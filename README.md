@@ -1,6 +1,6 @@
 # Aion Explorer and Dashboard
 
-MVP Features:
+MVP Features :
 
 1. See high-level statistics about the Aion network
 2. Real-time list of blocks and transactions
