@@ -1,0 +1,1796 @@
+
+.NCNonIdealState
+{
+  .pt-non-ideal-state {
+    max-width: none;
+
+    .pt-non-ideal-state-title {
+      font-weight: 500;
+      color: @pt-icon-color;
+    }
+    .pt-non-ideal-state-description {
+      font-weight: 300;
+      color: @pt-icon-color;
+    }
+    .pt-non-ideal-state-btn {
+      font-weight: 300;
+      color: @pt-icon-color;
+      margin-top: 20px;
+    }
+  }
+}
+
+.NCLoading
+{
+  display: block;
+  text-align: center;
+
+  .title {
+    display: block;
+    margin-top: 15px;
+    font-weight: 300;
+  }
+}
+
+.NCComponentLevelSpinner
+{
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+
+  .spinner-container 
+  {
+    display: inline-block;
+    text-align: center;
+    
+    .title 
+    {
+      display: block;
+      margin-top: 15px;
+      font-weight: 300;
+    }
+  }  
+}
+
+.NCKPIGroup
+{
+  display: inline-block;
+  margin: 10px;
+  padding: 20px;
+  text-align: left;
+
+  .group-title
+  {
+    color: @pt-icon-color;
+    display: block;
+    font-size: 19px;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    font-weight: 300;
+    .titillium;
+
+    strong {
+      font-family: inherit;
+      font-weight: 400;
+      color: @pt-heading-color;
+    }
+  }
+
+  .NCKPI
+  {
+    &:not(:last-of-type) {
+      margin-right: 15px;
+    }
+
+    .kpi-card
+    {
+      padding: 5px 14px;
+      text-align: center;
+      display: inline-block;
+
+      &>.error 
+      {
+        height: 65px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .icon {
+          color: @light-gray1;
+          display: block;
+          order: 1;
+          font-size: 30px;
+        }
+        .message {
+          margin-top: 8px;
+          color: @pt-icon-color;
+          display: block;
+          width: 100%;
+          order: 2;
+          font-size: 11px;
+        }
+      }
+      &>.metric 
+      {
+        font-size: 24px;
+        display: block;
+        height: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .value {
+          color: @pt-intent-primary;
+        }
+        .units {
+          margin-left: 2px;
+          color: @pt-intent-primary;
+        }
+      }
+      &>.title 
+      {
+        .titillium;
+        color: @pt-icon-color;
+        text-transform: uppercase;
+        display: block;
+      }
+    }
+  }
+}
+
+
+.NCKPIGroupSmall 
+{
+  padding: 15px;
+
+  .group-title
+  {
+    font-size: 17px;
+  }
+  .kpi-card
+  {
+    .metric {
+      font-size: 20px;
+      height: 65px;
+    }
+    .title {
+      font-size: 12px;
+    }
+  }
+}
+
+.NCKPI-tooltip {
+
+  .pt-popover {
+    max-width: 450px;
+
+    .pt-popover-content {
+      text-align: center;
+    }
+  }
+}
+
+.NCDashboard
+{
+  padding: 0px 30px 20px 30px;
+  flex: 1; 
+
+  .NCKPIContainer 
+  {
+    text-align: center;
+    margin-top: 15px;
+
+    .NCKPIGroup
+    {
+      .NCKPIGroupSmall;
+    }
+  }
+
+  .NCDashboardPanel
+  {
+    .clearfix;
+    margin: 25px 0 0 0;
+
+    .NCRecentTransactionsContainer 
+    {
+      display: inline-block;
+      width: 67%;
+      padding: 0 0 0 20px;
+      float: right;
+      min-height: 450px;
+    }
+
+    .NCRecentBlocksContainer 
+    {
+      display: inline-block;
+      width: 33%;
+      //box-shadow: 1px 0 0 0 @border-color;
+      padding: 0 20px 0 0;
+      float: left;
+      min-height: 450px;
+    }
+  }
+
+  @media screen and (max-width: 1180px)
+  {
+    .NCKPIContainer 
+    {
+      .NCKPIGroupDivider:nth-of-type(1) { 
+        display: block;
+      }
+    }
+
+    .NCDashboardPanel
+    {
+      margin: 25px 0 0 0;
+
+      .NCRecentBlocksContainer {
+        display: block;
+        width: auto;
+        float: none;
+        padding: 0 20px 0 20px;
+      }
+
+      .NCRecentTransactionsContainer {
+        margin-top: 30px;
+        width: auto;
+        display: block;
+        float: none;
+        padding: 0 20px 0 20px;
+      }
+    } 
+  }
+}
+
+// -----------------------------------------------------------------
+
+.NCRecentBlocks
+{
+  position: relative;
+  padding-bottom: 130px;
+  overflow: hidden;
+
+  .block-bridge 
+  {
+    display: inline-block;
+    position: absolute;
+    height: 730px;
+    border-left: 1px solid rgba(16, 22, 26, 0.15);
+    left: 31px;
+    top: 45px;
+  }
+
+  .block-bridged-dotted 
+  {
+    display: inline-block;
+    position: absolute;
+    height: 100px;
+    border-left: 1px dashed rgba(16, 22, 26, 0.15);
+    left: 31px;
+    top: 775px;
+  }
+
+  @media screen and (max-width: 1180px)
+  { 
+    .block-bridge 
+    {
+      height: 485px;
+    }
+
+    .block-bridged-dotted 
+    {
+      top: 530px;
+    }
+
+    .cards-column
+    {
+      height: 438px;
+      overflow: hidden;
+    }
+  }
+}
+
+.NCCardBlock.next-block-container
+{
+  display: block;
+  background-color: white;
+
+  .block-card {
+    border: none;
+    height: 130px;
+    .block-number {
+      margin-bottom: 10px;
+    }
+
+    .block-pending {
+      font-size: 13px;
+
+      .remaining {
+        //color: @pt-link-color;
+      }
+    }
+  }
+
+  .block-parent {
+    display: inline-block;
+    position: absolute;
+    height: 50px;
+    left: -40px;
+    top: 10px;
+    z-index: 1;
+
+    animation: spinBlock 3s linear infinite;
+    transition-property: transform;
+  }
+}
+
+.NCCardBlock
+{
+  position: relative;
+  margin: 10px 0 10px 40px;
+
+  .block-child {
+    display: inline-block;
+    position: absolute;
+    height: 50px;
+    left: -40px;
+    top: 10px;
+    z-index: 1;
+  }
+
+  .block-card {
+    padding: 15px 15px 20px 35px;
+
+    border-radius: 0 3px 3px 0;
+
+    border-style: solid solid solid none;
+    border-width: 1px 1px 1px 0px;
+
+    box-shadow: none;
+    background-color: #ffffff;
+    border-color: rgba(16, 22, 26, 0.15);
+
+    &.non-empty-block {
+      border-color: rgba(19, 124, 189, 0.4);
+    }
+
+    &.card-hover:hover {
+      border-radius: 3px;
+      border-style: solid;
+      border-width: 1px;
+
+      box-shadow:
+        0 2px 4px rgba(16, 22, 26, 0.2),
+        0 8px 24px rgba(16, 22, 26, 0.2);
+      //cursor: pointer;
+    }
+    .block-number {
+      margin-top: 3px;
+      margin-bottom: 25px;
+
+      &>* {
+        display: inline-block;
+        text-align: baseline;
+      }
+      .subtitle {
+        font-size: 14px;
+        margin-right: 10px;
+      }
+      .title {
+        font-size: 22px;
+        .titillium;
+      }
+    }
+    .proposer 
+    {
+      margin-bottom: 5px;
+      font-size: 13px;
+      white-space: nowrap;
+
+      display: flex;
+      align-items: center;
+
+      .subtitle {
+        margin-right: 6px;
+      }
+
+      .NCEntityLabel
+      {
+        color: @pt-link-color;
+        flex: 1;
+        width: 50px;
+        display: flex;
+
+        .text {
+          flex: 1;
+          margin-left: 4px;
+          text-align: left;
+        }
+      }
+    }
+    .transaction-count 
+    {
+      font-size: 13px;
+
+      &>* {
+        display: inline-block;
+        text-align: center;
+        margin: 0 4px 0 0;
+      }
+    }
+    .time-elapsed {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 12px;
+    }
+    .block-link {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+// -----------------------------------------------------------------
+
+.NCTab {
+
+  .pt-tab-list
+  {
+    //justify-content: flex-end;
+
+    .pt-tab
+    {
+      .titillium;
+      text-transform: uppercase;
+      font-size: 18px;
+      padding-bottom: 3px;
+
+      &[aria-selected="false"] {
+        color: @pt-icon-color;
+      }
+    }
+  }
+
+}
+
+.NCTimescale 
+{
+  display: inline-block;
+
+  &.medium 
+  {
+    .pt-tag {
+      padding: 4px 9px;
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    .pt-icon-arrow-right {
+      font-size: 16px;
+    }
+    
+    &>*:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  .pt-tag {
+    min-width: none;
+    padding: 5px 10px;
+    line-height: 20px;
+    font-size: 14px;
+  }
+
+  .pt-icon-arrow-right {
+    font-size: 16px;
+  }
+  
+  &>*:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+@keyframes spinBlock {
+  0%{transform:rotate(4.32deg);}1%{transform:rotate(12.3deg);}2%{transform:rotate(23.34deg);}3%{transform:rotate(36.87deg);}4%{transform:rotate(52.39deg);}5%{transform:rotate(69.42deg);}6%{transform:rotate(87.56deg);}7%{transform:rotate(106.43deg);}8%{transform:rotate(125.7deg);}9%{transform:rotate(145.08deg);}10%{transform:rotate(164.33deg);}11%{transform:rotate(183.23deg);}12%{transform:rotate(201.6deg);}13%{transform:rotate(219.31deg);}14%{transform:rotate(236.22deg);}15%{transform:rotate(252.25deg);}16%{transform:rotate(267.33deg);}17%{transform:rotate(281.42deg);}18%{transform:rotate(294.47deg);}19%{transform:rotate(306.48deg);}20%{transform:rotate(317.45deg);}21%{transform:rotate(327.4deg);}22%{transform:rotate(336.34deg);}23%{transform:rotate(344.32deg);}24%{transform:rotate(351.37deg);}25%{transform:rotate(357.53deg);}26%{transform:rotate(362.87deg);}27%{transform:rotate(367.42deg);}28%{transform:rotate(371.24deg);}29%{transform:rotate(374.4deg);}30%{transform:rotate(376.94deg);}31%{transform:rotate(378.92deg);}32%{transform:rotate(380.39deg);}33%{transform:rotate(381.42deg);}34%{transform:rotate(382.04deg);}35%{transform:rotate(382.32deg);}36%{transform:rotate(382.28deg);}37%{transform:rotate(381.99deg);}38%{transform:rotate(381.47deg);}39%{transform:rotate(380.76deg);}40%{transform:rotate(379.91deg);}41%{transform:rotate(378.94deg);}42%{transform:rotate(377.87deg);}43%{transform:rotate(376.74deg);}44%{transform:rotate(375.57deg);}45%{transform:rotate(374.38deg);}46%{transform:rotate(373.17deg);}47%{transform:rotate(371.98deg);}48%{transform:rotate(370.82deg);}49%{transform:rotate(369.68deg);}50%{transform:rotate(368.59deg);}51%{transform:rotate(367.55deg);}52%{transform:rotate(366.56deg);}53%{transform:rotate(365.64deg);}54%{transform:rotate(364.77deg);}55%{transform:rotate(363.97deg);}56%{transform:rotate(363.23deg);}57%{transform:rotate(362.56deg);}58%{transform:rotate(361.95deg);}59%{transform:rotate(361.41deg);}60%{transform:rotate(360.92deg);}61%{transform:rotate(360.49deg);}62%{transform:rotate(360.11deg);}63%{transform:rotate(359.79deg);}64%{transform:rotate(359.51deg);}65%{transform:rotate(359.28deg);}66%{transform:rotate(359.09deg);}67%{transform:rotate(358.93deg);}68%{transform:rotate(358.82deg);}69%{transform:rotate(358.73deg);}70%{transform:rotate(358.67deg);}71%{transform:rotate(358.63deg);}72%{transform:rotate(358.62deg);}73%{transform:rotate(358.62deg);}74%{transform:rotate(358.64deg);}75%{transform:rotate(358.67deg);}76%{transform:rotate(358.72deg);}77%{transform:rotate(358.77deg);}78%{transform:rotate(358.83deg);}79%{transform:rotate(358.9deg);}80%{transform:rotate(358.97deg);}81%{transform:rotate(359.04deg);}82%{transform:rotate(359.12deg);}83%{transform:rotate(359.19deg);}84%{transform:rotate(359.27deg);}85%{transform:rotate(359.34deg);}86%{transform:rotate(359.41deg);}87%{transform:rotate(359.48deg);}88%{transform:rotate(359.54deg);}89%{transform:rotate(359.6deg);}90%{transform:rotate(359.66deg);}91%{transform:rotate(359.71deg);}92%{transform:rotate(359.76deg);}93%{transform:rotate(359.8deg);}94%{transform:rotate(359.85deg);}95%{transform:rotate(359.88deg);}96%{transform:rotate(359.92deg);}97%{transform:rotate(359.95deg);}98%{transform:rotate(359.97deg);}99%{transform:rotate(360deg);}100%{transform:rotate(360.02deg);}
+}
+
+.NCPagination
+{
+  .clearfix;
+  @table-paging-height: 27px;
+
+  display: block;
+  margin-bottom: 12px;
+
+  .row-count 
+  {
+    float: left;
+    margin-top: 5px;
+    span {
+      font-size: 13px;
+      font-weight: 300;
+    }
+  }
+
+  .table-paging 
+  {
+    float: right;
+    display: flex;
+    align-items: center;
+    
+    &>.context {
+      font-size: 13px;
+      margin: 0 12px;
+      line-height: @table-paging-height;
+      font-weight: 300;
+    }
+
+    &>.pt-button 
+    {
+      &.right {
+        padding-right: 7px;
+      }
+      &.left {
+        padding-left: 5px;
+      }
+
+      &:before {
+        line-height: @table-paging-height;
+      }
+      span {
+        line-height: inherit;
+        color: @pt-icon-color;
+        font-weight: 300;
+      }
+
+      font-size: 13px;
+      line-height: @table-paging-height;
+      height: @table-paging-height;
+      
+      min-width: auto;
+      min-height: auto;
+    }
+    
+  }
+}
+
+.NCTableWrapper 
+{
+  padding: 0 10px;
+}
+
+// ASSUMPTION: TableWrapper always takes up full width of an embedded component
+.NCTableEnhanced
+{
+  @media (max-width: @container-width-min) {
+    width: @container-width-min - 64px;
+  }
+  @media (min-width: @container-width-min) and (max-width: @container-width-max) {
+    width: ~"calc(100vw - 64px)";
+  }
+  @media (min-width: @container-width-max) {
+    width: @container-width-max - 64px;
+  }
+}
+
+pre 
+{
+  background-color: @blueprint-docs-color;
+  border-color: @gray4;
+  padding: 13px 15px 15px;
+  min-height: 88px;
+}
+
+.nc-resizable {
+  resize: vertical;
+  overflow: auto;
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+  &.enforce-min-height {
+    height: 88px;
+  }
+}
+
+.NCTable 
+{
+  @table-row-height: 35px;
+
+  .bp-table-cell {
+    line-height: @table-row-height !important;
+    font-weight: 300;
+  }
+
+  .bp-table-row-name {
+    line-height: @table-row-height;
+  }
+
+  // row header
+
+  .row-header-cell:not(:last-child) {
+    box-shadow: inset 0 -1px 0 rgba(16, 22, 26, 0.15);
+  }
+
+  .row-header-cell {
+    cursor: pointer;
+    height: 35px;
+
+    &.bp-table-last-in-column {
+      box-shadow: none;
+    }
+
+    width: 34px;
+    button {
+      margin-left: 2px;
+      margin-top: 2.2px;
+      width: 27px;
+      height: @table-row-height - 7px;
+      cursor: inherit;
+    }
+  }
+
+  .NCColumnHeaderCell
+  {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 24px;
+    padding: 4px 0 0 0;
+
+    .header-icon 
+    {
+      font-size: 14px;
+      margin-right: 6px;
+      color: @gray2;
+    }
+  }
+
+  .NCColumnHeaderFilter 
+  {
+    padding: 0 5px 4px 5px;
+
+    .pt-icon {
+      color: @light-gray1;
+      font-size: 13px;
+      line-height: 36px;
+      margin: 0 0 0 10px;
+    }
+    
+    input {
+      height: 26px;
+      line-height: 26px;
+      font-size: 12px;
+      font-weight: 300;
+      padding: 0 4px 0 24px !important;
+
+      &:focus 
+      {
+        box-shadow: 0 0 0 1px #137cbd, inset 0 1px 1px rgba(16, 22, 26, 0.2); 
+      }
+    }
+  }
+}
+
+// NCTable custom styles
+
+.NCTable 
+{
+  .arrow-cell 
+  {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>span.pt-icon-standard {
+      line-height: inherit;
+    }
+  }
+
+  .deep-link 
+  {
+    padding-right: 0;
+    padding-left: 0;
+
+    .container 
+    {
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      //padding: 3px 3px 4px 3px;
+
+      .pt-button 
+      {
+        border-radius: 0px;
+        line-height: inherit;
+        height: 100%;
+        width: 100%;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+.NCEntityLabel
+{
+  display: inline-flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  align-items: center;
+  overflow: hidden;
+
+  .icon {
+    line-height: inherit;
+    color: @pt-icon-color
+  }
+  
+  .text {
+    line-height: inherit;
+    margin-left: 6px;
+  }
+
+  &:hover 
+  {
+    cursor: pointer;
+    .text {
+      color: @pt-link-color;
+      text-decoration: underline;
+    }
+  }
+}
+
+.NCLink
+{
+  display: inline-flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  align-items: center;
+  overflow: hidden;
+  
+  .text {
+    line-height: inherit;
+  }
+
+  &:hover 
+  {
+    cursor: pointer;
+    .text {
+      color: @pt-link-color;
+      text-decoration: underline;
+    }
+  }
+}
+
+
+.NCTitle
+{
+  &.page 
+  {
+    margin-bottom: 20px;
+
+    span {
+      .titillium;
+      text-transform: uppercase;
+      font-size: 30px;
+    }
+  }
+
+  &.section
+  {/*
+    &.blue {
+      border-bottom: 2px solid @pt-link-color;
+      span
+      {
+        color: @pt-link-color;
+      }
+    }*/
+
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid @gray3;
+    display: flex;
+    justify-content: space-between;
+
+    span
+    {
+      .titillium;
+      font-size: 18px;
+      line-height: 30px;
+      text-transform: uppercase;
+      color: @pt-link-color;
+      font-weight: 200;
+    }
+  }
+
+  &.card 
+  {
+    display: flex;
+    justify-content: space-between;
+
+    span
+    {
+      .titillium;
+      font-size: 20px;
+      line-height: 30px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.NCTxnRealtime {
+  padding-top: 20px;  
+}
+
+.NCSearchPanel
+{
+  .NCTitle.card 
+  {
+    margin-bottom: 35px;
+  }
+
+  .controls-container 
+  {
+    display: block;
+
+    &>.select-box
+    {
+      display: flex;
+      align-items: center;
+
+      .label 
+      {
+        display: inline-block; 
+        margin-right: 15px;
+      }
+
+      .textbox, .pt-select, select
+      {
+        display: flex;
+        flex: 1;
+      }
+    }
+
+    &>.date-range 
+    {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .label 
+      {
+        display: inline-block; 
+        margin-right: 15px;
+      }
+
+      .all-time 
+      {
+        display: inline-block;
+        border-left: 1px solid @border-color;
+        
+        padding-left: 20px;
+        margin-left: 20px;
+
+        line-height: 30px;
+        height: 30px;
+
+        display: flex;
+        align-items: center;
+
+
+        label {
+          margin: 0;
+        }
+      }
+    }
+
+
+
+    &>.input-field 
+    {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .label {
+        display: inline-block;
+        margin-right: 15px;
+      }
+
+      .textbox {
+        display: inline-block;
+        flex-grow: 1;
+      }
+    }
+  }
+
+  .searchbtn-container 
+  {
+    text-align: right; 
+    margin-top: 40px;
+    &>* {
+      display: inline-block;
+    }
+
+     .search-btn {
+      margin-left: 10px;
+    }  
+  }
+
+  @media (max-width: 875px)
+  {
+    .controls-container 
+    {
+      &>.date-range 
+      {
+        .all-time 
+        {
+          border-left: none;
+        
+          padding-left: 0px;
+          margin-left: 132px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+.NCSearchPanel-tooltip 
+{
+  max-width: 650px;
+
+  .pt-popover-content {
+    text-align: center;
+    font-weight: 300;
+    font-size: 13px;
+  }
+}
+
+
+
+.NCDateRangeInput 
+{
+  display: inline-block;
+
+  .date-range 
+  {
+    display: inline-block;
+    vertical-align: baseline;
+
+    .pt-icon-arrow-right {
+      margin: 0 12px;
+      font-size: 18px;
+    }
+  }
+
+  .daterange-popover-target 
+  {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+
+  .warning-tooltip {
+    text-align: center;
+  }
+}
+
+.NCDateRangeInput-popover 
+{
+  .pt-popover-content {
+    padding: 15px;
+    max-width: none !important;
+  }
+}
+
+// Nodes Pages
+
+.NCNodesOverviewMap 
+{
+  .NCMapOverview 
+  {
+    height: 500px;
+  }
+}
+
+.NCNodesOverview {
+
+  &>.pt-card 
+  {
+    padding: 15px 20px 10px 20px;
+    margin-bottom: 25px;
+
+    .NCTitle.card {
+      margin-bottom: 10px;
+    }
+
+    .NCKPIContainer 
+    {
+      text-align: center;
+
+      .NCKPIGroup
+      {
+        .NCKPIGroupSmall;
+      }
+    }
+  }
+
+  
+
+  .NCTitle.section {
+    margin-top: 35px;
+    margin-bottom: 25px;
+  }
+}
+
+.NCNodesRetrieve 
+{
+  .NCMapDetails 
+  {
+    margin-top: 30px;
+    height: 500px;
+  }
+
+  .NCTitle.section {
+    margin-top: 25px;
+  }
+
+  .NCTab {
+    margin-top: 25px;
+    min-height: 600px;
+
+    .NCTableEnhanced {
+      margin-top: 30px;
+    }
+  }
+}
+
+.NCMapPopover
+{
+  padding: 10px 30px 10px 15px;
+
+  &>* {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .name {
+    .titillium;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-bottom: 12px;
+    line-height: 25px;
+  }
+
+  .status {
+    margin-bottom: 10px;
+    &>* {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .desc {
+      font-size: 14px;
+      margin-left: 7px;
+      font-weight: 300;
+    }
+
+    .icon {
+      font-size: 26px;
+    }
+  }
+}
+
+.NCPathMarkerPopover 
+{
+  margin-bottom: 10px !important;
+  .pt-popover-content 
+  {
+    .NCConnDescription 
+    {
+      .name 
+      {
+        .arrow {
+          margin: 0 8px;
+        }
+      }
+
+      .node 
+      {
+        line-height: 18px;
+        .source,.sink {
+          font-size: 13px;
+          font-weight: 300;
+          color: @pt-icon-color;
+        }
+        .arrow {
+          font-size: 16px;
+          margin: 0 8px;
+          color: @pt-icon-color;
+        }
+      }
+
+      .latency 
+      {
+        font-size: 13px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        font-weight: 300;
+
+        .title {
+          margin-right: 3px;
+          color: @pt-icon-color;
+        }
+
+        .data {
+          color: @pt-icon-color-selected;
+        }
+      }
+
+
+    }
+  }
+}
+
+.NCNodeMarkerPopover 
+{
+  margin-bottom: 10px !important;
+
+  .pt-popover-content 
+  {
+    .NCNodeDescription 
+    {
+      .ip {
+        color: @pt-icon-color;
+        font-size: 13px;
+        margin-bottom: 4px;
+        font-weight: 300;
+      }
+
+      .peers {
+        color: @pt-icon-color;
+        font-size: 13px;
+        margin-bottom: 4px;
+        font-weight: 300;
+      }
+
+      .location {
+        color: @pt-icon-color;
+        font-size: 13px;
+        margin-bottom: 6px;
+        font-weight: 300;
+      }
+
+      .link {
+        margin-bottom: 15px;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 300;
+        color: @pt-icon-color-selected;
+        border-bottom: 1px dotted @pt-icon-color-selected;
+      }
+    }
+  }
+}
+
+// basic maps styles
+.NCMap 
+{
+  .ncmap-container { // flex container
+    height: 100%;
+  }
+  
+  .ncmap-element { // border around map element
+    height: 100%; 
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px @border-color;
+  }
+
+  // remove google-injected attributes:
+  
+  a[href^="http://maps.google.com/maps"]{display:none !important} // google logo
+  a[href^="https://maps.google.com/maps"]{display:none !important}
+
+  .gm-style-cc { // map attributions
+    display:none;
+  }
+
+  .gm-bundled-control { // map zoom control
+    &>.gmnoprint {
+      &>div {
+        //border: 1px solid @gray3;
+        //padding-right: 3px;
+        box-shadow: @dark-gray1 0px 1px 4px -1px !important;
+      }
+    }
+  }
+
+  .ncmap-marker 
+  {
+    //border: 1px solid red;
+    position: relative;
+    z-index: 2;
+
+    .marker-click-target 
+    {
+      cursor: pointer;
+    }
+    .circle-marker 
+    {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      height: 10px;
+      width: 10px;
+      cursor: pointer;
+      //line-height: 30px;
+      //font-size: 14px;
+      background-color: @nice-blue;
+      border-radius: 50%;
+      color: #fff;
+      text-align: center;
+      display: block;
+
+      &:before {
+        animation: pulsate 2s cubic-bezier(0.2, 1, 0.2, 1) infinite;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        content: '';
+        width: 10px;
+        height: 10px;
+        margin: -5px auto auto -5px;
+        transform-origin: 50% 50%;
+        border-radius: 50%;
+        background-color: inherit;
+        opacity: 1;
+        z-index: -1;
+        pointer-events: none;
+      }
+    }
+
+    @keyframes nectarBounceIn {
+      0%{ transform: translateY(80px); opacity: 0;}
+      33%{ transform: translateY(-13px); opacity: 1; }
+      66%{ transform: translateY(4px); opacity: 1; }
+      100%{ transform: translateY(0px); opacity: 1; }
+    }
+
+    @keyframes pulsate {
+      from {
+        opacity: 1;
+        transform: scale(1); 
+      }
+      to {
+        opacity: 0;
+       transform: scale(3); 
+      } 
+    }
+  }
+}
+
+.NCPage
+{
+  position: relative;
+}
+
+.NCHeader
+{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0;
+  height: @header-height;
+
+  .row
+  {
+    margin: 0 auto;
+    max-width: @container-width-max;
+    min-width: @container-width-min;
+    padding: 0 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: @header-height;
+
+    .pt-navbar-group {
+      height: @header-height;
+    }
+
+    .navbar-group-left
+    {
+      .menu-btn {
+        margin: 0 10px 0 0;
+      }
+
+      .logo 
+      {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        color: @dark-gray2;
+        cursor: pointer;
+
+        .moog-logo {
+          height: 15px;
+          margin: 0 10px 0 0;
+        }
+
+        .logo-img {
+          height: 35px;
+        }
+      }
+
+      .title {
+        .titillium;
+        font-size: 21px;
+        margin: 0 0px 0 10px;
+        color: @dark-gray5;
+      }
+
+      .pt-navbar-divider {
+        margin-right: 15px;
+        margin-left: 12px;
+      }
+
+      .pt-icon-caret-down {
+        margin-left: 5px;
+        margin-right: -2px;
+        color: @blue2;
+      }
+      .navbar-btn-active 
+      {    
+        &:before {
+          color: @blue2 !important;
+        }
+        color: @blue2 !important;
+        
+        box-shadow: 0 0 0 1px @muted-blue;
+      }
+    }
+
+    .navbar-group-right
+    {
+      flex: 1;
+      justify-content: flex-end;
+      padding-left: 35px;
+
+      .pt-navbar-divider {
+        margin-right: 5px;
+        margin-left: 10px;
+      }
+
+      .NCTopLevelSearch {
+        flex: 1;
+        max-width: 550px;
+
+        &>.pt-input {
+          &:focus {
+            box-shadow: 0 0 0 1px #137cbd, 0 0 0 2px rgba(19, 124, 189, 0.3), inset 0 1px 1px rgba(16, 22, 26, 0.2);
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: @tablet-breakpoint) 
+  {
+    .row {
+      .navbar-group-left {
+        .title {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+
+
+.NCFooter
+{
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: @footer-height;
+
+  background-color: inherit;
+  text-align: center;
+
+  &>div
+  {
+    margin: 0 auto;
+
+    max-width: @container-width-max;
+    min-width: @container-width-min;
+
+    margin-top: 5px;
+    display: block;
+
+    &>* {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .text {
+      .titillium;
+      font-size: 16px;
+      margin-right: 10px;
+      //color: @nuco-teal;
+      font-weight: 300;
+      margin-top: 2px;
+    }
+    .logo {
+      height: 41px;
+    }
+  }
+}
+
+.NCPageContent
+{
+  &>.container {
+    margin: 0 auto;
+    max-width: @container-width-max;
+    min-width: @container-width-min;
+    padding: @header-height 0px @footer-height 0px;
+
+    min-height: 100vh;
+    //display: flex; 
+
+    &>* {
+      //flex: 1;
+      //min-height: @min-page-height;
+    }
+  }
+
+  @media screen and (max-height: @min-page-height) {
+    &>.container {
+      min-height: @min-page-height;
+    }
+  }
+}
+
+// ------------------------------------------------------------
+
+.NCLivenessIndicator
+{
+  .liveness-btn
+  {
+    .icon 
+    {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      margin-bottom: 3px;
+
+      &.pt-icon-warning-sign
+      {
+        font-size: 22px;
+        color: @gray5;
+      }
+      &.live
+      {
+        font-size: 24px;
+        color: @green4; 
+      }
+
+      &.warning
+      {
+        font-size: 24px;
+        color: @orange4; 
+      }
+    }
+    .text {
+      //font-weight: 300;
+    }  
+  }
+}
+
+.NCLivenessIndicator-Popover
+{
+  margin-top: 14px !important;
+  
+  .pt-popover-content {
+    padding: 15px;
+    max-width: none !important;
+
+    .content-container
+    {
+      .no-data
+      {
+        &>* 
+        {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        &>.pt-icon-standard
+        {
+          color: @light-gray1;
+          font-size: 20px;
+          margin-right: 7px;
+        }
+        &>.text
+        {
+          font-size: 12px;
+          color: @pt-icon-color;
+        }
+      }
+
+      .liveness-indicator
+      {
+        &>*
+        {
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        &>*:not(:last-child)
+        {
+          margin-right: 8px;
+        }
+
+        &>.NCEntityLabel
+        {
+          width: auto;
+
+          .text 
+          {
+            font-weight: 300;
+          }
+        }
+        &>.desc
+        {
+          font-size: 13px;
+          font-weight: 300;
+          //color: @gray2;
+        }
+      }
+    }
+  }
+}
+
+// Entity Details Views
+.NCEntityDetail
+{
+  padding: 0 10px 0 10px;
+  overflow: hidden;
+
+  .row 
+  {
+    display: flex;
+    line-height: 35px;
+    overflow: hidden;
+
+    .field 
+    {
+      display: inline-block;
+      width: 140px;
+      font-weight: 500;
+
+      &.wide {
+        width: 200px;
+      }
+    }
+
+    .value 
+    {
+      display: inline-block;
+      flex: 1;
+      font-weight: 300;
+      overflow: hidden;
+      max-width: 800px;
+
+      &.restrict
+      {
+        max-width: 500px;
+        word-wrap: break-word;
+        line-height: 155%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
+
+.NCNodesRetrieve 
+{
+  .NCSearchPanel > .pt-card 
+  {
+    padding-bottom: 35px;
+  }
+}
+
+// ------------------------------------------------------------
+
+.NCNetworkStatus_Tooltip
+{
+  max-width: 400px;
+}
+
+.NCNetworkStatus
+{
+  &>a {
+    display: inline-block;
+  }
+}
+
+.nc-icon 
+{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px !important;
+  margin-bottom: 3px;
+  
+  &.pt-icon-warning-sign
+  {
+    font-size: 22px;
+    color: @gray5;
+  }
+  &.ok
+  {
+    font-size: 24px;
+    color: @green4; 
+  }
+
+  &.warning
+  {
+    font-size: 24px;
+    color: @orange4; 
+  }
+
+  &.danger
+  {
+    font-size: 24px;
+    color: @red4; 
+  }
+} 
+
+
+
+.NCExplorerPage {
+  padding: 0 22px 200px 22px;
+  .nc-tabular {
+
+  }
+
+  .NCExplorerHead {
+    .nav-row {
+      margin-top: 15px;
+      margin-bottom: 30px;
+      .pt-breadcrumbs {
+        .pt-breadcrumb {
+          font-size: 15px;
+          .titillium;
+        }
+        .pt-breadcrumb-current {
+          font-weight: 500;
+          //color: @blue1;
+        }
+      }
+    }
+
+    .title-row {
+      
+      border-bottom: 1px solid rgb(221, 222, 222);
+      @padding-bottom: 12px;
+      @btn-offset: 2px;
+      padding-bottom: @padding-bottom;
+      margin-bottom: 30px;
+
+      display: flex;
+
+      .left {
+        display: inline-flex;
+        align-self: flex-start;
+        flex-grow: 1;
+        min-width: 0;
+
+        .title {
+          vertical-align: bottom;
+          margin-right: 15px;
+          display: flex;
+          flex-grow: 1;
+          min-width: 0;
+          align-items: center;
+
+          .page {
+            .titillium;
+            font-weight: 400;
+            margin-bottom: 2px;
+            font-size: 26px;
+          }
+          .join {
+            vertical-align: bottom;
+            margin: 0 15px -2px 15px;
+            font-size: 24px;
+            border-left: 1px solid @pt-text-color-muted;
+            height: 30px;
+          }
+          .desc {
+            .titillium;
+            margin-bottom: 0px;
+            color: @pt-link-color;;
+            font-weight: 200;
+            font-size: 20px;
+
+            flex-grow: 1;
+            min-width: 0;
+            
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+
+            line-height: 24px;
+          }
+        }
+      }
+      .right {
+        display: inline-flex;
+        align-self: flex-end;
+        
+        .updated {
+          vertical-align: bottom;
+          white-space: nowrap;
+          .title {
+            padding-bottom: 5px;
+            font-size: 13px;
+            font-weight: 300;
+            padding-right: 8px; 
+            display: inline-block;
+          }
+          .NCTimescale {
+            display: inline-block;
+          }
+        }
+        
+      }
+    }
+  }
+
+  .NCSectionTabbed {
+    margin-top: 20px;
+    .pt-tab-list {
+      padding: 0 10px;
+    }
+  }
+}
+
+.nc-hr {
+  margin: 29px 0 26px 0;
+}
+
+.NCSection {
+  //padding: 0 10px 0 10px;
+}
+.pt-tab[id^="pt-tab-title_NCSectionTabbed_"] {
+  font-weight: 300;
+  text-transform: uppercase;
+  /*.titillium;
+      font-size: 17px;
+      line-height: 30px;
+      text-transform: uppercase;
+      color: @pt-link-color;
+      font-weight: 200;*/
+}
+
+.NCNavMenu {
+  padding: 8px;
+  .nav-option {
+    font-weight: 300;
+    padding: 9px 7px;
+  }
+}
