@@ -1,0 +1,4 @@
+{
+	"latestBlockTransactionWindowSize" : "10",
+	"blockAverageWindow" : "64",
+}

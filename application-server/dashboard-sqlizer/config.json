@@ -1,0 +1,5 @@
+{
+	"sqlIp" : "127.0.0.1",
+	"blockActiveThreasholdInSec" : "180",
+	"delayInPollingInMsec" : "5000"
+}
