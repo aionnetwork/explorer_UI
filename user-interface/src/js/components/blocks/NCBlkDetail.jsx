@@ -6,7 +6,7 @@ import NCEntityLabel from 'components/common/NCEntityLabel';
 import NCLink from 'components/common/NCLink';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_isStrEmpty, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
@@ -88,20 +88,20 @@ export default class NCBlkDetail extends Component
       },
       {
         field: "Block Reward",
-        value: entity.blockReward != null ? entity.blockReward : EMPTY_STR,
+        value: entity.blockReward != null ? entity.blockReward + " AION" : EMPTY_STR,
       },
       {
         field: "Nrg Consumed",
-        value: entity.nrgConsumed != null ? nc_numFormatterAionCoin(entity.nrgConsumed, 0)  + " AION": EMPTY_STR,
+        value: entity.nrgConsumed != null ? nc_numFormatter(entity.nrgConsumed, 6)  + " NRG": EMPTY_STR,
       },
       {
         field: "Nrg Limit",
-        value: entity.nrgLimit != null ? nc_numFormatterAionCoin(entity.nrgLimit, 0)  + " AION": EMPTY_STR,
+        value: entity.nrgLimit != null ? nc_numFormatter(entity.nrgLimit, 6)  + " NRG": EMPTY_STR,
       },
       // ---------------------------------------------------------------
       {
         field: "Block Size",
-        value: nc_numFormatterBytes(entity.size, 2),
+        value: nc_numFormatterBytes(entity.size, 6),
       },
       {
         field: "Bloom Filter",

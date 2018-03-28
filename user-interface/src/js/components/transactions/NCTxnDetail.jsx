@@ -6,7 +6,7 @@ import { NCEntity } from 'lib/NCEnums';
 import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntityLabel';
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
-import { nc_isStrEmpty, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
 
 const EMPTY_STR = "Not Available";
 
@@ -76,15 +76,15 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value != null ? nc_numFormatterAionCoin(entity.value, 0) + " AION" : EMPTY_STR,
+        value: entity.value != null ? nc_numFormatterAionCoin(entity.value, 6) + " AION" : EMPTY_STR,
       },
       {
         field: "Nrg Price",
-        value: entity.nrgPrice != null ? nc_numFormatterAionCoin(entity.nrgPrice, 0) + " AION" : EMPTY_STR,
+        value: entity.nrgPrice != null ? nc_numFormatter(entity.nrgPrice, 6) + " NRG" : EMPTY_STR,
       },
       {
         field: "Nrg Consumed",
-        value: entity.nrgConsumed != null ? nc_numFormatterAionCoin(entity.nrgConsumed, 0) + " AION" : EMPTY_STR,
+        value: entity.nrgConsumed != null ? nc_numFormatter(entity.nrgConsumed, 6) + " NRG" : EMPTY_STR,
       },
       // ---------------------------------------------------------------
       {

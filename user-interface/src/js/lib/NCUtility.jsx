@@ -135,6 +135,19 @@ export let nc_RegexpEscape;
   };
 }());
 
+export function nc_numFormatter_with0Floor(num, digits=2) {
+  if (num == null)
+    return 0;
+
+  const bn = (new BigNumber(String(num)));
+  const formatted = formatSI(bn);
+
+  if (formatted.value.lt(0))
+    return 0;
+  else
+    return formatted.value.dp(digits) + "" + formatted.prefix;  
+}
+
 export function nc_numFormatter(num, digits=2) {
   if (num == null)
     return 0;

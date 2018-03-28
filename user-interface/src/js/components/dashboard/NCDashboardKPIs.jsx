@@ -10,7 +10,7 @@ import NCLoading from 'components/common/NCLoading';
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 import {BigNumber} from 'bignumber.js'
-import { nc_decimalPoint, nc_numFormatter } from "lib/NCUtility";
+import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with0Floor } from "lib/NCUtility";
 
 import { hashHistory } from 'react-router';
 import moment from 'moment';
@@ -47,7 +47,7 @@ class NCDashboardKPIs extends Component
         kpiList: [
           {
             value:"10",
-            units:"H/s",
+            units:"Sol/s",
             title:["Network", "Hash Rate"],
             hoverContent: <span>Network hash rate = (last block's difficulty) /<br/>(average block time over last 64 blocks)</span>,
           },
@@ -55,7 +55,7 @@ class NCDashboardKPIs extends Component
             value:"15",
             units:"",
             title:["Average", "Difficulty"],
-            hoverContent: "Diffulty, averaged over the last 64 blocks",
+            hoverContent: "Difficulty, averaged over the last 64 blocks",
           },
           {
             value:"0.85",
@@ -72,7 +72,7 @@ class NCDashboardKPIs extends Component
             value:"1000",
             units:"",
             title:["NRG / Tx", "Consumed"],
-            hoverContent: "Average NRG per transaction for lastest 64 blocks",
+            hoverContent: "Average NRG per transaction for latest 64 blocks",
           },
           {
             value:"15",
@@ -125,16 +125,16 @@ class NCDashboardKPIs extends Component
     this.kpiData[0].kpiList[0].value = kpiList.targetBlockTime;
     this.kpiData[0].kpiList[1].value = nc_decimalPoint(kpiList.averageBlockTime, 2);
 
-    this.kpiData[1].kpiList[0].value = nc_numFormatter(kpiList.hashRate, 2);
+    this.kpiData[1].kpiList[0].value = nc_numFormatter(kpiList.hashRate, 1);
     this.kpiData[1].kpiList[1].value = nc_numFormatter(kpiList.averageDifficulty, 1);
     this.kpiData[1].kpiList[2].value = nc_decimalPoint(kpiList.lastBlockReward, 2);
 
-    this.kpiData[2].kpiList[0].value = nc_numFormatter(kpiList.averageEnergyConsumed, 1);
-    this.kpiData[2].kpiList[1].value = nc_numFormatter(kpiList.averageEnergyPrice, 1);
+    this.kpiData[2].kpiList[0].value = nc_numFormatter(kpiList.averageEnergyConsumed, 2);
+    this.kpiData[2].kpiList[1].value = nc_numFormatter(kpiList.averageEnergyPrice, 2);
 
-    this.kpiData[3].kpiList[0].value = nc_numFormatter(kpiList.transactionPerSecond, 1);
-    this.kpiData[3].kpiList[1].value = nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 1);
-    this.kpiData[3].kpiList[2].value = nc_numFormatter(kpiList.totalTransactionsInLast24hours, 1);
+    this.kpiData[3].kpiList[0].value = nc_numFormatter_with0Floor(kpiList.transactionPerSecond, 2);
+    this.kpiData[3].kpiList[1].value = nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 0);
+    this.kpiData[3].kpiList[2].value = nc_numFormatter(kpiList.totalTransactionsInLast24hours, 3);
 
     let ncKPIs = []
 

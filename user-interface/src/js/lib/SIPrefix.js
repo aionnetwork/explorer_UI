@@ -29,7 +29,7 @@ var PREFIXES = {
 };
 
 // expects a bignumber as input
-export function formatSI(num, fixed=4, ) {
+export function formatSI(num) {
   if (num.eq(0)) {
     return {
       sign: '',
