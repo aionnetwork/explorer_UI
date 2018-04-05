@@ -1384,6 +1384,7 @@ pre {
 .NCHeader .row .navbar-group-left .navbar-btn-active {
   color: #106ba3 !important;
   box-shadow: 0 0 0 1px rgba(19, 124, 189, 0.15);
+  margin-right: 15px;
 }
 .NCHeader .row .navbar-group-left .navbar-btn-active:before {
   color: #106ba3 !important;

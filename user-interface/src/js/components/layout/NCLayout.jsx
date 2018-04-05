@@ -104,6 +104,11 @@ class NCLayout extends Component {
                   rightIconName="pt-icon-caret-down"
                   text="Explorer"/>          
               </Popover>
+              <Button 
+                  className="navbar-btn-active pt-button pt-minimal"
+                  iconName="timeline-bar-chart"
+                  onClick={() => window.open("https://metrics0.aion.network", "Aion | Metrics")}
+                  text="Metrics"/>   
             </div>
 
             <div className="pt-navbar-group navbar-group-right">

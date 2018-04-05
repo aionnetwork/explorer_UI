@@ -21,6 +21,14 @@ export default class NCAccTable extends Component
     this.columnDescriptor = 
     [
       {
+        name: "Address",
+        isSortable: true,
+        isFilterable: true,
+        width: null,
+        flex: true,
+        objPath: 'addr',
+      },
+      {
         name: "Balance",
         isSortable: true,
         isFilterable: true,
@@ -44,15 +52,6 @@ export default class NCAccTable extends Component
         flex: false,
         objPath: 'numBlocksMined',
       },
-      {
-        name: "Address",
-        isSortable: true,
-        isFilterable: true,
-        width: null,
-        flex: true,
-        objPath: 'addr',
-      },
-      
     ];
   }
 
@@ -63,27 +62,28 @@ export default class NCAccTable extends Component
     entityList.forEach((entity, i) => 
     {
       tableContent[i] = [];
-      tableContent[i][0] = <Cell>{ nc_numFormatterAionCoin(entity.balance) }</Cell>;
-      tableContent[i][1] = 
+      tableContent[i][0] = 
+        <Cell>
+          <NCEntityLabel 
+            entityType={NCEntity.ACCOUNT} 
+            entityId={entity.addr}/> 
+        </Cell>;
+      tableContent[i][1] = <Cell>{ nc_numFormatterAionCoin(entity.balance) }</Cell>;
+      tableContent[i][2] = 
         <Cell>
           <NCLink 
             link={"/transactions?account=" + entity.addr} 
             title={nc_numFormatter(entity.numTransactions)}
             enabled={entity.numTransactions && entity.numTransactions > 0}/>
         </Cell>;
-      tableContent[i][2] = 
+      tableContent[i][3] = 
         <Cell>
           <NCLink 
             link={"/blocks?account=" + entity.addr} 
             title={nc_numFormatter(entity.numBlocksMined, 3)}
             enabled={entity.numBlocksMined && entity.numBlocksMined > 0} />
         </Cell>;
-      tableContent[i][3] = 
-        <Cell>
-          <NCEntityLabel 
-            entityType={NCEntity.ACCOUNT} 
-            entityId={entity.addr}/> 
-        </Cell>;
+        
     });
 
     return tableContent;

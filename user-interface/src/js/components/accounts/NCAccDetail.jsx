@@ -31,18 +31,21 @@ export default class NCAccDetail extends Component
       },
       {
         field: "Transaction Count",
-        value: <NCLink 
+        value: !entity.numTransactions ? EMPTY_STR : 
+                <NCLink 
                   link={"/transactions?account=" + entity.addr} 
                   title={nc_numFormatter(entity.numTransactions)}
                   enabled={entity.numTransactions && entity.numTransactions > 0}/>
       },
       {
         field: "Blocks Mined",
-        value: <NCLink 
+        value: !entity.numBlocksMined ? EMPTY_STR : 
+                <NCLink 
                   link={"/blocks?account=" + entity.addr} 
                   title={nc_numFormatter(entity.numBlocksMined, 3)}
                   enabled={entity.numBlocksMined && entity.numBlocksMined > 0}/>  
       },
+      /*
       {
         field: "Latest Transaction",
         value: 
@@ -56,7 +59,7 @@ export default class NCAccDetail extends Component
           entity.firstTransactionTimestamp == 0 ? 
           moment.unix(entity.firstTransactionTimestamp).format('LLLL') :
           "Not Available"
-      },
+      },*/
     ];
 
     return (

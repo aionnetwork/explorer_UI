@@ -124,7 +124,7 @@ export default class NCTableBase extends Component {
   componentWillReceiveProps(nextProps)
   {
     if (this.props.width !== nextProps.width || this.props.height !== nextProps.height) {
-      this.columnWidths = this.computeColumnWidths();
+      //this.columnWidths = this.computeColumnWidths();
     }
   }
 
@@ -162,7 +162,6 @@ export default class NCTableBase extends Component {
           renderColumnHeader={this.renderColumnHeader}/>);
     }
 
-    //
     return (
       <div className="NCTable">
         <Table 
