@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 
-import { InputGroup, Button, Intent } from "@blueprintjs/core";
+import { InputGroup, Button, Intent, Popover, Menu, MenuItem, Position } from "@blueprintjs/core";
 
-import { NCEntity, NCEntityServerMapping } from 'lib/NCEnums';
+import { NCEntity, NCEntityServerMapping, NCEntityInfo } from 'lib/NCEnums';
 import { nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
@@ -15,17 +15,22 @@ export default class NCTopLevelSearch extends Component
 
     this.state = {
       isFetching: false,
-      queryStr: ''
+      queryStr: '',
+      entity: NCEntity.BLOCK
     }
   }
 
   submitQuery = () => {
-    if (!nc_isStrEmpty(this.state.queryStr)) {
+    if (!nc_isStrEmpty(this.state.queryStr)) 
+    {
+      let queryStr = nc_trim(this.state.queryStr);
+      let entity = this.state.entity;
+
       this.setState({
-        isFetching: true
+        queryStr: ''
       }, () => {
-        console.log(nc_trim(this.state.queryStr))
-        network.getSearch(this.redirectToResult, nc_trim(this.state.queryStr));
+        console.log("query for entity: " + NCEntityInfo[entity].name + " for query string: " + queryStr);
+        nc_LinkToEntity(entity, queryStr)
       });
     }
   }
@@ -36,70 +41,60 @@ export default class NCTopLevelSearch extends Component
     });
   }
 
-  redirectToResult = (response) => {
-    console.log(response);
-    const entityType = (response && response.entityType) ? NCEntityServerMapping[response.entityType] : null;
-    const isResponseValid = this.isResponseValid(response, entityType)
-    const queryStr = nc_trim(this.state.queryStr);
-
-    this.setState({
-      isFetching: false,
-      queryStr: ''
-    }, () => {
-      if (!isResponseValid) {
-        let redirect = '/no-results';
-        if (queryStr)
-          redirect += '/' + queryStr;
-
-        hashHistory.push(redirect);
-      } 
-      else {
-        let entityId = null;
-        let entity = response.content[0];
-
-        switch(entityType) {
-          case (NCEntity.BLOCK): {
-            entityId = entity.blockHash;
-            break;
-          }
-          case (NCEntity.TXN): {
-            entityId = entity.transactionHash;
-            break;
-          }
-          case (NCEntity.ACCOUNT): {
-            entityId = entity.addr;
-            break;
-          }
-        }
-        nc_LinkToEntity(entityType, entityId)
-      }
-    });
-  }
-
-  isResponseValid = (response) => {
-    return (
-      response &&
-      NCEntityServerMapping[response.entityType] && 
-      !nc_isObjectEmpty(response)
-    );
-  }
-
   render() {
+    const permissionsMenu = (
+            <Popover
+                content={
+                    <Menu>
+                        <MenuItem 
+                          text={ NCEntityInfo[NCEntity.BLOCK].name }
+                          onClick={() => {
+                            this.setState({
+                              entity: NCEntity.BLOCK
+                            });
+                          }}/>
+                        <MenuItem 
+                          text={ NCEntityInfo[NCEntity.TXN].name }
+                          onClick={() => {
+                            this.setState({
+                              entity: NCEntity.TXN
+                            });
+                          }}/>
+                        <MenuItem 
+                          text={ NCEntityInfo[NCEntity.ACCOUNT].name }
+                          onClick={() => {
+                            this.setState({
+                              entity: NCEntity.ACCOUNT
+                            });
+                          }}/>
+                    </Menu>
+                }
+                
+                position={Position.BOTTOM_RIGHT}>
+                <Button className={"pt-minimal"} rightIconName={"caret-down"}>
+                    {NCEntityInfo[this.state.entity].name}
+                </Button>
+            </Popover>
+        );
+
     return (
-      <InputGroup
-        className="NCTopLevelSearch"
-        disabled={this.state.isFetching}
-        placeholder="Search for Account / Block / Transaction"
-        value={this.state.queryStr}
-        onChange={(e) => this.setQueryStr(e.target.value)}
-        onKeyPress={(e) => { if(e.key === 'Enter'){ this.submitQuery() }}}
-        rightElement={
+      <div className="NCTopLevelSearch">
+        <InputGroup
+          className="search-bar"
+          disabled={this.state.isFetching}
+          placeholder="Search for Account / Block / Transaction"
+          value={this.state.queryStr}
+          onChange={(e) => this.setQueryStr(e.target.value)}
+          onKeyPress={(e) => { if(e.key === 'Enter'){ this.submitQuery() }}}
+          leftIconName="search"
+          rightElement={permissionsMenu}/>
           <Button 
-            className="pt-button pt-minimal pt-intent-primary pt-icon-search main-search-btn"
-            intent={Intent.PRIMARY}
-            onClick={this.submitQuery}
-            loading={this.state.isFetching}/>
-        }/>
+              className="pt-button pt-minimal pt-intent-primary pt-icon-arrow-right main-search-btn"
+              intent={Intent.PRIMARY}
+              leftIconName="filter"
+              onClick={this.submitQuery}
+              loading={this.state.isFetching}/>
+      </div>
     );
   }
 }

@@ -18,15 +18,24 @@ let initialState_StoreKPIs =
     peakTransactionsPerBlockInLast24hours: null,
     totalTransactionsInLast24hours: null,
     
-    averageEnergyConsumed: null,
-    averageEnergyPrice: null,
-    
     hashRate: null,
     averageDifficulty: null,
     lastBlockReward: null,
 
     targetBlockTime: 10,
     averageBlockTime: null,
+
+    averageNrgLimitPerBlock: null,
+    averageNrgConsumedPerBlock: null,
+
+    startBlock: null,
+    startTimestamp: null,
+
+    endBlock: null,
+    endTimestamp: null,
+
+    currentBlockchainHead: null,
+    blockWindow: null,
   },
 }
 
@@ -44,22 +53,31 @@ export function reducer_kpis (state = initialState_StoreKPIs, action)
       if (input == null) return _state;
 
       data.transactionPerSecond = input.transactionPerSecond;
-          
       data.peakTransactionsPerBlockInLast24hours = input.peakTransactionsPerBlockInLast24hours;
       data.totalTransactionsInLast24hours = input.totalTransactionsInLast24hours;
-          
-      data.averageEnergyConsumed = input.averageEnergyConsumed;
-      data.averageEnergyPrice = input.averageEnergyPrice;
           
       data.hashRate = input.hashRate;
       data.averageDifficulty = input.averageDifficulty;
       data.lastBlockReward = input.lastBlockReward;
-          
+        
       data.averageBlockTime = input.averageBlockTime;
-          
+      data.targetBlockTime = input.targetBlockTime;
+      
+      data.averageNrgLimitPerBlock = input.averageNrgLimitPerBlock;
+      data.averageNrgConsumedPerBlock = input.averageNrgConsumedPerBlock;
+
+      data.startBlock = input.startBlock;
+      data.startTimestamp = input.startTimestamp;
+      
+      data.endBlock = input.endBlock;
+      data.endTimestamp = input.endTimestamp;
+
+      data.blockWindow = input.blockWindow;
+      data.currentBlockchainHead = input.currentBlockchainHead;
+
       _state.data = data;
       _state.momentUpdated = moment();
-
+      
       return _state;
     }
     default: 

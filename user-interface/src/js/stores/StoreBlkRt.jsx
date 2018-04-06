@@ -25,7 +25,21 @@ export function reducer_blkRt (state = initialState_StoreRtBlocks, action)
       let _state = Object.assign({}, state);
 
       let data = action.data;
-      if (data.constructor !== Array) return _state;
+
+      if (!Array.isArray(data)) return _state;
+
+      //sanitize block data coming from different sources
+      for (let i=0; i < data.length; i++) 
+      {
+        if (data[i].blockNumber == null && data[i].number != null)
+          data[i].blockNumber = data[i].number;
+        
+        if (data[i].timestampVal == null && data[i].timestamp != null)
+          data[i].timestampVal = data[i].timestamp;
+
+        if (data[i].minerAddress == null && data[i].miner != null)
+          data[i].minerAddress = data[i].miner;
+      }
 
       _state.data = data;
       _state.momentUpdated = moment();

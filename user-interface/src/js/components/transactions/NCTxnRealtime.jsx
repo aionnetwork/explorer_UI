@@ -39,12 +39,13 @@ class NCTxnRealtime extends Component
 
           loadingStr="Loading Transaction Stream"
           invalidDataStr="Server provided invalid response."
-          emptyDataStr="No transactions made on blockchain yet."
+          emptyDataStr="No transactions in the last 32 blocks."
+          isToplevelSection={false}
 
           marginTop={100} 
           
-          invalidDataTitle="No Transactions Available"
-          emptyDataTitle="No Transactions Available" 
+          invalidDataTitle="No Recent Transactions"
+          emptyDataTitle="No Recent Transactions" 
         />
       </NCComponentLazyLoad>
     );

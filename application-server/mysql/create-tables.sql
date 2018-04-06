@@ -25,7 +25,8 @@ create table block(
 create table transaction(
   transaction_hash varchar(64) not null primary key, 
   block_number bigint(64), 
-  data text, from_addr varchar(64), 
+  data text, 
+  from_addr varchar(64), 
   nonce text, 
   nrg_consumed decimal(64,20), 
   nrg_price decimal(64,20), 

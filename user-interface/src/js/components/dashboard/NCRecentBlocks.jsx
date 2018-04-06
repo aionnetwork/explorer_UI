@@ -21,6 +21,7 @@ import NCEntityLabel from 'components/common/NCEntityLabel';
 import moment from "moment";
 
 const BLOCK_STREAM_ELEMENT_SIZE = 4;
+const DEFAULT_TARGET_BLOCK_TIME = 10;
 
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
@@ -104,7 +105,7 @@ class NCRecentBlocks extends Component
   }
   
   render() {
-    this.targetBlockTime = this.props.kpi.data.targetBlockTime != null ? this.props.kpi.data.targetBlockTime : 10;
+    this.targetBlockTime = this.props.kpi.data.targetBlockTime != null ? this.props.kpi.data.targetBlockTime : DEFAULT_TARGET_BLOCK_TIME;
     let momentUpdated = this.props.blkRt.momentUpdated;
     let rtBlockList = this.props.blkRt.data;
 
@@ -115,9 +116,7 @@ class NCRecentBlocks extends Component
       );
     }
 
-    if (rtBlockList == null || rtBlockList.constructor !== Array || rtBlockList.length < 2 
-        || rtBlockList[0] == null 
-        || rtBlockList[0].blockNumber == null)
+    if (rtBlockList == null || !Array.isArray(rtBlockList) || rtBlockList.length < 2 || rtBlockList[0] == null)
     {
       return (
         <NCNonIdealState

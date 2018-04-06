@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { Link, hashHistory } from 'react-router'
 import { connect } from 'react-redux';
 
+import {BigNumber} from 'bignumber.js'
 import moment from "moment";
-import { Menu, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip } from "@blueprintjs/core";
+import { Menu, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip, MenuDivider } from "@blueprintjs/core";
 
 import { ncNetwork_pollForKpiList, ncNetwork_pollForStaticInfo } from 'network/NCNetwork';
 
@@ -63,12 +64,29 @@ class NCLayout extends Component {
     );
   }
 
+  renderConnectionMenu = () => {
+    return (
+      <Menu className="NCNavMenu">
+        <MenuDivider title="Switch Network" />
+        <MenuItem
+          className="nav-option"
+          onClick={() => {
+            console.log("link to Testnet-0");
+          }}
+          text="Testnet-0"
+        />
+      </Menu>
+    );
+  }
+
   render() 
   {
     const pathname = this.props.location.pathname;
+
+    let kpi = this.props.kpi;
     
     // wait on the response from KPI list to load application
-    if (NCNETWORK_REQUESTS_ENABLED && this.props.blkRt.momentUpdated == null) { 
+    if (NCNETWORK_REQUESTS_ENABLED && kpi.momentUpdated == null) { 
       return (
         <NCLoading
           title={"Connecting to Server"}
@@ -76,12 +94,11 @@ class NCLayout extends Component {
       );
     }
 
-    let latestBlock = null;
-    if (this.props.blkRt.data && 
-      Array.isArray(this.props.blkRt.data) && 
-      this.props.blkRt.data[0] ) {
-      latestBlock = this.props.blkRt.data[0];
-    }
+    let momentEnd = kpi.data.endTimestamp ? moment.unix(BigNumber(kpi.data.endTimestamp).toNumber(10)) : null;
+    let latestBlockNumber = kpi.data.endBlock ? BigNumber(kpi.data.endBlock).toNumber(10) : null; 
+    let dbLag = (kpi.data.currentBlockchainHead && kpi.data.endBlock) ? 
+                BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(kpi.data.endBlock)) : 0;
+    let lastUpdated = kpi.momentUpdated;
 
     return (
       <div className="NCPage">
@@ -115,11 +132,21 @@ class NCLayout extends Component {
               <NCTopLevelSearch/>
               <span className="pt-navbar-divider"></span>
               <NCLivenessIndicator 
-                momentEnd={latestBlock ? moment.unix(latestBlock.timestampVal) : null}
-                latestBlockNumber={latestBlock ? latestBlock.blockNumber : null }
-                dbLag={0}
-                lastUpdated={this.props.blkRt.momentUpdated}
+                momentEnd={momentEnd}
+                latestBlockNumber={latestBlockNumber}
+                dbLag={dbLag}
+                lastUpdated={lastUpdated}
               />
+              <Popover
+                content={this.renderConnectionMenu()}
+                interactionKind={PopoverInteractionKind.CLICK}
+                position={Position.BOTTOM_RIGHT}>
+                <Button 
+                  className="navbar-btn-active pt-button pt-minimal"
+                  rightIconName="pt-icon-caret-down"
+                  text="Testnet-1"/>          
+              </Popover>
+
             </div>
 
           </div>
@@ -143,7 +170,7 @@ class NCLayout extends Component {
 
 export default connect((state) => {
   return ({
-    blkRt: state.blkRt,
+    kpi: state.kpi,
   })
 })(NCLayout);
 

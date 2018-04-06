@@ -1345,23 +1345,24 @@ pre
         margin-right: 15px;
         margin-left: 12px;
       }
+    }
 
-      .pt-icon-caret-down {
-        margin-left: 5px;
-        margin-right: -2px;
-        color: @blue2;
-      }
-      .navbar-btn-active 
-      {    
-        &:before {
-          color: @blue2 !important;
-        }
+    .pt-icon-caret-down {
+      margin-left: 5px;
+      margin-right: -2px;
+      color: @blue2;
+    }
+
+    .navbar-btn-active 
+    {    
+      &:before {
         color: @blue2 !important;
-        
-        box-shadow: 0 0 0 1px @muted-blue;
-
-        margin-right: 15px;
       }
+      color: @blue2 !important;
+      
+      box-shadow: 0 0 0 1px @muted-blue;
+
+      margin-right: 15px;
     }
 
     .navbar-group-right
@@ -1377,7 +1378,20 @@ pre
 
       .NCTopLevelSearch {
         flex: 1;
-        max-width: 550px;
+        max-width: 600px;
+        justify-content: flex-end;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        .search-bar {
+          flex: 1;
+          display: flex;
+
+        }
+        .main-search-btn {
+          margin-left: 4px;
+        }
 
         &>.pt-input {
           &:focus {
@@ -1471,11 +1485,12 @@ pre
 {
   .liveness-btn
   {
+    margin-right: 6px;
+
     .icon 
     {
       display: inline-block;
       vertical-align: middle;
-      margin-right: 10px;
       margin-bottom: 3px;
 
       &.pt-icon-warning-sign
@@ -1496,6 +1511,7 @@ pre
       }
     }
     .text {
+      //margin-left: 10px;
       //font-weight: 300;
     }  
   }
@@ -1569,6 +1585,11 @@ pre
 {
   padding: 0 10px 0 10px;
   overflow: hidden;
+
+  .subtitle {
+    font-size: 12px;
+    color: #BFCCD6;
+  }
 
   .row 
   {

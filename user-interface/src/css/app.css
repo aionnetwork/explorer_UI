@@ -23,8 +23,7 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
   font-family: 'Montserrat', sans-serif;
 }
 /*
@@ -1376,17 +1375,17 @@ pre {
   margin-right: 15px;
   margin-left: 12px;
 }
-.NCHeader .row .navbar-group-left .pt-icon-caret-down {
+.NCHeader .row .pt-icon-caret-down {
   margin-left: 5px;
   margin-right: -2px;
   color: #106ba3;
 }
-.NCHeader .row .navbar-group-left .navbar-btn-active {
+.NCHeader .row .navbar-btn-active {
   color: #106ba3 !important;
   box-shadow: 0 0 0 1px rgba(19, 124, 189, 0.15);
   margin-right: 15px;
 }
-.NCHeader .row .navbar-group-left .navbar-btn-active:before {
+.NCHeader .row .navbar-btn-active:before {
   color: #106ba3 !important;
 }
 .NCHeader .row .navbar-group-right {
@@ -1400,7 +1399,18 @@ pre {
 }
 .NCHeader .row .navbar-group-right .NCTopLevelSearch {
   flex: 1;
-  max-width: 550px;
+  max-width: 600px;
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.NCHeader .row .navbar-group-right .NCTopLevelSearch .search-bar {
+  flex: 1;
+  display: flex;
+}
+.NCHeader .row .navbar-group-right .NCTopLevelSearch .main-search-btn {
+  margin-left: 4px;
 }
 .NCHeader .row .navbar-group-right .NCTopLevelSearch > .pt-input:focus {
   box-shadow: 0 0 0 1px #137cbd, 0 0 0 2px rgba(19, 124, 189, 0.3), inset 0 1px 1px rgba(16, 22, 26, 0.2);
@@ -1452,10 +1462,12 @@ pre {
     min-height: 600px;
   }
 }
+.NCLivenessIndicator .liveness-btn {
+  margin-right: 6px;
+}
 .NCLivenessIndicator .liveness-btn .icon {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 10px;
   margin-bottom: 3px;
 }
 .NCLivenessIndicator .liveness-btn .icon.pt-icon-warning-sign {
@@ -1510,6 +1522,10 @@ pre {
 .NCEntityDetail {
   padding: 0 10px 0 10px;
   overflow: hidden;
+}
+.NCEntityDetail .subtitle {
+  font-size: 12px;
+  color: #BFCCD6;
 }
 .NCEntityDetail .row {
   display: flex;

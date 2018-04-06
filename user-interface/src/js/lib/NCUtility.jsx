@@ -135,17 +135,17 @@ export let nc_RegexpEscape;
   };
 }());
 
-export function nc_numFormatter_with0Floor(num, digits=2) {
+export function nc_numFormatter_with1Floor(num, digits=2) {
   if (num == null)
     return 0;
 
   const bn = (new BigNumber(String(num)));
-  const formatted = formatSI(bn);
 
-  if (formatted.value.lt(0))
-    return 0;
-  else
-    return formatted.value.dp(digits) + "" + formatted.prefix;  
+  if (bn.lt(1))
+    return "< 1";
+
+  const formatted = formatSI(bn);
+  return formatted.value.dp(digits) + "" + formatted.prefix;  
 }
 
 export function nc_numFormatter(num, digits=2) {
@@ -210,12 +210,6 @@ export function nc_cleanDisplayString (x, undefinedStr) {
 
 // Search Types -----------------------------------------------------
 
-const CHAR_LENGTH_NODEID = 128;
-const reIsNodeId = new RegExp('^[a-f0-9]{'+CHAR_LENGTH_NODEID+'}$', 'i');
-
-const CHAR_LENTH_ACCOUNT = 40;
-const reIsAccount = new RegExp('^[a-f0-9]{'+CHAR_LENTH_ACCOUNT+'}$', 'i');
-
 const CHAR_LENTH_HASH = 64;
 const reIsHash = new RegExp('^[a-f0-9]{'+CHAR_LENTH_HASH+'}$', 'i');
 
@@ -228,17 +222,12 @@ export function nc_isPositiveInteger(input) {
   return /^[0-9]+$/.test(input);
 }
 
-export function nc_isValidAccount(input) {
-  let x = nc_sanitizeHex(input);
-  return reIsAccount.test(x);
-}
-
-export function nc_isValidNodeId(input) {
-  let x = nc_sanitizeHex(input);
-  return reIsNodeId.test(x);
-}
-
 export function nc_isValidHash(input) {
+  let x = nc_sanitizeHex(input);
+  return reIsHash.test(x);
+}
+
+export function nc_isValidEntity(input) {
   let x = nc_sanitizeHex(input);
   return reIsHash.test(x);
 }

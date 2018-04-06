@@ -4,26 +4,13 @@
 export const NCEntity = 
 {
   UNKNOWN: 0,
-  USER: 1,
-  SC: 2,
-  BLOCK: 3,
-  TXN: 4,
-  NODE: 5,
-  ACCOUNT: 6,
+  BLOCK: 1,
+  TXN: 2,
+  ACCOUNT: 3,
 };
 
 export let NCEntityInfo = {};
 
-NCEntityInfo[NCEntity.USER] = {
-	icon: "pt-icon-person",
-  name: "User",
-  absoluteUrl: null,
-}
-NCEntityInfo[NCEntity.SC] = {
-  icon: "pt-icon-code",
-  name: "Smart Contract",
-  absoluteUrl: null,
-}
 NCEntityInfo[NCEntity.BLOCK] = {
   icon: "pt-icon-layers",
   name: "Block",
@@ -34,15 +21,10 @@ NCEntityInfo[NCEntity.TXN] = {
   name: "Transaction",
   absoluteUrl: "/transaction/",
 }
-NCEntityInfo[NCEntity.NODE] = {
-  icon: "pt-icon-database",
-  name: "Node",
-  absoluteUrl: null,
-}
 NCEntityInfo[NCEntity.UNKNOWN] = {
   icon: "pt-icon-help",
   name: "Unknown Entity",
-  absoluteUrl: null,
+  absoluteUrl: "/",
 }
 NCEntityInfo[NCEntity.ACCOUNT] = {
   icon: "pt-icon-document",
