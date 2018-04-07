@@ -141,6 +141,7 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
 
 export const getBlkRetrievePagingTxnList = (queryStr, pageNumber) => {
   store.dispatch(StoreBlkRetrieve.GetPagingTxn());
+  console.log("blkTxn page:" + pageNumber);
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {  
     setTimeout(() => {
@@ -153,7 +154,7 @@ export const getBlkRetrievePagingTxnList = (queryStr, pageNumber) => {
   else {
     // get transaction list
     const ep = network.endpoint.transaction.list[txnListType.BY_BLOCK];
-    let params = [nc_trim(queryStr), 0, PAGE_SIZE, 'blockNumber,desc'];
+    let params = [nc_trim(queryStr), pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
       store.dispatch(StoreBlkRetrieve.SetPagingTxn(response));

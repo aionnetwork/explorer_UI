@@ -154,9 +154,9 @@ class NCRecentBlocks extends Component
                   "To be proposed "+((nextTimeRemaining > 0) ? "in " : "")
                 }</span>
                 <span className="remaining">{
-                  (nextTimeRemaining > 0) ?
-                  (nextTimeRemaining + "s") :
-                  ("momentarily ...")
+                  /*(nextTimeRemaining > 0) ?
+                  (nextTimeRemaining + "s") :*/
+                  "momentarily ..."
                 }</span>
               </div>
             </div>
