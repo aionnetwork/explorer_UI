@@ -84,8 +84,8 @@ class NCTxnRetrieve extends Component
         isDataValid={isTxnValid} 
         isDataEmpty={isTxnEmpty}
         
-        loadingStr={"Loading Block Details"}
-        invalidDataStr={"Server error. Block structure invalid."}
+        loadingStr={"Loading Transaction Details"}
+        invalidDataStr={"Server error. Transaction structure invalid."}
         emptyDataStr={"No transaction found for descriptor: " + desc + "."}
         
         page={page}/>

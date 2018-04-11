@@ -123,7 +123,9 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
     let request = nc_trim(queryStr);
     if (!nc_isPositiveInteger(request) && !nc_isValidEntity(request)) {
       store.dispatch(StoreBlkRetrieve.SetTopLevel({
-        blk: {},
+        blk: {
+          content: []
+        },
         txn: {}
       }));
       return;
@@ -289,7 +291,9 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
   else {
     let request = nc_trim(queryStr);
     if (!nc_isValidEntity(request)) {
-      store.dispatch(StoreTxnRetrieve.SetTopLevel({}));
+      store.dispatch(StoreTxnRetrieve.SetTopLevel({
+        content: []
+      }));
       return;
     }
 
@@ -298,6 +302,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
     let params = [request];
     network.request(ep, params)
     .then((response) => {
+      console.log(response);
       store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
     })
     .catch((error) => {
@@ -386,7 +391,9 @@ export const getAccRetrieveTopLevel = (queryStr) => {
       request = "0x0000000000000000000000000000000000000000000000000000000000000000"
     } else if (!nc_isValidEntity(request)) {
       store.dispatch(StoreAccRetrieve.SetTopLevel({
-        acc: {},
+        acc: {
+          content: []
+        },
         blk: {},
         txn: {}
       }));
