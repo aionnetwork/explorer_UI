@@ -4,7 +4,7 @@ import { Link, hashHistory } from 'react-router'
 import { connect } from 'react-redux';
 
 import moment from "moment";
-import { Menu, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip } from "@blueprintjs/core";
+import { Menu, MenuItem, Position, Classes, InputGroup, Popover, Button, MenuDivider, PopoverInteractionKind, Spinner, Tooltip } from "@blueprintjs/core";
 
 import { ncNetwork_pollForKpiList, ncNetwork_pollForStaticInfo } from 'network/NCNetwork';
 
@@ -58,6 +58,19 @@ class NCLayout extends Component {
             hashHistory.push('/accounts');
           }}
           text="Accounts"
+        />
+      </Menu>
+    );
+  }
+
+  renderConnectionMenu = () => {
+    return (
+      <Menu className="NCNavMenu">
+        <MenuDivider title="Switch Network" />
+        <MenuItem
+          className="nav-option"
+          onClick={() => window.open("https://testnet2.aion.network", "Aion | Testnet-1")}
+          text="Testnet-2"
         />
       </Menu>
     );
@@ -120,6 +133,15 @@ class NCLayout extends Component {
                 dbLag={0}
                 lastUpdated={this.props.blkRt.momentUpdated}
               />
+              <Popover
+                content={this.renderConnectionMenu()}
+                interactionKind={PopoverInteractionKind.CLICK}
+                position={Position.BOTTOM_RIGHT}>
+                <Button 
+                  className="navbar-btn-active pt-button pt-minimal"
+                  rightIconName="pt-icon-caret-down"
+                  text="Testnet-1"/>          
+              </Popover>
             </div>
 
           </div>

@@ -83,28 +83,28 @@ export default class NCLivenessIndicator extends Component
           (!isDataAvailable) && 
           <span>
             <span className="pt-icon-standard pt-icon-warning-sign icon"></span>
-            <span className="text">Disconnected</span>
+            <span className="text"></span>
           </span>
         }
         {
           (isDataAvailable && isHostBlockchainDown) && 
           <span>
             <span className="fa fa-exclamation-circle icon warning"></span>
-            <span className="text">Sync Lost</span>
+            <span className="text"></span>
           </span>
         }
         {
           (isDataAvailable && !isHostBlockchainDown && dbLagInt >= 5) && 
           <span>
             <Spinner className="pt-small icon" intent={Intent.PRIMARY}/>
-            <span className="text">Testnet</span>
+            <span className="text"></span>
           </span>
         }
         {
           (isDataAvailable && !isHostBlockchainDown && dbLagInt < 5) && 
           <span>
             <span className="fa fa-check-circle icon live"></span>
-            <span className="text">Testnet</span>
+            <span className="text"></span>
           </span>
         }
         </button>
