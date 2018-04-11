@@ -128,7 +128,7 @@ class NCDashboardKPIs extends Component
     this.kpiData[1].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
     this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);
     this.kpiData[1].kpiList[2].value = kpiList.lastBlockReward == null ? null :  
-                                          (BigNumber(kpiList.lastBlockReward).lt(2) ? 
+                                          (BigNumber(String(kpiList.lastBlockReward)).lt(2) ? 
                                           nc_decimalPoint(kpiList.lastBlockReward, 2) :
                                           nc_numFormatterAionCoin(kpiList.lastBlockReward, 2));
 
