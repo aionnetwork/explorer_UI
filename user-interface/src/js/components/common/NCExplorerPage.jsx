@@ -20,6 +20,7 @@ export default class NCExplorerPage extends Component
           loadingStr={loadingStr}
           invalidDataStr={invalidDataStr}
           emptyDataStr={emptyDataStr}
+          isToplevelSection={true}
         
           content={page}/>
       </NCComponentLazyLoad>

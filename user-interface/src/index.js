@@ -64,8 +64,10 @@ ReactDOM.render((
         {/* 
             Support 1 kind(s) of account lists: 
               1. /accounts  => All accounts 
+            Temporarily suspended due to no support from backend service. 
+            This accounts list view will be the equivalent of the "rich list" once we write the backend service to support it
         */}
-        <Route path="accounts" component={ AccList }/>
+        {/*<Route path="accounts" component={ AccList }/>*/}
         <Route path="account/:accId" component={ AccRetrieve }/>
 
         <Route path="no-results(/:query)" component={ NoResults }/>

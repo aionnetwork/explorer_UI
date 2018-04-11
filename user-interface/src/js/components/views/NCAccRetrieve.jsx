@@ -13,6 +13,7 @@ import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
+import NCNonIdealState from 'components/common/NCNonIdealState';
 
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
@@ -80,10 +81,10 @@ class NCAccRetrieve extends Component
         link: '/',
         body: 'Home',
       },
-      {
+      /*{
         link: '/accounts',
         body: 'Accounts',
-      },
+      },*/
       {
         link: '#',
         body: 'Account Details',
@@ -91,6 +92,29 @@ class NCAccRetrieve extends Component
     ];
 
     const desc = nc_hexPrefix(store.queryStr);
+
+    /*
+    const accBalanceSection = <NCExplorerSection 
+      className={""}
+
+      isLoading={isLoadingTopLevel}
+      isDataValid={isTxnListValid}
+      isDataEmpty={isTxnListEmpty} 
+      
+      loadingStr={"Loading Transactions"}
+      invalidDataStr={"Server provided an invalid response. Please try again."} 
+      emptyDataStr={"No transactions found for this account."}
+      marginTop={40}
+
+      content={
+        <NCTxnTable 
+          data={txnList}
+          onPageCallback={this.requestPagingTxnList}
+          isLoading={store.isLoadingPagingTxnList}
+          isPaginated={true}/>
+        }
+      
+    />
 
     const txnListSection = <NCExplorerSection 
       className={""}
@@ -102,7 +126,6 @@ class NCAccRetrieve extends Component
       loadingStr={"Loading Transactions"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
       emptyDataStr={"No transactions found for this account."}
-      isToplevelSection={false}
       marginTop={40}
 
       content={
@@ -125,7 +148,6 @@ class NCAccRetrieve extends Component
       loadingStr={"Loading Blocks"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
       emptyDataStr={"No blocks proposed by this account."}
-      isToplevelSection={false}
       marginTop={40}
 
       content={
@@ -136,6 +158,7 @@ class NCAccRetrieve extends Component
           isPaginated={true}/>
         }
     />
+    */
 
     const page =
       <div> 
@@ -145,8 +168,13 @@ class NCAccRetrieve extends Component
           title={"Account"}
           subtitle={desc}/>  
         <NCAccDetail entity={acc}/>
-        <hr className="nc-hr"/>
-        {
+         <hr className="nc-hr"/>
+        <NCNonIdealState
+          paddingTop={80}
+          icon={"pt-icon-offline"}
+          title={"Coming Soon"}
+          description={"Account transactions & blocks-mined feature undergoing reconstruction. To be re-enabled soon."}/>
+        {/*
           (!isAccEmpty) &&
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
@@ -160,7 +188,7 @@ class NCAccRetrieve extends Component
             }
             </Tabs2>
           </div>
-        }
+        */}
       </div>;
 
     return (

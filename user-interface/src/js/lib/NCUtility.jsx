@@ -16,12 +16,13 @@ export function nc_getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export function nc_decimalPoint(num, scale) {
+export function nc_decimalPoint(num, scale=2) {
+  if (num == null) return null;
   return (new BigNumber(String(num))).dp(scale).toString();
 }
 
-export function nc_roundNumber(num, scale) {
-  if (num == null || scale == null)
+export function nc_roundNumber(num, scale=2) {
+  if (num == null)
     return null;
 
   if(!("" + num).includes("e")) {
@@ -137,7 +138,7 @@ export let nc_RegexpEscape;
 
 export function nc_numFormatter_with1Floor(num, digits=2) {
   if (num == null)
-    return 0;
+    return null;
 
   const bn = (new BigNumber(String(num)));
 
@@ -150,7 +151,7 @@ export function nc_numFormatter_with1Floor(num, digits=2) {
 
 export function nc_numFormatter(num, digits=2) {
   if (num == null)
-    return 0;
+    return null;
 
   const bn = (new BigNumber(String(num)));
   const formatted = formatSI(bn);
@@ -180,16 +181,41 @@ export function nc_numFormatterBytes(num, digits) {
   return num.toFixed(digits).replace(rx, "$1");
 }
 
+export function nc_numFormatterACSensitive(num) {
+  if (num == null)
+    return null;
+
+  let bn = null;
+  try {
+    bn = new BigNumber(String(num));  
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+  
+  if (!bn || !BigNumber.isBigNumber(bn) || !bn.isFinite() || bn.isNegative())
+    return null;
+
+  return bn.shiftedBy(-18).toFormat();
+}
+
 export function nc_numFormatterAionCoin(num, fixed=4) {
   if (num == null)
-    return 0;
+    return null;
 
   
   let bn = (new BigNumber(String(num))).shiftedBy(-18);
   
   const formatted = formatSI(bn);
   
-  return (formatted.value.toFixed(fixed) + "" + formatted.prefix);
+  let result;
+
+  if (fixed == null)
+    result = formatted.value + "" + formatted.prefix;
+  else
+    result = formatted.value.toFixed(fixed) + "" + formatted.prefix;
+
+  return result;
 }
 
 export function nc_trim (x) {

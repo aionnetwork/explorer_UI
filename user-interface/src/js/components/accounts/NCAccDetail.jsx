@@ -2,10 +2,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
+import {BigNumber} from 'bignumber.js';
 import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_numFormatterAionCoin, nc_numFormatter } from 'lib/NCUtility';
+import { nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
 import NCLink from 'components/common/NCLink';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
@@ -17,49 +18,32 @@ export default class NCAccDetail extends Component
   render() {
     let { entity } = this.props;
     
+    let balance = nc_numFormatterACSensitive(entity.balance);
+
     let desc = [
       {
         field: "Address",
         value:  <NCEntityLabel
                   entityType={ NCEntity.ACCOUNT }
-                  entityId={ entity.addr }
+                  entityId={ entity.address }
                   linkActive={ false }/>
       },
       {
         field: "Balance",
-        value:  nc_numFormatterAionCoin(entity.balance) + " AION"
+        value:  balance == null ? "Balance Service Unavailable" :
+                <span className="strong">{balance + " AION"}
+                  <span className="subtitle">{"(as of block " + entity.blockNumber + ")"}</span>
+                </span>
       },
       {
         field: "Transaction Count",
-        value: !entity.numTransactions ? EMPTY_STR : 
+        value: !entity.nonce ? EMPTY_STR : 
                 <NCLink 
-                  link={"/transactions?account=" + entity.addr} 
-                  title={nc_numFormatter(entity.numTransactions)}
-                  enabled={entity.numTransactions && entity.numTransactions > 0}/>
+                  link={"/transactions?account=" + entity.address} 
+                  title={nc_numFormatter(entity.nonce)}
+                  enabled={false}/>
+                  /*enabled={entity.nonce && BigNumber(entity.nonce).gt(0)}/>*/
       },
-      {
-        field: "Blocks Mined",
-        value: !entity.numBlocksMined ? EMPTY_STR : 
-                <NCLink 
-                  link={"/blocks?account=" + entity.addr} 
-                  title={nc_numFormatter(entity.numBlocksMined, 3)}
-                  enabled={entity.numBlocksMined && entity.numBlocksMined > 0}/>  
-      },
-      /*
-      {
-        field: "Latest Transaction",
-        value: 
-          entity.lastTransactionTimestamp == 0 ? 
-          moment.unix(entity.lastTransactionTimestamp).format('LLLL') : 
-          "Not Available"
-      },
-      {
-        field: "First Transaction",
-        value:  
-          entity.firstTransactionTimestamp == 0 ? 
-          moment.unix(entity.firstTransactionTimestamp).format('LLLL') :
-          "Not Available"
-      },*/
     ];
 
     return (

@@ -163,7 +163,7 @@ export const getBlkRetrievePagingTxnList = (queryStr, pageNumber) => {
   else {
     // get transaction list
     const ep = network.endpoint.transaction.list[txnListType.BY_BLOCK];
-    let params = [nc_trim(queryStr), 0, PAGE_SIZE, 'blockNumber,desc'];
+    let params = [nc_trim(queryStr), pageNumber, PAGE_SIZE, 'blockNumber,desc'];
     network.request(ep, params)
     .then((response) => {
       store.dispatch(StoreBlkRetrieve.SetPagingTxn(response));
@@ -295,7 +295,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
 
     // get transaction details
     const ep = network.endpoint.transaction.detail;
-    let params = [nc_trim(queryStr)];
+    let params = [request];
     network.request(ep, params)
     .then((response) => {
       store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
@@ -379,9 +379,25 @@ export const getAccRetrieveTopLevel = (queryStr) => {
     }, 500);
   }
   else {
+    // validate the account to make sure it's a valid account string
+    let request = nc_trim(queryStr);
+
+    if (request == 0) {
+      request = "0x0000000000000000000000000000000000000000000000000000000000000000"
+    } else if (!nc_isValidEntity(request)) {
+      store.dispatch(StoreAccRetrieve.SetTopLevel({
+        acc: {},
+        blk: {},
+        txn: {}
+      }));
+      return;
+    } else {
+      request = nc_sanitizeHex(queryStr);
+    }
+    
     // get account details
     const ep = network.endpoint.account.detail;
-    let params = [nc_sanitizeHex(queryStr), 0, PAGE_SIZE, 0, PAGE_SIZE];
+    let params = [request, 0, PAGE_SIZE, 0, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
       console.log(response);
@@ -464,7 +480,6 @@ export const setDashboardData = (response) => {
   const isResponseEmpty = nc_isObjectEmpty(response);
   if(!isResponseEmpty) {
     let data = response.content[0];
-    console.log(data);
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
     store.dispatch(StoreTxnRt.SetAll(data.transactions));
     store.dispatch(StoreKpis.SetAll(data.metrics));
@@ -485,13 +500,15 @@ export const getDashboardData = () => {
   })
   .catch((error) => {
     console.log(error);
+    /*
+    // debug. let the user refresh page if initial request fails 
     setDashboardData({
-      content: {
+      content: [{
         blocks: {},
         transactions: {},
         metrics: {}
-      }
-    });
+      }]
+    });*/
   });
 }
 

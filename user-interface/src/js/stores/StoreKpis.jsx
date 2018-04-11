@@ -74,6 +74,7 @@ export function reducer_kpis (state = initialState_StoreKPIs, action)
 
       data.blockWindow = input.blockWindow;
       data.currentBlockchainHead = input.currentBlockchainHead;
+      data.dbBlockTableHead = input.dbBlockTableHead;
 
       _state.data = data;
       _state.momentUpdated = moment();

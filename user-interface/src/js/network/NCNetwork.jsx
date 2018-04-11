@@ -10,7 +10,7 @@ export const NCNETWORK_REQUESTS_ENABLED = true;
 const HTTPS_ENABLED = false;
 //const BASE_URL = 'api.aion.network/aion';
 
-const BASE_URL = 'localhost:8080/aion';
+const BASE_URL = '52.173.253.28:8080/aion';
 
 const stripTrailingSlash = (url) => {
   return url.replace(/\/$/, "");
@@ -160,7 +160,7 @@ export const connectSocket = (dashboardCallback) => {
     const mockPublish = () => { 
       setTimeout(() => {
         let dashboard = Object.assign({}, mock.dashboard);  
-        // do some manipulation on data to mock changing data;
+        // TODO: do some manipulation on data to mock changing data;
         // ...
         dashboardCallback(dashboard);
         mockPublish();

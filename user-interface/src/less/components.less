@@ -737,12 +737,14 @@ pre
     margin-left: 6px;
   }
 
-  &:hover 
-  {
-    cursor: pointer;
-    .text {
-      color: @pt-link-color;
-      text-decoration: underline;
+  &.active {
+    &:hover 
+    {
+      cursor: pointer;
+      .text {
+        color: @pt-link-color;
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -759,12 +761,14 @@ pre
     line-height: inherit;
   }
 
-  &:hover 
-  {
-    cursor: pointer;
-    .text {
-      color: @pt-link-color;
-      text-decoration: underline;
+  &.enabled {
+    &:hover 
+    {
+      cursor: pointer;
+      .text {
+        color: @pt-link-color;
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -1587,8 +1591,14 @@ pre
   overflow: hidden;
 
   .subtitle {
-    font-size: 12px;
-    color: #BFCCD6;
+    font-size: 13px;
+    color: #5C7080;
+    font-weight: 400;
+    padding-left: 7px;
+  }
+
+  .strong {
+    font-weight: 400;
   }
 
   .row 
@@ -1812,6 +1822,10 @@ pre
 
 .NCNavMenu {
   padding: 8px;
+  .pt-menu-header > h6 {
+    font-size: 15px;
+    font-weight: 400;
+  }
   .nav-option {
     font-weight: 300;
     padding: 9px 7px;

@@ -9,6 +9,7 @@ import { NCEntity } from 'lib/NCEnums';
 import NCTimescale from 'components/common/NCTimescale';
 
 const LIVENESS_DELTA_SECONDS = 60 * 5; // 5 min
+const LIVENESS_THRESHOLD_BLOCKS = 10; // ok to be +/- 10 blocks around chain head
 
 export default class NCLivenessIndicator extends Component
 {
@@ -21,7 +22,7 @@ export default class NCLivenessIndicator extends Component
     let dbLagStr = "";
     let dbLagInt = isNaN(dbLag) ? 0 : dbLag;
 
-    let isDataAvailable = (momentEnd != null && latestBlockNumber != null && dbLag != null && moment(momentEnd).isValid());
+    let isDataAvailable = latestBlockNumber != null && dbLag != null && momentEnd != null && moment(momentEnd).isValid();
 
     if (isDataAvailable)
     {
@@ -33,14 +34,14 @@ export default class NCLivenessIndicator extends Component
         //&& lastBlockTemporalDistanceFromNow.asSeconds() > LIVENESS_DELTA_SECONDS
       );
       
-      if (dbLagInt > 0) {
+      if (isHostBlockchainDown) {
+        dbLagStr = "Dashboard webserver non-responsive. "
+      } 
+      else if (dbLagInt >= LIVENESS_THRESHOLD_BLOCKS) {
         dbLagStr = "Lagging " + dbLagInt + " blocks from blockchain head. "
       }
-      else if (dbLagInt < 0) {
+      else if (dbLagInt < -1*LIVENESS_THRESHOLD_BLOCKS) {
         dbLagStr = "Dashboard " + Math.abs(dbLagInt) + " blocks ahead of blockchain. "
-      } 
-      else if (isHostBlockchainDown) {
-        dbLagStr = "Dashboard webserver non-responsive. "
       } 
     }
 
@@ -94,14 +95,14 @@ export default class NCLivenessIndicator extends Component
           </span>
         }
         {
-          (isDataAvailable && !isHostBlockchainDown && dbLagInt >= 5) && 
+          (isDataAvailable && !isHostBlockchainDown && dbLagInt >= LIVENESS_THRESHOLD_BLOCKS) && 
           <span>
             <Spinner className="pt-small icon" intent={Intent.PRIMARY}/>
             <span className="text"></span>
           </span>
         }
         {
-          (isDataAvailable && !isHostBlockchainDown && dbLagInt < 5) && 
+          (isDataAvailable && !isHostBlockchainDown && dbLagInt < LIVENESS_THRESHOLD_BLOCKS) && 
           <span>
             <span className="fa fa-check-circle icon live"></span>
             <span className="text"></span>

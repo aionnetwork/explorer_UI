@@ -40,7 +40,6 @@ class NCTxnRealtime extends Component
           loadingStr="Loading Transaction Stream"
           invalidDataStr="Server provided invalid response."
           emptyDataStr="No transactions in the last 32 blocks."
-          isToplevelSection={false}
 
           marginTop={100} 
           

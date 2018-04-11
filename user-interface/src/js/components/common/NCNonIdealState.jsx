@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 export default class NCNonIdealState extends Component
 {
   render() {
-    const { paddingTop="140", paddingBottom="0", title, description, icon, showHomeLink=true } = this.props;
+    const { paddingTop="140", paddingBottom="0", title, description, icon, showHomeLink=false } = this.props;
     
     return (
       <div 

@@ -52,14 +52,14 @@ class NCLayout extends Component {
           }}
           text="Transactions"
         />
-        <MenuItem
+        {/*<MenuItem
           className="nav-option"
           iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}
           onClick={() => {
             hashHistory.push('/accounts');
           }}
           text="Accounts"
-        />
+        />*/}
       </Menu>
     );
   }
@@ -71,9 +71,9 @@ class NCLayout extends Component {
         <MenuItem
           className="nav-option"
           onClick={() => {
-            console.log("link to Testnet-0");
+            console.log("link to Testnet-1");
           }}
-          text="Testnet-0"
+          text="Testnet-1"
         />
       </Menu>
     );
@@ -95,9 +95,12 @@ class NCLayout extends Component {
     }
 
     let momentEnd = kpi.data.endTimestamp ? moment.unix(BigNumber(kpi.data.endTimestamp).toNumber(10)) : null;
-    let latestBlockNumber = kpi.data.endBlock ? BigNumber(kpi.data.endBlock).toNumber(10) : null; 
+    /*let latestBlockNumber = kpi.data.endBlock ? BigNumber(kpi.data.endBlock).toNumber(10) : null; 
     let dbLag = (kpi.data.currentBlockchainHead && kpi.data.endBlock) ? 
-                BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(kpi.data.endBlock)) : 0;
+                BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(kpi.data.endBlock)) : 0;*/
+    let latestBlockNumber = kpi.data.dbBlockTableHead ? BigNumber(kpi.data.dbBlockTableHead).toNumber(10) : null; 
+    let dbLag = (kpi.data.currentBlockchainHead && kpi.data.dbBlockTableHead) ? 
+                BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(kpi.data.dbBlockTableHead)) : 0;
     let lastUpdated = kpi.momentUpdated;
 
     return (
@@ -121,11 +124,11 @@ class NCLayout extends Component {
                   rightIconName="pt-icon-caret-down"
                   text="Explorer"/>          
               </Popover>
-              <Button 
+              {/*<Button 
                   className="navbar-btn-active pt-button pt-minimal"
                   iconName="timeline-bar-chart"
                   onClick={() => window.open("https://metrics0.aion.network", "Aion | Metrics")}
-                  text="Metrics"/>   
+                  text="Metrics"/>*/}   
             </div>
 
             <div className="pt-navbar-group navbar-group-right">
@@ -144,7 +147,7 @@ class NCLayout extends Component {
                 <Button 
                   className="navbar-btn-active pt-button pt-minimal"
                   rightIconName="pt-icon-caret-down"
-                  text="Testnet-1"/>          
+                  text="Testnet-2"/>          
               </Popover>
 
             </div>

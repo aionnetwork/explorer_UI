@@ -13,7 +13,7 @@ export default class NCLink extends Component
 
     return( 
         <span 
-          className={"NCLink " + (className != null ? className : "")}
+          className={"NCLink " + (className != null ? className : "") + (enabled ? " enabled" : "")}
           onClick={(e) => { if (enabled) hashHistory.push(link) }}>
           <span className="text pt-text-overflow-ellipsis ">{ title }</span>
         </span>

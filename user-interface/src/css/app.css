@@ -931,10 +931,10 @@ pre {
   line-height: inherit;
   margin-left: 6px;
 }
-.NCEntityLabel:hover {
+.NCEntityLabel.active:hover {
   cursor: pointer;
 }
-.NCEntityLabel:hover .text {
+.NCEntityLabel.active:hover .text {
   color: #106ba3;
   text-decoration: underline;
 }
@@ -948,10 +948,10 @@ pre {
 .NCLink .text {
   line-height: inherit;
 }
-.NCLink:hover {
+.NCLink.enabled:hover {
   cursor: pointer;
 }
-.NCLink:hover .text {
+.NCLink.enabled:hover .text {
   color: #106ba3;
   text-decoration: underline;
 }
@@ -1524,8 +1524,13 @@ pre {
   overflow: hidden;
 }
 .NCEntityDetail .subtitle {
-  font-size: 12px;
-  color: #BFCCD6;
+  font-size: 13px;
+  color: #5C7080;
+  font-weight: 400;
+  padding-left: 7px;
+}
+.NCEntityDetail .strong {
+  font-weight: 400;
 }
 .NCEntityDetail .row {
   display: flex;
@@ -1685,6 +1690,10 @@ pre {
 }
 .NCNavMenu {
   padding: 8px;
+}
+.NCNavMenu .pt-menu-header > h6 {
+  font-size: 15px;
+  font-weight: 400;
 }
 .NCNavMenu .nav-option {
   font-weight: 300;

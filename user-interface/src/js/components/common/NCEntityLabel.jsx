@@ -84,7 +84,7 @@ export default class NCEntityLabel extends Component
 
     return( 
         <span 
-          className={"NCEntityLabel " + (className != null ? className : "")}
+          className={"NCEntityLabel " + (className != null ? className : "") + (linkActive ? " active" : "")}
           onClick={ (e) => this.linkToEntity(e, linkActive)}>
           <span className={"icon pt-icon-standard " + this.iconName}/>
           <span className="text pt-text-overflow-ellipsis ">{ displayName }</span>

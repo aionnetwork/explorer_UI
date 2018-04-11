@@ -127,20 +127,21 @@ class NCDashboardKPIs extends Component
 
     this.kpiData[1].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
     this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);
-    this.kpiData[1].kpiList[2].value = BigNumber(kpiList.lastBlockReward).lt(2) ? 
-                              nc_decimalPoint(kpiList.lastBlockReward, 2) :
-                              nc_numFormatterAionCoin(kpiList.lastBlockReward, 2);
+    this.kpiData[1].kpiList[2].value = kpiList.lastBlockReward == null ? null :  
+                                          (BigNumber(kpiList.lastBlockReward).lt(2) ? 
+                                          nc_decimalPoint(kpiList.lastBlockReward, 2) :
+                                          nc_numFormatterAionCoin(kpiList.lastBlockReward, 2));
 
     this.kpiData[2].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
     this.kpiData[2].kpiList[1].value = nc_numFormatter(kpiList.averageNrgLimitPerBlock, 2);
 
     this.kpiData[3].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
     this.kpiData[3].kpiList[1].value = kpiList.peakTransactionsPerBlockInLast24hours != null ? 
-                              nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 0) : 
-                              null;
+                                          nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 0) : 
+                                          null;
     this.kpiData[3].kpiList[2].value = kpiList.totalTransactionsInLast24hours != null ? 
-                              nc_numFormatter(kpiList.totalTransactionsInLast24hours, 3) : 
-                              null;
+                                          nc_numFormatter(kpiList.totalTransactionsInLast24hours, 3) : 
+                                          null;
 
     let ncKPIs = []
 

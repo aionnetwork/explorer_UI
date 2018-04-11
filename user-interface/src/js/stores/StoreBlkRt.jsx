@@ -26,8 +26,10 @@ export function reducer_blkRt (state = initialState_StoreRtBlocks, action)
 
       let data = action.data;
 
+      // error case
       if (!Array.isArray(data)) return _state;
-
+      
+      
       //sanitize block data coming from different sources
       for (let i=0; i < data.length; i++) 
       {

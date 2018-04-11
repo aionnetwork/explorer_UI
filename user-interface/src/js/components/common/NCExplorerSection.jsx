@@ -19,7 +19,7 @@ export default class NCExplorerSection extends Component
       loadingStr, 
       invalidDataStr, 
       emptyDataStr,
-      isToplevelSection=true,
+      isToplevelSection=false,
 
       marginTop, 
       invalidDataTitle="Invalid Data", 
