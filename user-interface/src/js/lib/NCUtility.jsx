@@ -324,7 +324,7 @@ export function nc_isListValid(list) {
   const isValid = (
     list && 
     list.content != null && 
-    list.page != null &&
+    //list.page != null &&
     Array.isArray(list.content)
   );
   return isValid;
@@ -337,7 +337,7 @@ export function nc_isListEmpty(list, isValid=null) {
   else if (!isValid)
     return true;
 
-  if (list.content.length > 0 && list.content[0] && list.content[0].rel === undefined && list.page.totalElements > 0)
+  if (list.content.length > 0 && list.content[0] && list.content[0].rel === undefined)
     return false;
 
   return true;

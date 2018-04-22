@@ -6,7 +6,7 @@ import { NCEntity } from 'lib/NCEnums';
 import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntityLabel';
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
-import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
 
 const EMPTY_STR = "Not Available";
 
@@ -38,7 +38,7 @@ export default class NCTxnDetail extends Component
     let desc = 
     [
       {
-        field: "Time Proposed",
+        field: "Time Sealed",
         value: moment.unix(entity.timestampVal).format('LLLL'),
       },
       {
@@ -55,6 +55,10 @@ export default class NCTxnDetail extends Component
                   entityId={entity.blockNumber}/>,
       },
       // ---------------------------------------------------------------
+      {
+        field: "Index",
+        value: entity.transactionIndex != null ? entity.transactionIndex : EMPTY_STR,
+      },
       {
         field: "Nonce",
         value: entity.nonce != null ? entity.nonce : EMPTY_STR,
@@ -76,7 +80,7 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value != null ? nc_numFormatterAionCoin(entity.value, 6) + " AION" : EMPTY_STR,
+        value: entity.value = null ? EMPTY_STR : <span className="strong">{nc_numFormatterACSensitive(entity.value) + " AION"}</span>,
       },
       {
         field: "Nrg Price",

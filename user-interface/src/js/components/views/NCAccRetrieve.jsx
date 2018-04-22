@@ -60,6 +60,8 @@ class NCAccRetrieve extends Component
   render() {
     const store = this.props.accRetrieve;
     
+    const isWeb3 = (store.response) ? store.response.web3 : false;
+
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const accObj = (store.response) ? store.response.acc : null;
     const txnList = (store.response) ? store.response.txn : null;
@@ -92,28 +94,24 @@ class NCAccRetrieve extends Component
     ];
 
     const desc = nc_hexPrefix(store.queryStr);
-
-    /*
+    
     const accBalanceSection = <NCExplorerSection 
       className={""}
 
       isLoading={isLoadingTopLevel}
-      isDataValid={isTxnListValid}
-      isDataEmpty={isTxnListEmpty} 
-      
-      loadingStr={"Loading Transactions"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={"No transactions found for this account."}
-      marginTop={40}
+      isDataValid={isAccValid}
+      isDataEmpty={isAccEmpty} 
 
-      content={
-        <NCTxnTable 
-          data={txnList}
-          onPageCallback={this.requestPagingTxnList}
-          isLoading={store.isLoadingPagingTxnList}
-          isPaginated={true}/>
-        }
+      emptyDataTitle={"Account Service Unavailable"}
+      invalidDataTitle={"Account Service Unavailable"}
       
+      loadingStr={"Loading Account"}
+      invalidDataStr={"Account Service Unavailable. Please try again."} 
+      emptyDataStr={"Account Service Unavailable. Please try again."}
+      marginTop={20}
+      marginBottom={30}
+
+      content={ <NCAccDetail entity={acc}/> }
     />
 
     const txnListSection = <NCExplorerSection 
@@ -135,7 +133,6 @@ class NCAccRetrieve extends Component
           isLoading={store.isLoadingPagingTxnList}
           isPaginated={true}/>
         }
-      
     />
 
     const blkListSection = <NCExplorerSection 
@@ -158,7 +155,6 @@ class NCAccRetrieve extends Component
           isPaginated={true}/>
         }
     />
-    */
 
     const page =
       <div> 
@@ -167,15 +163,18 @@ class NCAccRetrieve extends Component
           breadcrumbs={breadcrumbs}
           title={"Account"}
           subtitle={desc}/>  
-        <NCAccDetail entity={acc}/>
-         <hr className="nc-hr"/>
-        <NCNonIdealState
-          paddingTop={80}
-          icon={"pt-icon-offline"}
-          title={"Coming Soon"}
-          description={"Account transactions & blocks-mined feature undergoing reconstruction. To be re-enabled soon."}/>
-        {/*
-          (!isAccEmpty) &&
+        { accBalanceSection }
+        <hr className="nc-hr"/>
+        {
+          (isWeb3 && !isAccEmpty) &&
+          <NCNonIdealState
+            paddingTop={80}
+            icon={"pt-icon-offline"}
+            title={"Unavailable In Lite-Mode"}
+            description={"Account transactions & blocks-mined not available in lite-mode."}/>
+        }
+        {
+          (!isWeb3 && (!isBlkListEmpty || !isTxnListEmpty)) &&
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
             {
@@ -188,17 +187,17 @@ class NCAccRetrieve extends Component
             }
             </Tabs2>
           </div>
-        */}
+        }
       </div>;
 
     return (
       <NCExplorerPage
         isLoading={isLoadingTopLevel}
-        isDataValid={isAccValid} 
-        isDataEmpty={isAccEmpty}
+        isDataValid={true} 
+        isDataEmpty={false}
         
         loadingStr={"Loading Account Details"}
-        invalidDataStr={"Server error. Account data invalid."}
+        invalidDataStr={"Account Service Unavailable. Account data invalid."}
         emptyDataStr={"No account found for descriptor: " + desc + "."}
         
         page={page}/>

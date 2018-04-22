@@ -5,12 +5,12 @@ import Stomp from 'stompjs'
 import { blkListType, txnListType, accListType } from 'lib/NCEnums';
 import * as mock from 'lib/NCData';
 
-export const NCNETWORK_REQUESTS_ENABLED = true;
+export const NCNETWORK_REQUESTS_ENABLED = false;
 
-const HTTPS_ENABLED = true;
+const HTTPS_ENABLED = false;
 //const BASE_URL = 'api.aion.network/aion';
 
-const BASE_URL = 'testnet2-api.aion.network/aion';
+const BASE_URL = '52.173.253.28:8080/aion';
 
 const stripTrailingSlash = (url) => {
   return url.replace(/\/$/, "");

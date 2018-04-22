@@ -20,7 +20,7 @@ import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex } from 'lib/NCUtility';
 import { txnListType, blkListType, accListType } from 'lib/NCEnums';
 
-export const PAGE_SIZE = 25;
+export const PAGE_SIZE = 5;
 
 // network.NCNETWORK_REQUESTS_ENABLED
 // network.endpoint
@@ -113,7 +113,7 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
     setTimeout(() => {
       let response = {
         blk: mock.blk,
-        txn: mock.txnList
+        txn: mock.txnListArry
       };
       store.dispatch(StoreBlkRetrieve.SetTopLevel(response));
     }, 500);
@@ -377,8 +377,9 @@ export const getAccRetrieveTopLevel = (queryStr) => {
     setTimeout(() => {
       let response = {
         acc: mock.acc,
-        blk: mock.blkList,
-        txn: mock.txnList
+        blk: mock.blkListArry,
+        txn: mock.txnListArry,
+        web3: false
       };
       store.dispatch(StoreAccRetrieve.SetTopLevel(response));
     }, 500);

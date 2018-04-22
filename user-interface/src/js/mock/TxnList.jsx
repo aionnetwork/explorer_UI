@@ -284,16 +284,15 @@ const TxnList =
           href:"http://52.233.40.169/aion/transactions/58"
         }
       ]
-    }
+    },
   ],
-  page: {
+  /*page: {
     size:10,
     totalElements:67,
     totalPages:7,
     number:0
-  }
+  }*/
 }
-
 
 export default TxnList;
 

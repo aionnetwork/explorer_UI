@@ -70,9 +70,12 @@ class NCLayout extends Component {
         <MenuDivider title="Switch Network" />
         <MenuItem
           className="nav-option"
-          onClick={() => window.open("https://testnet1.aion.network", "Aion | Testnet-1")}
-          text="Testnet-1"
-        />
+          onClick={() => window.open("https://testnet2.aion.network")}
+          text="Testnet-1"/>
+        <MenuItem
+          className="nav-option"
+          onClick={() => window.open("https://testnet1.aion.network")}
+          text="Testnet-1"/>
       </Menu>
     );
   }
@@ -145,7 +148,7 @@ class NCLayout extends Component {
                 <Button 
                   className="navbar-btn-active pt-button pt-minimal"
                   rightIconName="pt-icon-caret-down"
-                  text="Testnet-2"/>          
+                  text="Mainnet"/>          
               </Popover>
 
             </div>

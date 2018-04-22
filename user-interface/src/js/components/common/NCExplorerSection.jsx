@@ -21,6 +21,7 @@ export default class NCExplorerSection extends Component
       emptyDataStr,
       isToplevelSection=false,
 
+      marginBottom=40,
       marginTop, 
       invalidDataTitle="Invalid Data", 
       emptyDataTitle="No Results Found" 
@@ -33,13 +34,13 @@ export default class NCExplorerSection extends Component
         <NCLoading
           title={loadingStr}
           marginTop={marginTop}
-          marginBottom={40}/>
+          marginBottom={marginBottom}/>
       }
       {
         (!isLoading && !isDataValid) &&
         <NCNonIdealState
           paddingTop={marginTop}
-          paddingBottom={40}
+          paddingBottom={marginBottom}
           icon={"pt-icon-warning-sign"}
           title={invalidDataTitle}
           description={invalidDataStr}
@@ -49,7 +50,7 @@ export default class NCExplorerSection extends Component
         (!isLoading && isDataValid && isDataEmpty) &&
         <NCNonIdealState
           paddingTop={marginTop}
-          paddingBottom={40}
+          paddingBottom={marginBottom}
           icon={"pt-icon-offline"}
           title={emptyDataTitle}
           description={emptyDataStr}
