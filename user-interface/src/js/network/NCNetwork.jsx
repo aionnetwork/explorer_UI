@@ -5,7 +5,7 @@ import Stomp from 'stompjs'
 import { blkListType, txnListType, accListType } from 'lib/NCEnums';
 import * as mock from 'lib/NCData';
 
-export const NCNETWORK_REQUESTS_ENABLED = false;
+export const NCNETWORK_REQUESTS_ENABLED = true;
 
 const HTTPS_ENABLED = false;
 //const BASE_URL = 'api.aion.network/aion';
@@ -38,32 +38,32 @@ export const endpoint = {
   block: {
     list: {
       [blkListType['ALL']]: {
-        link: '/blocks',
-        params: ['page', 'size', 'sort']
+        link: '/dashboard/getBlockList',
+        params: ['page', 'size']
       },
       [blkListType['BY_ACCOUNT']]: {
-        link: '/blocks/search/findByMinerAddress',
-        params: ['minerAddress', 'page', 'size', 'sort']
+        link: '/dashboard/getBlocksMinedByAddress',
+        params: ['searchParam', 'blockPage', 'blockSize']
       }
     },
     detail: {
       link: '/dashboard/getBlockAndTransactionDetailsFromBlockNumberOrBlockHash',
-      params: ['searchParam', 'transactionPageNumber', 'transactionPageSize', ]
+      params: ['searchParam']
     }
   },
   transaction: {
     list: {
       [txnListType['ALL']]: {
-        link: '/transactions',
-        params: ['page', 'size', 'sort']
+        link: '/dashboard/getTransactionList',
+        params: ['page', 'size']
       },
       [txnListType['BY_ACCOUNT']]: {
-        link: '/transactions/search/findByFromAddrOrToAddr',
-        params: ['fromAddr', 'toAddr', 'page', 'size', 'sort']
+        link: '/dashboard/getTransactionsFromAddress',
+        params: ['searchParam', 'transactionPage', 'transactionSize']
       },
       [txnListType['BY_BLOCK']]: {
         link: '/dashboard/findTransactionByBlockNumberOrBlockHash',
-        params: ['searchParam', 'transactionPageNumber', 'transactionPageSize']
+        params: ['searchParam']
       }
     },
     detail: {
@@ -72,24 +72,10 @@ export const endpoint = {
     }
   },
   account: {
-    list: {
-      [accListType['ALL']]: {
-        link: '/accounts',
-        params: ['page', 'size', 'sort']
-      }
-    },
     detail: {
-      link: '/dashboard/getBlockAndTransactionDetailsFromAccount',
-      params: ['accountAddress', 'blockPageNumber', 'blockPageSize', 'transactionPageNumber', 'transactionPageSize']
-    },
-    state: {
-      link: '/dashboard/getAccountState',
-      params: ['accountAddress']
+      link: '/dashboard/getAccountDetails',
+      params: ['searchParam']
     }
-  },
-  search: {
-    link: '/dashboard/search',
-    params: ['searchParam']
   },
   dashboard: {
     link: '/dashboard/view',

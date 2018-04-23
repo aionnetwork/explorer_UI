@@ -36,7 +36,7 @@ export default class NCAccDetail extends Component
                 </span>
       },
       {
-        field: "Transaction Count",
+        field: "Nonce",
         value: !entity.nonce ? EMPTY_STR : 
                 <NCLink 
                   link={"/transactions?account=" + entity.address} 

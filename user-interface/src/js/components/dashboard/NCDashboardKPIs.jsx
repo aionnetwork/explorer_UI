@@ -10,7 +10,7 @@ import NCLoading from 'components/common/NCLoading';
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 import {BigNumber} from 'bignumber.js'
-import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with1Floor, nc_numFormatterAionCoin } from "lib/NCUtility";
+import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with1Floor, nc_numFormatterACSensitive } from "lib/NCUtility";
 
 import { hashHistory } from 'react-router';
 import moment from 'moment';
@@ -130,7 +130,7 @@ class NCDashboardKPIs extends Component
     this.kpiData[1].kpiList[2].value = kpiList.lastBlockReward == null ? null :  
                                           (BigNumber(String(kpiList.lastBlockReward)).lt(2) ? 
                                           nc_decimalPoint(kpiList.lastBlockReward, 2) :
-                                          nc_numFormatterAionCoin(kpiList.lastBlockReward, 2));
+                                          nc_numFormatterACSensitive(kpiList.lastBlockReward, 2));
 
     this.kpiData[2].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
     this.kpiData[2].kpiList[1].value = nc_numFormatter(kpiList.averageNrgLimitPerBlock, 2);

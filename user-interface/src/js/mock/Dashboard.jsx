@@ -44,7 +44,7 @@ const Dashboard =
           "hash": "0x5acbb80b671f47d20db20cf1eb0e5f94e131df8b363b92b67f914f13a34f049a",
           "timestamp": "0x5acc2d5e",
           "blockNumber": 552379,
-          "timestampVal": "0x5acc2d5e",
+          "blockTimestamp": "0x5acc2d5e",
           "minerAddress": "0x994988c2f588bb8b5858772f7be2d3e83b74e4674a30b724d1f78319edaf3bc1"
         },
         {
@@ -70,7 +70,7 @@ const Dashboard =
           "hash": "0x327826f01e26505a2324a9aa8940b5cea20cdfa7e456d2b770b2474a454df184",
           "timestamp": "0x5acc2d59",
           "blockNumber": 552378,
-          "timestampVal": "0x5acc2d59",
+          "blockTimestamp": "0x5acc2d59",
           "minerAddress": "0x994988c2f588bb8b5858772f7be2d3e83b74e4674a30b724d1f78319edaf3bc1"
         },
         {
@@ -96,7 +96,7 @@ const Dashboard =
           "hash": "0xf11eaadc117a7c70cb934c6f89a803fc8f1f9e07b0b6c6a2152b053386705509",
           "timestamp": "0x5acc2d4b",
           "blockNumber": 552377,
-          "timestampVal": "0x5acc2d4b",
+          "blockTimestamp": "0x5acc2d4b",
           "minerAddress": "0x0000000000000000000000000000000000000000000000000000000000000000"
         },
         {
@@ -122,7 +122,7 @@ const Dashboard =
           "hash": "0x5b0039388e98884846a9d8003a1d297e5fa73ef647faa5f5c0803c0e8d3469ae",
           "timestamp": "0x5acc2d49",
           "blockNumber": 552376,
-          "timestampVal": "0x5acc2d49",
+          "blockTimestamp": "0x5acc2d49",
           "minerAddress": "0x0000000000000000000000000000000000000000000000000000000000000000"
         },
         {
@@ -148,7 +148,7 @@ const Dashboard =
           "hash": "0x1b0e031bb460177ccd561d377ed0058a19947b16d6fd87dabfe26319d1bdb822",
           "timestamp": "0x5acc2d2c",
           "blockNumber": 552375,
-          "timestampVal": "0x5acc2d2c",
+          "blockTimestamp": "0x5acc2d2c",
           "minerAddress": "0x0000000000000000000000000000000000000000000000000000000000000000"
         }
       ],
@@ -170,7 +170,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0xaefcacc0d08249d4ddebca38f82509410a28988b77c35dea6a73392a651493c3"
         },
         {
@@ -190,7 +190,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0xffe713e4c61ad52f23b3ff5525e8a7f1926199761b1513aef69d0621ab676ec1"
         },
         {
@@ -210,7 +210,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0x59983d9631b8c5907692b7abceba9a881391f40d83f1002582240e3b781d1ad3"
         },
         {
@@ -230,7 +230,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0xf81f3207faac659ef50de199c070206df0516fb346a22a1143767bd5c68fafa9"
         },
         {
@@ -250,7 +250,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0x0d7dbf9276e885a7e1f85eb59db54ba4aad91de8a150a67e4dec6630a1e548e1"
         },
         {
@@ -270,7 +270,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0x24f51f89df851959c950d6530ff5ee251ce860985af5c0bf00d2071c6cb19074"
         },
         {
@@ -290,7 +290,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0x797f12180b40c8a782f74062d153945bcae82cdb123b880197d29c6991b34114"
         },
         {
@@ -310,7 +310,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0xc3e192390c2c9edb76b09bd077054e4907afb55084506f4d9b24516ad43b7d88"
         },
         {
@@ -330,7 +330,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0x2669c31eb2fc8284365c79e5573d7081b794e64ca358e485c384afcad097da51"
         },
         {
@@ -350,7 +350,7 @@ const Dashboard =
           "timestamp": 1523330398,
           "toAddr": "0xb2cebb9bc25812e216f9529b77e429183b4c982167cdce1cef2d37cd3d58afd5",
           "fromAddr": "0x9e730db43e05f36e6dca22449141dacb04c4c29321d23b812231db4aed2cc09f",
-          "timestampVal": 1523330398,
+          "blockTimestamp": 1523330398,
           "transactionHash": "0x16e5bb4c4863e014cda180ee6d33cd8701ec93754ad4e0b45ac1462baf7a421b"
         }
       ]

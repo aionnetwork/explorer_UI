@@ -45,8 +45,8 @@ class NCBlkRetrieve extends Component
   }
 
   requestPagingTxnList = (pageNumber) => {
-    const queryStr = this.props.blkRetrieve.queryStr;
-    network.getBlkRetrievePagingTxnList(queryStr, pageNumber);
+    //const queryStr = this.props.blkRetrieve.queryStr;
+    //network.getBlkRetrievePagingTxnList(queryStr, pageNumber);
   }
 
   render() {

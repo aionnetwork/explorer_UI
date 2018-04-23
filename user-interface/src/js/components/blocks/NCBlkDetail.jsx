@@ -21,7 +21,7 @@ export default class NCBlkDetail extends Component
     [
       {
         field: "Time Proposed",
-        value: moment.unix(entity.timestampVal).format('LLLL')
+        value: moment.unix(entity.blockTimestamp).format('LLLL')
       },
       {
         field: "Block Number",
@@ -80,7 +80,7 @@ export default class NCBlkDetail extends Component
       },
       {
         field: "Total Difficulty",
-        value: nc_isPositiveInteger(entity.totalDifficulty) ? entity.totalDifficulty: EMPTY_STR,
+        value: entity.totalDifficulty ? nc_hexPrefix(entity.totalDifficulty) : EMPTY_STR,
       },
       {
         field: "Nonce",

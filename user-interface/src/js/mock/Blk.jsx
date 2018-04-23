@@ -2,7 +2,7 @@ const Blk =
 {
   content:[
     {
-      timestampVal:1516662050,
+      blockTimestamp:1516662050,
       blockNumber:999,
       numTransactions:0,
       

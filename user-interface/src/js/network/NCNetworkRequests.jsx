@@ -17,10 +17,11 @@ import * as StoreTxnRetrieve from 'stores/StoreTxnRetrieve';
 import * as StoreAccList from 'stores/StoreAccList';
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
-import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex } from 'lib/NCUtility';
+import {BigNumber} from 'bignumber.js';
+import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
 import { txnListType, blkListType, accListType } from 'lib/NCEnums';
 
-export const PAGE_SIZE = 5;
+export const PAGE_SIZE = 25;
 
 // network.NCNETWORK_REQUESTS_ENABLED
 // network.endpoint
@@ -136,9 +137,20 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
     let params = [request,  0, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
+      console.log(response);
+      
+      let transactionDetails = { content:[] };
+      let blockDetails = response;
+      if (response && response.content && response.content[0] && response.content[0].transactionList) {
+        let txnList = response.content[0].transactionList;
+        transactionDetails = {
+          content: txnList
+        }
+      }
+
       store.dispatch(StoreBlkRetrieve.SetTopLevel({
-        blk: response.blockDetails,
-        txn: response.transactionDetails
+        blk: blockDetails,
+        txn: transactionDetails
       }));
     })
     .catch((error) => {
@@ -147,32 +159,6 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
         blk: {},
         txn: {}
       }));
-    });
-  }
-}
-
-export const getBlkRetrievePagingTxnList = (queryStr, pageNumber) => {
-  store.dispatch(StoreBlkRetrieve.GetPagingTxn());
-
-  if (!network.NCNETWORK_REQUESTS_ENABLED) {  
-    setTimeout(() => {
-      let response = Object.assign({}, store.getState().blkRetrieve.response.txn);
-      response.page.number = pageNumber;
-
-      store.dispatch(StoreBlkRetrieve.SetPagingTxn(response));
-    }, 500);
-  }
-  else {
-    // get transaction list
-    const ep = network.endpoint.transaction.list[txnListType.BY_BLOCK];
-    let params = [nc_trim(queryStr), pageNumber, PAGE_SIZE, 'blockNumber,desc'];
-    network.request(ep, params)
-    .then((response) => {
-      store.dispatch(StoreBlkRetrieve.SetPagingTxn(response));
-    })
-    .catch((error) => {
-      console.log(error);
-      store.dispatch(StoreBlkRetrieve.SetPagingTxn({}));
     });
   }
 }
@@ -210,19 +196,19 @@ export const getTxnListTopLevel = (listType, queryStr) => {
           return;
         }
 
-        params = [request, 0, PAGE_SIZE]
+        params = [request]
         break;
       }
       case txnListType.BY_ACCOUNT: {
         
         if (request == 0) {
-          request = "0x0000000000000000000000000000000000000000000000000000000000000000"
+          request = "0000000000000000000000000000000000000000000000000000000000000000"
         } else if (!nc_isValidEntity(request)) {
           store.dispatch(StoreTxnList.SetTopLevel({}));
           return;
         }
 
-        params = [request, request, 0, PAGE_SIZE, 'blockNumber,desc']
+        params = [request, 0, PAGE_SIZE]
         break;
       }
     }
@@ -302,7 +288,6 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
     let params = [request];
     network.request(ep, params)
     .then((response) => {
-      console.log(response);
       store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
     })
     .catch((error) => {
@@ -315,7 +300,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
 // ========================================================
 // Accounts 
 // ========================================================
-
+/*
 export const getAccListTopLevel = () => {
   store.dispatch(StoreAccList.GetTopLevel());
 
@@ -367,7 +352,7 @@ export const getAccListPaging = (pageNumber) => {
     });
   }
 }
-
+*/
 export const getAccRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreAccRetrieve.GetTopLevel({
     queryStr: queryStr
@@ -389,14 +374,10 @@ export const getAccRetrieveTopLevel = (queryStr) => {
     let request = nc_trim(queryStr);
 
     if (request == 0) {
-      request = "0x0000000000000000000000000000000000000000000000000000000000000000"
+      request = "0000000000000000000000000000000000000000000000000000000000000000"
     } else if (!nc_isValidEntity(request)) {
       store.dispatch(StoreAccRetrieve.SetTopLevel({
-        acc: {
-          content: []
-        },
-        blk: {},
-        txn: {}
+        content: []
       }));
       return;
     } else {
@@ -405,23 +386,24 @@ export const getAccRetrieveTopLevel = (queryStr) => {
     
     // get account details
     const ep = network.endpoint.account.detail;
-    let params = [request, 0, PAGE_SIZE, 0, PAGE_SIZE];
+    let params = [request];
     network.request(ep, params)
     .then((response) => {
-      console.log(response);
-      store.dispatch(StoreAccRetrieve.SetTopLevel({
-        acc: response.accountDetails,
-        blk: response.blockDetails,
-        txn: response.transactionDetails
-      }));
+      const isAccValid = nc_isObjectValid(response);
+      const isAccEmpty = nc_isObjectEmpty(response, isAccValid);
+
+      // ok, make requests for blocks and transactions for this account
+      store.dispatch(StoreAccRetrieve.SetTopLevel(response));
+
+      // we can save on a network request if the nonce is zero
+      if (!isAccEmpty) {
+        getAccRetrievePagingTxnList(request, 0);
+        getAccRetrievePagingBlkList(request, 0);
+      }
     })
     .catch((error) => {
       console.log(error);
-      store.dispatch(StoreAccRetrieve.SetTopLevel({
-        acc: {},
-        blk: {},
-        txn: {}
-      }));
+      store.dispatch(StoreAccRetrieve.SetTopLevel({}));
     });
   }
 }
@@ -440,10 +422,19 @@ export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
   else {
     // get transaction list
     const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
-    let params = [nc_sanitizeHex(queryStr), nc_sanitizeHex(queryStr), pageNumber, PAGE_SIZE, 'blockNumber,desc'];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      store.dispatch(StoreAccRetrieve.SetPagingTxn(response));
+      // ok, now make sure that the response you got is still valid
+      // ie. matches up to the account loaded on-screen
+      let acc = store.getState().accRetrieve.response.acc;
+
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+          if (response && response.content && response.content[0])
+            store.dispatch(StoreAccRetrieve.SetPagingTxn(response.content[0].transactionDetails));  
+        }
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -465,10 +456,19 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber) => {
   }
   else {
     const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
-    let params = [nc_sanitizeHex(queryStr), pageNumber, PAGE_SIZE, 'blockNumber,desc'];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      store.dispatch(StoreAccRetrieve.SetPagingBlk(response));
+      // ok, now make sure that the response you got is still valid
+      // ie. matches up to the account loaded on-screen
+      let acc = store.getState().accRetrieve.response.acc;
+
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+          if (response && response.content && response.content[0])
+            store.dispatch(StoreAccRetrieve.SetPagingBlk(response.content[0].blockDetails));  
+        }
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -484,7 +484,6 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber) => {
 // using pub-sub to subscribe to data updates from webserver
 // function to update stores upon receipt of published data
 export const setDashboardData = (response) => {
-  //console.log(response);
   const isResponseEmpty = nc_isObjectEmpty(response);
   if(!isResponseEmpty) {
     let data = response.content[0];
@@ -523,7 +522,7 @@ export const getDashboardData = () => {
 // ========================================================
 // Top Level Search 
 // ========================================================
-
+/*
 export const getSearch = (callback, queryStr) => {
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     // query for the new result
@@ -549,7 +548,7 @@ export const getSearch = (callback, queryStr) => {
     });
   }
 }
-
+*/
 
 
 

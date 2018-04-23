@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { Tab2, Tabs2 } from "@blueprintjs/core";
+import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 
 import NCAccTable from 'components/accounts/NCAccTable';
 import NCBlkTable from 'components/blocks/NCBlkTable';
@@ -63,9 +63,12 @@ class NCAccRetrieve extends Component
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
-    const accObj = (store.response) ? store.response.acc : null;
-    const txnList = (store.response) ? store.response.txn : null;
-    const blkList = (store.response) ? store.response.blk : null;
+    const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
+    const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
+
+    const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
+    const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
+    const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
 
     const isAccValid = nc_isObjectValid(accObj);
     const isAccEmpty = nc_isObjectEmpty(accObj, isAccValid);
@@ -117,7 +120,7 @@ class NCAccRetrieve extends Component
     const txnListSection = <NCExplorerSection 
       className={""}
 
-      isLoading={isLoadingTopLevel}
+      isLoading={isTxnListFirstLoad == null}
       isDataValid={isTxnListValid}
       isDataEmpty={isTxnListEmpty} 
       
@@ -138,7 +141,7 @@ class NCAccRetrieve extends Component
     const blkListSection = <NCExplorerSection 
       className={""}
 
-      isLoading={isLoadingTopLevel}
+      isLoading={isBlkListFirstLoad == null}
       isDataValid={isBlkListValid}
       isDataEmpty={isBlkListEmpty} 
       
@@ -165,6 +168,13 @@ class NCAccRetrieve extends Component
           subtitle={desc}/>  
         { accBalanceSection }
         <hr className="nc-hr"/>
+        <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions and blocks. To retrieve older data, use our&nbsp;
+          <Tooltip
+            className="pt-tooltip-indicator"
+            content={<em>coming soon ...</em>}>
+            historical explorer.
+          </Tooltip>
+        </div>
         {
           (isWeb3 && !isAccEmpty) &&
           <NCNonIdealState
@@ -174,17 +184,11 @@ class NCAccRetrieve extends Component
             description={"Account transactions & blocks-mined not available in lite-mode."}/>
         }
         {
-          (!isWeb3 && (!isBlkListEmpty || !isTxnListEmpty)) &&
+          (!isWeb3) &&
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-            {
-              (!isTxnListEmpty) &&
               <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
-            }
-            {
-              (!isBlkListEmpty) &&
               <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
-            }
             </Tabs2>
           </div>
         }

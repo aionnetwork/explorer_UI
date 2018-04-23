@@ -38,7 +38,7 @@ const TxnList =
       nrgPrice:1,
       value:1000000,
       transactionLog:"[]",
-      timestampVal:1517928214,
+      blockTimestamp:1517928214,
       content:[
 
       ],
@@ -64,7 +64,7 @@ const TxnList =
       nrgPrice:1,
       value:1000,
       transactionLog:"[]",
-      timestampVal:1517928157,
+      blockTimestamp:1517928157,
       content:[
 
       ],
@@ -90,7 +90,7 @@ const TxnList =
       nrgPrice:1,
       value:1000000000000000000,
       transactionLog:"[]",
-      timestampVal:1517859256,
+      blockTimestamp:1517859256,
       content:[
 
       ],
@@ -116,7 +116,7 @@ const TxnList =
       nrgPrice:1,
       value:1000000000000000000,
       transactionLog:"[]",
-      timestampVal:1517859086,
+      blockTimestamp:1517859086,
       content:[
 
       ],
@@ -142,7 +142,7 @@ const TxnList =
       nrgPrice:1,
       value:1000000000000000000,
       transactionLog:"[]",
-      timestampVal:1517859025,
+      blockTimestamp:1517859025,
       content:[
 
       ],
@@ -168,7 +168,7 @@ const TxnList =
       nrgPrice:1,
       value:1000000000000000000,
       transactionLog:"[]",
-      timestampVal:1517859004,
+      blockTimestamp:1517859004,
       content:[
 
       ],
@@ -194,7 +194,7 @@ const TxnList =
       nrgPrice:1,
       value:1000000000000000000,
       transactionLog:"[]",
-      timestampVal:1517858976,
+      blockTimestamp:1517858976,
       content:[
 
       ],
@@ -220,7 +220,7 @@ const TxnList =
       nrgPrice:1,
       value:25,
       transactionLog:"[]",
-      timestampVal:1517780343,
+      blockTimestamp:1517780343,
       content:[
 
       ],
@@ -246,7 +246,7 @@ const TxnList =
       nrgPrice:1,
       value:10,
       transactionLog:"[]",
-      timestampVal:1517776027,
+      blockTimestamp:1517776027,
       content:[
 
       ],
@@ -272,7 +272,7 @@ const TxnList =
       nrgPrice:1,
       value:0,
       transactionLog:"[{\"address\":\"835de8df00afa69e2f48d8fd719d23ba468b4ac736f3150e141241d478216823\",\"data\":\"0000000000000000000000000000000a\",\"topics\":[\"0x27772adc63db07aae765b71eb2b533064fa781bd57457e1b138592d8198d0959\",\"0x84bd80a6edd6afa6d033be563e181dd13f64dba4d9dda4d8157f1a150a91c6c1\",\"0x167294a191c4985603de96329b79f6179a44703662aafe29d13a054ebf51b91c\"]}]",
-      timestampVal: 1517766476,
+      blockTimestamp: 1517766476,
       content: [],
       links: [
         {

@@ -181,13 +181,18 @@ export function nc_numFormatterBytes(num, digits) {
   return num.toFixed(digits).replace(rx, "$1");
 }
 
-export function nc_numFormatterACSensitive(num) {
+export function nc_numFormatterACSensitive(num, dp=null, isHex=false) {
   if (num == null)
     return null;
 
   let bn = null;
   try {
-    bn = new BigNumber(String(num));  
+    if (isHex) {
+      bn = (new BigNumber(String(num), 16));  
+    } 
+    else {
+      bn = (new BigNumber(String(num), 10));
+    }  
   } catch (e) {
     console.log(e);
     return null;
@@ -196,17 +201,30 @@ export function nc_numFormatterACSensitive(num) {
   if (!bn || !BigNumber.isBigNumber(bn) || !bn.isFinite() || bn.isNegative())
     return null;
 
-  return bn.shiftedBy(-18).toFormat();
+  return bn.shiftedBy(-18).toFormat(dp);
 }
 
-export function nc_numFormatterAionCoin(num, fixed=4) {
+export function nc_numFormatterAionCoin(num, fixed=4, isHex=false) {
   if (num == null)
     return null;
 
+  let bn = null;
+  try {
+    if (isHex) {
+      bn = (new BigNumber(String(num), 16));  
+    } 
+    else {
+      bn = (new BigNumber(String(num), 10));
+    }  
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
   
-  let bn = (new BigNumber(String(num))).shiftedBy(-18);
+  if (!bn || !BigNumber.isBigNumber(bn) || !bn.isFinite() || bn.isNegative())
+    return null;
   
-  const formatted = formatSI(bn);
+  const formatted = formatSI(bn.shiftedBy(-18));
   
   let result;
 

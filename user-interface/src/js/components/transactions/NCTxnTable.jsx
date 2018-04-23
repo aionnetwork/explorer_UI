@@ -38,7 +38,7 @@ export default class NCTxnTable extends Component
         isFilterable: false,
         width: 150,
         flex: false,
-        objPath: 'timestampVal',
+        objPath: 'blockTimestamp',
       },
       {
         name: "Transaction Hash",
@@ -87,7 +87,7 @@ export default class NCTxnTable extends Component
     entityList.forEach((entity, i) => 
     {
       // depending on if the enetity is an array or an object, we do different things!
-      // [transactionHash, fromAddr, toAddr, value, timestampVal, blockNumber]
+      // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       tableContent[i] = [];
       if (Array.isArray(entity)) {
         // ------------------------ entity is an array ----------------------------
@@ -122,7 +122,7 @@ export default class NCTxnTable extends Component
         tableContent[i][5] = 
         <Cell>
         {
-          entity.toAddr ?
+          entity[2] ?
           <NCEntityLabel 
             entityType={NCEntity.ACCOUNT} 
             entityName={entity[2]}
@@ -139,7 +139,7 @@ export default class NCTxnTable extends Component
             entityName={entity.blockNumber}
             entityId={entity.blockNumber}/> 
         </Cell>;
-        tableContent[i][1] = <Cell>{ moment.unix(entity.timestampVal).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+        tableContent[i][1] = <Cell>{ moment.unix(entity.blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
         tableContent[i][2] = 
         <Cell>
           <NCEntityLabel 

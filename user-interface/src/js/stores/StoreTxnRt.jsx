@@ -36,8 +36,8 @@ export function reducer_txnRt (state = initialState_StoreRtTransactions, action)
         if (data[i].fromAddr == null && data[i].from != null)
           data[i].fromAddr = data[i].from;
 
-        if (data[i].timestampVal == null && data[i].timestamp != null)
-          data[i].timestampVal = data[i].timestamp;
+        if (data[i].blockTimestamp == null && data[i].timestamp != null)
+          data[i].blockTimestamp = data[i].timestamp;
 
         if (data[i].transactionHash == null && data[i].hash != null)
           data[i].transactionHash = data[i].hash;

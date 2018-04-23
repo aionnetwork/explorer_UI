@@ -1,4 +1,4 @@
-// transactionHash, blockNumber, fromAddr, toAddr, value, timestampVal
+// transactionHash, blockNumber, fromAddr, toAddr, value, blockTimestamp
 
 const TxnListArry = 
 {

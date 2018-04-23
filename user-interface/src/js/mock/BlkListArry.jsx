@@ -1,4 +1,4 @@
-// blockHash, blockNumber, difficulty, nrgConsumed, nrgLimit, size, timestampVal, totalDifficulty, numTransactions
+// blockHash, blockNumber, difficulty, nrgConsumed, nrgLimit, size, blockTimestamp, totalDifficulty, numTransactions
 const BlkListArry = 
 {
   content:[

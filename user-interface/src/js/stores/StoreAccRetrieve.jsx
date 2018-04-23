@@ -61,11 +61,21 @@ let initialState_StoreBlkRetrieve =
   queryStr: "",
   
   response: {
-    acc: null,
-    blk: null,
-    txn: null
-  },
-  momentUpdated: null
+    acc: {
+      data: null,
+      momentUpdated: null
+    },
+    blk: {
+      data: null,
+      momentUpdated: null
+    },
+    txn: {
+      data: null,
+      momentUpdated: null
+    },
+    momentUpdated: null,
+    web3: false
+  }
 };
 
 export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, action) 
@@ -81,6 +91,9 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       _state.isLoadingTopLevel = true; 
       _state.queryStr = action.data.queryStr;
       
+      _state.response.acc.momentUpdated = null;
+      _state.response.blk.momentUpdated = null;
+      _state.response.txn.momentUpdated = null;
       _state.momentUpdated = null;
       
       return _state;
@@ -91,7 +104,8 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       
       _state.isLoadingTopLevel = false; 
       
-      _state.response = action.data;
+      _state.response.acc.data = action.data;
+      _state.response.acc.momentUpdated = moment();
       _state.momentUpdated = moment();
       
       return _state;
@@ -104,7 +118,7 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       let _state = Object.assign({}, state);
       
       _state.isLoadingPagingTxnList = true;
-      
+
       return _state;
     }
     case 'ACC_RETRIEVE_SET_PAGING_TXN':
@@ -113,9 +127,10 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       
       _state.isLoadingPagingTxnList = false;
       
-      _state.response.txn = action.data;
+      _state.response.txn.data = action.data;
+      _state.response.txn.momentUpdated = moment();
       _state.momentUpdated = moment();
-      
+
       return _state;
     }
 
@@ -135,7 +150,8 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       
       _state.isLoadingPagingBlkList = false;
       
-      _state.response.blk = action.data;
+      _state.response.blk.data = action.data;
+      _state.response.blk.momentUpdated = moment();
       _state.momentUpdated = moment();
       
       return _state;

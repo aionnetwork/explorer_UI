@@ -71,7 +71,7 @@ class NCLayout extends Component {
         <MenuItem
           className="nav-option"
           onClick={() => window.open("https://testnet2.aion.network")}
-          text="Testnet-1"/>
+          text="Testnet-2"/>
         <MenuItem
           className="nav-option"
           onClick={() => window.open("https://testnet1.aion.network")}
@@ -85,6 +85,8 @@ class NCLayout extends Component {
     const pathname = this.props.location.pathname;
 
     let kpi = this.props.kpi;
+
+
     
     // wait on the response from KPI list to load application
     if (NCNETWORK_REQUESTS_ENABLED && kpi.momentUpdated == null) { 
@@ -95,13 +97,17 @@ class NCLayout extends Component {
       );
     }
 
-    let momentEnd = kpi.data.endTimestamp ? moment.unix(BigNumber(kpi.data.endTimestamp).toNumber(10)) : null;
-    /*let latestBlockNumber = kpi.data.endBlock ? BigNumber(kpi.data.endBlock).toNumber(10) : null; 
-    let dbLag = (kpi.data.currentBlockchainHead && kpi.data.endBlock) ? 
-                BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(kpi.data.endBlock)) : 0;*/
-    let latestBlockNumber = kpi.data.dbBlockTableHead ? BigNumber(kpi.data.dbBlockTableHead).toNumber(10) : null; 
-    let dbLag = (kpi.data.currentBlockchainHead && kpi.data.dbBlockTableHead) ? 
-                BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(kpi.data.dbBlockTableHead)) : 0;
+    let momentEnd = kpi.data.endTimestamp ? moment.unix(kpi.data.endTimestamp) : null;
+
+    let latestBlockNumber = null;
+    if (kpi.data.dbBlockTableHead) {
+      latestBlockNumber = kpi.data.dbBlockTableHead;
+    } else {
+      latestBlockNumber = kpi.data.endBlock;
+    } 
+
+    let dbLag = (kpi.data.currentBlockchainHead && latestBlockNumber) ? 
+                BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(latestBlockNumber)) : 0;
     let lastUpdated = kpi.momentUpdated;
 
     return (

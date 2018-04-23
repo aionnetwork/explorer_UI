@@ -34,7 +34,7 @@ export default class NCBlkTable extends Component
         isFilterable: false,
         width: 150,
         flex: false,
-        objPath: 'timestampVal',
+        objPath: 'blockTimestamp',
       },
       {
         name: "Txn Count",
@@ -82,7 +82,7 @@ export default class NCBlkTable extends Component
     entityList.forEach((entity, i) => 
     {
       // depending on if the enetity is an array or an object, we do different things!
-      // blockHash, blockNumber, difficulty, nrgConsumed, nrgLimit, size, timestampVal, totalDifficulty, numTransactions
+      // blockHash, blockNumber, difficulty, nrgConsumed, nrgLimit, size, blockTimestamp, totalDifficulty, numTransactions
       tableContent[i] = [];
       if (Array.isArray(entity)) {
         // ------------------------ entity is an array ----------------------------
@@ -113,7 +113,7 @@ export default class NCBlkTable extends Component
             entityName={entity.blockNumber}
             entityId={entity.blockNumber}/> 
         </Cell>;
-        tableContent[i][1] = <Cell>{ moment.unix(entity.timestampVal).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+        tableContent[i][1] = <Cell>{ moment.unix(entity.blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
         tableContent[i][2] = 
         <Cell>
           <NCLink 

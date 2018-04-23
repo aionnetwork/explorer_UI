@@ -39,7 +39,7 @@ export default class NCTxnDetail extends Component
     [
       {
         field: "Time Sealed",
-        value: moment.unix(entity.timestampVal).format('LLLL'),
+        value: moment.unix(entity.blockTimestamp).format('LLLL'),
       },
       {
         field: "Transaction Hash",
@@ -80,7 +80,7 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value = null ? EMPTY_STR : <span className="strong">{nc_numFormatterACSensitive(entity.value) + " AION"}</span>,
+        value: entity.value = null ? EMPTY_STR : <span className="strong">{nc_numFormatterACSensitive(entity.value, null, true) + " AION"}</span>,
       },
       {
         field: "Nrg Price",

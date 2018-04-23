@@ -36,8 +36,8 @@ export function reducer_blkRt (state = initialState_StoreRtBlocks, action)
         if (data[i].blockNumber == null && data[i].number != null)
           data[i].blockNumber = data[i].number;
         
-        if (data[i].timestampVal == null && data[i].timestamp != null)
-          data[i].timestampVal = data[i].timestamp;
+        if (data[i].blockTimestamp == null && data[i].timestamp != null)
+          data[i].blockTimestamp = data[i].timestamp;
 
         if (data[i].minerAddress == null && data[i].miner != null)
           data[i].minerAddress = data[i].miner;

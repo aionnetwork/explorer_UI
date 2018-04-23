@@ -17,7 +17,7 @@ import BlkRetrieve from 'components/views/NCBlkRetrieve';
 import TxnList from 'components/views/NCTxnList';
 import TxnRetrieve from 'components/views/NCTxnRetrieve';
 
-import AccList from 'components/views/NCAccList';
+//import AccList from 'components/views/NCAccList';
 import AccRetrieve from 'components/views/NCAccRetrieve';
 
 import NoResults from 'components/views/NCNoResults';

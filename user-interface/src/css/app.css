@@ -1520,6 +1520,12 @@ pre {
   font-size: 13px;
   font-weight: 300;
 }
+.NCPageBreakerSubtitle {
+  font-size: 13px;
+  color: #5C7080;
+  font-weight: 400;
+  padding-left: 7px;
+}
 .NCEntityDetail {
   padding: 0 10px 0 10px;
   overflow: hidden;

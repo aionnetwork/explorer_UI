@@ -2,7 +2,7 @@ const Txn =
 {
   content:[
     {
-      timestampVal:1517928214,
+      blockTimestamp:1517928214,
       transactionHash:"480fba757d41ec5d279e48cb56c998eb583a02f0740e08da7a95bce61ac80eaf",
       blockNumber:119729,
 
