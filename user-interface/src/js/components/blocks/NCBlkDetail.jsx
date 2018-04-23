@@ -81,7 +81,7 @@ export default class NCBlkDetail extends Component
       },
       {
         field: "Total Difficulty",
-        value: entity.totalDifficulty ? nc_hexPrefix(entity.totalDifficulty) : EMPTY_STR,
+        value: entity.totalDifficulty ? BigNumber(String(entity.totalDifficulty), 16).toString(10) : EMPTY_STR,
       },
       {
         field: "Nonce",
