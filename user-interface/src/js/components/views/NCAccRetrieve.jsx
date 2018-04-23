@@ -105,12 +105,12 @@ class NCAccRetrieve extends Component
       isDataValid={isAccValid}
       isDataEmpty={isAccEmpty} 
 
-      emptyDataTitle={"Account Service Unavailable"}
+      emptyDataTitle={"Account Not Found"}
       invalidDataTitle={"Account Service Unavailable"}
       
       loadingStr={"Loading Account"}
       invalidDataStr={"Account Service Unavailable. Please try again."} 
-      emptyDataStr={"Account Service Unavailable. Please try again."}
+      emptyDataStr={"No Data Available for Account: "+desc}
       marginTop={20}
       marginBottom={30}
 
@@ -168,13 +168,7 @@ class NCAccRetrieve extends Component
           subtitle={desc}/>  
         { accBalanceSection }
         <hr className="nc-hr"/>
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions and blocks. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </div>
+        
         {
           (isWeb3 && !isAccEmpty) &&
           <NCNonIdealState
@@ -184,12 +178,21 @@ class NCAccRetrieve extends Component
             description={"Account transactions & blocks-mined not available in lite-mode."}/>
         }
         {
-          (!isWeb3) &&
-          <div className="NCSection">
-            <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-              <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
-              <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
-            </Tabs2>
+          (!isWeb3 && !isAccEmpty) &&
+          <div>
+            <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions and blocks. To retrieve older data, use our&nbsp;
+              <Tooltip
+                className="pt-tooltip-indicator"
+                content={<em>coming soon ...</em>}>
+                historical explorer.
+              </Tooltip>
+            </div>
+            <div className="NCSection">
+              <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
+                <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
+                <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
+              </Tabs2>
+            </div>
           </div>
         }
       </div>;

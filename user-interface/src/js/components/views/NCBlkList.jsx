@@ -36,12 +36,12 @@ class NCBlkList extends Component
   requestTopLevel = () => {
     let listType = blkListType.ALL;
     let queryStr = "";
-
+    /*
     let query = this.props.location.query; 
     if (query && query.account) {
       listType = blkListType.BY_ACCOUNT;
       queryStr = query.account;
-    }
+    }*/
 
     network.getBlkListTopLevel(listType, queryStr);
   }
@@ -100,7 +100,7 @@ class NCBlkList extends Component
         invalidDataStr={"Server provided an invalid response. Please try again."}
         emptyDataStr={(listType == blkListType.ALL) ? 
                 "No blocks found. Blockchain server loading blocks." : 
-                "Block list returned 0 results for account " + store.queryStr + "."}
+                "0 results found for account " + store.queryStr + "."}
         
         page={page}
         marginTop={100}/>

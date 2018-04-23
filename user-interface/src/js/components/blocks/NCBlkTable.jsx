@@ -12,6 +12,7 @@ import { NCEntity } from 'lib/NCEnums';
 import { nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_hexPrefix } from 'lib/NCUtility';
 
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
+import {BigNumber} from 'bignumber.js';
 
 export default class NCBlkTable extends Component 
 {
@@ -102,7 +103,7 @@ export default class NCBlkTable extends Component
             enabled={ entity[8] > 0 }/>
         </Cell>;
         tableContent[i][3] = <Cell>{ nc_numFormatter(entity[3], 2) }</Cell>;
-        tableContent[i][4] = <Cell>{entity[2]}</Cell>;
+        tableContent[i][4] = <Cell>{BigNumber(String(entity[2]), 16).toString(10)}</Cell>;
         tableContent[i][5] = <Cell>{ nc_numFormatterBytes(entity[5], 2) }</Cell>;
       } else {
         // ------------------------ entity is an object ----------------------------
@@ -122,7 +123,7 @@ export default class NCBlkTable extends Component
             enabled={ entity.numTransactions > 0 }/>
         </Cell>;
         tableContent[i][3] = <Cell>{ nc_numFormatter(entity.nrgConsumed, 2) }</Cell>;
-        tableContent[i][4] = <Cell>{entity.difficulty}</Cell>;
+        tableContent[i][4] = <Cell>{BigNumber(String(entity.difficulty), 16).toString(10)}</Cell>;
         tableContent[i][5] = <Cell>{ nc_numFormatterBytes(entity.size, 2) }</Cell>;
       }
     });

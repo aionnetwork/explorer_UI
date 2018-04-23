@@ -7,10 +7,8 @@ import * as mock from 'lib/NCData';
 
 export const NCNETWORK_REQUESTS_ENABLED = true;
 
-const HTTPS_ENABLED = false;
-//const BASE_URL = 'api.aion.network/aion';
-
-const BASE_URL = '52.173.253.28:8080/aion';
+const HTTPS_ENABLED = true;
+const BASE_URL = 'mainnet-api.aion.network/aion';
 
 const stripTrailingSlash = (url) => {
   return url.replace(/\/$/, "");

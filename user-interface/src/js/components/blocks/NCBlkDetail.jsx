@@ -11,6 +11,7 @@ import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAi
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
+import {BigNumber} from 'bignumber.js';
 
 export default class NCBlkDetail extends Component
 {
@@ -76,7 +77,7 @@ export default class NCBlkDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Difficulty",
-        value: nc_isPositiveInteger(entity.difficulty) ? entity.difficulty: EMPTY_STR,
+        value: entity.difficulty ? BigNumber(String(entity.difficulty), 16).toString(10) : EMPTY_STR,
       },
       {
         field: "Total Difficulty",

@@ -52,13 +52,21 @@ export const getBlkListTopLevel = (listType, queryStr) => {
     let params = [];
     switch(listType) {
       case blkListType.ALL: {
-        params = [0, PAGE_SIZE, 'blockNumber,desc']
+        params = [0, PAGE_SIZE]
         break;
-      }
+      }/*
       case blkListType.BY_ACCOUNT: {
-        params = [nc_trim(queryStr), 0, PAGE_SIZE, 'blockNumber,desc']
+        let request = nc_sanitizeHex(queryStr);
+        if (request == 0 || request == "0x0") {
+          request = "0000000000000000000000000000000000000000000000000000000000000000"
+        } else if (!nc_isValidEntity(request)) {
+          store.dispatch(StoreBlkList.SetTopLevel({ content:[] }));
+          return;
+        }
+
+        params = [request, 0, PAGE_SIZE]
         break;
-      }
+      }*/
     }
     network.request(ep, params)
     .then((response) => {
@@ -88,11 +96,16 @@ export const getBlkListPaging = (listType, queryStr, pageNumber) => {
       case blkListType.ALL: {
         params = [pageNumber, PAGE_SIZE, 'blockNumber,desc']
         break; 
-      }
+      }/*
       case blkListType.BY_ACCOUNT: {
-        params = [nc_trim(queryStr), pageNumber, PAGE_SIZE, 'blockNumber,desc']
+        let request = nc_sanitizeHex(queryStr);
+        if (request == 0) {
+          request = "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+
+        params = [request, pageNumber, PAGE_SIZE]
         break;
-      }
+      }*/
     }
     network.request(ep, params)
     .then((response) => {
@@ -137,7 +150,6 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
     let params = [request,  0, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      console.log(response);
       
       let transactionDetails = { content:[] };
       let blockDetails = response;
@@ -192,16 +204,15 @@ export const getTxnListTopLevel = (listType, queryStr) => {
       }
       case txnListType.BY_BLOCK: {
         if (!nc_isPositiveInteger(request) && !nc_isValidEntity(request)) {
-          store.dispatch(StoreTxnList.SetTopLevel({}));
+          store.dispatch(StoreTxnList.SetTopLevel({ content:[] }));
           return;
         }
 
         params = [request]
         break;
-      }
+      }/*
       case txnListType.BY_ACCOUNT: {
-        
-        if (request == 0) {
+        if (request == 0 || request == "0x0") {
           request = "0000000000000000000000000000000000000000000000000000000000000000"
         } else if (!nc_isValidEntity(request)) {
           store.dispatch(StoreTxnList.SetTopLevel({}));
@@ -210,7 +221,7 @@ export const getTxnListTopLevel = (listType, queryStr) => {
 
         params = [request, 0, PAGE_SIZE]
         break;
-      }
+      }*/
     }
 
     network.request(ep, params)
@@ -247,10 +258,16 @@ export const getTxnListPaging = (listType, queryStr, pageNumber) => {
         params = [nc_trim(queryStr), pageNumber, PAGE_SIZE]
         break;
       }
+      /*
       case txnListType.BY_ACCOUNT: {
-        params = [nc_trim(queryStr), nc_trim(queryStr), pageNumber, PAGE_SIZE, 'blockNumber,desc']
+        let request = nc_trim(queryStr);
+        if (request == 0 || request == "0x0") {
+          request = "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+
+        params = [request, pageNumber, PAGE_SIZE]
         break;
-      }
+      }*/
     }
     network.request(ep, params)
     .then((response) => {
@@ -431,8 +448,7 @@ export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
 
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
-          if (response && response.content && response.content[0])
-            store.dispatch(StoreAccRetrieve.SetPagingTxn(response.content[0].transactionDetails));  
+            store.dispatch(StoreAccRetrieve.SetPagingTxn(response));  
         }
       }
     })
@@ -462,11 +478,9 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber) => {
       // ok, now make sure that the response you got is still valid
       // ie. matches up to the account loaded on-screen
       let acc = store.getState().accRetrieve.response.acc;
-
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
-          if (response && response.content && response.content[0])
-            store.dispatch(StoreAccRetrieve.SetPagingBlk(response.content[0].blockDetails));  
+            store.dispatch(StoreAccRetrieve.SetPagingBlk(response));  
         }
       }
     })
