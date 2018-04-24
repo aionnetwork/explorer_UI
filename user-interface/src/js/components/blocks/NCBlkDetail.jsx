@@ -6,7 +6,7 @@ import NCEntityLabel from 'components/common/NCEntityLabel';
 import NCLink from 'components/common/NCLink';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterACSensitive, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
@@ -85,24 +85,27 @@ export default class NCBlkDetail extends Component
       },
       {
         field: "Nonce",
-        value: nc_isStrEmpty(entity.nonce) ? EMPTY_STR : entity.nonce,
+        value: nc_isStrEmpty(entity.nonce) ? EMPTY_STR : nc_hexPrefix(entity.nonce),
       },
       {
         field: "Block Reward",
-        value: entity.blockReward != null ? entity.blockReward + " AION" : EMPTY_STR,
+        value: entity.blockReward != null ? <span className="strong">
+          {nc_numFormatterACSensitive(entity.blockReward, null) + " AION"}
+          <span className="subtitle">{"(does not include transaction-fee payouts)"}</span>
+        </span> : EMPTY_STR,
       },
       {
         field: "Nrg Consumed",
-        value: entity.nrgConsumed != null ? nc_numFormatter(entity.nrgConsumed, 6)  + " NRG": EMPTY_STR,
+        value: entity.nrgConsumed != null ? nc_numFormatter(entity.nrgConsumed, 18)  + " NRG": EMPTY_STR,
       },
       {
         field: "Nrg Limit",
-        value: entity.nrgLimit != null ? nc_numFormatter(entity.nrgLimit, 6)  + " NRG": EMPTY_STR,
+        value: entity.nrgLimit != null ? nc_numFormatter(entity.nrgLimit, 18)  + " NRG": EMPTY_STR,
       },
       // ---------------------------------------------------------------
       {
         field: "Block Size",
-        value: nc_numFormatterBytes(entity.size, 6),
+        value: nc_numFormatterBytes(entity.size, 8),
       },
       {
         field: "Bloom Filter",

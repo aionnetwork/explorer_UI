@@ -8,6 +8,7 @@ import NCEntityDetail from 'components/common/NCEntityDetail';
 
 import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
 
+import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 
 export default class NCTxnDetail extends Component
@@ -63,7 +64,7 @@ export default class NCTxnDetail extends Component
       },
       {
         field: "Nonce",
-        value: entity.nonce != null ? entity.nonce : EMPTY_STR,
+        value: entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
       },
       {
         field: "From Address",
@@ -82,15 +83,15 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value = null ? EMPTY_STR : <span className="strong">{nc_numFormatterACSensitive(entity.value, null, true) + " AION"}</span>,
+        value: entity.value == null ? EMPTY_STR : <span className="strong">{nc_numFormatterACSensitive(entity.value, null, true) + " AION"}</span>,
       },
       {
         field: "Nrg Price",
-        value: entity.nrgPrice != null ? nc_numFormatter(entity.nrgPrice, 6) + " NRG" : EMPTY_STR,
+        value: entity.nrgPrice != null ? nc_numFormatter(entity.nrgPrice, 18) + " NRG" : EMPTY_STR,
       },
       {
         field: "Nrg Consumed",
-        value: entity.nrgConsumed != null ? nc_numFormatter(entity.nrgConsumed, 6) + " NRG" : EMPTY_STR,
+        value: entity.nrgConsumed != null ? nc_numFormatter(entity.nrgConsumed, 18) + " NRG" : EMPTY_STR,
       },
       // ---------------------------------------------------------------
       {

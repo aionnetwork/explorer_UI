@@ -392,7 +392,7 @@ export function nc_GetEntityIcon(entity) {
 
 export function nc_CanLinkToEntity(entity, entityId) {
   if (entity != null && entityId != null && 
-      NCEntityInfo[entity] != null && entityId != "" && 
+      NCEntityInfo[entity] != null && entityId !== "" &&
       NCEntityInfo[entity].absoluteUrl != null) {
     return true;
   }

@@ -37,12 +37,7 @@ export default class NCAccDetail extends Component
       },
       {
         field: "Nonce",
-        value: !entity.nonce ? EMPTY_STR : 
-                <NCLink 
-                  link={"/transactions?account=" + entity.address} 
-                  title={nc_numFormatter(entity.nonce)}
-                  enabled={false}/>
-                  /*enabled={entity.nonce && BigNumber(entity.nonce).gt(0)}/>*/
+        value: !entity.nonce ? EMPTY_STR : BigNumber(String(entity.nonce), 16).toString(10) 
       },
     ];
 

@@ -10,7 +10,7 @@ import NCLoading from 'components/common/NCLoading';
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 import {BigNumber} from 'bignumber.js'
-import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with1Floor, nc_numFormatterACSensitive } from "lib/NCUtility";
+import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with1Floor, nc_numFormatterACSensitive, nc_isNumber } from "lib/NCUtility";
 
 import { hashHistory } from 'react-router';
 import moment from 'moment';
@@ -122,8 +122,22 @@ class NCDashboardKPIs extends Component
 
     const kpiList = this.props.kpi.data;
 
+    // TODO: remove after mainnet launch event
+    let averageBlockTime = null;
+    if (kpiList.averageBlockTime) {
+      if (nc_isNumber(kpiList.averageBlockTime)) {
+        if (kpiList.averageBlockTime > 30) {
+          averageBlockTime = 30
+        } else {
+          averageBlockTime = nc_decimalPoint(kpiList.averageBlockTime, 2)
+        }
+      } else {
+        averageBlockTime = kpiList.averageBlockTime;
+      }
+    }
+
     this.kpiData[0].kpiList[0].value = kpiList.targetBlockTime;
-    this.kpiData[0].kpiList[1].value = nc_decimalPoint(kpiList.averageBlockTime, 2);
+    this.kpiData[0].kpiList[1].value = averageBlockTime;
 
     this.kpiData[1].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
     this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);

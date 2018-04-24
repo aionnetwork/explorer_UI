@@ -116,14 +116,14 @@ class NCRecentBlocks extends Component
       );
     }
 
-    if (rtBlockList == null || !Array.isArray(rtBlockList) || rtBlockList.length < 2 || rtBlockList[0] == null)
+    if (rtBlockList == null || !Array.isArray(rtBlockList) || rtBlockList.length < 0 || rtBlockList[0] == null)
     {
       return (
         <NCNonIdealState
-              paddingTop={100}
-              icon={"pt-icon-warning-sign"}
+              paddingTop={120}
+              icon={"pt-icon-offline"}
               title={"No Blocks Available"}
-              description={"server provided invalid response"}/>
+              description={"No blocks appear to have been mined."}/>
       );
     }
 
