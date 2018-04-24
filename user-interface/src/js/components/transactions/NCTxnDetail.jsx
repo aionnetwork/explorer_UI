@@ -34,8 +34,6 @@ export default class NCTxnDetail extends Component
   render() {
     let { entity } = this.props;
 
-    console.log(entity);
-
     let parsedTxnLog = this.parseTxnLog(entity.transactionLog)
 
     let desc = 
