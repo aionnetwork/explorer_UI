@@ -180,7 +180,7 @@ class NCAccRetrieve extends Component
         {
           (!isWeb3 && !isAccEmpty) &&
           <div>
-            <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions and blocks. To retrieve older data, use our&nbsp;
+            <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions. To retrieve older data, use our&nbsp;
               <Tooltip
                 className="pt-tooltip-indicator"
                 content={<em>coming soon ...</em>}>

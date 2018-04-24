@@ -236,6 +236,39 @@ export function nc_numFormatterAionCoin(num, fixed=4, isHex=false) {
   return result;
 }
 
+// format to Amp
+export function nc_numFormatterAmp(num, fixed=4, isHex=false) {
+  if (num == null)
+    return null;
+
+  let bn = null;
+  try {
+    if (isHex) {
+      bn = (new BigNumber(String(num), 16));  
+    } 
+    else {
+      bn = (new BigNumber(String(num), 10));
+    }  
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+  
+  if (!bn || !BigNumber.isBigNumber(bn) || !bn.isFinite() || bn.isNegative())
+    return null;
+  
+  const formatted = formatSI(bn.shiftedBy(-9));
+  
+  let result;
+
+  if (fixed == null)
+    result = formatted.value + " " + formatted.prefix + "Amp";
+  else
+    result = formatted.value.toFixed(fixed) + " " + formatted.prefix + "Amp";
+
+  return result;
+}
+
 export function nc_trim (x) {
   //return String(x).replace(/^\s+|\s+$/gm,'');
   return String(x).trim();
