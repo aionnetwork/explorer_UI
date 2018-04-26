@@ -170,7 +170,7 @@ class NCLayout extends Component {
         <div className="NCFooter">
           <div>
             <span className="text">Powered By</span>
-            <img className="logo" src="img/logo/aion-logo.svg" alt="logo"/>
+            <img className="logo" src="img/logo/aion-logo.png" alt="logo"/>
           </div>
         </div>
       </div>

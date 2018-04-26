@@ -1358,17 +1358,13 @@ pre {
   color: #202b33;
   cursor: pointer;
 }
-.NCHeader .row .navbar-group-left .logo .moog-logo {
-  height: 15px;
-  margin: 0 10px 0 0;
-}
 .NCHeader .row .navbar-group-left .logo .logo-img {
-  height: 35px;
+  height: 43px;
 }
 .NCHeader .row .navbar-group-left .title {
   font-family: 'Titillium Web', sans-serif;
   font-size: 21px;
-  margin: 0 0px 0 10px;
+  margin: 0 0px 0 3px;
   color: #394b59;
 }
 .NCHeader .row .navbar-group-left .pt-navbar-divider {

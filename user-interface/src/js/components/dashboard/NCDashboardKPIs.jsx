@@ -61,7 +61,7 @@ class NCDashboardKPIs extends Component
             value:"0.85",
             units:"",
             title:["Block", "Reward"],
-            hoverContent: "Current block reward value, denominated in Aion network coin (AC)",
+            hoverContent: "Current block reward value, denominated in Aion coin (AION)",
           },
         ]
       },
