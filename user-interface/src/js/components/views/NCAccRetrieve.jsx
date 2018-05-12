@@ -169,12 +169,12 @@ class NCAccRetrieve extends Component
           subtitle={desc}/>  
         <NCAccDetail entity={acc}/>
          <hr className="nc-hr"/>
-        <NCNonIdealState
-          paddingTop={80}
-          icon={"pt-icon-offline"}
-          title={"Coming Soon"}
-          description={"Account transactions & blocks-mined feature undergoing reconstruction. To be re-enabled soon."}/>
         {/*
+          <NCNonIdealState
+            paddingTop={80}
+            icon={"pt-icon-offline"}
+            title={"Coming Soon"}
+            description={"Account transactions & blocks-mined feature undergoing reconstruction. To be re-enabled soon."}/>
           (!isAccEmpty) &&
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
