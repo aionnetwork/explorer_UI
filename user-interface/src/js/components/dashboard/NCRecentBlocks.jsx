@@ -31,7 +31,7 @@ class NCRecentBlocks extends Component
 
     super(props);
 
-    this.clippedList = [];
+    this.clippedList = null;
 
     this.customEnterAnimation = {
       from: { transform: 'translate3d(0px, -145px, 0px)', opacity: 0 },
@@ -43,14 +43,11 @@ class NCRecentBlocks extends Component
       to:   { transform: 'translate3d(0px, 145px, 0px)', opacity: 0 }
     };
 
-    this.currentBlockNumber = (this.props.blkRt.data != null && 
-                               Array.isArray(this.props.blkRt.data) &&
-                               this.props.blkRt.data.length > 0)
-                              ? this.props.blkRt.data[0] : -1;
+    this.currentBlockNumber = -1;
+    this.targetBlockTime = DEFAULT_TARGET_BLOCK_TIME; // in seconds
 
-    this.targetBlockTime = 10; // in seconds
     this.state = {
-      nextBlockTimeRemaining: 10, // in seconds
+      nextBlockTimeRemaining: DEFAULT_TARGET_BLOCK_TIME, // in seconds
       documentHidden: false
     }
   }
@@ -69,7 +66,7 @@ class NCRecentBlocks extends Component
 
       let rtBlockList = this.props.blkRt.data;
 
-      if (rtBlockList == null || rtBlockList.constructor !== Array || rtBlockList.length <= 0) return;
+      if (rtBlockList == null || !Array.isArray(rtBlockList) || rtBlockList.length < 1 || rtBlockList[0] == null) return;
 
       let latestBlock = rtBlockList[0];
       let latestBlockNumber = latestBlock.blockNumber;
@@ -106,18 +103,15 @@ class NCRecentBlocks extends Component
   
   render() {
     this.targetBlockTime = this.props.kpi.data.targetBlockTime != null ? this.props.kpi.data.targetBlockTime : DEFAULT_TARGET_BLOCK_TIME;
-    let momentUpdated = this.props.blkRt.momentUpdated;
-    let rtBlockList = this.props.blkRt.data;
+    const momentUpdated = this.props.blkRt.momentUpdated;
 
-    if (momentUpdated == null)
-    {
+    if (momentUpdated == null || this.clippedList == null) {
       return (
         <NCLoading title={"Loading Block Stream"} marginTop={100} marginBottom={0}/>
       );
     }
 
-    if (rtBlockList == null || !Array.isArray(rtBlockList) || rtBlockList.length < 0 || rtBlockList[0] == null)
-    {
+    if (this.clippedList.length < 1) {
       return (
         <NCNonIdealState
               paddingTop={120}

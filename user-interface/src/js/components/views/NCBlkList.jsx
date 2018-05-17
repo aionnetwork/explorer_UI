@@ -87,7 +87,8 @@ class NCBlkList extends Component
           data={store.response}
           onPageCallback={this.requestPaging}
           isLoading={store.isLoadingPaging}
-          isPaginated={true}/>
+          isPaginated={true}
+          isLatest={true}/>
       </div>;
 
     return (

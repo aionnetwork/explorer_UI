@@ -150,7 +150,8 @@ class NCAccRetrieve extends Component
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}
           isPaginated={true}
-          ownAddr={acc.address}/>
+          ownAddr={acc.address}
+          isLatest={true}/>
         }
     />
 
@@ -187,7 +188,8 @@ class NCAccRetrieve extends Component
           data={blkList}
           onPageCallback={this.requestPagingBlkList}
           isLoading={store.isLoadingPagingBlkList}
-          isPaginated={true}/>
+          isPaginated={true}
+          isLatest={true}/>
         }
     />
 

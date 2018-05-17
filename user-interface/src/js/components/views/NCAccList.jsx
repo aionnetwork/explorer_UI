@@ -90,7 +90,8 @@ class NCAccList extends Component
           data={minerList}
           onPageCallback={null}
           isLoading={false}
-          isPaginated={true}/>
+          isPaginated={true}
+          isLatest={true}/>
         }
       marginTop={40}/>
 
@@ -114,7 +115,8 @@ class NCAccList extends Component
           data={inboundTxList}
           onPageCallback={null}
           isLoading={false}
-          isPaginated={true}/>
+          isPaginated={true}
+          isLatest={true}/>
         }
       marginTop={40}/>
     
@@ -138,7 +140,8 @@ class NCAccList extends Component
           data={outboundTxList}
           onPageCallback={null}
           isLoading={false}
-          isPaginated={true}/>
+          isPaginated={true}
+          isLatest={true}/>
         }
       marginTop={40}
     />

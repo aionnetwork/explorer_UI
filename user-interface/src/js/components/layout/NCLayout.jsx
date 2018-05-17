@@ -19,7 +19,7 @@ import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 import { disconnectSocket } from 'network/NCNetwork';
 import * as network from 'network/NCNetworkRequests';
 
-let DID_INITIALIZE_LAYOUT = false;
+import appConfig from '../../../config.json';
 
 class NCLayout extends Component {
 
@@ -29,11 +29,65 @@ class NCLayout extends Component {
     this.connectionMenu = 
     <Button 
       className="navbar-btn-active pt-button pt-minimal"
-      text="Explorer"/>;          
+      text="Explorer"/>;  
+
+    let networkList = appConfig.network_list;
+      
+    // figure out document title -----------------------------------------------
+
+    let documentTitle = "Aion | Explorer";
+
+    if (networkList && networkList[0] && networkList[0].name)
+      documentTitle = "Aion | "+networkList[0].name;
+
+    document.title = documentTitle; 
+
+    // figure out the menu items -----------------------------------------------
+
+    if (networkList && networkList[0].name) {
+      this.connectionMenu = 
+        <Button 
+          className="navbar-btn-active pt-button pt-minimal"
+          text={networkList[0].name}/>; 
+    }
+
+    if(Array.isArray(networkList) && networkList.length > 1) {
+
+      let menuItemList = [];
+      networkList.forEach((v, i) => {
+        if (i > 0) {
+          if (v.name && v.url) {
+            menuItemList.push(<MenuItem
+              key={i}
+              className="nav-option"
+              onClick={() => window.open(v.url)}
+              text={v.name}/>);
+          }
+        }
+      });
+
+      if (menuItemList.length > 0) {
+        this.connectionMenu = 
+        <Popover
+          content={
+            <Menu className="NCNavMenu">
+              <MenuDivider title="Switch Network" />
+              { menuItemList }
+            </Menu>
+          }
+          interactionKind={PopoverInteractionKind.CLICK}
+          position={Position.BOTTOM_RIGHT}>
+            <Button 
+              className="navbar-btn-active pt-button pt-minimal"
+              rightIconName="pt-icon-caret-down"
+              text={networkList[0].name ? networkList[0].name : "Explorer"}/>  
+        </Popover>
+      }   
+    }         
   }
 
   componentWillMount() {
-    network.setup();
+    network.getDashboardData();
   }
 
   componentWillUnmount() {
@@ -93,7 +147,6 @@ class NCLayout extends Component {
     const pathname = this.props.location.pathname;
 
     let kpi = this.props.kpi;
-    let config = this.props.config;
     
     // wait on the response from KPI list to load application
     if (NCNETWORK_REQUESTS_ENABLED && kpi.momentUpdated == null) { 
@@ -102,68 +155,7 @@ class NCLayout extends Component {
           title={"Connecting to Server"}
           marginTop={140}/>
       );
-    }
-
-    // ------------------------------------------------
-
-    if (!DID_INITIALIZE_LAYOUT) {
-      let networkList = config.data.networkList;
-      
-      // figure out document title -----------------------------------------------
-
-      let documentTitle = "Aion | Explorer";
-
-      if (networkList[0] && networkList[0].name)
-        documentTitle = "Aion | "+networkList[0].name;
-
-      document.title = documentTitle; 
-
-      // figure out the menu items -----------------------------------------------
-
-      if (networkList[0].name) {
-        this.connectionMenu = 
-          <Button 
-            className="navbar-btn-active pt-button pt-minimal"
-            text={networkList[0].name}/>; 
-      }
-
-      if(Array.isArray(networkList) && networkList.length > 1) {
-
-        let menuItemList = [];
-        networkList.forEach((v, i) => {
-          if (i > 0) {
-            if (v.name && v.url) {
-              menuItemList.push(<MenuItem
-                key={i}
-                className="nav-option"
-                onClick={() => window.open(v.url)}
-                text={v.name}/>);
-            }
-          }
-        });
-
-        if (menuItemList.length > 0) {
-          this.connectionMenu = 
-          <Popover
-            content={
-              <Menu className="NCNavMenu">
-                <MenuDivider title="Switch Network" />
-                { menuItemList }
-              </Menu>
-            }
-            interactionKind={PopoverInteractionKind.CLICK}
-            position={Position.BOTTOM_RIGHT}>
-              <Button 
-                className="navbar-btn-active pt-button pt-minimal"
-                rightIconName="pt-icon-caret-down"
-                text={networkList[0].name ? networkList[0].name : "Explorer"}/>  
-          </Popover>
-        }   
-      } 
-
-      DID_INITIALIZE_LAYOUT = true; 
-    }
-    
+    }    
 
     // ------------------------------------------------
 
@@ -244,7 +236,6 @@ class NCLayout extends Component {
 export default connect((state) => {
   return ({
     kpi: state.kpi,
-    config: state.config,
   })
 })(NCLayout);
 

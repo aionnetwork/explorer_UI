@@ -59,6 +59,8 @@ class NCBlkRetrieve extends Component
     const blkObj = (store.response) ? store.response.blk : null;
     const txnList = (store.response) ? store.response.txn : null;
 
+    console.log(blkObj);
+
     let isBlkValid = nc_isObjectValid(blkObj);
     let isBlkEmpty = nc_isObjectEmpty(blkObj, isBlkValid);
 

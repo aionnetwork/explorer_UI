@@ -5,7 +5,6 @@ import { store } from 'stores/NCReduxStore'
 import * as mock from 'lib/NCData';
 
 import * as StoreKpis from 'stores/StoreKpis';
-import * as StoreConfig from 'stores/StoreConfig';
 
 import * as StoreBlkRt from 'stores/StoreBlkRt';
 import * as StoreBlkList from 'stores/StoreBlkList';
@@ -508,6 +507,7 @@ export const getDashboardData = () => {
   });
 }
 
+/*
 export const setup = () => {
   network.configuration()
   .then((r) => {
@@ -517,7 +517,7 @@ export const setup = () => {
   .catch((e) => {
     console.log(e);
   });
-}
+}*/
 
 // ========================================================
 // Top Level Search 

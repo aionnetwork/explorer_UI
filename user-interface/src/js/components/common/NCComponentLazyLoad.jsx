@@ -30,7 +30,7 @@ export default class NCComponentLazyLoad extends Component
 
   render() {
 
-    const { marginTop="140", title="Loading Page" } = this.props;
+    const { marginTop="140", title="Loading" } = this.props;
 
     if (this.state.loadingPage) {
       return (

@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { createStore, combineReducers } from 'redux';
 
-import { reducer_config } from 'stores/StoreConfig';
 import { reducer_kpis } from 'stores/StoreKpis';
 
 import { reducer_blkRt } from 'stores/StoreBlkRt';
@@ -19,7 +18,6 @@ import { reducer_accRetrieve } from 'stores/StoreAccRetrieve';
 
 export const store = createStore(combineReducers(
 {
-  config: reducer_config,
   kpi: reducer_kpis,
 
   blkRt: reducer_blkRt,
