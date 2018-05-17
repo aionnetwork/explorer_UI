@@ -17,7 +17,7 @@ import BlkRetrieve from 'components/views/NCBlkRetrieve';
 import TxnList from 'components/views/NCTxnList';
 import TxnRetrieve from 'components/views/NCTxnRetrieve';
 
-//import AccList from 'components/views/NCAccList';
+import AccList from 'components/views/NCAccList';
 import AccRetrieve from 'components/views/NCAccRetrieve';
 
 import NoResults from 'components/views/NCNoResults';
@@ -67,7 +67,7 @@ ReactDOM.render((
             Temporarily suspended due to no support from backend service. 
             This accounts list view will be the equivalent of the "rich list" once we write the backend service to support it
         */}
-        {/*<Route path="accounts" component={ AccList }/>*/}
+        <Route path="accounts" component={ AccList }/>
         <Route path="account/:accId" component={ AccRetrieve }/>
 
         <Route path="no-results(/:query)" component={ NoResults }/>

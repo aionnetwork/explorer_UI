@@ -95,6 +95,13 @@ export default class NCBlkDetail extends Component
         </span> : EMPTY_STR,
       },
       {
+        field: "NRG Reward",
+        value: entity.nrgReward != null ? <span className="strong">
+          {nc_numFormatterACSensitive(entity.blockReward, null) + " AION"}
+          <span className="subtitle">{"(transaction-fee payout for included transactions, minus own transactions)"}</span>
+        </span> : EMPTY_STR,
+      },
+      {
         field: "Nrg Consumed",
         value: entity.nrgConsumed != null ? nc_numFormatter(entity.nrgConsumed, 18)  + " NRG": EMPTY_STR,
       },

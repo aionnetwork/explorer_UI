@@ -1,9 +1,9 @@
 .roboto {
   font-family: 'Roboto', sans-serif;
 }
-.montserrat {
+/*.montserrat {
   font-family: 'Montserrat', sans-serif;
-}
+}*/
 .titillium {
   font-family: 'Titillium Web', sans-serif;
 }
@@ -19,13 +19,10 @@ textarea {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
 }
-h1,
-h2,
-h3,
-h4,
-h5 {
+/*
+h1, h2, h3, h4, h5 {
   font-family: 'Montserrat', sans-serif;
-}
+}*/
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  */
@@ -930,6 +927,7 @@ pre {
 .NCEntityLabel .text {
   line-height: inherit;
   margin-left: 6px;
+  color: #182026;
 }
 .NCEntityLabel.active:hover {
   cursor: pointer;
@@ -1432,19 +1430,23 @@ pre {
   margin-top: 5px;
   display: block;
 }
-.NCFooter > div > * {
+.NCFooter > div .footer-container {
+  color: auto;
+  text-decoration: none;
+}
+.NCFooter > div .footer-container > * {
   display: inline-block;
   vertical-align: middle;
 }
-.NCFooter > div .text {
-  font-family: 'Titillium Web', sans-serif;
+.NCFooter > div .footer-container .text {
   font-size: 16px;
-  margin-right: 10px;
+  margin-right: 2px;
+  color: #5c7080;
   font-weight: 300;
   margin-top: 2px;
 }
-.NCFooter > div .logo {
-  height: 41px;
+.NCFooter > div .footer-container .logo {
+  height: 60px;
 }
 .NCPageContent > .container {
   margin: 0 auto;
@@ -1520,7 +1522,8 @@ pre {
   font-size: 13px;
   color: #5C7080;
   font-weight: 400;
-  padding-left: 7px;
+  padding-left: 10px;
+  margin-bottom: 20px;
 }
 .NCEntityDetail {
   padding: 0 10px 0 10px;
@@ -1701,6 +1704,23 @@ pre {
 .NCNavMenu .nav-option {
   font-weight: 300;
   padding: 9px 7px;
+}
+.tx-status {
+  display: inline-block;
+  vertical-align: middle;
+}
+.tx-status .icon {
+  display: inline-block;
+  margin-right: 5px;
+}
+.tx-status .icon.success {
+  color: #0f9960;
+}
+.tx-status .icon.fail {
+  color: #f29d49;
+}
+.tx-status .status-text {
+  display: inline-block;
 }
 .NCGraphZoom {
   fill: none;

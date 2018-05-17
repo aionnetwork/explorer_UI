@@ -1,0 +1,20 @@
+{
+  "api": {
+    "base_url": "52.173.253.28:8080/aion",
+    "https_enabled": false
+  },
+  "network_list": [
+    {
+      "name": "Testnet Peak",
+      "url": ""
+    },
+    {
+      "name": "Testnet Ascent",
+      "url": "https://testnet2.aion.network"
+    },
+    {
+      "name": "Mainnet Kilimanjaro",
+      "url": "https://mainnet.aion.network"
+    }
+  ]
+}

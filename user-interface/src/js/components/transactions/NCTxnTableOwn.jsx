@@ -19,7 +19,7 @@ import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
-export default class NCTxnTable extends Component 
+export default class NCTxnTableOwn extends Component 
 {
   constructor(props) {
     super(props);
@@ -116,6 +116,14 @@ export default class NCTxnTable extends Component
         value = entity.value;
       }
 
+      let isFrom = false;
+      if (this.props.ownAddr == fromAddr)
+        isFrom = true;
+
+      let isTo = false;
+      if (this.props.ownAddr == toAddr)
+        isTo = true;
+
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
@@ -135,11 +143,12 @@ export default class NCTxnTable extends Component
           entityId={transactionHash}/> 
       </Cell>;
       tableContent[i][4] = 
-      <Cell>
+      <Cell intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={fromAddr}
-          entityId={fromAddr}/>
+          entityId={fromAddr}
+          linkActive={isFrom ? false : true}/>
       </Cell>;
       tableContent[i][5] = 
       <Cell>
@@ -148,13 +157,14 @@ export default class NCTxnTable extends Component
         </div>
       </Cell>;
       tableContent[i][6] = 
-      <Cell>
+      <Cell intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
       {
         toAddr ?
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={toAddr}
-          entityId={toAddr}/>:
+          entityId={toAddr}
+          linkActive={isTo ? false : true}/>:
         "Contract Creation"
       }
       </Cell>;
@@ -164,7 +174,7 @@ export default class NCTxnTable extends Component
   }
   
   render() {
-    const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
+    const { ownAddr, data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
     
     return (
       <NCTableReactPaginated

@@ -5,6 +5,7 @@ import { store } from 'stores/NCReduxStore'
 import * as mock from 'lib/NCData';
 
 import * as StoreKpis from 'stores/StoreKpis';
+import * as StoreConfig from 'stores/StoreConfig';
 
 import * as StoreBlkRt from 'stores/StoreBlkRt';
 import * as StoreBlkList from 'stores/StoreBlkList';
@@ -317,7 +318,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
 // ========================================================
 // Accounts 
 // ========================================================
-/*
+
 export const getAccListTopLevel = () => {
   store.dispatch(StoreAccList.GetTopLevel());
 
@@ -329,8 +330,8 @@ export const getAccListTopLevel = () => {
   }
   else {
     // get transaction list
-    const ep = network.endpoint.account.list[accListType.ALL];
-    let params = [0, PAGE_SIZE, 'balance,desc'];
+    const ep = network.endpoint.account.list;
+    let params = [];
     
     network.request(ep, params)
     .then((response) => {
@@ -343,33 +344,6 @@ export const getAccListTopLevel = () => {
   }
 }
 
-export const getAccListPaging = (pageNumber) => {
-  store.dispatch(StoreAccList.GetPaging());
-
-  if (!network.NCNETWORK_REQUESTS_ENABLED) {
-    setTimeout(() => {
-      let response = Object.assign({}, store.getState().accList.response);
-      response.page.number = pageNumber;
-
-      store.dispatch(StoreAccList.SetPaging(response));
-    }, 500);
-  }
-  else {
-    // get transaction list
-    const ep = network.endpoint.account.list[accListType.ALL];
-    let params = [pageNumber, PAGE_SIZE, 'balance,desc'];
-    
-    network.request(ep, params)
-    .then((response) => {
-      store.dispatch(StoreAccList.SetPaging(response));
-    })
-    .catch((error) => {
-      console.log(error);
-      store.dispatch(StoreAccList.SetPaging({}));
-    });
-  }
-}
-*/
 export const getAccRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreAccRetrieve.GetTopLevel({
     queryStr: queryStr
@@ -522,7 +496,8 @@ export const getDashboardData = () => {
   .catch((error) => {
     console.log(error);
     /*
-    // debug. let the user refresh page if initial request fails 
+    // debug. give no indication that initial request fails
+    // user will automatically refresh the page if they are stuck at spinny-indicator 
     setDashboardData({
       content: [{
         blocks: {},
@@ -530,6 +505,17 @@ export const getDashboardData = () => {
         metrics: {}
       }]
     });*/
+  });
+}
+
+export const setup = () => {
+  network.configuration()
+  .then((r) => {
+    store.dispatch(StoreConfig.SetAll(r));
+    getDashboardData();
+  })
+  .catch((e) => {
+    console.log(e);
   });
 }
 

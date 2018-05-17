@@ -4,11 +4,13 @@ import SockJS from 'sockjs-client'
 import Stomp from 'stompjs'
 import { blkListType, txnListType, accListType } from 'lib/NCEnums';
 import * as mock from 'lib/NCData';
+import ms from 'ms';
 
 export const NCNETWORK_REQUESTS_ENABLED = true;
+export let NETWORK_LIST = [];
 
-const HTTPS_ENABLED = true;
-const BASE_URL = 'mainnet-api.aion.network/aion';
+let HTTPS_ENABLED = true;
+let BASE_URL = null;
 
 const stripTrailingSlash = (url) => {
   return url.replace(/\/$/, "");
@@ -27,10 +29,7 @@ const generateBaseUrl = (https, api) => {
   return url;
 }
 
-const net = axios.create({
-  baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL),
-  timeout: 0
-});
+let net = null;
 
 export const endpoint = {
   block: {
@@ -56,7 +55,7 @@ export const endpoint = {
         params: ['page', 'size']
       },
       [txnListType['BY_ACCOUNT']]: {
-        link: '/dashboard/getTransactionsFromAddress',
+        link: '/dashboard/getTransactionsByAddress',
         params: ['searchParam', 'transactionPage', 'transactionSize']
       },
       [txnListType['BY_BLOCK']]: {
@@ -70,6 +69,10 @@ export const endpoint = {
     }
   },
   account: {
+    list: {
+      link: '/dashboard/getAccountStatistics',
+      params: []
+    },
     detail: {
       link: '/dashboard/getAccountDetails',
       params: ['searchParam']
@@ -92,19 +95,30 @@ export const request = async (endpoint, params) =>
       });
     }
     
-    net.get(endpoint.link, args)
-    .then((response) => {
-      //console.log(response)
-      if (response.status == 200 && response.data)
-        resolve(response.data);
-      else {
-        reject("ERR: Bad API response.");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      reject("ERR: Bad API response.")
-    });
+    if (net == null && BASE_URL) {
+      net = axios.create({
+          baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL),
+          timeout: ms('5s')
+        });
+    }
+
+    if (net) {
+      net.get(endpoint.link, args)
+      .then((response) => {
+        //console.log(response)
+        if (response.status == 200 && response.data)
+          resolve(response.data);
+        else {
+          reject("ERR: Bad API response.");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        reject("ERR: Bad API response.")
+      });
+    } else {
+      reject("ERR: API not initialized");
+    }
   });
 }
 
@@ -159,7 +173,43 @@ export function disconnectSocket() {
     stompClient.disconnect()
 }
 
+// -------------------------------------------------
+// Load App Configuration
+// -------------------------------------------------
 
+const APP_CONFIG_LOCATION = '/config.json';
 
+export const configuration = async () => 
+{
+  return new Promise((resolve, reject) => 
+  {
+    axios.get(APP_CONFIG_LOCATION)
+    .then(function (response) {
+      if (response.status != 200 || !response.data) {
+        reject("ERR: Bad network response.");
+        return;
+      }
 
+      let r = response.data;
 
+      if (
+        r!=null && 
+        r.api!=null && 
+        r.api.base_url!=null && 
+        r.api.https_enabled!=null) 
+      {
+        // setup the network parameters
+        HTTPS_ENABLED = r.api.https_enabled;
+        BASE_URL = r.api.base_url;
+
+        resolve(r);
+      } else {
+        reject("ERR: could not parse "+APP_CONFIG_LOCATION);
+        return;
+      }
+    })
+    .catch(function (e1) {
+      reject(e1);
+    });
+  });
+}

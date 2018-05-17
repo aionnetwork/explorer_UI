@@ -735,6 +735,7 @@ pre
   .text {
     line-height: inherit;
     margin-left: 6px;
+    color: @pt-text-color;
   }
 
   &.active {
@@ -1435,21 +1436,26 @@ pre
 
     margin-top: 5px;
     display: block;
-
-    &>* {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .text {
-      .titillium;
-      font-size: 16px;
-      margin-right: 10px;
-      //color: @nuco-teal;
-      font-weight: 300;
-      margin-top: 2px;
-    }
-    .logo {
-      height: 41px;
+    
+    .footer-container {
+      color: auto;
+      text-decoration: none;
+      
+      &>* {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .text {
+        //.titillium;
+        font-size: 16px;
+        margin-right: 2px;
+        color: @gray1;
+        font-weight: 300;
+        margin-top: 2px;
+      }
+      .logo {
+        height: 60px;
+      }
     }
   }
 }
@@ -1584,7 +1590,8 @@ pre
     font-size: 13px;
     color: #5C7080;
     font-weight: 400;
-    padding-left: 7px;
+    padding-left: 10px;
+    margin-bottom: 20px;
   }
 
 // Entity Details Views
@@ -1832,5 +1839,24 @@ pre
   .nav-option {
     font-weight: 300;
     padding: 9px 7px;
+  }
+}
+
+.tx-status {
+  display: inline-block;
+  vertical-align: middle;
+
+  .icon {
+    display: inline-block;
+    margin-right: 5px;
+    &.success {
+      color: @green3;
+    }
+    &.fail {
+      color: @orange4;
+    }
+  } 
+  .status-text {
+    display: inline-block;
   }
 }

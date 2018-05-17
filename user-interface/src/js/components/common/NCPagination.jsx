@@ -23,7 +23,7 @@ export default class NCPagination extends Component
   render() {
     
     // pageNumber is zero indexed
-    let { entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading } = this.props;
+    let { entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
 
     let isFirstPage = (pageNumber + 1 == 1);
     let isLastPage = (pageNumber + 1 == totalPages )
@@ -46,7 +46,7 @@ export default class NCPagination extends Component
             {
               "Showing " + entityName + " " + 
               ((pageNumber * pageSize) + 1) + " - " + ((pageNumber * pageSize) + listSize) + 
-              " of " + totalElements + " found"
+              " of " + totalElements + (isLatest ? " latest" : " found")
             }
           </span>
         </div>

@@ -17,29 +17,14 @@ export const SetTopLevel = (data) =>
   }
 }
 
-// Paging
-// ------ 
-export const GetPaging = (data) => 
-{
-  return {
-    type: 'ACC_LIST_GET_PAGING',
-    data: data,
-  }
-}
-export const SetPaging = (data) => 
-{
-  return {
-    type: 'ACC_LIST_SET_PAGING',
-    data: data,
-  }
-}
-
 let initialState_StoreBlkList = 
 {
-  isLoadingPaging: false,
   isLoadingTopLevel: false,
-  
-  response: null,
+  response: {
+    miners: null,
+    txnInbound: null,
+    txnOutbound: null
+  },
   momentUpdated: null
 };
 
@@ -54,8 +39,11 @@ export function reducer_accList (state = initialState_StoreBlkList, action)
       let _state = Object.assign({}, state);
       
       _state.isLoadingTopLevel = true; 
-      
-      _state.response = null;
+
+      _state.response.miners = null;
+      _state.response.txnInbound = null;
+      _state.response.txnOutbound = null;
+
       _state.momentUpdated = null;
       
       return _state;
@@ -66,29 +54,10 @@ export function reducer_accList (state = initialState_StoreBlkList, action)
       
       _state.isLoadingTopLevel = false; 
       
-      _state.response = action.data;
-      _state.momentUpdated = moment();
+      _state.response.miners = action.data.miners;
+      _state.response.txnInbound = action.data.txnInbound;
+      _state.response.txnOutbound = action.data.txnOutbound;
       
-      return _state;
-    }
-
-    // Paging
-    // ------ 
-    case 'ACC_LIST_GET_PAGING':
-    {
-      let _state = Object.assign({}, state);
-      
-      _state.isLoadingPaging = true;
-      
-      return _state;
-    }
-    case 'ACC_LIST_SET_PAGING':
-    {
-      let _state = Object.assign({}, state);
-      
-      _state.isLoadingPaging = false;
-      
-      _state.response = action.data;
       _state.momentUpdated = moment();
       
       return _state;

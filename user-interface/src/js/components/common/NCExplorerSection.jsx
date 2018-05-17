@@ -14,6 +14,7 @@ export default class NCExplorerSection extends Component
       isDataValid, 
       isDataEmpty, 
       
+      subtitle,
       content, 
 
       loadingStr, 
@@ -57,7 +58,11 @@ export default class NCExplorerSection extends Component
           showHomeLink={isToplevelSection}/>
       }
       {
-        (!isLoading && isDataValid && !isDataEmpty) && content
+        (!isLoading && isDataValid && !isDataEmpty) &&   
+        <div>
+          { (subtitle != null) && subtitle }
+          { content }
+        </div>
       }
       </div>
     );

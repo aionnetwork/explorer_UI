@@ -5,9 +5,8 @@ import moment from 'moment';
 
 import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 
-import NCAccTable from 'components/accounts/NCAccTable';
 import NCBlkTable from 'components/blocks/NCBlkTable';
-import NCTxnTable from 'components/transactions/NCTxnTable';
+import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 
 import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
@@ -86,10 +85,10 @@ class NCAccRetrieve extends Component
         link: '/',
         body: 'Home',
       },
-      /*{
+      {
         link: '/accounts',
         body: 'Accounts',
-      },*/
+      },
       {
         link: '#',
         body: 'Account Details',
@@ -119,6 +118,15 @@ class NCAccRetrieve extends Component
 
     const txnListSection = <NCExplorerSection 
       className={""}
+      subtitle={
+        <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions. To retrieve older data, use our&nbsp;
+          <Tooltip
+            className="pt-tooltip-indicator"
+            content={<em>coming soon ...</em>}>
+            historical explorer.
+          </Tooltip>
+        </div>
+      }
 
       isLoading={isTxnListFirstLoad == null}
       isDataValid={isTxnListValid}
@@ -126,20 +134,37 @@ class NCAccRetrieve extends Component
       
       loadingStr={"Loading Transactions"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={"No transactions found for this account."}
+      emptyDataStr={
+        <span>No transactions found for this account in latest million transactions. <br/>To retrieve older data, use our&nbsp;
+          <Tooltip
+            className="pt-tooltip-indicator"
+            content={<em>coming soon ...</em>}>
+            historical explorer.
+          </Tooltip>
+        </span>}
       marginTop={40}
 
       content={
-        <NCTxnTable 
+        <NCTxnTableOwn 
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}
-          isPaginated={true}/>
+          isPaginated={true}
+          ownAddr={acc.address}/>
         }
     />
 
     const blkListSection = <NCExplorerSection 
       className={""}
+      subtitle={
+        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
+          <Tooltip
+            className="pt-tooltip-indicator"
+            content={<em>coming soon ...</em>}>
+            historical explorer.
+          </Tooltip>
+        </div>
+      }
 
       isLoading={isBlkListFirstLoad == null}
       isDataValid={isBlkListValid}
@@ -147,7 +172,14 @@ class NCAccRetrieve extends Component
       
       loadingStr={"Loading Blocks"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={"No blocks proposed by this account."}
+      emptyDataStr={
+        <span>No blocks mined by this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
+          <Tooltip
+            className="pt-tooltip-indicator"
+            content={<em>coming soon ...</em>}>
+            historical explorer.
+          </Tooltip>
+        </span>}
       marginTop={40}
 
       content={
@@ -178,21 +210,12 @@ class NCAccRetrieve extends Component
             description={"Account transactions & blocks-mined not available in lite-mode."}/>
         }
         {
-          (!isWeb3 && !isAccEmpty) &&
-          <div>
-            <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions. To retrieve older data, use our&nbsp;
-              <Tooltip
-                className="pt-tooltip-indicator"
-                content={<em>coming soon ...</em>}>
-                historical explorer.
-              </Tooltip>
-            </div>
-            <div className="NCSection">
-              <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-                <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
-                <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
-              </Tabs2>
-            </div>
+          (!isWeb3 && !isAccEmpty) &&  
+          <div className="NCSection">
+            <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
+              <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
+              <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
+            </Tabs2>
           </div>
         }
       </div>;

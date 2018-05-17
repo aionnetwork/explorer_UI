@@ -19,14 +19,21 @@ import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 import { disconnectSocket } from 'network/NCNetwork';
 import * as network from 'network/NCNetworkRequests';
 
+let DID_INITIALIZE_LAYOUT = false;
+
 class NCLayout extends Component {
 
   constructor(props) {
     super(props);
+
+    this.connectionMenu = 
+    <Button 
+      className="navbar-btn-active pt-button pt-minimal"
+      text="Explorer"/>;          
   }
 
   componentWillMount() {
-    network.getDashboardData();
+    network.setup();
   }
 
   componentWillUnmount() {
@@ -52,14 +59,14 @@ class NCLayout extends Component {
           }}
           text="Transactions"
         />
-        {/*<MenuItem
+        <MenuItem
           className="nav-option"
           iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}
           onClick={() => {
             hashHistory.push('/accounts');
           }}
           text="Accounts"
-        />*/}
+        />
       </Menu>
     );
   }
@@ -70,12 +77,13 @@ class NCLayout extends Component {
         <MenuDivider title="Switch Network" />
         <MenuItem
           className="nav-option"
-          onClick={() => window.open("https://testnet2.aion.network")}
-          text="Testnet-2"/>
+          onClick={() => window.open("https://mainnet.aion.network")}
+          text="Mainnet Kilimanjaro"/>
         <MenuItem
           className="nav-option"
-          onClick={() => window.open("https://testnet1.aion.network")}
-          text="Testnet-1"/>
+          onClick={() => window.open("https://testnet2.aion.network")}
+          text="Testnet Ascent"/>
+
       </Menu>
     );
   }
@@ -85,8 +93,7 @@ class NCLayout extends Component {
     const pathname = this.props.location.pathname;
 
     let kpi = this.props.kpi;
-
-
+    let config = this.props.config;
     
     // wait on the response from KPI list to load application
     if (NCNETWORK_REQUESTS_ENABLED && kpi.momentUpdated == null) { 
@@ -96,6 +103,69 @@ class NCLayout extends Component {
           marginTop={140}/>
       );
     }
+
+    // ------------------------------------------------
+
+    if (!DID_INITIALIZE_LAYOUT) {
+      let networkList = config.data.networkList;
+      
+      // figure out document title -----------------------------------------------
+
+      let documentTitle = "Aion | Explorer";
+
+      if (networkList[0] && networkList[0].name)
+        documentTitle = "Aion | "+networkList[0].name;
+
+      document.title = documentTitle; 
+
+      // figure out the menu items -----------------------------------------------
+
+      if (networkList[0].name) {
+        this.connectionMenu = 
+          <Button 
+            className="navbar-btn-active pt-button pt-minimal"
+            text={networkList[0].name}/>; 
+      }
+
+      if(Array.isArray(networkList) && networkList.length > 1) {
+
+        let menuItemList = [];
+        networkList.forEach((v, i) => {
+          if (i > 0) {
+            if (v.name && v.url) {
+              menuItemList.push(<MenuItem
+                key={i}
+                className="nav-option"
+                onClick={() => window.open(v.url)}
+                text={v.name}/>);
+            }
+          }
+        });
+
+        if (menuItemList.length > 0) {
+          this.connectionMenu = 
+          <Popover
+            content={
+              <Menu className="NCNavMenu">
+                <MenuDivider title="Switch Network" />
+                { menuItemList }
+              </Menu>
+            }
+            interactionKind={PopoverInteractionKind.CLICK}
+            position={Position.BOTTOM_RIGHT}>
+              <Button 
+                className="navbar-btn-active pt-button pt-minimal"
+                rightIconName="pt-icon-caret-down"
+                text={networkList[0].name ? networkList[0].name : "Explorer"}/>  
+          </Popover>
+        }   
+      } 
+
+      DID_INITIALIZE_LAYOUT = true; 
+    }
+    
+
+    // ------------------------------------------------
 
     let momentEnd = kpi.data.endTimestamp ? moment.unix(kpi.data.endTimestamp) : null;
 
@@ -147,16 +217,7 @@ class NCLayout extends Component {
                 dbLag={dbLag}
                 lastUpdated={lastUpdated}
               />
-              <Popover
-                content={this.renderConnectionMenu()}
-                interactionKind={PopoverInteractionKind.CLICK}
-                position={Position.BOTTOM_RIGHT}>
-                <Button 
-                  className="navbar-btn-active pt-button pt-minimal"
-                  rightIconName="pt-icon-caret-down"
-                  text="Mainnet"/>          
-              </Popover>
-
+              { this.connectionMenu }
             </div>
 
           </div>
@@ -169,9 +230,11 @@ class NCLayout extends Component {
         </div>
         <div className="NCFooter">
           <div>
-            <span className="text">Powered By</span>
-            <img className="logo" src="img/logo/aion-logo.png" alt="logo"/>
-          </div>
+            <a className="footer-container" target="_blank" href="https://aion.network">
+              <span className="text">Powered By</span>
+              <img className="logo" src="img/logo/aion-icon.svg" alt="logo"/>
+            </a>
+          </div>  
         </div>
       </div>
     );
@@ -181,6 +244,7 @@ class NCLayout extends Component {
 export default connect((state) => {
   return ({
     kpi: state.kpi,
+    config: state.config,
   })
 })(NCLayout);
 
