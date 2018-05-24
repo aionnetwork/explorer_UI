@@ -33,7 +33,7 @@ export default class NCBlkTable extends Component
         name: "Timestamp",
         isSortable: false,
         isFilterable: false,
-        width: 150,
+        width: 200,
         flex: false,
         objPath: 'blockTimestamp',
       },

@@ -52,7 +52,6 @@ class NCLayout extends Component {
     }
 
     if(Array.isArray(networkList) && networkList.length > 1) {
-
       let menuItemList = [];
       networkList.forEach((v, i) => {
         if (i > 0) {

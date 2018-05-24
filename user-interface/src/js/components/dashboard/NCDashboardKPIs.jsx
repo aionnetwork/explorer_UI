@@ -15,6 +15,7 @@ import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with1Floor, nc_numFor
 import { hashHistory } from 'react-router';
 import moment from 'moment';
 
+const KPI_BLK_RANGE = 128;
 
 class NCDashboardKPIs extends Component
 {
@@ -38,7 +39,7 @@ class NCDashboardKPIs extends Component
             value:"9.83",
             units:"s",
             title:["Current", "Block Time"],
-            hoverContent: <span>Mean of the inter-block arrival time, averaged over last 64 blocks</span>,
+            hoverContent: "Mean of inter-block arrival time over last "+KPI_BLK_RANGE+" blocks",
           },
         ]
       },
@@ -49,13 +50,13 @@ class NCDashboardKPIs extends Component
             value:"10",
             units:"Sol/s",
             title:["Network", "Hash Rate"],
-            hoverContent: <span>Network hash rate = (last block's difficulty) /<br/>(average block time over last 32 blocks)</span>,
+            hoverContent: <span>{"Network hash rate = (last block's difficulty) /"}<br/>{"(average block time over last "+KPI_BLK_RANGE+" blocks)"}</span>,
           },
           {
             value:"15",
             units:"",
             title:["Average", "Difficulty"],
-            hoverContent: "Difficulty, averaged over the last 32 blocks",
+            hoverContent: "Difficulty, averaged over the last "+KPI_BLK_RANGE+" blocks",
           },
           {
             value:"0.85",
@@ -72,13 +73,13 @@ class NCDashboardKPIs extends Component
             value:"1000",
             units:"",
             title:["Consumed", "NRG / Block"],
-            hoverContent: "Average NRG consumed per block for latest 32 blocks",
+            hoverContent: "Average NRG consumed per block for latest "+KPI_BLK_RANGE+" blocks",
           },
           {
             value:"15",
             units:"",
             title:["Limit", "NRG / Block"],
-            hoverContent: <span>Average NRG limit per block for latest 32 blocks</span>,
+            hoverContent: "Average NRG limit per block for latest "+KPI_BLK_RANGE+" blocks",
           },
         ]
       },
@@ -89,7 +90,7 @@ class NCDashboardKPIs extends Component
             value:"45",
             units:"",
             title:["Txn", "/ Second"],
-            hoverContent: "Transactions per second, averaged over last 32 blocks",
+            hoverContent: "Transactions per second, averaged over last "+KPI_BLK_RANGE+" blocks",
           },
           {
             value:"85",

@@ -1,11 +1,11 @@
 {
   "api": {
-    "base_url": "52.173.253.28:8080/aion",
+    "base_url": "localhost:8080/aion",
     "https_enabled": false
   },
   "network_list": [
     {
-      "name": "Testnet Peak",
+      "name": "Testnet Conquest",
       "url": ""
     },
     {

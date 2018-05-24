@@ -73,7 +73,7 @@ class NCAccList extends Component
     const minerListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from last 10,000 blocks (~last 24 hours).</div>
+        <div className="NCPageBreakerSubtitle">Showing miner accounts over last 10,000 blocks (~last 24 hours).</div>
       }
 
       isLoading={false}
@@ -98,7 +98,7 @@ class NCAccList extends Component
     const inboundTxListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from last 10,000 transactions.</div>
+        <div className="NCPageBreakerSubtitle">Showing recent accounts which received transactions, over last 10,000 transactions.</div>
       }
 
       isLoading={false}
@@ -123,7 +123,7 @@ class NCAccList extends Component
     const outboundTxListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from last 10,000 transactions.</div>
+        <div className="NCPageBreakerSubtitle">Showing recent accounts which sent transactions, over last 10,000 transactions.</div>
       }
 
       isLoading={false}
