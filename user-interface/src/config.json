@@ -1,7 +1,7 @@
 {
   "api": {
-    "base_url": "localhost:8080/aion",
-    "https_enabled": false
+    "base_url": "conquest-api.aion.network/aion",
+    "https_enabled": true
   },
   "network_list": [
     {
