@@ -70,12 +70,12 @@ class NCLayout extends Component {
         <MenuDivider title="Switch Network" />
         <MenuItem
           className="nav-option"
-          onClick={() => window.open("https://testnet2.aion.network")}
-          text="Testnet-2"/>
+          onClick={() => window.open("https://conquest.aion.network")}
+          text="Testnet Conquest"/>
         <MenuItem
           className="nav-option"
-          onClick={() => window.open("https://testnet1.aion.network")}
-          text="Testnet-1"/>
+          onClick={() => window.open("https://testnet2.aion.network")}
+          text="Testnet Ascent"/>
       </Menu>
     );
   }
