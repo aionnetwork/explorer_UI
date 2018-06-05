@@ -12,7 +12,7 @@ import NCEntityLabel from 'components/common/NCEntityLabel';
 
 export default class NCTableBase extends Component {
 
-  constructor(props) 
+  constructor(props)
   {
     super(props);
 
@@ -25,21 +25,21 @@ export default class NCTableBase extends Component {
     this.onColumnWidthChanged = this.onColumnWidthChanged.bind(this);
   }
 
-  renderCell (rowIndex, columnIndex) 
+  renderCell (rowIndex, columnIndex)
   {
     return (this.props.tableContent[rowIndex][columnIndex]);
   }
 
-  renderColumnHeader(columnIndex) 
+  renderColumnHeader(columnIndex)
   {
     let columnHeader = this.props.columnDescriptor[columnIndex];
     return (
-      <ColumnHeaderCell 
+      <ColumnHeaderCell
         name={ columnHeader.name }
         className={"NCColumnHeader"}
-        renderName={(name) => { 
+        renderName={(name) => {
           return (
-            <div className="bp-table-truncated-text NCColumnHeaderCell"> 
+            <div className="bp-table-truncated-text NCColumnHeaderCell">
             {
               (this.props.sortColumn == columnIndex) &&
               <span className={"pt-icon-standard header-icon "+(this.props.sortType == NCSortType.ASC ? "pt-icon-sort-asc" : "pt-icon-sort-desc")}></span>
@@ -48,40 +48,41 @@ export default class NCTableBase extends Component {
             </div>);
           }
         }
-        renderMenu={(index) => {
-          if (!columnHeader.isSortable)
-            return;
-
-          return(
-            <Menu>
-              <MenuItem
-                iconName="sort-asc"
-                text="Sort Ascending"
-                onClick={() => this.props.sortCallback(NCSortType.ASC, columnIndex)}/>
-              <MenuItem
-                iconName="sort-desc"
-                text="Sort Descending"
-                onClick={() => this.props.sortCallback(NCSortType.DESC, columnIndex)}/>
-            </Menu>);
-        }}
-        menuIconName={"chevron-down"}> 
-        {
-          (!columnHeader.isFilterable) ? null :
-          <InputGroup
-            className={"NCColumnHeaderFilter"}
-            leftIconName={"pt-icon-filter"}
-            placeholder=""
-            onChange={(e) => this.props.filterCallback(columnIndex, e.target.value)}
-          />
-        }
-      </ColumnHeaderCell> 
+        // renderMenu={(index) => {
+        //   if (!columnHeader.isSortable)
+        //     return;
+        //
+        //   return(
+        //     <Menu>
+        //       <MenuItem
+        //         iconName="sort-asc"
+        //         text="Sort Ascending"
+        //         onClick={() => this.props.sortCallback(NCSortType.ASC, columnIndex)}/>
+        //       <MenuItem
+        //         iconName="sort-desc"
+        //         text="Sort Descending"
+        //         onClick={() => this.props.sortCallback(NCSortType.DESC, columnIndex)}/>
+        //     </Menu>);
+        // }}
+        // menuIconName={"chevron-down"}>
+        // {
+        //   (!columnHeader.isFilterable) ? null :
+        //   <InputGroup
+        //     className={"NCColumnHeaderFilter"}
+        //     leftIconName={"pt-icon-filter"}
+        //     placeholder=""
+        //     onChange={(e) => this.props.filterCallback(columnIndex, e.target.value)}
+        //   />
+        // }
+        > 
+      </ColumnHeaderCell>
 
     );
   }
 
-  computeColumnWidths() 
+  computeColumnWidths()
   {
-    let containerWidth = this.props.width; 
+    let containerWidth = this.props.width;
     let containerHeight = this.props.height;
 
     let { columnDescriptor, sortColumn } = this.props;
@@ -91,7 +92,7 @@ export default class NCTableBase extends Component {
     let widthUtitlized = 0;
     let columnWidths = Array(columnDescriptor.length).fill(0);
 
-    columnDescriptor.forEach((col, i) => 
+    columnDescriptor.forEach((col, i) =>
     {
       if (col.flex) {
         flexColumns.push(i);
@@ -102,7 +103,7 @@ export default class NCTableBase extends Component {
       widthUtitlized += col.width;
     });
 
-    if (flexColumns.length > 0) 
+    if (flexColumns.length > 0)
     {
       flexColumnWidth = (containerWidth - widthUtitlized - 55) / flexColumns.length;
     }
@@ -116,7 +117,7 @@ export default class NCTableBase extends Component {
     return columnWidths;
   }
 
-  onColumnWidthChanged(index, width) 
+  onColumnWidthChanged(index, width)
   {
     this.columnWidths[index] = width;
   }
@@ -147,7 +148,7 @@ export default class NCTableBase extends Component {
     }
   }
 
-  render() 
+  render()
   {
     let { tableContent, sortColumn, sortType, columnDescriptor, isSortAndFilterEnabled } = this.props;
 
@@ -156,18 +157,18 @@ export default class NCTableBase extends Component {
 
     for (let i = 0; i < columnDescriptor.length; i++) {
       columns.push(
-        <Column 
-          key={i} 
+        <Column
+          key={i}
           renderCell={this.renderCell}
           renderColumnHeader={this.renderColumnHeader}/>);
     }
 
     return (
       <div className="NCTable">
-        <Table 
+        <Table
           useInteractionBar={false}
-          numRows={tableContent.length} 
-          defaultRowHeight={35} 
+          numRows={tableContent.length}
+          defaultRowHeight={35}
           columnWidths={this.columnWidths}
           selectionModes={SelectionModes.ROWS_AND_CELLS}
           onColumnWidthChanged={this.onColumnWidthChanged}>
@@ -177,55 +178,3 @@ export default class NCTableBase extends Component {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

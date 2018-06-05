@@ -9,23 +9,23 @@
   .header {
     background-color: @indigo;
     color: white;
-    font-weight: 400;
+    font-weight: 500;
+    border-bottom-style: none;
   }
   .body.table-row {
     background-color: white;
     &:hover {
-      // background-color: rgba(167, 182, 194, 0.3);
       background-color: #e4e9ed;
     }
   }
 }
-
+// SPINNER ----------------------------------------
 .NCComponentLevelSpinner {
   .pt-intent-primary {
     color: @teal !important;
   }
 }
-
+// INFO CARDS --------------------------------------
 .NCKPIGroup .group-title {
   color: @teal;
 
@@ -33,7 +33,6 @@
     color: white;
   }
 }
-
 .NCKPIGroup .NCKPI .kpi-card {
   &>.metric {
     .value {
@@ -44,7 +43,6 @@
     }
   }
 }
-
 .NCDashboard .NCKPIContainer .NCKPIGroup {
   box-shadow: 0 0 12px 1px rgba(0,0,0,.1);
   background-color: @indigo;
@@ -62,17 +60,18 @@
 
 .NCEntityLabel {
   .icon {
-    color: @purple;
+    // color: @purple;
+    color: #5c7080;
   }
   &.active {
     &:hover {
       .text {
-        color: @indigo;
+        color: @purple;
       }
     }
   }
 }
-
+// RECENT BLOCKS / TRANSACTIONS -------------------------
 .NCTitle {
   &.section{
     border-bottom: 1px solid @teal;
@@ -82,7 +81,7 @@
     }
   }
 }
-
+// RECENT TRANSACTIONS TABLE HEADER ----------------------
 .NCHeader {
   background-color: @indigo;
   .row {
@@ -120,6 +119,7 @@
   }
 }
 
+// NETWORK STATUS --------------------------------------
 .NCLivenessIndicator {
   .liveness-btn {
     .icon {
@@ -136,20 +136,28 @@
   }
 }
 
+// SMALL ICON CHANGES ---------------------------------
 .pt-menu-item::before, .pt-menu-item::after {
-  color: @purple;
+  // color: @purple;
 }
 .pt-button.pt-minimal.pt-intent-primary {
-  color: @purple;
+  // color: @purple;
 }
 .pt-icon-arrow-right.main-search-btn {
   color: @teal !important;
 }
-
+.pt-icon-circle-arrow-right {
+  color: @indigo !important;
+}
 .nc-minimal-btn-shadow {
   box-shadow: 0 0 0 1px @muted-teal !important;
 }
+// DONT NEED THIS
+// .pt-popover-content {
+//   background-color: @indigo !important;
+// }
 
+// GENERAL ----------------------------------------------
 body {
   background: #f2f3fd;
   background-position: 100% 0;

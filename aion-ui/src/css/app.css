@@ -2267,7 +2267,8 @@ pre {
 .NCTableTransactionsRT .header {
   background-color: #12173A;
   color: white;
-  font-weight: 400;
+  font-weight: 500;
+  border-bottom-style: none;
 }
 .NCTableTransactionsRT .body.table-row {
   background-color: white;
@@ -2301,10 +2302,10 @@ pre {
   color: #4221cc !important;
 }
 .NCEntityLabel .icon {
-  color: #4221cc;
+  color: #5c7080;
 }
 .NCEntityLabel.active:hover .text {
-  color: #12173A;
+  color: #4221cc;
 }
 .NCTitle.section {
   border-bottom: 1px solid #5af0bd;
@@ -2345,15 +2346,11 @@ pre {
 .NCNavMenu .pt-menu-header > h6 {
   color: #4221cc;
 }
-.pt-menu-item::before,
-.pt-menu-item::after {
-  color: #4221cc;
-}
-.pt-button.pt-minimal.pt-intent-primary {
-  color: #4221cc;
-}
 .pt-icon-arrow-right.main-search-btn {
   color: #5af0bd !important;
+}
+.pt-icon-circle-arrow-right {
+  color: #12173A !important;
 }
 .nc-minimal-btn-shadow {
   box-shadow: 0 0 0 1px rgba(90, 240, 189, 0.28) !important;
