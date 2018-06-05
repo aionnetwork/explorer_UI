@@ -43,8 +43,15 @@ class NCRecentBlocks extends Component
       to:   { transform: 'translate3d(0px, 145px, 0px)', opacity: 0 }
     };
 
+<<<<<<< HEAD:aion-ui/src/js/components/dashboard/NCRecentBlocks.jsx
     this.currentBlockNumber = -1;
     this.targetBlockTime = DEFAULT_TARGET_BLOCK_TIME; // in seconds
+=======
+    this.currentBlockNumber = (this.props.blkRt.data != null &&
+                               Array.isArray(this.props.blkRt.data) &&
+                               this.props.blkRt.data.length > 0)
+                              ? this.props.blkRt.data[0] : -1;
+>>>>>>> b720da1... Dashboard Style Change:user-interface/src/js/components/dashboard/NCRecentBlocks.jsx
 
     this.state = {
       nextBlockTimeRemaining: DEFAULT_TARGET_BLOCK_TIME, // in seconds
@@ -72,8 +79,8 @@ class NCRecentBlocks extends Component
       let latestBlockNumber = latestBlock.blockNumber;
 
       if (latestBlockNumber == null) return;
-      
-      if (this.currentBlockNumber != latestBlockNumber) 
+
+      if (this.currentBlockNumber != latestBlockNumber)
       {
         // update the clipped list
         // update the block number
@@ -81,7 +88,7 @@ class NCRecentBlocks extends Component
         this.clippedList = rtBlockList.slice(0, BLOCK_STREAM_ELEMENT_SIZE);
 
         this.currentBlockNumber = latestBlockNumber;
-        
+
         this.setState((prevState, props) => ({
           nextBlockTimeRemaining: this.targetBlockTime,
         }));
@@ -89,7 +96,7 @@ class NCRecentBlocks extends Component
     }, 250);
   }
 
-  componentWillUnmount() 
+  componentWillUnmount()
   {
     clearInterval(this.t_nextBlockTime);
     clearInterval(this.t_refreshBlockList);
@@ -100,7 +107,7 @@ class NCRecentBlocks extends Component
     //console.log('documentHidden: ', documentHidden);
     this.setState({ documentHidden: documentHidden });
   }
-  
+
   render() {
     this.targetBlockTime = this.props.kpi.data.targetBlockTime != null ? this.props.kpi.data.targetBlockTime : DEFAULT_TARGET_BLOCK_TIME;
     const momentUpdated = this.props.blkRt.momentUpdated;
@@ -127,7 +134,7 @@ class NCRecentBlocks extends Component
 
     const nextTimeRemaining = this.state.nextBlockTimeRemaining;
 
-    let nextBlockNumber = (this.clippedList[0] != null && this.clippedList[0].blockNumber != null) ? 
+    let nextBlockNumber = (this.clippedList[0] != null && this.clippedList[0].blockNumber != null) ?
                           this.clippedList[0].blockNumber + 1 : "Undefined";
 
     return (
@@ -136,7 +143,7 @@ class NCRecentBlocks extends Component
           <span className="block-bridge"/>
           <span className="block-bridged-dotted"/>
           <div className="NCCardBlock next-block-container">
-            <img  className="block-parent" src="img/block/block-blue.svg"/>
+            <img  className="block-parent" src="img/block/block-indigo.svg"/>
             <div className="block-card">
               <div className="block-number">
                 <span className="subtitle pt-text-muted">Block #</span>
@@ -177,5 +184,3 @@ export default connect((state) => {
     kpi: state.kpi,
   })
 })(NCRecentBlocks);
-
-

@@ -2264,3 +2264,105 @@ pre {
     width: 100%;
   }
 }
+.NCTableTransactionsRT .header {
+  background-color: #12173A;
+  color: white;
+  font-weight: 400;
+}
+.NCTableTransactionsRT .body.table-row {
+  background-color: white;
+}
+.NCTableTransactionsRT .body.table-row:hover {
+  background-color: #e4e9ed;
+}
+.NCComponentLevelSpinner .pt-intent-primary {
+  color: #5af0bd !important;
+}
+.NCKPIGroup .group-title {
+  color: #5af0bd;
+}
+.NCKPIGroup .group-title strong {
+  color: white;
+}
+.NCKPIGroup .NCKPI .kpi-card > .metric .value {
+  color: #4221cc;
+}
+.NCKPIGroup .NCKPI .kpi-card > .metric .units {
+  color: #4221cc;
+}
+.NCDashboard .NCKPIContainer .NCKPIGroup {
+  box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.1);
+  background-color: #12173A;
+}
+.NCCardBlock .block-card .proposer .NCEntityLabel {
+  color: #4221cc;
+}
+.NCCardBlock .block-card .proposer .NCEntityLabel:hover .text {
+  color: #4221cc !important;
+}
+.NCEntityLabel .icon {
+  color: #4221cc;
+}
+.NCEntityLabel.active:hover .text {
+  color: #12173A;
+}
+.NCTitle.section {
+  border-bottom: 1px solid #5af0bd;
+}
+.NCTitle.section span {
+  color: #4221cc;
+  font-weight: 400;
+}
+.NCHeader {
+  background-color: #12173A;
+}
+.NCHeader .row .navbar-group-left .title {
+  color: #5af0bd;
+}
+.NCHeader .row .navbar-group-left .pt-navbar-divider {
+  margin-right: 15px;
+  margin-left: 12px;
+  border-left: 1px solid #ffffffad;
+}
+.NCHeader .row .pt-icon-caret-down {
+  margin-left: 5px;
+  margin-right: -2px;
+  color: #5af0bd;
+}
+.NCHeader .row .navbar-btn-active {
+  color: #5af0bd !important;
+  box-shadow: 0 0 0 1px rgba(90, 240, 189, 0.28);
+}
+.NCHeader .row .navbar-btn-active:before {
+  color: #5af0bd !important;
+}
+.NCHeader .row .navbar-group-right .pt-navbar-divider {
+  border-left: 1px solid #ffffffad;
+}
+.NCLivenessIndicator .liveness-btn .icon.live {
+  color: #5af0bd;
+}
+.NCNavMenu .pt-menu-header > h6 {
+  color: #4221cc;
+}
+.pt-menu-item::before,
+.pt-menu-item::after {
+  color: #4221cc;
+}
+.pt-button.pt-minimal.pt-intent-primary {
+  color: #4221cc;
+}
+.pt-icon-arrow-right.main-search-btn {
+  color: #5af0bd !important;
+}
+.nc-minimal-btn-shadow {
+  box-shadow: 0 0 0 1px rgba(90, 240, 189, 0.28) !important;
+}
+body {
+  background: #f2f3fd;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  content: "";
+  background-image: url(https://aion.network/material/views/aion/assets/img/circuit_grid.png);
+}

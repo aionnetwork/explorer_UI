@@ -1,0 +1,160 @@
+// STYLE GUIDE ---------------------------------------
+@indigo: #12173A;
+@purple: #4221cc;
+@teal: #5af0bd;
+@muted-teal: rgba(90, 240, 189, 0.28);
+
+// TABLE STYLES --------------------------------------
+.NCTableTransactionsRT {
+  .header {
+    background-color: @indigo;
+    color: white;
+    font-weight: 400;
+  }
+  .body.table-row {
+    background-color: white;
+    &:hover {
+      // background-color: rgba(167, 182, 194, 0.3);
+      background-color: #e4e9ed;
+    }
+  }
+}
+
+.NCComponentLevelSpinner {
+  .pt-intent-primary {
+    color: @teal !important;
+  }
+}
+
+.NCKPIGroup .group-title {
+  color: @teal;
+
+  strong {
+    color: white;
+  }
+}
+
+.NCKPIGroup .NCKPI .kpi-card {
+  &>.metric {
+    .value {
+      color: @purple;
+    }
+    .units {
+      color: @purple;
+    }
+  }
+}
+
+.NCDashboard .NCKPIContainer .NCKPIGroup {
+  box-shadow: 0 0 12px 1px rgba(0,0,0,.1);
+  background-color: @indigo;
+}
+
+.NCCardBlock .block-card .proposer .NCEntityLabel {
+  color: @purple;
+
+  &:hover {
+    .text {
+      color: @purple !important;
+    }
+  }
+}
+
+.NCEntityLabel {
+  .icon {
+    color: @purple;
+  }
+  &.active {
+    &:hover {
+      .text {
+        color: @indigo;
+      }
+    }
+  }
+}
+
+.NCTitle {
+  &.section{
+    border-bottom: 1px solid @teal;
+    span {
+      color: @purple;
+      font-weight: 400;
+    }
+  }
+}
+
+.NCHeader {
+  background-color: @indigo;
+  .row {
+    .navbar-group-left {
+      .title {
+        color: @teal;
+      }
+
+      .pt-navbar-divider {
+        margin-right: 15px;
+        margin-left: 12px;
+        border-left: 1px solid #ffffffad;
+      }
+    }
+
+    .pt-icon-caret-down {
+      margin-left: 5px;
+      margin-right: -2px;
+      color: @teal;
+    }
+
+    .navbar-btn-active {
+      &:before {
+        color: @teal !important;
+      }
+      color: @teal !important;
+      box-shadow: 0 0 0 1px @muted-teal;
+    }
+
+    .navbar-group-right {
+      .pt-navbar-divider {
+        border-left: 1px solid #ffffffad;
+      }
+    }
+  }
+}
+
+.NCLivenessIndicator {
+  .liveness-btn {
+    .icon {
+      &.live {
+        color: @teal;
+      }
+    }
+  }
+}
+
+.NCNavMenu {
+  .pt-menu-header > h6 {
+    color: @purple;
+  }
+}
+
+.pt-menu-item::before, .pt-menu-item::after {
+  color: @purple;
+}
+.pt-button.pt-minimal.pt-intent-primary {
+  color: @purple;
+}
+.pt-icon-arrow-right.main-search-btn {
+  color: @teal !important;
+}
+
+.nc-minimal-btn-shadow {
+  box-shadow: 0 0 0 1px @muted-teal !important;
+}
+
+body {
+  background: #f2f3fd;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  content: "";
+  background-image: url(https://aion.network/material/views/aion/assets/img/circuit_grid.png);
+}
