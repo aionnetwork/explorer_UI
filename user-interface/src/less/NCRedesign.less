@@ -19,6 +19,14 @@
     }
   }
 }
+
+.NCTable {
+  .NCColumnHeaderCell {
+    .header-icon {
+      color: white;
+    }
+  }
+}
 // SPINNER ----------------------------------------
 .NCComponentLevelSpinner {
   .pt-intent-primary {
@@ -48,12 +56,16 @@
   background-color: @indigo;
 }
 
-.NCCardBlock .block-card .proposer .NCEntityLabel {
-  color: @purple;
-
-  &:hover {
-    .text {
-      color: @purple !important;
+.NCCardBlock .block-card {
+  &.non-empty-block {
+    border-color: @purple;
+  }
+  .proposer .NCEntityLabel {
+    color: @purple;
+    &:hover {
+      .text {
+        color: @purple !important;
+      }
     }
   }
 }
@@ -67,6 +79,30 @@
     &:hover {
       .text {
         color: @purple;
+      }
+    }
+  }
+}
+// ENTITY DETAILS VIEW ----------------------------------
+.NCEntityDetail {
+  .subtitle {
+    color: @purple;
+  }
+}
+
+// EXPLORER PAGE ----------------------------------------
+.NCExplorerPage {
+  .NCExplorerHead {
+    .title-row {
+      .left {
+        .title {
+          .join {
+            border-left: 1px solid @teal;
+          }
+          .desc {
+            color: @purple;
+          }
+        }
       }
     }
   }
@@ -136,12 +172,21 @@
   }
 }
 
+pre {
+  background-color: white;
+}
 // SMALL ICON CHANGES ---------------------------------
 .pt-menu-item::before, .pt-menu-item::after {
   // color: @purple;
 }
-.pt-button.pt-minimal.pt-intent-primary {
+// .pt-button.pt-minimal.pt-intent-primary {
   // color: @purple;
+// }
+.pt-button.pt-intent-primary {
+  color: @teal !important;
+}
+.pt-tag.pt-intent-primary {
+  color: @purple !important;
 }
 .pt-icon-arrow-right.main-search-btn {
   color: @teal !important;
@@ -149,20 +194,57 @@
 .pt-icon-circle-arrow-right {
   color: @indigo !important;
 }
+.pt-tag.pt-minimal.pt-intent-primary {
+  background-color: #e5e4e8;
+}
 .nc-minimal-btn-shadow {
   box-shadow: 0 0 0 1px @muted-teal !important;
 }
-// DONT NEED THIS
-// .pt-popover-content {
-//   background-color: @indigo !important;
-// }
+// TABLE RENDERING ---------------------------------------
+.bp-table-quadrant-main .bp-table-quadrant-scroll-container {
+  background-color: white !important;
+}
+.bp-table-top-container,
+.bp-table-header:before,
+.bp-table-menu {
+  background-color: @indigo !important;
+}
+.bp-table-row-name,
+.bp-table-column-name-text {
+  color: white !important;
+  font-weight: 400 !important;
+}
 
+.block-link.pt-button {
+  color: @indigo !important;
+}
+.pt-tab[aria-selected="true"],
+.pt-tab:not([aria-disabled="true"]):hover {
+  color: @purple;
+}
+
+.pt-tab-indicator {
+  background-color: @teal !important;
+}
 // GENERAL ----------------------------------------------
 body {
   background: #f2f3fd;
-  background-position: 100% 0;
-  background-repeat: no-repeat;
-  background-size: 60%;
-  content: "";
-  background-image: url(https://aion.network/material/views/aion/assets/img/circuit_grid.png);
+  &:after {
+    content: "";
+    background-image: url(https://aion.network/material/views/aion/assets/img/circuit_grid.png);
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    background-size: 60%;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;
+    overflow: hidden;
+  }
+}
+a, a:hover {
+  color: #4221cc;
 }
