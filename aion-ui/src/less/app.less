@@ -1,0 +1,104 @@
+// global changes
+
+// fonts
+.roboto {
+  font-family: 'Roboto', sans-serif;
+}
+/*.montserrat {
+  font-family: 'Montserrat', sans-serif;
+}*/
+.titillium {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+// generic dom-element style
+
+/* override normalize.css */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: 'Roboto', sans-serif;
+}
+* {
+  .roboto;
+  box-sizing: border-box;
+}
+/*
+h1, h2, h3, h4, h5 {
+  font-family: 'Montserrat', sans-serif;
+}*/
+
+// colors
+@blueprint-docs-color: #f5f8fa;
+@muted-blue: rgba(19, 124, 189, 0.15);
+@muted-blue2: rgba(19, 124, 189, 0.8);
+@border-color: rgba(16, 22, 26, 0.15);
+@gray-background-color: rgba(191, 204, 214, 0.2);
+@nuco-teal: #045276;
+@tmx-blue: rgba(0, 54, 119, 1);
+@muted-grey: rgba(16, 22, 26, 0.8);
+@nice-blue: #00aeef;
+
+
+// layout sizes
+@tablet-breakpoint: 1130px;
+@sidebar-width: 250px;
+//@container-width-max: 5000px;
+@container-width-max: 1440px;
+@container-width-min: 800px;
+@footer-height: 90px;
+
+@header-height: 45px;
+
+@min-page-height: 600px;
+
+// import blueprint variables
+//@import "../../node_modules/@blueprintjs/core/dist/blueprint.css";
+@import "../../node_modules/@blueprintjs/core/dist/variables.less";
+
+// import pages
+@import 'general.less';
+@import 'components.less';
+
+@import 'NCGraph.less';
+@import 'NCExplorer.less';
+@import 'NCTableFlex.less';
+
+@import 'NCTableTransactionsRT.less';
+@import 'NCTableBlocksRT.less';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
