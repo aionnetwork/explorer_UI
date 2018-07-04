@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "flow-bin": "^0.41.0",
     "font-awesome": "^4.7.0",
     "gulp": "^3.9.1",
@@ -49,8 +50,8 @@
   },
   "scripts": {
     "build-css": "gulp css",
-    "start": "NODE_PATH=src/js react-scripts start",
-    "build": "npm run build-css && NODE_PATH=src/js react-scripts build",
+    "start": "cross-env NODE_PATH=src/js react-scripts start",
+    "build": "npm run build-css && cross-env NODE_PATH=src/js react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
