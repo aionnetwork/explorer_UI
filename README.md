@@ -1,4 +1,4 @@
-# Aion Blockchain Explorer - User Interface
+# Aion Explorer - User Interface
 
 ### What's Here?
 
