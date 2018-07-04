@@ -6,7 +6,7 @@ This is a sigle page application that consumes the aion explorer api service; Th
 
 ### Development 
 
-1. Install node_modules
+1. Install `node_modules`
 
    ```
    yarn install
@@ -22,7 +22,8 @@ This is a sigle page application that consumes the aion explorer api service; Th
 
 ### Build 
 
-1. Build application; Build destination is /build
+1. Build application; Build destination is `/build`
+
    ```
    yarn build
    ```
