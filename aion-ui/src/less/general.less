@@ -1,0 +1,54 @@
+// clearfix
+.clearfix {
+  zoom: 1; // For IE 6/7 (trigger hasLayout)
+  &:before, &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear:both;
+  }
+}
+
+// fix for the buttons getting stuck with the background in the focused state in chrome.
+.pt-button.pt-minimal:focus {
+  background: none !important;
+}
+.pt-button.pt-minimal:hover {
+  background: rgba(167, 182, 194, 0.3) !important;
+}
+
+.nc-elipses {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nc-popover-arrow 
+{
+  &.dark {
+    .pt-popover-arrow:before {   
+      background-color: #394b59;
+    }
+  }
+  &.white {
+    .pt-popover-arrow:before {   
+      background-color: white;
+    }
+  }
+  &.shadow {
+    .pt-popover-arrow:before {   
+      box-shadow: @border-color 0px 0px 4px 4px !important;
+    }
+  }
+
+  .pt-popover-arrow {
+    &>svg {
+      display: none;
+    }
+  }
+}
+
+.nc-minimal-btn-shadow {
+  box-shadow: 0 0 0 1px @muted-blue !important;
+}

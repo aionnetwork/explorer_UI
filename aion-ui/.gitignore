@@ -1,0 +1,10 @@
+# General
+
+.DS_Store
+Desktop.ini
+Thumbs.db
+node_modules/
+.iml
+
+build/
+
