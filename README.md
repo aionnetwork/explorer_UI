@@ -2,7 +2,7 @@
 
 ### What's Here?
 
-This repository hosts the user interface for the 
+This repository hosts all user interface components for the Aion Blockchain Explorer service, hosted by the Aion Foundation.
 
 ### Features:
 
