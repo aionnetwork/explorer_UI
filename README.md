@@ -1,6 +1,10 @@
-# Aion Explorer and Dashboard
+# Aion Blockchain Explorer - User Interface
 
-MVP Features :
+### What's Here?
+
+This repository hosts the user interface for the 
+
+### Features:
 
 1. See high-level statistics about the Aion network
 2. Real-time list of blocks and transactions
