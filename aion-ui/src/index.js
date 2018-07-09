@@ -24,6 +24,13 @@ import NoResults from 'components/views/NCNoResults';
 
 import { store } from 'stores/NCReduxStore';
 
+
+//this section is related to Google analytics
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-121993888-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
+//google analytics
+
 // import css files
 import '../node_modules/normalize.css/normalize.css';
 import '../node_modules/@blueprintjs/core/dist/blueprint.css';
