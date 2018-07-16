@@ -21,6 +21,10 @@ import * as network from 'network/NCNetworkRequests';
 
 import appConfig from '../../../config.json';
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-121993888-1');
+//ReactGA.pageview(window.location.pathname + window.location.search);
+
 class NCLayout extends Component {
 
   constructor(props) {
@@ -144,6 +148,9 @@ class NCLayout extends Component {
   render() 
   {
     const pathname = this.props.location.pathname;
+
+    //ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.pageview(pathname);
 
     let kpi = this.props.kpi;
     

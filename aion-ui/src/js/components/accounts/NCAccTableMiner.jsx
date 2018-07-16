@@ -13,10 +13,18 @@ import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import NCLink from 'components/common/NCLink';
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-121993888-1');
+
 export default class NCAccTableMiner extends Component 
 {
   constructor(props) {
     super(props);
+
+    ReactGA.event({
+      category: 'Accounts',
+      action: 'Viewed Miner'
+    }); 
 
     this.columnDescriptor = 
     [

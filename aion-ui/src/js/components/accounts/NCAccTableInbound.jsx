@@ -10,10 +10,18 @@ import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 import { NCEntity } from 'lib/NCEnums';
 import { nc_numFormatter } from 'lib/NCUtility';
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-121993888-1');
+
 export default class NCAccTableInbound extends Component 
 {
   constructor(props) {
     super(props);
+
+    ReactGA.event({
+      category: 'Accounts',
+      action: 'Viewed Inbound'
+    });
 
     this.columnDescriptor = 
     [
