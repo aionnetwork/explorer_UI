@@ -16,13 +16,14 @@ import NCLoading from 'components/common/NCLoading';
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
+import { ga_key } from 'lib/NCData';
 import { disconnectSocket } from 'network/NCNetwork';
 import * as network from 'network/NCNetworkRequests';
 
 import appConfig from '../../../config.json';
 
 import ReactGA from 'react-ga';
-ReactGA.initialize('UA-121993888-1');
+ReactGA.initialize(ga_key);
 //ReactGA.pageview(window.location.pathname + window.location.search);
 
 class NCLayout extends Component {

@@ -8,13 +8,14 @@ import NCPagination from 'components/common/NCPagination';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import { NCEntity } from 'lib/NCEnums';
+import { ga_key } from 'lib/NCData';
 import { nc_numFormatter } from 'lib/NCUtility';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import NCLink from 'components/common/NCLink';
 
 import ReactGA from 'react-ga';
-ReactGA.initialize('UA-121993888-1');
+ReactGA.initialize(ga_key);
 
 export default class NCAccTableOutbound extends Component 
 {

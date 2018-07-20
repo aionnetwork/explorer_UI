@@ -37,6 +37,10 @@ export const dashboard = Dashboard;
 
 
 
+export const ga_key = "UA-121993888-1";
+
+
+
 
 
 
