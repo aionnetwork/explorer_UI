@@ -37,6 +37,8 @@ h1, h2, h3, h4, h5 {
 .clearfix:after {
   clear: both;
 }
+.pt-button.pt-minimal.pt-intent-primary {
+      color: #fff !important; }
 
 .pt-button.pt-minimal:focus {
   background: none !important;
@@ -988,6 +990,10 @@ pre {
   color: #12173A;
   font-weight: 300;
 }
+
+.NCTitle button span{text-transform: capitalize !important;color: #106ba3 !important;}
+.NCTitle.section button{background:#f2f2f2;}
+
 .NCTitle.card {
   display: flex;
   justify-content: space-between;
