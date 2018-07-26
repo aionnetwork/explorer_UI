@@ -46,7 +46,7 @@ export default class NCPagination extends Component
             {
               "Showing " + entityName + " " + 
               ((pageNumber * pageSize) + 1) + " - " + ((pageNumber * pageSize) + listSize) + 
-              " of " + totalElements + (isLatest ? " latest" : " found")
+              " of " + totalElements + (isLatest ? " latest" : " found")+ " ("+ totalElements +"+ total)"
             }
           </span>
         </div>

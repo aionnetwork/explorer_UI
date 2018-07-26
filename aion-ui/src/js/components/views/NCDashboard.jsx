@@ -1,8 +1,9 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
-import {Button, Tabs2, Tab2 } from "@blueprintjs/core";
+import {InputGroup, Button, Intent, Tabs2, Tab2 } from "@blueprintjs/core";
 
 import NCRecentBlocks from 'components/dashboard/NCRecentBlocks';
 import NCDashboardKPIs from 'components/dashboard/NCDashboardKPIs';
