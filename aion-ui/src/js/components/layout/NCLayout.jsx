@@ -119,6 +119,14 @@ class NCLayout extends Component {
         />
         <MenuItem
           className="nav-option"
+          iconName={NCEntityInfo[NCEntity.TXN].icon}
+          onClick={() => {
+            hashHistory.push('/tokens');
+          }}
+          text="Tokens"
+        />
+        <MenuItem
+          className="nav-option"
           iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}
           onClick={() => {
             hashHistory.push('/accounts');

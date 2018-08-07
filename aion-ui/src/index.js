@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRedirect, hashHistory } from 'react-router'
+import { Router, Route, IndexRedirect, hashHistory} from 'react-router'
 import { Provider } from 'react-redux'
 
 import { FocusStyleManager } from "@blueprintjs/core";
@@ -16,6 +16,9 @@ import BlkRetrieve from 'components/views/NCBlkRetrieve';
 
 import TxnList from 'components/views/NCTxnList';
 import TxnRetrieve from 'components/views/NCTxnRetrieve';
+
+import TknList from 'components/views/NCTknList';
+import TknRetrieve from 'components/views/NCTknRetrieve';
 
 import AccList from 'components/views/NCAccList';
 import AccRetrieve from 'components/views/NCAccRetrieve';
@@ -48,7 +51,7 @@ ReactDOM.render((
     <Router onUpdate={() => window.scrollTo(0, 0)} history={ hashHistory }>
       <Route path="/" component={ Layout }>
         
-        <IndexRedirect to="dashboard"/>
+        <IndexRedirect to="/"/>
         <Route path="dashboard" component={ Dashboard }/>
 
         {/* 
@@ -67,6 +70,17 @@ ReactDOM.render((
         */}
         <Route path="transactions" component={ TxnList }/>
         <Route path="transaction/:txnId" component={ TxnRetrieve }/>
+
+        {/* 
+            Support 3 kind(s) of transation lists: 
+              1. /tokens          => All transactions 
+              2. /tokens?address    => Token by address
+              
+        */}
+        <Route path="tokens" component={ TknList }/>
+        <Route path="token/:tknId" component={ TknRetrieve }/>
+
+
         
         {/* 
             Support 1 kind(s) of account lists: 
