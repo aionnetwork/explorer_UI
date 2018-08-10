@@ -12,7 +12,7 @@ import * as StoreTxnRetrieve from 'stores/StoreTxnRetrieve';
 import { nc_hexPrefix, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
-class NCTxnRetrieve extends Component
+class NCTknRetrieve extends Component
 {
   constructor(props) {
     super(props);
@@ -97,7 +97,7 @@ export default connect((state) => {
   return ({
     txnRetrieve: state.txnRetrieve,
   })
-})(NCTxnRetrieve);
+})(NCTknRetrieve);
 
 
 

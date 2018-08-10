@@ -14,7 +14,7 @@ import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } fr
 import { txnListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
 
-class NCTxnList extends Component
+class NCTknList extends Component
 {
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
@@ -136,7 +136,7 @@ export default connect((state) => {
   return ({
     txnList: state.txnList,
   })
-})(NCTxnList);
+})(NCTknList);
 
 
 
