@@ -101,8 +101,6 @@ export default class NCEntityLabel extends Component
           className={" NCTokenLabel" + (className != null ? className : "") + (linkActive ? " active" : "")}
           onClick={ (e) => this.linkToEntity(e, linkActive)}>
 
-          {console.log("Link: " + JSON.stringify(linkActive) + "")}
-
           <span className={"icon pt-icon-standard " + this.iconName}/>
           <span className="text pt-text-overflow-wrap ">{ displayName }{displaySym}</span>
 

@@ -154,7 +154,7 @@ export default class NCTknTable extends Component
 
         token = entity.name;
         symbol = entity.symbol;
-        Addr = entity.Addr;
+        Addr = '0x' + entity.Addr;
         totalSupply = entity.totalSupply;
         circulatingSupply = entity.circulatingSupply;
         decimal = entity.decimals;
@@ -179,7 +179,7 @@ export default class NCTknTable extends Component
           entityName={token}
           entityDescription={description}
           entitySymbol={symbol}
-          entityId={blockNumber}/>
+          entityId={Addr}/>
         
         
        </Cell>

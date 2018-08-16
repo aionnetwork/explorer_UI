@@ -7,13 +7,13 @@ import NCTknTable from 'components/tokens/NCTknTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 
-import * as StoreTxnList from 'stores/StoreTxnList';
+import * as StoreTknList from 'stores/StoreTknList';
 
-import TknList from 'mock/TknList';
+
 
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 
-import { txnListType } from 'lib/NCEnums';
+import { tknListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
 
 class NCTknList extends Component
@@ -37,32 +37,32 @@ class NCTknList extends Component
 
   requestTopLevel = () => {
     let queryStr = "";
-    let listType = txnListType.ALL;
+    let listType = tknListType.ALL;
 
     let query = this.props.location.query; 
-    if (query && query.block) {
-      listType = txnListType.BY_BLOCK;
-      queryStr = query.block;
+    if (query && query.account) {
+      listType = tknListType.BY_ACCOUNT;
+      queryStr = query.account;
     }/*
     else if (query && query.account) {
       listType = txnListType.BY_ACCOUNT;
       queryStr = query.account;
     }*/
     
-    network.getTxnListTopLevel(listType, queryStr);
+    network.getTknListTopLevel(listType, queryStr);
   }
 
   requestPaging = (pageNumber) => {
-    const listType = this.props.txnList.listType;
-    const queryStr = this.props.txnList.queryStr;
-    network.getTxnListPaging(listType, queryStr, pageNumber);
+    const listType = this.props.tknList.listType;
+    const queryStr = this.props.tknList.queryStr;
+    network.getTknListPaging(listType, queryStr, pageNumber);
   }
 
   render() {
 
-    const store = this.props.txnList;
+    const store = this.props.tknList;
     //const store.content = TxnList.content;
-    console.log(JSON.stringify(this.props.txnList));
+    //console.log(JSON.stringify(this.props.tknList));
     //console.log(JSON.stringify(TxnList.content));
 
     const listType = store.listType;
@@ -85,11 +85,11 @@ class NCTknList extends Component
     let subtitle = "(ERC777)"; // txnListType.ALL
     switch(listType) 
     {
-      case txnListType.BY_BLOCK: {
+      case tknListType.ALL: {
         subtitle = "Block: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
         break;
       }
-      case txnListType.BY_ACCOUNT: {
+      case tknListType.BY_ACCOUNT: {
         subtitle = "Account: " + nc_hexPrefix(store.queryStr)
         break;
       }
@@ -98,10 +98,10 @@ class NCTknList extends Component
     let emptyDataStr = "No transactions found. Dashboard server loading blocks."; // txnListType.ALL
     switch(listType) 
     {
-      case txnListType.BY_BLOCK: {
+      case tknListType.BY_ALL: {
         emptyDataStr = "No transactions found in block: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
       }
-      case txnListType.BY_ACCOUNT: {
+      case tknListType.BY_ACCOUNT: {
         emptyDataStr = "No transactions found involving account "+ nc_hexPrefix(store.queryStr) + "."
       }
     }
@@ -128,7 +128,7 @@ class NCTknList extends Component
         isDataValid={isDataValid} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Transaction Data"}
+        loadingStr={"Loading Token Data"}
         invalidDataStr={"Server provided an invalid response. Please try again."}
         emptyDataStr={emptyDataStr}
         
@@ -140,7 +140,7 @@ class NCTknList extends Component
 
 export default connect((state) => {
   return ({
-    txnList: state.txnList,
+    tknList: state.tknList,
   })
 })(NCTknList);
 

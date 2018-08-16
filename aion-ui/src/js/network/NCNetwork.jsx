@@ -2,7 +2,7 @@
 import axios from 'axios';
 import SockJS from 'sockjs-client'
 import Stomp from 'stompjs'
-import { blkListType, txnListType, accListType } from 'lib/NCEnums';
+import { blkListType, tknListType, txnListType, accListType } from 'lib/NCEnums';
 import * as mock from 'lib/NCData';
 import ms from 'ms';
 import appConfig from '../../config.json';
@@ -81,11 +81,11 @@ export const endpoint = {
   },
   token: {
     list: {
-      [txnListType['ALL']]: {
+      [tknListType['ALL']]: {
         link: '/dashboard/getTokenList',
         params: ['page', 'size']
       },
-      [txnListType['BY_ACCOUNT']]: {
+      [tknListType['BY_ACCOUNT']]: {
         link: '/dashboard/getTransactionsByAddress',
         params: ['searchParam', 'transactionPage', 'transactionSize']
       }

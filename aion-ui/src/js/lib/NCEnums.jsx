@@ -32,12 +32,17 @@ NCEntityInfo[NCEntity.ACCOUNT] = {
   name: "Account",
   absoluteUrl: "/account/",
 }
+NCEntityInfo[NCEntity.TKN] = {
+  icon: "pt-icon-applications",
+  name: "Token",
+  absoluteUrl: "/token/",
+}
 
 export let NCEntityServerMapping = {};
 NCEntityServerMapping['block'] = NCEntity.BLOCK;
 NCEntityServerMapping['transaction'] = NCEntity.TXN;
 NCEntityServerMapping['account'] = NCEntity.ACCOUNT;
-
+NCEntityServerMapping['token'] = NCEntity.TKN;
 // tables -------------------------------------------------------------
 
 export const NCSortType = {
@@ -60,4 +65,9 @@ export const txnListType = {
 
 export const accListType = {
   ALL: 0
+}
+
+export const tknListType = {
+  ALL: 0,
+  BY_ACCOUNT: 1
 }

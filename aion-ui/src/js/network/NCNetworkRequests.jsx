@@ -14,6 +14,8 @@ import * as StoreTxnRt from 'stores/StoreTxnRt';
 import * as StoreTxnList from 'stores/StoreTxnList';
 import * as StoreTxnRetrieve from 'stores/StoreTxnRetrieve';
 
+import * as StoreTknList from 'stores/StoreTknList';
+
 import * as StoreAccList from 'stores/StoreAccList';
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
@@ -549,6 +551,146 @@ export const getSearch = (callback, queryStr) => {
   }
 }
 */
+
+// ========================================================
+// Tokens
+// ========================================================
+
+export const getTknListTopLevel = (listType, queryStr) => {
+  store.dispatch(StoreTknList.GetTopLevel({
+    queryStr: queryStr,
+    listType: listType,
+  }));
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = mock.tknList;
+      store.dispatch(StoreTknList.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // get transaction list
+    const ep = network.endpoint.token.list[listType];
+    let params = [];
+    let request = nc_trim(queryStr);
+
+    switch(listType) {
+      case tknListType.ALL: {
+        params = [0, PAGE_SIZE, 'blockNumber,desc']
+        break;
+      }
+      case tknListType.BY_ACCOUNT: {
+        if (!nc_isPositiveInteger(request) && !nc_isValidEntity(request)) {
+          store.dispatch(StoreTknList.SetTopLevel({ content:[] }));
+          return;
+        }
+
+        params = [request]
+        break;
+      }/*
+      case txnListType.BY_ACCOUNT: {
+        if (request == 0 || request == "0x0") {
+          request = "0000000000000000000000000000000000000000000000000000000000000000"
+        } else if (!nc_isValidEntity(request)) {
+          store.dispatch(StoreTxnList.SetTopLevel({}));
+          return;
+        }
+
+        params = [request, 0, PAGE_SIZE]
+        break;
+      }*/
+    }
+
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreTknList.SetTopLevel(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknList.SetTopLevel({}));
+    });
+  }
+}
+
+export const getTknListPaging = (listType, queryStr, pageNumber) => {
+  store.dispatch(StoreTknList.GetPaging());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().tknList.response);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreTknList.SetPaging(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.token.list[listType];
+    let params = [];
+    switch(listType) {
+      case tknListType.ALL: {
+        params = [pageNumber, PAGE_SIZE, 'blockNumber,desc']
+        break;
+      }
+      case tknListType.BY_BLOCK: {
+        params = [nc_trim(queryStr), pageNumber, PAGE_SIZE]
+        break;
+      }
+      /*
+      case txnListType.BY_ACCOUNT: {
+        let request = nc_trim(queryStr);
+        if (request == 0 || request == "0x0") {
+          request = "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+
+        params = [request, pageNumber, PAGE_SIZE]
+        break;
+      }*/
+    }
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreTknList.SetPaging(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknList.SetPaging({}));
+    });
+  }
+}
+
+export const getTknRetrieveTopLevel = (queryStr) => {
+  store.dispatch(StoreTknRetrieve.GetTopLevel({
+    queryStr: queryStr
+  }));
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = mock.tkn;
+      store.dispatch(StoreTknRetrieve.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    let request = nc_trim(queryStr);
+    if (!nc_isValidEntity(request)) {
+      store.dispatch(StoreTknRetrieve.SetTopLevel({
+        content: []
+      }));
+      return;
+    }
+
+    // get transaction details
+    const ep = network.endpoint.token.detail;
+    let params = [request];
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreTknRetrieve.SetTopLevel(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknRetrieve.SetTopLevel({}));
+    });
+  }
+}
+
 
 
 
