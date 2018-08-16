@@ -41,6 +41,7 @@ import '../node_modules/@blueprintjs/datetime/dist/blueprint-datetime.css';
 import '../node_modules/@blueprintjs/table/dist/table.css';
 
 import './css/app.css';
+import './css/custom.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 // disable focus border accessibility feature (blueprintjs)

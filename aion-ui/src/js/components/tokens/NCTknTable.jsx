@@ -15,9 +15,14 @@ import { NCSortType, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
 
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
+import NCTokenLabel from 'components/common/NCTokenLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+
+ const row = {
+    height:"100px",
+  }
 
 export default class NCTknTable extends Component 
 {
@@ -30,28 +35,28 @@ export default class NCTknTable extends Component
         name: "Token",
         isSortable: false,
         isFilterable: false,
-        width: 100,
+        width: 300,
         flex: false,
         objPath: null,
       },
       {
-        name: "Logo",
+        name: "Decimal",
         isSortable: false,
         isFilterable: false,
-        width: 160,
+        width: 70,
         flex: false,
         objPath: null,
       },
       {
-        name: "Type",
-        isSortable: true,
+        name: "Frozen Supply",
+        isSortable: false,
         isFilterable: false,
         width: 100,
         flex: false,
         objPath: null,
       },
       {
-        name: "Total supply",
+        name: "Liquid Supply",
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -67,13 +72,13 @@ export default class NCTknTable extends Component
         objPath: null,
       },
       {
-        name: "Transfers", // arrow
+        name: "Transactions", // arrow
         isSortable: false,
         isFilterable: false,
-        width: 40,
-        flex: false,
+        width: null,
+        flex: true,
       },
-      {
+      /*{
         name: "Contract",
         isSortable: false,
         isFilterable: false,
@@ -88,7 +93,7 @@ export default class NCTknTable extends Component
         width: null,
         flex: true,
         objPath: null,
-      },/*
+      },
       {
         name: "To Address",
         isSortable: false,
@@ -110,6 +115,8 @@ export default class NCTknTable extends Component
     this.generateTableContent = this.generateTableContent.bind(this);
   }
 
+ 
+
   generateTableContent(entityList) 
   {
     let tableContent = [];
@@ -117,7 +124,17 @@ export default class NCTknTable extends Component
     entityList.forEach((entity, i) => 
     {
       let blockNumber = null;
-      let transactionHash = null;
+      let token = null;
+      let symbol = null;
+      let Addr = null;
+      let totalSupply = null;
+      let circulatingSupply = 0;
+      let description = "This is a test description!";
+      let decimal = null;
+      let transactions = 0;
+      let holders = 1;
+
+      let contractHash = null;
       let fromAddr = null;
       let toAddr = null;
       let blockTimestamp = null;
@@ -126,14 +143,24 @@ export default class NCTknTable extends Component
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
         blockNumber = entity[5];
-        transactionHash = entity[0];
+        token = entity[0];
+        symbol = entity[1];
         fromAddr = entity[1];
         toAddr = entity[2];
         blockTimestamp = entity[4];
         value = entity[3];
       } else {
         blockNumber = entity.blockNumber;
-        transactionHash = entity.transactionHash;
+
+        token = entity.name;
+        symbol = entity.symbol;
+        Addr = entity.Addr;
+        totalSupply = entity.totalSupply;
+        circulatingSupply = entity.circulatingSupply;
+        decimal = entity.decimals;
+        transactions = entity.transactions;
+        holders = entity.holders;
+
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
         blockTimestamp = entity.blockTimestamp;
@@ -143,56 +170,41 @@ export default class NCTknTable extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell>
-        <NCEntityLabel 
-          entityType={NCEntity.BLOCK} 
-          entityName={blockNumber}
-          entityId={blockNumber}/> 
-      </Cell>;
-      tableContent[i][1] = <Cell>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell>{ value ? nc_numFormatterAionCoin(value, 0, true) : 0 }</Cell>;
+      <Cell truncated={false}
+       wrapText={true}>
+        
+        
+        <NCTokenLabel 
+          entityType={NCEntity.TKN} 
+          entityName={token}
+          entityDescription={description}
+          entitySymbol={symbol}
+          entityId={blockNumber}/>
+        
+        
+       </Cell>
+      ;
+      tableContent[i][1] = <Cell>{ decimal }</Cell>;
+      tableContent[i][2] = <Cell>{ totalSupply }</Cell>;
       tableContent[i][3] = 
       <Cell>
         <NCEntityLabel 
           entityType={NCEntity.TXN} 
-          entityName={transactionHash}
-          entityId={transactionHash}/> 
+          entityName={circulatingSupply}
+          entityId={circulatingSupply}/> 
       </Cell>;
       tableContent[i][4] = 
       <Cell>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
-          entityName={fromAddr}
-          entityId={fromAddr}/>
+          entityName={holders}
+          entityId={holders}/>
       </Cell>;
       tableContent[i][5] = 
       <Cell>
-        <div className="arrow-cell">
-          <span className="pt-icon-standard pt-icon-arrow-right"/>
-        </div>
+        {transactions}
       </Cell>;
-      tableContent[i][6] = 
-      <Cell>
-      {
-        toAddr ?
-        <NCEntityLabel 
-          entityType={NCEntity.ACCOUNT} 
-          entityName={toAddr}
-          entityId={toAddr}/>:
-        "Contract Creation"
-      }
-      </Cell>;
-      tableContent[i][7] = 
-      <Cell>
-      {
-        toAddr ?
-        <NCEntityLabel 
-          entityType={NCEntity.ACCOUNT} 
-          entityName={toAddr}
-          entityId={toAddr}/>:
-        "Contract Creation"
-      }
-      </Cell>;
+     
     });
 
     return tableContent; 

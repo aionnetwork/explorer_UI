@@ -79,6 +79,22 @@ export const endpoint = {
       params: ['searchParam']
     }
   },
+  token: {
+    list: {
+      [txnListType['ALL']]: {
+        link: '/dashboard/getTokenList',
+        params: ['page', 'size']
+      },
+      [txnListType['BY_ACCOUNT']]: {
+        link: '/dashboard/getTransactionsByAddress',
+        params: ['searchParam', 'transactionPage', 'transactionSize']
+      }
+    },
+    detail: {
+      link: '/dashboard/findByTransactionHash',
+      params: ['searchParam']
+    }
+  },
   account: {
     list: {
       link: '/dashboard/getAccountStatistics',

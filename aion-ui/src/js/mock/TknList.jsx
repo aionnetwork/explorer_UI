@@ -26,13 +26,16 @@ const TknList =
       href:"http://52.233.40.169/aion/transactions/search"
     }
   ],
+
+  
   content:[
     {
       Addr:"480fba757d41ec5d279e48cb56c998eb583a02f0740e08da7a95bce61ac80eaf",
-      name:119729,
-      symbol:"",
-      decimals:"f7f1aa76f73c1d6a7d09c19c002b3e2acc8a81fe96d68afed0a37111a806c313",
-      totalSupply:"",
+      name:"Keno",
+      symbol:"KW",
+      decimals:"423423",
+      totalSupply:"1234568765",
+      circulatingSupply:21,
       nonce:"1",
       nrgConsumed:21000,
       nrgPrice:1,
@@ -57,8 +60,9 @@ const TknList =
       Addr:"16ecb952759031bb44da4a3d1171ce1dfe069816fc6ed7089d7d34493b845b68",
       name:119725,
       symbol:"",
-      decimals:"f7f1aa76f73c1d6a7d09c19c002b3e2acc8a81fe96d68afed0a37111a806c313",
-      totalSupply:"",
+      decimals:"12",
+      totalSupply:"576576576576",
+      circulatingSupply:21,
       nonce:"0",
       nrgConsumed:21000,
       nrgPrice:1,
@@ -83,8 +87,10 @@ const TknList =
       Addr:"ec8e7599537557918b37e7719b87931b236d75137a6c2381198ed45492642a5b",
       name:112844,
       symbol:"",
-      decimals:"8f30ce8eb81c57388bc25820b0f8d0612451c9f90091224028b9c562fc9c7036",
-      totalSupply:"",
+      decimals:21,
+      totalSupply:"423424",
+      circulatingSupply:21,
+      
       nonce:"49",
       nrgConsumed:21000,
       nrgPrice:1,
@@ -109,8 +115,11 @@ const TknList =
       Addr:"9c038796e3b3c742450326e50dcc841371eb63a002cb8cd1b89f55b9eb556fa8",
       name:112833,
       symbol:"",
-      decimals:"8f30ce8eb81c57388bc25820b0f8d0612451c9f90091224028b9c562fc9c7036",
-      totalSupply:"",
+      decimals:"36",
+      totalSupply:"3242423423",
+      transactions:"74389498237",
+      circulatingSupply:21,
+
       nonce:"48",
       nrgConsumed:21000,
       nrgPrice:1,
@@ -137,6 +146,9 @@ const TknList =
       symbol:"",
       decimals:"8f30ce8eb81c57388bc25820b0f8d0612451c9f90091224028b9c562fc9c7036",
       totalSupply:"",
+      circulatingSupply:21,
+       transactions:"74389498237",
+      
       nonce:"47",
       nrgConsumed:21000,
       nrgPrice:1,
@@ -163,6 +175,9 @@ const TknList =
       symbol:"",
       decimals:"8f30ce8eb81c57388bc25820b0f8d0612451c9f90091224028b9c562fc9c7036",
       totalSupply:"",
+      circulatingSupply:21,
+       transactions:"74389498237",
+      
       nonce:"46",
       nrgConsumed:21000,
       nrgPrice:1,
@@ -189,6 +204,7 @@ const TknList =
       symbol:"",
       decimals:"8f30ce8eb81c57388bc25820b0f8d0612451c9f90091224028b9c562fc9c7036",
       totalSupply:"",
+      circulatingSupply:21,
       nonce:"45",
       nrgConsumed:21000,
       nrgPrice:1,
@@ -215,6 +231,9 @@ const TknList =
       symbol:"",
       decimals:"84bd80a6edd6afa6d033be563e181dd13f64dba4d9dda4d8157f1a150a91c6c1",
       totalSupply:"",
+      circulatingSupply:21,
+       transactions:"74389498237",
+      
       nonce:"10",
       nrgConsumed:21000,
       nrgPrice:1,
@@ -241,6 +260,8 @@ const TknList =
       symbol:"",
       decimals:"10022897508759addcc6f9caa9ac1d6f0a52cfcc1eb66711c2aae685413439ca",
       totalSupply:"",
+      circulatingSupply:21,
+      holders: 122,
       nonce:"0",
       nrgConsumed:21000,
       nrgPrice:1,
@@ -267,6 +288,7 @@ const TknList =
       symbol:"fbb001d6167294a191c4985603de96329b79f6179a44703662aafe29d13a054ebf51b91c0000000000000000000000000000000a",
       decimals:"84bd80a6edd6afa6d033be563e181dd13f64dba4d9dda4d8157f1a150a91c6c1",
       totalSupply:"",
+      circulatingSupply:21,
       nonce:"9",
       nrgConsumed:57124,
       nrgPrice:1,
@@ -294,5 +316,5 @@ const TknList =
   }*/
 }
 
-export default TxnList;
+export default TknList;
 

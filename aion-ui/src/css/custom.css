@@ -1,0 +1,59 @@
+.pt-text-overflow-wrap {
+    overflow: visible !important;
+    -o-text-overflow: string;
+    text-overflow: string;
+    white-space: pre;
+    word-wrap: wrap !important;
+}
+/*.NCTokenLabel {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: wrap;
+    width: 100%;
+    -ms-flex-align: center;
+    align-items: center;
+    overflow: string;
+}*/
+
+.NCTokenLabel {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  width: 100%;
+
+  align-items: center; 
+ 
+  
+}
+.NCTokenLabel .icon {
+  line-height: inherit;
+  color: #5c7080;
+}
+.NCTokenLabel .text {
+  /*line-height: inherit;*/
+  margin-left: 6px;
+  color: #106ba3;/*improve ux*/
+  display:block;
+  margin-right:6px;
+  
+}
+.NCTokenLabel.active:hover {
+  cursor: pointer;
+}
+.NCTokenLabel.active:hover .text {
+  color: #106ba3;
+  text-decoration: underline;
+
+}
+.dtext{
+	display:block !important;
+	
+  color:#555;
+	margin-left: 6px;
+	word-wrap: break-word;
+	flex-wrap: wrap !important;
+	overflow: hidden;
+	
+
+
+}

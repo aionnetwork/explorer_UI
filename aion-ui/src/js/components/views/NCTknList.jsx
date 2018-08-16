@@ -9,6 +9,8 @@ import NCExplorerHead from 'components/common/NCExplorerHead';
 
 import * as StoreTxnList from 'stores/StoreTxnList';
 
+import TknList from 'mock/TknList';
+
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 
 import { txnListType } from 'lib/NCEnums';
@@ -57,7 +59,11 @@ class NCTknList extends Component
   }
 
   render() {
+
     const store = this.props.txnList;
+    //const store.content = TxnList.content;
+    console.log(JSON.stringify(this.props.txnList));
+    //console.log(JSON.stringify(TxnList.content));
 
     const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
@@ -76,7 +82,7 @@ class NCTknList extends Component
       }
     ];
 
-    let subtitle = "(Token type/standard)"; // txnListType.ALL
+    let subtitle = "(ERC777)"; // txnListType.ALL
     switch(listType) 
     {
       case txnListType.BY_BLOCK: {
@@ -109,9 +115,9 @@ class NCTknList extends Component
           subtitle={subtitle}
         />  
         <NCTknTable 
-          data={store.response}
+          data={TknList}
           onPageCallback={this.requestPaging}
-          isLoading={store.isLoadingPaging}
+          isLoading={store.isLoadingPaging} 
           isPaginated={true}
           isLatest={true}/>
       </div>;

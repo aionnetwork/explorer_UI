@@ -7,6 +7,7 @@ export const NCEntity =
   BLOCK: 1,
   TXN: 2,
   ACCOUNT: 3,
+  TKN:4,
 };
 
 export let NCEntityInfo = {};
