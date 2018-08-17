@@ -62,7 +62,7 @@ class NCTknList extends Component
 
     const store = this.props.tknList;
     //const store.content = TxnList.content;
-    //console.log(JSON.stringify(this.props.tknList));
+    console.log(JSON.stringify(this.props));
     //console.log(JSON.stringify(TxnList.content));
 
     const listType = store.listType;

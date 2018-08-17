@@ -73,7 +73,7 @@ ReactDOM.render((
         <Route path="transaction/:txnId" component={ TxnRetrieve }/>
 
         {/* 
-            Support 3 kind(s) of transation lists: 
+            Support 2 kind(s) of token lists: 
               1. /tokens          => All transactions 
               2. /tokens?address    => Token by address
               
