@@ -11,6 +11,10 @@
     {
       "name": "Mainnet Kilimanjaro",
       "url": "https://mainnet.aion.network"
+    },
+    {
+      "name": "Testnet mastery",
+      "url": "https://mastery.aion.network"
     }
   ]
 }
