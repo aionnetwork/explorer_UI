@@ -562,7 +562,7 @@ export const getTknListTopLevel = (listType, queryStr) => {
     listType: listType,
   }));
 
-  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+  if (network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.tknList;
       store.dispatch(StoreTknList.SetTopLevel(response));
@@ -615,7 +615,7 @@ export const getTknListTopLevel = (listType, queryStr) => {
 export const getTknListPaging = (listType, queryStr, pageNumber) => {
   store.dispatch(StoreTknList.GetPaging());
 
-  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+  if (network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = Object.assign({}, store.getState().tknList.response);
       response.page.number = pageNumber;
@@ -662,7 +662,7 @@ export const getTknRetrieveTopLevel = (queryStr) => {
     queryStr: queryStr
   }));
 
-  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+  if (network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.tkn;
       store.dispatch(StoreTknRetrieve.SetTopLevel(response));
