@@ -1,16 +1,16 @@
 {
   "api": {
-    "base_url": "conquest-api.aion.network/aion",
+    "base_url": "mainnet-api.aion.network/aion",
     "https_enabled": true
   },
   "network_list": [
     {
-      "name": "Testnet Conquest",
+      "name": "Mainnet Kilimanjaro ",
       "url": ""
     },
     {
-      "name": "Mainnet Kilimanjaro",
-      "url": "https://mainnet.aion.network"
+      "name": "Testnet Conquest",
+      "url": "https://conquest.aion.network"
     },
     {
       "name": "Testnet mastery",
