@@ -91,7 +91,7 @@ export const endpoint = {
       }
     },
     detail: {
-      link: '/dashboard/findByTransactionHash',
+      link: '/dashboard/getAccountDetails',
       params: ['searchParam']
     }
   },
@@ -113,6 +113,7 @@ export const endpoint = {
 
 export const request = async (endpoint, params) => 
 {
+  
   return new Promise((resolve, reject) => 
   {
     let args = { params: {} };
@@ -132,7 +133,7 @@ export const request = async (endpoint, params) =>
     if (net) {
       net.get(endpoint.link, args)
       .then((response) => {
-        //console.log(response)
+        
         if (response.status == 200 && response.data)
           resolve(response.data);
         else {

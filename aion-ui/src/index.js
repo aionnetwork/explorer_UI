@@ -47,6 +47,8 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 // disable focus border accessibility feature (blueprintjs)
 FocusStyleManager.onlyShowFocusOnTabs();
 
+console.log('1st index!');
+
 ReactDOM.render((
   <Provider store={ store }>
     <Router onUpdate={() => window.scrollTo(0, 0)} history={ hashHistory }>

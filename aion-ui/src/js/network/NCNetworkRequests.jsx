@@ -15,13 +15,14 @@ import * as StoreTxnList from 'stores/StoreTxnList';
 import * as StoreTxnRetrieve from 'stores/StoreTxnRetrieve';
 
 import * as StoreTknList from 'stores/StoreTknList';
+import * as StoreTknRetrieve from 'stores/StoreTknRetrieve';
 
 import * as StoreAccList from 'stores/StoreAccList';
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
 import {BigNumber} from 'bignumber.js';
 import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
-import { txnListType, blkListType, accListType } from 'lib/NCEnums';
+import { tknListType, txnListType, blkListType, accListType } from 'lib/NCEnums';
 
 export const PAGE_SIZE = 25;
 
@@ -187,6 +188,8 @@ export const getTxnListTopLevel = (listType, queryStr) => {
     listType: listType,
   }));
 
+  console.log('txn list top level');
+
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.txnList;
@@ -240,6 +243,8 @@ export const getTxnListTopLevel = (listType, queryStr) => {
 export const getTxnListPaging = (listType, queryStr, pageNumber) => {
   store.dispatch(StoreTxnList.GetPaging());
 
+  console.log('txn list paging');
+
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = Object.assign({}, store.getState().txnList.response);
@@ -286,6 +291,8 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreTxnRetrieve.GetTopLevel({
     queryStr: queryStr
   }));
+
+  console.log('txn retrieve list top level');
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
@@ -485,6 +492,7 @@ export const setDashboardData = (response) => {
 export const getDashboardData = () => {
   const ep = network.endpoint.dashboard;
   let params = [];
+  //console.log(ep);
   network.request(ep, params)
   .then((response) => {
     setDashboardData(response);
@@ -562,9 +570,12 @@ export const getTknListTopLevel = (listType, queryStr) => {
     listType: listType,
   }));
 
+  //console.log('Then network level!');
+
   if (network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.tknList;
+
       store.dispatch(StoreTknList.SetTopLevel(response));
     }, 500);
   }
@@ -664,7 +675,12 @@ export const getTknRetrieveTopLevel = (queryStr) => {
 
   if (network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
-      let response = mock.tkn;
+       let response = {
+        tkn: mock.tknList,
+        blk: mock.blkListArry,
+        txn: mock.txnListArry,
+        web3: false
+      };
       store.dispatch(StoreTknRetrieve.SetTopLevel(response));
     }, 500);
   }

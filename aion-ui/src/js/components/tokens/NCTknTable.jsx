@@ -120,7 +120,7 @@ export default class NCTknTable extends Component
   generateTableContent(entityList) 
   {
     let tableContent = [];
-
+    console.log('tkn table');
     entityList.forEach((entity, i) => 
     {
       let blockNumber = null;
@@ -154,7 +154,7 @@ export default class NCTknTable extends Component
 
         token = entity.name;
         symbol = entity.symbol;
-        Addr = '0x' + entity.Addr;
+        Addr = entity.Addr;
         totalSupply = entity.totalSupply;
         circulatingSupply = entity.circulatingSupply;
         decimal = entity.decimals;

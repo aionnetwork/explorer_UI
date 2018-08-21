@@ -14,6 +14,9 @@ import { reducer_txnRetrieve } from 'stores/StoreTxnRetrieve';
 import { reducer_accList } from 'stores/StoreAccList';
 import { reducer_accRetrieve } from 'stores/StoreAccRetrieve';
 
+import { reducer_tknList } from 'stores/StoreTknList';
+import { reducer_tknRetrieve } from 'stores/StoreTknRetrieve';
+
 // store -----------------------------------------------------------------
 
 export const store = createStore(combineReducers(
@@ -29,5 +32,8 @@ export const store = createStore(combineReducers(
   txnRetrieve: reducer_txnRetrieve,  
 
   accList: reducer_accList,
-  accRetrieve: reducer_accRetrieve
+  accRetrieve: reducer_accRetrieve,
+
+  tknList: reducer_tknList,
+  tknRetrieve: reducer_tknRetrieve
 }));

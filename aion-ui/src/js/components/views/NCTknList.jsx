@@ -9,8 +9,6 @@ import NCExplorerHead from 'components/common/NCExplorerHead';
 
 import * as StoreTknList from 'stores/StoreTknList';
 
-
-
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 
 import { tknListType } from 'lib/NCEnums';
@@ -40,9 +38,9 @@ class NCTknList extends Component
     let listType = tknListType.ALL;
 
     let query = this.props.location.query; 
-    if (query && query.account) {
+    if (query && query.block) {
       listType = tknListType.BY_ACCOUNT;
-      queryStr = query.account;
+      queryStr = query.block;
     }/*
     else if (query && query.account) {
       listType = txnListType.BY_ACCOUNT;
@@ -59,11 +57,9 @@ class NCTknList extends Component
   }
 
   render() {
-
+    console.log('txn list');
+    
     const store = this.props.tknList;
-    //const store.content = TxnList.content;
-    console.log(JSON.stringify(this.props));
-    //console.log(JSON.stringify(TxnList.content));
 
     const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
@@ -86,7 +82,7 @@ class NCTknList extends Component
     switch(listType) 
     {
       case tknListType.ALL: {
-        subtitle = "Block: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
+        subtitle = "Token: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
         break;
       }
       case tknListType.BY_ACCOUNT: {
@@ -98,11 +94,11 @@ class NCTknList extends Component
     let emptyDataStr = "No transactions found. Dashboard server loading blocks."; // txnListType.ALL
     switch(listType) 
     {
-      case tknListType.BY_ALL: {
-        emptyDataStr = "No transactions found in block: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
+      case tknListType.ALL: {
+        emptyDataStr = "No tokens found: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
       }
       case tknListType.BY_ACCOUNT: {
-        emptyDataStr = "No transactions found involving account "+ nc_hexPrefix(store.queryStr) + "."
+        emptyDataStr = "No tokens found involving account "+ nc_hexPrefix(store.queryStr) + "."
       }
     }
 
@@ -115,9 +111,9 @@ class NCTknList extends Component
           subtitle={subtitle}
         />  
         <NCTknTable 
-          data={TknList}
+          data={store.response}
           onPageCallback={this.requestPaging}
-          isLoading={store.isLoadingPaging} 
+          isLoading={store.isLoadingPaging}
           isPaginated={true}
           isLatest={true}/>
       </div>;
@@ -128,7 +124,7 @@ class NCTknList extends Component
         isDataValid={isDataValid} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Token Data"}
+        loadingStr={"Loading Transaction Data"}
         invalidDataStr={"Server provided an invalid response. Please try again."}
         emptyDataStr={emptyDataStr}
         
@@ -139,6 +135,7 @@ class NCTknList extends Component
 }
 
 export default connect((state) => {
+  
   return ({
     tknList: state.tknList,
   })

@@ -54,96 +54,41 @@ export default class NCTxnDetail extends Component
   render() {
     let { entity } = this.props;
 
-    let parsedTxnLog = this.parseTxnLog(entity.transactionLog);
-    let parsedInputData = this.parseInputData(entity.data);
-
+    console.log(JSON.stringify(this.props));
+    let parsedInputData = this.parseInputData(entity);
+    const symbol = " (" + entity.symbol + ")";
     let desc = 
     [
       {
-        field: "Time Sealed",
+        field: "Created",
         value: moment.unix(entity.blockTimestamp).format('LLLL'),
       },
       {
-        field: "Transaction Hash",
+        field: "Contract",
         value: <NCEntityLabel
                   entityType={NCEntity.TXN}
-                  entityId={entity.transactionHash}
+                  entityId={entity.Addr}
                   linkActive={false}/>,
       },
       {
-        field: "Block Number",
-        value: <NCEntityLabel
-                  entityType={NCEntity.BLOCK}
-                  entityId={entity.blockNumber}/>,
+        field: "Symbol",
+        value: entity.symbol,
       },
       // ---------------------------------------------------------------
       {
-        field: "Value",
-        value: entity.value == null ? EMPTY_STR : <span className="strong">{nc_numFormatterACSensitive(entity.value, null, true) + " AION"}</span>,
+        field: "Decimal",
+        value: entity.decimals,
       },
       {
-        field: "Nrg Price",
-        value: entity.nrgPrice == null ? EMPTY_STR : 
-            <span>
-              { nc_numFormatterAmp(entity.nrgPrice, null) }
-              <span className="subtitle"><a href="https://github.com/aionnetwork/aion/wiki/Aion-Terminology" target="_blank">(what's an Amp?)</a></span>
-            </span>
+        field: "TotalSupply",
+        value: entity.totalSupply,
       },
       {
-        field: "Nrg Consumed",
-        value: entity.nrgConsumed != null ? nc_numFormatter(entity.nrgConsumed, 18) + " NRG" : EMPTY_STR,
+        field: "Liquid",
+        value: entity.circulatingSupply,
       },
-      {
-        field: "Status",
-        value: entity.txError == null ? EMPTY_STR :
-          (entity.txError == "") ?
-          <span className="tx-status">
-            <span className="pt-icon-standard pt-icon-tick-circle icon success"/>
-            <span className="status-text">SUCCESS</span>
-          </span> :
-          <span className="tx-status">
-            <span className="pt-icon-standard pt-icon-error icon fail"/>
-            <span className="status-text">{entity.txError}</span>
-          </span>
-        
-      },
-      // ---------------------------------------------------------------
-      {
-        field: "Index",
-        value: entity.transactionIndex != null ? entity.transactionIndex : EMPTY_STR,
-      },
-      {
-        field: "Nonce",
-        value: entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
-      },
-      {
-        field: "From Address",
-        value: <NCEntityLabel 
-                  entityType={NCEntity.ACCOUNT} 
-                  entityId={entity.fromAddr}/>,
-      },
-      {
-        field: "To Address",
-        value: entity.toAddr ? 
-                <NCEntityLabel 
-                  entityType={NCEntity.ACCOUNT} 
-                  entityId={entity.toAddr}/> :
-                "Contract Creation",
-      },
-      // ---------------------------------------------------------------
-      {
-        field: "Txn Logs",
-        value: parsedTxnLog ? <pre className={"nc-resizable"}>{ parsedTxnLog }</pre> : "No Transaction Logs",
-      },
-      {
-        field: "Input Data",
-        value: parsedInputData ? 
-                (entity.toAddr ? 
-                  <pre className={"nc-resizable"}>{ parsedInputData }</pre> : 
-                  <pre className={"nc-resizable"}>{ entity.data }</pre>
-                ):
-                "No Input Data",
-      },
+     
+      
     ];
 
     return (
