@@ -1,3 +1,9 @@
+.pt-button.pt-minimal.pt-intent-primary {
+  color: #106ba3 !important;
+}
+.pt-button.pt-minimal.pt-intent-primary:hover {
+  color: #106ba3 !important;
+}
 .roboto {
   font-family: 'Roboto', sans-serif;
 }
