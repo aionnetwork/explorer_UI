@@ -1,6 +1,6 @@
 {
   "api": {
-    "base_url": "conquest-api.aion.network/aion",
+    "base_url": "mastery-api.aion.network/aion",
     "https_enabled": true
   },
   "network_list": [

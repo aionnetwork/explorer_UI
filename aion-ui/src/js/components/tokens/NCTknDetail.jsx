@@ -54,7 +54,7 @@ export default class NCTxnDetail extends Component
   render() {
     let { entity } = this.props;
 
-    console.log(JSON.stringify(this.props));
+    //console.log(JSON.stringify(this.props));
     let parsedInputData = this.parseInputData(entity);
     const symbol = " (" + entity.symbol + ")";
     let desc = 

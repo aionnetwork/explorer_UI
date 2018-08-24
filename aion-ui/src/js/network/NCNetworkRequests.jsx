@@ -707,6 +707,39 @@ export const getTknRetrieveTopLevel = (queryStr) => {
   }
 }
 
+export const getTknRetrievePagingTxnList = (queryStr, pageNumber) => {
+  store.dispatch(StoreTknRetrieve.GetPagingTxn());
+
+  if (network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().tknRetrieve.response.txn);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreTknRetrieve.SetPagingTxn(response));
+    }, 500);
+  }
+  else {
+    // get transaction list
+    const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      // ok, now make sure that the response you got is still valid
+      // ie. matches up to the account loaded on-screen
+      let acc = store.getState().accRetrieve.response.acc;
+
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreAccRetrieve.SetPagingTxn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreAccRetrieve.SetPagingTxn({}));
+    });
+  }
+}
 
 
 

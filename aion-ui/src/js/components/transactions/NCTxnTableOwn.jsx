@@ -175,7 +175,7 @@ export default class NCTxnTableOwn extends Component
   
   render() {
     const { ownAddr, data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
-    
+    //console.log("Txn loading state: " + isLoading);
     return (
       <NCTableReactPaginated
         data={data}

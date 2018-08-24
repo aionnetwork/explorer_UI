@@ -46,15 +46,16 @@ class NCTknRetrieve extends Component
     network.getTknRetrieveTopLevel(this.props.params.tknId);
   }
 
-  /*requestPagingTxnList = (pageNumber) => {
+  requestPagingTxnList = (pageNumber) => {
     const queryStr = this.props.tknRetrieve.queryStr;
     network.getTknRetrievePagingTxnList(queryStr, pageNumber);
   }
-
+  /*
   requestPagingBlkList = (pageNumber) => {
     const queryStr = this.props.tknRetrieve.queryStr;
     network.getTknRetrievePagingBlkList(queryStr, pageNumber);
-  }*/
+  }
+  */
 
   render() {
     const store = this.props.tknRetrieve;
@@ -63,13 +64,13 @@ class NCTknRetrieve extends Component
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
 
-    //console.log(JSON.stringify(this.props.tknRetrieve.response.tkn));
+    console.log("page Data for retrieve: "+JSON.stringify(this.props));
 
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
     const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
 
     //const name = this.props.tknRetrieve.response.tkn.name;
-    //console.log(JSON.stringify(store.response));
+    //console.log("this is whats happening: "+JSON.stringify(isTxnListFirstLoad));
     
 
     const token = (store.response && store.response.tkn) ? store.response.tkn.content[0] : null;
@@ -78,7 +79,7 @@ class NCTknRetrieve extends Component
     const txnList = (store.response && store.response.txn) ? store.response.txn : null;
     const blkList = (store.response && store.response.blk) ? store.response.blk : null;
 
-    console.log(JSON.stringify(txnList));//const isTknValid = nc_isObjectValid(tknObj);
+    //console.log(JSON.stringify(txnList));//const isTknValid = nc_isObjectValid(tknObj);
     //const isTknEmpty = nc_isObjectEmpty(tknObj, isTknValid);
 
     const isTxnListValid = nc_isListValid(txnList);
@@ -141,9 +142,9 @@ class NCTknRetrieve extends Component
         </div>
       }
 
-      isLoading={isBlkListFirstLoad == null}
-      isDataValid={isBlkListValid}
-      isDataEmpty={isBlkListEmpty}  
+      isLoading={isTxnListFirstLoad == null}
+      isDataValid={isTxnListValid}
+      isDataEmpty={isTxnListEmpty}  
       
       loadingStr={"Loading Transactions"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 

@@ -23,14 +23,14 @@ export const SetTopLevel = (data) =>
 export const GetPagingTxn = (data) => 
 {
   return {
-    type: 'ACC_RETRIEVE_GET_PAGING_TXN',
+    type: 'TKN_RETRIEVE_GET_PAGING_TXN',
     data: data,
   }
 }
 export const SetPagingTxn = (data) => 
 {
   return {
-    type: 'ACC_RETRIEVE_SET_PAGING_TXN',
+    type: 'TKN_RETRIEVE_SET_PAGING_TXN',
     data: data,
   }
 }
@@ -62,9 +62,21 @@ let initialState_StoreTknRetrieve =
   queryStr: "",
 
   response: {
-    tkn: null
+    acc: {
+      data: null,
+      momentUpdated: null
+    },
+    blk: {
+      data: null,
+      momentUpdated: null
+    },
+    tkn: {
+      data: null,
+      momentUpdated: null
+    },
   },
-  momentUpdated: null
+  momentUpdated: null,
+  web3: false
 };
 
 export function reducer_tknRetrieve (state = initialState_StoreTknRetrieve, action) 
@@ -80,7 +92,10 @@ export function reducer_tknRetrieve (state = initialState_StoreTknRetrieve, acti
       _state.isLoadingTopLevel = true; 
       _state.queryStr = action.data.queryStr;
       
-      _state.response.tkn = null;
+      //_state.response.tkn = null;
+      _state.response.tkn.momentUpdated = null;
+      _state.response.blk.momentUpdated = null;
+      _state.response.txn.momentUpdated = null;
       _state.momentUpdated = null;
       
       return _state;
@@ -91,11 +106,39 @@ export function reducer_tknRetrieve (state = initialState_StoreTknRetrieve, acti
       
       _state.isLoadingTopLevel = false; 
       
-      _state.response = action.data;
+      //_state.response = action.data;
+      _state.response.tkn.data = action.data;
+      _state.response.tkn.momentUpdated = moment();
+      
       _state.momentUpdated = moment();
       
       return _state;
     }
+
+    // Paging Transaction
+    // ------------------
+    case 'TKN_RETRIEVE_GET_PAGING_TXN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTxnList = true;
+
+      return _state;
+
+    }
+    case 'TKN_RETRIEVE_SET_PAGING_TXN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTxnList = false;
+      
+      _state.response.txn.data = action.data;
+      _state.response.txn.momentUpdated = moment();
+      _state.momentUpdated = moment();
+
+      return _state;
+    }
+
 
     default: 
     {
