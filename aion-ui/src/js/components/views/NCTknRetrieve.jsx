@@ -50,12 +50,12 @@ class NCTknRetrieve extends Component
     const queryStr = this.props.tknRetrieve.queryStr;
     network.getTknRetrievePagingTxnList(queryStr, pageNumber);
   }
-  /*
+  
   requestPagingBlkList = (pageNumber) => {
     const queryStr = this.props.tknRetrieve.queryStr;
     network.getTknRetrievePagingBlkList(queryStr, pageNumber);
   }
-  */
+  
 
   render() {
     const store = this.props.tknRetrieve;
@@ -73,14 +73,17 @@ class NCTknRetrieve extends Component
     //console.log("this is whats happening: "+JSON.stringify(isTxnListFirstLoad));
     
 
-    const token = (store.response && store.response.tkn) ? store.response.tkn.content[0] : null;
+    //const token = (store.response && store.response.tkn) ? store.response.tkn.content[0] : null;
      
+    const tknObj = (store.response && store.response.tkn) ? store.response.tkn.data : null;
     
-    const txnList = (store.response && store.response.txn) ? store.response.txn : null;
-    const blkList = (store.response && store.response.blk) ? store.response.blk : null;
+    const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
+    const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
 
     //console.log(JSON.stringify(txnList));//const isTknValid = nc_isObjectValid(tknObj);
     //const isTknEmpty = nc_isObjectEmpty(tknObj, isTknValid);
+    const isTknValid = nc_isObjectValid(tknObj);
+    const isTknEmpty = nc_isObjectEmpty(tknObj, isTknValid);
 
     const isTxnListValid = nc_isListValid(txnList);
     const isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
@@ -90,6 +93,10 @@ class NCTknRetrieve extends Component
 
     //const tkn = isTknEmpty ? {} : tknObj;
     //const tkn = tknObj[0];
+
+    const tkn = isTknEmpty ? {} : tknObj.content[0];
+    console.log(JSON.stringify(tkn));
+    
     
     const breadcrumbs = [
       {
@@ -127,7 +134,7 @@ class NCTknRetrieve extends Component
       marginTop={20}
       marginBottom={30}
 
-      content={ <NCTknDetail entity={token}/> }
+      content={ <NCTknDetail entity={tkn}/> }
     />
 
    const txnListSection = <NCExplorerSection 
@@ -212,8 +219,8 @@ class NCTknRetrieve extends Component
         <NCTExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"Token"}
-          subtitle={token}/>  
+          title={"tkn"}
+          subtitle={tkn}/>  
         { tknBalanceSection }
         <hr className="nc-hr"/>
         {

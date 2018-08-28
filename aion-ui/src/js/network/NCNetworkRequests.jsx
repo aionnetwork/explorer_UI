@@ -674,9 +674,10 @@ export const getTknRetrieveTopLevel = (queryStr) => {
   }));
 
   if (network.NCNETWORK_REQUESTS_ENABLED) {
+    console.log("getTknRetrieveTopLevel");
     setTimeout(() => {
        let response = {
-        tkn: mock.tknList,
+        tkn: mock.tkn,
         blk: mock.blkListArry,
         txn: mock.txnListArry,
         web3: false
@@ -685,6 +686,7 @@ export const getTknRetrieveTopLevel = (queryStr) => {
     }, 500);
   }
   else {
+    console.log("getTknRetrieveTopLevel live");
     let request = nc_trim(queryStr);
     if (!nc_isValidEntity(request)) {
       store.dispatch(StoreTknRetrieve.SetTopLevel({
@@ -726,21 +728,51 @@ export const getTknRetrievePagingTxnList = (queryStr, pageNumber) => {
     .then((response) => {
       // ok, now make sure that the response you got is still valid
       // ie. matches up to the account loaded on-screen
-      let acc = store.getState().accRetrieve.response.acc;
+      let tkn = store.getState().tknRetrieve.response.tkn;
 
-      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
-        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
-            store.dispatch(StoreAccRetrieve.SetPagingTxn(response));  
+      if (tkn && tkn.data && tkn.data.content && tkn.data.content[0]) {
+        if (nc_sanitizeHex(tkn.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreTknRetrieve.SetPagingTxn(response));  
         }
       }
     })
     .catch((error) => {
       console.log(error);
-      store.dispatch(StoreAccRetrieve.SetPagingTxn({}));
+      store.dispatch(StoreTknRetrieve.SetPagingTxn({}));
     });
   }
 }
+export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
+  store.dispatch(StoreTknRetrieve.GetPagingBlk());
 
+  if (network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().tknRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreTknRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      // ok, now make sure that the response you got is still valid
+      // ie. matches up to the account loaded on-screen
+      let tkn = store.getState().tknRetrieve.response.tkn;
+      if (tkn && tkn.data && tkn.data.content && tkn.data.content[0]) {
+        if (nc_sanitizeHex(tkn.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoretknRetrieve.SetPagingBlk(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknRetrieve.SetPagingBlk({}));
+    });
+  }
+}
 
 
 

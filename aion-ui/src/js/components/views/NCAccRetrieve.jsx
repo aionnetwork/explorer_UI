@@ -61,6 +61,8 @@ class NCAccRetrieve extends Component
     
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
+    console.log("page Data for retrieve: "+JSON.stringify(this.props));
+
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
     const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;

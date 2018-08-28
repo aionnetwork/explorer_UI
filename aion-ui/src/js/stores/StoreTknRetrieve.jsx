@@ -40,14 +40,14 @@ export const SetPagingTxn = (data) =>
 export const GetPagingBlk = (data) => 
 {
   return {
-    type: 'ACC_RETRIEVE_GET_PAGING_BLK',
+    type: 'TKN_RETRIEVE_GET_PAGING_BLK',
     data: data,
   }
 }
 export const SetPagingBlk = (data) => 
 {
   return {
-    type: 'ACC_RETRIEVE_SET_PAGING_BLK',
+    type: 'TKN_RETRIEVE_SET_PAGING_BLK',
     data: data,
   }
 }
@@ -62,7 +62,7 @@ let initialState_StoreTknRetrieve =
   queryStr: "",
 
   response: {
-    acc: {
+    txn: {
       data: null,
       momentUpdated: null
     },
@@ -107,9 +107,16 @@ export function reducer_tknRetrieve (state = initialState_StoreTknRetrieve, acti
       _state.isLoadingTopLevel = false; 
       
       //_state.response = action.data;
-      _state.response.tkn.data = action.data;
+      console.log("This data: "+JSON.stringify(action));
+
+      _state.response.tkn.data = action.data.tkn;
       _state.response.tkn.momentUpdated = moment();
-      
+
+      _state.response.txn.data = action.data.txn;
+      _state.response.txn.momentUpdated = moment();
+      _state.response.blk.data = action.data.blk;
+      _state.response.blk.momentUpdated = moment();
+
       _state.momentUpdated = moment();
       
       return _state;
@@ -136,6 +143,27 @@ export function reducer_tknRetrieve (state = initialState_StoreTknRetrieve, acti
       _state.response.txn.momentUpdated = moment();
       _state.momentUpdated = moment();
 
+      return _state;
+    }
+
+    case 'TKN_RETRIEVE_GET_PAGING_BLK':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingBlkList = true;
+      
+      return _state;
+    }
+    case 'TKN_RETRIEVE_SET_PAGING_BLK':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingBlkList = false;
+      
+      _state.response.blk.data = action.data;
+      _state.response.blk.momentUpdated = moment();
+      _state.momentUpdated = moment();
+      
       return _state;
     }
 
