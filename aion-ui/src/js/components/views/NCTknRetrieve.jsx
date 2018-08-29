@@ -219,7 +219,7 @@ class NCTknRetrieve extends Component
         <NCTExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"tkn"}
+          title={"Token"}
           subtitle={tkn}/>  
         { tknBalanceSection }
         <hr className="nc-hr"/>

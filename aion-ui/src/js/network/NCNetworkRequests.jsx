@@ -572,7 +572,7 @@ export const getTknListTopLevel = (listType, queryStr) => {
 
   //console.log('Then network level!');
 
-  if (network.NCNETWORK_REQUESTS_ENABLED) {
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.tknList;
 
