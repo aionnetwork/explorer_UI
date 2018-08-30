@@ -64,7 +64,7 @@ export default class NCTknTable extends Component
         objPath: null,
       },
       {
-        name: "Holders",
+        name: "Creator",
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -72,7 +72,7 @@ export default class NCTknTable extends Component
         objPath: null,
       },
       {
-        name: "Transactions", // arrow
+        name: "Transaction", // arrow
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -129,7 +129,7 @@ export default class NCTknTable extends Component
       let Addr = null;
       let totalSupply = null;
       let circulatingSupply = 0;
-      let description = "This is a test description!";
+      let description = " ";
       let decimal = null;
       let transactions = 0;
       let holders = 1;
@@ -154,12 +154,12 @@ export default class NCTknTable extends Component
 
         token = entity.name;
         symbol = entity.symbol;
-        Addr = entity.Addr;
+        Addr = entity.contractAddr;
         totalSupply = entity.totalSupply;
-        circulatingSupply = entity.circulatingSupply;
-        decimal = entity.decimals;
-        transactions = entity.transactions;
-        holders = entity.holders;
+        circulatingSupply = entity.liquidSupply;
+        decimal = entity.granularity;
+        transactions = entity.transactionHash;
+        holders = entity.creatorAddress;
 
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
@@ -195,10 +195,7 @@ export default class NCTknTable extends Component
       </Cell>;
       tableContent[i][4] = 
       <Cell>
-        <NCEntityLabel 
-          entityType={NCEntity.ACCOUNT} 
-          entityName={holders}
-          entityId={holders}/>
+        {holders}
       </Cell>;
       tableContent[i][5] = 
       <Cell>

@@ -6,6 +6,7 @@ import moment from 'moment';
 import NCTknTable from 'components/tokens/NCTknTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
+import NCTKNExplorerHead from 'components/common/NCTKNExplorerHead';
 
 import * as StoreTknList from 'stores/StoreTknList';
 
@@ -57,9 +58,10 @@ class NCTknList extends Component
   }
 
   render() {
-    console.log('txn list');
+    console.log('tkn list');
     
     const store = this.props.tknList;
+    console.log(JSON.stringify(store));
 
     const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
@@ -82,7 +84,7 @@ class NCTknList extends Component
     switch(listType) 
     {
       case tknListType.ALL: {
-        subtitle = "Token: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
+        subtitle = " Tokens";// + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
         break;
       }
       case tknListType.BY_ACCOUNT: {
@@ -104,11 +106,11 @@ class NCTknList extends Component
 
     const page =
       <div> 
-        <NCExplorerHead
+        <NCTKNExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
           title={"Tokens"}
-          subtitle={subtitle}
+          subtitle={store.response}
         />  
         <NCTknTable 
           data={store.response}

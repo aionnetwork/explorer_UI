@@ -109,12 +109,12 @@ export function reducer_tknRetrieve (state = initialState_StoreTknRetrieve, acti
       //_state.response = action.data;
       console.log("This data: "+JSON.stringify(action));
 
-      _state.response.tkn.data = action.data.tkn;
+      _state.response.tkn.data = action.data;
       _state.response.tkn.momentUpdated = moment();
 
-      _state.response.txn.data = action.data.txn;
+      _state.response.txn.data = {"content":[]};
       _state.response.txn.momentUpdated = moment();
-      _state.response.blk.data = action.data.blk;
+      _state.response.blk.data = {"content":[]};
       _state.response.blk.momentUpdated = moment();
 
       _state.momentUpdated = moment();

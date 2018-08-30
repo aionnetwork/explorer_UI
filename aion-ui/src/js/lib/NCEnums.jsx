@@ -3,11 +3,12 @@
 
 export const NCEntity = 
 {
-  UNKNOWN: 0,
-  BLOCK: 1,
-  TXN: 2,
-  ACCOUNT: 3,
-  TKN:4,
+  UNKNOWN: 4,
+  BLOCK: 0,
+  TXN: 3,
+  ACCOUNT: 2,
+  TKN:1,
+  SEARCH:1,
 };
 
 export let NCEntityInfo = {};
@@ -33,7 +34,7 @@ NCEntityInfo[NCEntity.ACCOUNT] = {
   absoluteUrl: "/account/",
 }
 NCEntityInfo[NCEntity.TKN] = {
-  icon: "pt-icon-applications",
+  icon: "pt-icon-document",
   name: "Token",
   absoluteUrl: "/token/",
 }
@@ -43,6 +44,7 @@ NCEntityServerMapping['block'] = NCEntity.BLOCK;
 NCEntityServerMapping['transaction'] = NCEntity.TXN;
 NCEntityServerMapping['account'] = NCEntity.ACCOUNT;
 NCEntityServerMapping['token'] = NCEntity.TKN;
+NCEntityServerMapping['search'] = NCEntity.SEARCH;
 // tables -------------------------------------------------------------
 
 export const NCSortType = {

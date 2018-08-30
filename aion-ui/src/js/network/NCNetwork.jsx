@@ -91,7 +91,7 @@ export const endpoint = {
       }
     },
     detail: {
-      link: '/dashboard/getAccountDetails',
+      link: '/dashboard/getTokenAndTransactionAndAccountDetailsFromTokenNameOrTokenAddress',
       params: ['searchParam']
     }
   },
@@ -108,6 +108,10 @@ export const endpoint = {
   dashboard: {
     link: '/dashboard/view',
     params: []
+  },
+  detail: {
+      link: '/dashboard/search',
+      params: ['searchParam']
   }
 }
 

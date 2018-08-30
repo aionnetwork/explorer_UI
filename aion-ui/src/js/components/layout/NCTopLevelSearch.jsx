@@ -5,7 +5,7 @@ import { hashHistory } from 'react-router';
 import { InputGroup, Button, Intent, Popover, Menu, MenuItem, Position } from "@blueprintjs/core";
 
 import { NCEntity, NCEntityServerMapping, NCEntityInfo } from 'lib/NCEnums';
-import { nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
+import { nc_FindEntity, nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 export default class NCTopLevelSearch extends Component
@@ -23,6 +23,9 @@ export default class NCTopLevelSearch extends Component
   submitQuery = () => {
     if (!nc_isStrEmpty(this.state.queryStr)) 
     {
+      //toDo:before trim identify the required entity from the queryStr
+      //nc_findEntity(this.state.queryStr);
+
       let queryStr = nc_trim(this.state.queryStr);
       let entity = this.state.entity;
 
@@ -30,7 +33,8 @@ export default class NCTopLevelSearch extends Component
         queryStr: ''
       }, () => {
         console.log("query for entity: " + NCEntityInfo[entity].name + " for query string: " + queryStr);
-        nc_LinkToEntity(entity, queryStr)
+        nc_LinkToEntity(entity, queryStr);
+        //nc_FindEntity(queryStr);
       });
     }
   }

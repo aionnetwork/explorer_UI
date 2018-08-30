@@ -310,7 +310,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
     }
 
     // get transaction details
-    const ep = network.endpoint.transaction.detail;
+    const ep = network.endpoint.token.detail;
     let params = [request];
     network.request(ep, params)
     .then((response) => {
@@ -673,7 +673,7 @@ export const getTknRetrieveTopLevel = (queryStr) => {
     queryStr: queryStr
   }));
 
-  if (network.NCNETWORK_REQUESTS_ENABLED) {
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
     console.log("getTknRetrieveTopLevel");
     setTimeout(() => {
        let response = {
@@ -745,7 +745,7 @@ export const getTknRetrievePagingTxnList = (queryStr, pageNumber) => {
 export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
   store.dispatch(StoreTknRetrieve.GetPagingBlk());
 
-  if (network.NCNETWORK_REQUESTS_ENABLED) {
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = Object.assign({}, store.getState().tknRetrieve.response.blk);
       response.page.number = pageNumber;
@@ -775,7 +775,62 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
 }
 
 
+export const getRetrieveTopLevel = (queryStr) => {
+  store.dispatch(StoreBlkRetrieve.GetTopLevel({
+    queryStr: queryStr
+  }));
 
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = {
+        blk: mock.blk,
+        txn: mock.txnListArry
+      };
+      store.dispatch(StoreBlkRetrieve.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // sanitize input string
+    let request = nc_trim(queryStr);
+    if (!nc_isPositiveInteger(request) && !nc_isValidEntity(request)) {
+      store.dispatch(StoreBlkRetrieve.SetTopLevel({
+        blk: {
+          content: []
+        },
+        txn: {}
+      }));
+      return;
+    }
+
+    // get block details
+    const ep = network.endpoint.block.detail;
+    let params = [request,  0, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      
+      let transactionDetails = { content:[] };
+      let blockDetails = response;
+      if (response && response.content && response.content[0] && response.content[0].transactionList) {
+        let txnList = response.content[0].transactionList;
+        transactionDetails = {
+          content: txnList
+        }
+      }
+
+      store.dispatch(StoreBlkRetrieve.SetTopLevel({
+        blk: blockDetails,
+        txn: transactionDetails
+      }));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreBlkRetrieve.SetTopLevel({
+        blk: {},
+        txn: {}
+      }));
+    });
+  }
+}
 
 
 

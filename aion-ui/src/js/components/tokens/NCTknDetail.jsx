@@ -61,14 +61,28 @@ export default class NCTxnDetail extends Component
     [
       {
         field: "Created",
-        value: moment.unix(entity.blockTimestamp).format('LLLL'),
+        value: moment.unix(entity.creationTimestamp).format('LLLL'),
       },
       {
         field: "Contract",
         value: <NCEntityLabel
+                  entityType={NCEntity.TKN}
+                  entityId={entity.contractAddr}
+                  linkActive={true}/>,
+      },
+      {
+        field: "Creator Addr",
+        value: <NCEntityLabel
+                  entityType={NCEntity.ACCOUNT}
+                  entityId={entity.creatorAddress}
+                  linkActive={true}/>,
+      },
+      {
+        field: "Transaction",
+        value: <NCEntityLabel
                   entityType={NCEntity.TXN}
-                  entityId={entity.Addr}
-                  linkActive={false}/>,
+                  entityId={entity.transactionHash}
+                  linkActive={true}/>,
       },
       {
         field: "Symbol",
@@ -77,15 +91,22 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Decimal",
-        value: entity.decimals,
+        value: entity.granularity,
+      },
+      {
+        field: "Special Addr",
+        value: <NCEntityLabel
+                  entityType={NCEntity.ACCOUNT}
+                  entityId={entity.specialAddress}
+                  linkActive={true}/>,
       },
       {
         field: "TotalSupply",
         value: entity.totalSupply,
       },
       {
-        field: "Liquid",
-        value: entity.circulatingSupply,
+        field: "Liquid Supply",
+        value: entity.liquidSupply,
       },
      
       

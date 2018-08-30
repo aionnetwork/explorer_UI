@@ -434,6 +434,28 @@ export function nc_CanLinkToEntity(entity, entityId) {
   }
 }
 
+export function nc_findEntity(queryStr){
+  //get 1st 4 char
+  let entity = 0;
+
+  if(str.substr(0, 4).search('a0')==0){
+    entity = 2;//account
+    nc_LinkToEntity(entity, queryStr);
+  }else if(!isNaN(queryStr)){
+    //block number
+    nc_LinkToEntity(entity, queryStr);
+  }else{
+    entity=5;//block or transaction
+    //search for block
+    if(true){
+      //search for a transaction
+    }
+    //route
+  }
+  
+
+}
+
 export function nc_LinkToEntity(entity, entityId) {
   if (nc_CanLinkToEntity(entity, entityId)) {
     hashHistory.push(NCEntityInfo[entity].absoluteUrl+entityId);
