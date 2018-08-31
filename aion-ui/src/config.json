@@ -5,12 +5,16 @@
   },
   "network_list": [
     {
-      "name": "mastery",
+      "name": "Staging",
       "url": ""
     },
     {
       "name": "Mainnet Kilimanjaro",
       "url": "https://mainnet.aion.network"
+    },
+    {
+      "name": "Mastery Testnet",
+      "url": "https://mastery.aion.network"
     }
   ],
   "ga_key":"UA-121993888-1"
