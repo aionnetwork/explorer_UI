@@ -20,7 +20,7 @@
     "axios": "^0.17.1",
     "axios-extensions": "^3.0.3",
     "bignumber.js": "^6.0.0",
-    "cross-env": "^5.1.6",
+    "cross-env": "^5.2.0",
     "crypto-js": "^3.1.9-1",
     "css-spring": "^4.1.0",
     "d3": "^4.11.0",
@@ -53,13 +53,12 @@
   },
   "scripts": {
     "build-css": "gulp css",
-<<<<<<< HEAD:aion-ui/package.json
-    "start": " react-scripts start",
+
+    
     "build": "npm run build-css && cross-env NODE_PATH=src/js react-scripts build",
-=======
+
     "start": "cross-env NODE_PATH=src/js react-scripts start",
-    "build": "npm run build-css && NODE_PATH=src/js react-scripts build",
->>>>>>> 9560346... Added cross-env, added NCRedesign file:user-interface/package.json
+    
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

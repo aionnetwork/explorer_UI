@@ -5,7 +5,7 @@
   font-family: 'Montserrat', sans-serif;
 }*/
 .titillium {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 /* override normalize.css */
 button,
@@ -37,13 +37,9 @@ h1, h2, h3, h4, h5 {
 .clearfix:after {
   clear: both;
 }
-.pt-button.pt-minimal.pt-intent-primary {
-      color: #fff !important; }
-
 .pt-button.pt-minimal:focus {
   background: none !important;
 }
-
 .pt-button.pt-minimal:hover {
   background: rgba(167, 182, 194, 0.3) !important;
 }
@@ -90,7 +86,7 @@ h1, h2, h3, h4, h5 {
 .NCLoading .title {
   display: block;
   margin-top: 15px;
-  font-weight: 900;
+  font-weight: 300;
 }
 .NCComponentLevelSpinner {
   display: flex;
@@ -120,12 +116,12 @@ h1, h2, h3, h4, h5 {
   margin: 0 0 15px 0;
   text-transform: uppercase;
   font-weight: 300;
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 .NCKPIGroup .group-title strong {
   font-family: inherit;
   font-weight: 400;
-  color: #000;
+  color: #182026;
 }
 .NCKPIGroup .NCKPI:not(:last-of-type) {
   margin-right: 15px;
@@ -165,14 +161,14 @@ h1, h2, h3, h4, h5 {
   justify-content: center;
 }
 .NCKPIGroup .NCKPI .kpi-card > .metric .value {
-  color: #4221cc;
+  color: #137cbd;
 }
 .NCKPIGroup .NCKPI .kpi-card > .metric .units {
   margin-left: 2px;
-  color: #4221cc;
+  color: #137cbd;
 }
 .NCKPIGroup .NCKPI .kpi-card > .title {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   color: #5c7080;
   text-transform: uppercase;
   display: block;
@@ -365,7 +361,7 @@ h1, h2, h3, h4, h5 {
 }
 .NCCardBlock .block-card .block-number .title {
   font-size: 22px;
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 .NCCardBlock .block-card .proposer {
   margin-bottom: 5px;
@@ -378,7 +374,7 @@ h1, h2, h3, h4, h5 {
   margin-right: 6px;
 }
 .NCCardBlock .block-card .proposer .NCEntityLabel {
-  color: #4221cc;
+  color: #106ba3;
   flex: 1;
   width: 50px;
   display: flex;
@@ -409,7 +405,7 @@ h1, h2, h3, h4, h5 {
   cursor: pointer;
 }
 .NCTab .pt-tab-list .pt-tab {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   text-transform: uppercase;
   font-size: 18px;
   padding-bottom: 3px;
@@ -424,8 +420,6 @@ h1, h2, h3, h4, h5 {
   padding: 4px 9px;
   font-size: 12px;
   line-height: 16px;
-  background:#4221cc;
-  color:#fff;
 }
 .NCTimescale.medium .pt-icon-arrow-right {
   font-size: 16px;
@@ -889,7 +883,7 @@ pre {
   padding: 0 4px 0 24px !important;
 }
 .NCTable .NCColumnHeaderFilter input:focus {
-  box-shadow: 0 0 0 1px #4221cc, inset 0 1px 1px rgba(16, 22, 26, 0.2);
+  box-shadow: 0 0 0 1px #137cbd, inset 0 1px 1px rgba(16, 22, 26, 0.2);
 }
 .NCTable .arrow-cell {
   height: 100%;
@@ -933,7 +927,7 @@ pre {
 .NCEntityLabel .text {
   line-height: inherit;
   margin-left: 6px;
-  color: #106ba3;/*improve ux*/
+  color: #182026;
 }
 .NCEntityLabel.active:hover {
   cursor: pointer;
@@ -963,7 +957,7 @@ pre {
   margin-bottom: 20px;
 }
 .NCTitle.page span {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   text-transform: uppercase;
   font-size: 30px;
 }
@@ -983,23 +977,19 @@ pre {
   justify-content: space-between;
 }
 .NCTitle.section span {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 18px;
   line-height: 30px;
   text-transform: uppercase;
-  color: #12173A;
-  font-weight: 300;
+  color: #106ba3;
+  font-weight: 200;
 }
-
-.NCTitle button span{text-transform: capitalize !important;color: #106ba3 !important;}
-.NCTitle.section button{background:#f2f2f2;}
-
 .NCTitle.card {
   display: flex;
   justify-content: space-between;
 }
 .NCTitle.card span {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 20px;
   line-height: 30px;
   text-transform: uppercase;
@@ -1163,7 +1153,7 @@ pre {
   white-space: nowrap;
 }
 .NCMapPopover .name {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   text-transform: uppercase;
   font-size: 16px;
   margin-bottom: 12px;
@@ -1215,7 +1205,7 @@ pre {
   color: #5c7080;
 }
 .NCPathMarkerPopover .pt-popover-content .NCConnDescription .latency .data {
-  color: #4221cc;
+  color: #137cbd;
 }
 .NCNodeMarkerPopover {
   margin-bottom: 10px !important;
@@ -1244,8 +1234,8 @@ pre {
   display: inline-block;
   font-size: 13px;
   font-weight: 300;
-  color: #4221cc;
-  border-bottom: 1px dotted #4221cc;
+  color: #137cbd;
+  border-bottom: 1px dotted #137cbd;
 }
 .NCMap .ncmap-container {
   height: 100%;
@@ -1342,8 +1332,6 @@ pre {
   width: 100%;
   padding: 0;
   height: 45px;
-  background-color: #12173A;
-  color:#fff;
 }
 .NCHeader .row {
   margin: 0 auto;
@@ -1354,8 +1342,6 @@ pre {
   flex-wrap: wrap;
   justify-content: space-between;
   height: 45px;
-  color:#fff;
-
 }
 .NCHeader .row .pt-navbar-group {
   height: 45px;
@@ -1367,17 +1353,17 @@ pre {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  color: #fff;
+  color: #202b33;
   cursor: pointer;
 }
 .NCHeader .row .navbar-group-left .logo .logo-img {
   height: 43px;
 }
 .NCHeader .row .navbar-group-left .title {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 21px;
   margin: 0 0px 0 3px;
-  color: #fff;
+  color: #394b59;
 }
 .NCHeader .row .navbar-group-left .pt-navbar-divider {
   margin-right: 15px;
@@ -1386,21 +1372,20 @@ pre {
 .NCHeader .row .pt-icon-caret-down {
   margin-left: 5px;
   margin-right: -2px;
-  color: #fff;
+  color: #106ba3;
 }
 .NCHeader .row .navbar-btn-active {
-  color: #fff !important;
+  color: #106ba3 !important;
   box-shadow: 0 0 0 1px rgba(19, 124, 189, 0.15);
   margin-right: 15px;
 }
 .NCHeader .row .navbar-btn-active:before {
-  color: #fff !important;
+  color: #106ba3 !important;
 }
 .NCHeader .row .navbar-group-right {
   flex: 1;
   justify-content: flex-end;
   padding-left: 35px;
-
 }
 .NCHeader .row .navbar-group-right .pt-navbar-divider {
   margin-right: 5px;
@@ -1422,7 +1407,7 @@ pre {
   margin-left: 4px;
 }
 .NCHeader .row .navbar-group-right .NCTopLevelSearch > .pt-input:focus {
-  box-shadow: 0 0 0 1px #4221cc, 0 0 0 2px rgba(19, 124, 189, 0.3), inset 0 1px 1px rgba(16, 22, 26, 0.2);
+  box-shadow: 0 0 0 1px #137cbd, 0 0 0 2px rgba(19, 124, 189, 0.3), inset 0 1px 1px rgba(16, 22, 26, 0.2);
 }
 @media (max-width: 1130px) {
   .NCHeader .row .navbar-group-left .title {
@@ -1435,7 +1420,7 @@ pre {
   position: absolute;
   width: 100%;
   height: 90px;
-  background-color: #12173a;
+  background-color: inherit;
   text-align: center;
 }
 .NCFooter > div {
@@ -1490,7 +1475,7 @@ pre {
 }
 .NCLivenessIndicator .liveness-btn .icon.live {
   font-size: 24px;
-  color: #5af0bd;
+  color: #15b371;
 }
 .NCLivenessIndicator .liveness-btn .icon.warning {
   font-size: 24px;
@@ -1508,13 +1493,13 @@ pre {
   vertical-align: middle;
 }
 .NCLivenessIndicator-Popover .pt-popover-content .content-container .no-data > .pt-icon-standard {
-  color: #fff;
+  color: #ced9e0;
   font-size: 20px;
   margin-right: 7px;
 }
 .NCLivenessIndicator-Popover .pt-popover-content .content-container .no-data > .text {
   font-size: 12px;
-  color: #fff;
+  color: #5c7080;
 }
 .NCLivenessIndicator-Popover .pt-popover-content .content-container .liveness-indicator > * {
   display: inline-block;
@@ -1620,7 +1605,7 @@ pre {
 }
 .NCExplorerPage .NCExplorerHead .nav-row .pt-breadcrumbs .pt-breadcrumb {
   font-size: 15px;
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 .NCExplorerPage .NCExplorerHead .nav-row .pt-breadcrumbs .pt-breadcrumb-current {
   font-weight: 500;
@@ -1646,7 +1631,7 @@ pre {
   align-items: center;
 }
 .NCExplorerPage .NCExplorerHead .title-row .left .title .page {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-weight: 400;
   margin-bottom: 2px;
   font-size: 26px;
@@ -1659,9 +1644,9 @@ pre {
   height: 30px;
 }
 .NCExplorerPage .NCExplorerHead .title-row .left .title .desc {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   margin-bottom: 0px;
-  color: #12173a;
+  color: #106ba3;
   font-weight: 200;
   font-size: 20px;
   flex-grow: 1;
@@ -1796,11 +1781,11 @@ pre {
   shape-rendering: crispEdges;
 }
 .NCGraphHistogram .bar > rect:hover {
-  fill: #4221cc;
+  fill: #106ba3;
 }
 .NCGraphBrush .line {
   fill: none;
-  stroke: #4221cc;
+  stroke: #137cbd;
   opacity: 0.6;
   stroke-width: 0.5px;
   stroke-linejoin: round;
@@ -1825,7 +1810,7 @@ pre {
 .NCGraphLine .line {
   fill: none;
   opacity: 0.6;
-  stroke: #4221cc;
+  stroke: #137cbd;
   stroke-width: 1px;
   clip-path: url(#clip);
 }
@@ -1857,7 +1842,7 @@ pre {
   color: #5c7080;
 }
 .NCDashboardGraphContainer .row1-container .switch-graphtype .pt-button span {
-  font-family: 'myriad-pro', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   text-transform: uppercase;
   font-size: 13px;
 }
@@ -1893,7 +1878,7 @@ pre {
   margin-bottom: 10px;
 }
 .NCHistogramZoomGraph .NCGraphHistogramMini .bar > rect {
-  fill: #4221cc;
+  fill: #106ba3;
   opacity: 0.4;
 }
 .NCHistogramZoomGraph .NCGraphBase .axis.x .tick > text {

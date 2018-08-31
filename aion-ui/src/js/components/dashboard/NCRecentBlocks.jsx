@@ -43,15 +43,14 @@ class NCRecentBlocks extends Component
       to:   { transform: 'translate3d(0px, 145px, 0px)', opacity: 0 }
     };
 
-<<<<<<< HEAD:aion-ui/src/js/components/dashboard/NCRecentBlocks.jsx
+
     this.currentBlockNumber = -1;
     this.targetBlockTime = DEFAULT_TARGET_BLOCK_TIME; // in seconds
-=======
+
     this.currentBlockNumber = (this.props.blkRt.data != null &&
                                Array.isArray(this.props.blkRt.data) &&
                                this.props.blkRt.data.length > 0)
                               ? this.props.blkRt.data[0] : -1;
->>>>>>> b720da1... Dashboard Style Change:user-interface/src/js/components/dashboard/NCRecentBlocks.jsx
 
     this.state = {
       nextBlockTimeRemaining: DEFAULT_TARGET_BLOCK_TIME, // in seconds
