@@ -445,7 +445,9 @@ export function nc_findEntity(queryStr){
     //block number
     nc_LinkToEntity(entity, queryStr);
   }else{
-    entity=5;//block or transaction
+    
+    //block or transaction
+    
     //search for block
     if(true){
       //search for a transaction
