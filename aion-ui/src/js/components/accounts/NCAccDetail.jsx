@@ -12,7 +12,7 @@ import NCLink from 'components/common/NCLink';
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
-
+const NOT_CONTRACT = "Not a Contract";
 export default class NCAccDetail extends Component
 {
   render() {
@@ -38,6 +38,14 @@ export default class NCAccDetail extends Component
       {
         field: "Nonce",
         value: !entity.nonce ? EMPTY_STR : BigNumber(String(entity.nonce), 16).toString(10) 
+      },
+      {
+        field: "Contract",
+        value: !entity.is_contract ? NOT_CONTRACT : 
+          <span className="tx-status">
+            <span className="pt-icon-standard pt-icon-tick-circle icon success"/>
+            <span className="status-text">Contract</span>
+          </span> 
       },
     ];
 
