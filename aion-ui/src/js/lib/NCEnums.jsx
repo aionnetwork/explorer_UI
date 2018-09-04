@@ -34,7 +34,7 @@ NCEntityInfo[NCEntity.ACCOUNT] = {
   absoluteUrl: "/account/",
 }
 NCEntityInfo[NCEntity.TKN] = {
-  icon: "pt-icon-document",
+  icon: "pt-icon-application",
   name: "Token",
   absoluteUrl: "/token/",
 }

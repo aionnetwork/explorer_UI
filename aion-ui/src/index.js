@@ -23,6 +23,9 @@ import TknRetrieve from 'components/views/NCTknRetrieve';
 import AccList from 'components/views/NCAccList';
 import AccRetrieve from 'components/views/NCAccRetrieve';
 
+//this url is to facilitate universal search for blocks/transaction/token/accounts
+import SearchRetrieve from 'components/views/NCSearchRetrieve';
+
 import NoResults from 'components/views/NCNoResults';
 
 import { store } from 'stores/NCReduxStore';
@@ -47,14 +50,14 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 // disable focus border accessibility feature (blueprintjs)
 FocusStyleManager.onlyShowFocusOnTabs();
 
-console.log('1st index!');
+//console.log('1st index!');
 
 ReactDOM.render((
   <Provider store={ store }>
     <Router onUpdate={() => window.scrollTo(0, 0)} history={ hashHistory }>
       <Route path="/" component={ Layout }>
         
-        <IndexRedirect to="/"/>
+        <IndexRedirect to="dashboard"/>
         <Route path="dashboard" component={ Dashboard }/>
 
         {/* 
@@ -95,6 +98,8 @@ ReactDOM.render((
         <Route path="account/:accId" component={ AccRetrieve }/>
 
         <Route path="no-results(/:query)" component={ NoResults }/>
+
+        <Route path="search/:term" component={ SearchRetrieve }/>
 
         <Route path="*" component={ NoMatch }/>
       </Route>

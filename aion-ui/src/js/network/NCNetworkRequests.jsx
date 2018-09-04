@@ -20,6 +20,8 @@ import * as StoreTknRetrieve from 'stores/StoreTknRetrieve';
 import * as StoreAccList from 'stores/StoreAccList';
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
+import * as StoreRetrieve from 'stores/StoreRetrieve';
+
 import {BigNumber} from 'bignumber.js';
 import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
 import { tknListType, txnListType, blkListType, accListType } from 'lib/NCEnums';
@@ -793,40 +795,30 @@ export const getRetrieveTopLevel = (queryStr) => {
     // sanitize input string
     let request = nc_trim(queryStr);
     if (!nc_isPositiveInteger(request) && !nc_isValidEntity(request)) {
-      store.dispatch(StoreBlkRetrieve.SetTopLevel({
-        blk: {
+      store.dispatch(StoreRetrieve.SetTopLevel({
+        result: {
           content: []
-        },
-        txn: {}
+        }
       }));
       return;
     }
 
     // get block details
-    const ep = network.endpoint.block.detail;
+    const ep = network.endpoint.search;
     let params = [request,  0, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
       
-      let transactionDetails = { content:[] };
-      let blockDetails = response;
-      if (response && response.content && response.content[0] && response.content[0].transactionList) {
-        let txnList = response.content[0].transactionList;
-        transactionDetails = {
-          content: txnList
-        }
-      }
-
-      store.dispatch(StoreBlkRetrieve.SetTopLevel({
-        blk: blockDetails,
-        txn: transactionDetails
+      let searchDetails = response;
+      
+      store.dispatch(StoreRetrieve.SetTopLevel({
+        result: searchDetails
       }));
     })
     .catch((error) => {
       console.log(error);
       store.dispatch(StoreBlkRetrieve.SetTopLevel({
-        blk: {},
-        txn: {}
+        
       }));
     });
   }

@@ -112,6 +112,10 @@ export const endpoint = {
   detail: {
       link: '/dashboard/search',
       params: ['searchParam']
+  },
+  search: {
+      link: '/dashboard/search',
+      params: ['searchParam']
   }
 }
 

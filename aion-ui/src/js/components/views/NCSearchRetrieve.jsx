@@ -8,18 +8,18 @@ import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 
-import NCTknDetail from 'components/tokens/NCTknDetail';
+import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
-import NCTExplorerHead from 'components/common/NCTExplorerHead';
+import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 import NCNonIdealState from 'components/common/NCNonIdealState';
 
-import * as StoreTknRetrieve from 'stores/StoreTknRetrieve';
+import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
-class NCTknRetrieve extends Component
+class NCAccRetrieve extends Component
 {
   constructor(props) {
     super(props);
@@ -38,65 +38,50 @@ class NCTknRetrieve extends Component
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.params.tknId != this.props.params.tknId)
+    if (prevProps.params.accId != this.props.params.accId)
       this.requestTopLevel();
   }
 
   requestTopLevel = () => {
-    network.getTknRetrieveTopLevel(this.props.params.tknId);
+    network.getRetrieveTopLevel(this.props.params.accId);
   }
 
   requestPagingTxnList = (pageNumber) => {
-    const queryStr = this.props.tknRetrieve.queryStr;
-    network.getTknRetrievePagingTxnList(queryStr, pageNumber);
+    const queryStr = this.props.accRetrieve.queryStr;
+    network.getAccRetrievePagingTxnList(queryStr, pageNumber);
   }
-  
+
   requestPagingBlkList = (pageNumber) => {
-    const queryStr = this.props.tknRetrieve.queryStr;
-    network.getTknRetrievePagingBlkList(queryStr, pageNumber);
+    const queryStr = this.props.accRetrieve.queryStr;
+    network.getAccRetrievePagingBlkList(queryStr, pageNumber);
   }
-  
 
   render() {
-    const store = this.props.tknRetrieve;
-    
+
+    const store = this.props;
+    console.log("page Data for retrieve: "+JSON.stringify(this.props));
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
-    const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
+    //console.log("page Data for retrieve: "+JSON.stringify(this.props));
 
-    console.log("page Data for retrieve: "+JSON.stringify(this.props));
+    const isLoadingTopLevel = false//this.isFirstRenderAfterMount || store.isLoadingTopLevel;
+    const isTxnListFirstLoad = false//(store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
+    const isBlkListFirstLoad = false//(store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
 
-    const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
-    const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
+    //const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
+    //const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
+    //const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
 
-    //const name = this.props.tknRetrieve.response.tkn.name;
-    //console.log("this is whats happening: "+JSON.stringify(isTxnListFirstLoad));
-    
+    const isAccValid = true;//nc_isObjectValid(accObj);
+    const isAccEmpty = true;//nc_isObjectEmpty(accObj, isAccValid);
 
-    //const token = (store.response && store.response.tkn) ? store.response.tkn.content[0] : null;
-     
-    const tknObj = (store.response && store.response.tkn) ? store.response.tkn.data : null;
-    
-    const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
-    const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
+    const isTxnListValid = true;//nc_isListValid(txnList);
+    const isTxnListEmpty = true;//nc_isListEmpty(txnList, isTxnListValid);
 
-    //console.log(JSON.stringify(txnList));//const isTknValid = nc_isObjectValid(tknObj);
-    //const isTknEmpty = nc_isObjectEmpty(tknObj, isTknValid);
-    const isTknValid = nc_isObjectValid(tknObj);
-    const isTknEmpty = nc_isObjectEmpty(tknObj, isTknValid);
+    const isBlkListValid = true;//nc_isListValid(blkList);
+    const isBlkListEmpty = true;//nc_isListEmpty(blkList, isBlkListValid);
 
-    const isTxnListValid = nc_isListValid(txnList);
-    const isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-
-    const isBlkListValid = nc_isListValid(blkList);
-    const isBlkListEmpty = nc_isListEmpty(blkList, isBlkListValid);
-
-    //const tkn = isTknEmpty ? {} : tknObj;
-    //const tkn = tknObj[0];
-
-    const tkn = isTknEmpty ? {} : tknObj.content[0];
-    console.log(JSON.stringify(tkn));
-    
+    //const acc = isAccEmpty ? {} : accObj.content[0];
     
     const breadcrumbs = [
       {
@@ -104,40 +89,37 @@ class NCTknRetrieve extends Component
         body: 'Home',
       },
       {
-        link: '/tokens',
-        body: 'Tokens',
+        link: 'search',
+        body: 'Search',
       },
       {
         link: '#',
-        body: 'Token Details',
+        body: 'Details',
       }
     ];
-    
-    //const name = " ";//store.response.tkn.content[0].name;//tkn.content.name;
-    
-    const truth = true;
+
     const desc = nc_hexPrefix(store.queryStr);
     
-    const tknBalanceSection = <NCExplorerSection 
+    const accBalanceSection = <NCExplorerSection 
       className={""}
 
       isLoading={isLoadingTopLevel}
-      isDataValid={truth}
-      isDataEmpty={!truth} 
+      isDataValid={isAccValid}
+      isDataEmpty={isAccEmpty} 
 
       emptyDataTitle={"Account Not Found"}
       invalidDataTitle={"Account Service Unavailable"}
       
       loadingStr={"Loading Account"}
       invalidDataStr={"Account Service Unavailable. Please try again."} 
-      emptyDataStr={"No Data Available for Account: "+name}
+      emptyDataStr={"No Data Available for Account: "+desc}
       marginTop={20}
       marginBottom={30}
 
-      content={ <NCTknDetail entity={tkn}/> }
+      content={ <NCAccDetail /> }
     />
 
-   const txnListSection = <NCExplorerSection 
+    const txnListSection = <NCExplorerSection 
       className={""}
       subtitle={
         <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions. To retrieve older data, use our&nbsp;
@@ -151,12 +133,12 @@ class NCTknRetrieve extends Component
 
       isLoading={isTxnListFirstLoad == null}
       isDataValid={isTxnListValid}
-      isDataEmpty={isTxnListEmpty}  
+      isDataEmpty={isTxnListEmpty} 
       
       loadingStr={"Loading Transactions"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
       emptyDataStr={
-        <span>No transactions found for this token in latest million transactions. <br/>To retrieve older data, use our&nbsp;
+        <span>No transactions found for this account in latest million transactions. <br/>To retrieve older data, use our&nbsp;
           <Tooltip
             className="pt-tooltip-indicator"
             content={<em>coming soon ...</em>}>
@@ -167,11 +149,11 @@ class NCTknRetrieve extends Component
 
       content={
         <NCTxnTableOwn 
-          data={txnList}
+          
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}
           isPaginated={true}
-          ownAddr={desc}
+          ownAddr={acc.address}
           isLatest={true}/>
         }
     />
@@ -192,10 +174,10 @@ class NCTknRetrieve extends Component
       isDataValid={isBlkListValid}
       isDataEmpty={isBlkListEmpty} 
       
-      loadingStr={"Loading Accounts"}
+      loadingStr={"Loading Blocks"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
       emptyDataStr={
-        <span>No accounts found for this token. <br/>To retrieve older data, use our&nbsp;
+        <span>No blocks mined by this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
           <Tooltip
             className="pt-tooltip-indicator"
             content={<em>coming soon ...</em>}>
@@ -216,15 +198,16 @@ class NCTknRetrieve extends Component
 
     const page =
       <div> 
-        <NCTExplorerHead
+        <NCExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"Token"}
-          subtitle={tkn}/>  
-        { tknBalanceSection }
+          title={"Account"}
+          subtitle={desc}/>  
+        { accBalanceSection }
         <hr className="nc-hr"/>
+        
         {
-          (false) &&
+          (isWeb3 && !isAccEmpty) &&
           <NCNonIdealState
             paddingTop={80}
             icon={"pt-icon-offline"}
@@ -232,16 +215,14 @@ class NCTknRetrieve extends Component
             description={"Account transactions & blocks-mined not available in lite-mode."}/>
         }
         {
-          (true) &&  
+          (!isWeb3 && !isAccEmpty) &&  
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-              <Tab2 id="txn" title="Transfers" panel={txnListSection}/>
-              <Tab2 id="blk" title="Holders" panel={blkListSection}/>
+              <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
+              <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
             </Tabs2>
           </div>
         }
-        
-        
       </div>;
 
     return (
@@ -250,9 +231,9 @@ class NCTknRetrieve extends Component
         isDataValid={true} 
         isDataEmpty={false}
         
-        loadingStr={"Loading Token Details"}
-        invalidDataStr={"Token Service Unavailable. Token data invalid."}
-        emptyDataStr={"No token found for descriptor: " + name + "."}
+        loadingStr={"Loading Account Details"}
+        invalidDataStr={"Account Service Unavailable. Account data invalid."}
+        emptyDataStr={"No account found for descriptor: " + desc + "."}
         
         page={page}/>
     );
@@ -261,9 +242,9 @@ class NCTknRetrieve extends Component
 
 export default connect((state) => {
   return ({
-    tknRetrieve: state.tknRetrieve,
+    accRetrieve: state.accRetrieve,
   })
-})(NCTknRetrieve);
+})(NCAccRetrieve);
 
 
 

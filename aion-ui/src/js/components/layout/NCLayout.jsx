@@ -119,7 +119,7 @@ class NCLayout extends Component {
         />
         <MenuItem
           className="nav-option"
-          iconName={NCEntityInfo[NCEntity.TXN].icon}
+          iconName={NCEntityInfo[NCEntity.TKN].icon}
           onClick={() => {
             hashHistory.push('/tokens');
           }}
