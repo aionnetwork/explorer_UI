@@ -63,20 +63,20 @@ export const endpoint = {
     list: {
       [txnListType['ALL']]: {
         link: '/dashboard/getTransactionList',
-        params: ['page', 'size']
+        params: ['page', 'size','token']
       },
       [txnListType['BY_ACCOUNT']]: {
         link: '/dashboard/getTransactionsByAddress',
-        params: ['searchParam', 'transactionPage', 'transactionSize']
+        params: ['searchParam', 'transactionPage', 'transactionSize','token']
       },
       [txnListType['BY_BLOCK']]: {
         link: '/dashboard/findTransactionByBlockNumberOrBlockHash',
-        params: ['searchParam']
+        params: ['searchParam','token']
       }
     },
     detail: {
       link: '/dashboard/findByTransactionHash',
-      params: ['searchParam']
+      params: ['searchParam','token']
     }
   },
   token: {
