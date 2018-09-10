@@ -93,13 +93,13 @@ export default class NCTxnDetail extends Component
         field: "Decimal",
         value: entity.granularity,
       },
-      {
+      /*{
         field: "Special Addr",
         value: <NCEntityLabel
                   entityType={NCEntity.ACCOUNT}
                   entityId={entity.specialAddress}
                   linkActive={true}/>,
-      },
+      },*/
       {
         field: "TotalSupply",
         value: entity.totalSupply,

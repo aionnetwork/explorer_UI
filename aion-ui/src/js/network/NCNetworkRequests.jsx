@@ -312,7 +312,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
     }
 
     // get transaction details
-    const ep = network.endpoint.token.detail;
+    const ep = network.endpoint.transaction.detail;
     let params = [request];
     network.request(ep, params)
     .then((response) => {
@@ -341,6 +341,7 @@ export const getAccListTopLevel = () => {
   else {
     // get transaction list
     const ep = network.endpoint.account.list;
+    console.log(ep);
     let params = [];
     
     network.request(ep, params)
@@ -388,18 +389,22 @@ export const getAccRetrieveTopLevel = (queryStr) => {
     // get account details
     const ep = network.endpoint.account.detail;
     let params = [request];
+    console.log(ep);
     network.request(ep, params)
     .then((response) => {
       const isAccValid = nc_isObjectValid(response);
       const isAccEmpty = nc_isObjectEmpty(response, isAccValid);
 
+      console.log(JSON.stringify(response));
       // ok, make requests for blocks and transactions for this account
       store.dispatch(StoreAccRetrieve.SetTopLevel(response));
-
+      console.log("Coool!");
       // we can save on a network request if the nonce is zero
       if (!isAccEmpty) {
         getAccRetrievePagingTxnList(request, 0);
         getAccRetrievePagingBlkList(request, 0);
+        //getAccRetrieveTknList(request, 0);
+        console.log("not empty!");
       }
     })
     .catch((error) => {
@@ -475,6 +480,37 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber) => {
   }
 }
 
+export const getAccRetrieveTknList = (queryStr, pageNumber) => {
+  store.dispatch(StoreAccRetrieve.GetTkn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreAccRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.token.list[tknListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      // ok, now make sure that the response you got is still valid
+      // ie. matches up to the account loaded on-screen
+      let acc = store.getState().accRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreAccRetrieve.SetTkn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreAccRetrieve.SetTkn({}));
+    });
+  }
+}
 // ========================================================
 // Dashboard 
 // ========================================================

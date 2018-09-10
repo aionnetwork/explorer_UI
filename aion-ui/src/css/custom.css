@@ -1,3 +1,28 @@
+.token-list{
+  
+  min-width:100px;
+  max-width:100%;
+  float:right;
+  display:block;
+  margin-top:10px;
+}
+.token-list .pt-popover-target{
+  /*min-width:100px;
+  background:#dfdfdf;
+  border-color:#dfdfdf;
+  border-radius:2px;
+  color:#4221cc;
+  min-height:25px;*/
+  margin-top:-8px;
+  
+}
+.token-list .title{
+    display: inline-block;
+    width: 140px;
+    font-weight: 500;
+}
+
+
 .pt-text-overflow-wrap {
     overflow: visible !important;
     -o-text-overflow: string;

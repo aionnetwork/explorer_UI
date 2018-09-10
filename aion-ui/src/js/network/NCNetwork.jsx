@@ -86,8 +86,8 @@ export const endpoint = {
         params: ['page', 'size']
       },
       [tknListType['BY_ACCOUNT']]: {
-        link: '/dashboard/getTransactionsByAddress',
-        params: ['searchParam', 'transactionPage', 'transactionSize']
+        link: '/dashboard/getTokensByAddress',
+        params: ['searchParam']
       }
     },
     detail: {
@@ -97,7 +97,7 @@ export const endpoint = {
   },
   account: {
     list: {
-      link: '/dashboard/getAccountStatistics',
+      link: '/dashboard/getDailyAccountStatistics',
       params: []
     },
     detail: {

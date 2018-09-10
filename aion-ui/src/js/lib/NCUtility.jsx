@@ -156,7 +156,7 @@ export function nc_numFormatter(num, digits=2) {
   const bn = (new BigNumber(String(num)));
   const formatted = formatSI(bn);
   
-  return formatted.value.dp(digits) + "" + formatted.prefix;
+  return nc_numPrettify(formatted.value.dp(digits)) + "" + formatted.prefix;
 }
 
 export function nc_numFormatterBytes(num, digits) {
@@ -262,9 +262,9 @@ export function nc_numFormatterAmp(num, fixed=4, isHex=false) {
   let result;
 
   if (fixed == null)
-    result = formatted.value + " " + formatted.prefix + "Amp";
+    result = nc_numPrettify(formatted.value) + " " + formatted.prefix + "Amp";
   else
-    result = formatted.value.toFixed(fixed) + " " + formatted.prefix + "Amp";
+    result = nc_numPrettify(formatted.value.toFixed(fixed)) + " " + formatted.prefix + "Amp";
 
   return result;
 }
@@ -465,8 +465,16 @@ export function nc_LinkToEntity(entity, entityId) {
 }
 
 
+export function nc_LinkToEntityWithParam(entity, entityId, param) {
+  if (nc_CanLinkToEntity(entity, entityId)) {
+    hashHistory.push(NCEntityInfo[entity].absoluteUrl+entityId+"?"+param.name+"="+param.value);
+  }
+}
 
-
+//formats numbers to be more human readable.
+export function nc_numPrettify(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 

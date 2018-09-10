@@ -128,11 +128,11 @@ export default class NCTknTable extends Component
       let symbol = null;
       let Addr = null;
       let totalSupply = null;
-      let circulatingSupply = 0;
+      let liquidSupply= 0;
       let description = " ";
       let decimal = null;
-      let transactions = 0;
-      let holders = 1;
+      let transaction = 0;
+      let holder = 1;
 
       let contractHash = null;
       let fromAddr = null;
@@ -156,10 +156,10 @@ export default class NCTknTable extends Component
         symbol = entity.symbol;
         Addr = entity.contractAddr;
         totalSupply = entity.totalSupply;
-        circulatingSupply = entity.liquidSupply;
+        liquidSupply= entity.liquidSupply;
         decimal = entity.granularity;
-        transactions = entity.transactionHash;
-        holders = entity.creatorAddress;
+        transaction = entity.transactionHash;
+        holder = entity.creatorAddress;
 
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
@@ -188,18 +188,24 @@ export default class NCTknTable extends Component
       tableContent[i][2] = <Cell>{ totalSupply }</Cell>;
       tableContent[i][3] = 
       <Cell>
-        <NCEntityLabel 
-          entityType={NCEntity.TXN} 
-          entityName={circulatingSupply}
-          entityId={circulatingSupply}/> 
+          {liquidSupply}
+         
       </Cell>;
       tableContent[i][4] = 
       <Cell>
-        {holders}
+          <NCEntityLabel 
+          entityType={NCEntity.ACCOUNT} 
+          entityName={holder}
+          entityId={holder}/> 
+        
       </Cell>;
       tableContent[i][5] = 
       <Cell>
-        {transactions}
+          <NCEntityLabel 
+          entityType={NCEntity.TXN} 
+          entityName={transaction}
+          entityId={transaction}/> 
+        
       </Cell>;
      
     });

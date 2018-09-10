@@ -6,7 +6,7 @@ import NCEntityLabel from 'components/common/NCEntityLabel';
 import NCLink from 'components/common/NCLink';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterACSensitive, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_numPrettify, nc_isStrEmpty, nc_numFormatter, nc_numFormatterACSensitive, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
@@ -77,11 +77,11 @@ export default class NCBlkDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Difficulty",
-        value: entity.difficulty ? BigNumber(String(entity.difficulty), 16).toString(10) : EMPTY_STR,
+        value: entity.difficulty ? nc_numPrettify(BigNumber(String(entity.difficulty), 16).toString(10)) : EMPTY_STR,
       },
       {
         field: "Total Difficulty",
-        value: entity.totalDifficulty ? BigNumber(String(entity.totalDifficulty), 16).toString(10) : EMPTY_STR,
+        value: entity.totalDifficulty ? nc_numPrettify(BigNumber(String(entity.totalDifficulty), 16).toString(10)) : EMPTY_STR,
       },
       {
         field: "Nonce",

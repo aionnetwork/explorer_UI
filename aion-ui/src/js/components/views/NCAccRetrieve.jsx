@@ -1,9 +1,11 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
+import { Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
+import { Select } from "@blueprintjs/select";
 
 import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
@@ -14,15 +16,25 @@ import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 import NCNonIdealState from 'components/common/NCNonIdealState';
 
+import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
+
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
+import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
+//import { nc_FindEntity, nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
+
 import * as network from 'network/NCNetworkRequests';
 
 class NCAccRetrieve extends Component
 {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isFetching: false,
+      queryStr: '',
+      entity: NCEntity.ACCOUNT
+    } 
   }
 
   componentWillMount() {
@@ -56,12 +68,78 @@ class NCAccRetrieve extends Component
     network.getAccRetrievePagingBlkList(queryStr, pageNumber);
   }
 
+  getTokenList = () => {
+    const list = this.props.accRetrieve.tokens;
+    return list;
+  }
+
+  changeToken = (queryStr, tkn) => {
+    if (!nc_isStrEmpty(queryStr)&&!nc_isStrEmpty(tkn))
+    {
+      
+      let str = nc_trim(queryStr);
+      let entity = this.state.entity;
+      let token = [];
+      token.name = "token";
+      token.value = tkn;
+      //console.log("changing token");
+      this.setState({
+        queryStr: ''
+      }, () => {
+        console.log("Changing token to: " + token);
+        nc_LinkToEntityWithParam(entity, queryStr, token);
+        //nc_FindEntity(queryStr);
+      });
+    }
+    
+  }
+
+  
+
+  renderTokenMenu = (tokenList) => {
+   let menuItemList = [];
+   if(Array.isArray(tokenList) && tokenList.length > 1) {
+      
+      tokenList.forEach((t, i) => {
+        if (i >= 0) {
+          if (t.name || t.symbol) {
+            menuItemList.push(
+              <MenuItem
+                key= {i}
+                className="nav-option"
+                iconName={NCEntityInfo[NCEntity.TKN].icon}
+                onClick={()=>this.changeToken(this.props.accRetrieve.queryStr,t.name)}
+                text={t.name+"("+t.symbol+")"}
+                value={t.name}
+              />
+              );
+          }
+        }
+      });
+    }
+
+    return (
+      <Menu className="NCNavMenu">
+              
+        <MenuItem
+          className="nav-option"
+          iconName={NCEntityInfo[NCEntity.TKN].icon}
+          onClick={() => {
+            hashHistory.push('/account/');
+          }}
+          text="LaLa(LA)"
+        />
+        {menuItemList}
+      </Menu>
+    );
+  }
+
   render() {
     const store = this.props.accRetrieve;
-    
+    const tokens=[{name:'Token',symbol:'test'},{name:'Token1',symbol:'test1'}]
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
-    console.log("page Data for retrieve: "+JSON.stringify(this.props));
+    //console.log("page Data for retrieve: "+JSON.stringify(this.props));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
@@ -114,7 +192,18 @@ class NCAccRetrieve extends Component
       emptyDataStr={"No Data Available for Account: "+desc}
       marginTop={20}
       marginBottom={30}
-
+      /*subtitle={<div className="token-list">
+        <span className="title">Token balances:</span><Popover
+                content={this.renderTokenMenu(tokens)}
+                interactionKind={PopoverInteractionKind.CLICK}
+                position={Position.BOTTOM}>
+                <Button 
+                  className="navbar-btn-active pt-button pt-minimal"
+                  iconName="pt-icon-application"
+                  rightIconName="pt-icon-caret-down"
+                  text="Aion (Default)"/>          
+        </Popover>
+      </div>}*/
       content={ <NCAccDetail entity={acc}/> }
     />
 
@@ -201,7 +290,8 @@ class NCAccRetrieve extends Component
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
           title={"Account"}
-          subtitle={desc}/>  
+          subtitle={desc}
+          token={store.momentUpdated}/>  
         { accBalanceSection }
         <hr className="nc-hr"/>
         

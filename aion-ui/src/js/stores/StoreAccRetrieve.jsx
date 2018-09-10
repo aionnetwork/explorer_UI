@@ -34,7 +34,22 @@ export const SetPagingTxn = (data) =>
     data: data,
   }
 }
-
+// Paging Transaction
+// ------------------
+export const GetTkn = (data) => 
+{
+  return {
+    type: 'ACC_RETRIEVE_GET_TKN',
+    data: data,
+  }
+}
+export const SetTkn = (data) => 
+{
+  return {
+    type: 'ACC_RETRIEVE_SET_TKN',
+    data: data,
+  }
+}
 // Paging Block
 // ------------
 export const GetPagingBlk = (data) => 
@@ -73,6 +88,10 @@ let initialState_StoreBlkRetrieve =
       data: null,
       momentUpdated: null
     },
+    tkn: {
+      data: null,
+      momentUpdated: null
+    },
     momentUpdated: null,
     web3: false
   }
@@ -91,6 +110,8 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       _state.isLoadingTopLevel = true; 
       _state.queryStr = action.data.queryStr;
       
+      _state.token = action.data.token;
+
       _state.response.acc.momentUpdated = null;
       _state.response.blk.momentUpdated = null;
       _state.response.txn.momentUpdated = null;
@@ -103,6 +124,8 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       let _state = Object.assign({}, state);
       
       _state.isLoadingTopLevel = false; 
+
+      _state.token = action.data.token;
       
       _state.response.acc.data = action.data;
       _state.response.acc.momentUpdated = moment();
@@ -133,7 +156,28 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
 
       return _state;
     }
+    // Paging Token
+    // ------------------
+    case 'ACC_RETRIEVE_GET_TKN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTknList = true;
 
+      return _state;
+    }
+    case 'ACC_RETRIEVE_SET_TKN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTknList = false;
+      
+      _state.response.tkn.data = action.data;
+      //_state.response.tkn.momentUpdated = moment();
+      //_state.momentUpdated = moment();
+
+      return _state;
+    }
     // Paging Block
     // ------------
     case 'ACC_RETRIEVE_GET_PAGING_BLK':

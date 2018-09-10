@@ -32,7 +32,7 @@ export default class NCAccDetail extends Component
         field: "Balance",
         value:  balance == null ? "Balance Service Unavailable" :
                 <span className="strong">{balance + " AION"}
-                  <span className="subtitle">{"(as of block " + entity.blockNumber + ")"}</span>
+                  <span className="subtitle">{"(as of block " + entity.lastBlockNumber + ")"}</span>
                 </span>
       },
       {
@@ -41,12 +41,17 @@ export default class NCAccDetail extends Component
       },
       {
         field: "Contract",
-        value: !entity.is_contract ? NOT_CONTRACT : 
+        value: !entity.contract ? 
+          <span className="tx-status">
+            <span className="pt-icon-standard pt-icon-cross nc-icon danger"/>
+            <span className="status-text">Not a Contract</span>
+          </span>  : 
           <span className="tx-status">
             <span className="pt-icon-standard pt-icon-tick-circle icon success"/>
             <span className="status-text">Contract</span>
           </span> 
       },
+      
     ];
 
     return (

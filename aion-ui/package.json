@@ -16,6 +16,7 @@
   "dependencies": {
     "@blueprintjs/core": "^1.14.0",
     "@blueprintjs/datetime": "^1.12.0",
+    "@blueprintjs/select": "^3.1.0",
     "@blueprintjs/table": "1.29.1",
     "axios": "^0.17.1",
     "axios-extensions": "^3.0.3",
@@ -53,12 +54,8 @@
   },
   "scripts": {
     "build-css": "gulp css",
-
-    
     "build": "npm run build-css && cross-env NODE_PATH=src/js react-scripts build",
-
     "start": "cross-env NODE_PATH=src/js react-scripts start",
-    
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

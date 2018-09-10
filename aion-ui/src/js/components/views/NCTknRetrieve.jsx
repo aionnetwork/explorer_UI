@@ -232,7 +232,7 @@ class NCTknRetrieve extends Component
             description={"Account transactions & blocks-mined not available in lite-mode."}/>
         }
         {
-          (true) &&  
+          (false) &&  
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="txn" title="Transfers" panel={txnListSection}/>
