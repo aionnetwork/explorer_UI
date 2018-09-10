@@ -67,10 +67,10 @@ export default class NCTxnTable extends Component
         objPath: null,
       },
       {
-        name: "", // arrow
+        name: "Status", // arrow
         isSortable: false,
         isFilterable: false,
-        width: 40,
+        width: 100,
         flex: false,
       },
       {
@@ -114,6 +114,8 @@ export default class NCTxnTable extends Component
         toAddr = entity.toAddr;
         blockTimestamp = entity.blockTimestamp;
         value = entity.value;
+        status = entity.txError;
+        
       }
 
       // Generate tableContent
@@ -143,9 +145,19 @@ export default class NCTxnTable extends Component
       </Cell>;
       tableContent[i][5] = 
       <Cell>
-        <div className="arrow-cell">
-          <span className="pt-icon-standard pt-icon-arrow-right"/>
-        </div>
+        
+        {
+         
+          (status == "") ?
+          <div className="arrow-cell tx-status">
+          <span className="pt-icon-large pt-icon-arrow-right icon success"/>
+          </div>
+          :
+          <div className="arrow-cell tx-status">
+          <span className="pt-icon-large pt-icon-arrow-right icon fail"/>
+          </div>
+                  
+        }
       </Cell>;
       tableContent[i][6] = 
       <Cell>
