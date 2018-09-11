@@ -8,7 +8,10 @@ import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 
+//list of sub-displays for details
 import NCAccDetail from 'components/accounts/NCAccDetail';
+
+
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
@@ -19,7 +22,7 @@ import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
-class NCAccRetrieve extends Component
+class NCSearchRetrieve extends Component
 {
   constructor(props) {
     super(props);
@@ -38,28 +41,24 @@ class NCAccRetrieve extends Component
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.params.accId != this.props.params.accId)
+    if (prevProps.params.accId != this.props.params.accId){
       this.requestTopLevel();
+    }
   }
 
   requestTopLevel = () => {
     network.getRetrieveTopLevel(this.props.params.accId);
   }
 
-  requestPagingTxnList = (pageNumber) => {
-    const queryStr = this.props.accRetrieve.queryStr;
-    network.getAccRetrievePagingTxnList(queryStr, pageNumber);
-  }
-
-  requestPagingBlkList = (pageNumber) => {
-    const queryStr = this.props.accRetrieve.queryStr;
-    network.getAccRetrievePagingBlkList(queryStr, pageNumber);
+  entityView = (entity) => {
+    return true;
   }
 
   render() {
 
     const store = this.props;
     console.log("page Data for retrieve: "+JSON.stringify(this.props));
+
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
     //console.log("page Data for retrieve: "+JSON.stringify(this.props));
@@ -68,20 +67,10 @@ class NCAccRetrieve extends Component
     const isTxnListFirstLoad = false//(store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
     const isBlkListFirstLoad = false//(store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
 
-    //const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
-    //const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
-    //const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
-
+    //const details = $this.entityView(store.response.entity)
     const isAccValid = true;//nc_isObjectValid(accObj);
     const isAccEmpty = true;//nc_isObjectEmpty(accObj, isAccValid);
 
-    const isTxnListValid = true;//nc_isListValid(txnList);
-    const isTxnListEmpty = true;//nc_isListEmpty(txnList, isTxnListValid);
-
-    const isBlkListValid = true;//nc_isListValid(blkList);
-    const isBlkListEmpty = true;//nc_isListEmpty(blkList, isBlkListValid);
-
-    //const acc = isAccEmpty ? {} : accObj.content[0];
     
     const breadcrumbs = [
       {
@@ -100,7 +89,7 @@ class NCAccRetrieve extends Component
 
     const desc = nc_hexPrefix(store.queryStr);
     
-    const accBalanceSection = <NCExplorerSection 
+    const searchResultSection = <NCExplorerSection 
       className={""}
 
       isLoading={isLoadingTopLevel}
@@ -119,82 +108,7 @@ class NCAccRetrieve extends Component
       content={ <NCAccDetail /> }
     />
 
-    const txnListSection = <NCExplorerSection 
-      className={""}
-      subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </div>
-      }
-
-      isLoading={isTxnListFirstLoad == null}
-      isDataValid={isTxnListValid}
-      isDataEmpty={isTxnListEmpty} 
-      
-      loadingStr={"Loading Transactions"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={
-        <span>No transactions found for this account in latest million transactions. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </span>}
-      marginTop={40}
-
-      content={
-        <NCTxnTableOwn 
-          
-          onPageCallback={this.requestPagingTxnList}
-          isLoading={store.isLoadingPagingTxnList}
-          isPaginated={true}
-          ownAddr={acc.address}
-          isLatest={true}/>
-        }
-    />
-
-    const blkListSection = <NCExplorerSection 
-      className={""}
-      subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </div>
-      }
-
-      isLoading={isBlkListFirstLoad == null}
-      isDataValid={isBlkListValid}
-      isDataEmpty={isBlkListEmpty} 
-      
-      loadingStr={"Loading Blocks"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={
-        <span>No blocks mined by this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </span>}
-      marginTop={40}
-
-      content={
-        <NCBlkTable 
-          data={blkList}
-          onPageCallback={this.requestPagingBlkList}
-          isLoading={store.isLoadingPagingBlkList}
-          isPaginated={true}
-          isLatest={true}/>
-        }
-    />
+  
 
     const page =
       <div> 
@@ -203,26 +117,10 @@ class NCAccRetrieve extends Component
           breadcrumbs={breadcrumbs}
           title={"Account"}
           subtitle={desc}/>  
-        { accBalanceSection }
+        { searchResultSection }
         <hr className="nc-hr"/>
         
-        {
-          (isWeb3 && !isAccEmpty) &&
-          <NCNonIdealState
-            paddingTop={80}
-            icon={"pt-icon-offline"}
-            title={"Unavailable In Lite-Mode"}
-            description={"Account transactions & blocks-mined not available in lite-mode."}/>
-        }
-        {
-          (!isWeb3 && !isAccEmpty) &&  
-          <div className="NCSection">
-            <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-              <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
-              <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
-            </Tabs2>
-          </div>
-        }
+       
       </div>;
 
     return (
@@ -242,9 +140,9 @@ class NCAccRetrieve extends Component
 
 export default connect((state) => {
   return ({
-    accRetrieve: state.accRetrieve,
+    searchRetrieve: state.searchRetrieve,
   })
-})(NCAccRetrieve);
+})(NCSearchRetrieve);
 
 
 
