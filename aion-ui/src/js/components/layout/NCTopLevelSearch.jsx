@@ -16,7 +16,7 @@ export default class NCTopLevelSearch extends Component
     this.state = {
       isFetching: false,
       queryStr: '',
-      entity: NCEntity.BLOCK
+      entity: NCEntity.SEARCH
     }
   }
 
@@ -51,6 +51,13 @@ export default class NCTopLevelSearch extends Component
                 content={
                     <Menu>
                         <MenuItem
+                          text={ NCEntityInfo[NCEntity.SEARCH].name }
+                          onClick={() => {
+                            this.setState({
+                              entity: NCEntity.SEARCH
+                            });
+                          }}/>
+                        <MenuItem
                           text={ NCEntityInfo[NCEntity.BLOCK].name }
                           onClick={() => {
                             this.setState({
@@ -71,6 +78,13 @@ export default class NCTopLevelSearch extends Component
                               entity: NCEntity.ACCOUNT
                             });
                           }}/>
+                        <MenuItem
+                          text={ NCEntityInfo[NCEntity.TKN].name }
+                          onClick={() => {
+                            this.setState({
+                              entity: NCEntity.TKN
+                            });
+                          }}/>
                     </Menu>
                 }
 
@@ -86,7 +100,7 @@ export default class NCTopLevelSearch extends Component
         <InputGroup
           className="search-bar"
           disabled={this.state.isFetching}
-          placeholder="Search for Account / Block / Transaction"
+          placeholder="Search for Account / Block / Transaction / Token"
           value={this.state.queryStr}
           onChange={(e) => this.setQueryStr(e.target.value)}
           onKeyPress={(e) => { if(e.key === 'Enter'){ this.submitQuery() }}}

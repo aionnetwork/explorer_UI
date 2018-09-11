@@ -8,7 +8,7 @@ export const NCEntity =
   TXN: 3,
   ACCOUNT: 2,
   TKN:1,
-  SEARCH:1,
+  SEARCH:5,
 };
 
 export let NCEntityInfo = {};
@@ -38,7 +38,11 @@ NCEntityInfo[NCEntity.TKN] = {
   name: "Token",
   absoluteUrl: "/token/",
 }
-
+NCEntityInfo[NCEntity.SEARCH] = {
+  icon: "pt-icon-search",
+  name: "Search",
+  absoluteUrl: "/search/",
+}
 export let NCEntityServerMapping = {};
 NCEntityServerMapping['block'] = NCEntity.BLOCK;
 NCEntityServerMapping['transaction'] = NCEntity.TXN;
