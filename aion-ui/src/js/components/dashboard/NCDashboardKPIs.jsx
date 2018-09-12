@@ -26,7 +26,7 @@ class NCDashboardKPIs extends Component
     this.kpiData = 
     [
       {
-        title: <span><strong>Block Time</strong></span>,
+        title: <span><strong>Network</strong></span>,
         kpiList: [
           {
             value:"$95665.83",
