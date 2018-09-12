@@ -43,7 +43,7 @@ export default class NCAccDetail extends Component
         field: "Contract",
         value: !entity.contract ? 
           <span className="tx-status">
-            <span className="pt-icon-standard pt-icon-cross nc-icon danger"/>
+            
             <span className="status-text">Not a Contract</span>
           </span>  : 
           <span className="tx-status">
