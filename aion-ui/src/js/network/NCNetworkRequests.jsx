@@ -533,6 +533,7 @@ export const getDashboardData = () => {
   //console.log(ep);
   network.request(ep, params)
   .then((response) => {
+    //console.log(JSON.stringify(response));
     setDashboardData(response);
 
     // connect to socket after initial data fetch
