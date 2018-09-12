@@ -121,14 +121,7 @@ class NCAccRetrieve extends Component
     return (
       <Menu className="NCNavMenu">
               
-        <MenuItem
-          className="nav-option"
-          iconName={NCEntityInfo[NCEntity.TKN].icon}
-          onClick={() => {
-            hashHistory.push('/account/');
-          }}
-          text="LaLa(LA)"
-        />
+        
         {menuItemList}
       </Menu>
     );

@@ -91,7 +91,7 @@ export const endpoint = {
       }
     },
     detail: {
-      link: '/dashboard/getTokenAndTransactionAndAccountDetailsFromTokenNameOrTokenAddress',
+      link: '/dashboard/getTokenAndTransactionAndAccountDetailsByContractAddress',
       params: ['searchParam']
     }
   },

@@ -64,6 +64,21 @@ export default class NCTxnDetail extends Component
         value: moment.unix(entity.blockTimestamp).format('LLLL'),
       },
       {
+        field: "Token",
+        value: 
+                  entity.token == null?
+                  <NCEntityLabel
+                  entityType={NCEntity.TKN}
+                  entityId="AION"
+                  linkActive={false}/>
+                  :
+                  <NCEntityLabel
+                  entityType={NCEntity.TKN}
+                  entityId={entity.token}
+                  linkActive={true}/>
+              
+      },
+      {
         field: "Transaction Hash",
         value: <NCEntityLabel
                   entityType={NCEntity.TXN}

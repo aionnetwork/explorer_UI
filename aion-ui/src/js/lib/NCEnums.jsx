@@ -40,7 +40,7 @@ NCEntityInfo[NCEntity.TKN] = {
 }
 NCEntityInfo[NCEntity.SEARCH] = {
   icon: "pt-icon-search",
-  name: "Search",
+  name: "Global",
   absoluteUrl: "/search/",
 }
 export let NCEntityServerMapping = {};

@@ -542,16 +542,7 @@ export const getDashboardData = () => {
   })
   .catch((error) => {
     console.log(error);
-    /*
-    // debug. give no indication that initial request fails
-    // user will automatically refresh the page if they are stuck at spinny-indicator 
-    setDashboardData({
-      content: [{
-        blocks: {},
-        transactions: {},
-        metrics: {}
-      }]
-    });*/
+    
   });
 }
 
@@ -750,7 +741,7 @@ export const getTknRetrieveTopLevel = (queryStr) => {
 export const getTknRetrievePagingTxnList = (queryStr, pageNumber) => {
   store.dispatch(StoreTknRetrieve.GetPagingTxn());
 
-  if (network.NCNETWORK_REQUESTS_ENABLED) {
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = Object.assign({}, store.getState().tknRetrieve.response.txn);
       response.page.number = pageNumber;
@@ -814,15 +805,17 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
 
 
 export const getRetrieveTopLevel = (queryStr) => {
-  store.dispatch(StoreBlkRetrieve.GetTopLevel({
+  store.dispatch(StoreRetrieve.GetTopLevel({
     queryStr: queryStr
   }));
+
+  //console.log('search network call!');
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = {
-        blk: mock.blk,
-        txn: mock.txnListArry
+        data: mock.data,
+        
       };
       store.dispatch(StoreBlkRetrieve.SetTopLevel(response));
     }, 500);
@@ -830,30 +823,26 @@ export const getRetrieveTopLevel = (queryStr) => {
   else {
     // sanitize input string
     let request = nc_trim(queryStr);
-    if (!nc_isPositiveInteger(request) && !nc_isValidEntity(request)) {
-      store.dispatch(StoreRetrieve.SetTopLevel({
-        result: {
-          content: []
-        }
-      }));
-      return;
-    }
 
     // get block details
     const ep = network.endpoint.search;
     let params = [request,  0, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      
-      let searchDetails = response;
-      
-      store.dispatch(StoreRetrieve.SetTopLevel({
-        result: searchDetails
-      }));
+      console.log(JSON.stringify(response.searchType));
+      if(typeof response.searchType !== "undefined"){ 
+        store.dispatch(StoreRetrieve.SetTopLevel(response));
+        console.log("right!");
+      }
+      else{
+        store.dispatch(StoreRetrieve.SetTopLevel({
+        
+        }));
+      }
     })
     .catch((error) => {
       console.log(error);
-      store.dispatch(StoreBlkRetrieve.SetTopLevel({
+      store.dispatch(StoreRetrieve.SetTopLevel({
         
       }));
     });

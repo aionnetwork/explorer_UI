@@ -20,6 +20,7 @@ import Dashboard from 'mock/Dashboard';
 
 // Aion data 
 // ===========================================================
+export const data = Blk;
 
 export const blk = Blk;
 

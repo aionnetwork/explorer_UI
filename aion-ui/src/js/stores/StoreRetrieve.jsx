@@ -6,7 +6,7 @@ import moment from 'moment';
 export const GetTopLevel = (data) => 
 {
   return {
-    type: 'ACC_RETRIEVE_GET_TOP_LEVEL',
+    type: 'RETRIEVE_GET_TOP_LEVEL',
     data: data,
   }
 }
@@ -27,6 +27,7 @@ let initialState_StoreRetrieve =
   
   response: {
     
+    data:null,
     momentUpdated: null,
     web3: false
   }
@@ -45,10 +46,6 @@ export function reducer_Retrieve (state = initialState_StoreRetrieve, action)
       _state.isLoadingTopLevel = true; 
       _state.queryStr = action.data.queryStr;
       
-      _state.response.acc.momentUpdated = null;
-      _state.response.blk.momentUpdated = null;
-      _state.response.txn.momentUpdated = null;
-
       _state.momentUpdated = null;
       
       return _state;
@@ -60,9 +57,10 @@ export function reducer_Retrieve (state = initialState_StoreRetrieve, action)
       _state.isLoadingTopLevel = false; 
       
       _state.response.data = action.data;
-      _state.response.acc.momentUpdated = moment();
+      
       _state.momentUpdated = moment();
       
+      _state.response.test = "action.data";
       return _state;
     }
     default: 
