@@ -536,6 +536,10 @@ export const getDashboardData = () => {
     //console.log(JSON.stringify(response));
     setDashboardData(response);
 
+    //getAionPrice();//get price
+    //network.eRequest('pro-api.coinmarketcap.com/v1/cryptocurrency/',true,'/listings/latest','{start: 1,limit: 5,convert: "USD"}',"{'CMC_PRO_API_KEY': 'e2738416-a8f2-4b17-ba40-eb376dff4d15'}");
+
+
     // connect to socket after initial data fetch
     network.connectSocket((response) => {
       setDashboardData(response);
@@ -849,6 +853,8 @@ export const getRetrieveTopLevel = (queryStr) => {
     });
   }
 }
+
+
 
 
 

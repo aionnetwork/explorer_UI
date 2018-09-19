@@ -25,9 +25,9 @@ class NCDashboardKPIs extends Component
 
     this.kpiData = 
     [
-      {
-        title: <span><strong>Network</strong></span>,
-        kpiList: [
+      /*{
+        title: <span><strong></strong></span>,
+        kpiList: [/*
           {
             value:"$95665.83",
             units:"",
@@ -48,7 +48,7 @@ class NCDashboardKPIs extends Component
           },
         ]
       },
-      /*{
+      {
         title: <span><strong>Block Time</strong></span>,
         kpiList: [
           /*{
@@ -67,25 +67,31 @@ class NCDashboardKPIs extends Component
         ]
       },*/
       {
-        title: <span><strong>Mining Stats&nbsp;</strong>| &nbsp;EQUI2109</span>,
+        title: <span><strong>Network&nbsp;</strong>| &nbsp;EQUI2109</span>,
         kpiList: [
           {
             value:"9.83",
             units:"s",
             title:["Current", "Block Time"],
-            hoverContent: "Mean of inter-block arrival time over last "+KPI_BLK_RANGE+" blocks",
+            hoverContent: "Mean of inter-block arrival time over last "+KPI_BLK_RANGE+" blocks. The target block time for the network is 10s. PoW difficulty is dynamically adjusted to acheive target. ",
           },
           {
             value:"10",
             units:"Sol/s",
             title:["Network", "Hash Rate"],
-            hoverContent: <span>{"Network hash rate = (last block's difficulty) /"}<br/>{"(average block time over last "+KPI_BLK_RANGE+" blocks)"}</span>,
+            hoverContent: <span>{"Network hash rate = (last block's difficulty) /"}<br/>{"(average block time over last "+KPI_BLK_RANGE+" blocks.)"}</span>,
           },
           {
             value:"15",
             units:"",
             title:["Average", "Difficulty"],
-            hoverContent: "Difficulty, averaged over the last "+KPI_BLK_RANGE+" blocks",
+            hoverContent: "Difficulty, averaged over the last "+KPI_BLK_RANGE+" blocks.",
+          },
+          {
+            value:"1000",
+            units:"",
+            title:["Consumed", "NRG / Block"],
+            hoverContent: "Average NRG consumed per block for latest "+KPI_BLK_RANGE+" blocks.",
           },
           /*{
             value:"0.85",
@@ -113,7 +119,7 @@ class NCDashboardKPIs extends Component
         ]
       },*/
       {
-        title: <span><strong>Transaction Stats</strong></span>,
+        title: <span><strong>Transaction </strong></span>,
         kpiList: [
           {
             value:"1000",
@@ -161,8 +167,10 @@ class NCDashboardKPIs extends Component
     //this.kpiData[0].kpiList[0].value = kpiList.targetBlockTime;
     //this.kpiData[0].kpiList[1].value = nc_decimalPoint(kpiList.averageBlockTime, 2);
 
-    this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
-    this.kpiData[1].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);
+    this.kpiData[0].kpiList[0].value = nc_decimalPoint(kpiList.averageBlockTime, 2);
+    this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
+    this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);
+    this.kpiData[0].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
     /*this.kpiData[1].kpiList[2].value = kpiList.lastBlockReward == null ? null :  
                                           (BigNumber(String(kpiList.lastBlockReward)).lt(2) ? 
                                           nc_decimalPoint(kpiList.lastBlockReward, 2) :
@@ -171,12 +179,12 @@ class NCDashboardKPIs extends Component
     //this.kpiData[3].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
     //this.kpiData[2].kpiList[1].value = nc_numFormatter(kpiList.averageNrgLimitPerBlock, 2);
 
-    this.kpiData[2].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
-    this.kpiData[2].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
-    this.kpiData[2].kpiList[2].value = kpiList.peakTransactionsPerBlockInLast24hours != null ? 
+    this.kpiData[1].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
+    this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
+    this.kpiData[1].kpiList[2].value = kpiList.peakTransactionsPerBlockInLast24hours != null ? 
                                           nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 0) : 
                                           null;
-    this.kpiData[2].kpiList[3].value = kpiList.totalTransactionsInLast24hours != null ? 
+    this.kpiData[1].kpiList[3].value = kpiList.totalTransactionsInLast24hours != null ? 
                                           nc_numFormatter(kpiList.totalTransactionsInLast24hours, 3) : 
                                           null;
 
