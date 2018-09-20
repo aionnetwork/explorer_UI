@@ -661,13 +661,13 @@ export const getCntrRetrievePagingTxnList = (queryStr, pageNumber) => {
   }
   else {
     // get transaction list
-    const ep = network.endpoint.transaction.list[txnListType.BY_contract];
+    const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
     let params = [queryStr, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
       // ok, now make sure that the response you got is still valid
       // ie. matches up to the contract loaded on-screen
-      let acc = store.getState().accRetrieve.response.acc;
+      let acc = store.getState().cntrRetrieve.response.acc;
 
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
@@ -700,7 +700,7 @@ export const getCntrRetrievePagingBlkList = (queryStr, pageNumber) => {
     .then((response) => {
       // ok, now make sure that the response you got is still valid
       // ie. matches up to the contract loaded on-screen
-      let acc = store.getState().accRetrieve.response.acc;
+      let acc = store.getState().cntrRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
             store.dispatch(StoreCntrRetrieve.SetPagingBlk(response));  

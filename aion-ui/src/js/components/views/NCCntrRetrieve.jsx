@@ -18,14 +18,14 @@ import NCNonIdealState from 'components/common/NCNonIdealState';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 
-import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
+import * as StoreCntrRetrieve from 'stores/StoreCntrRetrieve';
 
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
 //import { nc_FindEntity, nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
 
 import * as network from 'network/NCNetworkRequests';
 
-class NCAccRetrieve extends Component
+class NCCntrRetrieve extends Component
 {
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ class NCAccRetrieve extends Component
     this.state = {
       isFetching: false,
       queryStr: '',
-      entity: NCEntity.ACCOUNT
+      entity: NCEntity.CNTR
     } 
   }
 
@@ -50,18 +50,20 @@ class NCAccRetrieve extends Component
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.params.accId != this.props.params.accId)
+    if (prevProps.params.cntrId != this.props.params.cntrId)
       this.requestTopLevel();
   }
 
   requestTopLevel = () => {
-    console.log('contract:'+this.props.params.accId);
+    console.log('contract:'+this.props.params.cntrId);
+    console.log(JSON.stringify(this.props));
 
-    network.getCntrRetrieveTopLevel(this.props.params.accId);
+    network.getCntrRetrieveTopLevel(this.props.params.cntrId);
   }
 
   requestPagingTxnList = (pageNumber) => {
-    const queryStr = this.props.accRetrieve.queryStr;
+    const queryStr = this.props.cntrRetrieve.queryStr;
+    //network.getCntrRetrievePagingTxnList(queryStr, pageNumber);
     network.getAccRetrievePagingTxnList(queryStr, pageNumber);
   }
 
@@ -130,11 +132,11 @@ class NCAccRetrieve extends Component
   }
 
   render() {
-    const store = this.props.accRetrieve;
+    const store = this.props.cntrRetrieve;
     const tokens=[{name:'Token',symbol:'test'},{name:'Token1',symbol:'test1'}]
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
-    //console.log("page Data for retrieve: "+JSON.stringify(this.props));
+    console.log("page Data for retrieve: "+JSON.stringify(store.response.txn));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
@@ -179,12 +181,12 @@ class NCAccRetrieve extends Component
       isDataValid={isAccValid}
       isDataEmpty={isAccEmpty} 
 
-      emptyDataTitle={"Account Not Found"}
-      invalidDataTitle={"Account Service Unavailable"}
+      emptyDataTitle={"Contract Not Found"}
+      invalidDataTitle={"Contract Service Unavailable"}
       
-      loadingStr={"Loading Account"}
-      invalidDataStr={"Account Service Unavailable. Please try again."} 
-      emptyDataStr={"No Data Available for Account: "+desc}
+      loadingStr={"Loading Contract"}
+      invalidDataStr={"Contract Service Unavailable. Please try again."} 
+      emptyDataStr={"No Data Available for Contract: "+desc}
       marginTop={20}
       marginBottom={30}
       /*subtitle={<div className="token-list">
@@ -284,7 +286,7 @@ class NCAccRetrieve extends Component
         <NCExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"Account"}
+          title={"Contract"}
           subtitle={desc}
           token={store.momentUpdated}/>  
         { accBalanceSection }
@@ -326,9 +328,9 @@ class NCAccRetrieve extends Component
 
 export default connect((state) => {
   return ({
-    accRetrieve: state.accRetrieve,
+    cntrRetrieve: state.cntrRetrieve,
   })
-})(NCAccRetrieve);
+})(NCCntrRetrieve);
 
 
 

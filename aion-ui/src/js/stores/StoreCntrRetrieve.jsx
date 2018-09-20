@@ -76,7 +76,7 @@ let initialState_StoreBlkRetrieve =
   queryStr: "",
   
   response: {
-    cntr: {
+    acc: {
       data: null,
       momentUpdated: null
     },
