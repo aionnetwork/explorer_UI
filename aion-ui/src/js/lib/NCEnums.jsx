@@ -9,6 +9,7 @@ export const NCEntity =
   ACCOUNT: 2,
   TKN:1,
   SEARCH:5,
+  CNTR:6,
 };
 
 export let NCEntityInfo = {};
@@ -38,6 +39,11 @@ NCEntityInfo[NCEntity.TKN] = {
   name: "Token",
   absoluteUrl: "/token/",
 }
+NCEntityInfo[NCEntity.CNTR] = {
+  icon: "pt-icon-application",
+  name: "Contract",
+  absoluteUrl: "/contract/",
+}
 NCEntityInfo[NCEntity.SEARCH] = {
   icon: "pt-icon-search",
   name: "Default",
@@ -49,6 +55,7 @@ NCEntityServerMapping['transaction'] = NCEntity.TXN;
 NCEntityServerMapping['account'] = NCEntity.ACCOUNT;
 NCEntityServerMapping['token'] = NCEntity.TKN;
 NCEntityServerMapping['search'] = NCEntity.SEARCH;
+NCEntityServerMapping['contract'] = NCEntity.CNTR;
 // tables -------------------------------------------------------------
 
 export const NCSortType = {
@@ -74,6 +81,11 @@ export const accListType = {
 }
 
 export const tknListType = {
+  ALL: 0,
+  BY_ACCOUNT: 1
+}
+
+export const cntrListType = {
   ALL: 0,
   BY_ACCOUNT: 1
 }

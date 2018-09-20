@@ -20,6 +20,9 @@ import * as StoreTknRetrieve from 'stores/StoreTknRetrieve';
 import * as StoreAccList from 'stores/StoreAccList';
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
+import * as StoreCntrList from 'stores/StoreCntrList';
+import * as StoreCntrRetrieve from 'stores/StoreCntrRetrieve';
+
 import * as StoreRetrieve from 'stores/StoreRetrieve';
 
 import {BigNumber} from 'bignumber.js';
@@ -508,6 +511,237 @@ export const getAccRetrieveTknList = (queryStr, pageNumber) => {
     .catch((error) => {
       console.log(error);
       store.dispatch(StoreAccRetrieve.SetTkn({}));
+    });
+  }
+}
+// ========================================================
+// Contracts 
+// ========================================================
+
+export const getCntrListTopLevel = () => {
+  store.dispatch(StoreCntrList.GetTopLevel());
+  console.log("its here!!");
+  if (network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = mock.accList;
+      store.dispatch(StoreCntrList.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // get transaction list
+    const ep = network.endpoint.contract.list;
+    console.log(ep);
+    let params = [];
+    
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreCntrList.SetTopLevel(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrList.SetTopLevel({}));
+    });
+  }
+}
+
+export const getCntrListPaging = (listType, queryStr, pageNumber) => {
+  store.dispatch(StoreTknList.GetPaging());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().tknList.response);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreTknList.SetPaging(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.token.list[listType];
+    let params = [];
+    switch(listType) {
+      case cntrListType.ALL: {
+        params = [pageNumber, PAGE_SIZE, 'blockNumber,desc']
+        break;
+      }
+      case cntrListType.BY_ACCOUNT: {
+        params = [nc_trim(queryStr), pageNumber, PAGE_SIZE]
+        break;
+      }
+      /*
+      case txnListType.BY_ACCOUNT: {
+        let request = nc_trim(queryStr);
+        if (request == 0 || request == "0x0") {
+          request = "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+
+        params = [request, pageNumber, PAGE_SIZE]
+        break;
+      }*/
+    }
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreTknList.SetPaging(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknList.SetPaging({}));
+    });
+  }
+}
+
+export const getCntrRetrieveTopLevel = (queryStr) => {
+  store.dispatch(StoreCntrRetrieve.GetTopLevel({
+    queryStr: queryStr
+  }));
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = {
+        cntr: mock.cntr,
+        blk: mock.blkListArry,
+        txn: mock.txnListArry,
+        web3: false
+      };
+      store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // validate the contract to make sure it's a valid contract string
+    let request = nc_trim(queryStr);
+
+    if (request == 0) {
+      request = "0000000000000000000000000000000000000000000000000000000000000000"
+    } else if (!nc_isValidEntity(request)) {
+      store.dispatch(StoreCntrRetrieve.SetTopLevel({
+        content: []
+      }));
+      return;
+    } else {
+      request = nc_sanitizeHex(queryStr);
+    }
+    
+    // get contract details
+    const ep = network.endpoint.account.detail;
+    let params = [request];
+    console.log(ep);
+    network.request(ep, params)
+    .then((response) => {
+      const isCntrValid = nc_isObjectValid(response);
+      const isCntrEmpty = nc_isObjectEmpty(response, isCntrValid);
+
+      console.log(JSON.stringify(response));
+      // ok, make requests for blocks and transactions for this contract
+      store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+      console.log("Coool!");
+      // we can save on a network request if the nonce is zero
+      if (!isCntrEmpty) {
+        getCntrRetrievePagingTxnList(request, 0);
+        getCntrRetrievePagingBlkList(request, 0);
+        //getAccRetrieveTknList(request, 0);
+        console.log("not empty!");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetTopLevel({}));
+    });
+  }
+}
+
+export const getCntrRetrievePagingTxnList = (queryStr, pageNumber) => {
+  store.dispatch(StoreCntrRetrieve.GetPagingTxn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.txn);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreCntrRetrieve.SetPagingTxn(response));
+    }, 500);
+  }
+  else {
+    // get transaction list
+    const ep = network.endpoint.transaction.list[txnListType.BY_contract];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      // ok, now make sure that the response you got is still valid
+      // ie. matches up to the contract loaded on-screen
+      let acc = store.getState().accRetrieve.response.acc;
+
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreCntrRetrieve.SetPagingTxn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetPagingTxn({}));
+    });
+  }
+}
+
+export const getCntrRetrievePagingBlkList = (queryStr, pageNumber) => {
+  store.dispatch(StoreCntrRetrieve.GetPagingBlk());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreCntrRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      // ok, now make sure that the response you got is still valid
+      // ie. matches up to the contract loaded on-screen
+      let acc = store.getState().accRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreCntrRetrieve.SetPagingBlk(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetPagingBlk({}));
+    });
+  }
+}
+
+export const getCntrRetrieveTknList = (queryStr, pageNumber) => {
+  store.dispatch(StoreCntrRetrieve.GetTkn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreCntrRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.token.list[tknListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      // ok, now make sure that the response you got is still valid
+      // ie. matches up to the contract loaded on-screen
+      let acc = store.getState().accRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreCntrRetrieve.SetTkn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetTkn({}));
     });
   }
 }

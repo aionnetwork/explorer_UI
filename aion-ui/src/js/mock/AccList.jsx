@@ -18,6 +18,10 @@ const AccList =
     {
       addr:"167294a191c4985603de96329b79f6179a44703662aafe29d13a054ebf51b91c",
       balance:3.14164e+23,
+      name:'Avalon',
+      creator:"84bd80a6edd6afa6d033be563e181dd13f64dba4d9dda4d8157f1a150a91c6c1",
+      transactionHash:"84bd80a6edd6afa6d033be563e181dd13f64dba4d9dda4d8157f1a150a91c6c1",
+      blockNumber:1213,
       content:[
 
       ],

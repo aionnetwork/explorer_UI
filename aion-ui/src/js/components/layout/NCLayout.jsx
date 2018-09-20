@@ -133,6 +133,14 @@ class NCLayout extends Component {
           }}
           text="Accounts"
         />
+         <MenuItem
+          className="nav-option"
+          iconName={NCEntityInfo[NCEntity.CNTR].icon}
+          onClick={() => {
+            hashHistory.push('/contracts');
+          }}
+          text="Contracts"
+        />
       </Menu>
     );
   }

@@ -38,6 +38,10 @@ export const acc = Acc;
 
 export const accList = AccList;
 
+export const cntr = Acc;
+
+export const cntrList = AccList;
+
 export const dashboard = Dashboard;
 
 export const tknList = TknList;

@@ -3,24 +3,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { Tab2, Tabs2 } from "@blueprintjs/core";
-
-import NCAccTableMiner from 'components/accounts/NCAccTableMiner';
-import NCAccTableInbound from 'components/accounts/NCAccTableInbound';
-import NCAccTableOutbound from 'components/accounts/NCAccTableOutbound';
-
+import NCCntrTable from 'components/contracts/NCCntrTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
-import NCExplorerSection from 'components/common/NCExplorerSection';
+//import NCTKNExplorerHead from 'components/common/NCExplorerHead';
 
-import * as StoreAccList from 'stores/StoreAccList';
+import * as StoreCntrList from 'stores/StoreCntrList';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
+import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 
-import { accListType } from 'lib/NCEnums';
+import { cntrListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
 
-class NCAccList extends Component
+class NCCntrList extends Component
 {
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
@@ -35,142 +30,105 @@ class NCAccList extends Component
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // empty
+    if (prevProps.location.query != this.props.location.query)
+      this.requestTopLevel();
   }
 
   requestTopLevel = () => {
-    network.getAccListTopLevel();
-  }
-  
-  render() {
-    const store = this.props.accList;
+    let queryStr = "";
+    let listType = cntrListType.ALL;
 
+    /*let query = this.props.location.query; 
+    if (query && query.block) {
+      listType = tknListType.BY_ACCOUNT;
+      queryStr = query.block;
+    }
+    else if (query && query.account) {
+      listType = txnListType.BY_ACCOUNT;
+      queryStr = query.account;
+    }*/
+    
+    network.getCntrListTopLevel(listType, queryStr);
+  }
+
+  requestPaging = (pageNumber) => {
+    const listType = this.props.cntrList.listType;
+    const queryStr = this.props.cntrList.queryStr;
+    network.getCntrListPaging(listType, queryStr, pageNumber);
+  }
+
+  render() {
+    console.log('contract list view');
+    
+    const store = this.props.cntrList;
+    console.log(JSON.stringify(store));
+
+    const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
 
-    const minerList = (store.response) ? store.response.miners : null;
-    const isMinerListValid = nc_isListValid(minerList);
-    const isMinerListEmpty = nc_isListEmpty(minerList, isMinerListValid);
+    const isDataValid = nc_isListValid(store.response);
+    const isDataEmpty = nc_isListEmpty(store.response, isDataValid);
     
-    const inboundTxList = (store.response) ? store.response.txnInbound : null;
-    const isInboundTxListValid = nc_isListValid(inboundTxList);
-    const isInboundTxListEmpty = nc_isListEmpty(inboundTxList, isInboundTxListValid);
-
-    const outboundTxList = (store.response) ? store.response.txnOutbound : null;
-    const isOutboundTxListValid = nc_isListValid(outboundTxList);
-    const isOutboundTxListEmpty = nc_isListEmpty(outboundTxList, isOutboundTxListValid);
-
     const breadcrumbs = [
       {
         link: '/',
         body: 'Home',
       },
       {
-        link: '/accounts',
-        body: 'Accounts',
+        link: '/contracts',
+        body: 'Contracts',
       }
-    ];    
+    ];
 
-    const minerListSection = <NCExplorerSection 
-      className={""}
-      subtitle={
-        <div className="NCPageBreakerSubtitle">Showing miner accounts over last 10,000 blocks (~last 24 hours).</div>
+    let subtitle = "(ERC777)"; // txnListType.ALL
+    switch(listType) 
+    {
+      case cntrListType.ALL: {
+        subtitle = "Contracts";// + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
+        break;
       }
-
-      isLoading={false}
-      isDataValid={isMinerListValid}
-      isDataEmpty={isMinerListEmpty} 
-      
-      loadingStr={"Loading Miner List"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={"Miner list not available."}
-      isToplevelSection={false}
-      
-      content={
-        <NCAccTableMiner 
-          data={minerList}
-          onPageCallback={null}
-          isLoading={false}
-          isPaginated={true}
-          isLatest={true}/>
-        }
-      marginTop={40}/>
-
-    const inboundTxListSection = <NCExplorerSection 
-      className={""}
-      subtitle={
-        <div className="NCPageBreakerSubtitle">Showing recent accounts which received transactions, over last 10,000 transactions.</div>
+      case cntrListType.BY_ACCOUNT: {
+        subtitle = "Account: " + nc_hexPrefix(store.queryStr)
+        break;
       }
+    }
 
-      isLoading={false}
-      isDataValid={isInboundTxListValid}
-      isDataEmpty={isInboundTxListEmpty} 
-      
-      loadingStr={"Loading Accounts List"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={"No inbound account activity in last 24 hours"}
-      isToplevelSection={false}
-      
-      content={
-        <NCAccTableInbound 
-          data={inboundTxList}
-          onPageCallback={null}
-          isLoading={false}
-          isPaginated={true}
-          isLatest={true}/>
-        }
-      marginTop={40}/>
-    
-    const outboundTxListSection = <NCExplorerSection 
-      className={""}
-      subtitle={
-        <div className="NCPageBreakerSubtitle">Showing recent accounts which sent transactions, over last 10,000 transactions.</div>
+    let emptyDataStr = "No transactions found. Dashboard server loading blocks."; // txnListType.ALL
+    switch(listType) 
+    {
+      case cntrListType.ALL: {
+        emptyDataStr = "No contracts found: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
       }
-
-      isLoading={false}
-      isDataValid={isOutboundTxListValid}
-      isDataEmpty={isOutboundTxListEmpty} 
-      
-      loadingStr={"Loading Accounts List"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={"No outbound account activity in last 24 hours"}
-      isToplevelSection={false}
-      
-      content={
-        <NCAccTableOutbound 
-          data={outboundTxList}
-          onPageCallback={null}
-          isLoading={false}
-          isPaginated={true}
-          isLatest={true}/>
-        }
-      marginTop={40}
-    />
-
+      case cntrListType.BY_ACCOUNT: {
+        emptyDataStr = "No contracts found involving account "+ nc_hexPrefix(store.queryStr) + "."
+      }
+    }
+    console.log('contract list view 2');
     const page =
       <div> 
         <NCExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"Account Lists"}
-          subtitle={"Recent Accounts Statistics"}/>    
-        <div className="NCSection">
-          <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-            <Tab2 id="miner-acc" title="Miners" panel={minerListSection}/>
-            <Tab2 id="inbound-acc" title="Accounts Inbound" panel={inboundTxListSection}/>
-            <Tab2 id="outbound-acc" title="Accounts Outbound" panel={outboundTxListSection}/>
-          </Tabs2>
-        </div>
+          title={"Contracts"}
+          subtitle={'Recent contracts'}
+        />  
+        <NCCntrTable 
+          data={store.response}
+          onPageCallback={this.requestPaging}
+          isLoading={store.isLoadingPaging}
+          isPaginated={true}
+          isLatest={true}/>
       </div>;
 
     return (
       <NCExplorerPage
         isLoading={isLoadingTopLevel}
-        isDataValid={true} 
-        isDataEmpty={false}
+        isDataValid={isDataValid} 
+        isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Account Lists"}
+        loadingStr={"Loading Contract Data"}
         invalidDataStr={"Server provided an invalid response. Please try again."}
-        emptyDataStr={"No accounts found. Blockchain server loading blocks."}
+        emptyDataStr={emptyDataStr}
         
         page={page}
         marginTop={100}/>
@@ -179,10 +137,11 @@ class NCAccList extends Component
 }
 
 export default connect((state) => {
+  
   return ({
-    accList: state.accList,
+    cntrList: state.cntrList,
   })
-})(NCAccList);
+})(NCCntrList);
 
 
 
