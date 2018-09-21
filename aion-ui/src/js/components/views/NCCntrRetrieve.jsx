@@ -11,6 +11,8 @@ import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 
 import NCAccDetail from 'components/accounts/NCAccDetail';
+import NCCntrDetail from 'components/contracts/NCCntrDetail';
+
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
@@ -55,8 +57,8 @@ class NCCntrRetrieve extends Component
   }
 
   requestTopLevel = () => {
-    console.log('contract:'+this.props.params.cntrId);
-    console.log(JSON.stringify(this.props));
+    //console.log('contract:'+this.props.params.cntrId);
+    //console.log(JSON.stringify(this.props));
 
     network.getCntrRetrieveTopLevel(this.props.params.cntrId);
   }
@@ -68,8 +70,12 @@ class NCCntrRetrieve extends Component
   }
 
   requestPagingBlkList = (pageNumber) => {
-    const queryStr = this.props.accRetrieve.queryStr;
+    const queryStr = this.props.cntrRetrieve.queryStr;
     network.getAccRetrievePagingBlkList(queryStr, pageNumber);
+  }
+  requestPagingEventList = (pageNumber) => {
+    const queryStr = this.props.cntrRetrieve.queryStr;
+    network.getCntrRetrievePagingEventList(queryStr, pageNumber);
   }
 
   getTokenList = () => {
@@ -136,15 +142,17 @@ class NCCntrRetrieve extends Component
     const tokens=[{name:'Token',symbol:'test'},{name:'Token1',symbol:'test1'}]
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
-    console.log("page Data for retrieve: "+JSON.stringify(store.response.txn));
+    console.log("page Data for retrieve: "+JSON.stringify(store.response));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
     const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
+    const isEventListFirstLoad = (store.response && store.response.event) ? store.response.event.momentUpdated : null;
 
     const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
     const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
     const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
+    const eventList = (store.response && store.response.event) ? store.response.event.data : null;
 
     const isAccValid = nc_isObjectValid(accObj);
     const isAccEmpty = nc_isObjectEmpty(accObj, isAccValid);
@@ -154,6 +162,9 @@ class NCCntrRetrieve extends Component
 
     const isBlkListValid = nc_isListValid(blkList);
     const isBlkListEmpty = nc_isListEmpty(blkList, isBlkListValid);
+
+    const isEventListValid = nc_isListValid(eventList);
+    const isEventListEmpty = nc_isListEmpty(eventList, isEventListValid);
 
     const acc = isAccEmpty ? {} : accObj.content[0];
     
@@ -281,6 +292,44 @@ class NCCntrRetrieve extends Component
         }
     />
 
+    const eventListSection = <NCExplorerSection 
+      className={""}
+      subtitle={
+        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
+          <Tooltip
+            className="pt-tooltip-indicator"
+            content={<em>coming soon ...</em>}>
+            historical explorer.
+          </Tooltip>
+        </div>
+      }
+
+      isLoading={isEventListFirstLoad == null}
+      isDataValid={isEventListValid}
+      isDataEmpty={isEventListEmpty} 
+      
+      loadingStr={"Loading Blocks"}
+      invalidDataStr={"Server provided an invalid response. Please try again."} 
+      emptyDataStr={
+        <span>No events in this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
+          <Tooltip
+            className="pt-tooltip-indicator"
+            content={<em>coming soon ...</em>}>
+            historical explorer.
+          </Tooltip>
+        </span>}
+      marginTop={40}
+
+      content={
+        <NCBlkTable 
+          data={eventList}
+          onPageCallback={this.requestPagingEventList}
+          isLoading={store.isLoadingPagingEventList}
+          isPaginated={true}
+          isLatest={true}/>
+        }
+    />
+
     const page =
       <div> 
         <NCExplorerHead
@@ -306,6 +355,7 @@ class NCCntrRetrieve extends Component
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
               <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
+              <Tab2 id="event" title="Events" panel={eventListSection}/>
             </Tabs2>
           </div>
         }

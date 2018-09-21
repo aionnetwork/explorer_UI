@@ -10,6 +10,7 @@ export const NCEntity =
   TKN:1,
   SEARCH:5,
   CNTR:6,
+  EVENT:7
 };
 
 export let NCEntityInfo = {};
@@ -49,6 +50,7 @@ NCEntityInfo[NCEntity.SEARCH] = {
   name: "Default",
   absoluteUrl: "/search/",
 }
+
 export let NCEntityServerMapping = {};
 NCEntityServerMapping['block'] = NCEntity.BLOCK;
 NCEntityServerMapping['transaction'] = NCEntity.TXN;
@@ -56,6 +58,8 @@ NCEntityServerMapping['account'] = NCEntity.ACCOUNT;
 NCEntityServerMapping['token'] = NCEntity.TKN;
 NCEntityServerMapping['search'] = NCEntity.SEARCH;
 NCEntityServerMapping['contract'] = NCEntity.CNTR;
+
+NCEntityServerMapping['event'] = NCEntity.EVENT;
 // tables -------------------------------------------------------------
 
 export const NCSortType = {
@@ -86,6 +90,10 @@ export const tknListType = {
 }
 
 export const cntrListType = {
+  ALL: 0,
+  BY_ACCOUNT: 1
+}
+export const eventListType = {
   ALL: 0,
   BY_ACCOUNT: 1
 }

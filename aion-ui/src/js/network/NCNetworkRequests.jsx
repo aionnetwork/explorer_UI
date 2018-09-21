@@ -27,7 +27,7 @@ import * as StoreRetrieve from 'stores/StoreRetrieve';
 
 import {BigNumber} from 'bignumber.js';
 import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
-import { tknListType, txnListType, blkListType, accListType } from 'lib/NCEnums';
+import { tknListType, txnListType, blkListType, accListType, eventListType } from 'lib/NCEnums';
 
 export const PAGE_SIZE = 25;
 
@@ -637,6 +637,7 @@ export const getCntrRetrieveTopLevel = (queryStr) => {
       if (!isCntrEmpty) {
         getCntrRetrievePagingTxnList(request, 0);
         getCntrRetrievePagingBlkList(request, 0);
+        getCntrRetrievePagingEventList(request, 0);
         //getAccRetrieveTknList(request, 0);
         console.log("not empty!");
       }
@@ -696,6 +697,7 @@ export const getCntrRetrievePagingBlkList = (queryStr, pageNumber) => {
   else {
     const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
     let params = [queryStr, pageNumber, PAGE_SIZE];
+    console.log('I am here on the block!');
     network.request(ep, params)
     .then((response) => {
       // ok, now make sure that the response you got is still valid
@@ -710,6 +712,38 @@ export const getCntrRetrievePagingBlkList = (queryStr, pageNumber) => {
     .catch((error) => {
       console.log(error);
       store.dispatch(StoreCntrRetrieve.SetPagingBlk({}));
+    });
+  }
+}
+export const getCntrRetrievePagingEventList = (queryStr, pageNumber) => {
+  store.dispatch(StoreCntrRetrieve.GetPagingEvent());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreCntrRetrieve.SetPagingEvent(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.event.list[eventListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    console.log('I am here!');
+    network.request(ep, params)
+    .then((response) => {
+      // ok, now make sure that the response you got is still valid
+      // ie. matches up to the contract loaded on-screen
+      let acc = store.getState().cntrRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreCntrRetrieve.SetPagingEvent(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetPagingEvent({}));
     });
   }
 }

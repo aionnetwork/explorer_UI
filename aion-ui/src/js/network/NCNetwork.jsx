@@ -2,7 +2,7 @@
 import axios from 'axios';
 import SockJS from 'sockjs-client'
 import Stomp from 'stompjs'
-import { blkListType, tknListType, txnListType, accListType, cntrListType } from 'lib/NCEnums';
+import { blkListType, tknListType, txnListType, accListType, cntrListType, eventListType } from 'lib/NCEnums';
 import * as mock from 'lib/NCData';
 import ms from 'ms';
 import appConfig from '../../config.json';
@@ -133,12 +133,24 @@ export const endpoint = {
       link: '/dashboard/getAccountDetails',
       params: ['searchParam']
     }
+  },
+  event: {
+    list: {
+      [eventListType['ALL']]: {
+        link: '/dashboard/getContractList',
+        params: ['page', 'size']
+      },
+      [eventListType['BY_ACCOUNT']]: {
+        link: '/dashboard/getcontractByCreator',
+        params: ['searchParam']
+      }
+    }
   }
 }
 
 export const request = async (endpoint, params) => 
 {
-  console.log(JSON.stringify(endpoint));
+  //console.log(JSON.stringify(endpoint));
   return new Promise((resolve, reject) => 
   {
     let args = { params: {} };

@@ -66,8 +66,23 @@ export const SetPagingBlk = (data) =>
     data: data,
   }
 }
-
-let initialState_StoreBlkRetrieve = 
+// Paging Event
+// ------------
+export const GetPagingEvent = (data) => 
+{
+  return {
+    type: 'CNTR_RETRIEVE_GET_PAGING_EVENT',
+    data: data,
+  }
+}
+export const SetPagingEvent = (data) => 
+{
+  return {
+    type: 'CNTR_RETRIEVE_SET_PAGING_EVENT',
+    data: data,
+  }
+}
+let initialState_StoreCntrRetrieve = 
 {
   isLoadingPagingBlkList: false,
   isLoadingPagingTxnList: false,
@@ -92,12 +107,16 @@ let initialState_StoreBlkRetrieve =
       data: null,
       momentUpdated: null
     },
+    event: {
+      data: null,
+      momentUpdated: null
+    },
     momentUpdated: null,
     web3: false
   }
 };
 
-export function reducer_cntrRetrieve (state = initialState_StoreBlkRetrieve, action) 
+export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, action) 
 {
   switch(action.type)
   {
@@ -115,6 +134,7 @@ export function reducer_cntrRetrieve (state = initialState_StoreBlkRetrieve, act
       _state.response.acc.momentUpdated = null;
       _state.response.blk.momentUpdated = null;
       _state.response.txn.momentUpdated = null;
+      _state.response.event.momentUpdated = null;
       _state.momentUpdated = null;
       
       return _state;
@@ -197,6 +217,30 @@ export function reducer_cntrRetrieve (state = initialState_StoreBlkRetrieve, act
       _state.response.blk.data = action.data;
       _state.response.blk.momentUpdated = moment();
       _state.momentUpdated = moment();
+      
+      return _state;
+    }
+    // Paging Block
+    // ------------
+    case 'CNTR_RETRIEVE_GET_PAGING_EVENT':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingEventList = true;
+      
+      return _state;
+    }
+    case 'CNTR_RETRIEVE_SET_PAGING_EVENT':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingEventList = false;
+      
+      _state.response.event.data = action.data;
+      _state.response.event.momentUpdated = moment();
+      _state.momentUpdated = moment();
+
+      console.log('event moment');
       
       return _state;
     }
