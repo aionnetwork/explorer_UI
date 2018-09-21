@@ -1,9 +1,10 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link, hashHistory } from 'react-router';
 import moment from 'moment';
 
-import { Tab2, Tabs2 } from "@blueprintjs/core";
+import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
 
 import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCBlkDetail from 'components/blocks/NCBlkDetail';
@@ -14,13 +15,23 @@ import NCExplorerSection from 'components/common/NCExplorerSection';
 import * as StoreBlkRetrieve from 'stores/StoreBlkRetrieve';
 
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
+import { nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 class NCBlkRetrieve extends Component
 {
   constructor(props) {
     super(props);
+  }
+
+  submitQuery(num){
+      console.log('querry!!!!');
+      let entity = this.props.blkRetrieve.response.blk;
+
+      let str = this.props.params.blkId + num;
+
+      //console.log("query for entity: " + NCEntityInfo[entity].name + " for query string: " + queryStr);
+      nc_LinkToEntity(this.props.blkRetrieve.response.blk, this.props.params.blkId);
   }
 
   componentWillMount() {
@@ -66,6 +77,11 @@ class NCBlkRetrieve extends Component
 
     let isTxnListValid = nc_isListValid(txnList);
     let isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
+
+    //console.log(JSON.stringify(this.props.params.blkId));
+
+    let prev = parseInt(this.props.params.blkId)-1;
+    let next = parseInt(this.props.params.blkId)+1;
 
     const blk = isBlkEmpty ? {} : blkObj.content[0]; 
 
@@ -113,7 +129,15 @@ class NCBlkRetrieve extends Component
           breadcrumbs={breadcrumbs}
           title={"Block"}
           subtitle={desc}
+
+
         />  
+
+        <Button onClick={() => {hashHistory.push('/block/' + prev);}} className = "pt-button pt-minimal" iconName="arrow-left" text="Previous block" />
+        <Button onClick={() => {hashHistory.push('/block/' + next);}} className = "pt-button pt-minimal pull-right" rightIconName="arrow-right"  text="Next block" />
+        
+        <br/><br/>
+
         <NCBlkDetail entity={blk}/>
         <hr className="nc-hr"/>
         {
