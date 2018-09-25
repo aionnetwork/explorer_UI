@@ -55,7 +55,8 @@ class NCAccRetrieve extends Component
   }
 
   requestTopLevel = () => {
-    network.getAccRetrieveTopLevel(this.props.params.accId);
+    console.log('retrieve'+JSON.stringify(this.props.params));
+    network.getAccRetrieveTopLevel(this.props.params.accId,this.props.params.tknId);
   }
 
   requestPagingTxnList = (pageNumber) => {
@@ -80,14 +81,15 @@ class NCAccRetrieve extends Component
       let str = nc_trim(queryStr);
       let entity = this.state.entity;
       let token = [];
-      token.name = "token";
-      token.value = tkn;
+      token.name = tkn;
+      token.value = "token";//tkn;
       //console.log("changing token");
       this.setState({
         queryStr: ''
       }, () => {
         console.log("Changing token to: " + token);
-        nc_LinkToEntityWithParam(entity, queryStr, token);
+       // nc_LinkToEntityWithParam(entity, queryStr, token);
+        network.getAccRetrieveTopLevel(this.props.params.accId,token.name);
         //nc_FindEntity(queryStr);
       });
     }
@@ -185,7 +187,8 @@ class NCAccRetrieve extends Component
       emptyDataStr={"No Data Available for Account: "+desc}
       marginTop={20}
       marginBottom={30}
-      /*subtitle={<div className="token-list">
+
+      subtitle={<div className="token-list">
         <span className="title">Token balances:</span><Popover
                 content={this.renderTokenMenu(tokens)}
                 interactionKind={PopoverInteractionKind.CLICK}
@@ -196,7 +199,8 @@ class NCAccRetrieve extends Component
                   rightIconName="pt-icon-caret-down"
                   text="Aion (Default)"/>          
         </Popover>
-      </div>}*/
+      </div>}
+
       content={ <NCAccDetail entity={acc}/> }
     />
 

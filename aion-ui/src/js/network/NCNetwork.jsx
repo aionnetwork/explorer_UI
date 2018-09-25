@@ -92,7 +92,8 @@ export const endpoint = {
       }
     },
     detail: {
-      link: '/dashboard/getTokenAndTransactionAndAccountDetailsByContractAddress',
+      //link: '/dashboard/getTokenAndTransactionAndAccountDetailsByContractAddress',
+      link: '/dashboard/getTokenDetailsTransfersAndHoldersByContractAddress',
       params: ['searchParam']
     }
   },
@@ -103,7 +104,7 @@ export const endpoint = {
     },
     detail: {
       link: '/dashboard/getAccountDetails',
-      params: ['searchParam']
+      params: ['accountAddress','tokenAddress']
     }
   },
   dashboard: {
@@ -130,7 +131,7 @@ export const endpoint = {
       }
     },
     detail: {
-      link: '/dashboard/getAccountDetails',
+      link: '/dashboard/getContractDetailsByContractAddress',
       params: ['searchParam']
     }
   },

@@ -52,6 +52,7 @@ export default class NCEntityLabel extends Component
 
     if (!linkActive)
       return;    
+    console.log(JSON.stringify(this.props));
 
     nc_LinkToEntity(this.props.entityType, this.props.entityId);
   }

@@ -358,10 +358,12 @@ export const getAccListTopLevel = () => {
   }
 }
 
-export const getAccRetrieveTopLevel = (queryStr) => {
+export const getAccRetrieveTopLevel = (acc,tkn=null) => {
   store.dispatch(StoreAccRetrieve.GetTopLevel({
-    queryStr: queryStr
+    queryStr: acc
   }));
+
+  console.log('This is the top ACC param:' + JSON.stringify(acc+tkn));
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
@@ -376,7 +378,8 @@ export const getAccRetrieveTopLevel = (queryStr) => {
   }
   else {
     // validate the account to make sure it's a valid account string
-    let request = nc_trim(queryStr);
+    let request = nc_trim(acc);
+    let requestb = tkn;
 
     if (request == 0) {
       request = "0000000000000000000000000000000000000000000000000000000000000000"
@@ -386,13 +389,22 @@ export const getAccRetrieveTopLevel = (queryStr) => {
       }));
       return;
     } else {
-      request = nc_sanitizeHex(queryStr);
+      request = nc_sanitizeHex(acc);
     }
     
     // get account details
     const ep = network.endpoint.account.detail;
-    let params = [request];
-    console.log(ep);
+    let params = []; 
+    console.log(requestb);
+    if(requestb!=null){
+      //requestb = "nc_trim(tkn)";
+      params = [request,requestb];
+      console.log('not null ok?'+requestb);
+    }else{
+      params = [request];
+    }
+     
+    console.log(JSON.stringify(params));
     network.request(ep, params)
     .then((response) => {
       const isAccValid = nc_isObjectValid(response);
@@ -520,8 +532,11 @@ export const getAccRetrieveTknList = (queryStr, pageNumber) => {
 
 export const getCntrListTopLevel = () => {
   store.dispatch(StoreCntrList.GetTopLevel());
+
+
   console.log("its here!!");
-  if (network.NCNETWORK_REQUESTS_ENABLED) {
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.accList;
       store.dispatch(StoreCntrList.SetTopLevel(response));
@@ -535,7 +550,9 @@ export const getCntrListTopLevel = () => {
     
     network.request(ep, params)
     .then((response) => {
+       console.log('contract response');
       store.dispatch(StoreCntrList.SetTopLevel(response));
+
     })
     .catch((error) => {
       console.log(error);
