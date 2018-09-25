@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { Link, hashHistory } from 'react-router';
 import moment from 'moment';
 
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+
 import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
 
 import NCTxnTable from 'components/transactions/NCTxnTable';
@@ -11,6 +14,15 @@ import NCBlkDetail from 'components/blocks/NCBlkDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
+
+
+//list of charts
+import NCActiveAddressChart from 'components/charts/NCActiveAddressChart';
+//import NCNetworkDifficultyChart from 'components/charts/NCNetworkDifficultyChart';
+//import NCTopMinersChart from 'components/charts/NCTopMinersChart';
+//import NCBlockTimeChart from 'components/charts/NCBlockTimeChart';
+//import NCHashPowerChart from 'components/charts/NCHashPowerChart';
+//import NCHashPowerNodeChart from 'components/charts/NCHashPowerNodeChart';
 
 import * as StoreBlkRetrieve from 'stores/StoreBlkRetrieve';
 
@@ -22,16 +34,6 @@ class NCChartRetrieve extends Component
 {
   constructor(props) {
     super(props);
-  }
-
-  submitQuery(num){
-      console.log('querry!!!!');
-      let entity = this.props.blkRetrieve.response.blk;
-
-      let str = this.props.params.blkId + num;
-
-      //console.log("query for entity: " + NCEntityInfo[entity].name + " for query string: " + queryStr);
-      nc_LinkToEntity(this.props.blkRetrieve.response.blk, this.props.params.blkId);
   }
 
   componentWillMount() {
@@ -55,33 +57,91 @@ class NCChartRetrieve extends Component
     network.getBlkRetrieveTopLevel(this.props.params.blkId);
   }
 
-  requestPagingTxnList = (pageNumber) => {
-    //const queryStr = this.props.blkRetrieve.queryStr;
-    //network.getBlkRetrievePagingTxnList(queryStr, pageNumber);
-  }
-
+ 
   render() {
+
+    const options = {
+      title: {
+        text: 'My chart'
+      },
+      series: [{
+        data: [1, 2, 3]
+      }]
+    };
+
+     const data =  [[1167609600000,0.7537],[1167696000000,0.7537],[1167782400000,0.7559],[1167868800000,0.7631],[1167955200000,0.7644],[1168214400000,0.769],[1168300800000,0.7683],[1168387200000,0.77],[1168473600000,0.7703],[1168560000000,0.7757],[1168819200000,0.7728],[1168905600000,0.7721],[1168992000000,0.7748],[1169078400000,0.774],[1169164800000,0.7718],[1169424000000,0.7731],[1169510400000,0.767],[1169596800000,0.769],[1169683200000,0.7706],[1169769600000,0.7752],[1170028800000,0.774],[1170115200000,0.771],[1170201600000,0.7721],[1170288000000,0.7681],[1170374400000,0.7681],[1170633600000,0.7738],[1170720000000,0.772],[1170806400000,0.7701],[1170892800000,0.7699],[1170979200000,0.7689],[1171238400000,0.7719],[1171324800000,0.768],[1171411200000,0.7645],[1171497600000,0.7613],[1171584000000,0.7624],[1171843200000,0.7616],[1171929600000,0.7608],[1172016000000,0.7608],[1172102400000,0.7631],[1172188800000,0.7615],[1172448000000,0.76],[1172534400000,0.756],[1172620800000,0.757],[1172707200000,0.7562],[1172793600000,0.7598],[1173052800000,0.7645],[1173139200000,0.7635],[1173225600000,0.7614],[1173312000000,0.7604],[1173398400000,0.7603],[1173657600000,0.7602],[1173744000000,0.7566],[1173830400000,0.7587],[1173916800000,0.7562],[1174003200000,0.7506],[1174262400000,0.7518],[1174348800000,0.7522],[1174435200000,0.7524],[1174521600000,0.7491],[1174608000000,0.7505],[1174867200000,0.754],[1174953600000,0.7493],[1175040000000,0.7493],[1175126400000,0.7491],[1175212800000,0.751],[1175472000000,0.7483],[1175558400000,0.7487],[1175644800000,0.7491],[1175731200000,0.7479],[1175817600000,0.7479],[1176076800000,0.7479],[1176163200000,0.7449],[1176249600000,0.7454],[1176336000000,0.7427]];
+
+     const option = {
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: 'USD to EUR exchange rate over time'
+            },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: 'Exchange rate'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+
+            series: [{
+                type: 'area',
+                name: 'USD to EUR',
+                data: data
+            }]
+        }
+
     const store = this.props.blkRetrieve;
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const queryStr = store.queryStr;
+
     const desc = nc_isPositiveInteger(queryStr) ? '#'+queryStr : nc_hexPrefix(queryStr);
 
     const blkObj = (store.response) ? store.response.blk : null;
     const txnList = (store.response) ? store.response.txn : null;
-
-    console.log(blkObj);
 
     let isBlkValid = nc_isObjectValid(blkObj);
     let isBlkEmpty = nc_isObjectEmpty(blkObj, isBlkValid);
 
     let isTxnListValid = nc_isListValid(txnList);
     let isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-
-    //console.log(JSON.stringify(this.props.params.blkId));
-
-    let prev = parseInt(this.props.params.blkId)-1;
-    let next = parseInt(this.props.params.blkId)+1;
 
     const blk = isBlkEmpty ? {} : blkObj.content[0]; 
 
@@ -91,63 +151,32 @@ class NCChartRetrieve extends Component
         body: 'Home',
       },
       {
-        link: '/blocks',
-        body: 'Blocks',
+        link: '/chart',
+        body: 'Chart',
       },
       {
         link: '#',
-        body: 'Block Details',
+        body: 'Chart Details',
       }
     ];
 
-    const txnListSection = <NCExplorerSection 
-      className={""}
-
-      isLoading={isLoadingTopLevel}
-      isDataValid={isTxnListValid}
-      isDataEmpty={isTxnListEmpty} 
-      
-      loadingStr={"Loading Transactions"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={"No transactions found for this block."}
-      isToplevelSection={false}
-      
-      content={
-        <NCTxnTable 
-          data={txnList}
-          onPageCallback={this.requestPagingTxnList}
-          isLoading={store.isLoadingPagingTxnList}
-          isPaginated={true}/>
-        }
-      marginTop={40}
-    />
+    
 
     const page =
       <div> 
         <NCExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"Block"}
+          title={"Chart"}
           subtitle={desc}
 
 
         />  
 
-        <Button onClick={() => {hashHistory.push('/block/' + prev);}} className = "pt-button pt-minimal" iconName="arrow-left" text="Previous block" />
-        <Button onClick={() => {hashHistory.push('/block/' + next);}} className = "pt-button pt-minimal pull-right" rightIconName="arrow-right"  text="Next block" />
-        
-        <br/><br/>
+        <NCActiveAddressChart options={option} />
 
-        <NCBlkDetail entity={blk}/>
-        <hr className="nc-hr"/>
-        {
-          (!isBlkEmpty && !isTxnListEmpty) &&
-          <div className="NCSection">
-            <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true}>
-              <Tab2 id="blk" title="Included Transactions" panel={txnListSection} />
-            </Tabs2>
-          </div>
-        }
+       
+
         
       </div>;
 
@@ -157,9 +186,9 @@ class NCChartRetrieve extends Component
         isDataValid={isBlkValid} 
         isDataEmpty={isBlkEmpty}
         
-        loadingStr={"Loading Block Details"}
-        invalidDataStr={"Server error. Block structure invalid."}
-        emptyDataStr={"No block found for descriptor: " + desc + "."}
+        loadingStr={"Loading Chart Details"}
+        invalidDataStr={"Server error. Invalid Chart"}
+        emptyDataStr={"No chart found"}
         
         page={page}/>
     );
