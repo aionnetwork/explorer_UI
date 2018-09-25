@@ -75,7 +75,7 @@ export const endpoint = {
       }
     },
     detail: {
-      link: '/dashboard/findByTransactionHash',
+      link: '/dashboard/getTransactionDetailsByTransactionHash',
       params: ['searchParam','token']
     }
   },
@@ -145,6 +145,12 @@ export const endpoint = {
         link: '/dashboard/getcontractByCreator',
         params: ['searchParam']
       }
+    }
+  },
+  chart:{
+    detail:{
+      link:'',
+      param:['searchParam']
     }
   }
 }

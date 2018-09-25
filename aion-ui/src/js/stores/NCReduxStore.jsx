@@ -20,6 +20,8 @@ import { reducer_cntrRetrieve } from 'stores/StoreCntrRetrieve';
 import { reducer_tknList } from 'stores/StoreTknList';
 import { reducer_tknRetrieve } from 'stores/StoreTknRetrieve';
 
+import { reducer_chartRetrieve } from 'stores/StoreChartRetrieve';
+
 import { reducer_Retrieve } from 'stores/StoreRetrieve';
 // store -----------------------------------------------------------------
 
@@ -44,4 +46,7 @@ export const store = createStore(combineReducers(
   tknList: reducer_tknList,
   tknRetrieve: reducer_tknRetrieve,
   searchRetrieve: reducer_Retrieve,
+
+  chartRetrieve: reducer_chartRetrieve,
+
 }));

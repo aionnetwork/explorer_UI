@@ -23,6 +23,8 @@ import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 import * as StoreCntrList from 'stores/StoreCntrList';
 import * as StoreCntrRetrieve from 'stores/StoreCntrRetrieve';
 
+import * as StoreChartRetrieve from 'stores/StoreChartRetrieve';
+
 import * as StoreRetrieve from 'stores/StoreRetrieve';
 
 import {BigNumber} from 'bignumber.js';
@@ -1140,7 +1142,49 @@ export const getRetrieveTopLevel = (queryStr) => {
 }
 
 
+export const getRetrieveChart = (queryStr) => {
+  store.dispatch(StoreChartRetrieve.GetChart({
+    queryStr: queryStr
+  }));
 
+  //console.log('search network call!');
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = {
+        data: mock.data,
+        
+      };
+      store.dispatch(StoreBlkRetrieve.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // sanitize input string
+    let request = nc_trim(queryStr);
+
+    // get block details
+    const ep = network.endpoint.chart;
+    let params = [request,  0, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      
+      if(typeof response.searchType !== "undefined"){ 
+        store.dispatch(StoreChartRetrieve.SetChart(response));
+      }
+      else{
+        store.dispatch(StoreChartRetrieve.SetChart({
+        
+        }));
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreChartRetrieve.SetChart({
+        
+      }));
+    });
+  }
+}
 
 
 

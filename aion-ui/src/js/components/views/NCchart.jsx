@@ -9,8 +9,8 @@ import HighchartsReact from 'highcharts-react-official';
 
 import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
 
-import NCTxnTable from 'components/transactions/NCTxnTable';
-import NCBlkDetail from 'components/blocks/NCBlkDetail';
+//import NCTxnTable from 'components/transactions/NCTxnTable';
+//import NCBlkDetail from 'components/blocks/NCBlkDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
@@ -24,7 +24,7 @@ import NCActiveAddressChart from 'components/charts/NCActiveAddressChart';
 //import NCHashPowerChart from 'components/charts/NCHashPowerChart';
 //import NCHashPowerNodeChart from 'components/charts/NCHashPowerNodeChart';
 
-import * as StoreBlkRetrieve from 'stores/StoreBlkRetrieve';
+import * as StoreChartRetrieve from 'stores/StoreChartRetrieve';
 
 
 import { nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
@@ -87,7 +87,7 @@ class NCChartRetrieve extends Component
             },
             yAxis: {
                 title: {
-                    text: 'Exchange rate'
+                    text: 'Address total'
                 }
             },
             legend: {
