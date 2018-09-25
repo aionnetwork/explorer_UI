@@ -26,7 +26,7 @@ import AccRetrieve from 'components/views/NCAccRetrieve';
 import CntrList from 'components/views/NCCntrList';
 import CntrRetrieve from 'components/views/NCCntrRetrieve';
 
-import ChartRetrieve from 'components/views/NCChartRetrieve';
+import ChartRetrieve from 'components/views/NCchart';
 
 //this url is to facilitate universal search for blocks/transaction/token/accounts
 import SearchRetrieve from 'components/views/NCSearchRetrieve';
