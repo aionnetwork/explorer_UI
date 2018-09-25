@@ -26,6 +26,8 @@ import AccRetrieve from 'components/views/NCAccRetrieve';
 import CntrList from 'components/views/NCCntrList';
 import CntrRetrieve from 'components/views/NCCntrRetrieve';
 
+import ChartRetrieve from 'components/views/NCChartRetrieve';
+
 //this url is to facilitate universal search for blocks/transaction/token/accounts
 import SearchRetrieve from 'components/views/NCSearchRetrieve';
 
@@ -102,6 +104,8 @@ ReactDOM.render((
 
         <Route path="contracts" component={ CntrList }/>
         <Route path="contract/:cntrId" component={ CntrRetrieve }/>
+
+        <Route path="chart/block/:blkId" component={ ChartRetrieve }/>
 
         <Route path="no-results(/:query)" component={ NoResults }/>
 

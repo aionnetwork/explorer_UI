@@ -98,6 +98,60 @@ class NCLayout extends Component {
     disconnectSocket();
   };
 
+  renderMatricMenu = () => {
+    return (
+      <Menu className="NCNavMenu">
+        <MenuItem
+          className="nav-option"
+          
+          onClick={() => {
+            hashHistory.push('/chart/block');
+          }}
+          text="Active address"
+        />
+        <MenuItem
+          className="nav-option"
+          
+          onClick={() => {
+            hashHistory.push('/chart/transactions');
+          }}
+          text="Network Difficulty"
+        />
+        <MenuItem
+          className="nav-option"
+          
+          onClick={() => {
+            hashHistory.push('/chart/tokens');
+          }}
+          text="Top Miners"
+        />
+        <MenuItem
+          className="nav-option"
+          
+          onClick={() => {
+            hashHistory.push('/chart/accounts');
+          }}
+          text="Block times"
+        />
+         <MenuItem
+          className="nav-option"
+          
+          onClick={() => {
+            hashHistory.push('/chart/contracts');
+          }}
+          text="Hash power"
+        />
+         <MenuItem
+          className="nav-option"
+          onClick={() => {
+            hashHistory.push('/chart/contracts');
+          }}
+          text="Hash power by node"
+        />
+      </Menu>
+    );
+  }
+
   renderExplorerMenu = () => {
     return (
       <Menu className="NCNavMenu">
@@ -215,6 +269,17 @@ class NCLayout extends Component {
                   iconName="pt-icon-dashboard"
                   rightIconName="pt-icon-caret-down"
                   text="Explorer"/>          
+              </Popover>
+
+               <Popover
+                content={this.renderMatricMenu()}
+                interactionKind={PopoverInteractionKind.CLICK}
+                position={Position.BOTTOM}>
+                <Button 
+                  className="navbar-btn-active pt-button pt-minimal"
+                  iconName="pt-icon-chart"
+                  rightIconName="pt-icon-caret-down"
+                  text="Analytics"/>          
               </Popover>
               {/*<Button 
                   className="navbar-btn-active pt-button pt-minimal"
