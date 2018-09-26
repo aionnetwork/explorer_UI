@@ -98,14 +98,14 @@ class NCLayout extends Component {
     disconnectSocket();
   };
 
-  renderMatricMenu = () => {
+  renderMetricMenu = () => {
     return (
       <Menu className="NCNavMenu">
         <MenuItem
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/chart/block');
+            hashHistory.push('/charts/1');
           }}
           text="Active address"
         />
@@ -113,7 +113,7 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/chart/transactions');
+            hashHistory.push('/charts/2');
           }}
           text="Network Difficulty"
         />
@@ -121,7 +121,7 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/chart/tokens');
+            hashHistory.push('/charts/3');
           }}
           text="Top Miners"
         />
@@ -129,7 +129,7 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/chart/accounts');
+            hashHistory.push('/charts/4');
           }}
           text="Block times"
         />
@@ -137,14 +137,14 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/chart/contracts');
+            hashHistory.push('/charts/5');
           }}
           text="Hash power"
         />
          <MenuItem
           className="nav-option"
           onClick={() => {
-            hashHistory.push('/chart/contracts');
+            hashHistory.push('/charts/6');
           }}
           text="Hash power by node"
         />
@@ -272,7 +272,7 @@ class NCLayout extends Component {
               </Popover>
 
                <Popover
-                content={this.renderMatricMenu()}
+                content={this.renderMetricMenu()}
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
                 <Button 

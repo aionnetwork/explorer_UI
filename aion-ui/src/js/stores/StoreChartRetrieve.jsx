@@ -3,48 +3,47 @@ import moment from 'moment';
 
 // Top Level 
 // ---------
-export const GetTopLevel = (data) => 
+export const GetChart = (data) => 
 {
   return {
-    type: 'BLK_RETRIEVE_GET_TOP_LEVEL',
+    type: 'CHART_RETRIEVE_GET',
     data: data,
   }
 }
-export const SetTopLevel = (data) => 
+export const SetChart = (data) => 
 {
   return {
-    type: 'BLK_RETRIEVE_SET_TOP_LEVEL',
+    type: 'CHART_RETRIEVE_SET',
     data: data,
   }
 }
 
 // Paging
 // ------
-export const GetPagingTxn = (data) => 
+export const GetPagingChart = (data) => 
 {
   return {
-    type: 'BLK_RETRIEVE_GET_PAGING_TXN',
+    type: 'CHART_RETRIEVE_GET_PAGING',
     data: data,
   }
 }
-export const SetPagingTxn = (data) => 
+export const SetPagingChart = (data) => 
 {
   return {
-    type: 'BLK_RETRIEVE_SET_PAGING_TXN',
+    type: 'CHART_RETRIEVE_SET_PAGING',
     data: data,
   }
 }
 
 let initialState_StoreChartRetrieve = 
 {
-  isLoadingPagingTxnList: false,
-  isLoadingTopLevel: false, 
+  isLoadingPagingList: false,
+  isLoading: false, 
   
   queryStr: "",
 
   response: {
-    blk: null,
-    txn: null
+   
   },
   momentUpdated: null
 };
@@ -55,22 +54,24 @@ export function reducer_chartRetrieve (state = initialState_StoreChartRetrieve, 
   {
     // Top Level 
     // ---------
-    case 'BLK_RETRIEVE_GET_TOP_LEVEL':
+    case 'CHART_RETRIEVE_GET':
     {
       let _state = Object.assign({}, state);
       
-      _state.isLoadingTopLevel = true; 
+      _state.isLoading = true; 
       _state.queryStr = action.data.queryStr;
+
+      //console.log(JSON.stringify(action));
       
       _state.momentUpdated = null;
       
       return _state;
     }
-    case 'BLK_RETRIEVE_SET_TOP_LEVEL':
+    case 'CHART_RETRIEVE_SET':
     {
       let _state = Object.assign({}, state);
       
-      _state.isLoadingTopLevel = false; 
+      _state.isLoading = false; 
       
       _state.response = action.data;
       _state.momentUpdated = moment();
@@ -80,7 +81,7 @@ export function reducer_chartRetrieve (state = initialState_StoreChartRetrieve, 
 
     // Paging
     // ------ 
-    case 'BLK_RETRIEVE_GET_PAGING_TXN':
+    case 'CHART_RETRIEVE_GET_PAGING':
     {
       let _state = Object.assign({}, state);
       
@@ -88,7 +89,7 @@ export function reducer_chartRetrieve (state = initialState_StoreChartRetrieve, 
       
       return _state;
     }
-    case 'BLK_RETRIEVE_SET_PAGING_TXN':
+    case 'CHART_RETRIEVE_SET_PAGING':
     {
       let _state = Object.assign({}, state);
       

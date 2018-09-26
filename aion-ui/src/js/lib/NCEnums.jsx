@@ -13,6 +13,16 @@ export const NCEntity =
   EVENT:7
 };
 
+
+export const NCChart = {
+  ActiveAddressGrowth : 0,
+  TopMiner : 1,
+  Difficulty : 2,
+  HashingPower : 3,
+  TransactionsoverTime : 4,
+  BlockTime : 5,
+};
+
 export let NCEntityInfo = {};
 
 NCEntityInfo[NCEntity.BLOCK] = {

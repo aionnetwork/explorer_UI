@@ -105,7 +105,7 @@ ReactDOM.render((
         <Route path="contracts" component={ CntrList }/>
         <Route path="contract/:cntrId" component={ CntrRetrieve }/>
 
-        <Route path="charts" component={ ChartRetrieve }/>
+        <Route path="charts/:chartId" component={ ChartRetrieve }/>
 
         <Route path="no-results(/:query)" component={ NoResults }/>
 

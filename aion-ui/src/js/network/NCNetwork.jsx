@@ -149,7 +149,7 @@ export const endpoint = {
   },
   chart:{
     detail:{
-      link:'',
+      link:'/dashboard/charts',
       param:['searchParam']
     }
   }

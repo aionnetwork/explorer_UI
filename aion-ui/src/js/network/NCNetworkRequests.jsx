@@ -195,6 +195,8 @@ export const getTxnListTopLevel = (listType, queryStr) => {
     listType: listType,
   }));
 
+  console.log('coooo: '+listType);
+
   console.log('txn list top level');
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -1142,7 +1144,7 @@ export const getRetrieveTopLevel = (queryStr) => {
 }
 
 
-export const getRetrieveChart = (queryStr) => {
+export const getChartRetrieve = (queryStr) => {
   store.dispatch(StoreChartRetrieve.GetChart({
     queryStr: queryStr
   }));
@@ -1163,22 +1165,16 @@ export const getRetrieveChart = (queryStr) => {
     let request = nc_trim(queryStr);
 
     // get block details
-    const ep = network.endpoint.chart;
-    let params = [request,  0, PAGE_SIZE];
+    const ep = network.endpoint.chart.detail;
+    let params = [request];
     network.request(ep, params)
     .then((response) => {
       
-      if(typeof response.searchType !== "undefined"){ 
         store.dispatch(StoreChartRetrieve.SetChart(response));
-      }
-      else{
-        store.dispatch(StoreChartRetrieve.SetChart({
-        
-        }));
-      }
+    
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       store.dispatch(StoreChartRetrieve.SetChart({
         
       }));
