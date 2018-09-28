@@ -1,18 +1,13 @@
 {
   "api": {
-    "base_url": "conquest-api.aion.network/aion",
+    "base_url": "mainnet-api.aion.network/aion",
     "https_enabled": true
   },
   "network_list": [
     {
-      "name": "Testnet Conquest",
+      "name": "Mainnet",
       "url": ""
     },
-    {
-      "name": "Mainnet",
-      "url": "https://mainnet.aion.network"
-    }
-    ,
     {
       "name": "Testnet Mastery",
       "url": "https://mastery.aion.network"
