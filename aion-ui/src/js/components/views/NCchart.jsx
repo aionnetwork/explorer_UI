@@ -27,7 +27,7 @@ import NCHashPowerByNodeChart from 'components/charts/NCHashPowerByNodeChart';
 import * as StoreChartRetrieve from 'stores/StoreChartRetrieve'; 
 
 
-import { nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
+import { nc_getChartData, nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 class NCChartRetrieve extends Component
@@ -49,13 +49,61 @@ class NCChartRetrieve extends Component
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.params.chartId != this.props.params.chartId)
+    if (prevProps.params.chartId != this.props.params.chartId){
+      this.parseChart(this.props.params.chartId);
       this.request();
+    }
+  }
+
+  parseChart(str){
+
+    switch(str){
+    case 'ActiveAddressGrowth':
+        this.chart = <NCActiveAddressChart data={data} />
+        this.description = "Active Address Growth";
+        this.type="line";
+        this.id = 0;
+        break;  
+    case 'TopMiner':        
+        this.chart = <NCTopMinersChart  data={data} />
+        this.description = "Top Miner";
+        this.type="pie";
+        this.id = 1;
+        break;  
+    case 'Difficulty':        
+        this.chart =  <NCNetworkDifficultyChart data={data} />
+        this.description = "Difficulty";
+        this.type="line";
+        this.id = 2;
+        break;                
+    case 'HashingPower':
+        this.chart = <NCHashPowerByNodeChart data={data} />
+        this.description = "Hashing Power";
+        this.type="line";
+        this.id = 3;
+        break;    
+    case 'TransactionsoverTime':
+        this.chart = <NCActiveAddressChart data={data} />
+        this.description = "Transactions Over Time";
+        this.type="line";
+        this.id = 4;
+        break;  
+    case 'BlockTime':
+        
+        this.chart = <NCBlockTimesChart data={data} />
+        this.description = "Block Time";
+        this.type="line";
+        this.id = 5;
+        break;  
+    default:
+        this.chart = 'Invalid data'
+    }
+
   }
 
   request = () => {
     //console.log('Chart params:'+JSON.stringify(this.props));
-    network.getChartRetrieve(this.props.params.chartId);
+    network.getChartRetrieve(this.id);
   }
 
  
@@ -67,8 +115,13 @@ class NCChartRetrieve extends Component
 
     //console.log(JSON.stringify(store));
 
+
+
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const queryStr = store.queryStr;
+
+    //console.log(JSON.stringify(store));
+    //const data = nc_getChartData(store.content, type);
 
     const desc = queryStr;
 
@@ -86,7 +139,7 @@ class NCChartRetrieve extends Component
     let chart = '';  
    
 
-    switch(Number(desc)){
+    /*switch(Number(desc)){
     case 1:
           chart = <NCActiveAddressChart data={data} />
           break;  
@@ -108,7 +161,7 @@ class NCChartRetrieve extends Component
         break;  
     case 7:
         chart = <NCHashPowerChart data={data} />
-    }
+    }*/
 
     //console.log("yeeeeaaaaa!" + chart);
 

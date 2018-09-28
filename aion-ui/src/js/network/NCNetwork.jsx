@@ -67,7 +67,8 @@ export const endpoint = {
       },
       [txnListType['BY_ACCOUNT']]: {
         link: '/dashboard/getTransactionsByAddress',
-        params: ['searchParam', 'transactionPage', 'transactionSize','token']
+        //params: ['searchParam', 'transactionPage', 'transactionSize','token'],
+        params:["accountAddress","tokenAddress","page","size"]
       },
       [txnListType['BY_BLOCK']]: {
         link: '/dashboard/findTransactionByBlockNumberOrBlockHash',
@@ -131,8 +132,8 @@ export const endpoint = {
       }
     },
     detail: {
-      link: '/dashboard/getContractDetailsByContractAddress',
-      params: ['searchParam']
+      link: '/dashboard/getTokenDetailsTransfersAndHoldersByContractAddress',
+      params: ['searchParam','holdersPage','holdersSize','transfersPage','transfersSize']
     }
   },
   event: {
@@ -149,8 +150,8 @@ export const endpoint = {
   },
   chart:{
     detail:{
-      link:'/dashboard/charts',
-      param:['searchParam']
+      link:'/dashboard/getGraphingInfo',
+      param:['type']
     }
   }
 }

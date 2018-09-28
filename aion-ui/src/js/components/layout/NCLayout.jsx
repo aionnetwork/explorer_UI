@@ -105,7 +105,7 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/charts/1');
+            hashHistory.push('/charts/ActiveAddressGrowth');
           }}
           text="Active address"
         />
@@ -113,7 +113,7 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/charts/2');
+            hashHistory.push('/charts/Difficulty');
           }}
           text="Network Difficulty"
         />
@@ -121,7 +121,7 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/charts/3');
+            hashHistory.push('/charts/TopMiner');
           }}
           text="Top Miners"
         />
@@ -129,7 +129,7 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/charts/4');
+            hashHistory.push('/charts/BlockTime');
           }}
           text="Block times"
         />
@@ -137,17 +137,26 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
-            hashHistory.push('/charts/5');
+            hashHistory.push('/charts/HashingPower');
           }}
           text="Hash power"
         />
+         {(false)
+          <MenuItem
+            className="nav-option"
+            onClick={() => {
+              hashHistory.push('/charts/TransactionsoverTime');
+            }}
+            text="Hash power by node"
+          />
+         }
          <MenuItem
-          className="nav-option"
-          onClick={() => {
-            hashHistory.push('/charts/6');
-          }}
-          text="Hash power by node"
-        />
+            className="nav-option"
+            onClick={() => {
+              hashHistory.push('/charts/TransactionsoverTime');
+            }}
+            text="Transactions over time"
+          />
       </Menu>
     );
   }
@@ -272,7 +281,7 @@ class NCLayout extends Component {
               </Popover>
 
                <Popover
-                content={this.renderMetricMenu()}
+                content={this.renderMetricMenu()} 
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
                 <Button 

@@ -177,7 +177,7 @@ export default class NCTxnTable extends Component
   
   render() {
     const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
-    console.log('txn table');
+    //console.log('txn table');
     
     return (
       <NCTableReactPaginated

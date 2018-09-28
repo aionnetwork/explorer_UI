@@ -230,16 +230,14 @@ class NCTknRetrieve extends Component
             icon={"pt-icon-offline"}
             title={"Unavailable In Lite-Mode"}
             description={"Account transactions & blocks-mined not available in lite-mode."}/>
-        }
-        {
-          (false) &&  
+       }
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="txn" title="Transfers" panel={txnListSection}/>
               <Tab2 id="blk" title="Holders" panel={blkListSection}/>
             </Tabs2>
           </div>
-        }
+        
         
         
       </div>;

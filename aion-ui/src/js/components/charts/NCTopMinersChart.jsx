@@ -46,24 +46,24 @@ export default class NCTopMinersChart extends Component
         name: 'Mined Blocks',
         colorByPoint: true,
         data: [{
-            name: 'Chrome',
+            name: 'a01e4f5026fa0c49364ed885aa4eb12f0cc585ffb860d55d96accee1b8f3fca3',
             y: 61.41,
             sliced: true,
             selected: true
         }, {
-            name: 'Internet Explorer',
+            name: 'a01e4f5026fa0c49364e3285aa4eb12f0cc585ffb860d55d96accee1b8f3fca3',
             y: 11.84
         }, {
-            name: 'Firefox',
+            name: 'a01e4f5026fa0c49364ed885aa4eb12f0cc585ffb860d55d96accee1b8f3fcdk',
             y: 10.85
         }, {
-            name: 'Edge',
+            name: 'a01e4f5026fa0c49364ed885aa4eb12f0cc585ffb860d55d96accee1b8f3fqke',
             y: 40.67
         }, {
-            name: 'QQ',
+            name: 'a01e4f5026fa0c49364ed885aa4eb12f0cc585ffb860d55d96accee1b8f31w32',
             y: 18.2
         }, {
-            name: 'Other',
+            name: 'a01e4f5026fa0c49364ed885aa4eb12f0cc585ffb860d55d96accee1b81w23e4',
             y: 22.61
         }]
     }]

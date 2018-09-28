@@ -195,9 +195,9 @@ export const getTxnListTopLevel = (listType, queryStr) => {
     listType: listType,
   }));
 
-  console.log('coooo: '+listType);
+  //console.log('coooo: '+listType);
 
-  console.log('txn list top level');
+  //console.log('txn list top level');
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
@@ -301,7 +301,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
     queryStr: queryStr
   }));
 
-  console.log('txn retrieve list top level');
+  //console.log('txn retrieve list top level');
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {

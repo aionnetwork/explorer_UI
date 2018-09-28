@@ -460,7 +460,7 @@ export function nc_findEntity(queryStr){
 
 export function nc_LinkToEntity(entity, entityId) {
   if (nc_CanLinkToEntity(entity, entityId)) {
-    console.log(NCEntityInfo[entity].absoluteUrl+entityId);
+    //console.log(NCEntityInfo[entity].absoluteUrl+entityId);
     hashHistory.push(NCEntityInfo[entity].absoluteUrl+entityId);
   }
 }
@@ -478,7 +478,53 @@ export function nc_numPrettify(num) {
 }
 
 
+export function nc_getChartData(data,charttype=null){
 
+  //get first line
+  if(charttype!==null){
+    let chart =[]
+    if(Array.isArray(data)&&dat.length>1){
+      let chartType = data[0].chartype;
+      data.forEach( (record,i)=>{
+        let arr =[record.timestamp,record.value]//datapoint
+        chart.push(arr);//nc_datapoint(record,charttype)
+      })
+   
+    }else{
+      return chart;
+    }
+
+    return chart;
+  }
+
+}
+
+export function nc_datapoint(data,charttype=null){
+
+ if(data.timeStamp && data.value){
+  let point =[];
+
+  switch(charttype){
+    case 'line':
+        point =[];
+        break;  
+    case 'pie':        
+        point =[];
+        break;  
+    case 'bar':        
+        point =[];
+        break;                
+    default:
+        point =[];
+        break;    
+  }
+
+  return chart;
+ }else{
+    return;
+ }
+
+}
 
 
 

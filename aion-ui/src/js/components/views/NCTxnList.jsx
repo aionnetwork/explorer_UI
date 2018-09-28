@@ -57,7 +57,7 @@ class NCTxnList extends Component
   }
 
   render() {
-    console.log('txn list');
+    //console.log('txn list');
     
     const store = this.props.txnList;
 
