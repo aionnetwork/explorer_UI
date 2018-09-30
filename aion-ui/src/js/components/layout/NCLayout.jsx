@@ -141,15 +141,7 @@ class NCLayout extends Component {
           }}
           text="Hash power"
         />
-         {(false)
-          <MenuItem
-            className="nav-option"
-            onClick={() => {
-              hashHistory.push('/charts/TransactionsoverTime');
-            }}
-            text="Hash power by node"
-          />
-         }
+        
          <MenuItem
             className="nav-option"
             onClick={() => {

@@ -212,7 +212,7 @@ class NCCntrRetrieve extends Component
                   text="Aion (Default)"/>          
         </Popover>
       </div>}*/
-      content={ <NCAccDetail entity={acc}/> }
+      content={ <NCCntrDetail entity={acc}/> }
     />
 
     const txnListSection = <NCExplorerSection 
@@ -291,7 +291,43 @@ class NCCntrRetrieve extends Component
           isLatest={true}/>
         }
     />
+    const tknListSection = <NCExplorerSection 
+      className={""}
+      subtitle={
+        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
+          <Tooltip
+            className="pt-tooltip-indicator"
+            content={<em>coming soon ...</em>}>
+            historical explorer.
+          </Tooltip>
+        </div>
+      }
 
+      isLoading={isBlkListFirstLoad == null}
+      isDataValid={isBlkListValid}
+      isDataEmpty={isBlkListEmpty} 
+      
+      loadingStr={"Loading Blocks"}
+      invalidDataStr={"Server provided an invalid response. Please try again."} 
+      emptyDataStr={
+        <span>No blocks mined by this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
+          <Tooltip
+            className="pt-tooltip-indicator"
+            content={<em>coming soon ...</em>}>
+            historical explorer.
+          </Tooltip>
+        </span>}
+      marginTop={40}
+
+      content={
+        <NCBlkTable 
+          data={blkList}
+          onPageCallback={this.requestPagingBlkList}
+          isLoading={store.isLoadingPagingBlkList}
+          isPaginated={true}
+          isLatest={true}/>
+        }
+    />  
     const eventListSection = <NCExplorerSection 
       className={""}
       subtitle={
@@ -355,6 +391,7 @@ class NCCntrRetrieve extends Component
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
               <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
+              
               <Tab2 id="event" title="Events" panel={eventListSection}/>
             </Tabs2>
           </div>

@@ -71,23 +71,23 @@ export default class NCTknTable extends Component
         width: null,
         flex: true,
       },
+      {
+        name: "Holders",
+        isSortable: false,
+        isFilterable: false,
+        width: null,
+        flex: true,
+        objPath: null,
+      },
+      {
+        name: "Transfers",
+        isSortable: false,
+        isFilterable: false,
+        width: null,
+        flex: true,
+        objPath: null,
+      },
       /*{
-        name: "Contract",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },
-      {
-        name: "Site",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },
-      {
         name: "To Address",
         isSortable: false,
         isFilterable: false,
@@ -128,14 +128,17 @@ export default class NCTknTable extends Component
       let liquidSupply= 0;
       let description = " ";
       let decimal = null;
-      let transaction = 0;
-      let holder = 1;
+      let transactions = 0;
+      let holders = 1;
 
+      let transaction = null;
       let contractHash = null;
       let fromAddr = null;
       let toAddr = null;
       let blockTimestamp = null;
       let value = null;
+
+      console.log(JSON.stringify(entity));
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
@@ -147,10 +150,10 @@ export default class NCTknTable extends Component
         blockTimestamp = entity[4];
         value = entity[3];
       } else {
-        Addr = entity.addr;
-        name = entity.name;
+        Addr = entity.contractAddr;
+        name = entity.contractName;
         blockNumber = entity.blockNumber;
-        creator = entity.creator;
+        creator =  entity.contractCreatorAddr;
 
         token = entity.name;
         symbol = entity.symbol;
@@ -158,8 +161,10 @@ export default class NCTknTable extends Component
         totalSupply = entity.totalSupply;
         liquidSupply= entity.liquidSupply;
         decimal = entity.granularity;
-        transaction = entity.transactionHash;
-        holder = entity.creatorAddress;
+        transaction = entity.contractTxHash;
+
+        transactions = entity.totalTransactions;
+        holders = entity.totalAccounts;
 
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
@@ -206,6 +211,8 @@ export default class NCTknTable extends Component
           entityId={transaction}/> 
         
       </Cell>;
+      tableContent[i][5] = <Cell>{ holders }</Cell>;
+      tableContent[i][6] = <Cell>{ transactions }</Cell>;
      
     });
 

@@ -28,7 +28,7 @@ import * as StoreChartRetrieve from 'stores/StoreChartRetrieve';
 import * as StoreRetrieve from 'stores/StoreRetrieve';
 
 import {BigNumber} from 'bignumber.js';
-import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
+import { nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
 import { tknListType, txnListType, blkListType, accListType, eventListType } from 'lib/NCEnums';
 
 export const PAGE_SIZE = 25;
@@ -642,7 +642,7 @@ export const getCntrRetrieveTopLevel = (queryStr) => {
     }
     
     // get contract details
-    const ep = network.endpoint.account.detail;
+    const ep = network.endpoint.contract.detail;
     let params = [request];
     console.log(ep);
     network.request(ep, params)
@@ -653,12 +653,12 @@ export const getCntrRetrieveTopLevel = (queryStr) => {
       console.log(JSON.stringify(response));
       // ok, make requests for blocks and transactions for this contract
       store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
-      console.log("Coool!");
+      console.log("Coool!"+isCntrEmpty);
       // we can save on a network request if the nonce is zero
       if (!isCntrEmpty) {
         getCntrRetrievePagingTxnList(request, 0);
         getCntrRetrievePagingBlkList(request, 0);
-        getCntrRetrievePagingEventList(request, 0);
+        //getCntrRetrievePagingEventList(request, 0);
         //getAccRetrieveTknList(request, 0);
         console.log("not empty!");
       }
@@ -691,8 +691,11 @@ export const getCntrRetrievePagingTxnList = (queryStr, pageNumber) => {
       // ie. matches up to the contract loaded on-screen
       let acc = store.getState().cntrRetrieve.response.acc;
 
+      //console.log('This is a quite interesting Journey!');
+      //console.log(JSON.stringify(response));
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
-        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+        if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
+            //console.log('thats right!');
             store.dispatch(StoreCntrRetrieve.SetPagingTxn(response));  
         }
       }
@@ -725,7 +728,7 @@ export const getCntrRetrievePagingBlkList = (queryStr, pageNumber) => {
       // ie. matches up to the contract loaded on-screen
       let acc = store.getState().cntrRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
-        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+        if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
             store.dispatch(StoreCntrRetrieve.SetPagingBlk(response));  
         }
       }
@@ -757,7 +760,7 @@ export const getCntrRetrievePagingEventList = (queryStr, pageNumber) => {
       // ie. matches up to the contract loaded on-screen
       let acc = store.getState().cntrRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
-        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+        if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
             store.dispatch(StoreCntrRetrieve.SetPagingEvent(response));  
         }
       }
@@ -789,7 +792,7 @@ export const getCntrRetrieveTknList = (queryStr, pageNumber) => {
       // ie. matches up to the contract loaded on-screen
       let acc = store.getState().accRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
-        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+        if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
             store.dispatch(StoreCntrRetrieve.SetTkn(response));  
         }
       }
@@ -1166,15 +1169,18 @@ export const getChartRetrieve = (queryStr) => {
 
     // get block details
     const ep = network.endpoint.chart.detail;
+    console.log(JSON.stringify(network.endpoint.chart.detail)+"   "+JSON.stringify(request)); 
     let params = [request];
     network.request(ep, params)
     .then((response) => {
       
+        //console.log(JSON.stringify(response)); 
+        //nc_getChartData(response,)
         store.dispatch(StoreChartRetrieve.SetChart(response));
     
     })
     .catch((error) => {
-      //console.log(error);
+      console.log(error);
       store.dispatch(StoreChartRetrieve.SetChart({
         
       }));

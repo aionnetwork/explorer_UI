@@ -20,7 +20,7 @@ export default class NCActiveAddressChart extends Component
                 zoomType: 'x'
             },
             title: {
-                text: 'Active Address Growth'
+                text: 'Block Time Chart'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?

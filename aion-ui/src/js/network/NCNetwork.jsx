@@ -122,17 +122,20 @@ export const endpoint = {
   },
   contract: {
     list: {
-      [cntrListType['ALL']]: {
+
+      link: '/dashboard/getContractList',
+      params: ['page', 'size']
+      /*cntrListType['ALL']]: {
         link: '/dashboard/getContractList',
         params: ['page', 'size']
       },
       [cntrListType['BY_ACCOUNT']]: {
         link: '/dashboard/getcontractByCreator',
         params: ['searchParam']
-      }
+      }*/
     },
     detail: {
-      link: '/dashboard/getTokenDetailsTransfersAndHoldersByContractAddress',
+      link: '/dashboard/getContractDetailsByContractAddress',//a005fba9e3929857d021a75daf1b343bcd82268cf9b4c7bd393a6a23b36966ab
       params: ['searchParam','holdersPage','holdersSize','transfersPage','transfersSize']
     }
   },
@@ -151,7 +154,7 @@ export const endpoint = {
   chart:{
     detail:{
       link:'/dashboard/getGraphingInfo',
-      param:['type']
+      params:['type']
     }
   }
 }

@@ -24,7 +24,7 @@ export default class NCHasshPowerByNodeChart extends Component
         height:'50%' 
     },
     title: {
-        text: 'Top Miners For The Last Week'
+        text: 'Hash Power By Node'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -45,27 +45,7 @@ export default class NCHasshPowerByNodeChart extends Component
     series: [{
         name: 'Mined Blocks',
         colorByPoint: true,
-        data: [{
-            name: 'Chrome',
-            y: 61.41,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'Internet Explorer',
-            y: 11.84
-        }, {
-            name: 'Firefox',
-            y: 10.85
-        }, {
-            name: 'Edge',
-            y: 40.67
-        }, {
-            name: 'QQ',
-            y: 18.2
-        }, {
-            name: 'Other',
-            y: 22.61
-        }]
+        data: data
     }]
 }
 

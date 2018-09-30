@@ -127,6 +127,8 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       let _state = Object.assign({}, state);
       
       _state.isLoadingTopLevel = true; 
+      _state.isLoadingPagingEventList = true;
+
       _state.queryStr = action.data.queryStr;
       
       _state.token = action.data.token;
@@ -149,6 +151,11 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       
       _state.response.acc.data = action.data;
       _state.response.acc.momentUpdated = moment();
+      _state.momentUpdated = moment();
+
+      _state.response.event.data = action.data.content[0].event;
+      console.log('coookfkdflsdlfksdlfklsk'+JSON.stringify(action.data.content[0].events));
+      _state.response.event.momentUpdated = moment();
       _state.momentUpdated = moment();
       
       return _state;
@@ -193,7 +200,7 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       _state.isLoadingPagingTknList = false;
       
       _state.response.tkn.data = action.data;
-      //_state.response.tkn.momentUpdated = moment();
+      _state.response.tkn.momentUpdated = moment();
       //_state.momentUpdated = moment();
 
       return _state;

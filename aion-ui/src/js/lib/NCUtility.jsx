@@ -483,11 +483,12 @@ export function nc_getChartData(data,charttype=null){
   //get first line
   if(charttype!==null){
     let chart =[]
-    if(Array.isArray(data)&&dat.length>1){
-      let chartType = data[0].chartype;
+   
+    if(Array.isArray(data)&&data.length>1){
+      //let chartType = data[0].chartype;
       data.forEach( (record,i)=>{
-        let arr =[record.timestamp,record.value]//datapoint
-        chart.push(arr);//nc_datapoint(record,charttype)
+        //let arr =[record.timestamp,record.value]//datapoint
+        chart.push(nc_datapoint(record,charttype,i));//nc_datapoint(record,charttype)
       })
    
     }else{
@@ -499,17 +500,18 @@ export function nc_getChartData(data,charttype=null){
 
 }
 
-export function nc_datapoint(data,charttype=null){
+export function nc_datapoint(data,charttype=null,i){
 
- if(data.timeStamp && data.value){
+if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(data.detail) && nc_isNumber(data.value)) ){
+  
   let point =[];
 
   switch(charttype){
     case 'line':
-        point =[];
+        point =[data.timestamp,data.value];
         break;  
     case 'pie':        
-        point =[];
+        point ={name:data.detail,y:data.value};
         break;  
     case 'bar':        
         point =[];
@@ -519,9 +521,9 @@ export function nc_datapoint(data,charttype=null){
         break;    
   }
 
-  return chart;
+  return point;
  }else{
-    return;
+    return[0,0];
  }
 
 }

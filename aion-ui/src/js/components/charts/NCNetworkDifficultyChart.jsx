@@ -20,7 +20,7 @@ export default class NCActiveAddressChart extends Component
                 zoomType: 'x'
             },
             title: {
-                text: 'Active Address Growth'
+                text: 'Network Difficulty Chart'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -31,7 +31,7 @@ export default class NCActiveAddressChart extends Component
             },
             yAxis: {
                 title: {
-                    text: 'Address total'
+                    text: 'Difficulty'
                 }
             },
             legend: {
