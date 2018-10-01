@@ -67,7 +67,7 @@ export default class NCActiveAddressChart extends Component
 
             series: [{
                 type: 'area',
-                name: 'Active Address Growth',
+                name: 'Block Times Chart',
                 data: data
             }]
         }

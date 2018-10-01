@@ -153,8 +153,8 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       _state.response.acc.momentUpdated = moment();
       _state.momentUpdated = moment();
 
-      _state.response.event.data = action.data.content[0].event;
-      console.log('coookfkdflsdlfksdlfklsk'+JSON.stringify(action.data.content[0].events));
+      _state.response.event.data = action.data.content[0].events;
+      //console.log('coookfkdflsdlfksdlfklsk'+JSON.stringify(action.data.content[0].events));
       _state.response.event.momentUpdated = moment();
       _state.momentUpdated = moment();
       
@@ -247,7 +247,7 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       _state.response.event.momentUpdated = moment();
       _state.momentUpdated = moment();
 
-      console.log('event moment');
+      //console.log('event moment');
       
       return _state;
     }

@@ -58,10 +58,10 @@ class NCCntrList extends Component
   }
 
   render() {
-    console.log('contract list view');
+    //console.log('contract list view');
     
     const store = this.props.cntrList;
-    console.log(JSON.stringify(store));
+    //console.log(JSON.stringify(store));
 
     const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
@@ -103,7 +103,7 @@ class NCCntrList extends Component
         emptyDataStr = "No contracts found involving account "+ nc_hexPrefix(store.queryStr) + "."
       }
     }
-    console.log('contract list view 2');
+    //console.log('contract list view 2');
     const page =
       <div> 
         <NCExplorerHead

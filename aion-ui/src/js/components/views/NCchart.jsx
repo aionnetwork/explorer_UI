@@ -18,6 +18,7 @@ import NCExplorerSection from 'components/common/NCExplorerSection';
 
 //list of charts
 import NCActiveAddressChart from 'components/charts/NCActiveAddressChart';
+import NCTransactionsChart from 'components/charts/NCActiveAddressChart';
 import NCNetworkDifficultyChart from 'components/charts/NCNetworkDifficultyChart';
 import NCTopMinersChart from 'components/charts/NCTopMinersChart';
 import NCBlockTimesChart from 'components/charts/NCBlockTimesChart';
@@ -47,7 +48,7 @@ class NCChartRetrieve extends Component
   }
 
   componentDidMount() {
-    console.log('get data');
+    //console.log('get data');
     this.parseChart(this.props.params.chartId);
     this.request();
   }
@@ -58,7 +59,7 @@ class NCChartRetrieve extends Component
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.params.chartId != this.props.params.chartId){
-      console.log('get data update');
+      //console.log('get data update');
       this.parseChart(this.props.params.chartId);
       this.request();
     }
@@ -95,7 +96,7 @@ class NCChartRetrieve extends Component
         this.chartData.id = 3;
         break;    
     case 'TransactionsoverTime':
-        this.chartData.chart = <NCActiveAddressChart  />
+        this.chartData.chart = <NCTransactionsChart  />
         this.chartData.description = "Transactions Over Time";
         this.chartData.type="line";
         this.chartData.id = 4;
@@ -111,13 +112,13 @@ class NCChartRetrieve extends Component
         this.chartData.chart = 'Invalid data';
         break;
     }
-    console.log(this.chartData.description);
+    //console.log(this.chartData.description);
     return;
 
   }
 
   request = () => {
-    console.log('Chart params: '+this.chartData.id);
+    //console.log('Chart params: '+this.chartData.id);
     network.getChartRetrieve(this.chartData.id);
   }
 
@@ -128,11 +129,11 @@ class NCChartRetrieve extends Component
 
     const store = this.props.chartRetrieve;
 
-    console.log(JSON.stringify(store));
+    //console.log(JSON.stringify(store));
 
     const data =  nc_getChartData(store.response.content,this.chartData.type);
 
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const queryStr = store.queryStr;

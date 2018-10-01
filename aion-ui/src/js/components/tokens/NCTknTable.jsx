@@ -120,7 +120,7 @@ export default class NCTknTable extends Component
   generateTableContent(entityList) 
   {
     let tableContent = [];
-    console.log('tkn table');
+    //console.log('tkn table');
     entityList.forEach((entity, i) => 
     {
       let blockNumber = null;
