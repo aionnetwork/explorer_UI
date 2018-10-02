@@ -61,7 +61,7 @@ export default class NCTxnDetail extends Component
     [
       {
         field: "Created",
-        value: moment.unix(entity.creationTimestamp/1000000).format('LLLL'),
+        value: moment.unix(entity.creationTimestamp).format('LLLL'),
       },
       {
         field: "Contract",

@@ -64,6 +64,11 @@ class NCAccRetrieve extends Component
     network.getAccRetrievePagingTxnList(queryStr, pageNumber);
   }
 
+  requestDownload = (type, data) => {
+    //const queryStr = this.props.accRetrieve.queryStr;
+    network.RetrieveDownload(type, data);
+  }
+
   requestPagingBlkList = (pageNumber) => {
     const queryStr = this.props.accRetrieve.queryStr;
     network.getAccRetrievePagingBlkList(queryStr, pageNumber);
@@ -309,6 +314,9 @@ class NCAccRetrieve extends Component
             </Tabs2>
           </div>
         }
+        <hr className="nc-hr"/>
+        <Button onClick={this.requestDownload('Account',store)} className = "pt-button pt-minimal pull-right" rightIconName="Download" text="Download this page" />
+        
       </div>;
 
     return (
@@ -321,7 +329,9 @@ class NCAccRetrieve extends Component
         invalidDataStr={"Account Service Unavailable. Account data invalid."}
         emptyDataStr={"No account found for descriptor: " + desc + "."}
         
-        page={page}/>
+        page={page}
+
+        />
     );
   }
 }

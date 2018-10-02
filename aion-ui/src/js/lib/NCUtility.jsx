@@ -529,7 +529,9 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
 }
 
 
-
+export function nc_compare(a,b) {
+  return a.y-b.y;
+}
 
 
 

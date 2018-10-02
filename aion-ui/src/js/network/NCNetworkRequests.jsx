@@ -447,11 +447,15 @@ export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
   else {
     // get transaction list
     const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, PAGE_SIZE];
+    console.log('ep:'+JSON.stringify(ep));
+    let params = [queryStr,'' ,pageNumber, PAGE_SIZE];
+    console.log('params:'+JSON.stringify(params));
     network.request(ep, params)
     .then((response) => {
       // ok, now make sure that the response you got is still valid
       // ie. matches up to the account loaded on-screen
+
+      console.log('oooo:'+JSON.stringify(response));
       let acc = store.getState().accRetrieve.response.acc;
 
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
@@ -1146,7 +1150,36 @@ export const getRetrieveTopLevel = (queryStr) => {
   }
 }
 
+export const RetrieveDownload =(type, data) => {
 
+   if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    
+   }
+   else {
+    // sanitize input string
+    let request = nc_trim(type);
+
+    // get block details
+    const ep = network.endpoint.download.detail;
+     
+    let params = [request, data];
+    network.postRequest(ep, params)
+    .then((response) => {
+      
+        console.log(JSON.stringify(response)); 
+        //nc_getChartData(response,)
+        //store.dispatch(StoreChartRetrieve.SetChart(response));
+    
+    })
+    .catch((error) => {
+      console.log(error);
+      /*store.dispatch(StoreChartRetrieve.SetChart({
+        
+      }));*/
+    });
+  }
+
+}
 export const getChartRetrieve = (queryStr) => {
   store.dispatch(StoreChartRetrieve.GetChart({
     queryStr: queryStr

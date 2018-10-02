@@ -5,17 +5,40 @@ import moment from 'moment';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
+import Exporting from 'highcharts/modules/exporting';
+Exporting(Highcharts);
+
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
 import {BigNumber} from 'bignumber.js';
+import { nc_compare } from 'lib/NCUtility';
+
 
 export default class NCTopMinersChart extends Component
 {
   render() {
     let { entity, options, data} = this.props;
     //console.log('pie chart');
+
+    let points = data.sort(nc_compare);
+    console.log(JSON.stringify(points));
+
     const option = {
+
+    exporting: {
+        chartOptions: { // specific options for the exported image
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        allowOverlap: true
+                    }
+                }
+            }
+        },
+        fallbackToExportServer: false
+    },
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -24,11 +47,12 @@ export default class NCTopMinersChart extends Component
         height:'50%' 
     },
     title: {
-        text: 'Top Miners For The Last Week'
+        text: 'Top Miners For The Past 7 days'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
     },
+    credits:{enabled:false},
     plotOptions: {
         pie: {
             allowPointSelect: true,

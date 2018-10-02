@@ -156,6 +156,12 @@ export const endpoint = {
       link:'/dashboard/getGraphingInfo',
       params:['type']
     }
+  },
+  download:{
+    detail:{
+      link:'/dashboard/exportToCsv',
+      params:['type','data']
+    }
   }
 }
 
@@ -198,6 +204,45 @@ export const request = async (endpoint, params) =>
   });
 }
 
+
+export const postRequest = async (endpoint, params) => 
+{
+  //console.log(JSON.stringify(endpoint));
+  return new Promise((resolve, reject) => 
+  {
+    let args = { params: {} };
+    if (Array.isArray(params)) {
+      params.forEach((value, i) => {
+        args.params[endpoint.params[i]] = value;
+      });
+    }
+    
+    if (net == null && BASE_URL) {
+      net = axios.create({
+          baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL),
+          timeout: ms('2min')
+        });
+    }
+
+    if (net) {
+      net.post(endpoint.link, args)
+      .then((response) => {
+        
+        if (response.status == 200 && response.data)
+          resolve(response.data);
+        else {
+          reject("ERR: Bad API response.");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        reject("ERR: Bad API response.")
+      });
+    } else {
+      reject("ERR: API not initialized");
+    }
+  });
+}
 //eRequest('pro-api.coinmarketcap.com/v1/cryptocurrency/',true,'/listings/latest','{start: 1,limit: 5,convert: "USD"}',"{'X-CMC_PRO_API_KEY': 'e2738416-a8f2-4b17-ba40-eb376dff4d15'}");
 //External Endpoint Request
 export const eRequest = async(url,ssl,endpoint, params, headers) => {

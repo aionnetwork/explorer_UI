@@ -90,7 +90,7 @@ export default class NCTopLevelSearch extends Component
 
                 position={Position.BOTTOM_RIGHT}>
                 <Button className={"pt-minimal pt-min-toplvl"} rightIconName={"caret-down"}>
-                    Filter By
+                    Filter By  {NCEntityInfo[this.state.entity].name}
                 </Button>
             </Popover>
         );

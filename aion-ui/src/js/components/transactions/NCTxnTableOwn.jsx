@@ -98,6 +98,7 @@ export default class NCTxnTableOwn extends Component
       let toAddr = null;
       let blockTimestamp = null;
       let value = null;
+      let transferTimestamp =null;
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
@@ -112,7 +113,7 @@ export default class NCTxnTableOwn extends Component
         transactionHash = entity.transactionHash;
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
-        blockTimestamp = entity.blockTimestamp;
+        transferTimestamp = entity.transferTimestamp;
         value = entity.value;
       }
 
@@ -133,7 +134,7 @@ export default class NCTxnTableOwn extends Component
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
-      tableContent[i][1] = <Cell>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+      tableContent[i][1] = <Cell>{ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
       tableContent[i][2] = <Cell>{ value ? nc_numFormatterAionCoin(value, 0, true) : 0 }</Cell>;
       tableContent[i][3] = 
       <Cell>
