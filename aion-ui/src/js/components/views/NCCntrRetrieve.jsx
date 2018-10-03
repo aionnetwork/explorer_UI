@@ -7,6 +7,7 @@ import moment from 'moment';
 import { Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 
+import NCEventTable from 'components/contracts/NCEventTable';
 import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 
@@ -142,7 +143,7 @@ class NCCntrRetrieve extends Component
     const tokens=[{name:'Token',symbol:'test'},{name:'Token1',symbol:'test1'}]
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
-    console.log("page Data for retrieve: "+JSON.stringify(store.response));
+    //console.log("page Data for retrieve: "+JSON.stringify(store.response));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
@@ -159,13 +160,15 @@ class NCCntrRetrieve extends Component
 
     const isTxnListValid = nc_isListValid(txnList);
     const isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
+    console.log("heeey!"+JSON.stringify(eventList));
+    
 
     const isBlkListValid = nc_isListValid(blkList);
     const isBlkListEmpty = nc_isListEmpty(blkList, isBlkListValid);
 
     const isEventListValid = nc_isListValid(eventList);
     const isEventListEmpty = nc_isListEmpty(eventList, isEventListValid);
-
+    console.log(isEventListEmpty+""+isEventListValid);
     const acc = isAccEmpty ? {} : accObj.content[0];
     
     const breadcrumbs = [
@@ -357,7 +360,7 @@ class NCCntrRetrieve extends Component
       marginTop={40}
 
       content={
-        <NCBlkTable 
+        <NCEventTable 
           data={eventList}
           onPageCallback={this.requestPagingEventList}
           isLoading={store.isLoadingPagingEventList}
@@ -389,8 +392,15 @@ class NCCntrRetrieve extends Component
           (!isWeb3 && !isAccEmpty) &&  
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-              <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
-              <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
+              {
+                (isTxnListValid) &&
+                <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
+              }
+              
+              {
+                (isBlkListValid) &&
+                <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
+              }
               
               <Tab2 id="event" title="Events" panel={eventListSection}/>
             </Tabs2>

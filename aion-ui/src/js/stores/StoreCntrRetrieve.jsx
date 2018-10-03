@@ -108,7 +108,7 @@ let initialState_StoreCntrRetrieve =
       momentUpdated: null
     },
     event: {
-      data: null,
+      data: {content:null},
       momentUpdated: null
     },
     momentUpdated: null,
@@ -151,11 +151,15 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       
       _state.response.acc.data = action.data;
       _state.response.acc.momentUpdated = moment();
+
+      _state.response.event.data.content = action.data.content[0].events;
+      _state.response.event.momentUpdated = moment();
+
       _state.momentUpdated = moment();
 
-      _state.response.event.data = action.data.content[0].events;
+      //_state.response.event.data = action.data.content[0].events;
       //console.log('coookfkdflsdlfksdlfklsk'+JSON.stringify(action.data.content[0].events));
-      _state.response.event.momentUpdated = moment();
+      //_state.response.event.momentUpdated = moment();
       _state.momentUpdated = moment();
       
       return _state;

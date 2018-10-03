@@ -66,7 +66,7 @@ export default class NCTxnDetail extends Component
       {
         field: "Contract",
         value: <NCEntityLabel
-                  entityType={NCEntity.TKN}
+                  entityType={NCEntity.CNTR}
                   entityId={entity.contractAddr}
                   linkActive={true}/>,
       },

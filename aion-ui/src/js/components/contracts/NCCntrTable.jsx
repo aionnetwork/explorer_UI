@@ -24,7 +24,7 @@ import { nc_numFormatterAionCoin } from 'lib/NCUtility';
     height:"100px",
   }
 
-export default class NCTknTable extends Component 
+export default class NCCntrTable extends Component 
 {
   constructor(props) {
     super(props);
@@ -71,7 +71,7 @@ export default class NCTknTable extends Component
         width: null,
         flex: true,
       },
-      {
+      /*{
         name: "Holders",
         isSortable: false,
         isFilterable: false,
@@ -87,7 +87,7 @@ export default class NCTknTable extends Component
         flex: true,
         objPath: null,
       },
-      /*{
+      {
         name: "To Address",
         isSortable: false,
         isFilterable: false,
@@ -211,8 +211,8 @@ export default class NCTknTable extends Component
           entityId={transaction}/> 
         
       </Cell>;
-      tableContent[i][5] = <Cell>{ holders }</Cell>;
-      tableContent[i][6] = <Cell>{ transactions }</Cell>;
+      //tableContent[i][5] = <Cell>{ holders }</Cell>;
+      //tableContent[i][6] = <Cell>{ transactions }</Cell>;
      
     });
 

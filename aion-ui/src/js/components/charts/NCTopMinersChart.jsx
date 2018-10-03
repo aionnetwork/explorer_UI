@@ -31,13 +31,17 @@ export default class NCTopMinersChart extends Component
             plotOptions: {
                 series: {
                     dataLabels: {
-                        enabled: true,
-                        allowOverlap: true
+                        enabled: true,                        
                     }
                 }
             }
         },
-        fallbackToExportServer: false
+        sourceWidth: 2000,
+        fallbackToExportServer: false,
+        csv: {
+            
+            dateFormat: '%Y-%m-%d'
+        }
     },
     chart: {
         plotBackgroundColor: null,
