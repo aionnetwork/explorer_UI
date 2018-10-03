@@ -1,17 +1,17 @@
 {
-  "api": {
-    "base_url": "mainnet-api.aion.network/aion",
-    "https_enabled": true
-  },
-  "network_list": [
-    {
-      "name": "Mainnet",
-      "url": ""
-    },
-    {
-      "name": "Testnet Mastery",
-      "url": "https://mastery.aion.network"
-    }
-  ],
-  "ga_key":"UA-121993888-1"
+ "api": {
+   "base_url": "mainnet-api.aiondev.network/aion",
+   "https_enabled": true
+ },
+ "network_list": [
+   {
+     "name": "Mainnet",
+     "url": ""
+   },
+   {
+     "name": "Mastery",
+     "url": "https://mastery.aiondev.network"
+   }
+ ],
+ "ga_key":"UA-121993888-1"
 }
