@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+import classNames from "classnames";
 import React, { Component } from 'react';
 import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
@@ -7,7 +8,7 @@ import { connect } from 'react-redux';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
+import { Button,Overlay, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
 import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table"
 
 import NCTableBase from 'components/common/NCTableBase';
@@ -24,7 +25,9 @@ import { nc_numFormatterAionCoin } from 'lib/NCUtility';
     height:"100px",
   }
 
-export default class NCEventTable extends Component 
+  
+
+export default class NCEventTable extends Component
 {
   constructor(props) {
     super(props);
@@ -102,6 +105,16 @@ export default class NCEventTable extends Component
     this.generateTableContent = this.generateTableContent.bind(this);
   }
 
+   
+   button: HTMLButtonElement;
+   
+   refHandlers = {
+        button: (ref: HTMLButtonElement) => (this.button = ref),
+    };
+
+   handleOpen = () => this.setState({ isOpen: true });
+
+   handleClose = () => this.setState({ isOpen: false });
  
    parseTxnLog = (txnLog) => {
     if (txnLog == null) return false;
@@ -224,12 +237,25 @@ export default class NCEventTable extends Component
 
       }
 
+      const state = {
+        autoFocus: true,
+        canEscapeKeyClose: true,
+        canOutsideClickClose: true,
+        enforceFocus: true,
+        hasBackdrop: true,
+        isOpen: false,
+        usePortal: true,
+    };
+
       const estyle = {height:'200px',padding:'10px',background:'#f00',border:'#ff0 solid'};
       const fstyle = {height:'200px',padding:'10px',background:'#00f', top:'50px',};
+      const classes = classNames(Classes.CARD, Classes.ELEVATION_4, OVERLAY_EXAMPLE_CLASS, this.props.data.themeName);
+      const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition"; 
+
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell>
+      <Cell >
         
         
         {id}
@@ -241,16 +267,41 @@ export default class NCEventTable extends Component
      
       tableContent[i][2] = 
       <Cell>
-           {name}
-         
+           
+           <Button elementRef={this.refHandlers.button} onClick={this.handleOpen} text="Show overlay" />
+         <Overlay onClose={this.handleClose} className={Classes.OVERLAY_SCROLL_CONTAINER} {...this.state}>
+                    <div className={classes}>
+                        <h3> I'm an Overlay!</h3>
+                        <p>
+                            This is a simple container with some inline styles to position it on the screen. Its CSS
+                            transitions are customized for this example only to demonstrate how easily custom
+                            transitions can be implemented.
+                        </p>
+                        <p>
+                            Click the right button below to transfer focus to the "Show overlay" trigger button outside
+                            of this overlay. If persistent focus is enabled, focus will be constrained to the overlay.
+                            Use the <code>tab</code> key to move to the next focusable element to illustrate this
+                            effect.
+                        </p>
+                        <br />
+                        <Button intent={Intent.DANGER} onClick={this.handleClose}>
+                            Close
+                        </Button>
+                        <Button onClick={this.focusButton} style={{ float: "right" }}>
+                            Focus button
+                        </Button>
+                    </div>
+                </Overlay>
       </Cell>;
       tableContent[i][3] = 
       <Cell
 
       truncated={false}
-      wrapText={true} >
-          <div style={estyle} >{entity.inputList}<br/>
-         {entity.parameterList} </div>       
+      wrapText={true} 
+      
+      >
+         {entity.inputList}
+         {entity.parameterList}      
       </Cell>;
       
       //tableContent[i][5] = <Cell>{ holders }</Cell>;
@@ -262,6 +313,7 @@ export default class NCEventTable extends Component
   }
   
   render() {
+    const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition";
     const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
     
     return (
@@ -270,7 +322,7 @@ export default class NCEventTable extends Component
         onPageCallback={onPageCallback}
         isLoading={isLoading}
         isPaginated={isPaginated}
-        entityName={"Tokens"}
+        entityName={"Events"}
         generateTableContent={this.generateTableContent}
         columnDescriptor={this.columnDescriptor}
         isLatest={isLatest}/>
