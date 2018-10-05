@@ -15,7 +15,7 @@ export default class NCDwnRetrieve extends Component
   }
   render() {  
     
-    const style = {position:'relative','text-align':'center',width:'100%',margin:'auto',top:'100px',padding:'25px' };
+    const style = {position:'relative',textAlign:'center',width:'100%',margin:'auto',top:'100px',padding:'25px' };
     const recapcontainer = {position:'relative',width:'310px',margin:'auto',top:'100px',padding:'5px' };
     const stylerecaptcha = {margin:'auto', };
     return (

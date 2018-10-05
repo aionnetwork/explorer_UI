@@ -16,6 +16,9 @@ export default class NCHasshPowerByNodeChart extends Component
     let { entity, options, data} = this.props;
 
     const option = {
+        exporting: {
+                enabled:false,
+            },
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,

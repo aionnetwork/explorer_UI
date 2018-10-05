@@ -30,6 +30,7 @@ export default class NCTopMinersChart extends Component
         chartOptions: { // specific options for the exported image
             plotOptions: {
                 series: {
+
                     dataLabels: {
                         enabled: true,                        
                     }
@@ -58,16 +59,23 @@ export default class NCTopMinersChart extends Component
     },
     credits:{enabled:false},
     plotOptions: {
+
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
+
             dataLabels: {
                 enabled: true,
                 format: '{point.percentage:.1f} %',
                 style: {
                     color:  'black'
                 }
-            }
+            },
+            events: {
+                    click: function({point}) {
+                        location.href = 'https://mainnet.aion.network/#/block/'+point.name;
+                    }
+                }
         }
     },
     series: [{

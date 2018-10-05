@@ -648,23 +648,23 @@ export const getCntrRetrieveTopLevel = (queryStr) => {
     // get contract details
     const ep = network.endpoint.contract.detail;
     let params = [request];
-    console.log(ep);
+    //console.log(ep);
     network.request(ep, params)
     .then((response) => {
       const isCntrValid = nc_isObjectValid(response);
       const isCntrEmpty = nc_isObjectEmpty(response, isCntrValid);
 
-      console.log(JSON.stringify(response));
+      //console.log(JSON.stringify(response));
       // ok, make requests for blocks and transactions for this contract
       store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
-      console.log("Coool!"+isCntrEmpty);
+      //console.log("Coool!"+isCntrEmpty);
       // we can save on a network request if the nonce is zero
       if (!isCntrEmpty) {
         getCntrRetrievePagingTxnList(request, 0);
         getCntrRetrievePagingBlkList(request, 0);
         //getCntrRetrievePagingEventList(request, 0);
         //getAccRetrieveTknList(request, 0);
-        console.log("not empty!");
+        //console.log("not empty!");
       }
     })
     .catch((error) => {
@@ -725,7 +725,7 @@ export const getCntrRetrievePagingBlkList = (queryStr, pageNumber) => {
   else {
     const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
     let params = [queryStr, pageNumber, PAGE_SIZE];
-    console.log('I am here on the block!');
+    //console.log('I am here on the block!');
     network.request(ep, params)
     .then((response) => {
       // ok, now make sure that the response you got is still valid

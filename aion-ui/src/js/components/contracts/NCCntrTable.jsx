@@ -39,14 +39,14 @@ export default class NCCntrTable extends Component
         flex: true,
         
       },
-      {
+      /*{
         name: "Name",
         isSortable: false,
         isFilterable: false,
         width: 150,
         flex: false,
         
-      },
+      },*/
      
       {
         name: "Block",
@@ -185,9 +185,9 @@ export default class NCCntrTable extends Component
         
        </Cell>
       ;
-      tableContent[i][1] = <Cell>{ name }</Cell>;
+      //tableContent[i][1] = <Cell>{ name }</Cell>;
      
-      tableContent[i][2] = 
+      tableContent[i][1] = 
       <Cell>
            <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
@@ -195,7 +195,7 @@ export default class NCCntrTable extends Component
           entityId={blockNumber}/> 
          
       </Cell>;
-      tableContent[i][3] = 
+      tableContent[i][2] = 
       <Cell>
           <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
@@ -203,7 +203,7 @@ export default class NCCntrTable extends Component
           entityId={creator}/> 
         
       </Cell>;
-      tableContent[i][4] = 
+      tableContent[i][3] = 
       <Cell>
           <NCEntityLabel 
           entityType={NCEntity.TXN} 
@@ -228,7 +228,7 @@ export default class NCCntrTable extends Component
         onPageCallback={onPageCallback}
         isLoading={isLoading}
         isPaginated={isPaginated}
-        entityName={"Tokens"}
+        entityName={"Contracts"}
         generateTableContent={this.generateTableContent}
         columnDescriptor={this.columnDescriptor}
         isLatest={isLatest}/>

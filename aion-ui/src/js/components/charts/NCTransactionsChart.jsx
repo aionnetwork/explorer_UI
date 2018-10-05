@@ -16,11 +16,14 @@ export default class NCTransactionsChart extends Component
     let { entity, options, data} = this.props;
 
     const option = {
+            exporting: {
+                enabled:false,
+            },
             chart: {
                 zoomType: 'x'
             },
             title: {
-                text: 'Active Address Growth'
+                text: 'Transaction per Hour'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -31,12 +34,13 @@ export default class NCTransactionsChart extends Component
             },
             yAxis: {
                 title: {
-                    text: 'Address total'
+                    text: 'Transactions'
                 }
             },
             legend: {
                 enabled: false
             },
+            credits:{enabled:false},
             plotOptions: {
                 area: {
                     fillColor: {

@@ -5,6 +5,9 @@ import moment from 'moment';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
+import Exporting from 'highcharts/modules/exporting';
+Exporting(Highcharts);
+
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
@@ -16,6 +19,9 @@ export default class NCActiveAddressChart extends Component
     let { entity, options, data} = this.props;
 
     const option = {
+            exporting: {
+                enabled:false,
+            },
             chart: {
                 zoomType: 'x'
             },
@@ -37,6 +43,7 @@ export default class NCActiveAddressChart extends Component
             legend: {
                 enabled: false
             },
+            credits:{enabled:false},
             plotOptions: {
                 area: {
                     fillColor: {

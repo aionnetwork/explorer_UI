@@ -4,7 +4,7 @@ import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
+import {AnchorButton, Classes, Intent, Dialog, Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 
 import NCEventTable from 'components/contracts/NCEventTable';
@@ -160,7 +160,7 @@ class NCCntrRetrieve extends Component
 
     const isTxnListValid = nc_isListValid(txnList);
     const isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-    console.log("heeey!"+JSON.stringify(eventList));
+    //console.log("heeey!"+JSON.stringify(eventList));
     
 
     const isBlkListValid = nc_isListValid(blkList);
@@ -168,7 +168,7 @@ class NCCntrRetrieve extends Component
 
     const isEventListValid = nc_isListValid(eventList);
     const isEventListEmpty = nc_isListEmpty(eventList, isEventListValid);
-    console.log(isEventListEmpty+""+isEventListValid);
+    //console.log(isEventListEmpty+""+isEventListValid);
     const acc = isAccEmpty ? {} : accObj.content[0];
     
     const breadcrumbs = [
@@ -391,6 +391,7 @@ class NCCntrRetrieve extends Component
         {
           (!isWeb3 && !isAccEmpty) &&  
           <div className="NCSection">
+             
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               {
                 (isTxnListValid) &&

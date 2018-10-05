@@ -23,7 +23,7 @@ export default class NCTableReactPaginated extends Component
   }
 
   render() {
-    const { data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
+    const { dialog, data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
     const list = data.content;
     let tableList = list;
 
@@ -73,7 +73,8 @@ export default class NCTableReactPaginated extends Component
         <NCTableReact
           data={tableList}
           generateTableContent={generateTableContent}
-          columnDescriptor={columnDescriptor}/>
+          columnDescriptor={columnDescriptor}
+          dialog={dialog}/>
       </div>
     );
   }

@@ -131,7 +131,7 @@ export default class NCTableReact extends Component
 
   render() {
 
-    let { data, generateTableContent, columnDescriptor } = this.props;
+    let { dialog, data, generateTableContent, columnDescriptor } = this.props;
 
     let filteredData = this.runFilter(data);
     let sortedData = this.runSort(filteredData);

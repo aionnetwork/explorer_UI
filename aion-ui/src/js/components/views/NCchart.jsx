@@ -18,7 +18,7 @@ import NCExplorerSection from 'components/common/NCExplorerSection';
 
 //list of charts
 import NCActiveAddressChart from 'components/charts/NCActiveAddressChart';
-import NCTransactionsChart from 'components/charts/NCActiveAddressChart';
+import NCTransactionsChart from 'components/charts/NCTransactionsChart';
 import NCNetworkDifficultyChart from 'components/charts/NCNetworkDifficultyChart';
 import NCTopMinersChart from 'components/charts/NCTopMinersChart';
 import NCBlockTimesChart from 'components/charts/NCBlockTimesChart';
@@ -97,7 +97,7 @@ class NCChartRetrieve extends Component
         break;    
     case 'TransactionsoverTime':
         this.chartData.chart = <NCTransactionsChart  />
-        this.chartData.description = "Transactions Over Time";
+        this.chartData.description = "Transactions Per Hour";
         this.chartData.type="line";
         this.chartData.id = 4;
         break;  
@@ -132,14 +132,12 @@ class NCChartRetrieve extends Component
     //console.log(JSON.stringify(store));
 
     const data =  nc_getChartData(store.response.content,this.chartData.type);
-
-    //console.log(JSON.stringify(data));
+    store.response.content =[];
+    
+    console.log(JSON.stringify(data));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const queryStr = store.queryStr;
-
-    //console.log(JSON.stringify(store));
-    //const data = nc_getChartData(store.content, type);
 
     const desc = this.chartData.description;
 
@@ -154,34 +152,8 @@ class NCChartRetrieve extends Component
 
     const blk = isBlkEmpty ? {} : blkObj.content[0]; 
 
-    let chart = '';  
-   
+    let chart = '';    
 
-    /*switch(Number(desc)){
-    case 1:
-          chart = <NCActiveAddressChart data={data} />
-          break;  
-    case 2:        
-        chart = <NCNetworkDifficultyChart data={data} />
-        break;  
-    case 3:        
-        chart = <NCTopMinersChart  data={data} /> 
-        break;                
-    case 4:
-        chart = <NCActiveAddressChart data={data} />
-        break;    
-    case 5:
-        chart = <NCBlockTimesChart data={data} />
-        break;  
-    case 6:
-        
-        chart = <NCHashPowerByNodeChart data={data} />
-        break;  
-    case 7:
-        chart = <NCHashPowerChart data={data} />
-    }*/
-
-    //console.log("yeeeeaaaaa!" + chart);
 
     const breadcrumbs = [
       {
@@ -207,13 +179,9 @@ class NCChartRetrieve extends Component
           breadcrumbs={breadcrumbs}
           title={"Chart"}
           subtitle={desc}
-
-
         />  
 
-        {React.cloneElement(this.chartData.chart, {data: data})}
-
-        
+        {React.cloneElement(this.chartData.chart, {data: data})}   
 
        
 

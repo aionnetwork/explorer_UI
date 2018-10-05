@@ -6,9 +6,10 @@ import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
+import NCDialog from 'components/common/NCDialog';
 
 import moment from 'moment';
-import { Button,Overlay, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
+import { Tooltip, AnchorButton, Dialog,Button,Overlay, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
 import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table"
 
 import NCTableBase from 'components/common/NCTableBase';
@@ -32,28 +33,37 @@ export default class NCEventTable extends Component
   constructor(props) {
     super(props);
 
+    this.dialog =  <Dialog
+                    className={''}
+                    isOpen= {false}
+                    icon="info-sign"
+                    onClose={this.handleClose}
+                    title="Palantir Foundry"
+                    autoFocus= {true}
+                    canEscapeKeyClose= {true}
+                    canOutsideClickClose= {true}
+                    enforceFocus= {true}
+                    hasBackdrop= {true}
+                    usePortal= {true}
+                    
+                >
+                   <p>Just cheching</p>
+              </Dialog>
+
     this.columnDescriptor = 
     [
       {
-        name: "Event Id",
+        name: "Block #",
         isSortable: false,
         isFilterable: false,
-        width: 100,
+        width: null,
 
-        flex: false,
+        flex: true,
         
       },
+          
       {
         name: "Name",
-        isSortable: false,
-        isFilterable: false,
-        width: 150,
-        flex: false,
-        
-      },
-     
-      {
-        name: "timestamp",
         isSortable: false,
         isFilterable: false,
         width: 150,
@@ -62,11 +72,18 @@ export default class NCEventTable extends Component
       },
       
       {
-        name: "Event Logs", // arrow
+        name: "Event timestamp", // arrow
         isSortable: false,
         isFilterable: false,
-        width: 400,
-        flex: true,
+        width: 250,
+        flex: false,
+      },
+      {
+        name: "Event logs", // arrow
+        isSortable: false,
+        isFilterable: false,
+        width: 100,
+        flex: false,
       },
       /*{
         name: "Holders",
@@ -112,53 +129,46 @@ export default class NCEventTable extends Component
         button: (ref: HTMLButtonElement) => (this.button = ref),
     };
 
-   handleOpen = () => this.setState({ isOpen: true });
+   handleOpen = (input, param) => this.setState({ isOpen: true });
 
    handleClose = () => this.setState({ isOpen: false });
  
-   parseTxnLog = (txnLog) => {
-    if (txnLog == null) return false;
+   parseInputData = (txnLog) => {
+    let result = "";
     try {
-      let parsed = JSON.parse(txnLog);
-
-      if (!parsed || parsed.length == 0)
-        return false;
-
-      return(JSON.stringify(parsed, undefined, 2))
+      let a = txnLog.slice(1,-1);
+      let inputstr = a.split('\"').join('');
+      result = inputstr.split(",");
     } catch (e) {
       console.log(e);
       return false;
     }
+    return result;
   }
 
-  parseInputData = (data) => {
+  parseParamData = (data) => {
     let result = "";
     try {
-      // get the function header
-      if (data.length > 0) {
-        result += data.substring(0, 8) + '\n';
-        data = data.substring(8);
-      }
-
-      while (data.length > 0) {
-        result += data.substring(0, 32) + '\n';
-        data = data.substring(32);
-      }
+      let b = data.slice(1,-1);
+      let paramstr = b.split('\"').join('');
+      result = paramstr.split(",");
     } catch (e) {
       console.log(e);
     }
     return result;
   } 
 
+  
+
   generateTableContent(entityList) 
   {
     let tableContent = [];
-    console.log('tkn table');
+    //console.log('tkn table');
     entityList.forEach((entity, i) => 
     {
-      let parsedTxnLog = this.parseTxnLog(entity.inputList);
-      let parsedInputData = this.parseInputData(entity.parameterList);
-
+      let parsedInputData = null;//this.parseTxnLog(entity.inputList);
+      let parsedParamData = null;//this.parseInputData(entity.parameterList);
+      let parsedLogs = null;
         let str = "";
       str = entity.name+" -> ";
 
@@ -176,28 +186,11 @@ export default class NCEventTable extends Component
       let Addr = null;
       let name = null;
       let blockNumber = null;
-      let creator = null;
-
-      let token = null;
-      let symbol = null;
       
-      let totalSupply = null;
-      let liquidSupply= 0;
-      let description = " ";
-      let decimal = null;
-      let transactions = 0;
-      let holders = 1;
-
-      let transaction = null;
-      let contractHash = null;
-      let fromAddr = null;
-      let toAddr = null;
-      let blockTimestamp = null;
-      let value = null;
-
+      let timestamp = null;
       let id = null;
 
-      console.log(JSON.stringify(entity));
+      //console.log(JSON.stringify(entity));
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
@@ -212,64 +205,42 @@ export default class NCEventTable extends Component
         Addr = entity.contractAddr;
         name = entity.name;
         blockNumber = entity.blockNumber;
-        creator =  entity.contractCreatorAddr;
-
-        token = entity.name;
-        symbol = entity.symbol;
-        
-        totalSupply = entity.totalSupply;
-        liquidSupply= entity.liquidSupply;
-        decimal = entity.granularity;
-        transaction = str;
-
-        transactions = entity.inputList;
-        holders = entity.totalAccounts;
-
-        fromAddr = entity.fromAddr;
-        toAddr = entity.toAddr;
-        blockTimestamp = entity.blockTimestamp;
-        value = entity.value;
+        timestamp = entity.eventTimestamp;
 
         id= entity.eventId;
-
+        parsedInputData = this.parseInputData(entity.inputList);
+        parsedParamData = this.parseParamData(entity.parameterList);
        
 
 
       }
 
-      const state = {
-        autoFocus: true,
-        canEscapeKeyClose: true,
-        canOutsideClickClose: true,
-        enforceFocus: true,
-        hasBackdrop: true,
-        isOpen: false,
-        usePortal: true,
-    };
-
+      
       const estyle = {height:'200px',padding:'10px',background:'#f00',border:'#ff0 solid'};
       const fstyle = {height:'200px',padding:'10px',background:'#00f', top:'50px',};
-      const classes = classNames(Classes.CARD, Classes.ELEVATION_4, OVERLAY_EXAMPLE_CLASS, this.props.data.themeName);
       const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition"; 
+      const classes = classNames(Classes.CARD, Classes.ELEVATION_4, OVERLAY_EXAMPLE_CLASS, this.props.data.themeName);
+      
 
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
       <Cell >
         
-        
-        {id}
-        
+       <NCEntityLabel 
+          entityType={NCEntity.BLOCK} 
+          entityName={blockNumber}
+          entityId={blockNumber}/> 
         
        </Cell>
       ;
-      tableContent[i][1] = <Cell>{ name }</Cell>;
+      
      
-      tableContent[i][2] = 
-      <Cell>
+      tableContent[i][1] = <Cell><b>{ name }</b></Cell>;
+      /*<Cell>
            
            <Button elementRef={this.refHandlers.button} onClick={this.handleOpen} text="Show overlay" />
-         <Overlay onClose={this.handleClose} className={Classes.OVERLAY_SCROLL_CONTAINER} {...this.state}>
+         <Overlay  onClose={this.handleClose} className={Classes.OVERLAY_SCROLL_CONTAINER} {...this.state}>
                     <div className={classes}>
                         <h3> I'm an Overlay!</h3>
                         <p>
@@ -292,19 +263,22 @@ export default class NCEventTable extends Component
                         </Button>
                     </div>
                 </Overlay>
-      </Cell>;
-      tableContent[i][3] = 
-      <Cell
+      </Cell>;*/
+      tableContent[i][2] = 
+      
+      <Cell>{ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;     
+      
+      
+      tableContent[i][3] = <Cell>  
+        <NCDialog 
+          param= {parsedParamData}
+         
+          input= {parsedInputData}
+        />  
+       </Cell>;
 
-      truncated={false}
-      wrapText={true} 
-      
-      >
-         {entity.inputList}
-         {entity.parameterList}      
-      </Cell>;
-      
-      //tableContent[i][5] = <Cell>{ holders }</Cell>;
+         
+
       //tableContent[i][6] = <Cell>{ transactions }</Cell>;
      
     });
@@ -325,7 +299,11 @@ export default class NCEventTable extends Component
         entityName={"Events"}
         generateTableContent={this.generateTableContent}
         columnDescriptor={this.columnDescriptor}
-        isLatest={isLatest}/>
+        isLatest={isLatest}
+
+          
+
+        />
     );
   }
 }

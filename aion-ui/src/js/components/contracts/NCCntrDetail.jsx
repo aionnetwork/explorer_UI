@@ -28,13 +28,13 @@ export default class NCCntrDetail extends Component
                   entityId={ entity.contractAddr}
                   linkActive={ false }/>
       },
-      {
+      /*{
         field: "Name",
         value:  <NCEntityLabel
                   entityType={ NCEntity.CONTRACT }
                   entityId={ entity.contractName}
                   linkActive={ false }/>
-      },
+      },*/
       {
         field: "Block Number",
         value:  <NCEntityLabel

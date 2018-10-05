@@ -315,7 +315,7 @@ class NCAccRetrieve extends Component
           </div>
         }
         <hr className="nc-hr"/>
-        <Button onClick={this.requestDownload('Account',store)} className = "pt-button pt-minimal pull-right" rightIconName="Download" text="Download this page" />
+        <Button onClick={() => {hashHistory.push('/downloads');}} className = "pt-button pt-minimal pull-right" rightIconName="Download" text="Download this Account" />
         
       </div>;
 
