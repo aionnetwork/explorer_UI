@@ -96,9 +96,11 @@ class NCTxnList extends Component
     {
       case txnListType.BY_BLOCK: {
         emptyDataStr = "No transactions found in block: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
+        break;
       }
       case txnListType.BY_ACCOUNT: {
         emptyDataStr = "No transactions found involving account "+ nc_hexPrefix(store.queryStr) + "."
+        break;
       }
     }
 

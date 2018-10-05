@@ -33,6 +33,7 @@ export default class NCTransactionsChart extends Component
                 type: 'datetime'
             },
             yAxis: {
+                min:0,
                 title: {
                     text: 'Transactions'
                 }

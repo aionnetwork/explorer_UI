@@ -107,7 +107,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/charts/ActiveAddressGrowth');
           }}
-          text="Active address"
+          text="Active Address"
         />
         <MenuItem
           className="nav-option"
@@ -131,7 +131,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/charts/BlockTime');
           }}
-          text="Block times"
+          text="Block Times"
         />
          <MenuItem
           className="nav-option"
@@ -139,7 +139,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/charts/HashingPower');
           }}
-          text="Hash power"
+          text="Hash Power"
         />
         
          <MenuItem
@@ -147,7 +147,7 @@ class NCLayout extends Component {
             onClick={() => {
               hashHistory.push('/charts/TransactionsoverTime');
             }}
-            text="Transactions over time"
+            text="Transaction Times"
           />
       </Menu>
     );
@@ -316,6 +316,16 @@ class NCLayout extends Component {
               <img className="logo" src="img/logo/aion-icon.svg" alt="logo"/>
             </a>
           </div>  
+          <div>
+            <a className="footer-container" target="_blank" href="/#/terms">
+              <span className="text">Terms of use</span>          
+              
+            </a>
+            
+          </div>
+          <div>
+           <br/>
+          </div>
         </div>
       </div>
     );

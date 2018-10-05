@@ -32,6 +32,7 @@ export default class NCHasshPowerByNodeChart extends Component
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
     },
+    credits:{enabled:false},
     plotOptions: {
         pie: {
             allowPointSelect: true,

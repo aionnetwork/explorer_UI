@@ -36,6 +36,7 @@ export default class NCActiveAddressChart extends Component
                 type: 'datetime'
             },
             yAxis: {
+                min:0,
                 title: {
                     text: 'Hash Power'
                 }

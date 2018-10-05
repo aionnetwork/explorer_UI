@@ -73,7 +73,7 @@ class NCChartRetrieve extends Component
     case 'ActiveAddressGrowth':
 
         this.chartData.chart = <NCActiveAddressChart />
-        this.chartData.description = "Active Address Growth";
+        this.chartData.description = "Active Address";
         this.chartData.type="line";
         this.chartData.id = 0;
         break;  
@@ -85,7 +85,7 @@ class NCChartRetrieve extends Component
         break;  
     case 'Difficulty':        
         this.chartData.chart =  <NCNetworkDifficultyChart  />
-        this.chartData.description = "Difficulty";
+        this.chartData.description = "Network Difficulty";
         this.chartData.type="line";
         this.chartData.id = 2;
         break;                
@@ -97,7 +97,7 @@ class NCChartRetrieve extends Component
         break;    
     case 'TransactionsoverTime':
         this.chartData.chart = <NCTransactionsChart  />
-        this.chartData.description = "Transactions Per Hour";
+        this.chartData.description = "Transaction Times";
         this.chartData.type="line";
         this.chartData.id = 4;
         break;  

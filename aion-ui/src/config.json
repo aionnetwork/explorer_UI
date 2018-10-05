@@ -1,11 +1,11 @@
 {
   "api": {
-    "base_url": "explorer-staging-api.aion.network/aion",
+    "base_url": "https://mastery-api.aiondev.network/aion",
     "https_enabled": true
   },
   "network_list": [
     {
-      "name": "Staging",
+      "name": "Matery dev",
       "url": ""
     },
     {

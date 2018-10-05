@@ -136,7 +136,7 @@ class NCAccRetrieve extends Component
 
   render() {
     const store = this.props.accRetrieve;
-    const tokens=[{name:'Token',symbol:'test'},{name:'Token1',symbol:'test1'}]
+    const tokens=[]
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
     //console.log("page Data for retrieve: "+JSON.stringify(this.props));
@@ -315,7 +315,7 @@ class NCAccRetrieve extends Component
           </div>
         }
         <hr className="nc-hr"/>
-        <Button onClick={() => {hashHistory.push('/downloads');}} className = "pt-button pt-minimal pull-right" rightIconName="Download" text="Download this Account" />
+        <Button onClick={() => {hashHistory.push('/downloads/'+acc.address);}} className = "pt-button pt-minimal pull-right" rightIconName="Download" text="Download this Account" />
         
       </div>;
 

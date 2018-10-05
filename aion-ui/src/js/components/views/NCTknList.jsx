@@ -97,10 +97,12 @@ class NCTknList extends Component
     switch(listType) 
     {
       case tknListType.ALL: {
-        emptyDataStr = "No tokens found: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
+        emptyDataStr = "No tokens found " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
+        break;
       }
       case tknListType.BY_ACCOUNT: {
         emptyDataStr = "No tokens found involving account "+ nc_hexPrefix(store.queryStr) + "."
+        break;
       }
     }
 
@@ -123,7 +125,7 @@ class NCTknList extends Component
     return (
       <NCExplorerPage
         isLoading={isLoadingTopLevel}
-        isDataValid={isDataValid} 
+        isDataValid={true} 
         isDataEmpty={isDataEmpty}
         
         loadingStr={"Loading Transaction Data"}

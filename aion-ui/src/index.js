@@ -109,7 +109,7 @@ ReactDOM.render((
 
         <Route path="charts/:chartId" component={ ChartRetrieve }/>
 
-        <Route path="downloads" component={ DwnRetrieve }/>
+        <Route path="downloads/:accId" component={ DwnRetrieve }/>
         <Route path="terms" component={ TermsRetrieve }/>
 
         <Route path="no-results(/:query)" component={ NoResults }/>

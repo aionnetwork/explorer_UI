@@ -35,7 +35,8 @@ export default class NCActiveAddressChart extends Component
             xAxis: {
                 type: 'datetime'
             },
-            yAxis: {
+            yAxis: { 
+                min:0,
                 title: {
                     text: 'Address total'
                 }

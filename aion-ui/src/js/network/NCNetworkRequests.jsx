@@ -433,6 +433,96 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
   }
 }
 
+//getAccRetrieveCSV
+/*For an Account's Details
+searchParam1 = Account Address
+entityType = Account
+
+
+For an Account's Tokens
+searchParam1 = Account Address
+entityType = Account_Tokens
+
+
+For an Account's Transactions
+searchParam1 = Account Address
+searchParam2 = Token Address (optional)
+entityType = Account_Transactions
+rangeMin1 = some number
+rangeMax1 = some number
+
+
+For an Account's Mined Blocks
+searchParam1 = Account Address
+entityType = Account_Mined_Blocks
+rangeMin1 = some number
+rangeMax1 = some number*/
+export const getAccRetrieveCSV = (acc) => {
+  store.dispatch(StoreAccRetrieve.GetTopLevel({
+    queryStr: acc
+  }));
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    
+  }
+  else {
+    // validate the account to make sure it's a valid account string
+    let request = nc_trim(acc);
+    
+    if(request == 0) {
+      request = "0000000000000000000000000000000000000000000000000000000000000000"
+    }else {
+      request = nc_sanitizeHex(acc);
+    }
+    
+    // get account details
+    const ep = network.endpoint.download.detail;
+
+    let params = [];
+    let paramsA = [];
+    let paramsB = [];
+    let paramsC = [];
+
+    params = [request,'Account'];
+    paramsA = [request,'Account_Tokens'];
+    paramsB = [request,'','Account_Transactions',0,999];
+    paramsC = [request,'Account',0,999];
+    
+    network.request(ep, params)
+    .then((response) => {
+        console.log('Download successful details!');
+        network.request(ep, paramsA)
+        .then((response) => {
+
+          network.request(ep, paramsB)
+          .then((response) => {
+              network.request(ep, paramsC)
+              .then((response) => {                                 
+
+                console.log('Download successful!');
+
+              })
+              .catch((error) => {
+                console.log(error);      
+              });
+
+          })
+          .catch((error) => {
+            console.log(error);            
+          });
+
+        })
+        .catch((error) => {
+          console.log(error);         
+        });
+
+    })
+    .catch((error) => {
+      console.log(error);      
+    });
+  }
+}
+
 export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
   store.dispatch(StoreAccRetrieve.GetPagingTxn());
 

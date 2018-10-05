@@ -98,9 +98,11 @@ class NCCntrList extends Component
     {
       case cntrListType.ALL: {
         emptyDataStr = "No contracts found: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
+        break;
       }
       case cntrListType.BY_ACCOUNT: {
         emptyDataStr = "No contracts found involving account "+ nc_hexPrefix(store.queryStr) + "."
+        break;
       }
     }
     //console.log('contract list view 2');
@@ -123,7 +125,7 @@ class NCCntrList extends Component
     return (
       <NCExplorerPage
         isLoading={isLoadingTopLevel}
-        isDataValid={isDataValid} 
+        isDataValid={true} 
         isDataEmpty={isDataEmpty}
         
         loadingStr={"Loading Contract Data"}
