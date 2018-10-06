@@ -63,7 +63,7 @@ class NCDwnRetrieve extends Component
   }
 
   download = (a) => {
-       console.log(this.props.params.accId);
+       console.log(a);
        network.getAccRetrieveCSV(this.props.params.accId, a);
        //return;
   }
@@ -71,12 +71,14 @@ class NCDwnRetrieve extends Component
   render() {
     
     const verifyCallback = function (response) {
-       console.log('sending to server');
-       this.download(response);
+      console.log(response);
+      return this.download(response);
     };
     const style = {position:'relative',textAlign:'center',width:'100%',margin:'auto',top:'100px',padding:'25px' };
     const recapcontainer = {position:'relative',width:'310px',margin:'auto',top:'100px',padding:'5px' };
     const stylerecaptcha = {margin:'auto', };
+
+
 
     return (
       <div className= {''} style = {style}>
@@ -89,7 +91,7 @@ class NCDwnRetrieve extends Component
           sitekey="6LfwrXMUAAAAAEpZCdMFD0ba96ryOUDGPMyqHZPA"
           verifyCallback={verifyCallback}
         />
-        <Button  text = {'Download'} type = {"button"} onClick = {this.download} ></Button>
+        
        </div>
         
       </div>

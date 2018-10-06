@@ -60,7 +60,7 @@ export default class NCCntrDetail extends Component
         field: "Balance",
         value:  balance == null ? "Balance Service Unavailable" :
                 <span className="strong">{balance + " AION"}
-                  <span className="subtitle">{"(as of block " + entity.lastBlockNumber + ")"}</span>
+                  <span className="subtitle">{"(as of block " + entity.blockNumber + ")"}</span>
                 </span>
       }
       

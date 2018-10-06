@@ -4,6 +4,8 @@ import { store } from 'stores/NCReduxStore'
 
 import * as mock from 'lib/NCData';
 
+ import * as fileDownload from 'js-file-download';
+
 import * as StoreKpis from 'stores/StoreKpis';
 
 import * as StoreBlkRt from 'stores/StoreBlkRt';
@@ -486,27 +488,22 @@ export const getAccRetrieveCSV = (acc,key) => {
     params = [request,'','Account'];
     paramsA = [request,'','Account_Tokens'];
     paramsB = [request,'','Account_Transactions',0,999];
-    paramsC = [request,'','Account',0,999];
+    paramsC = [request,'','Accoun_Mined_Blocks',0,999];
     
     network.request(ep, params)
     .then((response) => {
         console.log(response);
+        //var fileDownload = require('js-file-download');
+        fileDownload(response, 'Account_'+request+'.csv');
     })
     .catch((error) => {
       console.log(error);      
     });
 
-    /*network.request(ep, paramsA)
-    .then((response) => {
-        
-    })
-    .catch((error) => {
-      console.log(error);      
-    });
 
     network.request(ep, paramsB)
     .then((response) => {
-        
+        fileDownload(response, 'Account_'+request+'_Transactions.csv');
     })
     .catch((error) => {
       console.log(error);      
@@ -514,11 +511,20 @@ export const getAccRetrieveCSV = (acc,key) => {
 
     network.request(ep, paramsC)
     .then((response) => {
-        
+        fileDownload(response, 'Account_'+request+'_Mined_Blocks.csv');
     })
     .catch((error) => {
       console.log(error);      
-    });*/
+    });
+
+
+    network.request(ep, paramsA)
+    .then((response) => {
+        fileDownload(response, 'Account_'+request+'_Tokens.csv');
+    })
+    .catch((error) => {
+      console.log(error);      
+    });
 
   }
 }
@@ -750,8 +756,8 @@ export const getCntrRetrieveTopLevel = (queryStr) => {
       //console.log("Coool!"+isCntrEmpty);
       // we can save on a network request if the nonce is zero
       if (!isCntrEmpty) {
-        getCntrRetrievePagingTxnList(request, 0);
-        getCntrRetrievePagingBlkList(request, 0);
+        //getCntrRetrievePagingTxnList(request, 0);
+        //getCntrRetrievePagingBlkList(request, 0);
         //getCntrRetrievePagingEventList(request, 0);
         //getAccRetrieveTknList(request, 0);
         //console.log("not empty!");
