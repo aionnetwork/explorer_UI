@@ -57,17 +57,22 @@ class NCDwnRetrieve extends Component
   }
 
   requestDownload = () => {
-       network.getAccRetrieveCSV(this.props.params.accId);
+       //this.download('uyuy');
+       network.getAccRetrieveCSV(this.props.params.accId, 'nothing');
+      
   }
 
-  requestDownloadb = (type, data) => {
-    network.RetrieveDownload(type, data);
+  download = (a) => {
+       console.log(this.props.params.accId);
+       network.getAccRetrieveCSV(this.props.params.accId, a);
+       //return;
   }
 
   render() {
     
     const verifyCallback = function (response) {
-       console.log(response);
+       console.log('sending to server');
+       this.download(response);
     };
     const style = {position:'relative',textAlign:'center',width:'100%',margin:'auto',top:'100px',padding:'25px' };
     const recapcontainer = {position:'relative',width:'310px',margin:'auto',top:'100px',padding:'5px' };

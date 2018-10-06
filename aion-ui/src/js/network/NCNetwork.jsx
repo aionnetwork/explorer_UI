@@ -173,7 +173,7 @@ export const request = async (endpoint, params) =>
     let args = { params: {} };
     if (Array.isArray(params)) {
       params.forEach((value, i) => {
-        args.params[endpoint.params[i]] = value;
+        if(value!==''){args.params[endpoint.params[i]] = value;}
       });
     }
     

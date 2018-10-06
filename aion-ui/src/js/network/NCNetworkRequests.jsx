@@ -457,7 +457,7 @@ searchParam1 = Account Address
 entityType = Account_Mined_Blocks
 rangeMin1 = some number
 rangeMax1 = some number*/
-export const getAccRetrieveCSV = (acc) => {
+export const getAccRetrieveCSV = (acc,key) => {
   store.dispatch(StoreAccRetrieve.GetTopLevel({
     queryStr: acc
   }));
@@ -483,43 +483,43 @@ export const getAccRetrieveCSV = (acc) => {
     let paramsB = [];
     let paramsC = [];
 
-    params = [request,'Account'];
-    paramsA = [request,'Account_Tokens'];
+    params = [request,'','Account'];
+    paramsA = [request,'','Account_Tokens'];
     paramsB = [request,'','Account_Transactions',0,999];
-    paramsC = [request,'Account',0,999];
+    paramsC = [request,'','Account',0,999];
     
     network.request(ep, params)
     .then((response) => {
-        console.log('Download successful details!');
-        network.request(ep, paramsA)
-        .then((response) => {
-
-          network.request(ep, paramsB)
-          .then((response) => {
-              network.request(ep, paramsC)
-              .then((response) => {                                 
-
-                console.log('Download successful!');
-
-              })
-              .catch((error) => {
-                console.log(error);      
-              });
-
-          })
-          .catch((error) => {
-            console.log(error);            
-          });
-
-        })
-        .catch((error) => {
-          console.log(error);         
-        });
-
+        console.log(response);
     })
     .catch((error) => {
       console.log(error);      
     });
+
+    /*network.request(ep, paramsA)
+    .then((response) => {
+        
+    })
+    .catch((error) => {
+      console.log(error);      
+    });
+
+    network.request(ep, paramsB)
+    .then((response) => {
+        
+    })
+    .catch((error) => {
+      console.log(error);      
+    });
+
+    network.request(ep, paramsC)
+    .then((response) => {
+        
+    })
+    .catch((error) => {
+      console.log(error);      
+    });*/
+
   }
 }
 

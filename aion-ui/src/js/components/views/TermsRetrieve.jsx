@@ -30,21 +30,18 @@ export default class TermsRetrieve extends Component
         body: 'Home',
       },
       {
-        link: '/blocks',
-        body: 'Blocks',
-      },
-      {
-        link: '#',
-        body: 'Block Details',
+        link: '/Terms',
+        body: '#',
       }
+
     ];
      const page =
       <div> 
         <NCExplorerHead
           
           breadcrumbs={breadcrumbs}
-          title={"Block"}
-          subtitle={'desc'}
+          title={"Terms"}
+          subtitle={''}
 
 
         />  
