@@ -526,6 +526,8 @@ export const getAccRetrieveCSV = (acc,key) => {
       console.log(error);      
     });
 
+    return;
+
   }
 }
 
