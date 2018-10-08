@@ -22,6 +22,9 @@ export default class NCActiveAddressChart extends Component
             exporting: {
                 enabled:false,
             },
+            time: {
+                useUTC: false,
+            },
             chart: {
                 zoomType: 'x'
             },

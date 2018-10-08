@@ -147,7 +147,7 @@ class NCLayout extends Component {
             onClick={() => {
               hashHistory.push('/charts/TransactionsoverTime');
             }}
-            text="Transaction Times"
+            text="Transactions per Hour"
           />
       </Menu>
     );
@@ -250,6 +250,8 @@ class NCLayout extends Component {
                 BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(latestBlockNumber)) : 0;
     let lastUpdated = kpi.momentUpdated;
 
+    let style = {fontSize:'9px'}
+
     return (
       <div className="NCPage">
         <div className="NCHeader pt-navbar">
@@ -316,13 +318,15 @@ class NCLayout extends Component {
               <img className="logo" src="img/logo/aion-icon.svg" alt="logo"/>
             </a>
           </div>  
+          {(false)&&
           <div>
             <a className="footer-container" target="_blank" href="/#/terms">
-              <span className="text">Terms of use</span>          
+              <span style={style}  className="text">Terms of use</span>          
               
             </a>
             
           </div>
+          }
           <div>
            <br/>
           </div>

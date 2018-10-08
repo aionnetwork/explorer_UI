@@ -55,7 +55,7 @@ class NCAccRetrieve extends Component
   }
 
   requestTopLevel = () => {
-    console.log('retrieve'+JSON.stringify(this.props.params));
+    //console.log('retrieve'+JSON.stringify(this.props.params));
     network.getAccRetrieveTopLevel(this.props.params.accId,this.props.params.tknId);
   }
 

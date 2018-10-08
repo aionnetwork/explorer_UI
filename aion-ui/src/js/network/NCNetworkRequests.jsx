@@ -369,7 +369,7 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
     queryStr: acc
   }));
 
-  console.log('This is the top ACC param:' + JSON.stringify(acc+tkn));
+  //console.log('This is the top ACC param:' + JSON.stringify(acc+tkn));
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
@@ -401,7 +401,7 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
     // get account details
     const ep = network.endpoint.account.detail;
     let params = []; 
-    console.log(requestb);
+    //console.log(requestb);
     if(requestb!=null){
       //requestb = "nc_trim(tkn)";
       params = [request,requestb];
@@ -410,22 +410,22 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
       params = [request];
     }
      
-    console.log(JSON.stringify(params));
+    //console.log(JSON.stringify(params));
     network.request(ep, params)
     .then((response) => {
       const isAccValid = nc_isObjectValid(response);
       const isAccEmpty = nc_isObjectEmpty(response, isAccValid);
 
-      console.log(JSON.stringify(response));
+      //console.log(JSON.stringify(response));
       // ok, make requests for blocks and transactions for this account
       store.dispatch(StoreAccRetrieve.SetTopLevel(response));
-      console.log("Coool!");
+      //console.log("Coool!");
       // we can save on a network request if the nonce is zero
       if (!isAccEmpty) {
         getAccRetrievePagingTxnList(request, 0);
         getAccRetrievePagingBlkList(request, 0);
         //getAccRetrieveTknList(request, 0);
-        console.log("not empty!");
+        //console.log("not empty!");
       }
     })
     .catch((error) => {
@@ -545,15 +545,15 @@ export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
   else {
     // get transaction list
     const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
-    console.log('ep:'+JSON.stringify(ep));
+    //console.log('ep:'+JSON.stringify(ep));
     let params = [queryStr,'' ,pageNumber, PAGE_SIZE];
-    console.log('params:'+JSON.stringify(params));
+    //console.log('params:'+JSON.stringify(params));
     network.request(ep, params)
     .then((response) => {
       // ok, now make sure that the response you got is still valid
       // ie. matches up to the account loaded on-screen
 
-      console.log('oooo:'+JSON.stringify(response));
+      //console.log('oooo:'+JSON.stringify(response));
       let acc = store.getState().accRetrieve.response.acc;
 
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
@@ -1300,7 +1300,7 @@ export const getChartRetrieve = (queryStr) => {
 
     // get block details
     const ep = network.endpoint.chart.detail;
-    console.log(JSON.stringify(network.endpoint.chart.detail)+"   "+JSON.stringify(request)); 
+    //console.log(JSON.stringify(network.endpoint.chart.detail)+"   "+JSON.stringify(request)); 
     let params = [request];
     network.request(ep, params)
     .then((response) => {

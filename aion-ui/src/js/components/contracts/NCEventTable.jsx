@@ -85,7 +85,36 @@ export default class NCEventTable extends Component
     this.generateTableContent = this.generateTableContent.bind(this);
   }
 
+   
+   
+ 
+   parseInputData = (txnLog) => {
+    let result = "";
+    try {
+      let a = txnLog.slice(1,-1);
+      let inputstr = a.split('\"').join('');
+      result = inputstr.split(",");
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+    return result;
+  }
+
+  parseParamData = (data) => {
+    let result = "";
+    try {
+      let b = data.slice(1,-1);
+      let paramstr = b.split('\"').join('');
+      result = paramstr.split(",");
+    } catch (e) {
+      console.log(e);
+    }
+    return result;
+  } 
+
   
+
   generateTableContent(entityList) 
   {
     let tableContent = [];
@@ -94,21 +123,7 @@ export default class NCEventTable extends Component
     {
       let parsedInputData = null;//this.parseTxnLog(entity.inputList);
       let parsedParamData = null;//this.parseInputData(entity.parameterList);
-      let parsedLogs = null;
-        let str = "";
-      str = entity.name+" -> ";
-
-      let a = entity.inputList.slice(1,-1);
-      let b = entity.parameterList.slice(1,-1);
-
-      let inputstr = a.split('\"').join('');
-      let input = inputstr.split(",");
-
-      let paramstr = b.split('\"').join('');
-      let param = paramstr.split(",");
-
-      str = str + param[0]+":"+input[0]+";"+ param[1]+":"+input[1]+";"+ param[2]+":"+input[2];
-
+      
       let Addr = null;
       let name = null;
       let blockNumber = null;

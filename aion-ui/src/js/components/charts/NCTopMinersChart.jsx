@@ -22,7 +22,7 @@ export default class NCTopMinersChart extends Component
     //console.log('pie chart');
 
     let points = data.sort(nc_compare);
-    console.log(JSON.stringify(points));
+    //console.log(JSON.stringify(points));
 
     const option = {
 

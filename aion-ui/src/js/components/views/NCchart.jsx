@@ -67,7 +67,7 @@ class NCChartRetrieve extends Component
 
   parseChart(str){
 
-    console.log('time to parse string' + str);
+    //console.log('time to parse string' + str);
 
     switch(str){
     case 'ActiveAddressGrowth':
@@ -79,7 +79,7 @@ class NCChartRetrieve extends Component
         break;  
     case 'TopMiner':        
         this.chartData.chart = <NCTopMinersChart   />
-        this.chartData.description = "Top Miner";
+        this.chartData.description = "Top Miners";
         this.chartData.type="pie";
         this.chartData.id = 1;
         break;  
@@ -97,7 +97,7 @@ class NCChartRetrieve extends Component
         break;    
     case 'TransactionsoverTime':
         this.chartData.chart = <NCTransactionsChart  />
-        this.chartData.description = "Transaction Times";
+        this.chartData.description = "Transactions per Hour";
         this.chartData.type="line";
         this.chartData.id = 4;
         break;  
@@ -134,7 +134,7 @@ class NCChartRetrieve extends Component
     const data =  nc_getChartData(store.response.content,this.chartData.type);
     store.response.content =[];
     
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const queryStr = store.queryStr;

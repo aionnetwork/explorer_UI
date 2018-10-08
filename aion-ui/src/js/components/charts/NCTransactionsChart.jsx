@@ -22,6 +22,9 @@ export default class NCTransactionsChart extends Component
             chart: {
                 zoomType: 'x'
             },
+            time: {
+                useUTC: false,
+            },
             title: {
                 text: 'Transaction per Hour'
             },
@@ -72,7 +75,7 @@ export default class NCTransactionsChart extends Component
 
             series: [{
                 type: 'area',
-                name: 'Active Address Growth',
+                name: 'Transactions per Hour',
                 data: data
             }]
         }

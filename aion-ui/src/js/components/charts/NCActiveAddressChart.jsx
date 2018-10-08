@@ -25,6 +25,9 @@ export default class NCActiveAddressChart extends Component
             chart: {
                 zoomType: 'x'
             },
+            time: {
+                useUTC: false,
+            },
             title: {
                 text: 'Active Address Growth'
             },
