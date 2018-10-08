@@ -85,6 +85,13 @@ export default class NCTopLevelSearch extends Component
                               entity: NCEntity.TKN
                             });
                           }}/>
+                          <MenuItem
+                          text={ NCEntityInfo[NCEntity.CNTR].name }
+                          onClick={() => {
+                            this.setState({
+                              entity: NCEntity.CNTR
+                            });
+                          }}/>
                     </Menu>
                 }
 
@@ -100,7 +107,7 @@ export default class NCTopLevelSearch extends Component
         <InputGroup
           className="search-bar"
           disabled={this.state.isFetching}
-          placeholder="Search for Account / Block / Transaction / Token"
+          placeholder="Search for Account / Block / Contract / Transaction / Token"
           value={this.state.queryStr}
           onChange={(e) => this.setQueryStr(e.target.value)}
           onKeyPress={(e) => { if(e.key === 'Enter'){ this.submitQuery() }}}

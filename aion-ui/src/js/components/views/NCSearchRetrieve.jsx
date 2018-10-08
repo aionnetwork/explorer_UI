@@ -11,6 +11,7 @@ import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCTknDetail from 'components/tokens/NCTknDetail';
 import NCBlkDetail from 'components/blocks/NCBlkDetail';
 import NCTxnDetail from 'components/transactions/NCTxnDetail';
+import NCCntrDetail from 'components/contracts/NCCntrDetail';
 
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
@@ -79,6 +80,11 @@ class NCSearchRetrieve extends Component
       {
         return <NCAccDetail entity={data}/>
       }
+      case'contract':
+      {
+        return <NCCntrDetail entity={data}/>
+      }
+
 
 
       default: 
