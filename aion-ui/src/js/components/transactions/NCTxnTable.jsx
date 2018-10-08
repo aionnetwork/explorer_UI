@@ -128,7 +128,7 @@ export default class NCTxnTable extends Component
           entityId={blockNumber}/> 
       </Cell>;
       tableContent[i][1] = <Cell>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell>{ value ? nc_numFormatterAionCoin(value, 0, true) : 0 }</Cell>;
+      tableContent[i][2] = <Cell>{ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }</Cell>;
       tableContent[i][3] = 
       <Cell>
         <NCEntityLabel 

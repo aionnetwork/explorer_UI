@@ -8,7 +8,7 @@ import { Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, Popove
 import { Select } from "@blueprintjs/select";
 
 import NCBlkTable from 'components/blocks/NCBlkTable';
-import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
+import NCTxnTable from 'components/transactions/NCTxnTable';
 
 import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
@@ -238,7 +238,7 @@ class NCAccRetrieve extends Component
       marginTop={40}
 
       content={
-        <NCTxnTableOwn 
+        <NCTxnTable 
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}

@@ -9,6 +9,11 @@ import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 import { nc_trim, nc_GetEntityIcon, nc_LinkToEntity } from 'lib/NCUtility';
 
+import appConfig from '../../../config.json';
+
+import ReactGA from 'react-ga';
+ReactGA.initialize(appConfig.ga_key);
+
 
 
 export default class NCDialog extends Component
@@ -16,12 +21,22 @@ export default class NCDialog extends Component
 
    handleOpen = (input, param) => this.setState({ isOpen: true });
 
-   handleClose = () => this.setState({ isOpen: false });
+   handleClose = () => {
+
+    this.setState({ isOpen: false })
+
+    ReactGA.event({
+      category: 'Contract',
+      action: 'Events log Viewed',
+      label: this.props.contract
+    });
+
+  };
 
 
    render() {
 
-    let { param=[], input=[],title="View", className="", enabled=true } = this.props;
+    let { contract, param=[], input=[],title="View", className="", enabled=true } = this.props;
 
     let isOpen = false
 

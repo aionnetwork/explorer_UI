@@ -23,7 +23,7 @@ import NCNetworkDifficultyChart from 'components/charts/NCNetworkDifficultyChart
 import NCTopMinersChart from 'components/charts/NCTopMinersChart';
 import NCBlockTimesChart from 'components/charts/NCBlockTimesChart';
 import NCHashPowerChart from 'components/charts/NCHashPowerChart';
-import NCHashPowerByNodeChart from 'components/charts/NCHashPowerByNodeChart';
+//import NCHashPowerByNodeChart from 'components/charts/NCHashPowerByNodeChart';
 
 import * as StoreChartRetrieve from 'stores/StoreChartRetrieve'; 
 
@@ -160,13 +160,10 @@ class NCChartRetrieve extends Component
         link: '/',
         body: 'Home',
       },
-      {
-        link: '/chart',
-        body: 'Chart',
-      },
+      
       {
         link: '#',
-        body: 'Chart Details',
+        body: this.chartData.description + ' Chart',
       }
     ];
 

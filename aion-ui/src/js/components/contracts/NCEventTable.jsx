@@ -22,6 +22,11 @@ import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
+import appConfig from '../../../config.json';
+
+import ReactGA from 'react-ga';
+ReactGA.initialize(appConfig.ga_key);
+
  const row = {
     height:"100px",
   }
@@ -33,23 +38,12 @@ export default class NCEventTable extends Component
   constructor(props) {
     super(props);
 
-    this.dialog =  <Dialog
-                    className={''}
-                    isOpen= {false}
-                    icon="info-sign"
-                    onClose={this.handleClose}
-                    title="Palantir Foundry"
-                    autoFocus= {true}
-                    canEscapeKeyClose= {true}
-                    canOutsideClickClose= {true}
-                    enforceFocus= {true}
-                    hasBackdrop= {true}
-                    usePortal= {true}
-                    
-                >
-                   <p>Just cheching</p>
-              </Dialog>
+    ReactGA.event({
+      category: 'Contract',
+      action: 'Events tab'
+    });
 
+    
     this.columnDescriptor = 
     [
       {
@@ -85,81 +79,13 @@ export default class NCEventTable extends Component
         width: 100,
         flex: false,
       },
-      /*{
-        name: "Holders",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },
-      {
-        name: "Transfers",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },
-      {
-        name: "To Address",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },
-      {
-        name: "To Address",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },*/
+      
     ];
 
     this.generateTableContent = this.generateTableContent.bind(this);
   }
 
-   
-   button: HTMLButtonElement;
-   
-   refHandlers = {
-        button: (ref: HTMLButtonElement) => (this.button = ref),
-    };
-
-   handleOpen = (input, param) => this.setState({ isOpen: true });
-
-   handleClose = () => this.setState({ isOpen: false });
- 
-   parseInputData = (txnLog) => {
-    let result = "";
-    try {
-      let a = txnLog.slice(1,-1);
-      let inputstr = a.split('\"').join('');
-      result = inputstr.split(",");
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
-    return result;
-  }
-
-  parseParamData = (data) => {
-    let result = "";
-    try {
-      let b = data.slice(1,-1);
-      let paramstr = b.split('\"').join('');
-      result = paramstr.split(",");
-    } catch (e) {
-      console.log(e);
-    }
-    return result;
-  } 
-
   
-
   generateTableContent(entityList) 
   {
     let tableContent = [];
@@ -237,33 +163,7 @@ export default class NCEventTable extends Component
       
      
       tableContent[i][1] = <Cell><b>{ name }</b></Cell>;
-      /*<Cell>
-           
-           <Button elementRef={this.refHandlers.button} onClick={this.handleOpen} text="Show overlay" />
-         <Overlay  onClose={this.handleClose} className={Classes.OVERLAY_SCROLL_CONTAINER} {...this.state}>
-                    <div className={classes}>
-                        <h3> I'm an Overlay!</h3>
-                        <p>
-                            This is a simple container with some inline styles to position it on the screen. Its CSS
-                            transitions are customized for this example only to demonstrate how easily custom
-                            transitions can be implemented.
-                        </p>
-                        <p>
-                            Click the right button below to transfer focus to the "Show overlay" trigger button outside
-                            of this overlay. If persistent focus is enabled, focus will be constrained to the overlay.
-                            Use the <code>tab</code> key to move to the next focusable element to illustrate this
-                            effect.
-                        </p>
-                        <br />
-                        <Button intent={Intent.DANGER} onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        <Button onClick={this.focusButton} style={{ float: "right" }}>
-                            Focus button
-                        </Button>
-                    </div>
-                </Overlay>
-      </Cell>;*/
+    
       tableContent[i][2] = 
       
       <Cell>{ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;     
@@ -271,6 +171,9 @@ export default class NCEventTable extends Component
       
       tableContent[i][3] = <Cell>  
         <NCDialog 
+
+          contract = {Addr}
+
           param= {parsedParamData}
          
           input= {parsedInputData}

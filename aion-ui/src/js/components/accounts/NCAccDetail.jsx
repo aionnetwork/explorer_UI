@@ -39,18 +39,7 @@ export default class NCAccDetail extends Component
         field: "Nonce",
         value: !entity.nonce ? EMPTY_STR : BigNumber(String(entity.nonce), 16).toString(10) 
       },
-      {
-        field: "Contract",
-        value: !entity.contract ? 
-          <span className="tx-status">
-            
-            <span className="status-text">Not a Contract</span>
-          </span>  : 
-          <span className="tx-status">
-            <span className="pt-icon-standard pt-icon-tick-circle icon success"/>
-            <span className="status-text">Contract</span>
-          </span> 
-      },
+      
       
     ];
 

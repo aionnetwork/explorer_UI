@@ -16,7 +16,7 @@ class NCTxnTableRTRow extends Component
     return (
       <div className="table-row body">
         <div className="column txn-age pt-text-muted">{moment.unix(entity.blockTimestamp).fromNow()} </div>
-        <div className="column txn-block">{entity.value ? nc_numFormatterAionCoin(entity.value, 0, true) : 0}</div>
+        <div className="column txn-block">{entity.value ? nc_numFormatterAionCoin(entity.value, 4, true) : 0}</div>
         <div className="column txn-hash growable">
           <NCEntityLabel
             entityType={NCEntity.TXN}

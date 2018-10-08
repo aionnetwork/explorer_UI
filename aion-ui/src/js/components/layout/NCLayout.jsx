@@ -23,7 +23,7 @@ import * as network from 'network/NCNetworkRequests';
 import appConfig from '../../../config.json';
 
 import ReactGA from 'react-ga';
-ReactGA.initialize(ga_key);
+ReactGA.initialize(appConfig.ga_key);
 //ReactGA.pageview(window.location.pathname + window.location.search);
 
 class NCLayout extends Component {

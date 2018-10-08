@@ -350,12 +350,8 @@ class NCCntrRetrieve extends Component
       loadingStr={"Loading Blocks"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
       emptyDataStr={
-        <span>No events in this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
+        <span>No events found in this contract. 
+          
         </span>}
       marginTop={40}
 

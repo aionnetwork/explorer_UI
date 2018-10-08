@@ -36,11 +36,11 @@ import SearchRetrieve from 'components/views/NCSearchRetrieve';
 import NoResults from 'components/views/NCNoResults';
 
 import { store } from 'stores/NCReduxStore';
-
+import appConfig from './config.json';
 
 //this section is related to Google analytics
 //import ReactGA from 'react-ga';
-//ReactGA.initialize('UA-121993888-1');
+//ReactGA.initialize(appConfig.ga_key);
 //ReactGA.pageview(window.location.pathname + window.location.search);
 //google analytics
 
