@@ -113,7 +113,7 @@ export default class NCCntrTable extends Component
   generateTableContent(entityList) 
   {
     let tableContent = [];
-    console.log('tkn table');
+    //console.log('tkn table');
     entityList.forEach((entity, i) => 
     {
       let Addr = null;
@@ -138,7 +138,7 @@ export default class NCCntrTable extends Component
       let blockTimestamp = null;
       let value = null;
 
-      console.log(JSON.stringify(entity));
+      //console.log(JSON.stringify(entity));
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {

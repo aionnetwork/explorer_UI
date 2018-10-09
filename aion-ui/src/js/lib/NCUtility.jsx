@@ -182,6 +182,7 @@ export function nc_numFormatterBytes(num, digits) {
 }
 
 export function nc_numFormatterACSensitive(num, dp=null, isHex=false) {
+  
   if (num == null)
     return null;
 
@@ -460,7 +461,7 @@ export function nc_findEntity(queryStr){
 
 export function nc_LinkToEntity(entity, entityId) {
   if (nc_CanLinkToEntity(entity, entityId)) {
-    //console.log(NCEntityInfo[entity].absoluteUrl+entityId);
+    console.log('Link to!');
     hashHistory.push(NCEntityInfo[entity].absoluteUrl+entityId);
   }
 }

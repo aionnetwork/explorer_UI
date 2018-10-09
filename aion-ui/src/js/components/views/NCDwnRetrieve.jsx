@@ -100,6 +100,8 @@ class NCDwnRetrieve extends Component
     let button = this.state.button;
     let recaptcha= this.state.recaptcha;
 
+    console.log(recaptcha);
+
     return (
       <div className= {''} style = {style}>
 
@@ -109,7 +111,7 @@ class NCDwnRetrieve extends Component
         <Recaptcha
           ref={e => recaptchaInstance = e}
           style = {stylerecaptcha}
-          sitekey="6LfwrXMUAAAAAEpZCdMFD0ba96ryOUDGPMyqHZPA"
+          sitekey="6Le-HXQUAAAAAIiff6mAVhNd2CobJrdD49sUDoi6"
           verifyCallback={this.verifyCallback.bind(this)}
         />
         <br/>

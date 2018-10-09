@@ -14,8 +14,10 @@ import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import NCLink from 'components/common/NCLink';
 
+import appConfig from '../../../config.json';
+
 import ReactGA from 'react-ga';
-ReactGA.initialize(ga_key);
+ReactGA.initialize(appConfig.ga_key);
 
 export default class NCAccTableMiner extends Component 
 {

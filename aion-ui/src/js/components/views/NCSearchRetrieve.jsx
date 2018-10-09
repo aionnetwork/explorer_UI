@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Router, Route, IndexRedirect, hashHistory} from 'react-router'
 import moment from 'moment';
 
 import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
@@ -33,30 +34,99 @@ class NCSearchRetrieve extends Component
     this.state = {
       isFetching: false,
       queryStr: '',
-      entity: NCEntity.SEARCH
+      entity: NCEntity.SEARCH,
+      page:false,
+      item:''
+
     }
   }
 
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
+
+
   }
 
   componentDidMount() {
     this.requestTopLevel();
+
+
+     
   }
 
   componentWillReceiveProps(nextProps) {
     this.isFirstRenderAfterMount = false;
+
+    console.log('console' + JSON.stringify(nextProps));
+    
+    if(this.props.searchRetrieve.response.data !== null){
+      
+      this.showView(this.props.searchRetrieve.response.data);
+
+    }
+    
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.params.term != this.props.params.term){
       this.requestTopLevel();
     }
-  }
+
+ }
 
   requestTopLevel = () => {
     network.getRetrieveTopLevel(this.props.params.term);
+
+     console.log('This props:'+JSON.stringify(this.props.searchRetrieve));
+  }
+
+  showView = (entity) => {
+
+     //console.log(JSON.stringify(entity));
+     //console.log(JSON.stringify(entity));
+
+    switch(entity.searchType)
+    {
+
+
+    // Top Level 
+    // ---------
+      case 'block':
+      {  
+         hashHistory.push('/block/'+entity.content[0].blockHash);
+         break;
+    
+      }
+      case 'transaction':
+      {
+        hashHistory.push('/transaction/'+entity.content[0].transactionHash);
+        break;
+      }
+      case'token':
+      {
+        hashHistory.push('/token/'+entity.content[0].contractAddress);
+        break;
+      }
+      case'account':
+      {
+        hashHistory.push('/account/'+entity.content[0].address);
+        break;
+      }
+      case'contract':
+      {
+        
+        hashHistory.push('/contract/'+entity.content[0].contractAddr);
+        break;
+      }
+
+
+
+      default: 
+      {
+        return "";
+      }
+    }
+
   }
 
   entityView = (entity,data) => {
@@ -113,7 +183,7 @@ class NCSearchRetrieve extends Component
     const isSrEmpty = nc_isObjectEmpty(srObj, isSrValid);
 
     const result = isSrEmpty ? {} : srObj.content[0];
-    const entity = isSrEmpty ? "no result" : srObj.searchType;
+    const entity = isSrEmpty ? null : srObj.searchType;
 
     const breadcrumbs = [
       {
@@ -150,7 +220,7 @@ class NCSearchRetrieve extends Component
       marginTop={20}
       marginBottom={30} 
 
-      content={ this.entityView(entity,result) }
+      content={""}
     />
 
   
@@ -168,17 +238,20 @@ class NCSearchRetrieve extends Component
        
       </div>;
 
+
     return (
-      <NCExplorerPage
-        isLoading={isLoadingTopLevel}
-        isDataValid={true} 
-        isDataEmpty={false}
-        
-        loadingStr={"Loading Account Details"}
-        invalidDataStr={"Account Service Unavailable. Account data invalid."}
-        emptyDataStr={"No account found for descriptor: " + desc + "."}
-        
-        page={page}/>
+          <NCExplorerPage
+            isLoading={isLoadingTopLevel}
+            isDataValid={true} 
+            isDataEmpty={false}
+            
+            loadingStr={"Loading Account Details"}
+            invalidDataStr={"Account Service Unavailable. Account data invalid."}
+            emptyDataStr={"No account found for descriptor: " + desc + "."}
+            
+            page={page}/>
+
+
     );
   }
 }

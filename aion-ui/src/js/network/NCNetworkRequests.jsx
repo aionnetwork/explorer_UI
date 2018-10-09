@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as network from 'network/NCNetwork';
 import { store } from 'stores/NCReduxStore'
+import { Router, Route, IndexRedirect, hashHistory} from 'react-router'
 
 import * as mock from 'lib/NCData';
 
@@ -30,7 +31,7 @@ import * as StoreChartRetrieve from 'stores/StoreChartRetrieve';
 import * as StoreRetrieve from 'stores/StoreRetrieve';
 
 import {BigNumber} from 'bignumber.js';
-import { nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
+import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
 import { tknListType, txnListType, blkListType, accListType, eventListType } from 'lib/NCEnums';
 
 export const PAGE_SIZE = 25;
@@ -350,7 +351,7 @@ export const getAccListTopLevel = () => {
   else {
     // get transaction list
     const ep = network.endpoint.account.list;
-    console.log(ep);
+    //console.log(ep);
     let params = [];
     
     network.request(ep, params)
@@ -640,7 +641,7 @@ export const getCntrListTopLevel = () => {
   store.dispatch(StoreCntrList.GetTopLevel());
 
 
-  console.log("its here!!");
+  //console.log("its here!!");
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
@@ -651,12 +652,12 @@ export const getCntrListTopLevel = () => {
   else {
     // get transaction list
     const ep = network.endpoint.contract.list;
-    console.log(ep);
+    //console.log(ep);
     let params = [];
     
     network.request(ep, params)
     .then((response) => {
-       console.log('contract response');
+       //console.log('contract response');
       store.dispatch(StoreCntrList.SetTopLevel(response));
 
     })
@@ -1202,6 +1203,55 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
   }
 }
 
+ let showView = (entity) => {
+
+     //console.log(JSON.stringify(entity));
+     //console.log(JSON.stringify(entity));
+
+    switch(entity.searchType)
+    {
+
+
+    // Top Level 
+    // ---------
+      case 'block':
+      {  
+         hashHistory.push('/block/'+entity.content[0].blockHash);
+         break;
+    
+      }
+      case 'transaction':
+      {
+        hashHistory.push('/transaction/'+entity.content[0].transactionHash);
+        break;
+      }
+      case'token':
+      {
+        hashHistory.push('/token/'+entity.content[0].contractAddress);
+        break;
+      }
+      case'account':
+      {
+        hashHistory.push('/account/'+entity.content[0].address);
+        break;
+      }
+      case'contract':
+      {
+        
+        hashHistory.push('/contract/'+entity.content[0].contractAddr);
+        break;
+      }
+
+
+
+      default: 
+      {
+        return "";
+      }
+    }
+
+  }
+
 
 export const getRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreRetrieve.GetTopLevel({
@@ -1230,7 +1280,11 @@ export const getRetrieveTopLevel = (queryStr) => {
     .then((response) => {
       console.log(JSON.stringify(response.searchType));
       if(typeof response.searchType !== "undefined"){ 
-        store.dispatch(StoreRetrieve.SetTopLevel(response));
+
+        //console.log('Data:'+JSON.stringify(response));
+
+        showView(response);
+        //store.dispatch(StoreRetrieve.SetTopLevel(response));
         console.log("right!");
       }
       else{

@@ -30,8 +30,8 @@ export default class NCAccDetail extends Component
       },
       {
         field: "Balance",
-        value:  balance == null ? "Balance Service Unavailable" :
-                <span className="strong">{balance + " AION"}
+        value:  entity.balance == null ? "Balance Service Unavailable" :
+                <span className="strong">{entity.balance + " AION"}
                   <span className="subtitle">{"(as of block " + entity.lastBlockNumber + ")"}</span>
                 </span>
       },

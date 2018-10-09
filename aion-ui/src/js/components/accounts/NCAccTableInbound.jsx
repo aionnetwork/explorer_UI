@@ -8,7 +8,7 @@ import NCPagination from 'components/common/NCPagination';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import { NCEntity } from 'lib/NCEnums';
-import { ga_key } from 'lib/NCData';
+
 import { nc_numFormatter } from 'lib/NCUtility';
 
 import appConfig from '../../../config.json';
