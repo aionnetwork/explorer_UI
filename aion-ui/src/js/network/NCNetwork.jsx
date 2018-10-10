@@ -160,7 +160,7 @@ export const endpoint = {
   download:{
     detail:{
       link:'/dashboard/exportToCsv',
-      params:['searchParam1','searchParam2', 'entityType','rangeMin1','rangeMax1']
+      params:['searchParam1','searchParam2', 'entityType','rangeMin1','rangeMax1','g-recaptcha-response']
     }
   }
 }
