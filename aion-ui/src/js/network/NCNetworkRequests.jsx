@@ -471,7 +471,9 @@ export const getAccRetrieveCSV = (acc,key) => {
   else {
     // validate the account to make sure it's a valid account string
     let request = nc_trim(acc);
-    
+
+    let recaptcha = nc_trim(key);
+
     if(request == 0) {
       request = "0000000000000000000000000000000000000000000000000000000000000000"
     }else {
@@ -486,7 +488,7 @@ export const getAccRetrieveCSV = (acc,key) => {
     let paramsB = [];
     let paramsC = [];
 
-    params = [request,'','Account'];
+    params = [request,'','Account',0,999,recaptcha];
     paramsA = [request,'','Account_Tokens'];
     paramsB = [request,'','Account_Transactions',0,999];
     paramsC = [request,'','Accoun_Mined_Blocks',0,999];
@@ -502,6 +504,7 @@ export const getAccRetrieveCSV = (acc,key) => {
     });
 
 
+    /*
     network.request(ep, paramsB)
     .then((response) => {
         fileDownload(response, 'Account_'+request+'_Transactions.csv');
@@ -526,6 +529,7 @@ export const getAccRetrieveCSV = (acc,key) => {
     .catch((error) => {
       console.log(error);      
     });
+    */
 
     return;
 
@@ -1206,7 +1210,7 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
  let showView = (entity) => {
 
      //console.log(JSON.stringify(entity));
-     //console.log(JSON.stringify(entity));
+     //console.log(JSON.stringify(entity.content[0]));
 
     switch(entity.searchType)
     {
@@ -1216,7 +1220,7 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
     // ---------
       case 'block':
       {  
-         hashHistory.push('/block/'+entity.content[0].blockHash);
+         hashHistory.push('/block/'+entity.content[0].blockNumber);
          break;
     
       }
