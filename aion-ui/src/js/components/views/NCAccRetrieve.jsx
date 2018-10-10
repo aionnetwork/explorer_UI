@@ -222,7 +222,7 @@ class NCAccRetrieve extends Component
       }
 
       isLoading={isTxnListFirstLoad == null}
-      isDataValid={isTxnListValid}
+      isDataValid={true}
       isDataEmpty={isTxnListEmpty} 
       
       loadingStr={"Loading Transactions"}
@@ -261,7 +261,7 @@ class NCAccRetrieve extends Component
       }
 
       isLoading={isBlkListFirstLoad == null}
-      isDataValid={isBlkListValid}
+      isDataValid={true}
       isDataEmpty={isBlkListEmpty} 
       
       loadingStr={"Loading Blocks"}

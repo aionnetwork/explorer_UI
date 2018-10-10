@@ -42,7 +42,7 @@ export default class NCActiveAddressChart extends Component
                 min:0,
                 
                 title: {
-                    text: 'Address total'
+                    text: 'Block time (seconds) '
                 }
             },
             legend: {

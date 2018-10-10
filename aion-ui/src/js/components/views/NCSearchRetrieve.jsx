@@ -8,11 +8,11 @@ import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 
 
 //list of sub-displays for details
-import NCAccDetail from 'components/accounts/NCAccDetail';
-import NCTknDetail from 'components/tokens/NCTknDetail';
-import NCBlkDetail from 'components/blocks/NCBlkDetail';
-import NCTxnDetail from 'components/transactions/NCTxnDetail';
-import NCCntrDetail from 'components/contracts/NCCntrDetail';
+//import NCAccDetail from 'components/accounts/NCAccDetail';
+//import NCTknDetail from 'components/tokens/NCTknDetail';
+//import NCBlkDetail from 'components/blocks/NCBlkDetail';
+//import NCTxnDetail from 'components/transactions/NCTxnDetail';
+//import NCCntrDetail from 'components/contracts/NCCntrDetail';
 
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
@@ -54,19 +54,12 @@ class NCSearchRetrieve extends Component
   componentWillReceiveProps(nextProps) {
     this.isFirstRenderAfterMount = false;
 
-    console.log('console' + JSON.stringify(nextProps));
-    
-   /* if(this.props.searchRetrieve.response.data !== null){
-      
-      this.showView(this.props.searchRetrieve.response.data);
-
-    }*/
     
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.params.term != this.props.params.term){
-      //this.requestTopLevel();
+      this.requestTopLevel();
     }
 
  }
@@ -74,94 +67,9 @@ class NCSearchRetrieve extends Component
   requestTopLevel = () => {
     network.getRetrieveTopLevel(this.props.params.term);
 
-     console.log('This props:'+JSON.stringify(this.props.searchRetrieve));
   }
 
-  showView = (entity) => {
-
-     //console.log(JSON.stringify(entity));
-     //console.log(JSON.stringify(entity));
-
-    switch(entity.searchType)
-    {
-
-
-    // Top Level 
-    // ---------
-      case 'block':
-      {  
-         hashHistory.push('/block/'+entity.content[0].blockHash);
-         break;
-    
-      }
-      case 'transaction':
-      {
-        hashHistory.push('/transaction/'+entity.content[0].transactionHash);
-        break;
-      }
-      case'token':
-      {
-        hashHistory.push('/token/'+entity.content[0].contractAddress);
-        break;
-      }
-      case'account':
-      {
-        hashHistory.push('/account/'+entity.content[0].address);
-        break;
-      }
-      case'contract':
-      {
-        
-        hashHistory.push('/contract/'+entity.content[0].contractAddr);
-        break;
-      }
-
-
-
-      default: 
-      {
-        return "";
-      }
-    }
-
-  }
-
-  entityView = (entity,data) => {
-    switch(entity)
-    {
-    // Top Level 
-    // ---------
-      case 'block':
-      {  
-        return <NCBlkDetail entity={data}/>
-      }
-      case 'transaction':
-      {
-        return <NCTxnDetail entity={data}/>
-      }
-      case'token':
-      {
-        return <NCTknDetail entity={data}/>
-      }
-      case'account':
-      {
-        return <NCAccDetail entity={data}/>
-      }
-      case'contract':
-      {
-        return <NCCntrDetail entity={data}/>
-      }
-
-
-
-      default: 
-      {
-        return "";
-      }
-    }
-
-  }
-
+  
   render() {
 
     const store = this.props.searchRetrieve;
@@ -171,7 +79,7 @@ class NCSearchRetrieve extends Component
 
     //console.log("page Data for retrieve 2: "+JSON.stringify(this.props));
 
-    const isLoadingTopLevel = false//this.isFirstRenderAfterMount || store.isLoadingTopLevel;
+    const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = false//(store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
     const isBlkListFirstLoad = false//(store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
 
@@ -198,15 +106,13 @@ class NCSearchRetrieve extends Component
     ];
 
     const desc = store.queryStr;
-    const detail = this.entityView(entity,result);
-
     
     const searchResultSection = <NCExplorerSection 
       className={""}
 
       isLoading={isLoadingTopLevel}
-      isDataValid={isSrValid}
-      isDataEmpty={isSrEmpty} 
+      isDataValid={true}
+      isDataEmpty={true} 
 
       emptyDataTitle={"Not Found"}
       invalidDataTitle={"No Result found!"}
@@ -240,11 +146,11 @@ class NCSearchRetrieve extends Component
           <NCExplorerPage
             isLoading={isLoadingTopLevel}
             isDataValid={true} 
-            isDataEmpty={false}
+            isDataEmpty={true}
             
-            loadingStr={"Loading Account Details"}
-            invalidDataStr={"Account Service Unavailable. Account data invalid."}
-            emptyDataStr={"No account found for descriptor: " + desc + "."}
+            loadingStr={"Searching..."}
+            invalidDataStr={"No Result found!"}
+            emptyDataStr={"No Result found for: " + desc + "."}
             
             page={page}/>
 

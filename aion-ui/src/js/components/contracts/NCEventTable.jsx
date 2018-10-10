@@ -113,7 +113,7 @@ export default class NCEventTable extends Component
 
       //console.log(JSON.stringify(arr));
 
-      result = inputstr.split(",").join('","').split(',"[').join(',[').split(']"]').join(']]');
+      result = inputstr.split(",").join('","').split(',"[').join(',[').split(']"').join(']').split(']"]').join(']]');
     } catch (e) {
       console.log(e);
       return false;
@@ -174,6 +174,7 @@ export default class NCEventTable extends Component
 
         console.log(this.parseInputData(entity.inputList));
         
+        //console.log(JSON.parse(this.parseInputData(entity.inputList)));
         parsedInputData = JSON.parse(this.parseInputData(entity.inputList));//this.parseInputData(entity.inputList);
         console.log(JSON.stringify(parsedInputData));
         parsedParamData = JSON.parse(this.parseInputData(entity.parameterList));//this.parseParamData(entity.parameterList);
