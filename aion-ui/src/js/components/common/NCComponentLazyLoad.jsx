@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import NCLoading from 'components/common/NCLoading';
 
-const COMPONENT_MOUNT_TIMEOUT = 300; // ms
+const COMPONENT_MOUNT_TIMEOUT = 30; // ms
 
 export default class NCComponentLazyLoad extends Component
 {

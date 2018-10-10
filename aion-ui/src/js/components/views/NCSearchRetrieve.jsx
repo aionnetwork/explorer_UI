@@ -48,10 +48,7 @@ class NCSearchRetrieve extends Component
   }
 
   componentDidMount() {
-    this.requestTopLevel();
-
-
-     
+    this.requestTopLevel();     
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,17 +56,17 @@ class NCSearchRetrieve extends Component
 
     console.log('console' + JSON.stringify(nextProps));
     
-    if(this.props.searchRetrieve.response.data !== null){
+   /* if(this.props.searchRetrieve.response.data !== null){
       
       this.showView(this.props.searchRetrieve.response.data);
 
-    }
+    }*/
     
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.params.term != this.props.params.term){
-      this.requestTopLevel();
+      //this.requestTopLevel();
     }
 
  }

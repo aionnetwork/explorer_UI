@@ -93,39 +93,39 @@ export default class NCEventTable extends Component
 
     let arr = [];
     try {
-      let a = txnLog.slice(1,-1);
+      let a = txnLog;//.slice(1,-1);
 
-      let inputstr = a.split('\"').join('').split("[");//.replace(/\\"/g, '"');
+      let inputstr = a.split('[').join('["').split("]").join('"]');//.replace(/\\"/g, '"');
 
-      console.log(JSON.stringify(txnLog.replace(/\\"/g, '"')));
+      //console.log(JSON.stringify(txnLog.replace(/\\"/g, '"')));
 
       //first loop
-      inputstr[0] = inputstr[0].slice(0,-1).split(",");
-      arr = arr.concat(inputstr[0]);
+      //inputstr[0] = inputstr[0].slice(0,-1).split(",");
+      //arr = arr.concat(inputstr[0]);
 
       //body loop
-      inputstr[1] = "[" + inputstr[1].slice(0,-2) + "]";
-      arr = arr.concat(inputstr[1]);
+      //inputstr[1] = "[" + inputstr[1].slice(0,-2) + "]";
+      //arr = arr.concat(inputstr[1]);
 
       //last loop
-      arr = arr.concat(inputstr[2].split(']').join('[]'));
+      //arr = arr.concat(inputstr[2].split(']').join('[]'));
 
 
-      console.log(JSON.stringify(arr));
+      //console.log(JSON.stringify(arr));
 
-      result = arr;//inputstr.split(",");
+      result = inputstr.split(",").join('","').split(',"[').join(',[').split(']"]').join(']]');
     } catch (e) {
       console.log(e);
       return false;
     }
-    return arr;
+    return result;
   }
 
   parseParamData = (data) => {
     let result = "";
     try {
       let b = data.slice(1,-1);
-      let paramstr = b.split('\"').join('');
+      let paramstr = b.split(',').join('","');
       result = paramstr.split(",");
       console.log(JSON.stringify(result));
     } catch (e) {
@@ -152,7 +152,7 @@ export default class NCEventTable extends Component
       let timestamp = null;
       let id = null;
 
-      console.log(JSON.stringify(entity.inputList));
+      //console.log(JSON.stringify(entity.inputList));
       //console.log(JSON.stringify(entity.parameterList));
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
@@ -171,8 +171,12 @@ export default class NCEventTable extends Component
         timestamp = entity.eventTimestamp;
 
         id= entity.eventId;
-        parsedInputData = this.parseInputData(entity.inputList);
-        parsedParamData = this.parseParamData(entity.parameterList);
+
+        console.log(this.parseInputData(entity.inputList));
+        
+        parsedInputData = JSON.parse(this.parseInputData(entity.inputList));//this.parseInputData(entity.inputList);
+        console.log(JSON.stringify(parsedInputData));
+        parsedParamData = JSON.parse(this.parseInputData(entity.parameterList));//this.parseParamData(entity.parameterList);
        
 
 
