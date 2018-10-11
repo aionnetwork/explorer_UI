@@ -107,15 +107,18 @@ export function reducer_tknRetrieve (state = initialState_StoreTknRetrieve, acti
       _state.isLoadingTopLevel = false; 
       
       //_state.response = action.data;
-      console.log("This data: "+JSON.stringify(action));
+      //console.log("This data: "+JSON.stringify(action));
 
       _state.response.tkn.data = action.data;
       _state.response.tkn.momentUpdated = moment();
 
-      _state.response.txn.data = {"content":[]};
-      _state.response.txn.momentUpdated = moment();
-      _state.response.blk.data = {"content":[]};
-      _state.response.blk.momentUpdated = moment();
+    if(typeof action.data.content != 'undefined'){
+      _state.response.transfers.data = action.data.content[0].transfers;//{"content":[]};
+       _state.response.holders.data = action.data.content[0].holders;//{"content":[]};
+
+      _state.response.transfers.momentUpdated = moment();     
+      _state.response.holders.momentUpdated = moment();
+    }
 
       _state.momentUpdated = moment();
       

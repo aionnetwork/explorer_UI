@@ -59,45 +59,32 @@ class NCTknRetrieve extends Component
 
   render() {
     const store = this.props.tknRetrieve;
+
+    console.log(JSON.stringify(store));
     
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
 
-    console.log("page Data for retrieve: "+JSON.stringify(this.props));
-
-    const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
-    const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
-
-    //const name = this.props.tknRetrieve.response.tkn.name;
-    //console.log("this is whats happening: "+JSON.stringify(isTxnListFirstLoad));
-    
-
-    //const token = (store.response && store.response.tkn) ? store.response.tkn.content[0] : null;
+    const isTxnListFirstLoad = (store.response && store.response.transfers) ? store.response.transfers.momentUpdated : null;
+    const isAccListFirstLoad = (store.response && store.response.holders) ? store.response.holders.momentUpdated : null;
      
     const tknObj = (store.response && store.response.tkn) ? store.response.tkn.data : null;
     
-    const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
-    const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
+    const txnList = (store.response && store.response.transfers) ? store.response.transfers.data : null;
+    const accList = (store.response && store.response.holders) ? store.response.holders.data : null;
 
-    //console.log(JSON.stringify(txnList));//const isTknValid = nc_isObjectValid(tknObj);
-    //const isTknEmpty = nc_isObjectEmpty(tknObj, isTknValid);
     const isTknValid = nc_isObjectValid(tknObj);
     const isTknEmpty = nc_isObjectEmpty(tknObj, isTknValid);
 
     const isTxnListValid = nc_isListValid(txnList);
     const isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
 
-    const isBlkListValid = nc_isListValid(blkList);
-    const isBlkListEmpty = nc_isListEmpty(blkList, isBlkListValid);
-
-    //const tkn = isTknEmpty ? {} : tknObj;
-    //const tkn = tknObj[0];
+    const isAccListValid = nc_isListValid(accList);
+    const isAccListEmpty = nc_isListEmpty(accList, isAccListValid);
 
     const tkn = isTknEmpty ? {} : tknObj.content[0];
-    console.log(JSON.stringify(tkn));
-    
-    
+   
     const breadcrumbs = [
       {
         link: '/',
@@ -176,7 +163,7 @@ class NCTknRetrieve extends Component
         }
     />
 
-    const blkListSection = <NCExplorerSection 
+    const accListSection = <NCExplorerSection 
       className={""}
       subtitle={
         <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
@@ -188,9 +175,9 @@ class NCTknRetrieve extends Component
         </div>
       }
 
-      isLoading={isBlkListFirstLoad == null}
-      isDataValid={isBlkListValid}
-      isDataEmpty={isBlkListEmpty} 
+      isLoading={isAccListFirstLoad == null}
+      isDataValid={isAccListValid}
+      isDataEmpty={isAccListEmpty} 
       
       loadingStr={"Loading Accounts"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
@@ -206,7 +193,7 @@ class NCTknRetrieve extends Component
 
       content={
         <NCBlkTable 
-          data={blkList}
+          data={accList}
           onPageCallback={this.requestPagingBlkList}
           isLoading={store.isLoadingPagingBlkList}
           isPaginated={true}
@@ -234,7 +221,7 @@ class NCTknRetrieve extends Component
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="txn" title="Transfers" panel={txnListSection}/>
-              <Tab2 id="blk" title="Holders" panel={blkListSection}/>
+              <Tab2 id="blk" title="Holders" panel={accListSection}/>
             </Tabs2>
           </div>
         
