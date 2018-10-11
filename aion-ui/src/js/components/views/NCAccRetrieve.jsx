@@ -107,7 +107,17 @@ class NCAccRetrieve extends Component
   renderTokenMenu = (tokenList) => {
    let menuItemList = [];
    if(Array.isArray(tokenList) && tokenList[0] && tokenList.length > 0) {
-      console.log('cool'+JSON.stringify(tokenList));
+      //console.log('cool'+JSON.stringify(tokenList));
+      /*menuItemList.push(
+              <MenuItem
+                key = "1"
+                className = "nav-option"
+                iconName = {NCEntityInfo[NCEntity.TKN].icon}
+                onClick={()=>this.changeToken(this.props.accRetrieve.queryStr)}
+                text = "Aion (Default)"
+                value = {this.props.accRetrieve.queryStr}
+              />
+              );*/
       tokenList.forEach((t, i) => {
         if (i >= 0) {
           if (t.name || t.symbol) {
@@ -127,8 +137,7 @@ class NCAccRetrieve extends Component
     }
 
     return (
-      <Menu className="NCNavMenu">
-              
+      <Menu className="NCNavMenu">         
         
         {menuItemList}
       </Menu>
@@ -205,7 +214,9 @@ class NCAccRetrieve extends Component
                   className="navbar-btn-active pt-button pt-minimal"
                   iconName="pt-icon-application"
                   rightIconName="pt-icon-caret-down"
-                  text="Aion (Default)"/>          
+                  text= {acc.tokenName  ? acc.tokenName  : "Aion (Default)"}
+
+                />          
         </Popover>
       </div>}
 
