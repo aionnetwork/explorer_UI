@@ -118,11 +118,11 @@ export default class NCEventTable extends Component
       input[0]  = input[0].split('[').join('["').split(',').join('","') +'"';
       let input2 =input.join(',"[').split('],').join(']",').split(']]').join(']"]').slice(2,-2).split('","');
 
-      console.log(JSON.stringify(input2));
+      //console.log(JSON.stringify(input2));
 
       result = input2//inputstr.split(",").join('","').split(',"[').join(',[').split(']"').join(']').split(']"]').join(']]');
     
-      console.log(JSON.stringify(result));
+      //console.log(JSON.stringify(result));
     } catch (e) {
       console.log(e);
       return false;
@@ -169,11 +169,11 @@ export default class NCEventTable extends Component
 
         id= entity.eventId;
 
-        console.log(this.parseInputData(entity.inputList));
+        //console.log(this.parseInputData(entity.inputList));
         
         //console.log(JSON.parse(this.parseInputData(entity.inputList)));
         parsedInputData = this.parseInputData(entity.inputList);//this.parseInputData(entity.inputList);
-        console.log(JSON.stringify(parsedInputData));
+        //console.log(JSON.stringify(parsedInputData));
         parsedParamData = JSON.parse(this.parseParamData(entity.parameterList));//this.parseParamData(entity.parameterList);
        
 

@@ -50,14 +50,7 @@ export default class NCTxnTableOwn extends Component
         flex: false,
         objPath: null,
       },
-      {
-        name: "Transaction Hash",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },
+      
       {
         name: "From Address",
         isSortable: false,
@@ -114,7 +107,7 @@ export default class NCTxnTableOwn extends Component
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
         transferTimestamp = entity.transferTimestamp;
-        value = entity.value;
+        value = entity.tknValue;
       }
 
       let isFrom = false;
@@ -135,15 +128,9 @@ export default class NCTxnTableOwn extends Component
           entityId={blockNumber}/> 
       </Cell>;
       tableContent[i][1] = <Cell>{ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell>{ value ? nc_numFormatterAionCoin(value, 0, true) : 0 }</Cell>;
+      tableContent[i][2] = <Cell>{ value ? value : 0 }</Cell>;
+     
       tableContent[i][3] = 
-      <Cell>
-        <NCEntityLabel 
-          entityType={NCEntity.TXN} 
-          entityName={transactionHash}
-          entityId={transactionHash}/> 
-      </Cell>;
-      tableContent[i][4] = 
       <Cell intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
@@ -151,13 +138,13 @@ export default class NCTxnTableOwn extends Component
           entityId={fromAddr}
           linkActive={isFrom ? false : true}/>
       </Cell>;
-      tableContent[i][5] = 
+      tableContent[i][4] = 
       <Cell>
         <div className="arrow-cell">
           <span className="pt-icon-standard pt-icon-arrow-right"/>
         </div>
       </Cell>;
-      tableContent[i][6] = 
+      tableContent[i][5] = 
       <Cell intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
       {
         toAddr ?

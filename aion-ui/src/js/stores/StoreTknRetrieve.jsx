@@ -62,11 +62,11 @@ let initialState_StoreTknRetrieve =
   queryStr: "",
 
   response: {
-    txn: {
+    transfers: {
       data: null,
       momentUpdated: null
     },
-    blk: {
+    holders: {
       data: null,
       momentUpdated: null
     },
@@ -94,8 +94,8 @@ export function reducer_tknRetrieve (state = initialState_StoreTknRetrieve, acti
       
       //_state.response.tkn = null;
       _state.response.tkn.momentUpdated = null;
-      _state.response.blk.momentUpdated = null;
-      _state.response.txn.momentUpdated = null;
+      _state.response.holders.momentUpdated = null;
+      _state.response.transfers.momentUpdated = null;
       _state.momentUpdated = null;
       
       return _state;

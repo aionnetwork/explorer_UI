@@ -30,14 +30,22 @@ export default class NCAccDetail extends Component
       },
       {
         field: "Balance",
-        value:  entity.balance == null ? "Balance Service Unavailable" :
+        value:  entity.tokenName  ?
+                entity.balance == null ? "Balance Service Unavailable" :
+                <span className="strong">
+                  {entity.balance + " " + entity.tokenName}                
+                </span>
+                :
+                entity.balance == null ? "Balance Service Unavailable" :
                 <span className="strong">{entity.balance + " AION"}
                   <span className="subtitle">{"(as of block " + entity.lastBlockNumber + ")"}</span>
                 </span>
+
+
       },
       {
         field: "Nonce",
-        value: !entity.nonce ? EMPTY_STR : BigNumber(String(entity.nonce), 16).toString(10) 
+        value: !entity.nonce ? EMPTY_STR : entity.nonce
       },
       
       

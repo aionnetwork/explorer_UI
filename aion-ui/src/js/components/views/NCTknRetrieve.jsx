@@ -6,6 +6,7 @@ import moment from 'moment';
 import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 
 import NCBlkTable from 'components/blocks/NCBlkTable';
+import NCHolderTable from 'components/tokens/NCHolderTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 
 import NCTknDetail from 'components/tokens/NCTknDetail';
@@ -192,7 +193,7 @@ class NCTknRetrieve extends Component
       marginTop={40}
 
       content={
-        <NCBlkTable 
+        <NCHolderTable 
           data={accList}
           onPageCallback={this.requestPagingBlkList}
           isLoading={store.isLoadingPagingBlkList}
@@ -220,8 +221,8 @@ class NCTknRetrieve extends Component
        }
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-              <Tab2 id="txn" title="Transfers" panel={txnListSection}/>
-              <Tab2 id="blk" title="Holders" panel={accListSection}/>
+              <Tab2 id="transfers" title="Transfers" panel={txnListSection}/>
+              <Tab2 id="holders" title="Holders" panel={accListSection}/>
             </Tabs2>
           </div>
         

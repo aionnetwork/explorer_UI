@@ -9,6 +9,7 @@ import { Select } from "@blueprintjs/select";
 
 import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTable from 'components/transactions/NCTxnTable';
+import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 
 import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
@@ -105,8 +106,8 @@ class NCAccRetrieve extends Component
 
   renderTokenMenu = (tokenList) => {
    let menuItemList = [];
-   if(Array.isArray(tokenList) && tokenList.length > 1) {
-      
+   if(Array.isArray(tokenList) && tokenList[0] && tokenList.length > 0) {
+      console.log('cool'+JSON.stringify(tokenList));
       tokenList.forEach((t, i) => {
         if (i >= 0) {
           if (t.name || t.symbol) {
@@ -115,9 +116,9 @@ class NCAccRetrieve extends Component
                 key= {i}
                 className="nav-option"
                 iconName={NCEntityInfo[NCEntity.TKN].icon}
-                onClick={()=>this.changeToken(this.props.accRetrieve.queryStr,t.name)}
+                onClick={()=>this.changeToken(this.props.accRetrieve.queryStr,t.contractAddr)}
                 text={t.name+"("+t.symbol+")"}
-                value={t.name}
+                value={t.contractAddr}
               />
               );
           }
@@ -136,10 +137,12 @@ class NCAccRetrieve extends Component
 
   render() {
     const store = this.props.accRetrieve;
-    const tokens=[]
+
+    const tokens = (store.response && store.response.acc.data && store.response.acc.data.content) ? store.response.acc.data.content[0].tokens : [];
+    
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
-    //console.log("page Data for retrieve: "+JSON.stringify(this.props));
+    //console.log("page Data for retrieve: "+JSON.stringify(tokens));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
@@ -238,12 +241,23 @@ class NCAccRetrieve extends Component
       marginTop={40}
 
       content={
+        !acc.tokenName ?
         <NCTxnTable 
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}
           isPaginated={true}
           ownAddr={acc.address}
+          isLatest={true}/>
+        
+        :
+
+        <NCTxnTableOwn 
+          data={txnList}
+          onPageCallback={this.requestPagingTxnList}
+          isLoading={store.isLoadingPagingTxnList}
+          isPaginated={true}
+          ownAddr={desc}
           isLatest={true}/>
         }
     />

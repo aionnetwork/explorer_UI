@@ -423,7 +423,8 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
       //console.log("Coool!");
       // we can save on a network request if the nonce is zero
       if (!isAccEmpty) {
-        getAccRetrievePagingTxnList(request, 0);
+        console.log(requestb);
+        getAccRetrievePagingTxnList(request, requestb, 0);
         getAccRetrievePagingBlkList(request, 0);
         //getAccRetrieveTknList(request, 0);
         //console.log("not empty!");
@@ -536,7 +537,7 @@ export const getAccRetrieveCSV = (acc,key) => {
   }
 }
 
-export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
+export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber) => {
   store.dispatch(StoreAccRetrieve.GetPagingTxn());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -551,7 +552,14 @@ export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
     // get transaction list
     const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
     //console.log('ep:'+JSON.stringify(ep));
-    let params = [queryStr,'' ,pageNumber, PAGE_SIZE];
+    let params = []; 
+    if(tkn!==null){
+      params = [queryStr,tkn ,pageNumber, PAGE_SIZE];
+    }else{
+      params = [queryStr,'' ,pageNumber, PAGE_SIZE];
+    }
+    
+
     //console.log('params:'+JSON.stringify(params));
     network.request(ep, params)
     .then((response) => {
