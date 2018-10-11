@@ -88,7 +88,7 @@ export default class NCEventTable extends Component
    
    
  
-   parseInputData = (txnLog) => {
+   parseParamData = (txnLog) => {
     let result = "";
 
     let arr = [];
@@ -97,23 +97,8 @@ export default class NCEventTable extends Component
 
       let inputstr = a.split('[').join('["').split("]").join('"]');//.replace(/\\"/g, '"');
 
-      //console.log(JSON.stringify(txnLog.replace(/\\"/g, '"')));
-
-      //first loop
-      //inputstr[0] = inputstr[0].slice(0,-1).split(",");
-      //arr = arr.concat(inputstr[0]);
-
-      //body loop
-      //inputstr[1] = "[" + inputstr[1].slice(0,-2) + "]";
-      //arr = arr.concat(inputstr[1]);
-
-      //last loop
-      //arr = arr.concat(inputstr[2].split(']').join('[]'));
-
-
-      //console.log(JSON.stringify(arr));
-
       result = inputstr.split(",").join('","').split(',"[').join(',[').split(']"').join(']').split(']"]').join(']]');
+    
     } catch (e) {
       console.log(e);
       return false;
@@ -121,18 +106,30 @@ export default class NCEventTable extends Component
     return result;
   }
 
-  parseParamData = (data) => {
+   parseInputData = (txnLog) => {
     let result = "";
+
+    let arr = [];
     try {
-      let b = data.slice(1,-1);
-      let paramstr = b.split(',').join('","');
-      result = paramstr.split(",");
+      let a = txnLog;//.slice(1,-1);
+
+      let input = a.split(',['); 
+
+      input[0]  = input[0].split('[').join('["').split(',').join('","') +'"';
+      let input2 =input.join(',"[').split('],').join(']",').split(']]').join(']"]').slice(2,-2).split('","');
+
+      console.log(JSON.stringify(input2));
+
+      result = input2//inputstr.split(",").join('","').split(',"[').join(',[').split(']"').join(']').split(']"]').join(']]');
+    
       console.log(JSON.stringify(result));
     } catch (e) {
       console.log(e);
+      return false;
     }
     return result;
-  } 
+  }
+
 
   
 
@@ -175,9 +172,9 @@ export default class NCEventTable extends Component
         console.log(this.parseInputData(entity.inputList));
         
         //console.log(JSON.parse(this.parseInputData(entity.inputList)));
-        parsedInputData = JSON.parse(this.parseInputData(entity.inputList));//this.parseInputData(entity.inputList);
+        parsedInputData = this.parseInputData(entity.inputList);//this.parseInputData(entity.inputList);
         console.log(JSON.stringify(parsedInputData));
-        parsedParamData = JSON.parse(this.parseInputData(entity.parameterList));//this.parseParamData(entity.parameterList);
+        parsedParamData = JSON.parse(this.parseParamData(entity.parameterList));//this.parseParamData(entity.parameterList);
        
 
 

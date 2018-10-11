@@ -40,8 +40,10 @@ export default class NCDialog extends Component
 
     let isOpen = false
 
-    const style ={width:'100%', padding:'15px', flex: 1, flexWrap: 'wrap'}
+    const style ={width:'90%', padding:'5px', flex: 1, flexWrap: 'wrap',marginLeft:'15px'}
     const NCdialogcontainer = {width:'100%',padding:'5px', wordWrap: 'break-word'}
+    const panel ={background:'#eee',padding:'10px',margin:'15px'}
+    const inputPanel ={background:'#fff',padding:'10px',margin:'15px'}
 
     const inputList = input;//this.format(input);
     const paramList = param;//this.format(param);
@@ -71,14 +73,15 @@ export default class NCDialog extends Component
                       <h5>Logs</h5>
 
                       {param.map(function(name, index){
-                          return <p style={style} key={ index }><strong >{name}</strong>: <br/><span>{input[index]}</span></p>;
+                          return <div key={ index }><p style={style} ><strong >{name}</strong>: <br/> {input[index]}</p></div>;
                        })}
 
                       <h5>Inputs</h5>
+                      <div style={panel}>
                       {inputList.map(function(name, index){
                           return <p  key={ index }><span>{name}</span></p>;
                        })}
-                   
+                      </div>
                    
                       
                   </div>
