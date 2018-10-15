@@ -102,7 +102,7 @@ ReactDOM.render((
             This accounts list view will be the equivalent of the "rich list" once we write the backend service to support it
         */}
         <Route path="accounts" component={ AccList }/>
-        <Route path="account/:accId" component={ AccRetrieve }/>
+        <Route path="account/:accId(/:tknId)" component={ AccRetrieve }/>
 
         <Route path="contracts" component={ CntrList }/>
         <Route path="contract/:cntrId" component={ CntrRetrieve }/>

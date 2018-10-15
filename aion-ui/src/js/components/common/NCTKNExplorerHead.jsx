@@ -45,7 +45,7 @@ export default class NCExplorerHead extends Component
             }
             {
               subtitle && 
-              <h2 className="desc">{subtitle.totalTokens + " Tokens found"}</h2>
+              <h2 className="desc">{subtitle.totalTokens + " Total Tokens"}</h2>
             }
             </span>
           </span>

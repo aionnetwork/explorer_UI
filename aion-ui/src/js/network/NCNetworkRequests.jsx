@@ -406,7 +406,7 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
     if(requestb!=null){
       //requestb = "nc_trim(tkn)";
       params = [request,requestb];
-      console.log('not null ok?'+requestb);
+      //console.log('not null ok?'+requestb);
     }else{
       params = [request];
     }

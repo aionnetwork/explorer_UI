@@ -70,7 +70,7 @@ export default class NCCntrTable extends Component
         isFilterable: false,
         width: null,
         flex: true,
-      },
+      }
       /*{
         name: "Holders",
         isSortable: false,
@@ -104,7 +104,7 @@ export default class NCCntrTable extends Component
         objPath: null,
       },*/
     ];
-
+    //console.log(JSON.stringify(this.columnDescriptor));
     this.generateTableContent = this.generateTableContent.bind(this);
   }
 

@@ -22,20 +22,20 @@ export default class NCAccTable extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Block #",
+        name: "Account",
         isSortable: false,
         isFilterable: false,
         width: 120,
         flex: true,
-        objPath: 'blockNumber',
+        objPath: 'holderAddr',
       },
       {
-        name: "Account",
+        name: "Block #",
         isSortable: false,
         isFilterable: false,
         width: 200,
         flex: false,
-        objPath: 'holderAddr',
+        objPath: 'blockNumber',
       },
       {
         name: "Contract",
@@ -85,19 +85,20 @@ export default class NCAccTable extends Component
       }
 
       tableContent[i] = [];  
+      
       tableContent[i][0] = 
-      <Cell>
-        <NCEntityLabel 
-          entityType={NCEntity.BLOCK} 
-          entityName={blockNumber}
-          entityId={blockNumber}/> 
-      </Cell>;
-      tableContent[i][1] = 
       <Cell>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={holderAddr}
           entityId={holderAddr}/> 
+      </Cell>;
+      tableContent[i][1] = 
+      <Cell>
+        <NCEntityLabel 
+          entityType={NCEntity.BLOCK} 
+          entityName={blockNumber}
+          entityId={blockNumber}/> 
       </Cell>;
       tableContent[i][2] = 
       <Cell>

@@ -87,7 +87,7 @@ class NCAccRetrieve extends Component
       let str = nc_trim(queryStr);
       let entity = this.state.entity;
       let token = [];
-      token.name = tkn;
+      token.hash = tkn;
       token.value = "token";//tkn;
       //console.log("changing token");
       this.setState({
@@ -95,9 +95,24 @@ class NCAccRetrieve extends Component
       }, () => {
         console.log("Changing token to: " + token);
        // nc_LinkToEntityWithParam(entity, queryStr, token);
-        network.getAccRetrieveTopLevel(this.props.params.accId,token.name);
+       hashHistory.push('/account/'+this.props.params.accId+'/'+token.hash);
+       network.getAccRetrieveTopLevel(this.props.params.accId,token.hash);
         //nc_FindEntity(queryStr);
       });
+    } else if (!nc_isStrEmpty(queryStr)){
+
+      let str = nc_trim(queryStr);
+      let entity = this.state.entity;
+      
+      this.setState({
+        queryStr: ''
+      }, () => {
+        
+        hashHistory.push('/account/'+this.props.params.accId);
+        network.getAccRetrieveTopLevel(this.props.params.accId);
+       
+      });
+
     }
     
   }
@@ -108,7 +123,7 @@ class NCAccRetrieve extends Component
    let menuItemList = [];
    if(Array.isArray(tokenList) && tokenList[0] && tokenList.length > 0) {
       //console.log('cool'+JSON.stringify(tokenList));
-      /*menuItemList.push(
+      menuItemList.push(
               <MenuItem
                 key = "1"
                 className = "nav-option"
@@ -117,7 +132,7 @@ class NCAccRetrieve extends Component
                 text = "Aion (Default)"
                 value = {this.props.accRetrieve.queryStr}
               />
-              );*/
+              );
       tokenList.forEach((t, i) => {
         if (i >= 0) {
           if (t.name || t.symbol) {
@@ -146,7 +161,7 @@ class NCAccRetrieve extends Component
 
   render() {
     const store = this.props.accRetrieve;
-
+    console.log(JSON.stringify(this.props.params));
     const tokens = (store.response && store.response.acc.data && store.response.acc.data.content) ? store.response.acc.data.content[0].tokens : [];
     
     const isWeb3 = (store.response) ? store.response.web3 : false;

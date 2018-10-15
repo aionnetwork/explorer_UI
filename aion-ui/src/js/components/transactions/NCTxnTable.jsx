@@ -149,13 +149,38 @@ export default class NCTxnTable extends Component
         {
          
           (status == "") ?
-          <div className="arrow-cell tx-status">
-          <span className="pt-icon-large pt-icon-arrow-right icon success"/>
-          </div>
+          
+          <Popover
+            content="Transaction was successful"
+            interactionKind={PopoverInteractionKind.HOVER}
+            inline={false}
+            popoverClassName="NCLivenessIndicator-Popover"
+            className="NCLivenessIndicator"
+            position={Position.BOTTOM_RIGHT}>
+            <button className="pt-button pt-minimal liveness-btn">
+
+              <div className="arrow-cell tx-status">
+                <span className="pt-icon-large pt-icon-arrow-right icon success"/>
+              </div>
+            </button>
+          </Popover>
+
           :
-          <div className="arrow-cell tx-status">
-          <span className="pt-icon-large pt-icon-arrow-right icon fail"/>
-          </div>
+          
+          <Popover
+            content="Transaction pending"
+            interactionKind={PopoverInteractionKind.HOVER}
+            inline={false}
+            popoverClassName="NCLivenessIndicator-Popover"
+            className="NCLivenessIndicator"
+            position={Position.BOTTOM_RIGHT}>
+            <button className="">
+
+              <div className="arrow-cell tx-status">
+                <span className="pt-icon-large pt-icon-arrow-right icon fail"/>
+              </div>
+            </button>
+          </Popover> 
                   
         }
       </Cell>;

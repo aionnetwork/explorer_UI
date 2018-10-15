@@ -112,7 +112,7 @@ export default class NCTableBase extends Component {
       columnWidths[col] = flexColumnWidth;
     });
 
-    columnWidths[sortColumn] += 15;
+    columnWidths[sortColumn] += 56;
 
     return columnWidths;
   }
@@ -167,6 +167,7 @@ export default class NCTableBase extends Component {
       <div className="NCTable">
         <Table
           useInteractionBar={false}
+          isRowHeaderShown={false}
           numRows={tableContent.length}
           defaultRowHeight={35}
           columnWidths={this.columnWidths}

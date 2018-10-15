@@ -509,7 +509,7 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
 
   switch(charttype){
     case 'line':
-        point =[data.timestamp,data.value];
+        point =[data.timestamp,Math.log(data.value)];
         break;  
     case 'pie':        
         point ={name:data.detail,y:data.value};
