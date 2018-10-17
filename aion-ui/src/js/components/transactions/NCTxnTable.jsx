@@ -168,7 +168,7 @@ export default class NCTxnTable extends Component
           :
           
           <Popover
-            content="Transaction pending"
+            content="Transaction Failed"
             interactionKind={PopoverInteractionKind.HOVER}
             inline={false}
             popoverClassName="NCLivenessIndicator-Popover"

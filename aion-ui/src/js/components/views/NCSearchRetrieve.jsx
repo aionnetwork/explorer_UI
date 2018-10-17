@@ -14,6 +14,8 @@ import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 //import NCTxnDetail from 'components/transactions/NCTxnDetail';
 //import NCCntrDetail from 'components/contracts/NCCntrDetail';
 
+import NCTknTable from 'components/tokens/NCTknTable';
+
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
@@ -90,6 +92,8 @@ class NCSearchRetrieve extends Component
     const result = isSrEmpty ? {} : srObj.content[0];
     const entity = isSrEmpty ? null : srObj.searchType;
 
+    const token = (store.response.data && store.response.data.searchType) ? store.response.data.searchType : false;
+
     const breadcrumbs = [
       {
         link: '/',
@@ -126,6 +130,8 @@ class NCSearchRetrieve extends Component
       content={""}
     />
 
+
+
   
 
     const page =
@@ -134,8 +140,21 @@ class NCSearchRetrieve extends Component
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
           title={"Result for:"}
-          subtitle={desc}/>  
-        { searchResultSection }
+          subtitle={desc}/> 
+
+         
+          {
+            token ?
+          <NCTknTable 
+          data={store.response.data}
+          
+          isLoading={store.isLoadingPaging}
+          isPaginated={false}
+          isLatest={true}/>
+          :
+          searchResultSection
+          }
+
         <hr className="nc-hr"/>
         
        
@@ -146,7 +165,7 @@ class NCSearchRetrieve extends Component
           <NCExplorerPage
             isLoading={isLoadingTopLevel}
             isDataValid={true} 
-            isDataEmpty={true}
+            isDataEmpty={false}
             
             loadingStr={"Searching..."}
             invalidDataStr={"No Result found!"}

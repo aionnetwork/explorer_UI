@@ -78,7 +78,7 @@ export default class NCActiveAddressChart extends Component
 
             series: [{
                 type: 'area',
-                name: 'Active Address Growth',
+                name: 'Total Address Amount',
                 data: data,
                 tuboThreshold:15000,
             }]

@@ -26,7 +26,8 @@ export default class NCActiveAddressChart extends Component
                 useUTC: false,
             },
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
+                height: 500,
             },
             title: {
                 text: 'Block Times Chart'
@@ -39,8 +40,8 @@ export default class NCActiveAddressChart extends Component
                 type: 'datetime'
             },
             yAxis: {
-                min:0,
-                
+                //min:0,
+                type: 'logarithmic',
                 title: {
                     text: 'Block time (seconds) '
                 }
@@ -49,6 +50,7 @@ export default class NCActiveAddressChart extends Component
                 enabled: false
             },
             credits:{enabled:false},
+            
             plotOptions: {
                 area: {
                     fillColor: {
@@ -80,13 +82,15 @@ export default class NCActiveAddressChart extends Component
             series: [{
                 type: 'area',
                 name: 'Block Times Chart',
-                data: data
+                data: data,
+                
             }]
         }
 
     return (
        <HighchartsReact
           highcharts={Highcharts}
+          //constructorType={'stockChart'}
           options={option}
         />
     );

@@ -39,7 +39,8 @@ export default class NCActiveAddressChart extends Component
                 type: 'datetime'
             },
             yAxis: {
-                min:0,
+                //min:0,
+                type: 'logarithmic',
                 title: {
                     text: 'Difficulty'
                 }

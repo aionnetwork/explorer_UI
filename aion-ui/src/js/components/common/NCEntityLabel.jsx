@@ -75,6 +75,7 @@ export default class NCEntityLabel extends Component
       if (
         entityType == NCEntity.USER || 
         entityType == NCEntity.SC || 
+        entityType == NCEntity.CNTR ||
         entityType == NCEntity.TXN || 
         entityType == NCEntity.NODE || 
         entityType == NCEntity.ACCOUNT)

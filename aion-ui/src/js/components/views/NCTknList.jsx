@@ -61,7 +61,7 @@ class NCTknList extends Component
     //console.log('tkn list');
     
     const store = this.props.tknList;
-    //console.log(JSON.stringify(store));
+    console.log(JSON.stringify(store));
 
     const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;

@@ -1291,13 +1291,20 @@ export const getRetrieveTopLevel = (queryStr) => {
     network.request(ep, params)
     .then((response) => {
       console.log(JSON.stringify(response.searchType));
-      if(typeof response.searchType !== "undefined"){ 
 
-        //console.log('Data:'+JSON.stringify(response));
+      if(typeof response.searchType !== "undefined" && response.searchType !== "token"){ 
 
+        console.log('Data:'+JSON.stringify(response));
+        
         showView(response);
         //store.dispatch(StoreRetrieve.SetTopLevel(response));
-        console.log("right!");
+        //console.log("right!");
+      }
+      else if(typeof response.searchType !== "undefined"){ 
+
+        console.log('token search!');  
+        store.dispatch(StoreRetrieve.SetTopLevel(response));
+
       }
       else{
         store.dispatch(StoreRetrieve.SetTopLevel({

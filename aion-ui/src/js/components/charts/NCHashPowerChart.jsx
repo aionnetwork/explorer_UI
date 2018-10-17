@@ -41,7 +41,7 @@ export default class NCActiveAddressChart extends Component
             yAxis: {
                 min:0,
                 title: {
-                    text: 'Hash Power'
+                    text: 'Hash Power  (sols/sec)'
                 }
             },
             legend: {
@@ -78,7 +78,7 @@ export default class NCActiveAddressChart extends Component
 
             series: [{
                 type: 'area',
-                name: 'Hashpower',
+                name: 'Hashpower (sols/sec)',
                 data: data
             }]
         }

@@ -26,7 +26,7 @@ export default class NCCntrDetail extends Component
         value:  <NCEntityLabel
                   entityType={ NCEntity.ACCOUNT }
                   entityId={ entity.contractAddr}
-                  linkActive={ false }/>
+                  linkActive={ true }/>
       },
       /*{
         field: "Name",
@@ -40,21 +40,21 @@ export default class NCCntrDetail extends Component
         value:  <NCEntityLabel
                   entityType={ NCEntity.BLOCK }
                   entityId={ entity.blockNumber}
-                  linkActive={ false }/>
+                  linkActive={ true }/>
       },
       {
         field: "Transaction Hash",
         value:  <NCEntityLabel
                   entityType={ NCEntity.TXN }
                   entityId={ entity.contractTxHash}
-                  linkActive={ false }/>
+                  linkActive={ true }/>
       },
       {
         field: "Creator",
         value:  <NCEntityLabel
                   entityType={ NCEntity.ACCOUNT }
                   entityId={ entity.contractCreatorAddr}
-                  linkActive={ false }/>
+                  linkActive={ true }/>
       },
       {
         field: "Balance",

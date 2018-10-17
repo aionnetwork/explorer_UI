@@ -50,18 +50,18 @@ export default class NCEventTable extends Component
         name: "Block #",
         isSortable: false,
         isFilterable: false,
-        width: null,
+        width: 200,
 
-        flex: true,
+        flex: false,
         
       },
           
       {
-        name: "Name",
+        name: "Event",
         isSortable: false,
         isFilterable: false,
-        width: 150,
-        flex: false,
+        width: null,
+        flex: true,
         objPath: null,
       },
       

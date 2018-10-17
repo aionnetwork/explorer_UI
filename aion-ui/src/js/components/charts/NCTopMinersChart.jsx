@@ -9,10 +9,12 @@ import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
+import appConfig from '../../../config.json';
 
 const EMPTY_STR = "Not Available";
 import {BigNumber} from 'bignumber.js';
 import { nc_compare } from 'lib/NCUtility';
+
 
 
 export default class NCTopMinersChart extends Component
@@ -73,7 +75,7 @@ export default class NCTopMinersChart extends Component
             },
             events: {
                     click: function({point}) {
-                        location.href = 'https://mainnet.aion.network/#/block/'+point.name;
+                        location.href = 'https://'+appConfig.site.base_url+'/#/account/'+point.name;
                     }
                 }
         }

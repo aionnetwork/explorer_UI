@@ -41,6 +41,7 @@ class NCChartRetrieve extends Component
       type:null,
       id:null
     };
+    this.cLoad=true;
   }
 
   componentWillMount() {
@@ -59,7 +60,7 @@ class NCChartRetrieve extends Component
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.params.chartId != this.props.params.chartId){
-      //console.log('get data update');
+      this.cLoad=false;
       this.parseChart(this.props.params.chartId);
       this.request();
     }
@@ -98,7 +99,7 @@ class NCChartRetrieve extends Component
     case 'TransactionsoverTime':
         this.chartData.chart = <NCTransactionsChart  />
         this.chartData.description = "Transactions per Hour";
-        this.chartData.type="line";
+        this.chartData.type="bar";
         this.chartData.id = 4;
         break;  
     case 'BlockTime':
@@ -130,9 +131,20 @@ class NCChartRetrieve extends Component
     const store = this.props.chartRetrieve;
 
     //console.log(JSON.stringify(store));
+    //const data =  nc_getChartData(store.response.content,this.chartData.type);
+    let data = []
 
-    const data =  nc_getChartData(store.response.content,this.chartData.type);
-    store.response.content =[];
+    if(this.cLoad){
+      data =  nc_getChartData(store.response.content,this.chartData.type);
+
+    }else{
+      //data =  nc_getChartData([],this.chartData.type);
+      store.response.content =[];
+      this.cLoad = true;
+      //console.log('its false');
+    }
+
+    //store.response.content =[];
     
     //console.log(JSON.stringify(data));
 

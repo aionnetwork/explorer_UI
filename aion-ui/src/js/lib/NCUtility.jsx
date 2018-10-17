@@ -509,13 +509,17 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
 
   switch(charttype){
     case 'line':
-        point =[data.timestamp,Math.log(data.value)];
+        point =[data.timestamp,data.value];
         break;  
     case 'pie':        
-        point ={name:data.detail,y:data.value};
+        if(data.detail){
+          point ={name:data.detail, y:data.value};
+        }else if(data.otheraddress){
+          point ={name:'Other address', y:data.otheraddress};
+        }
         break;  
     case 'bar':        
-        point =[];
+        point =[data.timestamp,data.value];
         break;                
     default:
         point =[];
