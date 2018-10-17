@@ -144,7 +144,7 @@ class NCCntrRetrieve extends Component
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
     //console.log("page Data for retrieve: "+JSON.stringify(store.response));
-
+    //console.log(JSON.stringify(store));
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
     const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
@@ -153,7 +153,7 @@ class NCCntrRetrieve extends Component
     const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
     const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
     const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
-    const eventList = (store.response && store.response.event) ? store.response.event.data : null;
+    const eventList = (store.response && store.response.event && store.response.event.data.content) ? store.response.event.data.content : null;
 
     const isAccValid = nc_isObjectValid(accObj);
     const isAccEmpty = nc_isObjectEmpty(accObj, isAccValid);
@@ -168,7 +168,7 @@ class NCCntrRetrieve extends Component
 
     const isEventListValid = nc_isListValid(eventList);
     const isEventListEmpty = nc_isListEmpty(eventList, isEventListValid);
-    //console.log(isEventListEmpty+""+isEventListValid);
+    console.log(isEventListEmpty+""+isEventListValid);
     const acc = isAccEmpty ? {} : accObj.content[0];
     
     const breadcrumbs = [

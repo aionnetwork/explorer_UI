@@ -43,7 +43,7 @@ export default class NCEventTable extends Component
       action: 'Events tab'
     });
 
-    
+    console.log('events time');
     this.columnDescriptor = 
     [
       {
@@ -72,13 +72,7 @@ export default class NCEventTable extends Component
         width: 250,
         flex: false,
       },
-      {
-        name: "Event logs", // arrow
-        isSortable: false,
-        isFilterable: false,
-        width: 100,
-        flex: false,
-      },
+      
       
     ];
 
@@ -118,7 +112,7 @@ export default class NCEventTable extends Component
       input[0]  = input[0].split('[').join('["').split(',').join('","') +'"';
       let input2 =input.join(',"[').split('],').join(']",').split(']]').join(']"]').slice(2,-2).split('","');
 
-      //console.log(JSON.stringify(input2));
+      //console.log(JSON.stringify(entity));
 
       result = input2//inputstr.split(",").join('","').split(',"[').join(',[').split(']"').join(']').split(']"]').join(']]');
     
@@ -130,13 +124,37 @@ export default class NCEventTable extends Component
     return result;
   }
 
+  parameters = (a) => {
+      let list = '';
+
+      let data = JSON.parse(a);
+
+      for (var i in data) {
+          list = list + data[i] + ", " ;
+      }
+
+      return list.slice(0,-2); 
+  }
+  inputs = (a,b) =>{
+      let list = [];
+
+      let data = JSON.parse(a);
+      let param = JSON.parse(b);
+
+      for (var i in data) {
+          list.push( param[i] +' = '+data[i] );
+      }
+
+      return list;
+  }
 
   
 
   generateTableContent(entityList) 
   {
     let tableContent = [];
-    //console.log('tkn table');
+    console.log('tkn table');
+    console.log(JSON.stringify(entityList));
     entityList.forEach((entity, i) => 
     {
       let parsedInputData = null;//this.parseTxnLog(entity.inputList);
@@ -148,6 +166,8 @@ export default class NCEventTable extends Component
       
       let timestamp = null;
       let id = null;
+      let params = null;
+      let inputs = null
 
       //console.log(JSON.stringify(entity.inputList));
       //console.log(JSON.stringify(entity.parameterList));
@@ -161,23 +181,26 @@ export default class NCEventTable extends Component
         toAddr = entity[2];
         blockTimestamp = entity[4];
         value = entity[3];
+        console.log('Array: '+JSON.stringify(entity));
       } else {
         Addr = entity.contractAddr;
         name = entity.name;
         blockNumber = entity.blockNumber;
         timestamp = entity.eventTimestamp;
+        params = this.parameters(entity.parameterList);
+        inputs = this.inputs(entity.inputList, entity.parameterList );
 
         id= entity.eventId;
 
         //console.log(this.parseInputData(entity.inputList));
         
         //console.log(JSON.parse(this.parseInputData(entity.inputList)));
-        parsedInputData = this.parseInputData(entity.inputList);//this.parseInputData(entity.inputList);
+        //parsedInputData = this.parseInputData(entity.inputList);//this.parseInputData(entity.inputList);
         //console.log(JSON.stringify(parsedInputData));
-        parsedParamData = JSON.parse(this.parseParamData(entity.parameterList));//this.parseParamData(entity.parameterList);
+        //parsedParamData = JSON.parse(this.parseParamData(entity.parameterList));//this.parseParamData(entity.parameterList);
        
 
-
+          console.log(JSON.stringify(entity));
       }
 
       
@@ -201,23 +224,24 @@ export default class NCEventTable extends Component
       ;
       
      
-      tableContent[i][1] = <Cell><b>{ name }</b></Cell>;
+      tableContent[i][1] = <Cell><b>{ name + '('+params+')' }<br/>
+      <pre className={'nc-resizable'}>
+        { inputs[0] }<br/>
+         { inputs[1] }<br/>
+          { inputs[2] }<br/>
+           { inputs[3] }<br/>
+            { inputs[4] }<br/>
+             { inputs[5] }<br/>
+             { inputs[6] }<br/>
+        </pre></b>
+      </Cell>;
     
       tableContent[i][2] = 
       
       <Cell>{ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;     
       
       
-      tableContent[i][3] = <Cell>  
-        <NCDialog 
-
-          contract = {Addr}
-
-          param= {parsedParamData}
-         
-          input= {parsedInputData}
-        />  
-       </Cell>;
+      
 
          
 
@@ -234,6 +258,7 @@ export default class NCEventTable extends Component
     
     return (
       <NCTableReactPaginated
+        rowHeight = {300}
         data={data}
         onPageCallback={onPageCallback}
         isLoading={isLoading}

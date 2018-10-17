@@ -495,7 +495,7 @@ export function nc_getChartData(data,charttype=null){
     }else{
       return chart;
     }
-
+      console.log(JSON.stringify(chart));
     return chart;
   }
 
@@ -503,20 +503,19 @@ export function nc_getChartData(data,charttype=null){
 
 export function nc_datapoint(data,charttype=null,i){
 
+let point =[];
 if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(data.detail) && nc_isNumber(data.value)) ){
   
-  let point =[];
+  
 
   switch(charttype){
     case 'line':
         point =[data.timestamp,data.value];
         break;  
     case 'pie':        
-        if(data.detail){
-          point ={name:data.detail, y:data.value};
-        }else if(data.otheraddress){
-          point ={name:'Other address', y:data.otheraddress};
-        }
+        
+        point ={name:data.detail, y:data.value};
+        
         break;  
     case 'bar':        
         point =[data.timestamp,data.value];
@@ -527,7 +526,15 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
   }
 
   return point;
- }else{
+
+ }else if(nc_isNumber(data['Other Addresses'])){
+
+  point ={name:'Other addresses', y:45};
+
+  return point;
+
+ }
+ else{
     return[0,0];
  }
 

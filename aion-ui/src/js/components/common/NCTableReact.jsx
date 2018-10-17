@@ -131,11 +131,12 @@ export default class NCTableReact extends Component
 
   render() {
 
-    let { dialog, data, generateTableContent, columnDescriptor } = this.props;
+    let { rowHeight, dialog, data, generateTableContent, columnDescriptor } = this.props;
 
     let filteredData = this.runFilter(data);
     let sortedData = this.runSort(filteredData);
     let tableContent = generateTableContent(sortedData);
+    let height = rowHeight;
 
     return (
       <div className="NCTableEnhanced">
@@ -143,7 +144,7 @@ export default class NCTableReact extends Component
           <NCTableBase 
             tableContent={tableContent}
             columnDescriptor={columnDescriptor}
-
+            rowHeight = {height}
             sortColumn={this.state.sortColumn}
             sortType={this.state.sortType}
             sortCallback={this.sortCallback}

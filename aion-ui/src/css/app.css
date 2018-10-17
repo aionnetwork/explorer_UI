@@ -931,7 +931,6 @@ pre {
   line-height: inherit;
   margin-left: 6px;
   color: #182026;
-  font-family: monospace;
 }
 .NCEntityLabel.active:hover {
   cursor: pointer;
