@@ -73,6 +73,25 @@ export default class NCTopMinersChart extends Component
                     color:  'black'
                 }
             },
+
+            events: {
+                    click: function({point}) {
+                        location.href = 'https://'+appConfig.site.base_url+'/#/account/'+point.name;
+                    }
+                }
+        },
+         bar: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+
+            dataLabels: {
+                enabled: true,
+                format: '{point.y} ',
+                style: {
+                    color:  'black'
+                }
+            },
+        
             events: {
                     click: function({point}) {
                         location.href = 'https://'+appConfig.site.base_url+'/#/account/'+point.name;
@@ -83,7 +102,7 @@ export default class NCTopMinersChart extends Component
     series: [{
         name: 'Mined Blocks',
         colorByPoint: true,
-        data: data
+        data: points
     }]
 }
 

@@ -20,7 +20,7 @@ import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityL
 import NCTokenLabel from 'components/common/NCTokenLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { nc_numFormatterAionCoin, nc_isStrEmpty } from 'lib/NCUtility';
 
 import appConfig from '../../../config.json';
 
@@ -43,7 +43,7 @@ export default class NCEventTable extends Component
       action: 'Events tab'
     });
 
-    console.log('events time');
+    //console.log('events time');
     this.columnDescriptor = 
     [
       {
@@ -142,7 +142,7 @@ export default class NCEventTable extends Component
       let param = JSON.parse(b);
 
       for (var i in data) {
-          list.push( param[i] +' = '+data[i] );
+          if(nc_isStrEmpty(data[i])){list.push( param[i] +' = []' );}else{list.push( param[i] +' = '+data[i] );}
       }
 
       return list;
@@ -200,7 +200,7 @@ export default class NCEventTable extends Component
         //parsedParamData = JSON.parse(this.parseParamData(entity.parameterList));//this.parseParamData(entity.parameterList);
        
 
-          console.log(JSON.stringify(entity));
+          //console.log(JSON.stringify(entity));
       }
 
       

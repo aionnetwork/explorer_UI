@@ -42,6 +42,13 @@ class NCChartRetrieve extends Component
       id:null
     };
     this.cLoad=true;
+    this.type = 'logarithmic';
+  }
+
+   toggle = () => {
+    //Highcharts().yAxis[0].update({ type: 'linear'});
+    this.type = 'linear';
+    //console.log('toggle!');
   }
 
   componentWillMount() {
@@ -152,6 +159,7 @@ class NCChartRetrieve extends Component
     const queryStr = store.queryStr;
 
     const desc = this.chartData.description;
+    let log = this.type;
 
     const blkObj = (store.response) ? store.response.blk : null;
     const txnList = (store.response) ? store.response.txn : null;
@@ -202,6 +210,8 @@ class NCChartRetrieve extends Component
         isLoading={false}
         isDataValid={true} 
         isDataEmpty={false}
+        log = {log}
+
         
         loadingStr={"Loading Chart Details"}
         invalidDataStr={"Server error. Invalid Chart"}

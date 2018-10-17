@@ -4,6 +4,7 @@ import moment from 'moment';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
 
 import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
@@ -15,6 +16,19 @@ import {BigNumber} from 'bignumber.js';
 
 export default class NCActiveAddressChart extends Component
 {
+  constructor(props) 
+  {
+    super(props);
+
+    // entity type does not change over lifecyle in this app
+    this.type = 'logarithmic';
+  }
+
+  toggle = () => {
+    //Highcharts().yAxis[0].update({ type: 'linear'});
+    this.type = 'linear';
+    console.log('toggle!');
+  }
   render() {
     let { entity, options, data} = this.props;
 
@@ -40,7 +54,8 @@ export default class NCActiveAddressChart extends Component
             },
             yAxis: {
                 //min:0,
-                type: 'logarithmic',
+                type: this.type,
+
                 title: {
                     text: 'Difficulty'
                 }
@@ -85,10 +100,15 @@ export default class NCActiveAddressChart extends Component
         }
 
     return (
-       <HighchartsReact
-          highcharts={Highcharts}
-          options={option}
-        />
+        <div>
+            <Button onClick={() => {this.toggle()}} className = "pt-button pt-minimal pull-right" text="Toggle Logarithimic" />
+        
+            <HighchartsReact
+                highcharts={Highcharts}
+                options={option}
+                />
+
+        </div>
     );
   }
 }

@@ -495,7 +495,7 @@ export function nc_getChartData(data,charttype=null){
     }else{
       return chart;
     }
-      console.log(JSON.stringify(chart));
+      //console.log(JSON.stringify(chart));
     return chart;
   }
 
@@ -504,6 +504,7 @@ export function nc_getChartData(data,charttype=null){
 export function nc_datapoint(data,charttype=null,i){
 
 let point =[];
+
 if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(data.detail) && nc_isNumber(data.value)) ){
   
   
@@ -533,16 +534,15 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
 
   return point;
 
- }
- else{
-    return[0,0];
+ }else {
+    return [];
  }
 
 }
 
 
 export function nc_compare(a,b) {
-  return a.y-b.y;
+  return b.y-a.y;
 }
 
 
