@@ -30,7 +30,7 @@ export default class NCActiveAddressChart extends Component
     console.log('toggle!');
   }
   render() {
-    let { entity, options, data} = this.props;
+    let { type, entity, options, data} = this.props;
 
     const option = {
             exporting: {
@@ -54,7 +54,7 @@ export default class NCActiveAddressChart extends Component
             },
             yAxis: {
                 //min:0,
-                type: this.type,
+                type: type,
 
                 title: {
                     text: 'Difficulty'
@@ -101,8 +101,7 @@ export default class NCActiveAddressChart extends Component
 
     return (
         <div>
-            <Button onClick={() => {this.toggle()}} className = "pt-button pt-minimal pull-right" text="Toggle Logarithimic" />
-        
+            
             <HighchartsReact
                 highcharts={Highcharts}
                 options={option}

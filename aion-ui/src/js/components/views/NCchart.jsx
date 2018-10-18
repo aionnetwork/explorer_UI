@@ -43,12 +43,16 @@ class NCChartRetrieve extends Component
     };
     this.cLoad=true;
     this.type = 'logarithmic';
+    this.state={
+      type: 'linear'
+    };
   }
 
    toggle = () => {
     //Highcharts().yAxis[0].update({ type: 'linear'});
-    this.type = 'linear';
-    //console.log('toggle!');
+    (this.state.type !== 'logarithmic') ? this.setState({type: 'logarithmic'}) : this.setState({type: 'linear'});
+
+    console.log('toggle!');
   }
 
   componentWillMount() {
@@ -198,11 +202,11 @@ class NCChartRetrieve extends Component
           subtitle={desc}
         />  
 
-        {React.cloneElement(this.chartData.chart, {data: data})}   
-
-       
-
+        <Button onClick={() => {this.toggle()}} className = "pt-button pt-minimal pull-right" text="Toggle Logarithimic" />
         
+
+        {React.cloneElement(this.chartData.chart, {data: data, type: this.state.type})}   
+       
       </div>;
 
     return (
@@ -210,7 +214,7 @@ class NCChartRetrieve extends Component
         isLoading={false}
         isDataValid={true} 
         isDataEmpty={false}
-        log = {log}
+
 
         
         loadingStr={"Loading Chart Details"}
