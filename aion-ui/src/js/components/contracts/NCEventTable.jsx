@@ -153,8 +153,8 @@ export default class NCEventTable extends Component
   generateTableContent(entityList) 
   {
     let tableContent = [];
-    console.log('tkn table');
-    console.log(JSON.stringify(entityList));
+    //console.log('tkn table');
+    //console.log(JSON.stringify(entityList));
     entityList.forEach((entity, i) => 
     {
       let parsedInputData = null;//this.parseTxnLog(entity.inputList);

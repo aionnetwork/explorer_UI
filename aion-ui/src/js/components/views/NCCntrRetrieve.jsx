@@ -168,7 +168,7 @@ class NCCntrRetrieve extends Component
 
     const isEventListValid = nc_isListValid(eventList);
     const isEventListEmpty = nc_isListEmpty(eventList, isEventListValid);
-    console.log(isEventListEmpty+""+isEventListValid);
+    //console.log(isEventListEmpty+""+isEventListValid);
     const acc = isAccEmpty ? {} : accObj.content[0];
     
     const breadcrumbs = [

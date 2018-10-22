@@ -1127,7 +1127,7 @@ export const getTknRetrieveTopLevel = (queryStr) => {
     }, 500);
   }
   else {
-    console.log("getTknRetrieveTopLevel live");
+    //console.log("getTknRetrieveTopLevel live");
     let request = nc_trim(queryStr);
     if (!nc_isValidEntity(request)) {
       store.dispatch(StoreTknRetrieve.SetTopLevel({

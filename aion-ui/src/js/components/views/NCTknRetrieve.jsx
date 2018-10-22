@@ -61,7 +61,7 @@ class NCTknRetrieve extends Component
   render() {
     const store = this.props.tknRetrieve;
 
-    console.log(JSON.stringify(store));
+    //console.log(JSON.stringify(store));
     
     const isWeb3 = (store.response) ? store.response.web3 : false;
 

@@ -61,7 +61,7 @@ class NCTknList extends Component
     //console.log('tkn list');
     
     const store = this.props.tknList;
-    console.log(JSON.stringify(store));
+    //console.log(JSON.stringify(store));
 
     const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
@@ -128,7 +128,7 @@ class NCTknList extends Component
         isDataValid={true} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Transaction Data"}
+        loadingStr={"Loading Token Data"}
         invalidDataStr={"Server provided an invalid response. Please try again."}
         emptyDataStr={emptyDataStr}
         

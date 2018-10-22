@@ -105,7 +105,7 @@ class NCAccList extends Component
       isDataValid={isInboundTxListValid}
       isDataEmpty={isInboundTxListEmpty} 
       
-      loadingStr={"Loading Accounts List"}
+      loadingStr={"Loading Accounts Data"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
       emptyDataStr={"No inbound account activity in last 24 hours"}
       isToplevelSection={false}
