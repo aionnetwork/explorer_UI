@@ -225,6 +225,30 @@ class NCLayout extends Component {
     ReactGA.pageview(pathname);
 
     let kpi = this.props.kpi;
+    let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
+     const permissionsMenu = (
+            <Popover
+                content={<div>
+                    Please leave a feedback!
+                   <InputGroup
+                    disabled={false}
+                    
+                    value={"tagValue"}
+                />
+                <InputGroup
+                    disabled={false}
+                    
+                    value={"tagValue"}
+                /></div>
+                }
+
+                position={Position.TOP_LEFT}>
+                <Button style = { css } className={" "} iconName={"envelope"}>
+                    Feedback
+                </Button>
+            </Popover>
+        );
+    
     
     // wait on the response from KPI list to load application
     if (NCNETWORK_REQUESTS_ENABLED && kpi.momentUpdated == null) { 
@@ -310,6 +334,7 @@ class NCLayout extends Component {
           <div className="container">
           { this.props.children }
           </div>
+          {permissionsMenu}
         </div>
         <div className="NCFooter">
           <div>

@@ -224,7 +224,7 @@ export default class NCEventTable extends Component
       ;
       
      
-      tableContent[i][1] = <Cell><b>{ name + '('+params+')' }<br/>
+      tableContent[i][1] = <Cell interactive={true} ><b>{ name + '('+params+')' }<br/>
       <pre className={'nc-resizable'}>
         { inputs[0] }<br/>
          { inputs[1] }<br/>

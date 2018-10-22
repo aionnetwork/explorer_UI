@@ -172,6 +172,7 @@ export default class NCTableBase extends Component {
           isRowHeaderShown={false}
           numRows={tableContent.length}
           defaultRowHeight={height}
+          enableMultipleSelection={false}
           columnWidths={this.columnWidths}
           selectionModes={SelectionModes.ROWS_AND_CELLS}
           onColumnWidthChanged={this.onColumnWidthChanged}>
