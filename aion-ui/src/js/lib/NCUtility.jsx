@@ -156,7 +156,7 @@ export function nc_numFormatter(num, digits=2) {
   const bn = (new BigNumber(String(num)));
   const formatted = formatSI(bn);
   
-  return nc_numPrettify(formatted.value.dp(digits)) + "" + formatted.prefix;
+  return formatted.value.dp(digits) + "" + formatted.prefix;
 }
 
 export function nc_numFormatterBytes(num, digits) {

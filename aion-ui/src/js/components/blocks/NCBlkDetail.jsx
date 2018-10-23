@@ -22,7 +22,7 @@ export default class NCBlkDetail extends Component
     [
       {
         field: "Time Proposed",
-        value: moment.unix(entity.blockTimestamp).format('LLLL')
+        value: moment.unix(entity.blockTimestamp).format('MMM D YYYY, hh:mm:ss a')
       },
       {
         field: "Block Number",

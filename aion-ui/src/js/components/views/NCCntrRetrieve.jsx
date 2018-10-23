@@ -344,7 +344,7 @@ class NCCntrRetrieve extends Component
       }
 
       isLoading={isEventListFirstLoad == null}
-      isDataValid={isEventListValid}
+      isDataValid={true}
       isDataEmpty={isEventListEmpty} 
       
       loadingStr={"Loading Blocks"}

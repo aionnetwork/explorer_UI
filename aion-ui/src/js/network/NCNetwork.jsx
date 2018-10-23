@@ -51,11 +51,11 @@ export const endpoint = {
       },
       [blkListType['BY_ACCOUNT']]: {
         link: '/dashboard/getBlocksMinedByAddress',
-        params: ['searchParam', 'blockPage', 'blockSize']
+        params: ['searchParam', 'page', 'size']
       }
     },
     detail: {
-      link: '/dashboard/getBlockAndTransactionDetailsFromBlockNumberOrBlockHash',
+      link: '/dashboard/getBlockAndTransactionDetailsFromBlockNumberOrBlockHash',//getBlockAndTransactionDetailsFromBlockNumberOrBlockHash
       params: ['searchParam']
     }
   },

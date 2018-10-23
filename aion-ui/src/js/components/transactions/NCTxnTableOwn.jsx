@@ -133,7 +133,7 @@ export default class NCTxnTableOwn extends Component
       tableContent[i][3] = 
       <Cell intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
-          entityType={NCEntity.ACCOUNT} 
+          entityType={NCEntity.SEARCH} 
           entityName={fromAddr}
           entityId={fromAddr}
           linkActive={isFrom ? false : true}/>
@@ -149,7 +149,7 @@ export default class NCTxnTableOwn extends Component
       {
         toAddr ?
         <NCEntityLabel 
-          entityType={NCEntity.ACCOUNT} 
+          entityType={NCEntity.SEARCH} 
           entityName={toAddr}
           entityId={toAddr}
           linkActive={isTo ? false : true}/>:

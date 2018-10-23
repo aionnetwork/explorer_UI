@@ -34,6 +34,7 @@ class NCAccRetrieve extends Component
     this.state = {
       isFetching: false,
       queryStr: '',
+      token:null,
       entity: NCEntity.ACCOUNT
     } 
   }
@@ -62,7 +63,7 @@ class NCAccRetrieve extends Component
 
   requestPagingTxnList = (pageNumber) => {
     const queryStr = this.props.accRetrieve.queryStr;
-    network.getAccRetrievePagingTxnList(queryStr, pageNumber);
+    network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber);
   }
 
   requestDownload = (type, data) => {
@@ -91,7 +92,7 @@ class NCAccRetrieve extends Component
       token.value = "token";//tkn;
       //console.log("changing token");
       this.setState({
-        queryStr: ''
+        queryStr: '', token: token.hash
       }, () => {
         console.log("Changing token to: " + token);
        // nc_LinkToEntityWithParam(entity, queryStr, token);

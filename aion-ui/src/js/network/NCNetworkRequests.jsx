@@ -461,7 +461,7 @@ searchParam1 = Account Address
 entityType = Account_Mined_Blocks
 rangeMin1 = some number
 rangeMax1 = some number*/
-export const getAccRetrieveCSV = (acc,key) => {
+export const getAccRetrieveCSV = (acc,key,range) => {
   store.dispatch(StoreAccRetrieve.GetTopLevel({
     queryStr: acc
   }));
@@ -489,7 +489,7 @@ export const getAccRetrieveCSV = (acc,key) => {
     let paramsB = [];
     let paramsC = [];
 
-    params = [request,'','Account',0,999,recaptcha];
+    params = [request,'','Account',range[0],range[1],recaptcha];
     paramsA = [request,'','Account_Tokens'];
     paramsB = [request,'','Account_Transactions',0,999];
     paramsC = [request,'','Accoun_Mined_Blocks',0,999];
@@ -499,8 +499,10 @@ export const getAccRetrieveCSV = (acc,key) => {
         console.log(response);
         //var fileDownload = require('js-file-download');
         fileDownload(response, 'Account_'+request+'.csv');
+        //store.dispatch(StoreDwn.Setresponse(true));  
     })
     .catch((error) => {
+      //store.dispatch(StoreDwn.Setresponse(false)); 
       console.log(error);      
     });
 
@@ -556,7 +558,9 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber) => {
     if(tkn!==null){
       params = [queryStr,tkn ,pageNumber, PAGE_SIZE];
     }else{
-      params = [queryStr,'' ,pageNumber, PAGE_SIZE];
+      params = [queryStr,null,pageNumber, PAGE_SIZE];
+
+      //console.log('we are here')
     }
     
 

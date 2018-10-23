@@ -139,7 +139,7 @@ export default class NCTxnTable extends Component
       tableContent[i][4] = 
       <Cell>
         <NCEntityLabel 
-          entityType={NCEntity.ACCOUNT} 
+          entityType={NCEntity.SEARCH} 
           entityName={fromAddr}
           entityId={fromAddr}/>
       </Cell>;
@@ -189,7 +189,7 @@ export default class NCTxnTable extends Component
       {
         toAddr ?
         <NCEntityLabel 
-          entityType={NCEntity.ACCOUNT} 
+          entityType={NCEntity.SEARCH} 
           entityName={toAddr}
           entityId={toAddr}/>:
         "Contract Creation"

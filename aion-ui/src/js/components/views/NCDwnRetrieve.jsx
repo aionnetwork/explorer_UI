@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import Recaptcha from 'react-recaptcha';
 
-import { Position, Intent, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
+import { Position,RangeSlider, Intent, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 
 import NCBlkTable from 'components/blocks/NCBlkTable';
@@ -37,7 +37,9 @@ class NCDwnRetrieve extends Component
       queryStr: '',
       entity: NCEntity.ACCOUNT,
       recaptcha:'',
-      button: true
+      button: true,
+      range: [0,1000],
+      display:false
     } 
     this.captcha = this.captcha.bind(this);
   }
@@ -70,9 +72,9 @@ class NCDwnRetrieve extends Component
   }
 
   download(a){
-       console.log(a);
-       this.setState({button:true});
-       network.getAccRetrieveCSV(this.props.params.accId, a);
+       //console.log(a);
+       this.setState({button:true,display:true});
+       network.getAccRetrieveCSV(this.props.params.accId, a,this.state.range);
        //return;
   }
 
@@ -80,6 +82,8 @@ class NCDwnRetrieve extends Component
        //this.state.recaptcha = response;
         this.setState({recaptcha:response,button:false});
    };
+
+   handleValueChange = (range: NumberRange) => this.setState({ range });
 
  
   render() {
@@ -99,6 +103,8 @@ class NCDwnRetrieve extends Component
 
     let button = this.state.button;
     let recaptcha= this.state.recaptcha;
+    let range = this.state.range;
+
 
     return (
       <div className= {''} style = {style}>
@@ -106,15 +112,32 @@ class NCDwnRetrieve extends Component
         <p>To complete your download, please verify that you are not a robot by completing the captcha below then click download. </p>
        
        <div className= {''} style = {recapcontainer}>
-        <Recaptcha
+        {(!this.state.display)&& 
+          <Recaptcha
           ref={e => recaptchaInstance = e}
           style = {stylerecaptcha}
           sitekey="6LfwrXMUAAAAAEpZCdMFD0ba96ryOUDGPMyqHZPA"
           verifyCallback={this.verifyCallback.bind(this)}
-        />
-        <br/>
+        />}
+        <br/><br/>
+        {(!this.state.display)&& <div><p>Please select transaction range.</p> <RangeSlider
+                    min={0}
+                    max={1000000}
+                    stepSize={10000}
+                    labelStepSize={250000}
+                    onChange={this.handleValueChange}
+                    disabled={button}
+                    value={range}
+                    vertical={false}
+                /></div>
+        }
+        {(!this.state.display)&&
         <Button  text='Download' disabled={button} onClick={() => {resetRecaptcha(); this.download(recaptcha)}} className = "pt-button pt-minimal" rightIconName="download" />
-        
+        }
+        <br/>
+        {(this.state.display)&&
+        <h5>Please wait, this might take a while!</h5>
+        }
        </div>
         
       </div>
