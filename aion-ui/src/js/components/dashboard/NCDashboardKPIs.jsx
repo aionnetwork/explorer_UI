@@ -121,12 +121,7 @@ class NCDashboardKPIs extends Component
       {
         title: <span><strong>Transaction </strong></span>,
         kpiList: [
-          {
-            value:"1000",
-            units:"",
-            title:["Consumed", "NRG / Block"],
-            hoverContent: "Average NRG consumed per block for latest "+KPI_BLK_RANGE+" blocks",
-          },
+          
           {
             value:"45",
             units:"",
@@ -171,6 +166,8 @@ class NCDashboardKPIs extends Component
     this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
     this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);
     this.kpiData[0].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
+    //this.kpiData[0].kpiList[4].value = nc_numFormatter(kpiList.averageNrgLimitPerBlock, 2);
+
     /*this.kpiData[1].kpiList[2].value = kpiList.lastBlockReward == null ? null :  
                                           (BigNumber(String(kpiList.lastBlockReward)).lt(2) ? 
                                           nc_decimalPoint(kpiList.lastBlockReward, 2) :
@@ -179,12 +176,12 @@ class NCDashboardKPIs extends Component
     //this.kpiData[3].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
     //this.kpiData[2].kpiList[1].value = nc_numFormatter(kpiList.averageNrgLimitPerBlock, 2);
 
-    this.kpiData[1].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
-    this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
-    this.kpiData[1].kpiList[2].value = kpiList.peakTransactionsPerBlockInLast24hours != null ? 
+    //this.kpiData[1].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
+    this.kpiData[1].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
+    this.kpiData[1].kpiList[1].value = kpiList.peakTransactionsPerBlockInLast24hours != null ? 
                                           nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 0) : 
                                           null;
-    this.kpiData[1].kpiList[3].value = kpiList.totalTransactionsInLast24hours != null ? 
+    this.kpiData[1].kpiList[2].value = kpiList.totalTransactionsInLast24hours != null ? 
                                           nc_numFormatter(kpiList.totalTransactionsInLast24hours, 3) : 
                                           null;
 
