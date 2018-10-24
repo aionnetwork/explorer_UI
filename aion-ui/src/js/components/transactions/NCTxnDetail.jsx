@@ -94,7 +94,7 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value == null ? EMPTY_STR : <span className="strong">{nc_numFormatterACSensitive(entity.value, null, true) + " AION"}</span>,
+        value: entity.value == null ? EMPTY_STR : <span className="">{nc_numFormatterACSensitive(entity.value, null, true) + " AION"}</span>,
       },
       {
         field: "Nrg Price",

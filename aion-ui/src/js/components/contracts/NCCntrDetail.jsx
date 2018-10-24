@@ -6,7 +6,7 @@ import {BigNumber} from 'bignumber.js';
 import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
+import { nc_decimalPrettify, nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
 import NCLink from 'components/common/NCLink';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
@@ -18,7 +18,8 @@ export default class NCCntrDetail extends Component
   render() {
     let { entity } = this.props;
     
-    let balance = nc_numFormatterACSensitive(entity.balance);
+    //let balance = nc_numFormatterACSensitive(entity.balance);
+    let balance = nc_decimalPrettify(entity.balance);
 
     let desc = [
       {
@@ -59,7 +60,7 @@ export default class NCCntrDetail extends Component
       {
         field: "Balance",
         value:  balance == null ? "Balance Service Unavailable" :
-                <span className="strong">{balance + " AION"}
+                <span className="">{balance + " AION"}
                   <span className="subtitle">{"(as of block " + entity.blockNumber + ")"}</span>
                 </span>
       },

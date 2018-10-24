@@ -89,14 +89,14 @@ export default class NCBlkDetail extends Component
       },
       {
         field: "Block Reward",
-        value: entity.blockReward != null ? <span className="strong">
+        value: entity.blockReward != null ? <span className="">
           {nc_numFormatterACSensitive(entity.blockReward, null) + " AION"}
           <span className="subtitle">{"(does not include transaction-fee payouts)"}</span>
         </span> : EMPTY_STR,
       },
       {
         field: "NRG Reward",
-        value: entity.nrgReward != null ? <span className="strong">
+        value: entity.nrgReward != null ? <span className="">
           {nc_numFormatterACSensitive(entity.nrgReward, null, true) + " AION"}
           <span className="subtitle">{"(transaction-fee payout for included transactions, minus own transactions)"}</span>
         </span> : EMPTY_STR,

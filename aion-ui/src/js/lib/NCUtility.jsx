@@ -478,7 +478,16 @@ export function nc_numPrettify(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-
+export function nc_decimalPrettify(num){
+  let a = num.toString().split('.');
+  let b = 0;
+  if(a[0]){
+    b = nc_numPrettify(a[0]);
+  }else{
+    return num
+  }
+  return b + '.' + a[1];
+}
 export function nc_getChartData(data,charttype=null){
 
   //get first line
