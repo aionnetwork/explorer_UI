@@ -9,7 +9,7 @@ import { Select } from "@blueprintjs/select";
 
 import NCEventTable from 'components/contracts/NCEventTable';
 import NCBlkTable from 'components/blocks/NCBlkTable';
-import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
+import NCTxnTable from 'components/transactions/NCTxnTable';
 
 import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCCntrDetail from 'components/contracts/NCCntrDetail';
@@ -151,7 +151,11 @@ class NCCntrRetrieve extends Component
     const isEventListFirstLoad = (store.response && store.response.event) ? store.response.event.momentUpdated : null;
 
     const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
-    const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
+
+    //const txnList = (store.response && store.response.transactions) ? store.response.transactions.data : null;
+    const txnList = (store.response && store.response.txn && store.response.txn.data.content) ? store.response.txn.data.content : null;
+    console.log(JSON.stringify(txnList));
+
     const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
     const eventList = (store.response && store.response.event && store.response.event.data.content) ? store.response.event.data.content : null;
 
@@ -247,7 +251,7 @@ class NCCntrRetrieve extends Component
       marginTop={40}
 
       content={
-        <NCTxnTableOwn 
+        <NCTxnTable 
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}

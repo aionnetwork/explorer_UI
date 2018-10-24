@@ -100,7 +100,7 @@ let initialState_StoreCntrRetrieve =
       momentUpdated: null
     },
     txn: {
-      data: null,
+      data: {content:null},
       momentUpdated: null
     },
     tkn: {
@@ -128,6 +128,7 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       
       _state.isLoadingTopLevel = true; 
       _state.isLoadingPagingEventList = true;
+      _state.isLoadingPagingTxnList= true;
 
       _state.queryStr = action.data.queryStr;
       
@@ -154,8 +155,11 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
 
       if(typeof(action.data.content) !== 'undefined'){
           _state.response.event.data.content = action.data.content[0].events;
+          _state.response.txn.data.content = action.data.content[0].transactions;
+          _state.isLoadingPagingTxnList= false;
       } 
 
+      
       _state.response.event.momentUpdated = moment();
 
       _state.momentUpdated = moment();
