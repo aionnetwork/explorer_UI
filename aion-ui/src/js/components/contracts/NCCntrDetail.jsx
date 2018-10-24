@@ -62,8 +62,11 @@ export default class NCCntrDetail extends Component
                 <span className="strong">{balance + " AION"}
                   <span className="subtitle">{"(as of block " + entity.blockNumber + ")"}</span>
                 </span>
+      },
+      {
+        field: "Nonce",
+        value:  !entity.nonce ? EMPTY_STR : entity.nonce
       }
-      
     ];
 
     return (

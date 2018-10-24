@@ -383,6 +383,7 @@ h1, h2, h3, h4, h5 {
   display: flex;
 }
 .NCCardBlock .block-card .proposer .NCEntityLabel .text {
+  font-family: monospace;
   flex: 1;
   margin-left: 4px;
   text-align: left;
@@ -922,6 +923,7 @@ pre {
   width: 100%;
   align-items: center;
   overflow: hidden;
+  font-family: Courier New,monospace;
 }
 .NCEntityLabel .icon {
   line-height: inherit;
@@ -931,6 +933,7 @@ pre {
   line-height: inherit;
   margin-left: 6px;
   color: #182026;
+  font-family: monospace;
 }
 .NCEntityLabel.active:hover {
   cursor: pointer;
@@ -1516,6 +1519,7 @@ pre {
 }
 .NCLivenessIndicator-Popover .pt-popover-content .content-container .liveness-indicator > .NCEntityLabel .text {
   font-weight: 300;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
 }
 .NCLivenessIndicator-Popover .pt-popover-content .content-container .liveness-indicator > .desc {
   font-size: 13px;

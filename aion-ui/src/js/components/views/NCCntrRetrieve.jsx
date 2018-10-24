@@ -364,7 +364,7 @@ class NCCntrRetrieve extends Component
           data={eventList}
           onPageCallback={this.requestPagingEventList}
           isLoading={store.isLoadingPagingEventList}
-          isPaginated={true}
+          isPaginated={false}
           isLatest={true}/>
         }
     />
