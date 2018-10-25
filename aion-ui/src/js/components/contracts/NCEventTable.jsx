@@ -226,14 +226,8 @@ export default class NCEventTable extends Component
      
       tableContent[i][1] = <Cell interactive={true} ><b>{ name + '('+params+')' }<br/>
       <pre className={'nc-resizable'}>
-        { inputs[0] }<br/>
-         { inputs[1] }<br/>
-          { inputs[2] }<br/>
-           { inputs[3] }<br/>
-            { inputs[4] }<br/>
-             { inputs[5] }<br/>
-             { inputs[6] }<br/>
-        </pre></b>
+             {inputs.map((a,i)=>{return (<span key={i}>{a}<br/></span>)})}
+      </pre></b>
       </Cell>;
     
       tableContent[i][2] = 
