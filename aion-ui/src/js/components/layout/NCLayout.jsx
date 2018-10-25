@@ -226,23 +226,35 @@ class NCLayout extends Component {
 
     let kpi = this.props.kpi;
     let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
-     const permissionsMenu = (
+    let feedback ={padding:'10px', margin:'10px'}
+    const permissionsMenu = (
             <Popover
-                content={<div>
+                content={<div style={feedback} >
                     Please leave a feedback!
-                   <InputGroup
+                   <select :modifier>
+                    <option selected>Choose an item...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                 </select>
+                 <select :modifier>
+                    <option selected>Choose an item...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                </select>
+                
+                 <InputGroup
                     disabled={false}
-                    
-                    value={"tagValue"}
+                    style={feedback}
+                    value={"Message"}
                 />
-                <InputGroup
-                    disabled={false}
-                    
-                    value={"tagValue"}
-                /></div>
+                </div>
                 }
 
-                position={Position.TOP_LEFT}>
+                position={Position.TOP_RIGHT}>
                 <Button style = { css } className={" "} iconName={"envelope"}>
                     Feedback
                 </Button>
