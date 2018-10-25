@@ -1,11 +1,11 @@
 {
  "api": {
-   "base_url": "mastery-api.aion.network/aion",
+   "base_url": "mastery-api.aiondev.network/aion",
    "https_enabled": true
  },
  "network_list": [
    {
-     "name": "Mastery",
+     "name": "MasteryDev",
      "url": ""
    },
    {
