@@ -481,7 +481,7 @@ export function nc_numPrettify(num) {
 export function nc_decimalPrettify(num){
   let a = num.toString().split('.');
   let b = 0;
-  if(a[0]){
+  if(a[1]){
     b = nc_numPrettify(a[0]);
   }else{
     return num
