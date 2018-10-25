@@ -802,19 +802,16 @@ export const getCntrRetrievePagingTxnList = (queryStr, pageNumber) => {
   }
   else {
     // get transaction list
-    const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, PAGE_SIZE];
+    //const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
+    const ep = network.endpoint.contract.detail;
+    let params = [queryStr, null, null, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the contract loaded on-screen
-      let acc = store.getState().cntrRetrieve.response.acc;
+     
+      let cntr = store.getState().cntrRetrieve.response.acc;
 
-      //console.log('This is a quite interesting Journey!');
-      //console.log(JSON.stringify(response));
-      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
-        if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
-            //console.log('thats right!');
+      if (cntr && cntr.data && cntr.data.content && cntr.data.content[0]) {
+        if (nc_sanitizeHex(cntr.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {            
             store.dispatch(StoreCntrRetrieve.SetPagingTxn(response));  
         }
       }
