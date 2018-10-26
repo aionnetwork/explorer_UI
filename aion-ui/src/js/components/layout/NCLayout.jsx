@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import {BigNumber} from 'bignumber.js'
 import moment from "moment";
-import { Menu, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip, MenuDivider } from "@blueprintjs/core";
+import {  Menu, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip, MenuDivider } from "@blueprintjs/core";
 
 import { ncNetwork_pollForKpiList, ncNetwork_pollForStaticInfo } from 'network/NCNetwork';
 
@@ -231,20 +231,26 @@ class NCLayout extends Component {
             <Popover
                 content={<div style={feedback} >
                     Please leave a feedback!
-                   <select :modifier>
-                    <option selected>Choose an item...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
+                   <br/><select defaultValue={"Choose an item..."} className={'pt-input'} style={feedback}>
+                    
+                    <option value="Block">Block</option>
+                    <option value="Transaction">Transaction</option>
+                    <option value="Analytics">Analytics</option>
+                    <option value="UI/UX">UI/UX</option>
+                    <option value="Token">Account</option>
+                    <option value="contract">Contract</option>
+                    <option value="General">General</option>
                  </select>
-                 <select :modifier>
-                    <option selected>Choose an item...</option>
+                 
+                 <br/><br/>
+                 <select className={'pt-input'} style={feedback}>
+                    
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                     <option value="4">Four</option>
                 </select>
+
                 
                  <InputGroup
                     disabled={false}
@@ -252,6 +258,8 @@ class NCLayout extends Component {
                     value={"Message"}
                 />
                 </div>
+                
+
                 }
 
                 position={Position.TOP_RIGHT}>
