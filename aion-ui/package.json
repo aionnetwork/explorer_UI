@@ -29,7 +29,7 @@
     "format-si-prefix": "^0.3.2",
     "glamor": "^2.20.24",
     "highcharts": "^6.1.4",
-    "highcharts-react-official": "^1.4.0",
+    "highcharts-react-official": "1.4.0",
     "js-file-download": "^0.4.4",
     "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.8",
