@@ -10,6 +10,7 @@ import { Select } from "@blueprintjs/select";
 import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
+import NCTxnTableOwnToken from 'components/transactions/NCTxnTableOwnToken';
 
 import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
@@ -269,7 +270,7 @@ class NCAccRetrieve extends Component
 
       content={
         !acc.tokenName ?
-        <NCTxnTable 
+        <NCTxnTableOwn 
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}
@@ -279,7 +280,7 @@ class NCAccRetrieve extends Component
         
         :
 
-        <NCTxnTableOwn 
+        <NCTxnTableOwnToken 
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}

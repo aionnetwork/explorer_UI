@@ -73,25 +73,25 @@ class NCDashboardKPIs extends Component
             value:"9.83",
             units:"s",
             title:["Current", "Block Time"],
-            hoverContent: "Mean of inter-block arrival time over last "+KPI_BLK_RANGE+" blocks. The target block time for the network is 10s. PoW difficulty is dynamically adjusted to acheive target. ",
+            hoverContent: "Mean of inter-block arrival time over the last 24 hours. The target block time for the network is 10s. PoW difficulty is dynamically adjusted to acheive target. ",
           },
           {
             value:"10",
             units:"Sol/s",
             title:["Network", "Hash Rate"],
-            hoverContent: <span>{"Network hash rate = (last block's difficulty) /"}<br/>{"(average block time over last "+KPI_BLK_RANGE+" blocks.)"}</span>,
+            hoverContent: <span>{"Network hash rate = (last block's difficulty) /"}<br/>{"(average block time over the last 24 hours.)"}</span>,
           },
           {
             value:"15",
             units:"",
             title:["Average", "Difficulty"],
-            hoverContent: "Difficulty, averaged over the last "+KPI_BLK_RANGE+" blocks.",
+            hoverContent: "Difficulty, averaged over the last 24 hours.",
           },
           {
             value:"1000",
             units:"",
             title:["Consumed", "NRG / Block"],
-            hoverContent: "Average NRG consumed per block for latest "+KPI_BLK_RANGE+" blocks.",
+            hoverContent: "Average NRG consumed per block for the last 24 hours.",
           },
           /*{
             value:"0.85",
@@ -126,7 +126,7 @@ class NCDashboardKPIs extends Component
             value:"45",
             units:"",
             title:["Txn", "/ Second"],
-            hoverContent: "Transactions per second, averaged over last "+KPI_BLK_RANGE+" blocks",
+            hoverContent: "Transactions per second, averaged over the last 24 hours",
           },
           {
             value:"85",
