@@ -24,6 +24,10 @@ export default class NCExplorerContactUs extends Component
 
     ];
       
+    const contact_container ={border:'#ccc solid 1px',padding:'10px',borderRadius:'5px',maxWidth:'500px'}
+    const contact_input ={width:"100%"}
+    const contact_textArea ={width:"100%",height:"200px"}
+    const contact_submit ={right:'10'}
     const page =
       <div> 
         <NCExplorerHead
@@ -35,15 +39,17 @@ export default class NCExplorerContactUs extends Component
 
         />  
 
-        <div>
+        <div style={contact_container}>
 
             <FormGroup
-                helperText="Helper text with details..."
+                
                 label="Topic"
                 labelFor="text-input"
                 labelInfo="(required)"
+                className="pt-form-group "
+
             >
-              <select defaultValue="default">
+              <select defaultValue="default"  style={contact_input} className="pt-input pt-large">
                 <option value="default">Choose an item...</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
@@ -52,12 +58,12 @@ export default class NCExplorerContactUs extends Component
               </select>
             </FormGroup>
              <FormGroup
-                helperText="Helper text with details..."
+               
                 label="Type"
                 labelFor="text-input"
                 labelInfo="(required)"
             >
-              <select defaultValue="default">
+              <select defaultValue="default"  style={contact_input} className="pt-input pt-large" >
                 <option value="default">Choose an item...</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
@@ -66,7 +72,7 @@ export default class NCExplorerContactUs extends Component
               </select>
             </FormGroup>
             <FormGroup
-                helperText="Helper text with details..."
+                
                 label="Message"
                 labelFor="text-input"
                 labelInfo="(required)"
@@ -74,11 +80,14 @@ export default class NCExplorerContactUs extends Component
               <TextArea
                 large={true}
                 intent={"#000"}
+                className="pt-input pt-large"
+                rows="6"
+                style={contact_textArea}
                 
               />
             </FormGroup>
 
-            <Button intent="success" text="Submit" />
+            <Button intent="success" onClick={()=>{console.log('submit')}} text="Submit" />
             
         </div>
         
