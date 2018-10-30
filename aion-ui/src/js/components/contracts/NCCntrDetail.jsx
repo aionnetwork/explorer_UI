@@ -70,8 +70,34 @@ export default class NCCntrDetail extends Component
       }
     ];
 
+    let bridge = [
+      {
+        field: "Address",
+        value:  <NCEntityLabel
+                  entityType={ NCEntity.CNTR }
+                  entityId={ entity.contractAddr}
+                  linkActive={ true }/>
+      },
+      {
+        field: "Balance",
+        value:  balance == null ? "Balance Service Unavailable" :
+                <span className="">{balance + " AION"}
+                  {entity.isATB == true ? "" : <span className="subtitle">{"(as of block " + entity.blockNumber + ")"}</span>}
+                </span>
+      },
+      {
+        field: "Nonce",
+        value:  !entity.nonce ? EMPTY_STR : entity.nonce
+      },
+      {
+        field: "Notice",
+        value: <p>This is a special bridge contract. To learn more about it click <a href="https://docs.aion.network/docs/swap-overview">here</a> </p>
+      }
+
+    ];
+
     return (
-      <NCEntityDetail desc={desc}/>
+      <NCEntityDetail desc={!entity.isATB ? desc : bridge }/>
     );
   }
 }

@@ -8,6 +8,7 @@ import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCHolderTable from 'components/tokens/NCHolderTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
+import NCTxnTableOwnToken from 'components/transactions/NCTxnTableOwnToken';
 
 import NCTknDetail from 'components/tokens/NCTknDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
@@ -154,7 +155,7 @@ class NCTknRetrieve extends Component
       marginTop={40}
 
       content={
-        <NCTxnTableOwn 
+        <NCTxnTableOwnToken 
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}

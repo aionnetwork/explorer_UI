@@ -4,13 +4,17 @@ import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 
+<<<<<<< HEAD
 import Recaptcha from 'react-recaptcha';
 
+=======
+>>>>>>> 9eac678... latest staging dashboard v2
 import { TextArea, FormGroup, Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
 
 
 export default class NCExplorerContactUs extends Component
 {
+<<<<<<< HEAD
 
   constructor(props) {
     super(props);
@@ -74,6 +78,11 @@ export default class NCExplorerContactUs extends Component
       recaptchaInstance.reset();  
     };
 
+=======
+  render() {
+    const { isLoading, isDataValid, isDataEmpty, loadingStr, invalidDataStr, emptyDataStr } = this.props;
+
+>>>>>>> 9eac678... latest staging dashboard v2
     const breadcrumbs = [
       {
         link: '/',
@@ -96,21 +105,34 @@ export default class NCExplorerContactUs extends Component
           
           breadcrumbs={breadcrumbs}
           title={"Contact Us"}
+<<<<<<< HEAD
           subtitle={'We value your opinion'}
+=======
+          subtitle={'Your opinion is valued'}
+>>>>>>> 9eac678... latest staging dashboard v2
    
 
         />  
 
         <div style={contact_container}>
+<<<<<<< HEAD
         <form>
             <FormGroup
                 
                 label="Topic"
                 labelFor="topic-input"
+=======
+
+            <FormGroup
+                
+                label="Topic"
+                labelFor="text-input"
+>>>>>>> 9eac678... latest staging dashboard v2
                 labelInfo="(required)"
                 className="pt-form-group "
 
             >
+<<<<<<< HEAD
               <select id="topic-input" onChange={this.handleTopicChange} defaultValue="default"  style={contact_input} className="pt-input pt-large">
                 <option value="default">Choose an item</option>
                 <option value="Analytics">Analytics</option>
@@ -121,11 +143,20 @@ export default class NCExplorerContactUs extends Component
                 <option value="Transactions">Transactions</option>
                 <option value="Others">Others</option>
                
+=======
+              <select defaultValue="default"  style={contact_input} className="pt-input pt-large">
+                <option value="default">Choose an item...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="4">Four</option>
+>>>>>>> 9eac678... latest staging dashboard v2
               </select>
             </FormGroup>
              <FormGroup
                
                 label="Type"
+<<<<<<< HEAD
                 labelFor="type-input"
                 labelInfo="(required)"
             >
@@ -135,6 +166,17 @@ export default class NCExplorerContactUs extends Component
                 <option value="feature">Feature Request</option>
                 <option value="suggestions">Suggestion</option>
                 
+=======
+                labelFor="text-input"
+                labelInfo="(required)"
+            >
+              <select defaultValue="default"  style={contact_input} className="pt-input pt-large" >
+                <option value="default">Choose an item...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="4">Four</option>
+>>>>>>> 9eac678... latest staging dashboard v2
               </select>
             </FormGroup>
             <FormGroup
@@ -144,12 +186,16 @@ export default class NCExplorerContactUs extends Component
                 labelInfo="(required)"
             >
               <TextArea
+<<<<<<< HEAD
                 id="text-input"
+=======
+>>>>>>> 9eac678... latest staging dashboard v2
                 large={true}
                 intent={"#000"}
                 className="pt-input pt-large"
                 rows="6"
                 style={contact_textArea}
+<<<<<<< HEAD
                 onChange={this.handleChange}
                 
               />
@@ -168,6 +214,14 @@ export default class NCExplorerContactUs extends Component
             {/*<input type="submit" value="Submit" />*/}
             <Button type="submit" intent="success" onClick={()=>{console.log('submit')}} text="Submit" />
         </form>  
+=======
+                
+              />
+            </FormGroup>
+
+            <Button intent="success" onClick={()=>{console.log('submit')}} text="Submit" />
+            
+>>>>>>> 9eac678... latest staging dashboard v2
         </div>
         
       </div>;
