@@ -356,7 +356,14 @@ export function nc_isObjectValid(obj) {
   );
   return isValid;
 }
-
+export function nc_isObjectValid_v2(obj) {
+  const isValid = (
+    obj && 
+    obj.content != null && 
+    Array.isArray(obj.content)
+  );
+  return isValid;
+}
 export function nc_isObjectEmpty(obj, isValid=null) {
   if (isValid == null) {
     if (!nc_isObjectValid(obj))
