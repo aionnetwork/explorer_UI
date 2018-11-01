@@ -1,10 +1,10 @@
 {
   "api": {
-    "base_url": "explorer-staging-api.aion.network/aion",
+    "base_url": "mainnet-api.aion.network/aion",
     "https_enabled": true
   },
   "site": {
-    "base_url": "explorer-staging.aion.network",
+    "base_url": "mainnet.aion.network",
     "https_enabled": true
   },
   "network_list": [
