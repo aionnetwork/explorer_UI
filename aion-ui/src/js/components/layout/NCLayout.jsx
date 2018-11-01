@@ -113,6 +113,22 @@ class NCLayout extends Component {
           className="nav-option"
           
           onClick={() => {
+            hashHistory.push('/charts/BlockTime');
+          }}
+          text="Block Times"
+        />
+        <MenuItem
+          className="nav-option"
+          
+          onClick={() => {
+            hashHistory.push('/charts/HashingPower');
+          }}
+          text="Hash Power"
+        />
+        <MenuItem
+          className="nav-option"
+          
+          onClick={() => {
             hashHistory.push('/charts/Difficulty');
           }}
           text="Network Difficulty"
@@ -125,22 +141,8 @@ class NCLayout extends Component {
           }}
           text="Top Miners"
         />
-        <MenuItem
-          className="nav-option"
-          
-          onClick={() => {
-            hashHistory.push('/charts/BlockTime');
-          }}
-          text="Block Times"
-        />
-         <MenuItem
-          className="nav-option"
-          
-          onClick={() => {
-            hashHistory.push('/charts/HashingPower');
-          }}
-          text="Hash Power"
-        />
+        
+         
         
          <MenuItem
             className="nav-option"
@@ -156,6 +158,14 @@ class NCLayout extends Component {
   renderExplorerMenu = () => {
     return (
       <Menu className="NCNavMenu">
+         <MenuItem
+          className="nav-option"
+          iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}
+          onClick={() => {
+            hashHistory.push('/accounts');
+          }}
+          text="Accounts"
+        />
         <MenuItem
           className="nav-option"
           iconName={NCEntityInfo[NCEntity.BLOCK].icon}
@@ -166,11 +176,11 @@ class NCLayout extends Component {
         />
         <MenuItem
           className="nav-option"
-          iconName={NCEntityInfo[NCEntity.TXN].icon}
+          iconName={NCEntityInfo[NCEntity.CNTR].icon}
           onClick={() => {
-            hashHistory.push('/transactions');
+            hashHistory.push('/contracts');
           }}
-          text="Transactions"
+          text="Contracts"
         />
         <MenuItem
           className="nav-option"
@@ -182,20 +192,15 @@ class NCLayout extends Component {
         />
         <MenuItem
           className="nav-option"
-          iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}
+          iconName={NCEntityInfo[NCEntity.TXN].icon}
           onClick={() => {
-            hashHistory.push('/accounts');
+            hashHistory.push('/transactions');
           }}
-          text="Accounts"
+          text="Transactions"
         />
-         <MenuItem
-          className="nav-option"
-          iconName={NCEntityInfo[NCEntity.CNTR].icon}
-          onClick={() => {
-            hashHistory.push('/contracts');
-          }}
-          text="Contracts"
-        />
+        
+       
+         
       </Menu>
     );
   }
