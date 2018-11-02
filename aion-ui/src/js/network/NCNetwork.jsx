@@ -12,7 +12,7 @@ export let NETWORK_LIST = [];
 
 let HTTPS_ENABLED = true;
 let BASE_URL = null;
-if (
+/*if (
   appConfig!=null && 
   appConfig.api!=null &&
   appConfig.api.base_url!=null && 
@@ -21,7 +21,43 @@ if (
   // setup the network parameters
   HTTPS_ENABLED = appConfig.api.https_enabled;
   BASE_URL = appConfig.api.base_url;
+}*/
+
+if (process.env.NODE_ENV !== 'production') {
+
+  if (
+  appConfig!=null && 
+  appConfig.api!=null &&
+  appConfig.api.base_url!=null && 
+  appConfig.api.https_enabled!=null) 
+  {
+    // setup the network parameters
+    HTTPS_ENABLED = appConfig.api.https_enabled;
+    BASE_URL = appConfig.api.base_url;
+    HOME_URL =appConfig.site.base_url;
+    NETWORK_LIST = appConfig.network_list['staging'];
+    GA_KEY = appConfig.ga_key;
+  }
+  console.log('dev Mode!');
+
+      
+}else{ 
+
+    HTTPS_ENABLED = true;//server var process.env.NODE_ENV
+    BASE_URL = process.env.BASE_URL;//server var
+    HOME_URL = process.env.HOME_URL;
+    NETWORK_LIST = process.env.NETWORK_LIST;
+    GA_KEY = process.env.GA_KEY;
 }
+
+export const NC_ENV={
+  "HTTPS_ENABLED":HTTPS_ENABLED,
+  "BASE_URL": BASE_URL,
+  "NETWORK_LIST": NETWORK_LIST,
+  "GA_KEY":GA_KEY,
+}
+
+
 
 const stripTrailingSlash = (url) => {
   return url.replace(/\/$/, "");
