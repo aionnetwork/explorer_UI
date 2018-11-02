@@ -114,7 +114,7 @@ ReactDOM.render((
         <Route path="downloads/:accId" component={ DwnRetrieve }/>
 
         <Route path="terms" component={ TermsRetrieve }/>
-        <Route path="contacts" component={ ContactsRetrieve }/>
+        <Route path="feedback" component={ ContactsRetrieve }/>
 
         <Route path="no-results(/:query)" component={ NoResults }/>
 

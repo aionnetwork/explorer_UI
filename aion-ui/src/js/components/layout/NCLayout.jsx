@@ -377,6 +377,13 @@ class NCLayout extends Component {
             
           </div>
           }
+           <div>
+            <a className="footer-container" target="_blank" href="/#/feedback">
+              <span style={style}  className="text">Feedback</span>          
+              
+            </a>
+            
+          </div>
           <div>
            <br/>
           </div>

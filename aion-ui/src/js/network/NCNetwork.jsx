@@ -27,15 +27,23 @@ const stripTrailingSlash = (url) => {
   return url.replace(/\/$/, "");
 }
 
-const generateBaseUrl = (https, api) => {
+const generateBaseUrl = (https, api, e) => {
   let url = "";
+  let str = "";
 
   if (https)
     url+="https://"
   else
     url+="http://"
 
-  url+=stripTrailingSlash(api);
+
+  if(e)
+    str= api.slice(0,-5);
+  else
+    str=api
+
+  console.log(str);
+  url+=stripTrailingSlash(str);
 
   return url;
 }
@@ -162,10 +170,16 @@ export const endpoint = {
       link:'/dashboard/exportToCsv',
       params:['searchParam1','searchParam2', 'entityType','rangeMin1','rangeMax1','g-recaptcha-response']
     }
+  },
+  contact:{
+    detail:{
+      link:'/feedback/sendFeedback',
+      params:['topic','message','g-recaptcha-response']
+    }
   }
 }
 
-export const request = async (endpoint, params) => 
+export const request = async (endpoint, params,sub_base=false) => 
 {
   //console.log(JSON.stringify(endpoint));
   return new Promise((resolve, reject) => 
@@ -177,9 +191,10 @@ export const request = async (endpoint, params) =>
       });
     }
     
-    if (net == null && BASE_URL) {
+    if ( BASE_URL) {
+      console.log('create endpoint!'+sub_base);
       net = axios.create({
-          baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL),
+          baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
           timeout: ms('2min')
         });
     }
@@ -191,12 +206,12 @@ export const request = async (endpoint, params) =>
         if (response.status == 200 && response.data)
           resolve(response.data);
         else {
-          reject("ERR: Bad API response.");
+          reject("ERR: Bad API get response 2.");
         }
       })
       .catch((error) => {
         console.log(error);
-        reject("ERR: Bad API response.")
+        reject("ERR: Bad API get response 1.")
       });
     } else {
       reject("ERR: API not initialized");
@@ -205,7 +220,7 @@ export const request = async (endpoint, params) =>
 }
 
 
-export const postRequest = async (endpoint, params) => 
+export const postRequest = async (endpoint, params,sub_base=false) => 
 {
   //console.log(JSON.stringify(endpoint));
   return new Promise((resolve, reject) => 
@@ -216,22 +231,29 @@ export const postRequest = async (endpoint, params) =>
         args.params[endpoint.params[i]] = value;
       });
     }
+
+    console.log('post request!');
+
     
-    if (net == null && BASE_URL) {
+    if ( BASE_URL) {
+      console.log('create post endpoint!'+sub_base);
       net = axios.create({
-          baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL),
+          baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
           timeout: ms('2min')
         });
     }
 
     if (net) {
+      console.log('post');
       net.post(endpoint.link, args)
       .then((response) => {
         
-        if (response.status == 200 && response.data)
+        if (response.status == 200 && response.data){
           resolve(response.data);
-        else {
-          reject("ERR: Bad API response.");
+          console.log('post success');
+        }else {
+          console.log('error');
+          reject("ERR: Bad API post response.");
         }
       })
       .catch((error) => {

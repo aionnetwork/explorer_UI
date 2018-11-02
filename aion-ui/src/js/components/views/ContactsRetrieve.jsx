@@ -14,7 +14,7 @@ import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 //import NCExplorerContactUs from 'components/common/NCExplorerContactUs';
-
+import * as network from 'network/NCNetworkRequests';
 
 export default class ontactsRetrieve extends Component
 { 
@@ -26,7 +26,7 @@ export default class ontactsRetrieve extends Component
       isFetching: false,
       topic: '',
       type: '',
-      text: '',
+      
       value:'',
       recaptcha:'',
       button: true,
@@ -46,7 +46,7 @@ export default class ontactsRetrieve extends Component
 
   verifyCallback(response) {
        //this.state.recaptcha = response;
-        this.setState({recaptcha:response,button:false});
+        this.setState({recaptcha:response});
    };
 
    handleTypeChange(event) {
@@ -60,15 +60,22 @@ export default class ontactsRetrieve extends Component
     
   }
   handleTextChange(event) {
-    
+    console.log('change');
     this.setState({text : event.target.value});
     
   }
 
+   handle() {
+    
+    console.log('feedback test!');
+   
+  }
+
   handleSubmit(event) {
     //alert('A name was submitted: ' + this.state.value);
+    console.log('feedback!');
     event.preventDefault();
-    network.postFeedback(this.state);
+    network.submitFeedback(this.state.topic,this.state.text,this.state.recaptcha);
   }
 
   captcha(key){
@@ -166,7 +173,7 @@ export default class ontactsRetrieve extends Component
                 className="pt-input pt-large"
                 rows="6"
                 style={contact_textArea}
-                onChange={this.handleChange}
+                onChange={this.handleTextChange}
                 
               />
             </FormGroup>
@@ -182,7 +189,7 @@ export default class ontactsRetrieve extends Component
 
             
             {/*<input type="submit" value="Submit" />*/}
-            <Button type="submit" intent="success" onClick={()=>{console.log('submit')}} text="Submit" />
+            <Button type="submit" intent="success" onClick={this.handleSubmit} text="Submit" />
         </form>  
         </div>;
 

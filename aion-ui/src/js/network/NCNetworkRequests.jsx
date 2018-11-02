@@ -1355,6 +1355,36 @@ export const RetrieveDownload =(type, data) => {
   }
 
 }
+export const submitFeedback =(topic=null,message=null,key=null) => {
+
+   if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    
+   }
+   else {
+    // sanitize input string
+    let post_topic = nc_trim(topic);
+    let post_message = nc_trim(message);
+    // get block details
+    const ep = network.endpoint.contact.detail;
+     
+    let params = [post_topic, post_message, key];
+    network.postRequest(ep, params, true)
+    .then((response) => {
+      
+        console.log(JSON.stringify(response)); 
+        //nc_getChartData(response,)
+        //store.dispatch(StoreChartRetrieve.SetChart(response));
+    
+    })
+    .catch((error) => {
+      console.log(error);
+      /*store.dispatch(StoreChartRetrieve.SetChart({
+        
+      }));*/
+    });
+  }
+
+}
 export const getChartRetrieve = (queryStr) => {
   store.dispatch(StoreChartRetrieve.GetChart({
     queryStr: queryStr
