@@ -317,7 +317,7 @@ class NCLayout extends Component {
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
                 <Button 
-                  className="navbar-btn-active pt-button pt-minimal"
+                  className="text navbar-btn-active pt-button pt-minimal"
                   iconName="pt-icon-dashboard"
                   rightIconName="pt-icon-caret-down"
                   text="Explorer"/>          
