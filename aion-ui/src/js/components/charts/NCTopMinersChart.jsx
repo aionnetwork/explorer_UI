@@ -10,6 +10,7 @@ Exporting(Highcharts);
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
 import appConfig from '../../../config.json';
+import { NC_ENV} from 'network/NCNetwork';
 
 const EMPTY_STR = "Not Available";
 import {BigNumber} from 'bignumber.js';
@@ -76,7 +77,7 @@ export default class NCTopMinersChart extends Component
 
             events: {
                     click: function({point}) {
-                        location.href = 'https://'+appConfig.site.base_url+'/#/account/'+point.name;
+                        location.href = 'https://'+NC_ENV.HOME_URL+'/#/account/'+point.name;
                     }
                 }
         },

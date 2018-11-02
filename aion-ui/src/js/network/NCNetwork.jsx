@@ -8,10 +8,13 @@ import ms from 'ms';
 import appConfig from '../../config.json';
 
 export const NCNETWORK_REQUESTS_ENABLED = true;
-export let NETWORK_LIST = [];
+//export let NETWORK_LIST = [];
 
 let HTTPS_ENABLED = true;
 let BASE_URL = null;
+let NETWORK_LIST =null;
+let GA_KEY = null;
+let HOME_URL = null;
 /*if (
   appConfig!=null && 
   appConfig.api!=null &&

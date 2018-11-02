@@ -17,14 +17,16 @@ import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 import { ga_key } from 'lib/NCData';
-import { disconnectSocket } from 'network/NCNetwork';
+//import { disconnectSocket } from 'network/NCNetwork';
+import { NC_ENV, disconnectSocket } from 'network/NCNetwork';
 import * as network from 'network/NCNetworkRequests';
 
 import appConfig from '../../../config.json';
 
 import ReactGA from 'react-ga';
-ReactGA.initialize(appConfig.ga_key);
+//ReactGA.initialize(appConfig.ga_key);
 //ReactGA.pageview(window.location.pathname + window.location.search);
+ReactGA.initialize(NC_ENV.GA_KEY);
 
 class NCLayout extends Component {
 
@@ -36,7 +38,8 @@ class NCLayout extends Component {
       className="navbar-btn-active pt-button pt-minimal"
       text="Explorer"/>;  
 
-    let networkList = appConfig.network_list;
+    //let networkList = appConfig.network_list;
+    let networkList = NC_ENV.NETWORK_LIST;
       
     // figure out document title -----------------------------------------------
 
