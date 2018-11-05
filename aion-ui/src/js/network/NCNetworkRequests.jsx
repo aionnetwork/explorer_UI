@@ -494,7 +494,7 @@ export const getAccRetrieveCSV = (acc,key,range) => {
     paramsB = [request,'','Account_Transactions',0,999];
     paramsC = [request,'','Accoun_Mined_Blocks',0,999];
     
-    network.request(ep, params)
+    network.request(ep, params, true)
     .then((response) => {
         console.log(response);
         //var fileDownload = require('js-file-download');
