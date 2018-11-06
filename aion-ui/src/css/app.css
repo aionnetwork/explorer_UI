@@ -2252,12 +2252,24 @@ pre {
     width: 100%;
   }
 }
+#root {
+  max-width: 100%;
+}
 @media all and (max-width: 1030px) {
   .NCHeader .row .navbar-btn-active span {
     display: none;
   }
   .NCTopLevelSearch .search-bar .pt-input-action .pt-popover-target button span {
     display: none;
+  }
+  .NCTopLevelSearch {
+    display: none !important;
+  }
+  .pt-navbar-divider {
+    display: none !important;
+  }
+  .NCHeader .row {
+    min-width: 300px !important;
   }
   span.pt-icon-standard.pt-icon-caret-down.pt-align-right {
     display: inline !important;
