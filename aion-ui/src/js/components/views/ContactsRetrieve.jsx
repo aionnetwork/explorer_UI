@@ -119,7 +119,7 @@ export default class ontactsRetrieve extends Component
 
     ];
       
-    const contact_container ={border:'#ccc solid 1px',padding:'10px',borderRadius:'5px',maxWidth:'500px'}
+    const contact_container ={margin:'auto',  border:'#ccc solid 1px',padding:'10px',borderRadius:'5px',maxWidth:'500px'}
     const contact_input ={width:"100%"}
     const contact_textArea ={width:"100%",height:"200px"}
     const contact_submit ={right:'10'}

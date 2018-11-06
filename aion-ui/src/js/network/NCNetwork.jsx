@@ -89,6 +89,8 @@ const generateBaseUrl = (https, api, e) => {
 
 let net = null;
 let enet = null;
+let pnet = null;
+
 export const endpoint = {
   block: {
     list: {
@@ -207,7 +209,7 @@ export const endpoint = {
   },
   download:{
     detail:{
-      link:'/downloads/exportToCsv',
+      link:'/downloads/exportToCsv', //exportAccountTxns(g-recaptcha-response, accountAddress, tokenAddress, rangeMin, rangeMax)
       params:['searchParam1','searchParam2', 'entityType','rangeMin1','rangeMax1','g-recaptcha-response']
     }
   },
@@ -231,7 +233,7 @@ export const request = async (endpoint, params,sub_base=false) =>
       });
     }
     
-    if ( BASE_URL) {
+    if ( net == null && BASE_URL) {
       console.log('create endpoint!'+sub_base);
       net = axios.create({
           baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
@@ -272,20 +274,20 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
       });
     }
 
-    console.log('post request!');
+    //console.log('post request!');
 
     
-    if ( BASE_URL) {
+    if (pnet == null && BASE_URL) {
       console.log('create post endpoint!'+sub_base);
-      net = axios.create({
+      pnet = axios.create({
           baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
           timeout: ms('2min')
         });
     }
 
-    if (net) {
+    if (pnet) {
       console.log('post');
-      net.post(endpoint.link, args)
+      pnet.post(endpoint.link, args)
       .then((response) => {
         
         if (response.status == 200 && response.data){
