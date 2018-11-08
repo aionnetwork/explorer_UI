@@ -121,23 +121,23 @@ export default class NCTxnTable extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell>
+      <Cell copy={blockNumber}>
         <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
-      tableContent[i][1] = <Cell>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell>{ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }</Cell>;
+      tableContent[i][1] = <Cell copy={ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+      tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }>{ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }</Cell>;
       tableContent[i][3] = 
-      <Cell>
+      <Cell copy={transactionHash}>
         <NCEntityLabel 
           entityType={NCEntity.TXN} 
           entityName={transactionHash}
           entityId={transactionHash}/> 
       </Cell>;
       tableContent[i][4] = 
-      <Cell>
+      <Cell copy={fromAddr}>
         <NCEntityLabel 
           entityType={NCEntity.SEARCH} 
           entityName={fromAddr}
@@ -185,7 +185,7 @@ export default class NCTxnTable extends Component
         }
       </Cell>;
       tableContent[i][6] = 
-      <Cell>
+      <Cell copy={toAddr ? toAddr : "Contract Creation"}>
       {
         toAddr ?
         <NCEntityLabel 

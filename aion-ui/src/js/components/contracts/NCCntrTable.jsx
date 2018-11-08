@@ -175,7 +175,7 @@ export default class NCCntrTable extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell>
+      <Cell copy={Addr}>
         
         
         <NCEntityLabel 
@@ -188,7 +188,7 @@ export default class NCCntrTable extends Component
       //tableContent[i][1] = <Cell>{ name }</Cell>;
      
       tableContent[i][1] = 
-      <Cell>
+      <Cell copy={blockNumber}>
            <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
           entityName={blockNumber}
@@ -196,7 +196,7 @@ export default class NCCntrTable extends Component
          
       </Cell>;
       tableContent[i][2] = 
-      <Cell>
+      <Cell copy={creator}>
           <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={creator}
@@ -204,7 +204,7 @@ export default class NCCntrTable extends Component
         
       </Cell>;
       tableContent[i][3] = 
-      <Cell>
+      <Cell copy={transaction}>
           <NCEntityLabel 
           entityType={NCEntity.TXN} 
           entityName={transaction}

@@ -213,7 +213,7 @@ export default class NCEventTable extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell >
+      <Cell copy={blockNumber}>
         
        <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
@@ -224,7 +224,7 @@ export default class NCEventTable extends Component
       ;
       
      
-      tableContent[i][1] = <Cell interactive={true} ><b>{ name + '('+params+')' }<br/>
+      tableContent[i][1] = <Cell copy={inputs.map((a,i)=>{return ({a})})} interactive={true} ><b>{ name + '('+params+')' }<br/>
       <pre className={'nc-resizable'}>
              {inputs.map((a,i)=>{return (<span key={i}>{a}<br/></span>)})}
       </pre></b>
@@ -232,7 +232,7 @@ export default class NCEventTable extends Component
     
       tableContent[i][2] = 
       
-      <Cell>{ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;     
+      <Cell copy={ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;     
       
       
       

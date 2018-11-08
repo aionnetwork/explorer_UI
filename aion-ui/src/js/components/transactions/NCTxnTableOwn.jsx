@@ -127,23 +127,23 @@ export default class NCTxnTableOwn extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell>
+      <Cell copy={blockNumber}>
         <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
-      tableContent[i][1] = <Cell>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell>{ value ? nc_numFormatterAionCoin(value, 0, true) : 0 }</Cell>;
+      tableContent[i][1] = <Cell copy={ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+      tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 0, true) : 0 }>{ value ? nc_numFormatterAionCoin(value, 0, true) : 0 }</Cell>;
       tableContent[i][3] = 
-      <Cell>
+      <Cell copy={transactionHash}>
         <NCEntityLabel 
           entityType={NCEntity.TXN} 
           entityName={transactionHash}
           entityId={transactionHash}/> 
       </Cell>;
       tableContent[i][4] = 
-      <Cell intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
+      <Cell copy={fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={fromAddr}
@@ -151,13 +151,13 @@ export default class NCTxnTableOwn extends Component
           linkActive={isFrom ? false : true}/>
       </Cell>;
       tableContent[i][5] = 
-      <Cell>
+      <Cell >
         <div className="arrow-cell">
           <span className="pt-icon-standard pt-icon-arrow-right"/>
         </div>
       </Cell>;
       tableContent[i][6] = 
-      <Cell intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
+      <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
       {
         toAddr ?
         <NCEntityLabel 

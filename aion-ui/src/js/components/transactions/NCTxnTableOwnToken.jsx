@@ -121,17 +121,17 @@ export default class NCTxnTableOwn extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell>
+      <Cell copy={blockNumber}>
         <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
-      tableContent[i][1] = <Cell>{ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell>{ value ? value : 0 }</Cell>;
+      tableContent[i][1] = <Cell copy={ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+      tableContent[i][2] = <Cell copy={ value ? value : 0 }>{ value ? value : 0 }</Cell>;
      
       tableContent[i][3] = 
-      <Cell intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
+      <Cell copy={fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.SEARCH} 
           entityName={fromAddr}
@@ -145,7 +145,7 @@ export default class NCTxnTableOwn extends Component
         </div>
       </Cell>;
       tableContent[i][5] = 
-      <Cell intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
+      <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
       {
         toAddr ?
         <NCEntityLabel 

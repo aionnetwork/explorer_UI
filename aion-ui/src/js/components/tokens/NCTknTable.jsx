@@ -171,7 +171,7 @@ export default class NCTknTable extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell truncated={false}
+      <Cell copy={token+" ("+symbol+") "+ Addr+" "+description} truncated={false}
        wrapText={true}>
         
         
@@ -185,15 +185,15 @@ export default class NCTknTable extends Component
         
        </Cell>
       ;
-      tableContent[i][1] = <Cell>{ decimal }</Cell>;
-      tableContent[i][2] = <Cell>{ totalSupply }</Cell>;
+      tableContent[i][1] = <Cell copy={ decimal }>{ decimal }</Cell>;
+      tableContent[i][2] = <Cell copy={ totalSupply }>{ totalSupply }</Cell>;
       tableContent[i][3] = 
-      <Cell>
+      <Cell copy={liquidSupply}>
           {liquidSupply}
          
       </Cell>;
       tableContent[i][4] = 
-      <Cell>
+      <Cell copy={holder}>
           <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={holder}
@@ -201,7 +201,7 @@ export default class NCTknTable extends Component
         
       </Cell>;
       tableContent[i][5] = 
-      <Cell>
+      <Cell copy={transaction}>
           <NCEntityLabel 
           entityType={NCEntity.TXN} 
           entityName={transaction}
