@@ -51,10 +51,10 @@ class NCCntrList extends Component
     network.getCntrListTopLevel(listType, queryStr);
   }
 
-  requestPaging = (pageNumber) => {
+  requestPaging = (pageNumber, pageSize) => {
     const listType = this.props.cntrList.listType;
     const queryStr = this.props.cntrList.queryStr;
-    network.getCntrListPaging(listType, queryStr, pageNumber);
+    network.getCntrListPaging(listType, queryStr, pageNumber, pageSize);
   }
 
   render() {

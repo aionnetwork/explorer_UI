@@ -92,7 +92,7 @@ export const getBlkListTopLevel = (listType, queryStr) => {
   }
 }
 
-export const getBlkListPaging = (listType, queryStr, pageNumber) => {
+export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0) => {
   store.dispatch(StoreBlkList.GetPaging());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -104,10 +104,12 @@ export const getBlkListPaging = (listType, queryStr, pageNumber) => {
   }
   else {
     const ep = network.endpoint.block.list[listType];
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+    //console.log(size);
     let params = [];
     switch(listType) {
       case blkListType.ALL: {
-        params = [pageNumber, PAGE_SIZE, 'blockNumber,desc']
+        params = [pageNumber, size, 'blockNumber,desc']
         break; 
       }/*
       case blkListType.BY_ACCOUNT: {
@@ -252,7 +254,7 @@ export const getTxnListTopLevel = (listType, queryStr) => {
   }
 }
 
-export const getTxnListPaging = (listType, queryStr, pageNumber) => {
+export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize) => {
   store.dispatch(StoreTxnList.GetPaging());
 
   console.log('txn list paging');
@@ -268,9 +270,10 @@ export const getTxnListPaging = (listType, queryStr, pageNumber) => {
   else {
     const ep = network.endpoint.transaction.list[listType];
     let params = [];
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     switch(listType) {
       case txnListType.ALL: {
-        params = [pageNumber, PAGE_SIZE, 'blockNumber,desc']
+        params = [pageNumber, size, 'blockNumber,desc']
         break;
       }
       case txnListType.BY_BLOCK: {
@@ -684,7 +687,7 @@ export const getCntrListTopLevel = () => {
   }
 }
 
-export const getCntrListPaging = (listType, queryStr, pageNumber) => {
+export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize) => {
   store.dispatch(StoreTknList.GetPaging());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -698,9 +701,10 @@ export const getCntrListPaging = (listType, queryStr, pageNumber) => {
   else {
     const ep = network.endpoint.token.list[listType];
     let params = [];
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     switch(listType) {
       case cntrListType.ALL: {
-        params = [pageNumber, PAGE_SIZE, 'blockNumber,desc']
+        params = [pageNumber, size, 'blockNumber,desc']
         break;
       }
       case cntrListType.BY_ACCOUNT: {
@@ -1065,7 +1069,7 @@ export const getTknListTopLevel = (listType, queryStr) => {
   }
 }
 
-export const getTknListPaging = (listType, queryStr, pageNumber) => {
+export const getTknListPaging = (listType, queryStr, pageNumber, pageSize) => {
   store.dispatch(StoreTknList.GetPaging());
 
   if (network.NCNETWORK_REQUESTS_ENABLED) {
@@ -1079,13 +1083,14 @@ export const getTknListPaging = (listType, queryStr, pageNumber) => {
   else {
     const ep = network.endpoint.token.list[listType];
     let params = [];
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     switch(listType) {
       case tknListType.ALL: {
-        params = [pageNumber, PAGE_SIZE, 'blockNumber,desc']
+        params = [pageNumber, size, 'blockNumber,desc']
         break;
       }
       case tknListType.BY_BLOCK: {
-        params = [nc_trim(queryStr), pageNumber, PAGE_SIZE]
+        params = [nc_trim(queryStr), pageNumber, size]
         break;
       }
       /*

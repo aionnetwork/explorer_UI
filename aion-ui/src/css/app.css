@@ -768,6 +768,9 @@ h1, h2, h3, h4, h5 {
   font-size: 13px;
   font-weight: 300;
 }
+.NCPagination .pt-input {
+  width: 50px !important;
+}
 .NCPagination .table-paging {
   float: right;
   display: flex;
@@ -2269,6 +2272,12 @@ pre {
     display: none !important;
   }
   .NCHeader .row {
+    min-width: 300px !important;
+  }
+  .NCFooter > div {
+    min-width: 300px !important;
+  }
+  .NCPageContent > .container {
     min-width: 300px !important;
   }
   span.pt-icon-standard.pt-icon-caret-down.pt-align-right {

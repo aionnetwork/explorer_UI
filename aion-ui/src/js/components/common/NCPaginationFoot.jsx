@@ -11,7 +11,7 @@ const SEARCH_DIR = {
   BACKWARD: 2,
 }
 
-export default class NCPagination extends Component
+export default class NCPaginationFoot extends Component
 {
   constructor(props) {
     super(props);
@@ -44,11 +44,27 @@ export default class NCPagination extends Component
       <div className="NCPagination">
         <div className="row-count">
           <span className="pt-text-muted">
-            {
-              "Showing " + entityName + " " + 
-              ((pageNumber * pageSize) + 1) + " - " + ((pageNumber * pageSize) + listSize) + 
-              " of " + totalElements + (isLatest ? " latest" : " found")
-            }
+            Page size  :
+             <select id="topic-input" 
+                     onChange= {(e) => {
+                        this.serchDirection = SEARCH_DIR.FORWARD;
+
+                         if((parseInt(e.target.value))<500){
+
+                            this.props.onPageCallback(pageNumber,e.target.value);
+
+                          }
+
+                
+                }} 
+                     defaultValue="default"   className="pt-input pt-large">
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+                <option value="250">250</option>              
+               
+              </select>
           </span>
         </div>
       {
@@ -86,9 +102,6 @@ export default class NCPagination extends Component
               type="number" 
               onChange={(e) => {
                 this.serchDirection = SEARCH_DIR.FORWARD;
-
-                console.log(totalElements);
-                console.log(parseInt(e.target.value)-1);
 
                 if((parseInt(e.target.value)-1)<totalPages){
 

@@ -46,10 +46,10 @@ class NCBlkList extends Component
     network.getBlkListTopLevel(listType, queryStr);
   }
 
-  requestPaging = (pageNumber) => {
+  requestPaging = (pageNumber,pageSize) => {
     const listType = this.props.blkList.listType;
     const queryStr = this.props.blkList.queryStr;
-    network.getBlkListPaging(listType, queryStr, pageNumber);
+    network.getBlkListPaging(listType, queryStr, pageNumber,pageSize);
   }
 
   render() {
