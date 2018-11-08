@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
-import { Menu, MenuItem, Intent, Popover, PopoverInteractionKind, Position, Button, InputGroup, Spinner } from "@blueprintjs/core";
+import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, CopyCellsMenuItem,
+    IMenuContext,  Utils} from "@blueprintjs/table"
+import { Menu, MenuItem, Intent, Popover,ContextMenuTarget, PopoverInteractionKind, Position, Button, InputGroup, Spinner } from "@blueprintjs/core";
 
 import { NCSortType, NCEntity } from 'lib/NCEnums';
 import NCEntityLabel from 'components/common/NCEntityLabel';
@@ -23,6 +24,8 @@ export default class NCTableBase extends Component {
     this.renderCell = this.renderCell.bind(this);
     this.computeColumnWidths = this.computeColumnWidths.bind(this);
     this.onColumnWidthChanged = this.onColumnWidthChanged.bind(this);
+
+    this.state = { data:[]};
   }
 
   renderCell (rowIndex, columnIndex)
@@ -148,6 +151,20 @@ export default class NCTableBase extends Component {
     }
   }
 
+   getCellData = (rowIndex: number, columnIndex: number) => {
+       
+       return this.props.tableContent[rowIndex][columnIndex].props.copy;
+       
+    };
+
+    renderBodyContextMenu = (context: IMenuContext) => {
+        return (
+            <Menu>
+                <CopyCellsMenuItem context={context} getCellData={this.getCellData} text="Copy" />
+            </Menu>
+        );
+    };
+
   render()
   {
     let { rowHeight = 35, tableContent, sortColumn, sortType, columnDescriptor, isSortAndFilterEnabled } = this.props;
@@ -168,6 +185,7 @@ export default class NCTableBase extends Component {
     return (
       <div className="NCTable">
         <Table
+          renderBodyContextMenu={this.renderBodyContextMenu}
           useInteractionBar={false}
           isRowHeaderShown={false}
           numRows={tableContent.length}

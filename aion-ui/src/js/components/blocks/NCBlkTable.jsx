@@ -111,17 +111,17 @@ export default class NCBlkTable extends Component
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
-      tableContent[i][1] = <Cell>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+      tableContent[i][1] = <Cell copy={ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') } >{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
       tableContent[i][2] = 
-      <Cell>
+      <Cell copy={numTransactions} >
         <NCLink 
           link={"/transactions?block=" + blockNumber} 
           title={numTransactions} 
           enabled={ numTransactions > 0 }/>
       </Cell>;
-      tableContent[i][3] = <Cell>{ nc_numFormatter(nrgConsumed, 2) }</Cell>;
-      tableContent[i][4] = <Cell>{nc_numPrettify(BigNumber(String(difficulty), 16).toString(10))}</Cell>;
-      tableContent[i][5] = <Cell>{ nc_numFormatterBytes(size, 2) }</Cell>;
+      tableContent[i][3] = <Cell copy={ nc_numFormatter(nrgConsumed, 2) } >{ nc_numFormatter(nrgConsumed, 2) }</Cell>;
+      tableContent[i][4] = <Cell copy={nc_numPrettify(BigNumber(String(difficulty), 16).toString(10))}>{nc_numPrettify(BigNumber(String(difficulty), 16).toString(10))}</Cell>;
+      tableContent[i][5] = <Cell copy={ nc_numFormatterBytes(size, 2) }>{ nc_numFormatterBytes(size, 2) }</Cell>;
     });
 
     return tableContent;
