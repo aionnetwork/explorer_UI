@@ -156,11 +156,28 @@ export default class NCTableBase extends Component {
        return this.props.tableContent[rowIndex][columnIndex].props.copy;
        
     };
+    
 
     renderBodyContextMenu = (context: IMenuContext) => {
+
+        //console.log( JSON.stringify(context));
+        //console.log(this.props.tableContent[context.target.rows[0]][context.target.cols[0]].props.link);
         return (
             <Menu>
                 <CopyCellsMenuItem context={context} getCellData={this.getCellData} text="Copy" />
+
+                
+                {(typeof this.props.tableContent[context.target.rows[0]][context.target.cols[0]].props.link !== "undefined")&&
+                  <MenuItem 
+                    target="_blank" 
+                    
+                    href={this.props.tableContent[context.target.rows[0]][context.target.cols[0]].props.link}
+                    text="Open link in new tab"
+                  />
+                  
+                }
+               
+
             </Menu>
         );
     };
@@ -177,6 +194,7 @@ export default class NCTableBase extends Component {
     for (let i = 0; i < columnDescriptor.length; i++) {
       columns.push(
         <Column
+
           key={i}
           renderCell={this.renderCell}
           renderColumnHeader={this.renderColumnHeader}/>);

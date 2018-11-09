@@ -87,21 +87,21 @@ export default class NCAccTable extends Component
       tableContent[i] = [];  
       
       tableContent[i][0] = 
-      <Cell>
+      <Cell copy={holderAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+holderAddr}>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={holderAddr}
           entityId={holderAddr}/> 
       </Cell>;
       tableContent[i][1] = 
-      <Cell>
+      <Cell copy={blockNumber} link={'#'+NCEntityInfo[NCEntity.BLOCK].absoluteUrl+''+blockNumber}>
         <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
       tableContent[i][2] = 
-      <Cell>
+      <Cell copy={contractAddr} link={'#'+NCEntityInfo[NCEntity.CNTR].absoluteUrl+''+contractAddr}>
         <NCEntityLabel 
           entityType={NCEntity.CNTR} 
           entityName={contractAddr}

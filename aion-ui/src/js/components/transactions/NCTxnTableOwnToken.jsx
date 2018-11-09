@@ -121,7 +121,7 @@ export default class NCTxnTableOwn extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell copy={blockNumber}>
+      <Cell copy={blockNumber} link={'#'+NCEntityInfo[NCEntity.BLOCK].absoluteUrl+''+blockNumber}>
         <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
           entityName={blockNumber}
@@ -131,7 +131,7 @@ export default class NCTxnTableOwn extends Component
       tableContent[i][2] = <Cell copy={ value ? value : 0 }>{ value ? value : 0 }</Cell>;
      
       tableContent[i][3] = 
-      <Cell copy={fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
+      <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.SEARCH].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.SEARCH} 
           entityName={fromAddr}

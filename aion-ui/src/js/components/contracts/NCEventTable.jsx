@@ -13,7 +13,7 @@ import { Tooltip, AnchorButton, Dialog,Button,Overlay, Position, Classes, Popove
 import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table"
 
 import NCTableBase from 'components/common/NCTableBase';
-import { NCSortType, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
+import { NCSortType, NCEntity, nc_LinkToEntity,NCEntityInfo } from 'lib/NCEnums';
 
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
@@ -213,7 +213,7 @@ export default class NCEventTable extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell copy={blockNumber}>
+      <Cell copy={blockNumber} link={'#'+NCEntityInfo[NCEntity.BLOCK].absoluteUrl+''+blockNumber}>
         
        <NCEntityLabel 
           entityType={NCEntity.BLOCK} 

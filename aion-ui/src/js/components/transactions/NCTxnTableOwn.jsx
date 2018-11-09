@@ -127,7 +127,7 @@ export default class NCTxnTableOwn extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell copy={blockNumber}>
+      <Cell copy={blockNumber} link={'#'+NCEntityInfo[NCEntity.BLOCK].absoluteUrl+''+blockNumber}>
         <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
           entityName={blockNumber}
@@ -136,14 +136,14 @@ export default class NCTxnTableOwn extends Component
       tableContent[i][1] = <Cell copy={ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
       tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 0, true) : 0 }>{ value ? nc_numFormatterAionCoin(value, 0, true) : 0 }</Cell>;
       tableContent[i][3] = 
-      <Cell copy={transactionHash}>
+      <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash}>
         <NCEntityLabel 
           entityType={NCEntity.TXN} 
           entityName={transactionHash}
           entityId={transactionHash}/> 
       </Cell>;
       tableContent[i][4] = 
-      <Cell copy={fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
+      <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={fromAddr}

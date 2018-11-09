@@ -11,7 +11,7 @@ import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent,
 import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
 
 import NCTableBase from 'components/common/NCTableBase';
-import { NCSortType, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
+import { NCSortType,NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
 
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
@@ -188,7 +188,7 @@ export default class NCCntrTable extends Component
       //tableContent[i][1] = <Cell>{ name }</Cell>;
      
       tableContent[i][1] = 
-      <Cell copy={blockNumber}>
+      <Cell copy={blockNumber} link={'#'+NCEntityInfo[NCEntity.BLOCK].absoluteUrl+''+blockNumber}>
            <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
           entityName={blockNumber}
@@ -196,7 +196,7 @@ export default class NCCntrTable extends Component
          
       </Cell>;
       tableContent[i][2] = 
-      <Cell copy={creator}>
+      <Cell copy={creator} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+creator}>
           <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={creator}
@@ -204,7 +204,7 @@ export default class NCCntrTable extends Component
         
       </Cell>;
       tableContent[i][3] = 
-      <Cell copy={transaction}>
+      <Cell copy={transaction} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transaction}>
           <NCEntityLabel 
           entityType={NCEntity.TXN} 
           entityName={transaction}

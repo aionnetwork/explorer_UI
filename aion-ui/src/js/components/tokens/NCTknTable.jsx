@@ -193,7 +193,7 @@ export default class NCTknTable extends Component
          
       </Cell>;
       tableContent[i][4] = 
-      <Cell copy={holder}>
+      <Cell copy={holder} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+holder}>
           <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           entityName={holder}
@@ -201,7 +201,7 @@ export default class NCTknTable extends Component
         
       </Cell>;
       tableContent[i][5] = 
-      <Cell copy={transaction}>
+      <Cell copy={transaction} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transaction}>
           <NCEntityLabel 
           entityType={NCEntity.TXN} 
           entityName={transaction}
