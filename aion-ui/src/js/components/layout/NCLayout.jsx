@@ -344,7 +344,7 @@ class NCLayout extends Component {
             </div>
 
             <div className="pt-navbar-group navbar-group-right">
-              <NCTopLevelSearch/>
+              <NCTopLevelSearch className="hide"/>
               <span className="pt-navbar-divider"></span>
               <NCLivenessIndicator 
                 momentEnd={momentEnd}
@@ -355,6 +355,11 @@ class NCLayout extends Component {
               { this.connectionMenu }
             </div>
 
+          </div>
+          <div className="row show" >
+            <div className="pt-navbar-group navbar-group-right">
+              <NCTopLevelSearch/>
+            </div>
           </div>
         </div>
         

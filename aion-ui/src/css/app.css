@@ -2258,6 +2258,9 @@ pre {
 #root {
   max-width: 100%;
 }
+.show {
+  display: none !important;
+}
 @media all and (max-width: 1030px) {
   .NCHeader .row .navbar-btn-active span {
     display: none;
@@ -2265,7 +2268,13 @@ pre {
   .NCTopLevelSearch .search-bar .pt-input-action .pt-popover-target button span {
     display: none;
   }
-  .NCTopLevelSearch {
+  .NCTopLevelSearch .hide {
+    display: none !important;
+  }
+  .show {
+    display: inline !important;
+  }
+  .NCDashboard .NCKPIContainer {
     display: none !important;
   }
   .pt-navbar-divider {
@@ -2279,6 +2288,9 @@ pre {
   }
   .NCPageContent > .container {
     min-width: 300px !important;
+  }
+  .txn-arrow {
+    display: none !important;
   }
   span.pt-icon-standard.pt-icon-caret-down.pt-align-right {
     display: inline !important;

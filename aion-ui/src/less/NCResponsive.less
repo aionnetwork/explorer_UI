@@ -3,6 +3,8 @@
     max-width:100%;
   }
 
+  .show{display:none !important;}
+
   @media all and (max-width: 1030px) 
   {
     .NCHeader .row .navbar-btn-active span {
@@ -11,7 +13,14 @@
     .NCTopLevelSearch .search-bar .pt-input-action .pt-popover-target button span {
       display: none;
     }
-    .NCTopLevelSearch{
+    .NCTopLevelSearch .hide{
+      display: none !important;
+    }
+    .show{
+      display: inline !important;
+    }
+
+    .NCDashboard .NCKPIContainer {
       display: none !important;
     }
     .pt-navbar-divider{

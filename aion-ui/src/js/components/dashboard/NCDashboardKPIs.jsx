@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Tooltip, Position } from "@blueprintjs/core";
 
-import NCKPIGroup from 'components/common/NCKPIGroup';
+import { NCKPIResponsive, NCKPIGroup} from 'components/common/NCKPIGroup';
 import NCLoading from 'components/common/NCLoading';
 
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
@@ -185,7 +185,10 @@ class NCDashboardKPIs extends Component
                                           nc_numFormatter(kpiList.totalTransactionsInLast24hours, 3) : 
                                           null;
 
-    let ncKPIs = []
+    let ncKPIs = [];
+    let ncKPIr = [];
+
+    let kpi = {}
 
     this.kpiData.forEach((kpiGroup, i) => 
     {
@@ -193,11 +196,23 @@ class NCDashboardKPIs extends Component
                     key={i} 
                     kpiGroup={kpiGroup}/>);
       ncKPIs.push(<span key={this.kpiData.length + i} className="NCKPIGroupDivider"/>);
+
+      ncKPIr.push(<NCKPIResponsive 
+                    key={i} 
+                    kpiGroup={kpiGroup}/>);
+      //ncKPIr.push(<span key={this.kpiData.length + i} className="NCKPIGroupDivider"></span>);
+      //ncKPIr.push(<p key={i} kpiGroup={kpiGroup}></p>);
+
     });
     
     return (
+      <div>
       <div className="NCKPIContainer">
       { ncKPIs }
+      </div>
+      <div className="show" >
+      { ncKPIr }
+      </div>
       </div>
     );
   }

@@ -47,7 +47,7 @@ class NCKPI extends Component
   }
 }
 
-export default class NCKPIGroup extends Component
+export class NCKPIGroup extends Component
 {
   render() {
 
@@ -73,7 +73,29 @@ export default class NCKPIGroup extends Component
   }
 }
 
+export class NCKPIResponsive extends Component
+{
+  render() {
 
+    let { kpiGroup } = this.props;
+
+    return (
+      <div className="NCKPIGroup">
+        <div className="group-title">{ kpiGroup.title }</div>
+        
+        {
+          kpiGroup.kpiList.map((kpi, i) => 
+          <div>
+            <p>{kpi.title}</p>
+
+            <b>{kpi.value+" "+kpi.units}</b><br/><hr/>
+          </div>
+          )
+        }
+      </div>
+    );
+  }
+}
 
 
 
