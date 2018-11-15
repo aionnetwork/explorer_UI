@@ -41,7 +41,7 @@ if (process.env.NODE_ENV !== 'production') {
     NETWORK_LIST = appConfig.network_list['staging'];
     GA_KEY = appConfig.ga_key;
   }
-  console.log('dev Mode!');
+  //console.log('dev Mode!');
 
       
 }else{ 
@@ -81,7 +81,7 @@ const generateBaseUrl = (https, api, e) => {
   else
     str=api
 
-  console.log(str);
+  //console.log(str);
   url+=stripTrailingSlash(str);
 
   return url;
@@ -234,7 +234,7 @@ export const request = async (endpoint, params,sub_base=false) =>
     }
     
     if ( net == null && BASE_URL) {
-      console.log('create endpoint!'+sub_base);
+      //console.log('create endpoint!'+sub_base);
       net = axios.create({
           baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
           timeout: ms('2min')

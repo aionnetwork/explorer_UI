@@ -84,7 +84,10 @@ export default class NCEntityLabel extends Component
       }
     }
 
+         
+
     return( 
+     linkActive ?
         <a 
           className={"NCEntityLabel " + (className != null ? className : "") + (linkActive ? " active" : "")}
           href={'#'+NCEntityInfo[this.props.entityType].absoluteUrl+''+this.props.entityId}
@@ -92,6 +95,14 @@ export default class NCEntityLabel extends Component
           <span className={"icon pt-icon-standard " + this.iconName}/>
           <span className="text pt-text-overflow-ellipsis ">{ displayName }</span>
         </a>
+        :
+        <span 
+          className={"NCEntityLabel " + (className != null ? className : "") + (linkActive ? " active" : "")}
+          href={'#'+NCEntityInfo[this.props.entityType].absoluteUrl+''+this.props.entityId}
+           >
+          <span className={"icon pt-icon-standard " + this.iconName}/>
+          <span className="text pt-text-overflow-ellipsis ">{ displayName }</span>
+        </span>
     );
   }
 }

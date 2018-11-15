@@ -64,12 +64,12 @@ export default class NCTxnDetail extends Component
         value: moment.unix(entity.blockTimestamp).format('LLLL'),
       },
       {
-        field: "Token",
+        field: entity.token == null? "Coin" : "Token",
         value: 
                   entity.token == null?
                   <NCEntityLabel
                   entityType={NCEntity.TKN}
-                  entityId="AION"
+                  entityId="AION (native)"
                   linkActive={false}/>
                   :
                   <NCEntityLabel
@@ -144,6 +144,19 @@ export default class NCTxnDetail extends Component
                   entityType={NCEntity.ACCOUNT} 
                   entityId={entity.toAddr}/> :
                 "Contract Creation",
+      },
+       {
+        field: "Tokens Transfered",
+        value: <span>
+                  <span className="subtitle">From: </span> 
+                    {entity.toAddr}
+                  
+                  <br/
+                  ><span className="subtitle"> To: </span> 
+                    {entity.toAddr}               
+                  <span className="subtitle">of  (43252.90) </span>              
+                  {"Token"}
+               </span>
       },
       // ---------------------------------------------------------------
       {

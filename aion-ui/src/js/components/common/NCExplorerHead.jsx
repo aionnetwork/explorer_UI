@@ -41,11 +41,11 @@ export default class NCExplorerHead extends Component
             <h2 className="page">{title}</h2>
             {
               subtitle && 
-              <span className="join"></span>
+              <span className="join hide"></span>
             }
             {
               subtitle && 
-              <h2 className="desc">{subtitle}</h2>
+              <h2 className="desc hide">{subtitle}</h2>
             }
             </span>
           </span>
@@ -53,7 +53,7 @@ export default class NCExplorerHead extends Component
           { 
             (momentUpdated && moment(momentUpdated).isValid()) &&
             <div className="updated">
-              <span className="title">Retrieved:</span> 
+              <span className="title hide">Retrieved:</span> 
               <NCTimescale
                 dateObjArr={[momentUpdated]}
                 isMedium={true}/>

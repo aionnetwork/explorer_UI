@@ -105,6 +105,7 @@ export default class NCTopLevelSearch extends Component
     return (
       <div className="NCTopLevelSearch">
         <InputGroup
+          name="search"
           className="search-bar"
           disabled={this.state.isFetching}
           placeholder="Search for Account / Block / Contract / Transaction / Token"

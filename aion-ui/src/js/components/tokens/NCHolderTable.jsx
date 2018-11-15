@@ -8,7 +8,7 @@ import NCPagination from 'components/common/NCPagination';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 import NCLink from 'components/common/NCLink';
 
-import { NCEntity } from 'lib/NCEnums';
+import { NCEntityInfo,NCEntity } from 'lib/NCEnums';
 import { nc_numPrettify, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_hexPrefix } from 'lib/NCUtility';
 
 import { PAGE_SIZE } from 'network/NCNetworkRequests'

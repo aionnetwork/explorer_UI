@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import {BigNumber} from 'bignumber.js'
 import moment from "moment";
-import {  Menu, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip, MenuDivider } from "@blueprintjs/core";
+import {  Menu, ContextMenu, ContextMenuTarget, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip, MenuDivider } from "@blueprintjs/core";
 
 import { ncNetwork_pollForKpiList, ncNetwork_pollForStaticInfo } from 'network/NCNetwork';
 
@@ -82,6 +82,7 @@ class NCLayout extends Component {
               { menuItemList }
             </Menu>
           }
+          className="hide"
           interactionKind={PopoverInteractionKind.CLICK}
           position={Position.BOTTOM_RIGHT}>
             <Button 
@@ -90,6 +91,10 @@ class NCLayout extends Component {
               text={networkList[0].name ? networkList[0].name : "Explorer"}/>  
         </Popover>
       }   
+
+
+
+
     }         
   }
 
@@ -101,17 +106,40 @@ class NCLayout extends Component {
     disconnectSocket();
   };
 
+ showContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+        console.log('Hey!');// must prevent default to cancel parent's context menu
+        e.preventDefault();
+        // invoke static API, getting coordinates from mouse event
+        ContextMenu.show(
+            <Menu>
+                <MenuItem
+          className="nav-option"
+          target="blank"
+          onClick={() => {
+            hashHistory.push('e.link');
+          }}
+          text="Open link in new tab"
+        />
+                
+            </Menu>,
+            { left: e.clientX, top: e.clientY },
+            () => this.setState({ isContextMenuOpen: false }),
+        );
+        // indicate that context menu is open so we can add a CSS class to this element
+        this.setState({ isContextMenuOpen: true });
+    };
+
   renderMetricMenu = () => {
     return (
       <Menu className="NCNavMenu">
-        <MenuItem
+        <div onContextMenu={this.showContextMenu}><MenuItem
           className="nav-option"
           
           onClick={() => {
             hashHistory.push('/charts/ActiveAddressGrowth');
           }}
           text="Active Address"
-        />
+        /></div>
         <MenuItem
           className="nav-option"
           
@@ -158,17 +186,44 @@ class NCLayout extends Component {
     );
   }
 
+  renderMobileMenu = () => {
+
+    
+     return(<Popover
+          content={
+            <Menu className="NCNavMenu">
+              <MenuDivider title="Explorer" />
+              {this.renderExplorerMenu()} 
+              <MenuDivider title="Analytics" />
+              {this.renderMetricMenu()} 
+              <MenuDivider title="Switch Network" />
+              
+            </Menu>
+          }
+          interactionKind={PopoverInteractionKind.CLICK}
+          className="show"
+          position={Position.BOTTOM_RIGHT}>
+            <Button 
+              className="  pt-minimal"
+              iconName="pt-icon-menu"
+             
+              />  
+        </Popover>);
+  }
+
   renderExplorerMenu = () => {
     return (
       <Menu className="NCNavMenu">
-         <MenuItem
+         <div onContextMenu={this.showContextMenu}><MenuItem
           className="nav-option"
+          link='/accounts'
           iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}
+          onContextMenu={this.showContextMenu}
           onClick={() => {
             hashHistory.push('/accounts');
           }}
           text="Accounts"
-        />
+        /></div>
         <MenuItem
           className="nav-option"
           iconName={NCEntityInfo[NCEntity.BLOCK].icon}
@@ -316,6 +371,7 @@ class NCLayout extends Component {
               </Link>
               <span className="pt-navbar-divider"></span>              
               <Popover
+                className="hide"
                 content={this.renderExplorerMenu()}
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
@@ -327,6 +383,7 @@ class NCLayout extends Component {
               </Popover>
 
                <Popover
+                className="hide"
                 content={this.renderMetricMenu()} 
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
@@ -344,7 +401,9 @@ class NCLayout extends Component {
             </div>
 
             <div className="pt-navbar-group navbar-group-right">
-              <NCTopLevelSearch className="hide"/>
+              <div className="hide">
+              <NCTopLevelSearch />
+              </div>
               <span className="pt-navbar-divider"></span>
               <NCLivenessIndicator 
                 momentEnd={momentEnd}
@@ -352,7 +411,10 @@ class NCLayout extends Component {
                 dbLag={dbLag}
                 lastUpdated={lastUpdated}
               />
-              { this.connectionMenu }
+              
+              {this.connectionMenu }
+              {this.renderMobileMenu()}
+              
             </div>
 
           </div>
@@ -371,7 +433,7 @@ class NCLayout extends Component {
         </div>
         <div className="NCFooter">
           <div>
-            <a className="footer-container" target="_blank" href="https://aion.network">
+            <a className="footer-container" rel="noopener" target="_blank" href="https://aion.network">
               <span className="text">Powered By</span>
               <img className="logo" src="img/logo/aion-icon.svg" alt="logo"/>
             </a>

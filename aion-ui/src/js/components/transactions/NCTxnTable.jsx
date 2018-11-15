@@ -11,7 +11,7 @@ import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent,
 import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
 
 import NCTableBase from 'components/common/NCTableBase';
-import { NCSortType, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
+import { NCSortType, NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
 
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
@@ -174,7 +174,7 @@ export default class NCTxnTable extends Component
             popoverClassName="NCLivenessIndicator-Popover"
             className="NCLivenessIndicator"
             position={Position.BOTTOM_RIGHT}>
-            <button className="">
+            <button className="pt-button pt-minimal liveness-btn">
 
               <div className="arrow-cell tx-status">
                 <span className="pt-icon-large pt-icon-arrow-right icon fail"/>

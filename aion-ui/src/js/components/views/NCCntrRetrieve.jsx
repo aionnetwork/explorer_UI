@@ -154,7 +154,7 @@ class NCCntrRetrieve extends Component
 
     //const txnList = (store.response && store.response.transactions) ? store.response.transactions.data : null;
     const txnList = (store.response && store.response.txn && store.response.txn.data.content) ? store.response.txn.data.content : null;
-    console.log(JSON.stringify(txnList));
+    //console.log(JSON.stringify(txnList));
 
     const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
     const eventList = (store.response && store.response.event && store.response.event.data.content) ? store.response.event.data.content : null;

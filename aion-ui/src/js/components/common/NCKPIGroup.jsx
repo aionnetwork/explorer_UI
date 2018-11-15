@@ -85,7 +85,7 @@ export class NCKPIResponsive extends Component
         
         {
           kpiGroup.kpiList.map((kpi, i) => 
-          <div>
+          <div key={i}>
             <p>{kpi.title}</p>
 
             <b>{kpi.value+" "+kpi.units}</b><br/><hr/>

@@ -11,7 +11,7 @@ import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent,
 import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
 
 import NCTableBase from 'components/common/NCTableBase';
-import { NCSortType, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
+import { NCSortType, NCEntity,NCEntityInfo, nc_LinkToEntity } from 'lib/NCEnums';
 
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';

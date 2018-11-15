@@ -106,9 +106,13 @@ export default class NCTableBase extends Component {
       widthUtitlized += col.width;
     });
 
-    if (flexColumns.length > 0)
+    if ((flexColumns.length > 0)&&(containerWidth>1030))
     {
       flexColumnWidth = (containerWidth - widthUtitlized - 55) / flexColumns.length;
+    }
+    else{
+      //this is for mobile compatibility
+      flexColumnWidth = 450;
     }
 
     flexColumns.forEach((col) => {
