@@ -129,7 +129,7 @@ class NCTknRetrieve extends Component
    const txnListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions. To retrieve older data, use our&nbsp;
+        <div className="NCPageBreakerSubtitle">Showing results from the latest transactions. To retrieve older data, use our&nbsp;
           <Tooltip
             className="pt-tooltip-indicator"
             content={<em>coming soon ...</em>}>
@@ -145,7 +145,7 @@ class NCTknRetrieve extends Component
       loadingStr={"Loading Transactions"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
       emptyDataStr={
-        <span>No transactions found for this token in latest million transactions. <br/>To retrieve older data, use our&nbsp;
+        <span>No transactions found for this token. <br/>To retrieve older data, use our&nbsp;
           <Tooltip
             className="pt-tooltip-indicator"
             content={<em>coming soon ...</em>}>
@@ -168,7 +168,7 @@ class NCTknRetrieve extends Component
     const accListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
+        <div className="NCPageBreakerSubtitle">Showing results from the latest blocks. To retrieve older data, use our&nbsp;
           <Tooltip
             className="pt-tooltip-indicator"
             content={<em>coming soon ...</em>}>
