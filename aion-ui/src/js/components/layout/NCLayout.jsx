@@ -59,6 +59,8 @@ class NCLayout extends Component {
           text={networkList[0].name}/>; 
     }
 
+   this.connectionMenuItemList = [];
+
     if(Array.isArray(networkList) && networkList.length > 1) {
       let menuItemList = [];
       networkList.forEach((v, i) => {
@@ -74,7 +76,8 @@ class NCLayout extends Component {
       });
 
       if (menuItemList.length > 0) {
-        this.connectionMenu = 
+         this.connectionMenuItemList = menuItemList;
+         this.connectionMenu = 
         <Popover
           content={
             <Menu className="NCNavMenu">
@@ -197,7 +200,7 @@ class NCLayout extends Component {
               <MenuDivider title="Analytics" />
               {this.renderMetricMenu()} 
               <MenuDivider title="Switch Network" />
-              
+              {this.connectionMenuItemList} 
             </Menu>
           }
           interactionKind={PopoverInteractionKind.CLICK}

@@ -243,7 +243,7 @@ class NCAccRetrieve extends Component
     const txnListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions. To retrieve older data, use our&nbsp;
+        <div className="NCPageBreakerSubtitle">Showing latest million transactions. To retrieve older data, use our&nbsp;
           <Tooltip
             className="pt-tooltip-indicator"
             content={<em>coming soon ...</em>}>
@@ -259,7 +259,7 @@ class NCAccRetrieve extends Component
       loadingStr={"Loading Transactions"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
       emptyDataStr={
-        <span>No transactions found for this account in latest million transactions. <br/>To retrieve older data, use our&nbsp;
+        <span>No transactions found for this account. <br/>To retrieve older data, use our&nbsp;
           <Tooltip
             className="pt-tooltip-indicator"
             content={<em>coming soon ...</em>}>
@@ -293,7 +293,7 @@ class NCAccRetrieve extends Component
     const blkListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
+        <div className="NCPageBreakerSubtitle">Showing results from the latest blocks. To retrieve older data, use our&nbsp;
           <Tooltip
             className="pt-tooltip-indicator"
             content={<em>coming soon ...</em>}>

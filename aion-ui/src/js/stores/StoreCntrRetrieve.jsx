@@ -156,6 +156,7 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       if(typeof(action.data.content) !== 'undefined'){
           _state.response.event.data.content = action.data.content[0].events;
           _state.response.txn.data.content = action.data.content[0].transactions;
+          _state.response.txn.momentUpdated = moment();
           _state.isLoadingPagingTxnList= false;
       } 
 
@@ -187,7 +188,7 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       let _state = Object.assign({}, state);
       
       _state.isLoadingPagingTxnList = false;
-      
+      //console.log('CNTR_RETRIEVE_SET_PAGING_TXN');
       _state.response.txn.data = action.data;
       _state.response.txn.momentUpdated = moment();
       _state.momentUpdated = moment();

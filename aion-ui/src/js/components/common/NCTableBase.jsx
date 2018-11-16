@@ -188,7 +188,7 @@ export default class NCTableBase extends Component {
 
   render()
   {
-    let { rowHeight = 35, tableContent, sortColumn, sortType, columnDescriptor, isSortAndFilterEnabled } = this.props;
+    let { rowHeights=null, rowHeight = 35, tableContent, sortColumn, sortType, columnDescriptor, isSortAndFilterEnabled } = this.props;
 
     // generate this array here based on resizing of the parent container
     let columns = [];
@@ -204,6 +204,8 @@ export default class NCTableBase extends Component {
           renderColumnHeader={this.renderColumnHeader}/>);
     }
 
+    //console.log(JSON.stringify(rowHeights));
+
     return (
       <div className="NCTable">
         <Table
@@ -212,6 +214,7 @@ export default class NCTableBase extends Component {
           isRowHeaderShown={false}
           numRows={tableContent.length}
           defaultRowHeight={height}
+          rowHeights={rowHeights}
           enableMultipleSelection={false}
           columnWidths={this.columnWidths}
           selectionModes={SelectionModes.ROWS_AND_CELLS}

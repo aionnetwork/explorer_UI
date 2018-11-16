@@ -131,17 +131,18 @@ export default class NCTableReact extends Component
 
   render() {
 
-    let { rowHeight, dialog, data, generateTableContent, columnDescriptor } = this.props;
+    let { rowHeight = 35,rowHeights, dialog, data, generateTableContent, columnDescriptor } = this.props;
 
     let filteredData = this.runFilter(data);
     let sortedData = this.runSort(filteredData);
     let tableContent = generateTableContent(sortedData);
     let height = rowHeight;
-
+    //console.log(JSON.stringify(rowHeights));
     return (
       <div className="NCTableEnhanced">
         <ContainerDimensions>
           <NCTableBase 
+            rowHeights={rowHeights}
             tableContent={tableContent}
             columnDescriptor={columnDescriptor}
             rowHeight = {height}

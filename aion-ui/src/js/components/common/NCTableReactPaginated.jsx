@@ -26,7 +26,7 @@ export default class NCTableReactPaginated extends Component
   }
 
   render() {
-    const { rowHeight, dialog, data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
+    const { rowHeight, rowHeights, dialog, data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
     const list = data.content;
     let tableList = list;
     let height = rowHeight;
@@ -109,6 +109,7 @@ export default class NCTableReactPaginated extends Component
         <NCTableReact
           data={tableList}
           rowHeight = {height}
+          rowHeights = {rowHeights}
           generateTableContent={generateTableContent}
           columnDescriptor={columnDescriptor}
           dialog={dialog}/>

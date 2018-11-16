@@ -103,6 +103,7 @@ class NCTxnList extends Component
         break;
       }
     }
+    console.log(JSON.stringify(store.response));
 
     const page =
       <div> 

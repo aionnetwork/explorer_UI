@@ -30,7 +30,7 @@ export default class NCTxnEventLogTable extends Component
         name: "Logs",
         isSortable: false,
         isFilterable: false,
-        width: 400,
+        width: null,
         flex: true,
         objPath: null,
       }
@@ -38,12 +38,15 @@ export default class NCTxnEventLogTable extends Component
       
     ];
 
+    this.ncRowHeight = [];
+
     this.generateTableContent = this.generateTableContent.bind(this);
   }
 
   generateTableContent(entityList) 
   {
     let tableContent = [];
+    console.log(JSON.stringify(entityList));
 
     entityList.forEach((entity, i) => 
     {
@@ -59,17 +62,21 @@ export default class NCTxnEventLogTable extends Component
         transactionHash = entity.transactionHash;        
         
       }
-
+      const cell = {'height':'300px'}
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell copy={blockNumber} link={'#'+NCEntityInfo[NCEntity.BLOCK].absoluteUrl+''+blockNumber}>
-        <NCEntityLabel 
-          entityType={NCEntity.BLOCK} 
-          entityName={blockNumber}
-          entityId={blockNumber}/> 
+      <Cell truncated={false} wrapText={true} >
+      name Transfer (index_topic_1 address _from, index_topic_2 address _to, uint256 _value)<br/>
+      Topics  [0] 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef<br/>
+              [1] 0x000000000000000000000000d2842acffff364b7653a10761e58640d9a3d6201<br/>
+              [2] 0x00000000000000000000000000000000000000000000eb50ed425cc0dce13dbc<br/>
+      data    000000000000000000000000000000000000000000000000002386f26fc10000<br/>
+
+        
       </Cell>;
-      
+     
+      this.ncRowHeight.push(60+30*4);//this will calculate the height of the row based on the input size
       
     });
 
@@ -78,10 +85,11 @@ export default class NCTxnEventLogTable extends Component
   
   render() {
     const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
-        
+       // console.log(data);
     return (
       <NCTableReactPaginated
         data={data}
+        rowHeights= {this.ncRowHeight}
         onPageCallback={onPageCallback}
         isLoading={isLoading}
         isPaginated={isPaginated}

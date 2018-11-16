@@ -76,6 +76,8 @@ export default class NCEventTable extends Component
       
     ];
 
+    this.ncRowHeight = [];
+
     this.generateTableContent = this.generateTableContent.bind(this);
   }
 
@@ -210,6 +212,7 @@ export default class NCEventTable extends Component
       const classes = classNames(Classes.CARD, Classes.ELEVATION_4, OVERLAY_EXAMPLE_CLASS, this.props.data.themeName);
       
 
+
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
@@ -234,13 +237,8 @@ export default class NCEventTable extends Component
       
       <Cell copy={ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;     
       
-      
-      
-
-         
-
-      //tableContent[i][6] = <Cell>{ transactions }</Cell>;
-     
+      this.ncRowHeight.push(60+25*inputs.length);
+           
     });
 
     return tableContent; 
@@ -252,7 +250,7 @@ export default class NCEventTable extends Component
     
     return (
       <NCTableReactPaginated
-        rowHeight = {300}
+        rowHeights = {this.ncRowHeight}
         data={data}
         onPageCallback={onPageCallback}
         isLoading={isLoading}

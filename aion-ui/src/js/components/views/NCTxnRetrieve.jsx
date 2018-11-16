@@ -74,7 +74,15 @@ class NCTxnRetrieve extends Component
 
     const desc = nc_hexPrefix(store.queryStr);
 
-    const eventLog = [];
+    const eventLog =  {
+            'content' : [ 
+                  'key1' : 'input1',
+                  'key2' : 'input2'
+                ],
+            
+};
+
+    //console.log(eventLog);
 
     const eventListSection = <NCExplorerSection 
       className={""}
@@ -84,7 +92,7 @@ class NCTxnRetrieve extends Component
 
       isLoading={false}
       isDataValid={true}
-      isDataEmpty={true} 
+      isDataEmpty={false} 
       
       loadingStr={"Loading Event Logs"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
@@ -96,7 +104,7 @@ class NCTxnRetrieve extends Component
           data= {eventLog}
           onPageCallback={null}
           isLoading={false}
-          isPaginated={true}
+          isPaginated={false}
           isLatest={true}/>
         }
       marginTop={40}

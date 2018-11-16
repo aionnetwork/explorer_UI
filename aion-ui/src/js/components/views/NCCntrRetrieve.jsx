@@ -167,7 +167,7 @@ class NCCntrRetrieve extends Component
 
     const isTxnListValid = nc_isListValid(txnList);
     const isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-    //console.log("heeey!"+JSON.stringify(eventList));
+    //console.log(isTxnListEmpty+"  "+isTxnListFirstLoad+"heeey!"+JSON.stringify(txnList));
     
 
     const isBlkListValid = nc_isListValid(blkList);
