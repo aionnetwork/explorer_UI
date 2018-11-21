@@ -14,7 +14,7 @@ import NCExplorerSection from 'components/common/NCExplorerSection';
 
 import * as StoreBlkRetrieve from 'stores/StoreBlkRetrieve';
 
-
+import * as MSG from 'lib/NCTerms';
 import { nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
@@ -25,7 +25,7 @@ class NCBlkRetrieve extends Component
   }
 
   submitQuery(num){
-      console.log('querry!!!!');
+      //console.log('querry!!!!');
       let entity = this.props.blkRetrieve.response.blk;
 
       let str = this.props.params.blkId + num;
@@ -151,15 +151,17 @@ class NCBlkRetrieve extends Component
         
       </div>;
 
+      console.log({isBlkValid});
+
     return (
       <NCExplorerPage
         isLoading={isLoadingTopLevel}
         isDataValid={isBlkValid} 
         isDataEmpty={isBlkEmpty}
         
-        loadingStr={"Loading Block Details"}
-        invalidDataStr={"Server error. Block structure invalid."}
-        emptyDataStr={"No block found for descriptor: " + desc + "."}
+        loadingStr={MSG.Block.LOADING}
+        invalidDataStr={MSG.Block.INVALID_DATA}
+        emptyDataStr={MSG.Block.EMPTY_DATA + desc + "."}
         
         page={page}/>
     );

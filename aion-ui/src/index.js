@@ -30,7 +30,7 @@ import ChartRetrieve from 'components/views/NCchart';
 import DwnRetrieve from 'components/views/NCDwnRetrieve';
 
 import TermsRetrieve from 'components/views/TermsRetrieve';
-import ContactsRetrieve from 'components/views/ContactsRetrieve';
+import ContactsRetrieve from 'components/views/NCContactsRetrieve';
 
 //this url is to facilitate universal search for blocks/transaction/token/accounts
 import SearchRetrieve from 'components/views/NCSearchRetrieve';
@@ -58,6 +58,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 // disable focus border accessibility feature (blueprintjs)
 FocusStyleManager.onlyShowFocusOnTabs();
+
 
 //console.log('1st index!');
 

@@ -23,7 +23,8 @@ export default class NCActiveAddressChart extends Component
                 enabled:false,
             },
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
+                backgroundColor: '#000000',
             },
             time: {
                 useUTC: false,

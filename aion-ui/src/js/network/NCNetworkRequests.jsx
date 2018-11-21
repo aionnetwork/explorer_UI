@@ -153,7 +153,7 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
     if (!nc_isPositiveInteger(request) && !nc_isValidEntity(request)) {
       store.dispatch(StoreBlkRetrieve.SetTopLevel({
         blk: {
-          content: []
+          content: {}
         },
         txn: {}
       }));
@@ -935,7 +935,7 @@ export const setDashboardData = (response) => {
     let data = response.content[0];
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
     store.dispatch(StoreTxnRt.SetAll(data.transactions));
-    store.dispatch(StoreKpis.SetAll(data.metrics));
+    //store.dispatch(StoreKpis.SetAll(data.metrics));
   }
 }
 
@@ -961,6 +961,23 @@ export const getDashboardData = () => {
     console.log(error);
     
   });
+}
+export const setKPIData = (response) => {
+  //const isResponseEmpty = nc_isObjectEmpty(response);
+  if(response.content.length > 0) {
+    let data = response.content[0];
+    
+    store.dispatch(StoreKpis.SetAll(data.metrics));
+  }
+}
+
+export const getKPIData = () => {
+  
+    // get data for liveness indicator in the header
+    network.connectSocket((response) => {
+      setKPIData(response);
+    });
+  
 }
 
 /*

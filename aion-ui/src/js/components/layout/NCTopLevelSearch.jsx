@@ -103,7 +103,7 @@ export default class NCTopLevelSearch extends Component
         );
 
     return (
-      <div className="NCTopLevelSearch">
+      <div className={"NCTopLevelSearch "+this.props.className}>
         <InputGroup
           name="search"
           className="search-bar"

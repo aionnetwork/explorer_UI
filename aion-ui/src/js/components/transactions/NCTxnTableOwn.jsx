@@ -182,7 +182,7 @@ export default class NCTxnTableOwn extends Component
         onPageCallback={onPageCallback}
         isLoading={isLoading}
         isPaginated={isPaginated}
-        entityName={"blocks"}
+        entityName={"transactions"}
         generateTableContent={this.generateTableContent}
         columnDescriptor={this.columnDescriptor}
         isLatest={isLatest}/>

@@ -32,6 +32,7 @@ class NCLayout extends Component {
 
   constructor(props) {
     super(props);
+    this.darkMode = true;
 
     this.connectionMenu = 
     <Button 
@@ -102,7 +103,7 @@ class NCLayout extends Component {
   }
 
   componentWillMount() {
-    network.getDashboardData();
+    network.getKPIData();
   }
 
   componentWillUnmount() {
@@ -110,7 +111,7 @@ class NCLayout extends Component {
   };
 
  showContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
-        console.log('Hey!');// must prevent default to cancel parent's context menu
+        //console.log('Hey!');// must prevent default to cancel parent's context menu
         e.preventDefault();
         // invoke static API, getting coordinates from mouse event
         ContextMenu.show(
@@ -291,7 +292,7 @@ class NCLayout extends Component {
     ReactGA.pageview(pathname);
 
     let kpi = this.props.kpi;
-    {/*let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
+    {let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
     let feedback ={padding:'10px', margin:'10px'}
     const permissionsMenu = (
             <Popover
@@ -335,7 +336,7 @@ class NCLayout extends Component {
             </Popover>
         );
     
-    */}
+    }
     // wait on the response from KPI list to load application
     if (NCNETWORK_REQUESTS_ENABLED && kpi.momentUpdated == null) { 
       return (
@@ -404,9 +405,9 @@ class NCLayout extends Component {
             </div>
 
             <div className="pt-navbar-group navbar-group-right">
-              <div className="hide">
-              <NCTopLevelSearch />
-              </div>
+              
+              <NCTopLevelSearch className="hide"/>
+              
               <span className="pt-navbar-divider"></span>
               <NCLivenessIndicator 
                 momentEnd={momentEnd}
@@ -441,25 +442,22 @@ class NCLayout extends Component {
               <img className="logo" src="img/logo/aion-icon.svg" alt="logo"/>
             </a>
           </div>  
-          {(false)&&
+          {(true)&&
           <div>
-            <a className="footer-container" target="_blank" href="/#/terms">
+            {/*<a className="footer-container" target="_blank" href="/#/terms">
               <span style={style}  className="text">Terms of use</span>          
               
-            </a>
+            </a>*/}
             
-          </div>
-          }
-           <div>
+          
             <a className="footer-container" target="_blank" href="/#/feedback">
               <span style={style}  className="text">Feedback</span>          
               
             </a>
-            
+           
           </div>
-          <div>
-           <br/>
-          </div>
+        }
+         
         </div>
       </div>
     );

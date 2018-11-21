@@ -349,6 +349,7 @@ export function nc_hexPrefix(input) {
 */
 
 export function nc_isObjectValid(obj) {
+  //console.log(JSON.stringify(obj));
   const isValid = (
     obj && 
     obj.content != null && 

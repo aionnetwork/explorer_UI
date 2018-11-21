@@ -1,6 +1,6 @@
 /* eslint-disable */
 import axios from 'axios';
-import SockJS from 'sockjs-client'
+import SockJS from 'sockjs-client' 
 import Stomp from 'stompjs'
 import { blkListType, tknListType, txnListType, accListType, cntrListType, eventListType } from 'lib/NCEnums';
 import * as mock from 'lib/NCData';
@@ -133,7 +133,7 @@ export const endpoint = {
   token: {
     list: {
       [tknListType['ALL']]: {
-        link: '/dashboard/getTokenList',
+        link: '/dashboard/getTokenListt',
         params: ['page', 'size']
       },
       [tknListType['BY_ACCOUNT']]: {
@@ -237,7 +237,7 @@ export const request = async (endpoint, params,sub_base=false) =>
       //console.log('create endpoint!'+sub_base);
       net = axios.create({
           baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
-          timeout: ms('2min')
+          timeout: 120000
         });
     }
 
@@ -248,12 +248,12 @@ export const request = async (endpoint, params,sub_base=false) =>
         if (response.status == 200 && response.data)
           resolve(response.data);
         else {
-          reject("ERR: Bad API get response 2.");
+          reject("ERR: Bad API get response.");
         }
       })
       .catch((error) => {
         console.log(error);
-        reject("ERR: Bad API get response 1.")
+        reject("ERR: Bad API get response.")
       });
     } else {
       reject("ERR: API not initialized");
@@ -273,8 +273,6 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
         args.params[endpoint.params[i]] = value;
       });
     }
-
-    //console.log('post request!');
 
     
     if (pnet == null && BASE_URL) {

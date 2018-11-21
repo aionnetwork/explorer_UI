@@ -93,11 +93,11 @@ class NCCntrList extends Component
       }
     }
 
-    let emptyDataStr = "No transactions found. Dashboard server loading blocks."; // txnListType.ALL
+    let emptyDataStr = "No Contracts found."; // txnListType.ALL
     switch(listType) 
     {
       case cntrListType.ALL: {
-        emptyDataStr = "No contracts found: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
+        emptyDataStr = "No contracts found for: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
         break;
       }
       case cntrListType.BY_ACCOUNT: {

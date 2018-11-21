@@ -808,7 +808,7 @@ h1, h2, h3, h4, h5 {
 }
 @media (max-width: 800px) {
   .NCTableEnhanced {
-    width: 100%;
+    width: 736px;
   }
 }
 @media (min-width: 800px) and (max-width: 1440px) {
@@ -818,7 +818,7 @@ h1, h2, h3, h4, h5 {
 }
 @media (min-width: 1440px) {
   .NCTableEnhanced {
-    width: 100%px;
+    width: 1376px;
   }
 }
 pre {
@@ -2296,6 +2296,9 @@ pre {
     width: 100%;
     background-color: #fff;
   }
+  .pt-large > .pt-tab {
+    font-size: 10px;
+  }
   .NCFooter > div {
     min-width: 300px !important;
   }
@@ -2308,4 +2311,75 @@ pre {
   span.pt-icon-standard.pt-icon-caret-down.pt-align-right {
     display: inline !important;
   }
+}
+.NCPage {
+  background-color: #000 !important;
+  color: #d1cfcf;
+}
+.NCPage.dark-mode {
+  background-color: #000;
+}
+.NCHeader .row {
+  background-color: #000;
+}
+.NCHeader .row.dark-mode {
+  background-color: #000;
+}
+.pt-navbar {
+  background-color: #000 !important;
+}
+.NCKPIGroup {
+  background-color: #222;
+}
+.pt-card {
+  background-color: #000 !important;
+}
+.pt-menu {
+  color: #d1cfcf;
+  background-color: #333;
+}
+.pt-popover .pt-popover-arrow-fill {
+  fill: #333;
+}
+.block-card {
+  background-color: #111 !important;
+}
+input.pt-input {
+  color: #ccc;
+  background-color: #ccc;
+}
+.NCTableTransactionsRT .header {
+  background-color: #333 !important;
+}
+.NCDarkInput {
+  background-color: #333;
+}
+.bp-table-column-headers {
+  color: #d1cfcf;
+  background-color: #333;
+}
+.NCEntityLabel {
+  color: #d1cfcf;
+  background-color: transparent;
+}
+.NCEntityLabel .text {
+  color: #d1cfcf;
+  background-color: transparent;
+}
+.block-card .NCEntityLabel .text {
+  color: #d1cfcf;
+  background-color: transparent;
+}
+.block-card .NCEntityLabel {
+  background-color: transparent;
+}
+.NCTable .bp-table-cell {
+  color: #d1cfcf;
+  background-color: #333;
+}
+.desc {
+  color: #d1cfcf;
+}
+.NCHeader .row .navbar-btn-active {
+  color: #d1cfcf !important;
 }

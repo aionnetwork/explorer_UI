@@ -16,7 +16,7 @@ import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 //import NCExplorerContactUs from 'components/common/NCExplorerContactUs';
 import * as network from 'network/NCNetworkRequests';
 
-export default class ontactsRetrieve extends Component
+export default class NCContactsRetrieve extends Component
 { 
 
   constructor(props) {
@@ -46,6 +46,7 @@ export default class ontactsRetrieve extends Component
 
   verifyCallback(response) {
        //this.state.recaptcha = response;
+        console.log(response);
         this.setState({recaptcha:response});
    };
 
@@ -60,7 +61,7 @@ export default class ontactsRetrieve extends Component
     
   }
   handleTextChange(event) {
-    console.log('change');
+    //console.log('change');
     this.setState({text : event.target.value});
     
   }
@@ -79,7 +80,8 @@ export default class ontactsRetrieve extends Component
   }
 
   captcha(key){
-      this.setState({recaptcha:response})
+      this.setState({recaptcha:response});
+      //console.log(response);
   }
 
   componentWillMount() {

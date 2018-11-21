@@ -10,11 +10,14 @@ import NCDashboardKPIs from 'components/dashboard/NCDashboardKPIs';
 import NCTxnRealtime from 'components/transactions/NCTxnRealtime';
 import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 
+import * as network from 'network/NCNetworkRequests';
+
 export default class NCDashboard extends Component
 {
   componentDidMount()
   {
     // subscribe for block and transaction streams
+    network.getDashboardData();
   }
 
   componentWillUnmount() 
