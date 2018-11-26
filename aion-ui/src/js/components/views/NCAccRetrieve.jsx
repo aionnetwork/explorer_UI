@@ -206,6 +206,8 @@ class NCAccRetrieve extends Component
     ];
 
     const desc = nc_hexPrefix(store.queryStr);
+
+    console.log('cool:'+isAccValid+' '+isAccEmpty);
     
     const accBalanceSection = <NCExplorerSection 
       className={""}
@@ -214,12 +216,13 @@ class NCAccRetrieve extends Component
       isDataValid={isAccValid}
       isDataEmpty={isAccEmpty} 
 
-      emptyDataTitle={"Account Not Found"}
-      invalidDataTitle={"Account Service Unavailable"}
+
+      emptyDataTitle={MSG.Account.EMPTY_DATA_TITLE}
+      invalidDataTitle={MSG.Account.INVALID_DATA}
       
-      loadingStr={"Loading Account"}
-      invalidDataStr={"Account Service Unavailable. Please try again."} 
-      emptyDataStr={"No Data Available for Account: "+desc}
+      loadingStr={MSG.Account.LOADING}
+      invalidDataStr={MSG.Account.INVALID_DATA} 
+      emptyDataStr={MSG.Account.EMPTY_DATA+desc}
       marginTop={20}
       marginBottom={30}
 
@@ -257,16 +260,9 @@ class NCAccRetrieve extends Component
       isDataValid={true}
       isDataEmpty={isTxnListEmpty} 
       
-      loadingStr={"Loading Transactions"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={
-        <span>No transactions found for this account. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </span>}
+      loadingStr={MSG.Transaction.LOADING}
+      invalidDataStr={MSG.Transaction.INVALID_DATA} 
+      emptyDataStr={MSG.Transaction.EMPTY_DATA_LIST}
       marginTop={40}
 
       content={
@@ -307,16 +303,9 @@ class NCAccRetrieve extends Component
       isDataValid={true}
       isDataEmpty={isBlkListEmpty} 
       
-      loadingStr={"Loading Blocks"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={
-        <span>No blocks mined by this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </span>}
+      loadingStr={MSG.Block.LOADING}
+      invalidDataStr={MSG.Block.INVALID_DATA} 
+      emptyDataStr={MSG.Block.EMPTY_DATA_LIST}
       marginTop={40}
 
       content={
@@ -368,9 +357,9 @@ class NCAccRetrieve extends Component
         isDataValid={true} 
         isDataEmpty={false}
         
-        loadingStr={"Loading Account Details"}
-        invalidDataStr={"Account Service Unavailable. Account data invalid."}
-        emptyDataStr={"No account found for descriptor: " + desc + "."}
+        loadingStr={MSG.Page.LOADING}
+        invalidDataStr={MSG.Page.INVALID_DATA}
+        emptyDataStr={MSG.Page.EMPTY_DATA + desc + "."}
         
         page={page}
 

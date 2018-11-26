@@ -1,17 +1,17 @@
 /* eslint-disable */
 // entity ------------------------------------------------------------
 
-
+//.Account.
 export const Account = {
-  LOADING:"Loading Block Details",
+  LOADING:"Loading Account Details",
   LOADING_LIST:"Loading In Bound Accounts Data",
   LOADING_LIST_OUT:"Loading Out Bound Accounts Data",
   LOADING_LIST_MINER:"Loading Miner List",
   LOADING_LIST_IN:"Loading Accounts Data",
   EMPTY_DATA_TITLE:"Account Not Found",
   EMPTY_DATA:"No Data Available for Account: ",
-  EMPTY_DATA_LIST:"No blocks found. Blockchain server loading blocks.",  
-  INVALID_DATA:"Invalid User Input. Please try again.",
+  EMPTY_DATA_LIST:"No accounts found.",  
+  INVALID_DATA:"Invalid Input. Please try again.",
   INVALID_DATA_LIST_IN:"No inbound account activity in last 24 hours",
   INVALID_DATA_LIST_OUT:"No outbound account activity in last 24 hours",
   INVALID_DATA_LIST_MINER:"Miner list not available."
@@ -46,12 +46,12 @@ export const Token = {
 };
 
 export const Transaction = {
-  LOADING:"Loading Block Details",
-  LOADING_LIST:"Loading Block Data",
-  EMPTY_DATA:"No block found for descriptor: ",
-  EMPTY_DATA_LIST:"No blocks found. Blockchain server loading blocks.",  
-  INVALID_DATA:"Server error. Block structure invalid.",
-  INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
+  LOADING:"Loading Transaction Details",
+  LOADING_LIST:"Loading Transaction Data",
+  EMPTY_DATA:"No Transaction found for descriptor: ",
+  EMPTY_DATA_LIST:"No transactions found.",  
+  INVALID_DATA:"Syntax error: Invalid block structure.",
+  INVALID_DATA_LIST:"Invalid Input. Please try again."
 };
 
 export const Chart = {
@@ -77,5 +77,13 @@ export const Paging = {
   EMPTY_DATA_LIST:"No blocks found. Blockchain server loading blocks.",  
   INVALID_DATA:"Server error. Block structure invalid.",
   INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
+};
+export const Page = {
+  LOADING:"Loading Page Details",
+  LOADING_LIST:"Loading Page Data",
+  EMPTY_DATA:"No data found for descriptor: ",
+  EMPTY_DATA_LIST:"No data found.",  
+  INVALID_DATA:"Syntax error: Invalid block structure.",
+  INVALID_DATA_LIST:"Invalid Input. Please try again."
 };
 

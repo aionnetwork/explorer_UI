@@ -353,7 +353,8 @@ export function nc_isObjectValid(obj) {
   const isValid = (
     obj && 
     obj.content != null && 
-    Array.isArray(obj.content)
+    Array.isArray(obj.content) &&
+    obj.content.length > 1
   );
   return isValid;
 }
