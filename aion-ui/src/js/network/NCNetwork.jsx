@@ -72,6 +72,7 @@ const stripTrailingSlash = (url) => {
 }
 
 const generateBaseUrl = (https, api, e) => {
+  console.log(api);
   let url = "";
   let str = "";
 
