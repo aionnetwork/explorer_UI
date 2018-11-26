@@ -26,6 +26,9 @@ let HOME_URL = null;
   BASE_URL = appConfig.api.base_url;
 }*/
 
+console.log(process.env.NODE_ENV);
+
+
 if (process.env.NODE_ENV !== 'production') {
 
   if (
