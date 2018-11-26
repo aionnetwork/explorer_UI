@@ -395,7 +395,7 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
       request = "0000000000000000000000000000000000000000000000000000000000000000"
     } else if (!nc_isValidEntity(request)) {
       store.dispatch(StoreAccRetrieve.SetTopLevel({
-        content: []
+        content: null
       }));
       return;
     } else {

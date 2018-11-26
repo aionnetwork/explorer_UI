@@ -26,7 +26,7 @@ let HOME_URL = null;
   BASE_URL = appConfig.api.base_url;
 }*/
 
-console.log(process.env.NODE_ENV);
+//console.log(process.env.NODE_ENV);
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -86,7 +86,7 @@ const generateBaseUrl = (https, api, e) => {
   else
     str=api
 
-  //console.log(str);
+  console.log(str);
   url+=stripTrailingSlash(str);
 
   return url;
