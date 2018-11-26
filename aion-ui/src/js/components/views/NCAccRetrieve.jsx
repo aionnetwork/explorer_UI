@@ -20,6 +20,7 @@ import NCNonIdealState from 'components/common/NCNonIdealState';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 
+import * as MSG from 'lib/NCTerms';
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
@@ -164,7 +165,7 @@ class NCAccRetrieve extends Component
   render() {
     const store = this.props.accRetrieve;
     //console.log(JSON.stringify(this.props.params));
-    const tokens = (store.response && store.response.acc.data && store.response.acc.data.content) ? store.response.acc.data.content[0].tokens : [];
+    const tokens = (store.response && store.response.acc.data && store.response.acc.data.content[0]) ? store.response.acc.data.content[0].tokens : [];
     
     const isWeb3 = (store.response) ? store.response.web3 : false;
 

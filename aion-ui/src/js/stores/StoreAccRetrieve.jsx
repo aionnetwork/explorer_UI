@@ -110,7 +110,7 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       _state.isLoadingTopLevel = true; 
       _state.queryStr = action.data.queryStr;
       
-      _state.token = action.data.token;
+      _state.token = [];
 
       _state.response.acc.momentUpdated = null;
       _state.response.blk.momentUpdated = null;
