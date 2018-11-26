@@ -519,7 +519,9 @@
   }
 
   .pt-input{
-    width:50px !important;
+    width: 40px !important;
+    text-align: center;
+    height: 20px;
   }
 
   .table-paging 
@@ -566,7 +568,7 @@
 
 .NCTableWrapper 
 {
-  padding: 0 10px;
+  
 }
 
 // ASSUMPTION: TableWrapper always takes up full width of an embedded component
@@ -576,10 +578,10 @@
     width: @container-width-min - 64px;
   }
   @media (min-width: @container-width-min) and (max-width: @container-width-max) {
-    width: ~"calc(100vw - 64px)";
+    width: 100%;
   }
   @media (min-width: @container-width-max) {
-    width: @container-width-max - 64px;
+    width: 100%;
   }
 }
 
@@ -1308,7 +1310,7 @@ pre
     margin: 0 auto;
     max-width: @container-width-max;
     min-width: @container-width-min;
-    padding: 0 20px;
+    padding: 0 15px;
 
     display: flex;
     flex-wrap: wrap;
@@ -1366,7 +1368,7 @@ pre
       
       box-shadow: 0 0 0 1px @muted-blue;
 
-      margin-right: 15px;
+      margin-right: 5px;
     }
 
     .navbar-group-right
@@ -1486,6 +1488,11 @@ pre
       min-height: @min-page-height;
     }
   }
+  @media screen and (max-width: @container-width-max) {
+    &>.container {
+      max-width: 100%;
+    }
+  }
 }
 
 // ------------------------------------------------------------
@@ -1594,14 +1601,14 @@ pre
     font-size: 13px;
     color: #5C7080;
     font-weight: 400;
-    padding-left: 10px;
+    
     margin-bottom: 20px;
   }
 
 // Entity Details Views
 .NCEntityDetail
 {
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 0;
   overflow: hidden;
 
   .subtitle {
@@ -1708,7 +1715,7 @@ pre
 
 
 .NCExplorerPage {
-  padding: 0 22px 200px 22px;
+  padding: 0 22px 50px 22px;
   .nc-tabular {
 
   }
@@ -1811,7 +1818,7 @@ pre
   .NCSectionTabbed {
     margin-top: 20px;
     .pt-tab-list {
-      padding: 0 10px;
+      
     }
   }
 }

@@ -769,7 +769,9 @@ h1, h2, h3, h4, h5 {
   font-weight: 300;
 }
 .NCPagination .pt-input {
-  width: 50px !important;
+  width: 40px !important;
+  text-align: center;
+  height: 20px;
 }
 .NCPagination .table-paging {
   float: right;
@@ -803,22 +805,19 @@ h1, h2, h3, h4, h5 {
   color: #5c7080;
   font-weight: 300;
 }
-.NCTableWrapper {
-  padding: 0 10px;
-}
-@media (max-width: 800px) {
+@media (max-width: 100px) {
   .NCTableEnhanced {
-    width: 736px;
+    width: 36px;
   }
 }
-@media (min-width: 800px) and (max-width: 1440px) {
+@media (min-width: 100px) and (max-width: 1440px) {
   .NCTableEnhanced {
-    width: calc(100vw - 64px);
+    width: 100%;
   }
 }
 @media (min-width: 1440px) {
   .NCTableEnhanced {
-    width: 1376px;
+    width: 100%;
   }
 }
 pre {
@@ -1342,8 +1341,8 @@ pre {
 .NCHeader .row {
   margin: 0 auto;
   max-width: 1440px;
-  min-width: 800px;
-  padding: 0 20px;
+  min-width: 100px;
+  padding: 0 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1383,7 +1382,7 @@ pre {
 .NCHeader .row .navbar-btn-active {
   color: #106ba3 !important;
   box-shadow: 0 0 0 1px rgba(19, 124, 189, 0.15);
-  margin-right: 15px;
+  margin-right: 5px;
 }
 .NCHeader .row .navbar-btn-active:before {
   color: #106ba3 !important;
@@ -1432,7 +1431,7 @@ pre {
 .NCFooter > div {
   margin: 0 auto;
   max-width: 1440px;
-  min-width: 800px;
+  min-width: 100px;
   margin-top: 5px;
   display: block;
 }
@@ -1457,13 +1456,18 @@ pre {
 .NCPageContent > .container {
   margin: 0 auto;
   max-width: 1440px;
-  min-width: 800px;
+  min-width: 100px;
   padding: 45px 0px 90px 0px;
   min-height: 100vh;
 }
 @media screen and (max-height: 600px) {
   .NCPageContent > .container {
     min-height: 600px;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .NCPageContent > .container {
+    max-width: 100%;
   }
 }
 .NCLivenessIndicator .liveness-btn {
@@ -1528,11 +1532,10 @@ pre {
   font-size: 13px;
   color: #5C7080;
   font-weight: 400;
-  padding-left: 10px;
   margin-bottom: 20px;
 }
 .NCEntityDetail {
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 0;
   overflow: hidden;
 }
 .NCEntityDetail .subtitle {
@@ -1603,7 +1606,7 @@ pre {
   color: #f55656;
 }
 .NCExplorerPage {
-  padding: 0 22px 200px 22px;
+  padding: 0 22px 50px 22px;
 }
 .NCExplorerPage .NCExplorerHead .nav-row {
   margin-top: 15px;
@@ -1683,9 +1686,6 @@ pre {
 }
 .NCExplorerPage .NCSectionTabbed {
   margin-top: 20px;
-}
-.NCExplorerPage .NCSectionTabbed .pt-tab-list {
-  padding: 0 10px;
 }
 .nc-hr {
   margin: 29px 0 26px 0;
@@ -2311,75 +2311,4 @@ pre {
   span.pt-icon-standard.pt-icon-caret-down.pt-align-right {
     display: inline !important;
   }
-}
-.NCPage {
-  background-color: #000 !important;
-  color: #d1cfcf;
-}
-.NCPage.dark-mode {
-  background-color: #000;
-}
-.NCHeader .row {
-  background-color: #000;
-}
-.NCHeader .row.dark-mode {
-  background-color: #000;
-}
-.pt-navbar {
-  background-color: #000 !important;
-}
-.NCKPIGroup {
-  background-color: #222;
-}
-.pt-card {
-  background-color: #000 !important;
-}
-.pt-menu {
-  color: #d1cfcf;
-  background-color: #333;
-}
-.pt-popover .pt-popover-arrow-fill {
-  fill: #333;
-}
-.block-card {
-  background-color: #111 !important;
-}
-input.pt-input {
-  color: #ccc;
-  background-color: #ccc;
-}
-.NCTableTransactionsRT .header {
-  background-color: #333 !important;
-}
-.NCDarkInput {
-  background-color: #333;
-}
-.bp-table-column-headers {
-  color: #d1cfcf;
-  background-color: #333;
-}
-.NCEntityLabel {
-  color: #d1cfcf;
-  background-color: transparent;
-}
-.NCEntityLabel .text {
-  color: #d1cfcf;
-  background-color: transparent;
-}
-.block-card .NCEntityLabel .text {
-  color: #d1cfcf;
-  background-color: transparent;
-}
-.block-card .NCEntityLabel {
-  background-color: transparent;
-}
-.NCTable .bp-table-cell {
-  color: #d1cfcf;
-  background-color: #333;
-}
-.desc {
-  color: #d1cfcf;
-}
-.NCHeader .row .navbar-btn-active {
-  color: #d1cfcf !important;
 }

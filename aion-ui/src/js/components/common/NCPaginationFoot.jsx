@@ -42,7 +42,8 @@ export default class NCPaginationFoot extends Component
     
     return (
       <div className="NCPagination">
-        <div className="row-count">
+        {(totalPages > 1) && (totalElements > 25) &&
+          <div className="row-count">
           <span className="pt-text-muted">
             Page size  :
              <select id="topic-input" 
@@ -57,7 +58,7 @@ export default class NCPaginationFoot extends Component
 
                 
                 }} 
-                     defaultValue="default"   className="pt-input pt-large">
+                     defaultValue="default"   className="pt-input">
                 <option value="25">25</option>
                 <option value="50">50</option>
                 <option value="75">75</option>
@@ -67,6 +68,7 @@ export default class NCPaginationFoot extends Component
               </select>
           </span>
         </div>
+      }
       {
         (totalPages > 1) &&
         <div className="table-paging">

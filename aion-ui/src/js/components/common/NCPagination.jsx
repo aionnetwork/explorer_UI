@@ -43,7 +43,7 @@ export default class NCPagination extends Component
     return (
       <div className="NCPagination">
         <div className="row-count">
-          <span className="pt-text-muted">
+          <span className="pt-text-muted hide">
             {
               "Showing " + entityName + " " + 
               ((pageNumber * pageSize) + 1) + " - " + ((pageNumber * pageSize) + listSize) + 

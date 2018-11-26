@@ -133,7 +133,7 @@ export const endpoint = {
   token: {
     list: {
       [tknListType['ALL']]: {
-        link: '/dashboard/getTokenListt',
+        link: '/dashboard/getTokenList',
         params: ['page', 'size']
       },
       [tknListType['BY_ACCOUNT']]: {
