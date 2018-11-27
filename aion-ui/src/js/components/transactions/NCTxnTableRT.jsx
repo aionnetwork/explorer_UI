@@ -15,7 +15,7 @@ class NCTxnTableRTRow extends Component
     let { entity } = this.props;
     return (
       <div className="table-row body">
-        <div className="column txn-age pt-text-muted">{moment.unix(entity.blockTimestamp).fromNow()} </div>
+        <div className="column txn-age pt-text-muted hide">{moment.unix(entity.blockTimestamp).fromNow()} </div>
         <div className="column txn-block">{entity.value ? nc_numFormatterAionCoin(entity.value, 4, true) : 0}</div>
         <div className="column txn-hash growable">
           <NCEntityLabel
@@ -80,7 +80,7 @@ export default class NCTxnTableRT extends Component
       <PageVisibility onChange={this.handleVisibilityChange}>
         <div className="NCTableFlex NCTableTransactionsRT">
           <div className="table-row header">
-            <div className="column txn-age">Age</div>
+            <div className="column txn-age hide">Age</div>
             <div className="column txn-block">Value</div>
             <div className="column txn-hash growable">Transaction Hash</div>
             <div className="wrapper txn-entityContainer growable">

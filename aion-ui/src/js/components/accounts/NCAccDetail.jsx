@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import React, { Component } from 'react'; 
 import moment from 'moment';
 
 import {BigNumber} from 'bignumber.js';
