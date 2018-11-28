@@ -6,6 +6,7 @@ import { blkListType, tknListType, txnListType, accListType, cntrListType, event
 import * as mock from 'lib/NCData';
 import ms from 'ms';
 import appConfig from '../../config.json';
+import ENV from '../../../env.json';
 
 export const NCNETWORK_REQUESTS_ENABLED = true;
 //export let NETWORK_LIST = [];
@@ -25,9 +26,6 @@ let HOME_URL = null;
   HTTPS_ENABLED = appConfig.api.https_enabled;
   BASE_URL = appConfig.api.base_url;
 }*/
-let a = "%BASE_URL%";
-console.log(process.env);
-console.log(a);
 
 if (process.env.NODE_ENV !== 'production') {
 
@@ -49,19 +47,11 @@ if (process.env.NODE_ENV !== 'production') {
       
 }else{ 
 
-     if (
-  appConfig!=null && 
-  appConfig.api!=null &&
-  appConfig.api.base_url!=null && 
-  appConfig.api.https_enabled!=null) 
-  {
-    // setup the network parameters
-    HTTPS_ENABLED = appConfig.api.https_enabled;
-    BASE_URL = appConfig.api.base_url;
-    HOME_URL =appConfig.site.base_url;
-    NETWORK_LIST = appConfig.network_list['staging'];
-    GA_KEY = appConfig.ga_key;
-  }
+    HTTPS_ENABLED = true;
+    BASE_URL = ENV.BASE_URL;
+    HOME_URL = ENV.HOME_URL;
+    NETWORK_LIST = ENV.NETWORK_LIST;
+    GA_KEY = ENV.GA_KEY;  
 }
 
 export const NC_ENV={

@@ -7,5 +7,6 @@ node_modules/
 .iml
 
 .env
+env.json
 archive/
 build/
