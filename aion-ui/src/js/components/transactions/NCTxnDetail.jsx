@@ -5,6 +5,7 @@ import moment from 'moment';
 import { NCEntity } from 'lib/NCEnums';
 import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntityLabel';
 import NCEntityDetail from 'components/common/NCEntityDetail';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import { nc_isStrEmpty, nc_numFormatter,nc_numPrettify, nc_numFormatterAmp, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
 
@@ -161,7 +162,16 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Txn Logs",
-        value: parsedTxnLog ? <pre className={"nc-resizable"}>{ parsedTxnLog }</pre> : "No Transaction Logs",
+        value: parsedTxnLog ? 
+        <pre className={"nc-resizable"}>
+          <CopyToClipboard text={parsedTxnLog}
+          onCopy={() => this.setState({copied: true})}>
+          <button className="copy">Copy</button>
+          </CopyToClipboard>
+          { parsedTxnLog }
+        </pre> 
+        : 
+        "No Transaction Logs",
       },
       {
         field: "Input Data",

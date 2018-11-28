@@ -21,6 +21,7 @@ import NCNonIdealState from 'components/common/NCNonIdealState';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 
+import * as MSG from 'lib/NCTerms';
 import * as StoreCntrRetrieve from 'stores/StoreCntrRetrieve';
 
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';

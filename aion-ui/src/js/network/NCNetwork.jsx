@@ -48,8 +48,9 @@ if (process.env.NODE_ENV !== 'production') {
 
       
 }else{ 
-
-    console.log("BASE_URL:" +process.env.BASE_URL+" HOME_URL:"+process.env.HOME_URL+"NETWORK_LIST:"+process.env.NETWORK_LIST+"GA_KEY:"+ process.env.GA_KEY);
+  
+    require('dotenv').load();
+    //console.log("BASE_URL:" +process.env.BASE_URL+" HOME_URL:"+process.env.HOME_URL+"NETWORK_LIST:"+process.env.NETWORK_LIST+"GA_KEY:"+ process.env.GA_KEY);
 
     HTTPS_ENABLED = true;//server var process.env.NODE_ENV
     BASE_URL = process.env.BASE_URL;//server var

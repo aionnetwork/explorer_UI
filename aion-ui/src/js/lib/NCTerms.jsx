@@ -62,28 +62,28 @@ export const Chart = {
 };
 
 export const Search = {
-  LOADING:"Loading Block Details",
-  LOADING_LIST:"Loading Block Data",
-  EMPTY_DATA:"No block found for descriptor: ",
-  EMPTY_DATA_LIST:"No blocks found. Blockchain server loading blocks.",  
-  INVALID_DATA:"Server error. Block structure invalid.",
-  INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
+  LOADING:"Searching",
+  LOADING_LIST:"Loading Results",
+  EMPTY_DATA:"No results found for: ",
+  EMPTY_DATA_LIST:"No results found",  
+  INVALID_DATA:"Invalid data",
+  INVALID_DATA_LIST:"Invalid data. Please try again."
 };
 
 export const Paging = {
-  LOADING:"Loading Block Details",
-  LOADING_LIST:"Loading Block Data",
-  EMPTY_DATA:"No block found for descriptor: ",
-  EMPTY_DATA_LIST:"No blocks found. Blockchain server loading blocks.",  
-  INVALID_DATA:"Server error. Block structure invalid.",
-  INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
+  LOADING:"Loading Details",
+  LOADING_LIST:"Loading Data",
+  EMPTY_DATA:"No result found for descriptor: ",
+  EMPTY_DATA_LIST:"No data found.",  
+  INVALID_DATA:"Syntax error. Data structure invalid.",
+  INVALID_DATA_LIST:"Invalid response. Please try again."
 };
 export const Page = {
   LOADING:"Loading Page Details",
   LOADING_LIST:"Loading Page Data",
   EMPTY_DATA:"No data found for descriptor: ",
   EMPTY_DATA_LIST:"No data found.",  
-  INVALID_DATA:"Syntax error: Invalid block structure.",
+  INVALID_DATA:"Syntax error: Invalid data structure.",
   INVALID_DATA_LIST:"Invalid Input. Please try again."
 };
 

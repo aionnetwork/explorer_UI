@@ -27,3 +27,11 @@ This is a sigle page application that consumes the aion explorer api service; Th
    ```
    yarn build
    ```
+## Dashboard Messages
+
+###Loading
+Data is being retrieved from the server
+###Empty
+No data was found for the specified parameters
+###Invalid
+The parameters entered are incorrect 

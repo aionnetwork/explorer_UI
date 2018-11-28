@@ -13,7 +13,7 @@ import NCTxnEventLogTable from 'components/transactions/NCTxnEventLogTable';
 
 import * as StoreTxnRetrieve from 'stores/StoreTxnRetrieve';
 import { Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
-
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import { nc_hexPrefix, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';

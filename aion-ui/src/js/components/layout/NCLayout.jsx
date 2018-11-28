@@ -454,6 +454,21 @@ class NCLayout extends Component {
               <span style={style}  className="text">Feedback</span>          
               
             </a>
+            &nbsp;
+            <a className="footer-container" target="_blank" href="https://aion.network/community/">
+              <span style={style}  className="text">Community</span>          
+              
+            </a>
+            &nbsp;
+            <a className="footer-container" target="_blank" href="https://aion.network/bounty/">
+              <span style={style}  className="text">Bounties & Grants</span>          
+              
+            </a>
+            &nbsp;
+            <a className="footer-container" target="_blank" href="https://aion.network/developers/">
+              <span style={style}  className="text">Developers</span>          
+              
+            </a>
            
           </div>
         }

@@ -26,6 +26,7 @@ import NCHashPowerChart from 'components/charts/NCHashPowerChart';
 //import NCHashPowerByNodeChart from 'components/charts/NCHashPowerByNodeChart';
 
 import * as StoreChartRetrieve from 'stores/StoreChartRetrieve'; 
+import * as MSG from 'lib/NCTerms';
 
 
 import { nc_getChartData, nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
@@ -223,12 +224,10 @@ class NCChartRetrieve extends Component
         isLoading={isLoadingTopLevel}
         isDataValid={true} 
         isDataEmpty={false}
-
-
         
-        loadingStr={"Loading Chart Details"}
-        invalidDataStr={"Server error. Invalid Chart"}
-        emptyDataStr={"No chart found"}
+        loadingStr={MSG.Chart.LOADING}
+        invalidDataStr={MSG.Chart.INVALID_DATA}
+        emptyDataStr={MSG.Chart.EMPTY_DATA}
         
         page={page}/>
     );

@@ -1414,18 +1414,13 @@ pre {
 .NCHeader .row .navbar-group-right .NCTopLevelSearch > .pt-input:focus {
   box-shadow: 0 0 0 1px #137cbd, 0 0 0 2px rgba(19, 124, 189, 0.3), inset 0 1px 1px rgba(16, 22, 26, 0.2);
 }
-@media (max-width: 1130px) {
-  .NCHeader .row .navbar-group-left .title {
-    display: none;
-  }
-}
 .NCFooter {
   bottom: 0;
   left: 0;
   position: absolute;
   width: 100%;
-  height: 90px;
-  background-color: inherit;
+  height: 120px;
+  background-color: #ccc;
   text-align: center;
 }
 .NCFooter > div {
@@ -1457,7 +1452,7 @@ pre {
   margin: 0 auto;
   max-width: 1440px;
   min-width: 100px;
-  padding: 45px 0px 90px 0px;
+  padding: 45px 0px 120px 0px;
   min-height: 100vh;
 }
 @media screen and (max-height: 600px) {
@@ -1998,7 +1993,7 @@ pre {
   height: 35px;
 }
 .NCExplorer .NCExplorer-Container .NCExplorer-Content {
-  padding: 30px 30px 190px 280px;
+  padding: 30px 30px 220px 280px;
   display: flex;
   flex-grow: 1;
   transition: padding 0.3s ease-out !important;
@@ -2008,7 +2003,7 @@ pre {
 }
 @media all and (max-width: 1130px) {
   .NCExplorer .NCExplorer-Container .NCExplorer-Content {
-    padding: 30px 30px 190px 30px;
+    padding: 30px 30px 220px 30px;
   }
 }
 .NCTableFlex .table-row {
@@ -2068,6 +2063,26 @@ pre {
 }
 .txn-toEntity {
   width: 130px;
+}
+@media all and (max-width: 1030px) {
+  .txn-hash {
+    width: 30%;
+  }
+  .txn-block {
+    width: 20%;
+  }
+  .txn-age {
+    width: 125px;
+  }
+  .txn-fromEntity {
+    width: 30% px;
+  }
+  .txn-arrow {
+    width: 10px;
+  }
+  .txn-toEntity {
+    width: 30% px;
+  }
 }
 .NCTableTransactionsRT .table-row {
   border-bottom: 1px solid rgba(16, 22, 26, 0.15);

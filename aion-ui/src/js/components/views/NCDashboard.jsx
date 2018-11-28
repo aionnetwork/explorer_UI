@@ -49,7 +49,7 @@ export default class NCDashboard extends Component
                   className=" pt-button pt-minimal"
                   
                   onClick={() => {hashHistory.push('/transactions');}}
-                  text="View Alll"/> 
+                  text="View All"/> 
               </div>
               <NCTxnRealtime/>
             </div>
