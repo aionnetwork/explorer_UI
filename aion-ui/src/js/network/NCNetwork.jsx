@@ -6,7 +6,7 @@ import { blkListType, tknListType, txnListType, accListType, cntrListType, event
 import * as mock from 'lib/NCData';
 import ms from 'ms';
 import appConfig from '../../config.json';
-import ENV from '../../../env.json';
+import ENV from '../../env.json';
 
 export const NCNETWORK_REQUESTS_ENABLED = true;
 //export let NETWORK_LIST = [];
