@@ -49,14 +49,19 @@ if (process.env.NODE_ENV !== 'production') {
       
 }else{ 
   
-    require('dotenv').load();
-    //console.log("BASE_URL:" +process.env.BASE_URL+" HOME_URL:"+process.env.HOME_URL+"NETWORK_LIST:"+process.env.NETWORK_LIST+"GA_KEY:"+ process.env.GA_KEY);
-
-    HTTPS_ENABLED = true;//server var process.env.NODE_ENV
-    BASE_URL = process.env.BASE_URL;//server var
-    HOME_URL = process.env.HOME_URL;
-    NETWORK_LIST = process.env.NETWORK_LIST;
-    GA_KEY = process.env.GA_KEY;
+     if (
+  appConfig!=null && 
+  appConfig.api!=null &&
+  appConfig.api.base_url!=null && 
+  appConfig.api.https_enabled!=null) 
+  {
+    // setup the network parameters
+    HTTPS_ENABLED = appConfig.api.https_enabled;
+    BASE_URL = appConfig.api.base_url;
+    HOME_URL =appConfig.site.base_url;
+    NETWORK_LIST = appConfig.network_list['staging'];
+    GA_KEY = appConfig.ga_key;
+  }
 }
 
 export const NC_ENV={
