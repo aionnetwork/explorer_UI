@@ -25,9 +25,9 @@ let HOME_URL = null;
   HTTPS_ENABLED = appConfig.api.https_enabled;
   BASE_URL = appConfig.api.base_url;
 }*/
-
+let a = "%BASE_URL%";
 console.log(process.env);
-
+console.log(a);
 
 if (process.env.NODE_ENV !== 'production') {
 
@@ -48,7 +48,7 @@ if (process.env.NODE_ENV !== 'production') {
 
       
 }else{ 
-  
+
      if (
   appConfig!=null && 
   appConfig.api!=null &&
