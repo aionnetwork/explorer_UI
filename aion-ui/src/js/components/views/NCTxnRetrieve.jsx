@@ -18,17 +18,22 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { nc_hexPrefix, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
+
+
 class NCTxnRetrieve extends Component
 {
   constructor(props) {
     super(props);
+    
   }
 
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
+    console.log('componentWillMount');
   }
 
   componentDidMount() {
+    console.log('componentDidMount');
     this.requestTopLevel();
   }
 
@@ -42,8 +47,11 @@ class NCTxnRetrieve extends Component
   }
 
   requestTopLevel = () => {
+    console.log('requestTopLevel');
     network.getTxnRetrieveTopLevel(this.props.params.txnId);
   }
+
+
 
   render() {
     const store = this.props.txnRetrieve;

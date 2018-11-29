@@ -66,7 +66,7 @@ export default class NCTxnEventLogTable extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell truncated={false} wrapText={true} >
+      <Cell truncated={false} wrapText={true} copy={'something coppied'}> 
       name Transfer (index_topic_1 address _from, index_topic_2 address _to, uint256 _value)<br/>
       Topics  [0] 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef<br/>
               [1] 0x000000000000000000000000d2842acffff364b7653a10761e58640d9a3d6201<br/>

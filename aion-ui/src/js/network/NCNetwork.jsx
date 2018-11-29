@@ -42,7 +42,7 @@ if (process.env.NODE_ENV !== 'production') {
     NETWORK_LIST = appConfig.network_list['staging'];
     GA_KEY = appConfig.ga_key;
   }
-  //console.log('dev Mode!');
+  console.log('dev Mode!');
 
       
 }else{ 
@@ -68,7 +68,8 @@ const stripTrailingSlash = (url) => {
 }
 
 const generateBaseUrl = (https, api, e) => {
-  console.log(api);
+  console.log('generateBaseUrl');
+  //console.log(api);
   let url = "";
   let str = "";
 
@@ -225,7 +226,8 @@ export const endpoint = {
 
 export const request = async (endpoint, params,sub_base=false) => 
 {
-  //console.log(JSON.stringify(endpoint));
+  console.log('networkrequestTopLevel');
+  
   return new Promise((resolve, reject) => 
   {
     let args = { params: {} };
@@ -370,6 +372,7 @@ const MOCK_POLL_INTERVAl = 5000; // 5s
 export const connectSocket = (dashboardCallback) => {
   if (NCNETWORK_REQUESTS_ENABLED) {
     // make the real subscribe
+    console.log('generateBaseUrl');
     if (!sock || sock.readyState >= 3) 
     { 
       sock = new SockJS(generateBaseUrl(HTTPS_ENABLED, BASE_URL) + '/dashboard-interface');
@@ -377,10 +380,11 @@ export const connectSocket = (dashboardCallback) => {
       stompClient = Stomp.over(sock);
       stompClient.debug = null;
       stompClient.connect({}, function(frame) {
+        console.log('socket connect');
         stompClient.subscribe('/dashboard/view', (response) => { 
           try {
             const body = JSON.parse(response.body);
-            //console.log('ws: ', body);
+            console.log('socket subscribe');
             dashboardCallback(body) 
           } 
           catch(error) {
@@ -388,6 +392,7 @@ export const connectSocket = (dashboardCallback) => {
           }
           
         });
+        console.log('socket leave');
       });
     }
   } else {
@@ -410,6 +415,26 @@ export function disconnectSocket() {
     stompClient.disconnect()
 }
 
+export function myFunction(request, func) {
+    setInterval(
+      function(){ 
+        
+        const ep = network.endpoint.dashboard;
+        let params = [];
+
+        //console.log(ep);
+        request(ep, params)
+        .then((response) => {
+          setDashboardData(response);
+          func(response)//callback function
+        })
+        .catch((error) => {
+          console.log(error);    
+        });      
+
+      },
+      10000);//10 seconds interval
+}
 // -------------------------------------------------
 // Load App Configuration
 // -------------------------------------------------

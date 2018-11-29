@@ -34,8 +34,8 @@ class NCKPI extends Component
             {
               (value == null) &&
               <div className="error">
-                <span className="pt-icon-large pt-icon-warning-sign icon"></span>
-                <span className="message">Not Available</span>
+                <span className="pt-icon-large pt-icon-time icon"></span>
+                <span className="message">Loading</span>
               </div>
             }
             {

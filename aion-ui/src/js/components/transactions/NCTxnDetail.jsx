@@ -11,11 +11,13 @@ import { nc_isStrEmpty, nc_numFormatter,nc_numPrettify, nc_numFormatterAmp, nc_n
 
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
+console.log('3 index!');
 
 export default class NCTxnDetail extends Component
 {
   constructor(props) {
     super(props);
+    this.cpmessage = "";
   }
 
   parseTxnLog = (txnLog) => {
@@ -50,6 +52,11 @@ export default class NCTxnDetail extends Component
       console.log(e);
     }
     return result;
+  }
+
+  copyNotice = () => {
+    this.cpmessage = "copied";
+    setTimeout(function(){ this.cpmessage = ""; }, 3000);
   }
 
   render() {
@@ -164,6 +171,7 @@ export default class NCTxnDetail extends Component
         field: "Txn Logs",
         value: parsedTxnLog ? 
         <pre className={"nc-resizable"}>
+          {this.cpmessage}
           <CopyToClipboard text={parsedTxnLog}
           onCopy={() => this.setState({copied: true})}>
           <button className="copy">Copy</button>
@@ -177,8 +185,21 @@ export default class NCTxnDetail extends Component
         field: "Input Data",
         value: parsedInputData ? 
                 (entity.toAddr ? 
-                  <pre className={"nc-resizable"}>{ parsedInputData }</pre> : 
-                  <pre className={"nc-resizable"}>{ entity.data }</pre>
+                  <pre className={"nc-resizable"}>
+                  <CopyToClipboard text={parsedInputData}
+                    onCopy={() => this.setState({copied: true})}>
+                    <button className="copy">Copy</button>
+                    </CopyToClipboard>
+                  { parsedInputData }
+                  </pre> 
+                  : 
+                  <pre className={"nc-resizable"}>
+                  <CopyToClipboard text={entity.data}
+                   onCopy={() => this.setState({copied: true})}>
+                  <button className="copy">Copy</button>
+                  </CopyToClipboard>
+                  { entity.data }
+                  </pre>
                 ):
                 "No Input Data",
       },

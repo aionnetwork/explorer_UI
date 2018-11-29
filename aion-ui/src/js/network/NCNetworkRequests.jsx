@@ -30,10 +30,13 @@ import * as StoreChartRetrieve from 'stores/StoreChartRetrieve';
 
 import * as StoreRetrieve from 'stores/StoreRetrieve';
 
+
+
 import {BigNumber} from 'bignumber.js';
 import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
 import { tknListType, txnListType, blkListType, accListType, eventListType } from 'lib/NCEnums';
 
+console.log('networkRequest'); 
 export const PAGE_SIZE = 25;
 
 // network.NCNETWORK_REQUESTS_ENABLED
@@ -306,7 +309,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreTxnRetrieve.GetTopLevel({
     queryStr: queryStr
   }));
-
+    console.log('4 index!');
   //console.log('txn retrieve list top level');
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -974,8 +977,24 @@ export const setKPIData = (response) => {
 export const getKPIData = () => {
   
     // get data for liveness indicator in the header
-    network.connectSocket((response) => {
+    console.log('get kpi');
+    /*network.connectSocket((response) => {
       setKPIData(response);
+    });*/
+    const ep = network.endpoint.dashboard;
+    let params = [];
+
+    network.request(ep,params)
+    .then((response) => {
+      setKPIData(response);
+      network.connectSocket((response) => {
+        setKPIData(response);
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      setKPIData({content:[]});
+      //store.dispatch(StoreTknList.SetTopLevel({}));
     });
   
 }

@@ -26,6 +26,7 @@ import appConfig from '../../../config.json';
 import ReactGA from 'react-ga';
 //ReactGA.initialize(appConfig.ga_key);
 //ReactGA.pageview(window.location.pathname + window.location.search);
+console.log('2 index!');
 ReactGA.initialize(NC_ENV.GA_KEY);
 
 class NCLayout extends Component {
@@ -103,7 +104,15 @@ class NCLayout extends Component {
   }
 
   componentWillMount() {
-    network.getKPIData();
+    console.log('componentWillMount');
+    //network.getKPIData(); 
+    network.getDashboardData();
+    network.getKPIData(); 
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+    //network.getKPIData();
   }
 
   componentWillUnmount() {
@@ -435,7 +444,7 @@ class NCLayout extends Component {
           </div>
           {/*permissionsMenu*/}
         </div>
-        <div className="NCFooter">
+        <div className="NCFooter"> 
           <div>
             <a className="footer-container" rel="noopener" target="_blank" href="https://aion.network">
               <span className="text">Powered By</span>
@@ -447,7 +456,7 @@ class NCLayout extends Component {
             {/*<a className="footer-container" target="_blank" href="/#/terms">
               <span style={style}  className="text">Terms of use</span>          
               
-            </a>*/}
+            </a>*/} 
             
           
             <a className="footer-container" target="_blank" href="/#/feedback">

@@ -9,10 +9,17 @@ export const SetAll = (data) =>
     data: data,
   }
 }
+export const getAll = (data) => 
+{
+  return {
+    type: 'KPI_GET_ALL',
+    data: data,
+  }
+}
 
 let initialState_StoreKPIs = 
 {
-  momentUpdated: null,
+  momentUpdated: moment(),
   data: {
     transactionPerSecond: null,
     peakTransactionsPerBlockInLast24hours: null,
