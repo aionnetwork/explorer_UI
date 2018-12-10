@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import {BigNumber} from 'bignumber.js'
 import moment from "moment";
-import {  Menu, ContextMenu, ContextMenuTarget, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip, MenuDivider } from "@blueprintjs/core";
+import {  FormGroup, Switch, Menu, ContextMenu, ContextMenuTarget, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip, MenuDivider } from "@blueprintjs/core";
 
 import { ncNetwork_pollForKpiList, ncNetwork_pollForStaticInfo } from 'network/NCNetwork';
 
@@ -18,7 +18,7 @@ import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 import { ga_key } from 'lib/NCData';
 //import { disconnectSocket } from 'network/NCNetwork';
-import { NC_ENV, disconnectSocket } from 'network/NCNetwork';
+import { NC_ENV, disconnectSocket, stopInterval, intervalID } from 'network/NCNetwork';
 import * as network from 'network/NCNetworkRequests';
 
 import appConfig from '../../../config.json';
@@ -33,7 +33,7 @@ class NCLayout extends Component {
 
   constructor(props) {
     super(props);
-    this.darkMode = true;
+    this.state = {darkMode : false,};
 
     this.connectionMenu = 
     <Button 
@@ -117,7 +117,8 @@ class NCLayout extends Component {
 
   componentWillUnmount() {
     disconnectSocket();
-  };
+    stopInterval(intervalID);
+  }
 
  showContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
         //console.log('Hey!');// must prevent default to cancel parent's context menu
@@ -140,7 +141,23 @@ class NCLayout extends Component {
         );
         // indicate that context menu is open so we can add a CSS class to this element
         this.setState({ isContextMenuOpen: true });
-    };
+    }
+
+  toggleMode = () => {
+    console.log('this.darkMode');
+    
+    this.setState({ darkMode: !this.state.darkMode })
+    
+    console.log(this.darkMode);
+  }
+
+  darkModeOn = () => {
+    this.darkMode = true;
+  }
+
+  darkModeOff = () => {
+    this.darkMode = false;
+  }
 
   renderMetricMenu = () => {
     return (
@@ -195,10 +212,12 @@ class NCLayout extends Component {
             }}
             text="Transactions per Hour"
           />
+
+
       </Menu>
     );
   }
-
+   
   renderMobileMenu = () => {
 
     
@@ -269,12 +288,51 @@ class NCLayout extends Component {
           }}
           text="Transactions"
         />
-        
-       
+        <hr/>
+                    
+        <MenuItem
+              className="nav-option"
+              iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}              
+              text="Settings">
+
+                
+                <MenuItem
+                  className="nav-option"
+                  iconName={NCEntityInfo[NCEntity.TKN].icon}
+                  onClick={() => {
+                    hashHistory.push('/tokens');
+                  }}
+                  text="Help"
+                />
+                <MenuItem
+                  className="nav-option"
+                  iconName={NCEntityInfo[NCEntity.TKN].icon}
+                  onClick={() => {
+                    hashHistory.push('/tokens');
+                  }}
+                  text="Language"
+                />
+
+                <FormGroup
+    helperText="Helper text with details..."
+    label="Label A"
+    labelFor="text-input"
+    labelInfo="(required)"
+>
+    <Switch checked={this.state.darkMode} label="Dark Mode" onChange={() => {
+      this.toggleMode()
+    }} />
+</FormGroup>
+                
+
+          </MenuItem>
+          
+          
          
       </Menu>
     );
   }
+   
 
   renderConnectionMenu = () => {
     return (
@@ -299,6 +357,8 @@ class NCLayout extends Component {
 
     //ReactGA.pageview(window.location.pathname + window.location.search);
     ReactGA.pageview(pathname);
+
+    console.log(JSON.stringify(this.state));
 
     let kpi = this.props.kpi;
     {let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};

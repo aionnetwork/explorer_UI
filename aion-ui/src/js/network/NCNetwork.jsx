@@ -415,26 +415,34 @@ export function disconnectSocket() {
     stompClient.disconnect()
 }
 
-export function myFunction(request, func) {
-    setInterval(
-      function(){ 
-        
-        const ep = network.endpoint.dashboard;
-        let params = [];
+export let intervalID = null;
 
-        //console.log(ep);
-        request(ep, params)
+export function startInterval(endpoint, params,func) {
+    console.log(JSON.stringify(endpoint));
+    intervalID = setInterval(
+      function(){ 
+
+        console.log('Endpoint in interval: '+JSON.stringify(endpoint));
+        
+        request(endpoint, params)
         .then((response) => {
-          setDashboardData(response);
-          func(response)//callback function
+          //setDashboardData(response);
+          func(response);//callback function
         })
         .catch((error) => {
           console.log(error);    
         });      
 
       },
-      10000);//10 seconds interval
+      10000,endpoint, params,func);//10 seconds interval
 }
+
+
+
+export function stopInterval(Interval) {
+    clearInterval(Interval);
+}
+
 // -------------------------------------------------
 // Load App Configuration
 // -------------------------------------------------

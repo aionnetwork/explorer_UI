@@ -56,10 +56,13 @@ import './css/app.css';
 import './css/custom.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
+
 // disable focus border accessibility feature (blueprintjs)
 FocusStyleManager.onlyShowFocusOnTabs();
 
-console.log('1st index!');
+//console.log('1st index!');
+
+
 
 ReactDOM.render((
   <Provider store={ store }>
