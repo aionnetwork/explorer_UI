@@ -43,7 +43,7 @@ export default class NCPaginationFoot extends Component
     return (
       <div className="NCPagination">
         {(totalPages > 1) && (totalElements > 25) &&
-          <div className="row-count">
+          <div className="row-count hide">
           <span className="pt-text-muted">
             Page size  :
              <select id="topic-input" 
@@ -58,7 +58,7 @@ export default class NCPaginationFoot extends Component
 
                 
                 }} 
-                     defaultValue="default"   className="pt-input">
+                     defaultValue="default"   className="pt-input pt-select-input">
                 <option value="25">25</option>
                 <option value="50">50</option>
                 <option value="75">75</option>
@@ -117,7 +117,7 @@ export default class NCPaginationFoot extends Component
                className="paging-input"
               value = {parseInt(pageNumber+1)}
                />
-          <span className="pt-text-muted context">    
+          <span className="pt-text-muted context hide">    
             { " of " + totalPages}
           </span>
           <Button 

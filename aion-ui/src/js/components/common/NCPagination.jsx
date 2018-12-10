@@ -102,7 +102,7 @@ export default class NCPagination extends Component
                className="paging-input"
               value = {parseInt(pageNumber+1)}
                />
-          <span className="pt-text-muted context">    
+          <span className="pt-text-muted context hide">    
             { " of " + totalPages}
           </span>
           <Button 

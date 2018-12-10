@@ -49,6 +49,7 @@ export const Transaction = {
   LOADING:"Loading Transaction Details",
   LOADING_LIST:"Loading Transaction Data",
   EMPTY_DATA:"No Transaction found for descriptor: ",
+  EMPTY_DATA_TITLE:"No transactions",  
   EMPTY_DATA_LIST:"No transactions found.",  
   INVALID_DATA:"Syntax error: Invalid block structure.",
   INVALID_DATA_LIST:"Invalid Input. Please try again."

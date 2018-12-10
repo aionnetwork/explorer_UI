@@ -773,6 +773,9 @@ h1, h2, h3, h4, h5 {
   text-align: center;
   height: 20px;
 }
+.NCPagination .pt-select-input {
+  height: 24px !important;
+}
 .NCPagination .table-paging {
   float: right;
   display: flex;
@@ -1420,7 +1423,7 @@ pre {
   position: absolute;
   width: 100%;
   height: 120px;
-  background-color: #137cbd26;
+  background-color: #7dbcff35;
   text-align: center;
 }
 .NCFooter > div {
