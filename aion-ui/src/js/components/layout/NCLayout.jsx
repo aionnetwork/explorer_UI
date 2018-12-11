@@ -41,66 +41,29 @@ class NCLayout extends Component {
       text="Explorer"/>;  
 
     //let networkList = appConfig.network_list;
-    let networkList = NC_ENV.NETWORK_LIST;
+    this.networkList = NC_ENV.NETWORK_LIST;
       
     // figure out document title -----------------------------------------------
 
     let documentTitle = "Aion | Explorer";
 
-    if (networkList && networkList[0] && networkList[0].name)
-      documentTitle = "Aion | "+networkList[0].name;
+    if (this.networkList && this.networkList[0] && this.networkList[0].name)
+      documentTitle = "Aion | "+this.networkList[0].name;
 
     document.title = documentTitle; 
 
     // figure out the menu items -----------------------------------------------
 
-    if (networkList && networkList[0].name) {
+    if (this.networkList && this.networkList[0].name) {
       this.connectionMenu = 
         <Button 
           className="navbar-btn-active pt-button pt-minimal"
-          text={networkList[0].name}/>; 
+          text={this.networkList[0].name}/>; 
     }
 
-   this.connectionMenuItemList = [];
+    this.connectionMenuItemList = [];
 
-    if(Array.isArray(networkList) && networkList.length > 1) {
-      let menuItemList = [];
-      networkList.forEach((v, i) => {
-        if (i > 0) {
-          if (v.name && v.url) {
-            menuItemList.push(<MenuItem
-              key={i}
-              className="nav-option"
-              onClick={() => window.open(v.url)}
-              text={v.name}/>);
-          }
-        }
-      });
-
-      if (menuItemList.length > 0) {
-         this.connectionMenuItemList = menuItemList;
-         this.connectionMenu = 
-        <Popover
-          content={
-            <Menu className="NCNavMenu">
-              <MenuDivider title="Switch Network" />
-              { menuItemList }
-            </Menu>
-          }
-          className="hide"
-          interactionKind={PopoverInteractionKind.CLICK}
-          position={Position.BOTTOM_RIGHT}>
-            <Button 
-              className="navbar-btn-active pt-button pt-minimal"
-              rightIconName="pt-icon-caret-down"
-              text={networkList[0].name ? networkList[0].name : "Explorer"}/>  
-        </Popover>
-      }   
-
-
-
-
-    }         
+            
   }
 
   componentWillMount() {
@@ -146,9 +109,9 @@ class NCLayout extends Component {
   toggleMode = () => {
     console.log('this.darkMode');
     
-    this.setState({ darkMode: !this.state.darkMode })
+    this.setState({ darkMode: !this.state.darkMode });
     
-    console.log(this.darkMode);
+    console.log(this.state.darkMode);
   }
 
   darkModeOn = () => {
@@ -288,44 +251,7 @@ class NCLayout extends Component {
           }}
           text="Transactions"
         />
-        <hr/>
-                    
-        <MenuItem
-              className="nav-option"
-              iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}              
-              text="Settings">
-
-                
-                <MenuItem
-                  className="nav-option"
-                  iconName={NCEntityInfo[NCEntity.TKN].icon}
-                  onClick={() => {
-                    hashHistory.push('/tokens');
-                  }}
-                  text="Help"
-                />
-                <MenuItem
-                  className="nav-option"
-                  iconName={NCEntityInfo[NCEntity.TKN].icon}
-                  onClick={() => {
-                    hashHistory.push('/tokens');
-                  }}
-                  text="Language"
-                />
-
-                <FormGroup
-    helperText="Helper text with details..."
-    label="Label A"
-    labelFor="text-input"
-    labelInfo="(required)"
->
-    <Switch checked={this.state.darkMode} label="Dark Mode" onChange={() => {
-      this.toggleMode()
-    }} />
-</FormGroup>
-                
-
-          </MenuItem>
+        
           
           
          
@@ -334,22 +260,69 @@ class NCLayout extends Component {
   }
    
 
-  renderConnectionMenu = () => {
-    return (
-      <Menu className="NCNavMenu">
-        <MenuDivider title="Switch Network" />
-        <MenuItem
-          className="nav-option"
-          onClick={() => window.open("https://mainnet.aion.network")}
-          text="Mainnet Kilimanjaro"/>
-        <MenuItem
-          className="nav-option"
-          onClick={() => window.open("https://testnet2.aion.network")}
-          text="Testnet Ascent"/>
+  renderConnectionMenu = (networkList) => {if(Array.isArray(networkList) && networkList.length > 1) {
+      let menuItemList = [];
+      networkList.forEach((v, i) => {
+        if (i > 0) {
+          if (v.name && v.url) {
+            menuItemList.push(<MenuItem
+              key={i}
+              className="nav-option"
+              onClick={() => window.open(v.url)}
+              text={v.name}/>);
+          }
+        }
+      });
 
-      </Menu>
-    );
-  }
+      if (menuItemList.length > 0) {
+         this.connectionMenuItemList = menuItemList;
+         this.connectionMenu = 
+        <Popover
+          content={
+            <Menu className="NCNavMenu">
+              <MenuDivider title="Switch Network" />
+              { menuItemList }
+
+              <MenuDivider title="Explorer Settings" />
+
+        <MenuItem
+              className="nav-option"
+              iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}              
+              text="Language">
+
+                <MenuItem
+                  className="nav-option"
+                  
+                  text="Coming soon"
+                />
+                
+                                             
+
+          </MenuItem>
+          
+          <FormGroup>
+            <Switch checked={this.state.darkMode} label="Dark Mode" onChange={() => {
+                this.toggleMode();
+            }} />
+            
+          </FormGroup>
+          
+            </Menu>
+          }
+          className="hide"
+          interactionKind={PopoverInteractionKind.CLICK}
+          position={Position.BOTTOM_RIGHT}>
+            <Button 
+              className="navbar-btn-active pt-button pt-minimal"
+              rightIconName="pt-icon-caret-down"
+              text={networkList[0].name ? networkList[0].name : "Explorer"}/>  
+        </Popover>
+      }   
+
+
+
+
+    } }
 
   render() 
   {
@@ -363,49 +336,12 @@ class NCLayout extends Component {
     let kpi = this.props.kpi;
     {let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
     let feedback ={padding:'10px', margin:'10px'}
-    const permissionsMenu = (
-            <Popover
-                content={<div style={feedback} >
-                    Please leave a feedback!
-                   <br/><select defaultValue={"Choose an item..."} className={'pt-input'} style={feedback}>
-                    
-                    <option value="Block">Block</option>
-                    <option value="Transaction">Transaction</option>
-                    <option value="Analytics">Analytics</option>
-                    <option value="UI/UX">UI/UX</option>
-                    <option value="Token">Account</option>
-                    <option value="contract">Contract</option>
-                    <option value="General">General</option>
-                 </select>
-                 
-                 <br/><br/>
-                 <select className={'pt-input'} style={feedback}>
-                    
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                </select>
-
-                
-                 <InputGroup
-                    disabled={false}
-                    style={feedback}
-                    value={"Message"}
-                />
-                </div>
-                
-
-                }
-
-                position={Position.TOP_RIGHT}>
-                <Button style = { css } className={" "} iconName={"envelope"}>
-                    Feedback
-                </Button>
-            </Popover>
-        );
+    
     
     }
+
+    this.renderConnectionMenu(this.networkList)
+
     // wait on the response from KPI list to load application
     if (NCNETWORK_REQUESTS_ENABLED && kpi.momentUpdated == null) { 
       return (
@@ -430,10 +366,12 @@ class NCLayout extends Component {
                 BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(latestBlockNumber)) : 0;
     let lastUpdated = kpi.momentUpdated;
 
+    let darkmode = (this.state.darkMode)?'darkMode ':'';
+
     let style = {fontSize:'9px'}
 
     return (
-      <div className="NCPage">
+      <div className={darkmode + " NCPage"}>
         <div className="NCHeader pt-navbar">
           <div className="row">
             
@@ -487,6 +425,7 @@ class NCLayout extends Component {
               
               {this.connectionMenu }
               {this.renderMobileMenu()}
+
               
             </div>
 

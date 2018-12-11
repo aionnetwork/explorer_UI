@@ -2336,3 +2336,78 @@ pre {
     display: inline !important;
   }
 }
+.darkMode {
+  background-color: #000 !important;
+  color: #d1cfcf;
+}
+.darkMode .NCPage {
+  background-color: #000 !important;
+  color: #d1cfcf;
+}
+.darkMode .NCPage.dark-mode {
+  background-color: #000;
+}
+.darkMode .NCHeader .row {
+  background-color: #000;
+}
+.darkMode .NCHeader .row.dark-mode {
+  background-color: #000;
+}
+.darkMode .pt-navbar {
+  background-color: #000 !important;
+}
+.darkMode .NCKPIGroup {
+  background-color: #222;
+}
+.darkMode .pt-card {
+  background-color: #182026 !important;
+}
+.darkMode .pt-menu {
+  color: #d1cfcf;
+  background-color: #333;
+}
+.darkMode .pt-popover .pt-popover-arrow-fill {
+  fill: #333;
+}
+.darkMode .block-card {
+  background-color: #111 !important;
+}
+.darkMode input.pt-input {
+  color: #ccc;
+  background-color: #ccc;
+}
+.darkMode .NCTableTransactionsRT .header {
+  background-color: #333 !important;
+}
+.darkMode .NCDarkInput {
+  background-color: #333;
+}
+.darkMode .bp-table-column-headers {
+  color: #d1cfcf;
+  background-color: #333;
+}
+.darkMode .NCEntityLabel {
+  color: #d1cfcf;
+  background-color: transparent;
+}
+.darkMode .NCEntityLabel .text {
+  color: #d1cfcf;
+  background-color: transparent;
+}
+.darkMode .block-card .NCEntityLabel .text {
+  color: #d1cfcf;
+  background-color: transparent;
+}
+.darkMode .block-card .NCEntityLabel {
+  background-color: transparent;
+}
+.darkMode .NCTable .bp-table-cell {
+  color: #d1cfcf;
+  background-color: #333;
+}
+.darkMode .desc {
+  color: #d1cfcf;
+}
+.darkMode .NCHeader .row .navbar-btn-active {
+  color: #d1cfcf !important;
+}

@@ -35,3 +35,12 @@ Data is being retrieved from the server
 No data was found for the specified parameters
 ###Invalid
 The parameters entered are incorrect 
+
+#Version
+## 2.0.1
+### feedback form
+### mobile responsive
+### footer
+### improved messaging
+### easy copy (rightclick)
+### dark mode
