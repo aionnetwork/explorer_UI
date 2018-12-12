@@ -42,7 +42,7 @@ if (process.env.NODE_ENV !== 'production') {
     NETWORK_LIST = appConfig.network_list['staging'];
     GA_KEY = appConfig.ga_key;
   }
-  console.log('dev Mode!');
+  //console.log('dev Mode!');
 
       
 }else{ 
@@ -68,7 +68,7 @@ const stripTrailingSlash = (url) => {
 }
 
 const generateBaseUrl = (https, api, e) => {
-  console.log('generateBaseUrl');
+  //console.log('generateBaseUrl');
   //console.log(api);
   let url = "";
   let str = "";
@@ -84,7 +84,7 @@ const generateBaseUrl = (https, api, e) => {
   else
     str=api
 
-  console.log(str);
+  //console.log(str);
   url+=stripTrailingSlash(str);
 
   return url;
@@ -226,7 +226,7 @@ export const endpoint = {
 
 export const request = async (endpoint, params,sub_base=false) => 
 {
-  console.log('networkrequestTopLevel');
+  //console.log('networkrequestTopLevel');
   
   return new Promise((resolve, reject) => 
   {
@@ -280,7 +280,7 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
 
     
     if (pnet == null && BASE_URL) {
-      console.log('create post endpoint!'+sub_base);
+      //console.log('create post endpoint!'+sub_base);
       pnet = axios.create({
           baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
           timeout: ms('2min')
@@ -288,13 +288,13 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
     }
 
     if (pnet) {
-      console.log('post');
+      //console.log('post');
       pnet.post(endpoint.link, args)
       .then((response) => {
         
         if (response.status == 200 && response.data){
           resolve(response.data);
-          console.log('post success');
+          //console.log('post success');
         }else {
           console.log('error');
           reject("ERR: Bad API post response.");
@@ -372,7 +372,7 @@ const MOCK_POLL_INTERVAl = 5000; // 5s
 export const connectSocket = (dashboardCallback) => {
   if (NCNETWORK_REQUESTS_ENABLED) {
     // make the real subscribe
-    console.log('generateBaseUrl');
+    //console.log('generateBaseUrl');
     if (!sock || sock.readyState >= 3) 
     { 
       sock = new SockJS(generateBaseUrl(HTTPS_ENABLED, BASE_URL) + '/dashboard-interface');
@@ -380,11 +380,11 @@ export const connectSocket = (dashboardCallback) => {
       stompClient = Stomp.over(sock);
       stompClient.debug = null;
       stompClient.connect({}, function(frame) {
-        console.log('socket connect');
+        //console.log('socket connect');
         stompClient.subscribe('/dashboard/view', (response) => { 
           try {
             const body = JSON.parse(response.body);
-            console.log('socket subscribe');
+            //console.log('socket subscribe');
             dashboardCallback(body) 
           } 
           catch(error) {
@@ -392,7 +392,7 @@ export const connectSocket = (dashboardCallback) => {
           }
           
         });
-        console.log('socket leave');
+        //console.log('socket leave');
       });
     }
   } else {
@@ -418,11 +418,11 @@ export function disconnectSocket() {
 export let intervalID = null;
 
 export function startInterval(endpoint, params,func) {
-    console.log(JSON.stringify(endpoint));
+    //console.log(JSON.stringify(endpoint));
     intervalID = setInterval(
       function(){ 
 
-        console.log('Endpoint in interval: '+JSON.stringify(endpoint));
+        //console.log('Endpoint in interval: '+JSON.stringify(endpoint));
         
         request(endpoint, params)
         .then((response) => {

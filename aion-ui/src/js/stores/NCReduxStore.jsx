@@ -2,6 +2,7 @@
 import { createStore, combineReducers } from 'redux';
 
 import { reducer_kpis } from 'stores/StoreKpis';
+import { reducer_dark } from 'stores/StoreDark';
 
 import { reducer_blkRt } from 'stores/StoreBlkRt';
 import { reducer_blkList } from 'stores/StoreBlkList';
@@ -28,6 +29,7 @@ import { reducer_Retrieve } from 'stores/StoreRetrieve';
 export const store = createStore(combineReducers(
 {
   kpi: reducer_kpis,
+  dark: reducer_dark,
 
   blkRt: reducer_blkRt,
   blkList: reducer_blkList,

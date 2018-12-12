@@ -8,6 +8,7 @@ import * as mock from 'lib/NCData';
  import * as fileDownload from 'js-file-download';
 
 import * as StoreKpis from 'stores/StoreKpis';
+import * as StoreDark from 'stores/StoreDark';
 
 import * as StoreBlkRt from 'stores/StoreBlkRt';
 import * as StoreBlkList from 'stores/StoreBlkList';
@@ -36,7 +37,7 @@ import {BigNumber} from 'bignumber.js';
 import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
 import { tknListType, txnListType, blkListType, accListType, eventListType } from 'lib/NCEnums';
 
-console.log('networkRequest'); 
+//console.log('networkRequest'); 
 export const PAGE_SIZE = 25;
 
 // network.NCNETWORK_REQUESTS_ENABLED
@@ -930,10 +931,17 @@ export const getCntrRetrieveTknList = (queryStr, pageNumber) => {
 // Dashboard 
 // ========================================================
 
+//activate dark-mode
+export const setDarkMode = (isdark) => {
+  store.dispatch(StoreDark.SetAll(isdark));
+}
+
+
 // using pub-sub to subscribe to data updates from webserver
 // function to update stores upon receipt of published data
 export const setDashboardData = (response) => {
   const isResponseEmpty = nc_isObjectEmpty(response);
+  
   if(!isResponseEmpty) {
     let data = response.content[0];
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
@@ -941,6 +949,7 @@ export const setDashboardData = (response) => {
     //store.dispatch(StoreKpis.SetAll(data.metrics));
   }
 }
+
 
 export const getDashboardData = () => {
   const ep = network.endpoint.dashboard;
@@ -968,7 +977,7 @@ export const getDashboardData = () => {
 export const setKPIData = (response) => {
   //const isResponseEmpty = nc_isObjectEmpty(response);
 
-  console.log('kpi');
+  //console.log('kpi');
   if(response.content.length > 0) {
     let data = response.content[0];
     
@@ -979,7 +988,7 @@ export const setKPIData = (response) => {
 export const getKPIData = () => {
   
     // get data for liveness indicator in the header
-    console.log('get kpi');
+    //console.log('get kpi');
     /*network.connectSocket((response) => {
       setKPIData(response);
     });*/

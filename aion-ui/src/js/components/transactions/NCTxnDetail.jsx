@@ -11,7 +11,7 @@ import { nc_isStrEmpty, nc_numFormatter,nc_numPrettify, nc_numFormatterAmp, nc_n
 
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
-console.log('3 index!');
+//console.log('3 index!');
 
 export default class NCTxnDetail extends Component
 {

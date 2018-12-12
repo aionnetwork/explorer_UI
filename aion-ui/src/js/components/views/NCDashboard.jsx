@@ -21,7 +21,7 @@ export default class NCDashboard extends Component
   }
 
  componentWillMount() {
-    console.log('componentWillMount');
+    //console.log('componentWillMount');
     //network.getKPIData(); 
     //network.getDashboardData();
   }

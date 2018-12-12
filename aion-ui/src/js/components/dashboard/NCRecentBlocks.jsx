@@ -110,7 +110,7 @@ class NCRecentBlocks extends Component
   render() {
     this.targetBlockTime = this.props.kpi.data.targetBlockTime != null ? this.props.kpi.data.targetBlockTime : DEFAULT_TARGET_BLOCK_TIME;
     const momentUpdated = this.props.blkRt.momentUpdated;
-
+    //console.log(JSON.stringify(this.props))
     if (momentUpdated == null || this.clippedList == null) {
       return (
         <NCLoading title={"Loading Block Stream"} marginTop={100} marginBottom={0}/>
@@ -142,7 +142,7 @@ class NCRecentBlocks extends Component
           <span className="block-bridge"/>
           <span className="block-bridged-dotted"/>
           <div className="NCCardBlock next-block-container">
-            <img  className="block-parent" src="img/block/block-indigo.svg"/>
+            <img  className="block-parent" src={(this.props.darkMode.data) ? "img/block/dark-block-indigo.svg" : "img/block/block-indigo.svg"}/>
             <div className="block-card">
               <div className="block-number">
                 <span className="subtitle pt-text-muted">Block #</span>
@@ -181,5 +181,6 @@ export default connect((state) => {
   return ({
     blkRt: state.blkRt,
     kpi: state.kpi,
+    darkMode: state.dark,
   })
 })(NCRecentBlocks);

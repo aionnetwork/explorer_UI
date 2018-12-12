@@ -26,7 +26,7 @@ import appConfig from '../../../config.json';
 import ReactGA from 'react-ga';
 //ReactGA.initialize(appConfig.ga_key);
 //ReactGA.pageview(window.location.pathname + window.location.search);
-console.log('2 index!');
+//console.log('2 index!');
 ReactGA.initialize(NC_ENV.GA_KEY);
 
 class NCLayout extends Component {
@@ -67,14 +67,14 @@ class NCLayout extends Component {
   }
 
   componentWillMount() {
-    console.log('componentWillMount');
+    //console.log('componentWillMount');
     //network.getKPIData(); 
     network.getDashboardData();
     network.getKPIData(); 
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    //console.log('componentDidMount');
     //network.getKPIData();
   }
 
@@ -107,11 +107,12 @@ class NCLayout extends Component {
     }
 
   toggleMode = () => {
-    console.log('this.darkMode');
-    
+    //console.log('this.darkMode');
+
+    network.setDarkMode(!this.state.darkMode);
     this.setState({ darkMode: !this.state.darkMode });
     
-    console.log(this.state.darkMode);
+    //console.log(this.state.darkMode);
   }
 
   darkModeOn = () => {
@@ -331,7 +332,7 @@ class NCLayout extends Component {
     //ReactGA.pageview(window.location.pathname + window.location.search);
     ReactGA.pageview(pathname);
 
-    console.log(JSON.stringify(this.state));
+    //console.log(JSON.stringify(this.state));
 
     let kpi = this.props.kpi;
     {let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
