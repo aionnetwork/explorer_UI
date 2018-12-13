@@ -492,7 +492,7 @@ export function nc_decimalPrettify(num){
   if(a[1]){
     b = nc_numPrettify(a[0]);
   }else{
-    return num
+    return nc_numPrettify(num);
   }
   return b + '.' + a[1];
 }
