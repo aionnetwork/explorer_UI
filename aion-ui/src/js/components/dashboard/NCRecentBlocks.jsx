@@ -128,13 +128,15 @@ class NCRecentBlocks extends Component
     }
 
     const cards = this.clippedList.map((block, i) => (
-      <NCCardBlock key={block.blockNumber} block={block}/>
+      <NCCardBlock key={block.blockNumber} block={block} darkMode={this.props.darkMode}/>
     ));
 
     const nextTimeRemaining = this.state.nextBlockTimeRemaining;
 
     let nextBlockNumber = (this.clippedList[0] != null && this.clippedList[0].blockNumber != null) ?
                           this.clippedList[0].blockNumber + 1 : "Undefined";
+
+    //console.log('blocks mode:'+this.props.darkMode.data);
 
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>

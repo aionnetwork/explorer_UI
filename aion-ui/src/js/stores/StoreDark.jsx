@@ -9,10 +9,11 @@ export const SetAll = (isdark) =>
     data: isdark}
 }
 
+let default_mode = JSON.parse(localStorage.getItem('d_mode'));
 
 let initialState_StoreDark = 
 {
-  data: false,
+  data: default_mode,
 }
 
 export function reducer_dark (state = initialState_StoreDark, action) 
@@ -21,10 +22,14 @@ export function reducer_dark (state = initialState_StoreDark, action)
   {
     case 'DARK_MODE':
     {
+      
       let _state = Object.assign({}, state);
       console.log('dark mode');
-      _state.data = action.data;
-      
+      //let val = localStorage.getItem('mode');
+      if(action.data!==null){ 
+        _state.data = action.data;
+      }
+
       return _state;
     }
     default: 

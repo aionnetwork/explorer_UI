@@ -45,7 +45,8 @@ class NCChartRetrieve extends Component
     this.cLoad=true;
     this.type = 'logarithmic';
     this.state={
-      type: 'linear'
+      type: 'linear',
+      darkMode:false
     };
   }
 
@@ -58,6 +59,7 @@ class NCChartRetrieve extends Component
 
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
+    localStorage.getItem('d_mode') && this.setState({darkMode:JSON.parse(localStorage.getItem('d_mode'))});
   }
 
   componentDidMount() {
@@ -196,8 +198,8 @@ class NCChartRetrieve extends Component
       }
     ];
 
+    let mode = (this.state.darkMode) ? '#000' : '#fff';
     
-
     const page =
       <div> 
         <NCExplorerHead
@@ -215,7 +217,7 @@ class NCChartRetrieve extends Component
 
 
         {/*this is where we add new props to the chart*/}
-        {React.cloneElement(this.chartData.chart, {data: data, type: this.state.type})}   
+        {React.cloneElement(this.chartData.chart, {data: data, type: this.state.type, mode:mode})}   
        
       </div>;
 
@@ -237,6 +239,7 @@ class NCChartRetrieve extends Component
 export default connect((state) => {
   return ({
     chartRetrieve: state.chartRetrieve,
+    darkMode: state.dark,
   })
 })(NCChartRetrieve);
 

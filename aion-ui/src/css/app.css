@@ -2354,7 +2354,7 @@ pre {
   background-color: #000;
 }
 .darkMode .pt-navbar {
-  background-color: #000 !important;
+  background-color: #010101 !important;
 }
 .darkMode .NCKPIGroup {
   background-color: #222;
@@ -2364,7 +2364,7 @@ pre {
 }
 .darkMode .pt-menu {
   color: #d1cfcf;
-  background-color: #333;
+  background: #333 !important;
 }
 .darkMode .pt-popover .pt-popover-arrow-fill {
   fill: #333;
@@ -2410,4 +2410,7 @@ pre {
 }
 .darkMode .NCHeader .row .navbar-btn-active {
   color: #d1cfcf !important;
+}
+.darkMode .NCFooter {
+  background-color: #333 !important;
 }

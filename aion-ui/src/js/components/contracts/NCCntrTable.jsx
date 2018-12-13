@@ -221,7 +221,7 @@ export default class NCCntrTable extends Component
   
   render() {
     const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
-    
+    //console.log('data'+isPaginated);
     return (
       <NCTableReactPaginated
         data={data}

@@ -33,7 +33,10 @@ class NCLayout extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {darkMode : false,};
+
+    
+      this.state = {darkMode : false,};
+    
 
     this.connectionMenu = 
     <Button 
@@ -69,13 +72,16 @@ class NCLayout extends Component {
   componentWillMount() {
     //console.log('componentWillMount');
     //network.getKPIData(); 
+    localStorage.getItem('d_mode') && this.setState({darkMode:JSON.parse(localStorage.getItem('d_mode'))});
     network.getDashboardData();
     network.getKPIData(); 
   }
 
   componentDidMount() {
-    //console.log('componentDidMount');
-    //network.getKPIData();
+    
+    //this.mode = (this.state.darkMode!==false) ? "darkMode" : "";
+    //this.mode = (this.props.darkMode.data) ? "darkMode" : "";  
+    this.d_mode_class = (this.props.darkMode.data) ? "darkMode" : "";   
   }
 
   componentWillUnmount() {
@@ -83,12 +89,12 @@ class NCLayout extends Component {
     stopInterval(intervalID);
   }
 
- showContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+/* showContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
         //console.log('Hey!');// must prevent default to cancel parent's context menu
         e.preventDefault();
         // invoke static API, getting coordinates from mouse event
         ContextMenu.show(
-            <Menu>
+            <Menu className={this.d_mode_class}>
                 <MenuItem
           className="nav-option"
           target="blank"
@@ -105,11 +111,12 @@ class NCLayout extends Component {
         // indicate that context menu is open so we can add a CSS class to this element
         this.setState({ isContextMenuOpen: true });
     }
-
+*/
   toggleMode = () => {
-    //console.log('this.darkMode');
-
+    
+    localStorage.setItem('d_mode', !this.state.darkMode);
     network.setDarkMode(!this.state.darkMode);
+
     this.setState({ darkMode: !this.state.darkMode });
     
     //console.log(this.state.darkMode);
@@ -123,9 +130,9 @@ class NCLayout extends Component {
     this.darkMode = false;
   }
 
-  renderMetricMenu = () => {
+  renderMetricMenu = (mode) => {
     return (
-      <Menu className="NCNavMenu">
+      <Menu className={mode +" NCNavMenu"}>
         <div onContextMenu={this.showContextMenu}><MenuItem
           className="nav-option"
           
@@ -182,12 +189,12 @@ class NCLayout extends Component {
     );
   }
    
-  renderMobileMenu = () => {
+  renderMobileMenu = (mode) => {
 
     
      return(<Popover
           content={
-            <Menu className="NCNavMenu">
+            <Menu className={mode+" NCNavMenu"}>
               <MenuDivider title="Explorer" />
               {this.renderExplorerMenu()} 
               <MenuDivider title="Analytics" />
@@ -207,9 +214,9 @@ class NCLayout extends Component {
         </Popover>);
   }
 
-  renderExplorerMenu = () => {
+  renderExplorerMenu = (mode) => {
     return (
-      <Menu className="NCNavMenu">
+      <Menu className={mode+" NCNavMenu"}>
          <div onContextMenu={this.showContextMenu}><MenuItem
           className="nav-option"
           link='/accounts'
@@ -280,7 +287,7 @@ class NCLayout extends Component {
          this.connectionMenu = 
         <Popover
           content={
-            <Menu className="NCNavMenu">
+            <Menu className={this.d_mode_class+" NCNavMenu"}>
               <MenuDivider title="Switch Network" />
               { menuItemList }
 
@@ -329,6 +336,8 @@ class NCLayout extends Component {
   {
     const pathname = this.props.location.pathname;
 
+    //console.log(this.state.darkMode);
+
     //ReactGA.pageview(window.location.pathname + window.location.search);
     ReactGA.pageview(pathname);
 
@@ -367,14 +376,21 @@ class NCLayout extends Component {
                 BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(latestBlockNumber)) : 0;
     let lastUpdated = kpi.momentUpdated;
 
-    let darkmode = (this.state.darkMode)?'darkMode ':'';
+    
+    //this.props.darkMode
+    
+    //console.log(this.state.darkMode!==false ? "darkMode" : "");
+    let mode = (this.props.darkMode.data) ? "darkMode" : ""; 
+    //console.log(this.props.darkMode.data + " dark_mode" + mode);
 
     let style = {fontSize:'9px'}
 
     return (
-      <div className={darkmode + " NCPage"}>
+      <div className={mode + " NCPage"}>
         <div className="NCHeader pt-navbar">
           <div className="row">
+
+            
             
             <div className="pt-navbar-group navbar-group-left">
               <Link to={"/dashboard"} className="logo">
@@ -384,7 +400,7 @@ class NCLayout extends Component {
               <span className="pt-navbar-divider"></span>              
               <Popover
                 className="hide"
-                content={this.renderExplorerMenu()}
+                content={this.renderExplorerMenu(mode)}
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
                 <Button 
@@ -396,7 +412,7 @@ class NCLayout extends Component {
 
                <Popover
                 className="hide"
-                content={this.renderMetricMenu()} 
+                content={this.renderMetricMenu(mode)} 
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
                 <Button 
@@ -425,7 +441,7 @@ class NCLayout extends Component {
               />
               
               {this.connectionMenu }
-              {this.renderMobileMenu()}
+              {this.renderMobileMenu(mode)}
 
               
             </div>
@@ -491,6 +507,7 @@ class NCLayout extends Component {
 export default connect((state) => {
   return ({
     kpi: state.kpi,
+    darkMode: state.dark,
   })
 })(NCLayout);
 

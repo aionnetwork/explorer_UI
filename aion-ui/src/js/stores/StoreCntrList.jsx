@@ -55,6 +55,7 @@ export function reducer_cntrList (state = initialState_StoreBlkList, action)
       _state.isLoadingTopLevel = false; 
       
       _state.response.content = action.data.content;
+      _state.response.page = action.data.page;
       //_state.response.txnInbound = action.data.txnInbound;
       //_state.response.txnOutbound = action.data.txnOutbound;
       

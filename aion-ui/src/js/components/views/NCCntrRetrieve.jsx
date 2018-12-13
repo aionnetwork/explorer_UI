@@ -203,12 +203,12 @@ class NCCntrRetrieve extends Component
       isDataValid={isAccValid}
       isDataEmpty={isAccEmpty} 
 
-      emptyDataTitle={"Contract Not Found"}
-      invalidDataTitle={"Contract Service Unavailable"}
+      emptyDataTitle={MSG.Contract.EMPTY_DATA_TITLE}
+      invalidDataTitle={MSG.Contract.INVALID_DATA}
       
-      loadingStr={"Loading Contract"}
-      invalidDataStr={"Contract Service Unavailable. Please try again."} 
-      emptyDataStr={"No Data Available for Contract: "+desc}
+      loadingStr={MSG.Contract.LOADING}
+      invalidDataStr={MSG.Contract.INVALID_DATA} 
+      emptyDataStr={MSG.Contract.EMPTY_DATA +" "+desc}
       marginTop={20}
       marginBottom={30}
       /*subtitle={<div className="token-list">

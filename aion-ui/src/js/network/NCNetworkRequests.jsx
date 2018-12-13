@@ -975,9 +975,7 @@ export const getDashboardData = () => {
   });
 }
 export const setKPIData = (response) => {
-  //const isResponseEmpty = nc_isObjectEmpty(response);
-
-  //console.log('kpi');
+  
   if(response.content.length > 0) {
     let data = response.content[0];
     

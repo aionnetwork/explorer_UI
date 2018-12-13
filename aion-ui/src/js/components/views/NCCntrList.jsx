@@ -9,6 +9,7 @@ import NCExplorerHead from 'components/common/NCExplorerHead';
 //import NCTKNExplorerHead from 'components/common/NCExplorerHead';
 
 import * as StoreCntrList from 'stores/StoreCntrList';
+import * as MSG from 'lib/NCTerms';
 
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 
@@ -93,19 +94,7 @@ class NCCntrList extends Component
       }
     }
 
-    let emptyDataStr = "No Contracts found."; // txnListType.ALL
-    switch(listType) 
-    {
-      case cntrListType.ALL: {
-        emptyDataStr = "No contracts found for: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
-        break;
-      }
-      case cntrListType.BY_ACCOUNT: {
-        emptyDataStr = "No contracts found involving account "+ nc_hexPrefix(store.queryStr) + "."
-        break;
-      }
-    }
-    //console.log('contract list view 2');
+      
     const page =
       <div> 
         <NCExplorerHead
@@ -128,9 +117,9 @@ class NCCntrList extends Component
         isDataValid={true} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Contract Data"}
-        invalidDataStr={"Server provided an invalid response. Please try again."}
-        emptyDataStr={emptyDataStr}
+        loadingStr={MSG.Contract.LOADING}
+        invalidDataStr={MSG.Contract.INVALID_DATA}
+        emptyDataStr={MSG.Contract.EMPTY_DATA}
         
         page={page}
         marginTop={100}/>

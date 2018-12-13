@@ -30,7 +30,7 @@ export default class NCActiveAddressChart extends Component
     console.log('toggle!');
   }
   render() {
-    let { type, entity, options, data} = this.props;
+    let { type, entity, options, data, mode} = this.props;
 
     const option = {
             exporting: {
@@ -40,7 +40,8 @@ export default class NCActiveAddressChart extends Component
                 useUTC: false,
             },
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
+                backgroundColor: mode,
             },
             title: {
                 text: 'Network Difficulty Chart'

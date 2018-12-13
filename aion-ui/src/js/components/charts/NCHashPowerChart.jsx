@@ -16,14 +16,15 @@ import {BigNumber} from 'bignumber.js';
 export default class NCActiveAddressChart extends Component
 {
   render() {
-    let { entity, options, data} = this.props;
+    let { entity, options, data, mode} = this.props;
 
     const option = {
             exporting: {
                 enabled:false,
             },
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
+                backgroundColor: mode,
             },
             time: {
                 useUTC: false,

@@ -32,6 +32,7 @@ export const Contract = {
   EMPTY_DATA:"No Contracts found for:",
   EMPTY_DATA_LIST:"No Contracts found.", 
   EMPTY_DATA_LIST_ACC:"No Contracts Found Involving Account", 
+  EMPTY_DATA_TITLE:"Contract Not Found",
   INVALID_DATA:"Contract Not Available",
   INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
 };
@@ -41,6 +42,7 @@ export const Token = {
   LOADING_LIST:"Loading Token Data",
   EMPTY_DATA:"Token Not Found",
   EMPTY_DATA_LIST:"No Tokens found.", 
+
   INVALID_DATA:"Contract Not Available",
   INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
 };
@@ -51,7 +53,7 @@ export const Transaction = {
   EMPTY_DATA:"No Transaction found for descriptor: ",
   EMPTY_DATA_TITLE:"No transactions",  
   EMPTY_DATA_LIST:"No transactions found.",  
-  INVALID_DATA:"Syntax error: Invalid block structure.",
+  INVALID_DATA:"Syntax error: Invalid request structure.",
   INVALID_DATA_LIST:"Invalid Input. Please try again."
 };
 
@@ -65,6 +67,7 @@ export const Chart = {
 export const Search = {
   LOADING:"Searching",
   LOADING_LIST:"Loading Results",
+  EMPTY_DATA_TITLE:"Not Found",
   EMPTY_DATA:"No results found for: ",
   EMPTY_DATA_LIST:"No results found",  
   INVALID_DATA:"Invalid data",

@@ -16,7 +16,7 @@ import {BigNumber} from 'bignumber.js';
 export default class NCActiveAddressChart extends Component
 {
   render() {
-    let { entity, options, data} = this.props;
+    let { entity, options, data, mode} = this.props;
 
     const option = {
             exporting: {
@@ -28,6 +28,7 @@ export default class NCActiveAddressChart extends Component
             chart: {
                 zoomType: 'x',
                 height: 500,
+                backgroundColor: mode,
             },
             title: {
                 text: 'Block Times Chart'

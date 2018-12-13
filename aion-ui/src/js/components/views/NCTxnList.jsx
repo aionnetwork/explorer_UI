@@ -13,6 +13,7 @@ import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } fr
 
 import { txnListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
+import * as MSG from 'lib/NCTerms';
 
 class NCTxnList extends Component
 {
@@ -78,32 +79,7 @@ class NCTxnList extends Component
       }
     ];
 
-    let subtitle = "Recent Transactions"; // txnListType.ALL
-    switch(listType) 
-    {
-      case txnListType.BY_BLOCK: {
-        subtitle = "Block: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
-        break;
-      }
-      case txnListType.BY_ACCOUNT: {
-        subtitle = "Account: " + nc_hexPrefix(store.queryStr)
-        break;
-      }
-    }
-
-    let emptyDataStr = "No transactions found. Dashboard server loading blocks."; // txnListType.ALL
-    switch(listType) 
-    {
-      case txnListType.BY_BLOCK: {
-        emptyDataStr = "No transactions found in block: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
-        break;
-      }
-      case txnListType.BY_ACCOUNT: {
-        emptyDataStr = "No transactions found involving account "+ nc_hexPrefix(store.queryStr) + "."
-        break;
-      }
-    }
-    //console.log(JSON.stringify(store.response));
+    
 
     const page =
       <div> 
@@ -127,9 +103,9 @@ class NCTxnList extends Component
         isDataValid={isDataValid} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Transaction Data"}
-        invalidDataStr={"Server provided an invalid response. Please try again."}
-        emptyDataStr={emptyDataStr}
+        loadingStr={MSG.Transaction.LOADING}
+        invalidDataStr={MSG.Transaction.INVALID_DATA}
+        emptyDataStr={MSG.Transaction.EMPTY_DATA}
         
         page={page}
         marginTop={100}/>

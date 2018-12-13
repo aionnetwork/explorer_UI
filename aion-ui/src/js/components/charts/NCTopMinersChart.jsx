@@ -21,7 +21,7 @@ import { nc_compare } from 'lib/NCUtility';
 export default class NCTopMinersChart extends Component
 {
   render() {
-    let { entity, options, data} = this.props;
+    let { entity, options, data, mode} = this.props;
     //console.log('pie chart');
 
     let points = data.sort(nc_compare);
@@ -52,7 +52,8 @@ export default class NCTopMinersChart extends Component
         plotBorderWidth: null,
         plotShadow: false,
         type: 'pie',
-        height:'50%' 
+        height:'50%',
+        backgroundColor: mode, 
     },
     title: {
         text: 'Top Miners For The Past 7 days'

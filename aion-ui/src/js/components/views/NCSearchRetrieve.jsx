@@ -22,6 +22,7 @@ import NCExplorerSection from 'components/common/NCExplorerSection';
 import NCNonIdealState from 'components/common/NCNonIdealState';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
+import * as MSG from 'lib/NCTerms';
 
 import * as StoreRetrieve from 'stores/StoreRetrieve';
 
@@ -118,12 +119,12 @@ class NCSearchRetrieve extends Component
       isDataValid={true}
       isDataEmpty={true} 
 
-      emptyDataTitle={"Not Found"}
-      invalidDataTitle={"No Result found!"}
+      emptyDataTitle={MSG.Search.EMPTY_DATA_TITLE}
+      invalidDataTitle={MSG.Search.INVALID_DATA}
       
-      loadingStr={"Loading Account"}
-      invalidDataStr={"Account Service Unavailable. Please try again."} 
-      emptyDataStr={"No Data Available for Account: "+desc}
+      loadingStr={MSG.Search.LOADING_LIST}
+      invalidDataStr={MSG.Search.INVALID_DATA} 
+      emptyDataStr={MSG.Search.EMPTY_DATA+" "+desc}
       marginTop={20}
       marginBottom={30} 
 

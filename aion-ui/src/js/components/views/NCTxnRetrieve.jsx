@@ -18,7 +18,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { nc_hexPrefix, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
-
+import * as MSG from 'lib/NCTerms';
 
 class NCTxnRetrieve extends Component
 {
@@ -155,9 +155,9 @@ class NCTxnRetrieve extends Component
         isDataValid={isTxnValid} 
         isDataEmpty={isTxnEmpty}
         
-        loadingStr={"Loading Transaction Details"}
-        invalidDataStr={"Server error. Transaction structure invalid."}
-        emptyDataStr={"No transaction found for descriptor: " + desc + "."}
+        loadingStr={MSG.Transaction.LOADING}
+        invalidDataStr={MSG.Transaction.INVALID_DATA}
+        emptyDataStr={MSG.Transaction.EMPTY_DATA+" "+ desc }
         
         page={page}/>
     );
