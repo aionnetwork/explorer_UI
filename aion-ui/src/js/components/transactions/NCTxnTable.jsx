@@ -96,6 +96,7 @@ export default class NCTxnTable extends Component
       let transactionHash = null;
       let fromAddr = null;
       let toAddr = null;
+      let contractAddr = null;
       let blockTimestamp = null;
       let value = null;
 
@@ -112,6 +113,7 @@ export default class NCTxnTable extends Component
         transactionHash = entity.transactionHash;
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
+        contractAddr = entity.contractAddr;
         blockTimestamp = entity.blockTimestamp;
         value = entity.value;
         status = entity.txError;
@@ -137,9 +139,9 @@ export default class NCTxnTable extends Component
           entityId={transactionHash}/> 
       </Cell>;
       tableContent[i][4] = 
-      <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.SEARCH].absoluteUrl+''+fromAddr}>
+      <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+fromAddr}>
         <NCEntityLabel 
-          entityType={NCEntity.SEARCH} 
+          entityType={NCEntity.ACCOUNT} 
           entityName={fromAddr}
           entityId={fromAddr}/>
       </Cell>;
@@ -185,14 +187,18 @@ export default class NCTxnTable extends Component
         }
       </Cell>;
       tableContent[i][6] = 
-      <Cell copy={toAddr ? toAddr : "Contract Creation"}>
+      <Cell copy={toAddr ? toAddr : contractAddr ? contractAddr : "Contract Creation"}>
       {
-        toAddr ?
-        <NCEntityLabel 
-          entityType={NCEntity.SEARCH} 
-          entityName={toAddr}
-          entityId={toAddr}/>:
-        "Contract Creation"
+            toAddr ? 
+                <NCEntityLabel 
+                  entityType={NCEntity.ACCOUNT} 
+                  entityId={toAddr}/> :
+                contractAddr ?
+                <NCEntityLabel 
+                  entityType={NCEntity.CNTR} 
+                  entityId={contractAddr}/> :
+                "Contract Creation"     
+
       }
       </Cell>;
     });
@@ -206,6 +212,7 @@ export default class NCTxnTable extends Component
     
     return (
       <NCTableReactPaginated
+        calFilter={true}
         data={data}
         onPageCallback={onPageCallback}
         isLoading={isLoading}

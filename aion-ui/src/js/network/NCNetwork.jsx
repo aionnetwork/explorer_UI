@@ -115,7 +115,7 @@ export const endpoint = {
     list: {
       [txnListType['ALL']]: {
         link: '/dashboard/getTransactionList',
-        params: ['page', 'size','token']
+        params: ['page', 'size', 'start', 'end']
       },
       [txnListType['BY_ACCOUNT']]: {
         link: '/dashboard/getTransactionsByAddress',
@@ -137,7 +137,7 @@ export const endpoint = {
     list: {
       [tknListType['ALL']]: {
         link: '/dashboard/getTokenList',
-        params: ['page', 'size']
+        params: ['page', 'size', 'start', 'end']
       },
       [tknListType['BY_ACCOUNT']]: {
         link: '/dashboard/getTokensByAddress',

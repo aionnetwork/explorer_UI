@@ -16,10 +16,21 @@ const NOT_CONTRACT = "Not a Contract";
 export default class NCAccDetail extends Component
 {
   render() {
-    let { entity } = this.props;
+    let { entity, tokenList } = this.props;
     
     //let balance = nc_numFormatterACSensitive(entity.balance);
     let balance = nc_decimalPrettify(entity.balance);
+
+    let contract = entity.contract ? 
+      {
+        field: "Address",
+        value:  <NCEntityLabel
+                  entityType={ NCEntity.ACCOUNT }
+                  entityId={ entity.address }
+                  linkActive={ false }/>
+      }
+      :
+      " ";
 
     let desc = [
       {
@@ -47,6 +58,18 @@ export default class NCAccDetail extends Component
       {
         field: "Nonce",
         value: !entity.nonce ? EMPTY_STR : entity.nonce
+      },
+      {
+        field: entity.contract ?"Contract view" : "",
+        value: entity.contract ? <NCEntityLabel
+                  entityType={ NCEntity.CNTR }
+                  entityId={ entity.address }
+                  linkActive={ true }/>
+                  :""
+      },
+      {
+        field: "",
+        value: tokenList
       },
       
       

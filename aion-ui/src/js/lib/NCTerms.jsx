@@ -11,7 +11,7 @@ export const Account = {
   EMPTY_DATA_TITLE:"Account Not Found",
   EMPTY_DATA:"No Data Available for Account: ",
   EMPTY_DATA_LIST:"No accounts found.",  
-  INVALID_DATA:"Invalid Input. Please try again.",
+  INVALID_DATA:"Invalid Input. Please try againn.",
   INVALID_DATA_LIST_IN:"No inbound account activity in last 24 hours",
   INVALID_DATA_LIST_OUT:"No outbound account activity in last 24 hours",
   INVALID_DATA_LIST_MINER:"Miner list not available."
@@ -23,7 +23,8 @@ export const Block = {
   EMPTY_DATA:"No block found for descriptor: ",
   EMPTY_DATA_LIST:"No blocks found. Blockchain server loading blocks.",  
   INVALID_DATA:"Syntax error: Invalid block structure.",
-  INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
+  INVALID_DATA_LIST:"Server provided an invalid response. Please try again.",
+  DATA_POLICY:"Showing results from the latest blocks. "
 };
 
 export const Contract = {
@@ -54,7 +55,8 @@ export const Transaction = {
   EMPTY_DATA_TITLE:"No transactions",  
   EMPTY_DATA_LIST:"No transactions found.",  
   INVALID_DATA:"Syntax error: Invalid request structure.",
-  INVALID_DATA_LIST:"Invalid Input. Please try again."
+  INVALID_DATA_LIST:"Invalid Input. Please try again.",
+  DATA_POLICY:"Showing results from the latest transactions. "
 };
 
 export const Chart = {

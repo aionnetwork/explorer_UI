@@ -258,10 +258,10 @@ export const getTxnListTopLevel = (listType, queryStr) => {
   }
 }
 
-export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize) => {
+export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start=null, end=null) => {
   store.dispatch(StoreTxnList.GetPaging());
 
-  console.log('txn list paging');
+  //console.log('txn list paging');
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
@@ -275,25 +275,19 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize) => {
     const ep = network.endpoint.transaction.list[listType];
     let params = [];
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+
+    let s = ((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : null ;
+
     switch(listType) {
       case txnListType.ALL: {
-        params = [pageNumber, size, 'blockNumber,desc']
+        params = [pageNumber, size, s, end]
         break;
       }
       case txnListType.BY_BLOCK: {
         params = [nc_trim(queryStr), pageNumber, PAGE_SIZE]
         break;
       }
-      /*
-      case txnListType.BY_ACCOUNT: {
-        let request = nc_trim(queryStr);
-        if (request == 0 || request == "0x0") {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        }
-
-        params = [request, pageNumber, PAGE_SIZE]
-        break;
-      }*/
+      
     }
     network.request(ep, params)
     .then((response) => {
@@ -431,6 +425,7 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
       // we can save on a network request if the nonce is zero
       if (!isAccEmpty) {
         console.log(requestb);
+        console.log('Its reaching here!');
         getAccRetrievePagingTxnList(request, requestb, 0);
         getAccRetrievePagingBlkList(request, 0);
         //getAccRetrieveTknList(request, 0);
@@ -579,9 +574,12 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber) => {
 
       //console.log('oooo:'+JSON.stringify(response));
       let acc = store.getState().accRetrieve.response.acc;
-
+      console.log('Its reaching here too 1!');
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        console.log('Its reaching here too 2!');
+        console.log(nc_sanitizeHex(acc.data.content[0].address)+'  Its reaching here too!  '+nc_sanitizeHex(queryStr));
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            console.log('Its reaching here too 3!');
             store.dispatch(StoreAccRetrieve.SetPagingTxn(response));  
         }
       }
@@ -708,7 +706,7 @@ export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize) => {
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     switch(listType) {
       case cntrListType.ALL: {
-        params = [pageNumber, size, 'blockNumber,desc']
+        params = [pageNumber, size]
         break;
       }
       case cntrListType.BY_ACCOUNT: {
@@ -1078,7 +1076,7 @@ export const getTknListTopLevel = (listType, queryStr) => {
 
     switch(listType) {
       case tknListType.ALL: {
-        params = [0, PAGE_SIZE, 'blockNumber,desc']
+        params = [0, PAGE_SIZE]
         break;
       }
       case tknListType.BY_ACCOUNT: {
@@ -1131,7 +1129,7 @@ export const getTknListPaging = (listType, queryStr, pageNumber, pageSize) => {
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     switch(listType) {
       case tknListType.ALL: {
-        params = [pageNumber, size, 'blockNumber,desc']
+        params = [pageNumber, size]
         break;
       }
       case tknListType.BY_BLOCK: {
@@ -1266,7 +1264,7 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
   }
 }
 
- let showView = (entity) => {
+ let showView = (entity,request) => {
 
      //console.log(JSON.stringify(entity));
      //console.log(JSON.stringify(entity.content[0]));
@@ -1279,29 +1277,29 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
     // ---------
       case 'block':
       {  
-         hashHistory.push('/block/'+entity.content[0].blockNumber);
+         hashHistory.push('/block/'+request);
          break;
     
       }
       case 'transaction':
       {
-        hashHistory.push('/transaction/'+entity.content[0].transactionHash);
+        hashHistory.push('/transaction/'+request);
         break;
       }
       case'token':
       {
-        hashHistory.push('/token/'+entity.content[0].contractAddress);
+        hashHistory.push('/token/'+request);
         break;
       }
       case'account':
       {
-        hashHistory.push('/account/'+entity.content[0].address);
+        hashHistory.push('/account/'+request);
         break;
       }
       case'contract':
       {
         
-        hashHistory.push('/contract/'+entity.content[0].contractAddr);
+        hashHistory.push('/contract/'+request);
         break;
       }
 
@@ -1341,19 +1339,15 @@ export const getRetrieveTopLevel = (queryStr) => {
     let params = [request,  0, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      console.log(JSON.stringify(response.searchType));
+      //console.log("Goo"+JSON.stringify(response));
 
       if(typeof response.searchType !== "undefined" && response.searchType !== "token"){ 
 
-        console.log('Data:'+JSON.stringify(response));
-        
-        showView(response);
-        //store.dispatch(StoreRetrieve.SetTopLevel(response));
-        //console.log("right!");
+        showView(response,request);
+       
       }
       else if(typeof response.searchType !== "undefined"){ 
 
-        console.log('token search!');  
         store.dispatch(StoreRetrieve.SetTopLevel(response));
 
       }

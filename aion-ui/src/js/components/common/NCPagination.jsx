@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { DateRangePicker, DateRangeInput } from "@blueprintjs/datetime";
 
 import moment from 'moment';
 import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
@@ -15,19 +16,88 @@ export default class NCPagination extends Component
 {
   constructor(props) {
     super(props);
-
+    this.state = {startDate:null, endDate:null, rangeChange:true};
     this.loading = false;
     this.serchDirection = SEARCH_DIR.NONE;
   }
+
+  handleRangeChange = (date) => {
+    //console.log(date[0]);
+    this.setState({
+        startDate: date[0], endDate: date[1],rangeChange:false
+      });
+  }
+  renderCalendarRange = () => {
+    return (  
+      <div>
+        <DateRangeInput
+          formatDate={date => date.toLocaleString()}
+          onChange={this.handleRangeChange}
+          parseDate={str => new Date(str)}
+          value={[this.state.startDate, this.state.endDate]}
+        />  
+        <Button             
+            className="pt-minimal " 
+            text="Filter range"
+            disabled={this.state.rangeChange}            
+            onClick={() => {
+              this.setState({
+                rangeChange:true
+              });
+              let start = new Date(this.state.startDate).getTime()/1000;
+              let end = new Date(this.state.endDate).getTime()/1000;
+              this.props.onPageCallback(0,25, start, end);
+            }}/>  
+      </div>
+    );
+  }
+
+  renderCalendarMenu = () => {
+    return (
+      <Menu className={"NCNavMenu"}>
+
+        <MenuItem
+          className="nav-option"
+         
+          text="Year"
+        />
+        <MenuItem
+          className="nav-option"
+          
+          text="Month"
+        />
+        <MenuItem
+          className="nav-option"
+          
+          text="Day"
+        />
+        <Button 
+            
+            className="pt-minimal right" 
+            text="Submit"
+            
+            disabled={true}
+            
+            onClick={() => {
+              this.serchDirection = SEARCH_DIR.FORWARD;
+              this.props.onPageCallback(totalPages-1)
+            }}/>
+         
+      </Menu>
+    );
+  }
+   
   
   render() {
     
     // pageNumber is zero indexed
-    let { entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
+    let { calFilter=false, entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
 
     let isFirstPage = (pageNumber + 1 == 1);
     let isLastPage = (pageNumber + 1 == totalPages );
     let val = pageNumber + 1;
+
+    //console.log(calFilter);
 
     if (isLoading != this.loading) 
     {
@@ -54,6 +124,25 @@ export default class NCPagination extends Component
       {
         (totalPages > 1) &&
         <div className="table-paging">
+          {
+            (calFilter!==false) &&
+            <Popover
+                
+                content={this.renderCalendarRange()}
+                interactionKind={PopoverInteractionKind.CLICK}
+                position={Position.BOTTOM}>
+                <Button 
+
+                  className="text navbar-btn-active pt-button pt-minimal"
+                  
+                  iconName="pt-icon-calendar"            
+                  className="pt-minimal" 
+            
+                  loading={(this.serchDirection == SEARCH_DIR.FORWARD && this.loading) ? true : false}
+
+                  />          
+            </Popover>
+          }
           <Button 
             
             className="pt-minimal left" 
@@ -129,6 +218,8 @@ export default class NCPagination extends Component
               this.serchDirection = SEARCH_DIR.FORWARD;
               this.props.onPageCallback(totalPages-1)
             }}/>
+            
+            
         </div>
       }
       </div>

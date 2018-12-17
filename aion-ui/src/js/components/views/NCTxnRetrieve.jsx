@@ -136,7 +136,7 @@ class NCTxnRetrieve extends Component
             title={"Event logs are unavailable"}
             description={"Please try again later."}/>
         }
-        {
+        {/*
           (!isTxnEmpty) &&  
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
@@ -144,7 +144,7 @@ class NCTxnRetrieve extends Component
               
             </Tabs2>
           </div>
-        }
+        */}
 
 
       </div>;

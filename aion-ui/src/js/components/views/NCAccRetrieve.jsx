@@ -169,7 +169,9 @@ class NCAccRetrieve extends Component
     
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
-    //console.log("page Data for retrieve: "+JSON.stringify(tokens));
+    console.log(store.response.txn.momentUpdated);
+    console.log(JSON.stringify(store.response.txn));
+     console.log(JSON.stringify(store.response));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
@@ -208,7 +210,36 @@ class NCAccRetrieve extends Component
     const desc = nc_hexPrefix(store.queryStr);
 
     console.log('cool:'+isAccValid+' '+isAccEmpty);
-    
+    const tokenList =  <div className="token-list hide">
+        <span className="title">Token balances:</span><Popover
+                content={this.renderTokenMenu(tokens)}
+                interactionKind={PopoverInteractionKind.CLICK}
+                position={Position.BOTTOM}>
+                <Button 
+                  className="navbar-btn-active pt-button pt-minimal"
+                  iconName="pt-icon-application"
+                  rightIconName="pt-icon-caret-down"
+                  text= {acc.tokenName  ? acc.tokenName  : "Aion (Default)"}
+
+                />          
+        </Popover>
+      </div>
+
+      const tokenListMobile =  <div className="token-list show">
+        <span className="title">Token balances:</span><Popover
+                content={this.renderTokenMenu(tokens)}
+                interactionKind={PopoverInteractionKind.CLICK}
+                position={Position.BOTTOM}>
+                <Button 
+                  className="navbar-btn-active pt-button pt-minimal"
+                  iconName="pt-icon-application"
+                  rightIconName="pt-icon-caret-down"
+                  text= {acc.tokenName  ? acc.tokenName  : "Aion (Default)"}
+
+                />          
+        </Popover>
+      </div>
+
     const accBalanceSection = <NCExplorerSection 
       className={""}
 
@@ -226,33 +257,16 @@ class NCAccRetrieve extends Component
       marginTop={20}
       marginBottom={30}
 
-      subtitle={<div className="token-list">
-        <span className="title">Token balances:</span><Popover
-                content={this.renderTokenMenu(tokens)}
-                interactionKind={PopoverInteractionKind.CLICK}
-                position={Position.BOTTOM}>
-                <Button 
-                  className="navbar-btn-active pt-button pt-minimal"
-                  iconName="pt-icon-application"
-                  rightIconName="pt-icon-caret-down"
-                  text= {acc.tokenName  ? acc.tokenName  : "Aion (Default)"}
+      subtitle={tokenList}
 
-                />          
-        </Popover>
-      </div>}
-
-      content={ <NCAccDetail entity={acc}/> }
+      content={ <NCAccDetail entity={acc} tokenList={tokenListMobile} /> }
     />
-
+    //console.log(isTxnListFirstLoad);
     const txnListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing latest million transactions. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
+        <div className="NCPageBreakerSubtitle">
+        {MSG.Transaction.DATA_POLICY}
         </div>
       }
 
@@ -290,12 +304,7 @@ class NCAccRetrieve extends Component
     const blkListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest blocks. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
+        <div className="NCPageBreakerSubtitle">{MSG.Block.DATA_POLICY}
         </div>
       }
 

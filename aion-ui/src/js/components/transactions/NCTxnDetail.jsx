@@ -64,7 +64,7 @@ export default class NCTxnDetail extends Component
 
     let parsedTxnLog = this.parseTxnLog(entity.transactionLog);
     let parsedInputData = this.parseInputData(entity.data);
-
+     console.log(entity.value);
     let desc = 
     [
       {
@@ -151,9 +151,13 @@ export default class NCTxnDetail extends Component
                 <NCEntityLabel 
                   entityType={NCEntity.ACCOUNT} 
                   entityId={entity.toAddr}/> :
+                entity.contractAddr ?
+                <NCEntityLabel 
+                  entityType={NCEntity.CNTR} 
+                  entityId={entity.contractAddr}/> :
                 "Contract Creation",
       },
-       {
+       {/*
         field: "Tokens Transfered",
         value: <span>
                   <span className="subtitle">From: </span> 
@@ -165,7 +169,7 @@ export default class NCTxnDetail extends Component
                   <span className="subtitle">of  (43252.90) </span>              
                   {"Token"}
                </span>
-      },
+      */},
       // ---------------------------------------------------------------
       {
         field: "Txn Logs",

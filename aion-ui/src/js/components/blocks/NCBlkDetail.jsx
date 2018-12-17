@@ -77,11 +77,11 @@ export default class NCBlkDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Difficulty",
-        value: entity.difficulty ? nc_numPrettify(BigNumber(String(entity.difficulty), 16).toString(10)) : EMPTY_STR,
+        value: entity.difficulty ? nc_numPrettify(entity.difficulty) : EMPTY_STR,
       },
       {
         field: "Total Difficulty",
-        value: entity.totalDifficulty ? nc_numPrettify(BigNumber(String(entity.totalDifficulty), 16).toString(10)) : EMPTY_STR,
+        value: entity.totalDifficulty ? nc_numPrettify(entity.totalDifficulty) : EMPTY_STR,
       },
       {
         field: "Nonce",

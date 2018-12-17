@@ -26,7 +26,7 @@ export default class NCTableReactPaginated extends Component
   }
 
   render() {
-    const { rowHeight, rowHeights, dialog, data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
+    const { calFilter, rowHeight, rowHeights, dialog, data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
     const list = data.content;
     let tableList = list;
     let height = rowHeight;
@@ -48,7 +48,7 @@ export default class NCTableReactPaginated extends Component
         paginationObj = 
         <NCPagination
             entityName={entityName}
-
+            calFilter={this.props.calFilter}
             pageNumber={this.state.pageNumber}
             totalElements={list.length}
             listSize={tableList.length}
@@ -75,7 +75,7 @@ export default class NCTableReactPaginated extends Component
         paginationObj = 
         <NCPagination
             entityName={entityName}
-
+            calFilter={this.props.calFilter}
             pageNumber={page.number}
             totalElements={page.totalElements}
             listSize={list.length}

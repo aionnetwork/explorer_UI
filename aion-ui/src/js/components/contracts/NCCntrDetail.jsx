@@ -19,7 +19,7 @@ export default class NCCntrDetail extends Component
     let { entity } = this.props;
     
     //let balance = nc_numFormatterACSensitive(entity.balance);
-    let balance = nc_decimalPrettify(entity.balance);
+    let balance = (entity.balance) ? nc_decimalPrettify(entity.balance) : 0;
 
     let desc = [
       {

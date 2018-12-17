@@ -311,7 +311,7 @@ export function nc_isValidEntity(input) {
 }
 
 export function nc_sanitizeHex(input) {
-  let x = nc_trim(input);
+  let x = nc_trim(input.toLowerCase());//add lowercase check in nc_sanitizeHex
 
   if (
     x.indexOf("0x") == 0 || 
@@ -524,11 +524,11 @@ let point =[];
 
 if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(data.detail) && nc_isNumber(data.value)) ){
   
-  
+  let adjust = 1000;//adjust for milliseconds converter
 
   switch(charttype){
     case 'line':
-        point =[data.timestamp,data.value];
+        point =[data.timestamp * adjust,data.value];
         break;  
     case 'pie':        
         
@@ -536,7 +536,7 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
         
         break;  
     case 'bar':        
-        point =[data.timestamp,data.value];
+        point =[data.timestamp * adjust,data.value];
         break;                
     default:
         point =[];

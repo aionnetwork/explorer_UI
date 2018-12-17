@@ -51,10 +51,10 @@ class NCTxnList extends Component
     network.getTxnListTopLevel(listType, queryStr);
   }
 
-  requestPaging = (pageNumber, pageSize) => {
+  requestPaging = (pageNumber, pageSize, start=0, end=0) => {
     const listType = this.props.txnList.listType;
     const queryStr = this.props.txnList.queryStr;
-    network.getTxnListPaging(listType, queryStr, pageNumber, pageSize);
+    network.getTxnListPaging(listType, queryStr, pageNumber, pageSize, start, end);
   }
 
   render() {
@@ -79,7 +79,7 @@ class NCTxnList extends Component
       }
     ];
 
-    
+    let subtitle = "Recent Transactions"; // txnListType.ALL
 
     const page =
       <div> 
