@@ -272,15 +272,18 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start
     }, 500);
   }
   else {
-    const ep = network.endpoint.transaction.list[listType];
+
+    //console.log(listType);
+    const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[3] : network.endpoint.transaction.list[listType];
     let params = [];
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
 
-    let s = ((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : null ;
+    let s = Math.round(((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : 0) ;
+    let e = Math.round(isNaN(end) ? 0 : end);
 
     switch(listType) {
       case txnListType.ALL: {
-        params = [pageNumber, size, s, end]
+        params = [pageNumber, size, s, e]
         break;
       }
       case txnListType.BY_BLOCK: {
@@ -1458,7 +1461,7 @@ export const getChartRetrieve = (queryStr) => {
     })
     .catch((error) => {
       
-        console.log(error+"this is the error");
+        console.log(error);
         store.dispatch(StoreChartRetrieve.SetChart({
         
       }));

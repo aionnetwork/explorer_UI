@@ -46,6 +46,7 @@ export default class NCPagination extends Component
               });
               let start = new Date(this.state.startDate).getTime()/1000;
               let end = new Date(this.state.endDate).getTime()/1000;
+              this.serchDirection = SEARCH_DIR.BACKWARD;
               this.props.onPageCallback(0,25, start, end);
             }}/>  
       </div>

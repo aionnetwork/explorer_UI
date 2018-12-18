@@ -87,7 +87,8 @@ export const blkListType = {
 export const txnListType = {
   ALL: 0,
   BY_BLOCK: 1,
-  BY_ACCOUNT: 2
+  BY_ACCOUNT: 2,
+  ALL_RANGE: 3
 }
 
 export const accListType = {
