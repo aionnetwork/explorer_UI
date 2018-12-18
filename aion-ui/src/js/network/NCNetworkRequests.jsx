@@ -307,7 +307,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreTxnRetrieve.GetTopLevel({
     queryStr: queryStr
   }));
-    console.log('4 index!');
+    //console.log('4 index!');
   //console.log('txn retrieve list top level');
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -544,7 +544,7 @@ export const getAccRetrieveCSV = (acc,key,range) => {
   }
 }
 
-export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber) => {
+export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, pageSize, start=null, end=null) => {
   store.dispatch(StoreAccRetrieve.GetPagingTxn());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -557,13 +557,22 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber) => {
   }
   else {
     // get transaction list
-    const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
+    //const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
+
+
+    const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[3] : network.endpoint.transaction.list[listType];
+    
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+
+    let s = Math.round(((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : 0) ;
+    let e = Math.round(isNaN(end) ? 0 : end);
+
     //console.log('ep:'+JSON.stringify(ep));
     let params = []; 
     if(tkn!==null){
       params = [queryStr,tkn ,pageNumber, PAGE_SIZE];
     }else{
-      params = [queryStr,null,pageNumber, PAGE_SIZE];
+      params = [queryStr, null, pageNumber, size, s, e];
 
       //console.log('we are here')
     }
@@ -577,12 +586,12 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber) => {
 
       //console.log('oooo:'+JSON.stringify(response));
       let acc = store.getState().accRetrieve.response.acc;
-      console.log('Its reaching here too 1!');
+      //console.log('Its reaching here too 1!');
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
-        console.log('Its reaching here too 2!');
-        console.log(nc_sanitizeHex(acc.data.content[0].address)+'  Its reaching here too!  '+nc_sanitizeHex(queryStr));
+        //console.log('Its reaching here too 2!');
+        //console.log(nc_sanitizeHex(acc.data.content[0].address)+'  Its reaching here too!  '+nc_sanitizeHex(queryStr));
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
-            console.log('Its reaching here too 3!');
+            //console.log('Its reaching here too 3!');
             store.dispatch(StoreAccRetrieve.SetPagingTxn(response));  
         }
       }

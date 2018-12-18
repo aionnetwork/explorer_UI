@@ -126,6 +126,11 @@ export const endpoint = {
         //params: ['searchParam', 'transactionPage', 'transactionSize','token'],
         params:["accountAddress","tokenAddress","page","size"]
       },
+      [txnListType['BY_ACCOUNT_RANGE']]: {
+        link: '/dashboard/getTransactionsByAddressAndRange',
+        //params: ['searchParam', 'transactionPage', 'transactionSize','token'],
+        params:["accountAddress","tokenAddress","page","size","start","end"]
+      },
       [txnListType['BY_BLOCK']]: {
         link: '/dashboard/findTransactionByBlockNumberOrBlockHash',
         params: ['searchParam','token']
