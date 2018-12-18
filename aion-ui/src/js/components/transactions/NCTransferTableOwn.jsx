@@ -19,7 +19,7 @@ import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
-export default class NCTxnTableOwn extends Component 
+export default class NCTransferTableOwn extends Component 
 {
   constructor(props) {
     super(props);
@@ -178,7 +178,7 @@ export default class NCTxnTableOwn extends Component
     
     return (
       <NCTableReactPaginated
-        calFilter={true}
+        calFilter={false}
         data={data}
         onPageCallback={onPageCallback}
         isLoading={isLoading}
