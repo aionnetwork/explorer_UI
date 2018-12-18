@@ -114,7 +114,11 @@ export const endpoint = {
   transaction: {
     list: {
       [txnListType['ALL']]: {
-        link: '/dashboard/getTransactionList',
+        link: '/dashboard/getTransactionList',//getTransactionListByRange
+        params: ['page', 'size', 'start', 'end']
+      },
+      [txnListType['ALL_RANGE']]: {
+        link: '/dashboard/getTransactionListByRange',//getTransactionListByRange/getTransactionList
         params: ['page', 'size', 'start', 'end']
       },
       [txnListType['BY_ACCOUNT']]: {

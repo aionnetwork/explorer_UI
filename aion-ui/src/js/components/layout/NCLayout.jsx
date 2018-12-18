@@ -268,7 +268,7 @@ class NCLayout extends Component {
   }
    
 
-  renderConnectionMenu = (networkList) => {if(Array.isArray(networkList) && networkList.length > 1) {
+  renderConnectionMenu = (networkList,mode) => {if(Array.isArray(networkList) && networkList.length > 1) {
       let menuItemList = [];
       networkList.forEach((v, i) => {
         if (i > 0) {
@@ -287,7 +287,7 @@ class NCLayout extends Component {
          this.connectionMenu = 
         <Popover
           content={
-            <Menu className={this.d_mode_class+" NCNavMenu"}>
+            <Menu className={mode + " NCNavMenu"}>
               <MenuDivider title="Switch Network" />
               { menuItemList }
 
@@ -350,7 +350,7 @@ class NCLayout extends Component {
     
     }
 
-    this.renderConnectionMenu(this.networkList)
+    
 
     // wait on the response from KPI list to load application
     if (NCNETWORK_REQUESTS_ENABLED && kpi.momentUpdated == null) { 
@@ -381,6 +381,7 @@ class NCLayout extends Component {
     
     //console.log(this.state.darkMode!==false ? "darkMode" : "");
     let mode = (this.props.darkMode.data) ? "darkMode" : ""; 
+    this.renderConnectionMenu(this.networkList,mode);
     //console.log(this.props.darkMode.data + " dark_mode" + mode);
 
     let style = {fontSize:'9px'}
@@ -440,7 +441,7 @@ class NCLayout extends Component {
                 lastUpdated={lastUpdated}
               />
               
-              {this.connectionMenu }
+              {this.connectionMenu}
               {this.renderMobileMenu(mode)}
 
               

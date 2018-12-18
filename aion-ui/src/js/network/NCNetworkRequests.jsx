@@ -1453,14 +1453,13 @@ export const getChartRetrieve = (queryStr) => {
     network.request(ep, params)
     .then((response) => {
       
-        //console.log(JSON.stringify(response)); 
-        //nc_getChartData(response,)
-        store.dispatch(StoreChartRetrieve.SetChart(response));
+       store.dispatch(StoreChartRetrieve.SetChart(response));
     
     })
     .catch((error) => {
-      console.log(error);
-      store.dispatch(StoreChartRetrieve.SetChart({
+      
+        console.log(error+"this is the error");
+        store.dispatch(StoreChartRetrieve.SetChart({
         
       }));
     });
