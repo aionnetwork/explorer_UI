@@ -74,7 +74,7 @@ class NCDwnRetrieve extends Component
   download(a){
        //console.log(a);
        this.setState({button:true,display:true});
-       network.getAccRetrieveCSV(this.props.params.accId, a,this.state.range);
+       network.getAccTxnRetrieveCSV(this.props.params.accId, a,this.state.range);
        //return;
   }
 

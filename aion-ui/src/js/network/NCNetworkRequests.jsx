@@ -462,7 +462,7 @@ searchParam1 = Account Address
 entityType = Account_Mined_Blocks
 rangeMin1 = some number
 rangeMax1 = some number*/
-export const getAccRetrieveCSV = (acc,key,range) => {
+export const getAccTxnRetrieveCSV = (acc,key,range) => {
   store.dispatch(StoreAccRetrieve.GetTopLevel({
     queryStr: acc
   }));
@@ -483,14 +483,14 @@ export const getAccRetrieveCSV = (acc,key,range) => {
     }
     
     // get account details
-    const ep = network.endpoint.download.detail;
+    const ep = network.endpoint.download.accountTxns;
 
     let params = [];
     let paramsA = [];
     let paramsB = [];
     let paramsC = [];
 
-    params = [request,'','Account',range[0],range[1],recaptcha];
+    params = [request,'',range[0],range[1],recaptcha];
     paramsA = [request,'','Account_Tokens'];
     paramsB = [request,'','Account_Transactions',0,999];
     paramsC = [request,'','Accoun_Mined_Blocks',0,999];
