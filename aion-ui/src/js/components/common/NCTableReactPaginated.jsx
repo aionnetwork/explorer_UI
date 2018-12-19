@@ -98,6 +98,9 @@ export default class NCTableReactPaginated extends Component
             listSize={list.length}
             totalPages={page.totalPages}
             pageSize={page.size}
+
+            startDate={page.start*1000}
+            endDate={page.end*1000}
             
             onPageCallback={onPageCallback}
             isLoading={isLoading}
