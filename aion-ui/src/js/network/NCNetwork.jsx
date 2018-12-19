@@ -50,7 +50,7 @@ if (process.env.NODE_ENV !== 'production') {
     HTTPS_ENABLED = true;
     BASE_URL = ENV.BASE_URL;
     HOME_URL = ENV.HOME_URL;
-    NETWORK_LIST = ENV.NETWORK_LIST;
+    NETWORK_LIST = appConfig.network_list[ENV.NETWORK_LIST];
     GA_KEY = ENV.GA_KEY;  
 }
 
