@@ -415,24 +415,20 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
       params = [request];
     }
      
-    //console.log(JSON.stringify(params));
     network.request(ep, params)
     .then((response) => {
       const isAccValid = nc_isObjectValid(response);
       const isAccEmpty = nc_isObjectEmpty(response, isAccValid);
 
-      //console.log(JSON.stringify(response));
       // ok, make requests for blocks and transactions for this account
       store.dispatch(StoreAccRetrieve.SetTopLevel(response));
-      //console.log("Coool!");
+      
       // we can save on a network request if the nonce is zero
       if (!isAccEmpty) {
-        console.log(requestb);
-        console.log('Its reaching here!');
+        
         getAccRetrievePagingTxnList(request, requestb, 0);
         getAccRetrievePagingBlkList(request, 0);
-        //getAccRetrieveTknList(request, 0);
-        //console.log("not empty!");
+        
       }
     })
     .catch((error) => {
@@ -558,14 +554,16 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
   else {
     // get transaction list
     //const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
+    console.log(start+"##########"+end);
 
-
-    const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[3] : network.endpoint.transaction.list[listType];
+    const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[4] : network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
     
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
 
     let s = Math.round(((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : 0) ;
     let e = Math.round(isNaN(end) ? 0 : end);
+
+    console.log(s+"****"+tkn+"****"+e);
 
     //console.log('ep:'+JSON.stringify(ep));
     let params = []; 
@@ -579,6 +577,8 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
     
 
     //console.log('params:'+JSON.stringify(params));
+    //console.log(ep);
+    //console.log('we are here');
     network.request(ep, params)
     .then((response) => {
       // ok, now make sure that the response you got is still valid

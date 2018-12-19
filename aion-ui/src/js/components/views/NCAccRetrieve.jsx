@@ -63,9 +63,9 @@ class NCAccRetrieve extends Component
     network.getAccRetrieveTopLevel(this.props.params.accId,this.props.params.tknId);
   }
 
-  requestPagingTxnList = (pageNumber) => {
+  requestPagingTxnList = (pageNumber,pageSize,start,end) => {
     const queryStr = this.props.accRetrieve.queryStr;
-    network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber);
+    network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
   }
 
   /* requestPaging = (pageNumber, pageSize, start=0, end=0) => {
@@ -180,9 +180,9 @@ class NCAccRetrieve extends Component
     
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
-    console.log(store.response.txn.momentUpdated);
-    console.log(JSON.stringify(store.response.txn));
-     console.log(JSON.stringify(store.response));
+    //console.log(store.response.txn.momentUpdated);
+    //console.log(JSON.stringify(store.response.txn));
+     //console.log(JSON.stringify(store.response));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
@@ -198,7 +198,7 @@ class NCAccRetrieve extends Component
     const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
     const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
     const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
-
+    console.log(JSON.stringify(accObj));
     const isAccValid = nc_isObjectValid(accObj);
     const isAccEmpty = nc_isObjectEmpty(accObj, isAccValid);
 
@@ -408,7 +408,7 @@ class NCAccRetrieve extends Component
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
               <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
-              <Tab2 id="trn" title="Transfers" panel={transferListSection}/>
+              {/*<Tab2 id="trn" title="Transfers" panel={transferListSection}/>*/}
             </Tabs2>
           </div>
         }

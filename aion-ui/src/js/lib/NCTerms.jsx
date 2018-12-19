@@ -11,7 +11,7 @@ export const Account = {
   EMPTY_DATA_TITLE:"Account Not Found",
   EMPTY_DATA:"No Data Available for Account: ",
   EMPTY_DATA_LIST:"No accounts found.",  
-  INVALID_DATA:"Invalid Input. Please try againn.",
+  INVALID_DATA:"Invalid Input. Please try again.",
   INVALID_DATA_LIST_IN:"No inbound account activity in last 24 hours",
   INVALID_DATA_LIST_OUT:"No outbound account activity in last 24 hours",
   INVALID_DATA_LIST_MINER:"Miner list not available."
@@ -53,10 +53,14 @@ export const Transaction = {
   LOADING_LIST:"Loading Transaction Data",
   EMPTY_DATA:"No Transaction found for descriptor: ",
   EMPTY_DATA_TITLE:"No transactions",  
-  EMPTY_DATA_LIST:"No transactions found.",  
+  EMPTY_DATA_LIST:"No transactions found.", 
+  EMPTY_DATA_LIST_ACC:"No Transactions Found Involving Account", 
+  EMPTY_DATA_LIST_CNTR:"No Transactions Found Found For This Contract",  
   INVALID_DATA:"Syntax error: Invalid request structure.",
   INVALID_DATA_LIST:"Invalid Input. Please try again.",
-  DATA_POLICY:"Showing results from the latest transactions. "
+  DATA_POLICY:"Showing results from the latest transactions. ",
+  DATA_POLICY_CNTR:"Showing latest transactions for this contract.",
+  DATA_POLICY:"Showing latest transactions for this contract."
 };
 
 export const Chart = {

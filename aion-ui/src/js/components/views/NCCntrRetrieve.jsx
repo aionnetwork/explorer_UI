@@ -229,12 +229,8 @@ class NCCntrRetrieve extends Component
     const txnListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
+        <div className="NCPageBreakerSubtitle">
+        {MSG.Transaction.DATA_POLICY_CNTR}
         </div>
       }
 
@@ -242,16 +238,9 @@ class NCCntrRetrieve extends Component
       isDataValid={isTxnListValid}
       isDataEmpty={isTxnListEmpty} 
       
-      loadingStr={"Loading Transactions"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={
-        <span>No transactions found for this account in latest million transactions. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </span>}
+      loadingStr={MSG.Transaction.LOADING_LIST}
+      invalidDataStr={MSG.Transaction.INVALID_DATA_LIST} 
+      emptyDataStr={MSG.Transaction.EMPTY_DATA_LIST_CNTR}
       marginTop={40}
 
       content={
