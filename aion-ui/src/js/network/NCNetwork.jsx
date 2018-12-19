@@ -79,12 +79,9 @@ const generateBaseUrl = (https, api, e) => {
     url+="http://"
 
 
-  
     
 
   str=api;
-
-  
 
   //console.log(str);
   url+=stripTrailingSlash(str);
