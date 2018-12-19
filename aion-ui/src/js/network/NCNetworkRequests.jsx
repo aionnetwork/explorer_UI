@@ -714,10 +714,11 @@ export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize) => {
   }
   else {
     const ep = network.endpoint.contract.list;
-    let params = [];
+    
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+    let params = [pageNumber, size];
     console.log(listType);
-    switch(listType) {
+    /*switch(listType) {
       case cntrListType.ALL: {
         params = [pageNumber, size]
         break;
@@ -726,17 +727,8 @@ export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize) => {
         params = [nc_trim(queryStr), pageNumber, PAGE_SIZE]
         break;
       }
-      /*
-      case txnListType.BY_ACCOUNT: {
-        let request = nc_trim(queryStr);
-        if (request == 0 || request == "0x0") {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        }
-
-        params = [request, pageNumber, PAGE_SIZE]
-        break;
-      }*/
-    }
+      
+    }*/
     network.request(ep, params)
     .then((response) => {
       store.dispatch(StoreCntrList.SetPaging(response));

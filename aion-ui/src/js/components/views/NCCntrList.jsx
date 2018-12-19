@@ -55,6 +55,7 @@ class NCCntrList extends Component
   requestPaging = (pageNumber, pageSize) => {
     const listType = this.props.cntrList.listType;
     const queryStr = this.props.cntrList.queryStr;
+    console.log(pageNumber + " " + pageSize)
     network.getCntrListPaging(listType, queryStr, pageNumber, pageSize);
   }
 
