@@ -103,7 +103,7 @@ export default class NCPagination extends Component
   render() {
     
     // pageNumber is zero indexed
-    let { calFilter=false, entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
+    let { calFilter=false, startDate, endDate, entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
 
     let isFirstPage = (pageNumber + 1 == 1);
     let isLastPage = (pageNumber + 1 == totalPages );
@@ -165,7 +165,7 @@ export default class NCPagination extends Component
             
             onClick={() => {
               this.serchDirection = SEARCH_DIR.BACKWARD;
-              this.props.onPageCallback(0,this.state.page_size,this.state.startDate,this.state.endDate);
+              this.props.onPageCallback(0,this.state.page_size,startDate,endDate);
             }}/>
             <Button 
             iconName="pt-icon-chevron-left" 
@@ -177,7 +177,7 @@ export default class NCPagination extends Component
             
             onClick={() => {
               this.serchDirection = SEARCH_DIR.BACKWARD;
-              this.props.onPageCallback(pageNumber - 1,this.state.page_size,this.state.startDate,this.state.endDate);
+              this.props.onPageCallback(pageNumber - 1,this.state.page_size,startDate,endDate);
             }}/>
           
           <span className="pt-text-muted context">
@@ -193,7 +193,7 @@ export default class NCPagination extends Component
 
                 if((parseInt(e.target.value)-1)<totalPages){
 
-                  this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,this.state.startDate,this.state.endDate);
+                  this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,startDate,endDate);
 
                 }
 
@@ -216,7 +216,7 @@ export default class NCPagination extends Component
 
             onClick={() => {
               this.serchDirection = SEARCH_DIR.FORWARD;
-              this.props.onPageCallback(pageNumber + 1,pageSize,this.state.startDate,this.state.endDate)
+              this.props.onPageCallback(pageNumber + 1,pageSize,startDate,endDate)
             }}/>
             <Button 
             
@@ -228,7 +228,7 @@ export default class NCPagination extends Component
 
             onClick={() => {
               this.serchDirection = SEARCH_DIR.FORWARD;
-              this.props.onPageCallback(totalPages-1,pageSize,this.state.startDate,this.state.endDate)
+              this.props.onPageCallback(totalPages-1,pageSize,startDate,endDate)
             }}/>
             
             
