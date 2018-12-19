@@ -35,7 +35,7 @@ import * as StoreRetrieve from 'stores/StoreRetrieve';
 
 import {BigNumber} from 'bignumber.js';
 import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
-import { tknListType, txnListType, blkListType, accListType, eventListType } from 'lib/NCEnums';
+import { cntrListType, tknListType, txnListType, blkListType, accListType, eventListType } from 'lib/NCEnums';
 
 //console.log('networkRequest'); 
 export const PAGE_SIZE = 25;
@@ -702,20 +702,21 @@ export const getCntrListTopLevel = () => {
 }
 
 export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize) => {
-  store.dispatch(StoreTknList.GetPaging());
+  store.dispatch(StoreCntrList.GetPaging());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = Object.assign({}, store.getState().tknList.response);
       response.page.number = pageNumber;
 
-      store.dispatch(StoreTknList.SetPaging(response));
+      store.dispatch(StoreCntrList.SetPaging(response));
     }, 500);
   }
   else {
-    const ep = network.endpoint.token.list[listType];
+    const ep = network.endpoint.contract.list;
     let params = [];
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+    console.log(listType);
     switch(listType) {
       case cntrListType.ALL: {
         params = [pageNumber, size]
@@ -738,11 +739,11 @@ export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize) => {
     }
     network.request(ep, params)
     .then((response) => {
-      store.dispatch(StoreTknList.SetPaging(response));
+      store.dispatch(StoreCntrList.SetPaging(response));
     })
     .catch((error) => {
       console.log(error);
-      store.dispatch(StoreTknList.SetPaging({}));
+      store.dispatch(StoreCntrList.SetPaging({}));
     });
   }
 }

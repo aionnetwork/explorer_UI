@@ -16,15 +16,22 @@ export default class NCPagination extends Component
 {
   constructor(props) {
     super(props);
-    this.state = {startDate:null, endDate:null, rangeChange:true};
+    this.state = {start:null, end:null,startDate:null, endDate:null, rangeChange:true
+    };
     this.loading = false;
     this.serchDirection = SEARCH_DIR.NONE;
+  }
+
+  componentDidMount() {
+    
+    //localStorage.getItem('p_size') && this.setState({'page_size':JSON.parse(localStorage.getItem('p_size'))});//this.state.page_size
+   
   }
 
   handleRangeChange = (date) => {
     //console.log(date[0]);
     this.setState({
-        startDate: date[0], endDate: date[1],rangeChange:false
+        start: date[0], end: date[1],rangeChange:false
       });
   }
   renderCalendarRange = () => {
@@ -34,7 +41,7 @@ export default class NCPagination extends Component
           formatDate={date => date.toLocaleString()}
           onChange={this.handleRangeChange}
           parseDate={str => new Date(str)}
-          value={[this.state.startDate, this.state.endDate]}
+          value={[this.state.start, this.state.end]}
         />  
         <Button             
             className="pt-minimal " 
@@ -44,8 +51,12 @@ export default class NCPagination extends Component
               this.setState({
                 rangeChange:true
               });
-              let start = new Date(this.state.startDate).getTime()/1000;
-              let end = new Date(this.state.endDate).getTime()/1000;
+              let start = new Date(this.state.start).getTime()/1000;
+              let end = new Date(this.state.end).getTime()/1000;
+              this.setState({
+                startDate:start,
+                endDate:end
+              });//this.state.startDate,this.state.endDate
               this.serchDirection = SEARCH_DIR.BACKWARD;
               this.props.onPageCallback(0,25, start, end);
             }}/>  
@@ -154,7 +165,7 @@ export default class NCPagination extends Component
             
             onClick={() => {
               this.serchDirection = SEARCH_DIR.BACKWARD;
-              this.props.onPageCallback(0);
+              this.props.onPageCallback(0,this.state.page_size,this.state.startDate,this.state.endDate);
             }}/>
             <Button 
             iconName="pt-icon-chevron-left" 
@@ -166,7 +177,7 @@ export default class NCPagination extends Component
             
             onClick={() => {
               this.serchDirection = SEARCH_DIR.BACKWARD;
-              this.props.onPageCallback(pageNumber - 1);
+              this.props.onPageCallback(pageNumber - 1,this.state.page_size,this.state.startDate,this.state.endDate);
             }}/>
           
           <span className="pt-text-muted context">
@@ -182,7 +193,7 @@ export default class NCPagination extends Component
 
                 if((parseInt(e.target.value)-1)<totalPages){
 
-                  this.props.onPageCallback(parseInt(e.target.value)-1);
+                  this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,this.state.startDate,this.state.endDate);
 
                 }
 
@@ -205,7 +216,7 @@ export default class NCPagination extends Component
 
             onClick={() => {
               this.serchDirection = SEARCH_DIR.FORWARD;
-              this.props.onPageCallback(pageNumber + 1)
+              this.props.onPageCallback(pageNumber + 1,pageSize,this.state.startDate,this.state.endDate)
             }}/>
             <Button 
             
@@ -217,7 +228,7 @@ export default class NCPagination extends Component
 
             onClick={() => {
               this.serchDirection = SEARCH_DIR.FORWARD;
-              this.props.onPageCallback(totalPages-1)
+              this.props.onPageCallback(totalPages-1,pageSize,this.state.startDate,this.state.endDate)
             }}/>
             
             

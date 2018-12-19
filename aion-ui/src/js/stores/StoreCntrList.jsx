@@ -17,6 +17,23 @@ export const SetTopLevel = (data) =>
   }
 }
 
+// Paging
+// ------ 
+export const GetPaging = (data) => 
+{
+  return {
+    type: 'CNTR_LIST_GET_PAGING',
+    data: data,
+  }
+}
+export const SetPaging = (data) => 
+{
+  return {
+    type: 'CNTR_LIST_SET_PAGING',
+    data: data,
+  }
+}
+
 let initialState_StoreBlkList = 
 {
   isLoadingTopLevel: false,
@@ -59,6 +76,17 @@ export function reducer_cntrList (state = initialState_StoreBlkList, action)
       //_state.response.txnInbound = action.data.txnInbound;
       //_state.response.txnOutbound = action.data.txnOutbound;
       
+      _state.momentUpdated = moment();
+      
+      return _state;
+    }
+    case 'CNTR_LIST_SET_PAGING':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPaging = false;
+      
+      _state.response = action.data;
       _state.momentUpdated = moment();
       
       return _state;

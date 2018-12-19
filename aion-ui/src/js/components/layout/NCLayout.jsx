@@ -70,8 +70,7 @@ class NCLayout extends Component {
   }
 
   componentWillMount() {
-    //console.log('componentWillMount');
-    //network.getKPIData(); 
+    
     localStorage.getItem('d_mode') && this.setState({darkMode:JSON.parse(localStorage.getItem('d_mode'))});
     network.getDashboardData();
     network.getKPIData(); 

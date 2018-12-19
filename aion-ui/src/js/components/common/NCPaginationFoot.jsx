@@ -52,13 +52,15 @@ export default class NCPaginationFoot extends Component
 
                          if((parseInt(e.target.value))<500){
 
+                            //localStorage.setItem('p_size', e.target.value);
+
                             this.props.onPageCallback(pageNumber,e.target.value);
 
                           }
 
                 
                 }} 
-                     defaultValue="default"   className="pt-input pt-select-input">
+                     defaultValue="pageSize"   className="pt-input pt-select-input">
                 <option value="25">25</option>
                 <option value="50">50</option>
                 <option value="75">75</option>
@@ -70,7 +72,7 @@ export default class NCPaginationFoot extends Component
         </div>
       }
       {
-        (totalPages > 1) &&
+        (totalPages > 1)&&(false) &&
         <div className="table-paging">
           <Button 
             
