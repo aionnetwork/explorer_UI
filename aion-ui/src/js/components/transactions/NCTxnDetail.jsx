@@ -64,7 +64,7 @@ export default class NCTxnDetail extends Component
 
     let parsedTxnLog = this.parseTxnLog(entity.transactionLog);
     let parsedInputData = this.parseInputData(entity.data);
-     console.log(entity.value);
+     //console.log(entity.value);
     let desc = 
     [
       {

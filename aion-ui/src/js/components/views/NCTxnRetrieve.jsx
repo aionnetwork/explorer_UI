@@ -29,11 +29,11 @@ class NCTxnRetrieve extends Component
 
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
-    console.log('componentWillMount');
+    //console.log('componentWillMount');
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    //console.log('componentDidMount');
     this.requestTopLevel();
   }
 
@@ -47,7 +47,7 @@ class NCTxnRetrieve extends Component
   }
 
   requestTopLevel = () => {
-    console.log('requestTopLevel');
+    //console.log('requestTopLevel');
     network.getTxnRetrieveTopLevel(this.props.params.txnId);
   }
 
