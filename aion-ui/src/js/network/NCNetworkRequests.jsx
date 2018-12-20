@@ -1117,7 +1117,7 @@ export const getTknListTopLevel = (listType, queryStr) => {
   }
 }
 
-export const getTknListPaging = (listType, queryStr, pageNumber, pageSize) => {
+export const getTknListPaging = (listType, queryStr, pageNumber, pageSize,start=0, end=0) => {
   store.dispatch(StoreTknList.GetPaging());
 
   if (network.NCNETWORK_REQUESTS_ENABLED) {
@@ -1134,7 +1134,7 @@ export const getTknListPaging = (listType, queryStr, pageNumber, pageSize) => {
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     switch(listType) {
       case tknListType.ALL: {
-        params = [pageNumber, size]
+        params = [pageNumber, size,start, end]
         break;
       }
       case tknListType.BY_BLOCK: {
