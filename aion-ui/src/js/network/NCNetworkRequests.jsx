@@ -701,7 +701,7 @@ export const getCntrListTopLevel = () => {
   }
 }
 
-export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize) => {
+export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize, start=0, end=0) => {
   store.dispatch(StoreCntrList.GetPaging());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -716,7 +716,7 @@ export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize) => {
     const ep = network.endpoint.contract.list;
     
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
-    let params = [pageNumber, size];
+    let params = [pageNumber, size, start, end];
     console.log(listType);
     /*switch(listType) {
       case cntrListType.ALL: {
