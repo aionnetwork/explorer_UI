@@ -115,16 +115,7 @@ export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0, star
       case blkListType.ALL: {
         params = [pageNumber, size, start, end]
         break; 
-      }/*
-      case blkListType.BY_ACCOUNT: {
-        let request = nc_sanitizeHex(queryStr);
-        if (request == 0) {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        }
-
-        params = [request, pageNumber, PAGE_SIZE]
-        break;
-      }*/
+      }
     }
     network.request(ep, params)
     .then((response) => {

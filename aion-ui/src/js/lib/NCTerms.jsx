@@ -4,10 +4,10 @@
 //.Account.
 export const Account = {
   LOADING:"Loading Account Details",
-  LOADING_LIST:"Loading In Bound Accounts Data",
+  LOADING_LIST:"Loading Accounts Data",
   LOADING_LIST_OUT:"Loading Out Bound Accounts Data",
   LOADING_LIST_MINER:"Loading Miner List",
-  LOADING_LIST_IN:"Loading Accounts Data",
+  LOADING_LIST_IN:" Loading In Bound Accounts Data",
   EMPTY_DATA_TITLE:"Account Not Found",
   EMPTY_DATA:"No Data Available for Account: ",
   EMPTY_DATA_LIST:"No accounts found.",  
@@ -64,6 +64,11 @@ export const Transaction = {
   INVALID_DATA_LIST:"Invalid Input. Please try again.",
   DATA_POLICY:"Showing results from the latest transactions. ",
   DATA_POLICY_CNTR:"Showing latest transactions for this contract.",
+  DATA_POLICY_ACC:"Showing recent accounts which received transactions, over last 10,000 transactions.",
+  DATA_POLICY_ACC_IN:"Showing recent accounts which received transactions, over last 10,000 transactions.",
+  DATA_POLICY_ACC_OUT:"Showing recent accounts which sent transactions, over last 10,000 transactions.",
+  DATA_POLICY_ACC_IN_EMPTY:"Showing recent accounts which received transactions, over last 10,000 transactions.",
+  DATA_POLICY_ACC_OUT_EMPTY:"No outbound account activity in last 24 hours",
   DATA_POLICY:"Showing results from the latest transactions. ",
   DATA_POLICY:"Showing latest transactions for this contract."
 };
