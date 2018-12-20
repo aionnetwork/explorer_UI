@@ -96,7 +96,7 @@ export const getBlkListTopLevel = (listType, queryStr) => {
   }
 }
 
-export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0) => {
+export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0, start=0, end=0) => {
   store.dispatch(StoreBlkList.GetPaging());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -113,7 +113,7 @@ export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0) => {
     let params = [];
     switch(listType) {
       case blkListType.ALL: {
-        params = [pageNumber, size, 'blockNumber,desc']
+        params = [pageNumber, size, start, end]
         break; 
       }/*
       case blkListType.BY_ACCOUNT: {
