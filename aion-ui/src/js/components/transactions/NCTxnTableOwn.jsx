@@ -98,6 +98,7 @@ export default class NCTxnTableOwn extends Component
       let toAddr = null;
       let blockTimestamp = null;
       let value = null;
+      let contractAddr = null;
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
@@ -112,6 +113,7 @@ export default class NCTxnTableOwn extends Component
         transactionHash = entity.transactionHash;
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
+        contractAddr = entity.contractAddr;
         blockTimestamp = entity.blockTimestamp;
         value = entity.value;
       }
@@ -158,14 +160,17 @@ export default class NCTxnTableOwn extends Component
       </Cell>;
       tableContent[i][6] = 
       <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
-      {
-        toAddr ?
-        <NCEntityLabel 
-          entityType={NCEntity.ACCOUNT} 
-          entityName={toAddr}
-          entityId={toAddr}
-          linkActive={isTo ? false : true}/>:
-        "Contract Creation"
+       {
+            toAddr ? 
+                <NCEntityLabel 
+                  entityType={NCEntity.ACCOUNT} 
+                  entityId={toAddr}/> :
+                contractAddr ?
+                <NCEntityLabel 
+                  entityType={NCEntity.CNTR} 
+                  entityId={contractAddr}/> :
+                "Contract Creation"     
+
       }
       </Cell>;
     });
