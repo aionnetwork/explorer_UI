@@ -14,7 +14,8 @@ export const Account = {
   INVALID_DATA:"Invalid Input. Please try again.",
   INVALID_DATA_LIST_IN:"No inbound account activity in last 24 hours",
   INVALID_DATA_LIST_OUT:"No outbound account activity in last 24 hours",
-  INVALID_DATA_LIST_MINER:"Miner list not available."
+  INVALID_DATA_LIST_MINER:"Miner list not available.",
+  DATA_POLICY:"Showing results from the latest transactions. ",
 };
 
 export const Block = {
@@ -35,6 +36,7 @@ export const Contract = {
   EMPTY_DATA_LIST_ACC:"No Contracts Found Involving Account", 
   EMPTY_DATA_TITLE:"Contract Not Found",
   INVALID_DATA:"Contract Not Available",
+  DATA_POLICY:"Showing results from the latest transactions. ",
   INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
 };
 
@@ -43,8 +45,9 @@ export const Token = {
   LOADING_LIST:"Loading Token Data",
   EMPTY_DATA:"Token Not Found",
   EMPTY_DATA_LIST:"No Tokens found.", 
-
+  DATA_POLICY:"Showing results from the latest transactions. ",
   INVALID_DATA:"Contract Not Available",
+  DATA_POLICY:"Showing results from the latest transactions. ",
   INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
 };
 
@@ -60,6 +63,7 @@ export const Transaction = {
   INVALID_DATA_LIST:"Invalid Input. Please try again.",
   DATA_POLICY:"Showing results from the latest transactions. ",
   DATA_POLICY_CNTR:"Showing latest transactions for this contract.",
+  DATA_POLICY:"Showing results from the latest transactions. ",
   DATA_POLICY:"Showing latest transactions for this contract."
 };
 
@@ -67,6 +71,7 @@ export const Chart = {
   LOADING:"Loading Chart Details",  
   EMPTY_DATA:"No Data Available to Display Chart",    
   INVALID_DATA:"Error. Unable to Display Chart",
+  DATA_POLICY:"Showing results from the latest transactions. "
 
 };
 
@@ -77,6 +82,7 @@ export const Search = {
   EMPTY_DATA:"No results found for: ",
   EMPTY_DATA_LIST:"No results found",  
   INVALID_DATA:"Invalid data",
+  DATA_POLICY:"Showing results from the latest transactions. ",
   INVALID_DATA_LIST:"Invalid data. Please try again."
 };
 
@@ -86,6 +92,7 @@ export const Paging = {
   EMPTY_DATA:"No result found for descriptor: ",
   EMPTY_DATA_LIST:"No data found.",  
   INVALID_DATA:"Syntax error. Data structure invalid.",
+  DATA_POLICY:"Showing results from the latest transactions. ",
   INVALID_DATA_LIST:"Invalid response. Please try again."
 };
 export const Page = {
@@ -94,6 +101,7 @@ export const Page = {
   EMPTY_DATA:"No data found for descriptor: ",
   EMPTY_DATA_LIST:"No data found.",  
   INVALID_DATA:"Syntax error: Invalid data structure.",
+  DATA_POLICY:"Showing results from the latest transactions. ",
   INVALID_DATA_LIST:"Invalid Input. Please try again."
 };
 
