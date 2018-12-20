@@ -98,11 +98,11 @@ export const endpoint = {
     list: {
       [blkListType['ALL']]: {
         link: '/aion/dashboard/getBlockList',
-        params: ['page', 'size']
+        params: ['page', 'size',"start","end"]
       },
       [blkListType['BY_ACCOUNT']]: {
         link: '/aion/dashboard/getBlocksMinedByAddress',
-        params: ['searchParam', 'page', 'size']
+        params: ['searchParam', 'page', 'size',"start","end"]
       }
     },
     detail: {
@@ -123,7 +123,7 @@ export const endpoint = {
       [txnListType['BY_ACCOUNT']]: {
         link: '/aion/dashboard/getTransactionsByAddress',
         //params: ['searchParam', 'transactionPage', 'transactionSize','token'],
-        params:["accountAddress","tokenAddress","page","size"]
+        params:["accountAddress","tokenAddress","page","size","start","end"]
       },
       [txnListType['BY_ACCOUNT_RANGE']]: {
         link: '/aion/dashboard/getTransactionsByAddressAndRange',
