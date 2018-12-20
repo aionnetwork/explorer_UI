@@ -198,7 +198,7 @@ class NCAccRetrieve extends Component
     const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
     const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
     const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
-    console.log(JSON.stringify(accObj));
+    //console.log(JSON.stringify(accObj));
     const isAccValid = nc_isObjectValid(accObj);
     const isAccEmpty = nc_isObjectEmpty(accObj, isAccValid);
 
@@ -227,7 +227,7 @@ class NCAccRetrieve extends Component
 
     const desc = nc_hexPrefix(store.queryStr);
 
-    console.log('cool:'+isAccValid+' '+isAccEmpty);
+    //console.log('cool:'+isAccValid+' '+isAccEmpty);
     const tokenList =  <div className="token-list hide">
         <span className="title">Token balances:</span><Popover
                 content={this.renderTokenMenu(tokens)}

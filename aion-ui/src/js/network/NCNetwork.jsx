@@ -114,7 +114,7 @@ export const endpoint = {
     list: {
       [txnListType['ALL']]: {
         link: '/aion/dashboard/getTransactionList',//getTransactionListByRange
-        params: ['page', 'size', 'start', 'end']
+        params: ['page', 'size']
       },
       [txnListType['ALL_RANGE']]: {
         link: '/aion/dashboard/getTransactionListByRange',//getTransactionListByRange/getTransactionList

@@ -104,7 +104,7 @@ export default class NCPagination extends Component
     
     // pageNumber is zero indexed
     let { calFilter=false, startDate, endDate, entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
-
+    console.log(startDate+" "+endDate);
     let isFirstPage = (pageNumber + 1 == 1);
     let isLastPage = (pageNumber + 1 == totalPages );
     let val = pageNumber + 1;

@@ -545,7 +545,7 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
   else {
     // get transaction list
     //const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
-    console.log(start+"##########"+end);
+    //console.log(start+"##########"+end);
 
     const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[4] : network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
     
@@ -554,7 +554,7 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
     let s = Math.round(((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : 0) ;
     let e = Math.round(isNaN(end) ? 0 : end);
 
-    console.log(s+"****"+tkn+"****"+e);
+    //console.log(s+"****"+tkn+"****"+e);
 
     //console.log('ep:'+JSON.stringify(ep));
     let params = []; 
