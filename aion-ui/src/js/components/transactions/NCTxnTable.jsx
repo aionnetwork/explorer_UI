@@ -98,6 +98,7 @@ export default class NCTxnTable extends Component
       let toAddr = null;
       let contractAddr = null;
       let blockTimestamp = null;
+      let timestamp = null;
       let value = null;
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
@@ -106,7 +107,7 @@ export default class NCTxnTable extends Component
         transactionHash = entity[0];
         fromAddr = entity[1];
         toAddr = entity[2];
-        blockTimestamp = entity[4];
+        timestamp = entity[4];
         value = entity[3];
       } else {
         blockNumber = entity.blockNumber;
@@ -129,7 +130,7 @@ export default class NCTxnTable extends Component
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
-      tableContent[i][1] = <Cell copy={ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+      tableContent[i][1] = <Cell copy={(timestamp!==null) ? timestamp :  moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{(timestamp!==null)? timestamp : moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
       tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }>{ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }</Cell>;
       tableContent[i][3] = 
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash}>
