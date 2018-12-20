@@ -25,7 +25,7 @@ export default class NCCntrDetail extends Component
       {
         field: "Address",
         value:  <NCEntityLabel
-                  entityType={ NCEntity.CNTR }
+                  entityType={ NCEntity.ACCOUNT }
                   entityId={ entity.contractAddr}
                   linkActive={ true }/>
       },
