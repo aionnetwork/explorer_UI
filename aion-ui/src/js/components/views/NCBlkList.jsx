@@ -97,11 +97,9 @@ class NCBlkList extends Component
         isDataValid={isDataValid} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Block Data"}
-        invalidDataStr={"Server provided an invalid response. Please try again."}
-        emptyDataStr={(listType == blkListType.ALL) ? 
-                "No blocks found. Blockchain server loading blocks." : 
-                "0 results found for account " + store.queryStr + "."}
+        loadingStr={MSG.Block.LOADING}
+        invalidDataStr={MSG.Block.LOADING}
+        emptyDataStr={MSG.Block.LOADING}
         
         page={page}
         marginTop={100}/>
