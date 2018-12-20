@@ -133,6 +133,7 @@ export default class NCBlkTable extends Component
     return (
       <NCTableReactPaginated
         data={data}
+        calFilter={true}
         onPageCallback={onPageCallback}
         isLoading={isLoading}
         isPaginated={isPaginated}

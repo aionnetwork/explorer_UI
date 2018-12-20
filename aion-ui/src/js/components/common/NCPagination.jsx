@@ -51,8 +51,9 @@ export default class NCPagination extends Component
               this.setState({
                 rangeChange:true
               });
-              let start = new Date(this.state.start).getTime()/1000;
-              let end = new Date(this.state.end).getTime()/1000;
+              let start = Math.round(new Date(this.state.start).getTime()/1000);
+              let end = Math.round(new Date(this.state.end).getTime()/1000);
+              console.log(end);
               this.setState({
                 startDate:start,
                 endDate:end
@@ -104,7 +105,7 @@ export default class NCPagination extends Component
     
     // pageNumber is zero indexed
     let { calFilter=false, startDate, endDate, entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
-    console.log(startDate+" "+endDate);
+    //console.log(startDate+" "+endDate);
     let isFirstPage = (pageNumber + 1 == 1);
     let isLastPage = (pageNumber + 1 == totalPages );
     let val = pageNumber + 1;
@@ -121,6 +122,8 @@ export default class NCPagination extends Component
         this.serchDirection = SEARCH_DIR.NONE;
       } 
     }
+
+    console.log(entityName);
     
     return (
       <div className="NCPagination">
@@ -129,8 +132,9 @@ export default class NCPagination extends Component
             {
               "Showing " + entityName + " " + 
               ((pageNumber * pageSize) + 1) + " - " + ((pageNumber * pageSize) + listSize) + 
-              " of " + totalElements + (isLatest ? " latest" : " found")
+              " of " + totalElements + (isLatest ? ((entityName!=="Contracts")&&(entityName!=="Tokens"))? "  for the last month" : "  for the last year" : " found")
             }
+          {/*con*/}
           </span>
         </div>
       {
