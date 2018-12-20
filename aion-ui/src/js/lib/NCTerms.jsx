@@ -23,8 +23,9 @@ export const Block = {
   LOADING_LIST:"Loading Block Data",
   EMPTY_DATA:"No block found for descriptor: ",
   EMPTY_DATA_LIST:"No blocks found. Blockchain server loading blocks.",  
+  EMPTY_DATA_LIST_MINER:"No mined blocks found.",  
   INVALID_DATA:"Syntax error: Invalid block structure.",
-  INVALID_DATA_LIST:"Server provided an invalid response. Please try again.",
+  INVALID_DATA_LIST:"Invalid Input. Please try again.",
   DATA_POLICY:"Showing results from the latest blocks. "
 };
 
@@ -37,7 +38,7 @@ export const Contract = {
   EMPTY_DATA_TITLE:"Contract Not Found",
   INVALID_DATA:"Contract Not Available",
   DATA_POLICY:"Showing results from the latest transactions. ",
-  INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
+  INVALID_DATA_LIST:"Invalid Input. Please try again."
 };
 
 export const Token = {
@@ -48,7 +49,7 @@ export const Token = {
   DATA_POLICY:"Showing results from the latest transactions. ",
   INVALID_DATA:"Contract Not Available",
   DATA_POLICY:"Showing results from the latest transactions. ",
-  INVALID_DATA_LIST:"Server provided an invalid response. Please try again."
+  INVALID_DATA_LIST:"Invalid Input. Please try again."
 };
 
 export const Transaction = {

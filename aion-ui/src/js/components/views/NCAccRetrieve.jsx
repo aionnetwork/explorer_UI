@@ -370,7 +370,7 @@ class NCAccRetrieve extends Component
       
       loadingStr={MSG.Block.LOADING}
       invalidDataStr={MSG.Block.INVALID_DATA} 
-      emptyDataStr={MSG.Block.EMPTY_DATA_LIST}
+      emptyDataStr={MSG.Block.EMPTY_DATA_LIST_MINER}
       marginTop={40}
 
       content={

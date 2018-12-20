@@ -97,9 +97,9 @@ class NCBlkList extends Component
         isDataValid={isDataValid} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={MSG.Block.LOADING}
-        invalidDataStr={MSG.Block.LOADING}
-        emptyDataStr={MSG.Block.LOADING}
+        loadingStr={MSG.Block.LOADING_LIST}
+        invalidDataStr={MSG.Block.INVALID_DATA_LIST}
+        emptyDataStr={MSG.Block.EMPTY_DATA_LIST}
         
         page={page}
         marginTop={100}/>
