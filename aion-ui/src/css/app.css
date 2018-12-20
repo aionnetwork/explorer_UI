@@ -2295,6 +2295,9 @@ pre {
   .NCTopLevelSearch {
     margin: auto;
   }
+  .NCHeader .row .navbar-group-right .NCTopLevelSearch .search-bar {
+    left: -30px;
+  }
   .NCKPIGroup {
     width: 100%;
     Margin-top: 150px;
