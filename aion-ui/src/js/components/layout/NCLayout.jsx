@@ -194,12 +194,29 @@ class NCLayout extends Component {
      return(<Popover
           content={
             <Menu className={mode+" NCNavMenu"}>
-              <MenuDivider title="Explorer" />
+              
+              <MenuItem
+                className="nav-option"
+                iconName={NCEntityInfo[NCEntity.BLOCK].icon}
+                text="Explorer"
+              >
               {this.renderExplorerMenu()} 
-              <MenuDivider title="Analytics" />
+              </MenuItem>
+              <MenuItem
+                className="nav-option"
+                iconName={NCEntityInfo[NCEntity.BLOCK].icon}
+                text="Analytics"
+              >
               {this.renderMetricMenu()} 
-              <MenuDivider title="Switch Network" />
+              </MenuItem>
+              <MenuItem
+                className="nav-option"
+                iconName={NCEntityInfo[NCEntity.BLOCK].icon}
+                text="Switch Network"
+              >
               {this.connectionMenuItemList} 
+              </MenuItem>
+              
             </Menu>
           }
           interactionKind={PopoverInteractionKind.CLICK}
