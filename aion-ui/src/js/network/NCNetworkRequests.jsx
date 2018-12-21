@@ -594,7 +594,7 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
   }
 }
 
-export const getAccRetrievePagingBlkList = (queryStr, pageNumber) => {
+export const getAccRetrievePagingBlkList = (queryStr, pageNumber, pageSize, start, end) => {
   store.dispatch(StoreAccRetrieve.GetPagingBlk());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -607,7 +607,7 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber) => {
   }
   else {
     const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, PAGE_SIZE];
+    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
     network.request(ep, params)
     .then((response) => {
       // ok, now make sure that the response you got is still valid
