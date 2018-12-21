@@ -98,11 +98,11 @@ export const endpoint = {
     list: {
       [blkListType['ALL']]: {
         link: '/aion/dashboard/getBlockList',
-        params: ['page', 'size',"start","end"]
+        params: ['page', 'size',"timestampStart", "timestampEnd"]//,"timestampStart", "timestampEnd"
       },
       [blkListType['BY_ACCOUNT']]: {
         link: '/aion/dashboard/getBlocksMinedByAddress',
-        params: ['searchParam', 'page', 'size',"start","end"]
+        params: ['searchParam', 'page', 'size',"timestampStart", "timestampEnd"]
       }
     },
     detail: {
@@ -114,21 +114,21 @@ export const endpoint = {
     list: {
       [txnListType['ALL']]: {
         link: '/aion/dashboard/getTransactionList',//getTransactionListByRange
-        params: ['page', 'size', 'start', 'end']
+        params: ['page', 'size',"timestampStart", "timestampEnd"]
       },
       [txnListType['ALL_RANGE']]: {
         link: '/aion/dashboard/getTransactionList',//getTransactionListByRange/getTransactionList
-        params: ['page', 'size', 'start', 'end']
+        params: ['page', 'size',"timestampStart", "timestampEnd"]
       },
       [txnListType['BY_ACCOUNT']]: {
         link: '/aion/dashboard/getTransactionsByAddress',
         //params: ['searchParam', 'transactionPage', 'transactionSize','token'],
-        params:["accountAddress","tokenAddress","page","size","start","end"]
+        params:["accountAddress","tokenAddress","page","size","timestampStart", "timestampEnd"]
       },
       [txnListType['BY_ACCOUNT_RANGE']]: {
         link: '/aion/dashboard/getTransactionsByAddressAndRange',
         //params: ['searchParam', 'transactionPage', 'transactionSize','token'],
-        params:["accountAddress","tokenAddress","page","size","start","end"]
+        params:["accountAddress","tokenAddress","page","size","timestampStart", "timestampEnd"]
       },
       [txnListType['BY_BLOCK']]: {
         link: '/aion/dashboard/findTransactionByBlockNumberOrBlockHash',
@@ -145,7 +145,7 @@ export const endpoint = {
     list: {
       [tknListType['ALL']]: {
         link: '/aion/dashboard/getTokenList',
-        params: ['page', 'size', 'start', 'end']
+        params: ['page', 'size',"timestampStart", "timestampEnd"]
       },
       [tknListType['BY_ACCOUNT']]: {
         link: '/aion/dashboard/getTokensByAddress',
