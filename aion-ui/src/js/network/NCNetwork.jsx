@@ -218,7 +218,7 @@ export const endpoint = {
       params:['type']
     }
   },
-  /*
+  /*//
     exportBlockTxns(g-recaptcha-response, blockNumber, rangeMin, rangeMax)
     exportBlockDetails(g-recaptcha-response, blockNumber)
     exportTokenHdrs(g-recaptcha-response, tokenAddress, rangeMin, rangeMax)
