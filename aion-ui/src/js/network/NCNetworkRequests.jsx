@@ -213,7 +213,7 @@ export const getTxnListTopLevel = (listType, queryStr) => {
 
     switch(listType) {
       case txnListType.ALL: {
-        params = [0, PAGE_SIZE, 'blockNumber,desc']
+        params = [0, PAGE_SIZE]
         break;
       }
       case txnListType.BY_BLOCK: {
@@ -269,8 +269,10 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start
     let params = [];
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
 
-    let s = Math.round(((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : 0) ;
-    let e = Math.round(isNaN(end) ? 0 : end);
+    //let s = Math.round(((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : 0) ;
+    //let e = Math.round(isNaN(end) ? 0 : end);
+    let e = Math.round((end!==null) ? end : new Date()/1000);
+    let s = Math.round(((start!==null)&&(start>0)) ? start : e-(43800*60) );
 
     switch(listType) {
       case txnListType.ALL: {
@@ -416,7 +418,7 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
       
       // we can save on a network request if the nonce is zero
       if (!isAccEmpty) {
-        
+        console.log('this call!');
         getAccRetrievePagingTxnList(request, requestb, 0);
         getAccRetrievePagingBlkList(request, 0);
         
@@ -550,13 +552,12 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
     const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[4] : network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
     
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+    
+    //let e = Math.round((end!==null) ? end : new Date()/1000);
+    //let s = Math.round(((start!==null)&&(start>0)) ? start : e-(43800*60) );
+    let e = Math.round((end!==null) ? end : new Date()/1000);
+    let s = Math.round(((start!==null)&&(start>0)) ? start : e-(43800*60) );
 
-    let s = Math.round(((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : 0) ;
-    let e = Math.round(isNaN(end) ? 0 : end);
-
-    //console.log(s+"****"+tkn+"****"+e);
-
-    //console.log('ep:'+JSON.stringify(ep));
     let params = []; 
     if(tkn!==null){
       params = [queryStr,tkn ,pageNumber, PAGE_SIZE];

@@ -35,6 +35,11 @@ export default class NCPagination extends Component
       });
   }
   renderCalendarRange = () => {
+
+    //let date = new Date();
+    //const today = date; 
+    //const launch = date.setTime(1524455999000); 
+
     return (  
       <div>
         <DateRangeInput
@@ -42,6 +47,8 @@ export default class NCPagination extends Component
           onChange={this.handleRangeChange}
           parseDate={str => new Date(str)}
           value={[this.state.start, this.state.end]}
+          minDate={new Date(2018, 3, 22)}
+          maxDate={new Date()}
         />  
         <Button             
             className="pt-minimal " 
@@ -110,6 +117,8 @@ export default class NCPagination extends Component
     let isLastPage = (pageNumber + 1 == totalPages );
     let val = pageNumber + 1;
 
+    
+
     //console.log(calFilter);
 
     if (isLoading != this.loading) 
@@ -123,7 +132,7 @@ export default class NCPagination extends Component
       } 
     }
 
-    console.log(entityName);
+    //console.log(entityName);
     
     return (
       <div className="NCPagination">
