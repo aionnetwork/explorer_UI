@@ -960,8 +960,14 @@ export const getDashboardData = () => {
 
 
     // connect to socket after initial data fetch
-    network.connectSocket((response) => {
+    console.log('Its socket time!');
+    /*network.connectSocket((response) => {
+      console.log(JSON.stringify(response));
       setDashboardData(response);
+    });*/
+
+    network.startInterval(ep,params,(response) => {
+        setDashboardData(response);
     });
   })
   .catch((error) => {
