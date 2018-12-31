@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Recaptcha from 'react-recaptcha';
 import NCNonIdealState from 'components/common/NCNonIdealState'
@@ -16,7 +17,7 @@ import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 //import NCExplorerContactUs from 'components/common/NCExplorerContactUs';
 import * as network from 'network/NCNetworkRequests';
 
-export default class NCContactsRetrieve extends Component
+class NCContactsRetrieve extends Component
 { 
 
   constructor(props) {
@@ -31,6 +32,7 @@ export default class NCContactsRetrieve extends Component
       recaptcha:'',
       button: true,
       range: [0,1000],
+      success: false,
       display:false
     } 
     this.captcha = this.captcha.bind(this);
@@ -101,9 +103,11 @@ export default class NCContactsRetrieve extends Component
 
    const { isLoading, isDataValid, isDataEmpty, loadingStr, invalidDataStr, emptyDataStr } = this.props;
 
-    // create a variable to store the component instance
+    console.log(JSON.stringify(this.props));// create a variable to store the component instance
     let recaptchaInstance;
- 
+    let success = this.state.success;
+    let message = <h1>Success! Feedback submitted.</h1>
+    console.log(success);
     // create a reset function
     const resetRecaptcha = () => {
       recaptchaInstance.reset();  
@@ -205,7 +209,7 @@ export default class NCContactsRetrieve extends Component
 
         /> 
 
-        {form}
+        {(success!==false) ? message : form}
       
       </div>;
     return (
@@ -229,7 +233,11 @@ export default class NCContactsRetrieve extends Component
   }
 }
 
-
+export default connect((state) => {
+  return ({
+    feedback: state.feedback,
+  })
+})(NCContactsRetrieve);
 
 
 

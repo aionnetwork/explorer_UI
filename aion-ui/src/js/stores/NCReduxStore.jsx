@@ -22,6 +22,7 @@ import { reducer_tknList } from 'stores/StoreTknList';
 import { reducer_tknRetrieve } from 'stores/StoreTknRetrieve';
 
 import { reducer_chartRetrieve } from 'stores/StoreChartRetrieve';
+import { reducer_contactRetrieve } from 'stores/StoreContactRetrieve';
 
 import { reducer_Retrieve } from 'stores/StoreRetrieve';
 // store -----------------------------------------------------------------
@@ -30,6 +31,7 @@ export const store = createStore(combineReducers(
 {
   kpi: reducer_kpis,
   dark: reducer_dark,
+  feedback: reducer_contactRetrieve,
 
   blkRt: reducer_blkRt,
   blkList: reducer_blkList,

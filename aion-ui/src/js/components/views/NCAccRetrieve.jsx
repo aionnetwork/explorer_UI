@@ -60,11 +60,13 @@ class NCAccRetrieve extends Component
 
   requestTopLevel = () => {
     //console.log('retrieve'+JSON.stringify(this.props.params));
+    //console.log(end);
     network.getAccRetrieveTopLevel(this.props.params.accId,this.props.params.tknId);
   }
 
   requestPagingTxnList = (pageNumber,pageSize,start,end) => {
     const queryStr = this.props.accRetrieve.queryStr;
+
     network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
   }
 

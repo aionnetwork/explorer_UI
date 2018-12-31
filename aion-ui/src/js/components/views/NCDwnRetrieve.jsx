@@ -6,6 +6,8 @@ import moment from 'moment';
 
 import Recaptcha from 'react-recaptcha';
 
+import { DateRangePicker, DateRangeInput } from "@blueprintjs/datetime";
+
 import { Position,RangeSlider, Intent, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 
@@ -31,7 +33,7 @@ class NCDwnRetrieve extends Component
 {
   constructor(props) {
     super(props);
-
+    var date = new Date();
     this.state = {
       isFetching: false,
       queryStr: '',
@@ -39,6 +41,9 @@ class NCDwnRetrieve extends Component
       recaptcha:'',
       button: true,
       range: [0,1000],
+      dateRange: [null,null],
+      start:null,
+      end:null,
       display:false
     } 
     this.captcha = this.captcha.bind(this);
@@ -63,8 +68,7 @@ class NCDwnRetrieve extends Component
 
   requestDownload = () => {
        //this.download('uyuy');
-       //network.getAccRetrieveCSV(this.props.params.accId, 'nothing');
-      
+       //network.getAccRetrieveCSV(this.props.params.accId, 'nothing');      
   }
 
   captcha(key){
@@ -74,18 +78,28 @@ class NCDwnRetrieve extends Component
   download(a){
        //console.log(a);
        this.setState({button:true,display:true});
-       network.getAccTxnRetrieveCSV(this.props.params.accId, a,this.state.range);
+       
+       network.getAccTxnRetrieveCSV(this.props.params.accId, a,this.state.start,this.state.end,this.state.range);
        //return;
   }
 
   verifyCallback(response) {
        //this.state.recaptcha = response;
+       console.log(response);
         this.setState({recaptcha:response,button:false});
    };
 
    handleValueChange = (range: NumberRange) => this.setState({ range });
+   
+   handleDateValueChange = (dateRange: NumberRange) => this.setState({ dateRange });
 
- 
+   handleRangeChange = (date) => {
+    //console.log(date[0]);
+    this.setState({
+        start: date[0], end: date[1],rangeChange:false
+      });
+  }
+
   render() {
     
     
@@ -104,7 +118,11 @@ class NCDwnRetrieve extends Component
     let button = this.state.button;
     let recaptcha= this.state.recaptcha;
     let range = this.state.range;
+    let dateRange = this.state.dateRange;
+    let start = this.state.start;
+    let end = this.state.end;
 
+    console.log(JSON.stringify(this.state.dateRange));
 
     return (
       <div className= {''} style = {style}>
@@ -120,7 +138,7 @@ class NCDwnRetrieve extends Component
           verifyCallback={this.verifyCallback.bind(this)}
         />}
         <br/><br/>
-        {(!this.state.display)&& <div><p>Please select transaction range.</p> <RangeSlider
+        {(!false)&& <div><p>Please select transaction range.</p> <RangeSlider
                     min={0}
                     max={1000000}
                     stepSize={10000}
@@ -131,6 +149,17 @@ class NCDwnRetrieve extends Component
                     vertical={false}
                 /></div>
         }
+        {(!this.state.display)&& <div><p>Please select transaction range.</p> 
+        <DateRangeInput
+          formatDate={date => date.toLocaleString()}
+          onChange={this.handleRangeChange}
+          parseDate={str => new Date(str)}
+          value={[start,end]}
+          minDate={new Date(2018, 3, 22)}
+          maxDate={new Date()}
+        />
+        </div>
+        }  
         {(!this.state.display)&&
         <Button  text='Download' disabled={button} onClick={() => {resetRecaptcha(); this.download(recaptcha)}} className = "pt-button pt-minimal" rightIconName="download" />
         }

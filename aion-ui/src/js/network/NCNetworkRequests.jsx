@@ -271,8 +271,13 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start
 
     //let s = Math.round(((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : 0) ;
     //let e = Math.round(isNaN(end) ? 0 : end);
-    let e = Math.round((end!==null) ? end : new Date()/1000);
-    let s = Math.round(((start!==null)&&(start>0)) ? start : e-(43800*60) );
+
+    //let e = Math.round((end!==null) ? end : new Date()/1000);
+    //let s = Math.round(((start!==null)&&(start>0)) ? start : e-(43800*60) );
+
+    let date = new Date();
+    let e = Math.floor((end!==null) ? end : (date.getTime()/1000)-date.getTimezoneOffset()*60);
+    let s = Math.ceil(((start!==null)&&(start>0)) ? start : e-(43800*60) );
 
     switch(listType) {
       case txnListType.ALL: {
@@ -455,7 +460,7 @@ searchParam1 = Account Address
 entityType = Account_Mined_Blocks
 rangeMin1 = some number
 rangeMax1 = some number*/
-export const getAccTxnRetrieveCSV = (acc,key,range) => {
+export const getAccTxnRetrieveCSV = (acc,key,start,end,range) => {
   store.dispatch(StoreAccRetrieve.GetTopLevel({
     queryStr: acc
   }));
@@ -483,7 +488,7 @@ export const getAccTxnRetrieveCSV = (acc,key,range) => {
     let paramsB = [];
     let paramsC = [];
 
-    params = [request,'',range[0],range[1],recaptcha];
+    params = [request,'',start,end,recaptcha];
     paramsA = [request,'','Account_Tokens'];
     paramsB = [request,'','Account_Transactions',0,999];
     paramsC = [request,'','Accoun_Mined_Blocks',0,999];
@@ -555,16 +560,19 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
     
     //let e = Math.round((end!==null) ? end : new Date()/1000);
     //let s = Math.round(((start!==null)&&(start>0)) ? start : e-(43800*60) );
-    let e = Math.round((end!==null) ? end : new Date()/1000);
-    let s = Math.round(((start!==null)&&(start>0)) ? start : e-(43800*60) );
 
+    let date = new Date();
+    let e = Math.floor((end!==null) ? end : (date.getTime()/1000)-date.getTimezoneOffset()*60);
+    let s = Math.ceil(((start!==null)&&(start>0)) ? start : e-(43800*60) );
+
+    
     let params = []; 
     if(tkn!==null){
       params = [queryStr,tkn ,pageNumber, PAGE_SIZE];
-    }else{
+    }else if(end!==null){
       params = [queryStr, null, pageNumber, size, s, e];
-
-      //console.log('we are here')
+    }else{
+      params = [queryStr, null, pageNumber, size, s];
     }
     
 
@@ -1417,7 +1425,7 @@ export const submitFeedback =(topic=null,message=null,key=null) => {
       
         console.log(JSON.stringify(response)); 
         //nc_getChartData(response,)
-        //store.dispatch(StoreChartRetrieve.SetChart(response));
+        store.dispatch(StoreContactRetrieve.SetData(response));
     
     })
     .catch((error) => {

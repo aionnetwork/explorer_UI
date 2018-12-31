@@ -8,6 +8,8 @@ import ms from 'ms';
 import appConfig from '../../config.json';
 import ENV from '../../env.json';
 
+import qs from 'qs';
+
 export const NCNETWORK_REQUESTS_ENABLED = true;
 //export let NETWORK_LIST = [];
 
@@ -240,7 +242,7 @@ export const endpoint = {
     },
     accountTxns:{
       link:'/downloads/exportAccountTxns', //exportAccountTxns(g-recaptcha-response, accountAddress, tokenAddress, rangeMin, rangeMax)
-      params:['accountAddress','tokenAddress', 'rangeMin','rangeMax','g-recaptcha-response']
+      params:['accountAddress','tokenAddress',"timestampStart", "timestampEnd",'g-recaptcha-response']
     }
   },
   contact:{
@@ -314,6 +316,20 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
         });
     }
 
+      console.log(endpoint.link);
+      console.log(generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base));
+
+      const url = generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base)+endpoint.link;
+      const options = {
+        method: 'POST',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: qs.stringify(args.params),
+        url,
+      };
+
+      axios(options);
+
+    /*
     if (pnet) {
       //console.log('post');
       pnet.post(endpoint.link, args)
@@ -334,6 +350,8 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
     } else {
       reject("ERR: API not initialized");
     }
+    */
+
   });
 }
 //eRequest('pro-api.coinmarketcap.com/v1/cryptocurrency/',true,'/listings/latest','{start: 1,limit: 5,convert: "USD"}',"{'X-CMC_PRO_API_KEY': 'e2738416-a8f2-4b17-ba40-eb376dff4d15'}");
