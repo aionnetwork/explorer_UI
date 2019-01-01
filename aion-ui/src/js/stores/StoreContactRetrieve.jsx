@@ -14,13 +14,11 @@ export const SetData = (data) =>
 
 let initialState_StoreContactRetrieve = 
 {
-  isLoadingPagingList: false,
-  isLoading: false, 
   
-  queryStr: "",
-
-  response: "Error!",
-  momentUpdated: null
+  isLoading: false, 
+  response: false,
+  message: "success!!"
+  
 };
 
 export function reducer_contactRetrieve (state = initialState_StoreContactRetrieve, action) 
@@ -33,9 +31,8 @@ export function reducer_contactRetrieve (state = initialState_StoreContactRetrie
       let _state = Object.assign({}, state);
       
       _state.isLoading = false; 
-      
-      _state.response = "Success!";
-      _state.momentUpdated = moment();
+      _state.response = true;
+      _state.message = "success!!";
       
       return _state;
     }

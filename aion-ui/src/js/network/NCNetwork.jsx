@@ -327,7 +327,16 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
         url,
       };
 
-      axios(options);
+      
+      console.log('before');
+
+      axios(options).then(function (response) {
+          console.log('during');
+
+          console.log(JSON.stringify(response.data));
+      });
+      
+      console.log('after');
 
     /*
     if (pnet) {

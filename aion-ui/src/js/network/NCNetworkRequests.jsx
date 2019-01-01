@@ -1422,15 +1422,17 @@ export const submitFeedback =(topic=null,message=null,key=null) => {
     let params = [post_topic, post_message, key];
     network.postRequest(ep, params, true)
     .then((response) => {
-      
-        console.log(JSON.stringify(response)); 
-        //nc_getChartData(response,)
+        
+
+        console.log(JSON.stringify(response));
+        console.log('post working');
+        
         store.dispatch(StoreContactRetrieve.SetData(response));
     
     })
     .catch((error) => {
       console.log(error);
-      /*store.dispatch(StoreChartRetrieve.SetChart({
+      console.log('post not working');/*store.dispatch(StoreChartRetrieve.SetChart({
         
       }));*/
     });

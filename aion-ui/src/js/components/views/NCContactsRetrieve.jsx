@@ -103,10 +103,10 @@ class NCContactsRetrieve extends Component
 
    const { isLoading, isDataValid, isDataEmpty, loadingStr, invalidDataStr, emptyDataStr } = this.props;
 
-    console.log(JSON.stringify(this.props));// create a variable to store the component instance
+    console.log(JSON.stringify(this.props.feedback));// create a variable to store the component instance
     let recaptchaInstance;
-    let success = this.state.success;
-    let message = <h1>Success! Feedback submitted.</h1>
+    let success = this.props.feedback.response;
+    let message = <p className="center">{this.props.feedback.message}</p>
     console.log(success);
     // create a reset function
     const resetRecaptcha = () => {
