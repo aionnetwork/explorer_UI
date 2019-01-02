@@ -79,6 +79,7 @@ class NCContactsRetrieve extends Component
     console.log('feedback!');
     event.preventDefault();
     network.submitFeedback(this.state.topic,this.state.text,this.state.recaptcha);
+    this.setState({success:true});
   }
 
   captcha(key){
@@ -103,11 +104,16 @@ class NCContactsRetrieve extends Component
 
    const { isLoading, isDataValid, isDataEmpty, loadingStr, invalidDataStr, emptyDataStr } = this.props;
 
-    console.log(JSON.stringify(this.props.feedback));// create a variable to store the component instance
+    //console.log(JSON.stringify(this.props.feedback));// create a variable to store the component instance
     let recaptchaInstance;
-    let success = this.props.feedback.response;
-    let message = <p className="center">{this.props.feedback.message}</p>
-    console.log(success);
+    const contact_success ={margin:'auto', textAlign:'center', border:'#ccc solid 1px',padding:'10px',borderRadius:'5px',maxWidth:'500px'}
+    
+    let success = this.state.success;//this.props.feedback.response;
+    let message = <div style={contact_success}>
+                    <h4 className="success">Success!</h4>
+                    <p className="center">Thank you for your feedback.</p>
+                  </div>
+    //console.log(success);
     // create a reset function
     const resetRecaptcha = () => {
       recaptchaInstance.reset();  
