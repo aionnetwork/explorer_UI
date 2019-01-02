@@ -31,7 +31,7 @@ import * as StoreChartRetrieve from 'stores/StoreChartRetrieve';
 
 import * as StoreRetrieve from 'stores/StoreRetrieve';
 
-
+import * as StoreContactRetrieve from 'stores/StoreContactRetrieve';
 
 import {BigNumber} from 'bignumber.js';
 import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
@@ -1418,23 +1418,18 @@ export const submitFeedback =(topic=null,message=null,key=null) => {
     let post_message = nc_trim(message);
     // get block details
     const ep = network.endpoint.contact.detail;
-     
+        
     let params = [post_topic, post_message, key];
     network.postRequest(ep, params, true)
     .then((response) => {
-        
-
-        console.log(JSON.stringify(response));
-        console.log('post working');
         
         store.dispatch(StoreContactRetrieve.SetData(response));
     
     })
     .catch((error) => {
       console.log(error);
-      console.log('post not working');/*store.dispatch(StoreChartRetrieve.SetChart({
-        
-      }));*/
+      store.dispatch(StoreContactRetrieve.SetData({}));
+      
     });
   }
 

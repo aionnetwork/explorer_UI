@@ -6,7 +6,7 @@ import Recaptcha from 'react-recaptcha';
 import NCNonIdealState from 'components/common/NCNonIdealState'
 
 import moment from 'moment';
-import { TextArea, FormGroup, Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
+import { TextArea, FormGroup, Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind, Toaster, ToasterPosition} from "@blueprintjs/core";
 
 import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCBlkDetail from 'components/blocks/NCBlkDetail';
@@ -26,8 +26,9 @@ class NCContactsRetrieve extends Component
     this.state = {
       isFetching: false,
       topic: '',
+      notice:'',
       type: '',
-      
+      text:'',
       value:'',
       recaptcha:'',
       button: true,
@@ -76,11 +77,28 @@ class NCContactsRetrieve extends Component
 
   handleSubmit(event) {
     //alert('A name was submitted: ' + this.state.value);
-    console.log('feedback!');
+    console.log('feedback!'+this.state.text);
     event.preventDefault();
-    network.submitFeedback(this.state.topic,this.state.text,this.state.recaptcha);
-    this.setState({success:true});
+
+    if(this.state.topic==''||this.state.text==''||this.state.recaptcha==''){
+      this.setState({notice:'Please ensure that all fields are completed.'});
+      this.addToast({ icon: "warning-sign", intent: Intent.DANGER, message: "Please ensure that all fields are completed." })
+    }else{
+      this.setState({success:true});
+      network.submitFeedback(this.state.topic,this.state.text,this.state.recaptcha);
+    }
   }
+
+  addToast(t: IToastProps) {
+        
+        const toast = Toaster.create({
+          position: Position.TOP,
+        });
+
+        t.className = '';
+        t.timeout = 5000;
+        toast.show(t);
+    }
 
   captcha(key){
       this.setState({recaptcha:response});
@@ -138,6 +156,7 @@ class NCContactsRetrieve extends Component
     
    const form =  <div style={contact_container}>
         <form>
+            
             <FormGroup
                 
                 label="Topic"

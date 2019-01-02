@@ -316,8 +316,8 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
         });
     }
 
-      console.log(endpoint.link);
-      console.log(generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base));
+      //console.log(endpoint.link);
+      //console.log(generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base));
 
       const url = generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base)+endpoint.link;
       const options = {
@@ -330,11 +330,16 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
       
       console.log('before');
 
-      axios(options).then(function (response) {
-          console.log('during');
-
-          console.log(JSON.stringify(response.data));
-      });
+      axios(options).then((response) => {
+    
+        console.log(JSON.stringify(response.data));
+        resolve(response.data);
+    
+      })
+      .catch((error) => {
+          console.log(error); 
+          reject("ERR: Bad API get response.");   
+       });
       
       console.log('after');
 
