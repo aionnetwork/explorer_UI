@@ -6,7 +6,9 @@ import Recaptcha from 'react-recaptcha';
 import NCNonIdealState from 'components/common/NCNonIdealState'
 
 import moment from 'moment';
+
 import { TextArea, FormGroup, Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind, Toaster, ToasterPosition} from "@blueprintjs/core";
+import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
 
 import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCBlkDetail from 'components/blocks/NCBlkDetail';
@@ -80,7 +82,7 @@ class NCContactsRetrieve extends Component
     console.log('feedback!'+this.state.text);
     event.preventDefault();
 
-    if(this.state.topic==''||this.state.text==''||this.state.recaptcha==''){
+    if(nc_trim(this.state.topic)==''||nc_trim(this.state.text)==''||nc_trim(this.state.recaptcha)==''){
       this.setState({notice:'Please ensure that all fields are completed.'});
       this.addToast({ icon: "warning-sign", intent: Intent.DANGER, message: "Please ensure that all fields are completed." })
     }else{
