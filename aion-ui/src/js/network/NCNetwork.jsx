@@ -332,12 +332,11 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
 
       axios(options).then((response) => {
     
-        console.log(JSON.stringify(response.data));
         resolve(response.data);
     
       })
       .catch((error) => {
-          console.log(error); 
+          //console.log(JSON.stringify(error)); 
           reject("ERR: Bad API get response.");   
        });
       
