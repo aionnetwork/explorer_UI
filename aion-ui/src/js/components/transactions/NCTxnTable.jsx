@@ -46,7 +46,7 @@ export default class NCTxnTable extends Component
         name: "Value",
         isSortable: false,
         isFilterable: false,
-        width: 100,
+        width: 150,
         flex: false,
         objPath: null,
       },
@@ -131,7 +131,7 @@ export default class NCTxnTable extends Component
           entityId={blockNumber}/> 
       </Cell>;
       tableContent[i][1] = <Cell copy={(timestamp!==null) ? timestamp :  moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{(timestamp!==null)? timestamp : moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }>{ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }</Cell>;
+      tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }>{ value ? value: 0 }</Cell>;
       tableContent[i][3] = 
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash}>
         <NCEntityLabel 

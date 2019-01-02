@@ -18,8 +18,8 @@ export default class NCAccDetail extends Component
   render() {
     let { entity, tokenList } = this.props;
     
-    //let balance = nc_numFormatterACSensitive(entity.balance);
-    let balance = nc_decimalPrettify(entity.balance);
+    let bal = nc_numFormatterACSensitive(entity.balance);
+    let balance = nc_decimalPrettify(bal);
 
     let contract = entity.contract ? 
       {

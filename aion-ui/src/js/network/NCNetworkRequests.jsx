@@ -968,7 +968,7 @@ export const getDashboardData = () => {
 
 
     // connect to socket after initial data fetch
-    console.log('Its socket time!');
+    //console.log('Its socket time!');
     /*network.connectSocket((response) => {
       console.log(JSON.stringify(response));
       setDashboardData(response);
