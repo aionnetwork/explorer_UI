@@ -42,12 +42,17 @@ export const Contract = {
 };
 
 export const Token = {
+  TITLE:"Token",
   LOADING:"Loading Token Details",
   LOADING_LIST:"Loading Token Data",
   EMPTY_DATA:"Token Not Found",
+  EMPTY_DATA_TITLE:"No Token",
+  EMPTY_DATA_STR:"No Transaction found for descriptor: ",
+  EMPTY_DATA_BY_ACCOUNT:"No tokens found involving account ",
   EMPTY_DATA_LIST:"No Tokens found.", 
-  DATA_POLICY:"Showing results from the latest transactions. ",
-  INVALID_DATA:"Contract Not Available",
+  DATA_POLICY:"Showing results from the latest tokens. ",
+  INVALID_DATA_TITLE:"No Token",
+  INVALID_DATA:"Token Not Available",
   DATA_POLICY:"Showing results from the latest transactions. ",
   INVALID_DATA_LIST:"Invalid Input. Please try again."
 };
@@ -56,7 +61,7 @@ export const Transaction = {
   LOADING:"Loading Transaction Details",
   LOADING_LIST:"Loading Transaction Data",
   EMPTY_DATA:"No Transaction found for descriptor: ",
-  EMPTY_DATA_TITLE:"No transactions",  
+  EMPTY_DATA_TITLE:"No Transactions",  
   EMPTY_DATA_LIST:"No transactions found.", 
   EMPTY_DATA_LIST_ACC:"No Transactions Found Involving Account", 
   EMPTY_DATA_LIST_CNTR:"No Transactions Found Found For This Contract",  

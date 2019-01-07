@@ -17,6 +17,7 @@ import NCExplorerSection from 'components/common/NCExplorerSection';
 import NCNonIdealState from 'components/common/NCNonIdealState';
 
 import * as StoreTknRetrieve from 'stores/StoreTknRetrieve';
+import * as MSG from 'lib/NCTerms';
 
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
@@ -114,12 +115,12 @@ class NCTknRetrieve extends Component
       isDataValid={truth}
       isDataEmpty={!truth} 
 
-      emptyDataTitle={"Account Not Found"}
-      invalidDataTitle={"Account Service Unavailable"}
+      emptyDataTitle={MSG.Token.EMPTY_DATA_TITLE}
+      invalidDataTitle={MSG.Token.INVALID_DATA_TITLE}
       
-      loadingStr={"Loading Account"}
-      invalidDataStr={"Account Service Unavailable. Please try again."} 
-      emptyDataStr={"No Data Available for Account: "+name}
+      loadingStr={MSG.Token.LOADING}
+      invalidDataStr={MSG.Token.INVALID_DATA} 
+      emptyDataStr={MSG.Token.EMPTY_DATA_STR + name}
       marginTop={20}
       marginBottom={30}
 
@@ -142,8 +143,8 @@ class NCTknRetrieve extends Component
       isDataValid={isTxnListValid}
       isDataEmpty={isTxnListEmpty}  
       
-      loadingStr={"Loading Transactions"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
+      loadingStr={MSG.Transaction.LOADING}
+      invalidDataStr={MSG.Transaction.INVALID_DATA} 
       emptyDataStr={
         <span>No transactions found for this token. <br/>To retrieve older data, use our&nbsp;
           <Tooltip
@@ -181,8 +182,8 @@ class NCTknRetrieve extends Component
       isDataValid={isAccListValid}
       isDataEmpty={isAccListEmpty} 
       
-      loadingStr={"Loading Accounts"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
+      loadingStr={MSG.Account.LOADING}
+      invalidDataStr={MSG.Account.INVALID_DATA} 
       emptyDataStr={
         <span>No accounts found for this token. <br/>To retrieve older data, use our&nbsp;
           <Tooltip
@@ -212,14 +213,7 @@ class NCTknRetrieve extends Component
           subtitle={tkn}/>  
         { tknBalanceSection }
         <hr className="nc-hr"/>
-        {
-          (false) &&
-          <NCNonIdealState
-            paddingTop={80}
-            icon={"pt-icon-offline"}
-            title={"Unavailable In Lite-Mode"}
-            description={"Account transactions & blocks-mined not available in lite-mode."}/>
-       }
+       
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="transfers" title="Transfers" panel={txnListSection}/>
@@ -237,9 +231,9 @@ class NCTknRetrieve extends Component
         isDataValid={true} 
         isDataEmpty={false}
         
-        loadingStr={"Loading Token Details"}
-        invalidDataStr={"Token Service Unavailable. Token data invalid."}
-        emptyDataStr={"No token found for descriptor: " + name + "."}
+        loadingStr={MSG.Token.LOADING}
+        invalidDataStr={MSG.Token.INVALID_DATA}
+        emptyDataStr={MSG.Token.EMPTY_DATA_STR + name + "."}
         
         page={page}/>
     );

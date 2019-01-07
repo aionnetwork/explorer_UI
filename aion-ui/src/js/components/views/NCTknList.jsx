@@ -9,7 +9,7 @@ import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCTKNExplorerHead from 'components/common/NCTKNExplorerHead';
 
 import * as StoreTknList from 'stores/StoreTknList';
-
+import * as MSG from 'lib/NCTerms';
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 
 import { tknListType } from 'lib/NCEnums';
@@ -94,15 +94,15 @@ class NCTknList extends Component
       }
     }
 
-    let emptyDataStr = "No transactions found. Dashboard server loading blocks."; // txnListType.ALL
+    let emptyDataStr = ""; // txnListType.ALL
     switch(listType) 
     {
       case tknListType.ALL: {
-        emptyDataStr = "No tokens found " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
+        emptyDataStr = MSG.Token.EMPTY_DATA_LIST;
         break;
       }
       case tknListType.BY_ACCOUNT: {
-        emptyDataStr = "No tokens found involving account "+ nc_hexPrefix(store.queryStr) + "."
+        emptyDataStr = MSG.Token.EMPTY_DATA_BY_ACCOUNT + nc_hexPrefix(store.queryStr) + "."
         break;
       }
     }
@@ -129,8 +129,8 @@ class NCTknList extends Component
         isDataValid={true} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Token Data"}
-        invalidDataStr={"Server provided an invalid response. Please try again."}
+        loadingStr={MSG.Token.LOADING}
+        invalidDataStr={MSG.Token.INVALID_DATA}
         emptyDataStr={emptyDataStr}
         
         page={page}

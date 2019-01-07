@@ -29,25 +29,30 @@ This is a sigle page application that consumes the aion explorer api service; Th
    ```
 ## Dashboard Messages
 
+There are three (3) main messaging states of the dashboard: Loading, Empty & Invalid
+
 ### Loading
 
-Data is being retrieved from the server
+Data is being retrieved from the server.
 
 ### Empty
 
-No data was found for the specified parameters
+No data was found for the specified parameters.
 
 ### Invalid
 
-The parameters entered are incorrect 
+The parameters entered are incorrect. 
 
 # Version
 
 ## 2.0.1
 
-- feedback form
-- mobile responsive
-- footer
-- improved messaging
-- easy copy (rightclick)
+- Feedback form added
+- Improvement in mobile responsiveness 
+- Footer expanded it include other links
+- Improved dashboard messaging
+- Easy copy table cells(rightclick)
+- Links in transaction details for contract creation
+- Paging contract list
+- Date filter for paging tables
 - dark mode
