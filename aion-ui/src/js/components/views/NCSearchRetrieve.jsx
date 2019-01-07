@@ -76,11 +76,7 @@ class NCSearchRetrieve extends Component
   render() {
 
     const store = this.props.searchRetrieve;
-    console.log("page Data for retrieve: "+JSON.stringify(store));
-
     const isWeb3 = (store.response) ? store.response.web3 : false;
-
-    //console.log("page Data for retrieve 2: "+JSON.stringify(this.props));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = false//(store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
