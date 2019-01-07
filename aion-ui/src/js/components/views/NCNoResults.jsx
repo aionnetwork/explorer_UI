@@ -1,13 +1,14 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import NCNonIdealState from 'components/common/NCNonIdealState'
+import * as MSG from 'lib/NCTerms';
 
 export default class NCNoResults extends Component
 { 
   render() {  
-    let msg = "No blocks, transactions or accounts found";
+    let msg = MSG.Search.EMPTY_DATA_LIST;
     if (this.props.params.query) 
-      msg += " for query: \"" + this.props.params.query + "\"."
+      msg += MSG.Search.EMPTY_DATA+"  \"" + this.props.params.query + "\"."
     else
       msg += "."
 
@@ -16,7 +17,7 @@ export default class NCNoResults extends Component
         <NCNonIdealState
           paddingTop={150}
           icon={"pt-icon-geosearch"}
-          title={"No Search Results Found"}
+          title={MSG.Search.EMPTY_DATA_TITLE}
           home={true}
           description={msg}/>
       </div>
