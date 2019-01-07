@@ -25,12 +25,9 @@ class NCBlkRetrieve extends Component
   }
 
   submitQuery(num){
-      //console.log('querry!!!!');
       let entity = this.props.blkRetrieve.response.blk;
 
       let str = this.props.params.blkId + num;
-
-      //console.log("query for entity: " + NCEntityInfo[entity].name + " for query string: " + queryStr);
       nc_LinkToEntity(this.props.blkRetrieve.response.blk, this.props.params.blkId);
   }
 
@@ -56,8 +53,7 @@ class NCBlkRetrieve extends Component
   }
 
   requestPagingTxnList = (pageNumber) => {
-    //const queryStr = this.props.blkRetrieve.queryStr;
-    //network.getBlkRetrievePagingTxnList(queryStr, pageNumber);
+     //network.getBlkRetrievePagingTxnList(queryStr, pageNumber);
   }
 
   render() {
@@ -70,15 +66,13 @@ class NCBlkRetrieve extends Component
     const blkObj = (store.response) ? store.response.blk : null;
     const txnList = (store.response) ? store.response.txn : null;
 
-    //console.log(blkObj);
+    
 
     let isBlkValid = nc_isObjectValid(blkObj);
     let isBlkEmpty = nc_isObjectEmpty(blkObj, isBlkValid);
 
     let isTxnListValid = nc_isListValid(txnList);
     let isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-
-    //console.log(JSON.stringify(this.props.params.blkId));
 
     let prev = parseInt(this.props.params.blkId)-1;
     let next = parseInt(this.props.params.blkId)+1;
@@ -151,7 +145,7 @@ class NCBlkRetrieve extends Component
         
       </div>;
 
-      console.log({isBlkValid});
+      
 
     return (
       <NCExplorerPage

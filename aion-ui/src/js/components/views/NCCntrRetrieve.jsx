@@ -25,8 +25,6 @@ import * as MSG from 'lib/NCTerms';
 import * as StoreCntrRetrieve from 'stores/StoreCntrRetrieve';
 
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
-//import { nc_FindEntity, nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
-
 import * as network from 'network/NCNetworkRequests';
 
 class NCCntrRetrieve extends Component
@@ -59,16 +57,12 @@ class NCCntrRetrieve extends Component
   }
 
   requestTopLevel = () => {
-    //console.log('contract:'+this.props.params.cntrId);
-    //console.log(JSON.stringify(this.props));
-
     network.getCntrRetrieveTopLevel(this.props.params.cntrId);
   }
 
   requestPagingTxnList = (pageNumber) => {
     const queryStr = this.props.cntrRetrieve.queryStr;
-    //network.getCntrRetrievePagingTxnList(queryStr, pageNumber);
-    network.getAccRetrievePagingTxnList(queryStr, pageNumber);
+     network.getAccRetrievePagingTxnList(queryStr, pageNumber);
   }
 
   requestPagingBlkList = (pageNumber) => {
@@ -94,13 +88,12 @@ class NCCntrRetrieve extends Component
       let token = [];
       token.name = "token";
       token.value = tkn;
-      //console.log("changing token");
+      
       this.setState({
         queryStr: ''
       }, () => {
-        console.log("Changing token to: " + token);
         nc_LinkToEntityWithParam(entity, queryStr, token);
-        //nc_FindEntity(queryStr);
+        
       });
     }
     

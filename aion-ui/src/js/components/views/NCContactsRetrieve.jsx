@@ -50,9 +50,7 @@ class NCContactsRetrieve extends Component
   }
 
   verifyCallback(response) {
-       //this.state.recaptcha = response;
-        console.log(response);
-        this.setState({recaptcha:response});
+       this.setState({recaptcha:response});
    };
 
    handleTypeChange(event) {
@@ -66,8 +64,7 @@ class NCContactsRetrieve extends Component
     
   }
   handleTextChange(event) {
-    //console.log('change');
-    this.setState({text : event.target.value});
+   this.setState({text : event.target.value});
     
   }
 
@@ -78,8 +75,6 @@ class NCContactsRetrieve extends Component
   }
 
   handleSubmit(event) {
-    //alert('A name was submitted: ' + this.state.value);
-    console.log('feedback!'+this.state.text);
     event.preventDefault();
 
     if(nc_trim(this.state.topic)==''||nc_trim(this.state.text)==''||nc_trim(this.state.recaptcha)==''){
@@ -124,7 +119,6 @@ class NCContactsRetrieve extends Component
 
    const { isLoading, isDataValid, isDataEmpty, loadingStr, invalidDataStr, emptyDataStr } = this.props;
 
-    //console.log(JSON.stringify(this.props.feedback));// create a variable to store the component instance
     let recaptchaInstance;
     const contact_success ={margin:'auto', textAlign:'center', border:'#ccc solid 1px',padding:'10px',borderRadius:'5px',maxWidth:'500px'}
     
@@ -133,8 +127,7 @@ class NCContactsRetrieve extends Component
                     <h4 className="success">Success!</h4>
                     <p className="center">Thank you for your feedback.</p>
                   </div>
-    //console.log(success);
-    // create a reset function
+    
     const resetRecaptcha = () => {
       recaptchaInstance.reset();  
     };
@@ -179,20 +172,7 @@ class NCContactsRetrieve extends Component
                
               </select>
             </FormGroup>
-            {/*<FormGroup
-               
-                label="Type"
-                labelFor="type-input"
-                labelInfo="(required)"
-            >
-              <select  id="type-input" onChange={this.handleTypeChange} defaultValue="default"  style={contact_input} className="pt-input pt-large" >
-                <option value="default">Choose an item...</option>
-                <option value="bug">Bug</option>
-                <option value="feature">Feature Request</option>
-                <option value="suggestions">Suggestion</option>
-                
-              </select>
-            </FormGroup>*/}
+            
             <FormGroup
                 
                 label="Message"
@@ -221,7 +201,7 @@ class NCContactsRetrieve extends Component
             />}
 
             
-            {/*<input type="submit" value="Submit" />*/}
+           
             <Button type="submit" intent="success" onClick={this.handleSubmit} text="Submit" />
         </form>  
         </div>;

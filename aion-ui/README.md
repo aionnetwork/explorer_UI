@@ -2,7 +2,7 @@
 
 ### What's Here?
 
-This is a sigle page application that consumes the aion explorer api service; This application is the main user interface to explor the Aion blockchain for blocks, transactions and accounts.
+This is a sigle page application that consumes the aion explorer api service; This application is the main user interface to explore the Aion blockchain for blocks, transactions and accounts.
 
 ### Development 
 
@@ -29,18 +29,25 @@ This is a sigle page application that consumes the aion explorer api service; Th
    ```
 ## Dashboard Messages
 
-###Loading
+### Loading
+
 Data is being retrieved from the server
-###Empty
+
+### Empty
+
 No data was found for the specified parameters
-###Invalid
+
+### Invalid
+
 The parameters entered are incorrect 
 
-#Version
+# Version
+
 ## 2.0.1
-### feedback form
-### mobile responsive
-### footer
-### improved messaging
-### easy copy (rightclick)
-### dark mode
+
+- feedback form
+- mobile responsive
+- footer
+- improved messaging
+- easy copy (rightclick)
+- dark mode

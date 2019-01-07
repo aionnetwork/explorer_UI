@@ -42,11 +42,7 @@ class NCTxnList extends Component
     if (query && query.block) {
       listType = txnListType.BY_BLOCK;
       queryStr = query.block;
-    }/*
-    else if (query && query.account) {
-      listType = txnListType.BY_ACCOUNT;
-      queryStr = query.account;
-    }*/
+    }
     
     network.getTxnListTopLevel(listType, queryStr);
   }
@@ -58,7 +54,7 @@ class NCTxnList extends Component
   }
 
   render() {
-    //console.log('txn list');
+    
     
     const store = this.props.txnList;
 

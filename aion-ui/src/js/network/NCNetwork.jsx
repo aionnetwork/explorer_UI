@@ -18,16 +18,7 @@ let BASE_URL = null;
 let NETWORK_LIST =null;
 let GA_KEY = null;
 let HOME_URL = null;
-/*if (
-  appConfig!=null && 
-  appConfig.api!=null &&
-  appConfig.api.base_url!=null && 
-  appConfig.api.https_enabled!=null) 
-{
-  // setup the network parameters
-  HTTPS_ENABLED = appConfig.api.https_enabled;
-  BASE_URL = appConfig.api.base_url;
-}*/
+
 
 if (process.env.NODE_ENV !== 'production') {
 
@@ -342,28 +333,6 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
       
       console.log('after');
 
-    /*
-    if (pnet) {
-      //console.log('post');
-      pnet.post(endpoint.link, args)
-      .then((response) => {
-        
-        if (response.status == 200 && response.data){
-          resolve(response.data);
-          //console.log('post success');
-        }else {
-          console.log('error');
-          reject("ERR: Bad API post response.");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        reject("ERR: Bad API response.")
-      });
-    } else {
-      reject("ERR: API not initialized");
-    }
-    */
 
   });
 }
@@ -501,42 +470,3 @@ export function stopInterval(Interval) {
     clearInterval(Interval);
 }
 
-// -------------------------------------------------
-// Load App Configuration
-// -------------------------------------------------
-/*
-const APP_CONFIG_LOCATION = '/config.json';
-export const configuration = async () => 
-{
-  return new Promise((resolve, reject) => 
-  {
-    axios.get(APP_CONFIG_LOCATION)
-    .then(function (response) {
-      if (response.status != 200 || !response.data) {
-        reject("ERR: Bad network response.");
-        return;
-      }
-
-      let r = response.data;
-
-      if (
-        r!=null && 
-        r.api!=null && 
-        r.api.base_url!=null && 
-        r.api.https_enabled!=null) 
-      {
-        // setup the network parameters
-        HTTPS_ENABLED = r.api.https_enabled;
-        BASE_URL = r.api.base_url;
-
-        resolve(r);
-      } else {
-        reject("ERR: could not parse "+APP_CONFIG_LOCATION);
-        return;
-      }
-    })
-    .catch(function (e1) {
-      reject(e1);
-    });
-  });
-}*/

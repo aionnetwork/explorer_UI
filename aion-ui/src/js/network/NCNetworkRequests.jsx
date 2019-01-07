@@ -71,19 +71,7 @@ export const getBlkListTopLevel = (listType, queryStr) => {
       case blkListType.ALL: {
         params = [0, PAGE_SIZE]
         break;
-      }/*
-      case blkListType.BY_ACCOUNT: {
-        let request = nc_sanitizeHex(queryStr);
-        if (request == 0 || request == "0x0") {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        } else if (!nc_isValidEntity(request)) {
-          store.dispatch(StoreBlkList.SetTopLevel({ content:[] }));
-          return;
-        }
-
-        params = [request, 0, PAGE_SIZE]
-        break;
-      }*/
+      }
     }
     network.request(ep, params)
     .then((response) => {
@@ -195,10 +183,7 @@ export const getTxnListTopLevel = (listType, queryStr) => {
     listType: listType,
   }));
 
-  //console.log('coooo: '+listType);
-
-  //console.log('txn list top level');
-
+ 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.txnList;
@@ -224,18 +209,7 @@ export const getTxnListTopLevel = (listType, queryStr) => {
 
         params = [request]
         break;
-      }/*
-      case txnListType.BY_ACCOUNT: {
-        if (request == 0 || request == "0x0") {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        } else if (!nc_isValidEntity(request)) {
-          store.dispatch(StoreTxnList.SetTopLevel({}));
-          return;
-        }
-
-        params = [request, 0, PAGE_SIZE]
-        break;
-      }*/
+      }
     }
 
     network.request(ep, params)
@@ -269,12 +243,6 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start
     let params = [];
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
 
-    //let s = Math.round(((start!==null)&&(start>0)) ? start : ((end!==null)&&(end>0)) ? end-(43800*60) : 0) ;
-    //let e = Math.round(isNaN(end) ? 0 : end);
-
-    //let e = Math.round((end!==null) ? end : new Date()/1000);
-    //let s = Math.round(((start!==null)&&(start>0)) ? start : e-(43800*60) );
-
     let date = new Date();
     let e = Math.floor((end!==null) ? end : (date.getTime()/1000)-date.getTimezoneOffset()*60);
     let s = Math.ceil(((start!==null)&&(start>0)) ? start : e-(43800*60) );
@@ -305,9 +273,7 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreTxnRetrieve.GetTopLevel({
     queryStr: queryStr
   }));
-    //console.log('4 index!');
-  //console.log('txn retrieve list top level');
-
+  
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.txn;
@@ -353,7 +319,7 @@ export const getAccListTopLevel = () => {
   else {
     // get transaction list
     const ep = network.endpoint.account.list;
-    //console.log(ep);
+    
     let params = [];
     
     network.request(ep, params)
@@ -372,8 +338,7 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
     queryStr: acc
   }));
 
-  //console.log('This is the top ACC param:' + JSON.stringify(acc+tkn));
-
+  
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = {
@@ -404,11 +369,11 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
     // get account details
     const ep = network.endpoint.account.detail;
     let params = []; 
-    //console.log(requestb);
+    
     if(requestb!=null){
-      //requestb = "nc_trim(tkn)";
+      
       params = [request,requestb];
-      //console.log('not null ok?'+requestb);
+      
     }else{
       params = [request];
     }
@@ -418,10 +383,10 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
       const isAccValid = nc_isObjectValid(response);
       const isAccEmpty = nc_isObjectEmpty(response, isAccValid);
 
-      // ok, make requests for blocks and transactions for this account
+      
       store.dispatch(StoreAccRetrieve.SetTopLevel(response));
       
-      // we can save on a network request if the nonce is zero
+      
       if (!isAccEmpty) {
         console.log('this call!');
         getAccRetrievePagingTxnList(request, requestb, 0);
@@ -436,30 +401,7 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
   }
 }
 
-//getAccRetrieveCSV
-/*For an Account's Details
-searchParam1 = Account Address
-entityType = Account
 
-
-For an Account's Tokens
-searchParam1 = Account Address
-entityType = Account_Tokens
-
-
-For an Account's Transactions
-searchParam1 = Account Address
-searchParam2 = Token Address (optional)
-entityType = Account_Transactions
-rangeMin1 = some number
-rangeMax1 = some number
-
-
-For an Account's Mined Blocks
-searchParam1 = Account Address
-entityType = Account_Mined_Blocks
-rangeMin1 = some number
-rangeMax1 = some number*/
 export const getAccTxnRetrieveCSV = (acc,key,start,end,range) => {
   store.dispatch(StoreAccRetrieve.GetTopLevel({
     queryStr: acc
@@ -495,43 +437,18 @@ export const getAccTxnRetrieveCSV = (acc,key,start,end,range) => {
     
     network.request(ep, params, true)
     .then((response) => {
-        console.log(response);
-        //var fileDownload = require('js-file-download');
+        
+        
         fileDownload(response, 'Account_'+request+'.csv');
-        //store.dispatch(StoreDwn.Setresponse(true));  
+         
     })
     .catch((error) => {
-      //store.dispatch(StoreDwn.Setresponse(false)); 
+      
       console.log(error);      
     });
 
 
-    /*
-    network.request(ep, paramsB)
-    .then((response) => {
-        fileDownload(response, 'Account_'+request+'_Transactions.csv');
-    })
-    .catch((error) => {
-      console.log(error);      
-    });
-
-    network.request(ep, paramsC)
-    .then((response) => {
-        fileDownload(response, 'Account_'+request+'_Mined_Blocks.csv');
-    })
-    .catch((error) => {
-      console.log(error);      
-    });
-
-
-    network.request(ep, paramsA)
-    .then((response) => {
-        fileDownload(response, 'Account_'+request+'_Tokens.csv');
-    })
-    .catch((error) => {
-      console.log(error);      
-    });
-    */
+   
 
     return;
 
@@ -550,17 +467,11 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
     }, 500);
   }
   else {
-    // get transaction list
-    //const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
-    //console.log(start+"##########"+end);
-
+    
     const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[4] : network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
     
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     
-    //let e = Math.round((end!==null) ? end : new Date()/1000);
-    //let s = Math.round(((start!==null)&&(start>0)) ? start : e-(43800*60) );
-
     let date = new Date();
     let e = Math.floor((end!==null) ? end : (date.getTime()/1000)-date.getTimezoneOffset()*60);
     let s = Math.ceil(((start!==null)&&(start>0)) ? start : e-(43800*60) );
@@ -576,23 +487,14 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
     }
     
 
-    //console.log('params:'+JSON.stringify(params));
-    //console.log(ep);
-    //console.log('we are here');
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the account loaded on-screen
-
-      //console.log('oooo:'+JSON.stringify(response));
+      
       let acc = store.getState().accRetrieve.response.acc;
-      //console.log('Its reaching here too 1!');
+      
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
-        //console.log('Its reaching here too 2!');
-        //console.log(nc_sanitizeHex(acc.data.content[0].address)+'  Its reaching here too!  '+nc_sanitizeHex(queryStr));
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
-            //console.log('Its reaching here too 3!');
-            store.dispatch(StoreAccRetrieve.SetPagingTxn(response));  
+           store.dispatch(StoreAccRetrieve.SetPagingTxn(response));  
         }
       }
     })
@@ -619,8 +521,7 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber, pageSize, star
     let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the account loaded on-screen
+      
       let acc = store.getState().accRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
@@ -651,8 +552,7 @@ export const getAccRetrieveTknList = (queryStr, pageNumber) => {
     let params = [queryStr, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the account loaded on-screen
+      
       let acc = store.getState().accRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
@@ -674,8 +574,6 @@ export const getCntrListTopLevel = () => {
   store.dispatch(StoreCntrList.GetTopLevel());
 
 
-  //console.log("its here!!");
-
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.accList;
@@ -685,12 +583,12 @@ export const getCntrListTopLevel = () => {
   else {
     // get transaction list
     const ep = network.endpoint.contract.list;
-    //console.log(ep);
+    
     let params = [];
     
     network.request(ep, params)
     .then((response) => {
-       //console.log('contract response');
+       
       store.dispatch(StoreCntrList.SetTopLevel(response));
 
     })
@@ -717,18 +615,7 @@ export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize, star
     
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     let params = [pageNumber, size, start, end];
-    console.log(listType);
-    /*switch(listType) {
-      case cntrListType.ALL: {
-        params = [pageNumber, size]
-        break;
-      }
-      case cntrListType.BY_ACCOUNT: {
-        params = [nc_trim(queryStr), pageNumber, PAGE_SIZE]
-        break;
-      }
-      
-    }*/
+        
     network.request(ep, params)
     .then((response) => {
       store.dispatch(StoreCntrList.SetPaging(response));
@@ -774,24 +661,14 @@ export const getCntrRetrieveTopLevel = (queryStr) => {
     // get contract details
     const ep = network.endpoint.contract.detail;
     let params = [request];
-    //console.log(ep);
+    
     network.request(ep, params)
     .then((response) => {
       const isCntrValid = nc_isObjectValid(response);
       const isCntrEmpty = nc_isObjectEmpty(response, isCntrValid);
 
-      //console.log(JSON.stringify(response));
-      // ok, make requests for blocks and transactions for this contract
       store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
-      //console.log("Coool!"+isCntrEmpty);
-      // we can save on a network request if the nonce is zero
-      if (!isCntrEmpty) {
-        //getCntrRetrievePagingTxnList(request, 0);
-        //getCntrRetrievePagingBlkList(request, 0);
-        //getCntrRetrievePagingEventList(request, 0);
-        //getAccRetrieveTknList(request, 0);
-        //console.log("not empty!");
-      }
+      
     })
     .catch((error) => {
       console.log(error);
@@ -813,7 +690,6 @@ export const getCntrRetrievePagingTxnList = (queryStr, pageNumber) => {
   }
   else {
     // get transaction list
-    //const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
     const ep = network.endpoint.contract.detail;
     let params = [queryStr, null, null, pageNumber, PAGE_SIZE];
     network.request(ep, params)
@@ -848,11 +724,9 @@ export const getCntrRetrievePagingBlkList = (queryStr, pageNumber) => {
   else {
     const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
     let params = [queryStr, pageNumber, PAGE_SIZE];
-    //console.log('I am here on the block!');
+    
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the contract loaded on-screen
       let acc = store.getState().cntrRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
@@ -883,9 +757,7 @@ export const getCntrRetrievePagingEventList = (queryStr, pageNumber) => {
     console.log('I am here!');
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the contract loaded on-screen
-      let acc = store.getState().cntrRetrieve.response.acc;
+     let acc = store.getState().cntrRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
             store.dispatch(StoreCntrRetrieve.SetPagingEvent(response));  
@@ -915,8 +787,6 @@ export const getCntrRetrieveTknList = (queryStr, pageNumber) => {
     let params = [queryStr, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the contract loaded on-screen
       let acc = store.getState().accRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
@@ -940,8 +810,6 @@ export const setDarkMode = (isdark) => {
 }
 
 
-// using pub-sub to subscribe to data updates from webserver
-// function to update stores upon receipt of published data
 export const setDashboardData = (response) => {
   const isResponseEmpty = nc_isObjectEmpty(response);
   
@@ -949,7 +817,7 @@ export const setDashboardData = (response) => {
     let data = response.content[0];
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
     store.dispatch(StoreTxnRt.SetAll(data.transactions));
-    //store.dispatch(StoreKpis.SetAll(data.metrics));
+    
   }
 }
 
@@ -957,22 +825,11 @@ export const setDashboardData = (response) => {
 export const getDashboardData = () => {
   const ep = network.endpoint.dashboard;
   let params = [];
-  //console.log(ep);
+  
   network.request(ep, params)
   .then((response) => {
-    //console.log(JSON.stringify(response));
+    
     setDashboardData(response);
-
-    //getAionPrice();//get price
-    //network.eRequest('pro-api.coinmarketcap.com/v1/cryptocurrency/',true,'/listings/latest','{start: 1,limit: 5,convert: "USD"}',"{'CMC_PRO_API_KEY': 'e2738416-a8f2-4b17-ba40-eb376dff4d15'}");
-
-
-    // connect to socket after initial data fetch
-    //console.log('Its socket time!');
-    /*network.connectSocket((response) => {
-      console.log(JSON.stringify(response));
-      setDashboardData(response);
-    });*/
 
     network.startInterval(ep,params,(response) => {
         setDashboardData(response);
@@ -994,11 +851,7 @@ export const setKPIData = (response) => {
 
 export const getKPIData = () => {
   
-    // get data for liveness indicator in the header
-    //console.log('get kpi');
-    /*network.connectSocket((response) => {
-      setKPIData(response);
-    });*/
+    
     const ep = network.endpoint.dashboard;
     let params = [];
 
@@ -1012,53 +865,11 @@ export const getKPIData = () => {
     .catch((error) => {
       console.log(error);
       setKPIData({content:[]});
-      //store.dispatch(StoreTknList.SetTopLevel({}));
+      
     });
   
 }
 
-/*
-export const setup = () => {
-  network.configuration()
-  .then((r) => {
-    store.dispatch(StoreConfig.SetAll(r));
-    getDashboardData();
-  })
-  .catch((e) => {
-    console.log(e);
-  });
-}*/
-
-// ========================================================
-// Top Level Search 
-// ========================================================
-/*
-export const getSearch = (callback, queryStr) => {
-  if (!network.NCNETWORK_REQUESTS_ENABLED) {
-    // query for the new result
-    setTimeout(() => {
-      let block = {
-        entityType: "block",
-        ...mock.blk
-      };
-
-      callback(block);
-    }, 2000);
-  }
-  else {
-    const ep = network.endpoint.search;
-    let params = [nc_trim(queryStr)];
-    network.request(ep, params)
-    .then((response) => {
-      callback(response);
-    })
-    .catch((error) => {
-      console.log(error);
-      callback({});
-    });
-  }
-}
-*/
 
 // ========================================================
 // Tokens
@@ -1070,8 +881,7 @@ export const getTknListTopLevel = (listType, queryStr) => {
     listType: listType,
   }));
 
-  //console.log('Then network level!');
-
+  
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.tknList;
@@ -1098,18 +908,7 @@ export const getTknListTopLevel = (listType, queryStr) => {
 
         params = [request]
         break;
-      }/*
-      case txnListType.BY_ACCOUNT: {
-        if (request == 0 || request == "0x0") {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        } else if (!nc_isValidEntity(request)) {
-          store.dispatch(StoreTxnList.SetTopLevel({}));
-          return;
-        }
-
-        params = [request, 0, PAGE_SIZE]
-        break;
-      }*/
+      }
     }
 
     network.request(ep, params)
@@ -1147,16 +946,7 @@ export const getTknListPaging = (listType, queryStr, pageNumber, pageSize,start=
         params = [nc_trim(queryStr), pageNumber, size]
         break;
       }
-      /*
-      case txnListType.BY_ACCOUNT: {
-        let request = nc_trim(queryStr);
-        if (request == 0 || request == "0x0") {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        }
-
-        params = [request, pageNumber, PAGE_SIZE]
-        break;
-      }*/
+     
     }
     network.request(ep, params)
     .then((response) => {
@@ -1187,7 +977,7 @@ export const getTknRetrieveTopLevel = (queryStr) => {
     }, 500);
   }
   else {
-    //console.log("getTknRetrieveTopLevel live");
+    
     let request = nc_trim(queryStr);
     if (!nc_isValidEntity(request)) {
       store.dispatch(StoreTknRetrieve.SetTopLevel({
@@ -1227,8 +1017,7 @@ export const getTknRetrievePagingTxnList = (queryStr, pageNumber) => {
     let params = [queryStr, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the account loaded on-screen
+      
       let tkn = store.getState().tknRetrieve.response.tkn;
 
       if (tkn && tkn.data && tkn.data.content && tkn.data.content[0]) {
@@ -1259,8 +1048,7 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
     let params = [queryStr, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the account loaded on-screen
+     
       let tkn = store.getState().tknRetrieve.response.tkn;
       if (tkn && tkn.data && tkn.data.content && tkn.data.content[0]) {
         if (nc_sanitizeHex(tkn.data.content[0].address) == nc_sanitizeHex(queryStr)) {
@@ -1277,9 +1065,7 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
 
  let showView = (entity,request) => {
 
-     //console.log(JSON.stringify(entity));
-     //console.log(JSON.stringify(entity.content[0]));
-
+    
     switch(entity.searchType)
     {
 
@@ -1350,7 +1136,7 @@ export const getRetrieveTopLevel = (queryStr) => {
     let params = [request,  0, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      //console.log("Goo"+JSON.stringify(response));
+     
 
       if(typeof response.searchType !== "undefined" && response.searchType !== "token"){ 
 
@@ -1394,15 +1180,11 @@ export const RetrieveDownload =(type, data) => {
     .then((response) => {
       
         console.log(JSON.stringify(response)); 
-        //nc_getChartData(response,)
-        //store.dispatch(StoreChartRetrieve.SetChart(response));
-    
+        
     })
     .catch((error) => {
       console.log(error);
-      /*store.dispatch(StoreChartRetrieve.SetChart({
-        
-      }));*/
+      
     });
   }
 
@@ -1439,8 +1221,7 @@ export const getChartRetrieve = (queryStr) => {
     queryStr: queryStr
   }));
 
-  //console.log('search network call!');
-
+ 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = {
@@ -1456,7 +1237,6 @@ export const getChartRetrieve = (queryStr) => {
 
     // get block details
     const ep = network.endpoint.chart.detail;
-    //console.log(JSON.stringify(network.endpoint.chart.detail)+"   "+JSON.stringify(request)); 
     let params = [request];
     network.request(ep, params)
     .then((response) => {

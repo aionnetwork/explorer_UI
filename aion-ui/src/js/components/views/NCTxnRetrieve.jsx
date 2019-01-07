@@ -29,11 +29,11 @@ class NCTxnRetrieve extends Component
 
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
-    //console.log('componentWillMount');
+    
   }
 
   componentDidMount() {
-    //console.log('componentDidMount');
+    
     this.requestTopLevel();
   }
 
@@ -136,15 +136,7 @@ class NCTxnRetrieve extends Component
             title={"Event logs are unavailable"}
             description={"Please try again later."}/>
         }
-        {/*
-          (!isTxnEmpty) &&  
-          <div className="NCSection">
-            <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-              <Tab2 id="txn" title="Event logs" panel={eventListSection}/>
-              
-            </Tabs2>
-          </div>
-        */}
+        
 
 
       </div>;

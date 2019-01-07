@@ -6,7 +6,6 @@ import moment from 'moment';
 import NCCntrTable from 'components/contracts/NCCntrTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
-//import NCTKNExplorerHead from 'components/common/NCExplorerHead';
 
 import * as StoreCntrList from 'stores/StoreCntrList';
 import * as MSG from 'lib/NCTerms';
@@ -61,11 +60,9 @@ class NCCntrList extends Component
   }
 
   render() {
-    //console.log('contract list view');
     
     const store = this.props.cntrList;
-    //console.log(JSON.stringify(store));
-
+    
     const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
 

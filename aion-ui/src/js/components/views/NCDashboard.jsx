@@ -16,14 +16,11 @@ export default class NCDashboard extends Component
 {
   componentDidMount()
   {
-    // subscribe for block and transaction streams
-    //network.getDashboardData();
+    
   }
 
  componentWillMount() {
-    //console.log('componentWillMount');
-    //network.getKPIData(); 
-    //network.getDashboardData();
+    
   }
 
   render() {

@@ -100,6 +100,7 @@ export default class NCTxnTable extends Component
       let blockTimestamp = null;
       let timestamp = null;
       let value = null;
+      let status = null;
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
@@ -120,6 +121,8 @@ export default class NCTxnTable extends Component
         status = entity.txError;
         
       }
+
+      console.log(status);
 
       // Generate tableContent
       tableContent[i] = [];

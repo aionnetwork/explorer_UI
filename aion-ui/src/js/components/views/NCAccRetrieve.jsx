@@ -24,7 +24,6 @@ import * as MSG from 'lib/NCTerms';
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
-//import { nc_FindEntity, nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
 
 import * as network from 'network/NCNetworkRequests';
 
@@ -70,16 +69,7 @@ class NCAccRetrieve extends Component
     network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
   }
 
-  /* requestPaging = (pageNumber, pageSize, start=0, end=0) => {
-    const listType = this.props.txnList.listType;
-    const queryStr = this.props.txnList.queryStr;
-    network.getTxnListPaging(listType, queryStr, pageNumber, pageSize, start, end);
-  }
 
-  requestPagingTrnList = (pageNumber) => {
-    const queryStr = this.props.accRetrieve.queryStr;
-    network.getAccRetrievePagingTrnList(queryStr, this.state.token, pageNumber);
-  }*/
 
   requestDownload = (type, data) => {
     //const queryStr = this.props.accRetrieve.queryStr;
@@ -177,14 +167,10 @@ class NCAccRetrieve extends Component
 
   render() {
     const store = this.props.accRetrieve;
-    //console.log(JSON.stringify(this.props.params));
+    
     const tokens = (store.response && store.response.acc.data && store.response.acc.data.content && store.response.acc.data.content[0]) ? store.response.acc.data.content[0].tokens : [];
     
     const isWeb3 = (store.response) ? store.response.web3 : false;
-
-    //console.log(store.response.txn.momentUpdated);
-    //console.log(JSON.stringify(store.response.txn));
-     //console.log(JSON.stringify(store.response));
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
@@ -200,7 +186,7 @@ class NCAccRetrieve extends Component
     const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
     const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
     const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
-    //console.log(JSON.stringify(accObj));
+    
     const isAccValid = nc_isObjectValid(accObj);
     const isAccEmpty = nc_isObjectEmpty(accObj, isAccValid);
 
@@ -281,7 +267,7 @@ class NCAccRetrieve extends Component
 
       content={ <NCAccDetail entity={acc} tokenList={tokenListMobile} /> }
     />
-    //console.log(isTxnListFirstLoad);
+    
      const transferListSection = <NCExplorerSection 
       className={""}
       subtitle={
