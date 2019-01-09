@@ -7,8 +7,8 @@ import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntit
 import NCEntityDetail from 'components/common/NCEntityDetail';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-import { nc_isStrEmpty, nc_numFormatter,nc_numPrettify, nc_numFormatterAmp, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
-
+import { nc_decimalPrettify,nc_isStrEmpty, nc_numFormatter,nc_numPrettify, nc_numFormatterAmp, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+//import { nc_decimalPrettify, nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 //console.log('3 index!');
@@ -65,6 +65,10 @@ export default class NCTxnDetail extends Component
     let parsedTxnLog = this.parseTxnLog(entity.transactionLog);
     let parsedInputData = this.parseInputData(entity.data);
      //console.log(entity.value);
+
+    let bal = nc_numFormatterACSensitive(entity.value);
+    let value = nc_decimalPrettify(bal);
+
     let desc = 
     [
       {
@@ -102,7 +106,7 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value == null ? EMPTY_STR : <span className="">{entity.value + " AION"}</span>,
+        value: entity.value == null ? EMPTY_STR : <span className="">{value + " AION"}</span>,
       },
       {
         field: "Nrg Price",
