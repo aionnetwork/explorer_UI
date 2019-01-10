@@ -54,7 +54,8 @@ export const Token = {
   INVALID_DATA_TITLE:"No Token",
   INVALID_DATA:"Token Not Available",
   DATA_POLICY:"Showing results from the latest transactions. ",
-  INVALID_DATA_LIST:"Invalid Input. Please try again."
+  INVALID_DATA_LIST:"Invalid Input. Please try again.",
+  GRANULARITY:"This is the Granularity"
 };
 
 export const Transaction = {

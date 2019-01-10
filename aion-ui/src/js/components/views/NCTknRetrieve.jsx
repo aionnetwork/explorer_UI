@@ -130,12 +130,12 @@ class NCTknRetrieve extends Component
    const txnListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest transactions. To retrieve older data, use our&nbsp;
-          <Tooltip
+        <div className="NCPageBreakerSubtitle">Showing results from the latest transactions. 
+          {/*<Tooltip
             className="pt-tooltip-indicator"
             content={<em>coming soon ...</em>}>
             historical explorer.
-          </Tooltip>
+          </Tooltip>*/}
         </div>
       }
 
