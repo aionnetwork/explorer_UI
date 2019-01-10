@@ -388,7 +388,7 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
       
       
       if (!isAccEmpty) {
-        console.log('this call!');
+        //console.log('this call!');
         getAccRetrievePagingTxnList(request, requestb, 0);
         getAccRetrievePagingBlkList(request, 0);
         
@@ -468,7 +468,7 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
   }
   else {
     
-    const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[4] : network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
+    const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[txnListType.BY_ACCOUNT] : network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
     
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     

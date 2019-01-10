@@ -314,6 +314,9 @@ class NCAccRetrieve extends Component
         </div>
       }
 
+      filter={true}
+      onCallBack={this.requestPagingTxnList}
+
       isLoading={isTxnListFirstLoad == null}
       isDataValid={true}
       isDataEmpty={isTxnListEmpty} 
@@ -385,6 +388,8 @@ class NCAccRetrieve extends Component
         {
           (isWeb3 && !isAccEmpty) &&
           <NCNonIdealState
+            filter={true}
+
             paddingTop={80}
             icon={"pt-icon-offline"}
             title={"Unavailable In Lite-Mode"}
