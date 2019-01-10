@@ -4,6 +4,9 @@ import moment from 'moment';
 
 import { NCEntity } from 'lib/NCEnums';
 import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntityLabel';
+import { Popover, PopoverInteractionKind, Position, Content, Button } from "@blueprintjs/core";
+import * as MSG from 'lib/NCTerms';
+
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
 import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterAmp, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
@@ -53,7 +56,7 @@ export default class NCTxnDetail extends Component
 
   render() {
     let { entity } = this.props;
-
+    let gran = MSG.Token.granularity;
     //console.log(JSON.stringify(this.props));
     let parsedInputData = this.parseInputData(entity);
     const symbol = " (" + entity.symbol + ")";
@@ -90,7 +93,18 @@ export default class NCTxnDetail extends Component
       },
       // ---------------------------------------------------------------
       {
-        field: "Decimal",
+        field: <div>
+                Granularity
+                <Popover 
+                  interactionKind={PopoverInteractionKind.HOVER}
+                  content={gran}
+                  position={Position.TOP_RIGHT}
+                >
+                  <Button className="pt-button pt-minimal liveness-btn" >
+                  <span className="fa fa-info-circle icon live"></span>
+                  </Button>
+               </Popover>
+               </div>,
         value: entity.granularity,
       },
       /*{
