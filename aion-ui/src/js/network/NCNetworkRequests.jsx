@@ -435,7 +435,8 @@ export const getAccTxnRetrieveCSV = (acc,key,start,end,range) => {
     paramsB = [request,'','Account_Transactions',0,999];
     paramsC = [request,'','Accoun_Mined_Blocks',0,999];
     
-    network.request(ep, params, true)
+    //postRequest/request
+    network.postRequest(ep, params, true)
     .then((response) => {
         
         

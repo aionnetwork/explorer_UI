@@ -104,8 +104,8 @@ class NCDwnRetrieve extends Component
     
     
     const style = {position:'relative',textAlign:'center',width:'100%',margin:'auto',top:'100px',padding:'25px' };
-    const recapcontainer = {position:'relative',width:'310px',margin:'auto',top:'100px',padding:'5px' };
-    const stylerecaptcha = {margin:'auto', };
+    const recapcontainer = {position:'relative',width:'400px',margin:'auto',top:'100px',padding:'5px' };
+    const stylerecaptcha = {left:'48px'};
 
     // create a variable to store the component instance
     let recaptchaInstance;
@@ -122,7 +122,7 @@ class NCDwnRetrieve extends Component
     let start = this.state.start;
     let end = this.state.end;
 
-    console.log(JSON.stringify(this.state.dateRange));
+    //console.log(JSON.stringify(this.state.dateRange));
 
     return (
       <div className= {''} style = {style}>
@@ -138,7 +138,7 @@ class NCDwnRetrieve extends Component
           verifyCallback={this.verifyCallback.bind(this)}
         />}
         <br/><br/>
-        {(!false)&& <div><p>Please select transaction range.</p> <RangeSlider
+        {(false)&& <div><p>Please select transaction range.</p> <RangeSlider
                     min={0}
                     max={1000000}
                     stepSize={10000}

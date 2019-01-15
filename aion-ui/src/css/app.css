@@ -26,6 +26,9 @@ h1, h2, h3, h4, h5 {
 .pt-dialog {
   width: 50%;
 }
+.g-recaptcha {
+  margin-left: 45px;
+}
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  */

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'; 
-import { DateRangePicker, DateRangeInput } from "@blueprintjs/datetime";
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
+import { DateRangeInput } from "@blueprintjs/datetime";
+import { Button,  Classes } from "@blueprintjs/core";
 
 
 export default class NCNonIdealState extends Component
