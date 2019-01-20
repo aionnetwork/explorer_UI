@@ -52,7 +52,15 @@ export default class NCAccTable extends Component
         width: 110,
         flex: false,
         objPath: 'tknBalance',
-      },
+      }/*,
+      {
+        name: "Raw Balance",
+        isSortable: false,
+        isFilterable: false,
+        width: 110,
+        flex: false,
+        objPath: 'rawBalance',
+      },*/
       
     ];
   }
@@ -68,7 +76,7 @@ export default class NCAccTable extends Component
       let holderAddr = null;
       let contractAddr = null;
       let balance = null;
-      
+      let rawbalance = null;
 
       // [blockHash, blockNumber, difficulty, nrgConsumed, nrgLimit, size, blockTimestamp, totalDifficulty, numTransactions]
       if (Array.isArray(entity)) {
@@ -81,7 +89,7 @@ export default class NCAccTable extends Component
         holderAddr = entity.holderAddr;
         contractAddr = entity.contractAddr;
         balance = entity.tknBalance;
-        
+        rawbalance = entity.rawBalance;
       }
 
       tableContent[i] = [];  
@@ -110,7 +118,7 @@ export default class NCAccTable extends Component
 
       
       tableContent[i][3] = <Cell>{ balance }</Cell>;
-      
+      {/*tableContent[i][4] = <Cell>{ rawbalance }</Cell>;*/}
     });
 
     return tableContent;

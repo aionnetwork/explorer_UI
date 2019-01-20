@@ -49,6 +49,15 @@ export default class NCTxnTableOwn extends Component
         width: 100,
         flex: false,
         objPath: null,
+      }
+      ,
+      {
+        name: "Raw Value",
+        isSortable: false,
+        isFilterable: false,
+        width: 100,
+        flex: false,
+        objPath: null,
       },
       
       {
@@ -91,6 +100,7 @@ export default class NCTxnTableOwn extends Component
       let toAddr = null;
       let blockTimestamp = null;
       let value = null;
+      let rawValue = null;
       let transferTimestamp =null;
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
@@ -108,6 +118,7 @@ export default class NCTxnTableOwn extends Component
         toAddr = entity.toAddr;
         transferTimestamp = entity.transferTimestamp;
         value = entity.tknValue;
+        rawValue = entity.rawValue;
       }
 
       let isFrom = true;
@@ -129,8 +140,8 @@ export default class NCTxnTableOwn extends Component
       </Cell>;
       tableContent[i][1] = <Cell copy={ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
       tableContent[i][2] = <Cell copy={ value ? value : 0 }>{ value ? value : 0 }</Cell>;
-     
-      tableContent[i][3] = 
+      tableContent[i][3] = <Cell copy={ rawValue ? rawValue : 0 }>{ rawValue ? rawValue : 0 }</Cell>;
+      tableContent[i][4] = 
       <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.SEARCH].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.SEARCH} 
@@ -138,13 +149,13 @@ export default class NCTxnTableOwn extends Component
           entityId={fromAddr}
           linkActive={isFrom ? false : true}/>
       </Cell>;
-      tableContent[i][4] = 
+      tableContent[i][5] = 
       <Cell>
         <div className="arrow-cell">
           <span className="pt-icon-standard pt-icon-arrow-right"/>
         </div>
       </Cell>;
-      tableContent[i][5] = 
+      tableContent[i][6] = 
       <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
       {
         toAddr ?
