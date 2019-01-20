@@ -35,7 +35,7 @@ import * as StoreContactRetrieve from 'stores/StoreContactRetrieve';
 
 import {BigNumber} from 'bignumber.js';
 import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
-import { cntrListType, tknListType, txnListType, blkListType, accListType, eventListType } from 'lib/NCEnums';
+import { cntrListType, tknListType, txnListType, blkListType, accListType, eventListType,trnListType, } from 'lib/NCEnums';
 
 //console.log('networkRequest'); 
 export const PAGE_SIZE = 25;
@@ -386,11 +386,17 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
       
       store.dispatch(StoreAccRetrieve.SetTopLevel(response));
       
-      
+            
       if (!isAccEmpty) {
         //console.log('this call!');
         getAccRetrievePagingTxnList(request, requestb, 0);
         getAccRetrievePagingBlkList(request, 0);
+        if(response.content[0].hasInternalTransfer){ 
+
+            getAccRetrievePagingTrnList(request, 0);
+        }
+        
+        //console.log(JSON.stringify(response));
         
       }
     })
@@ -533,6 +539,37 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber, pageSize, star
     .catch((error) => {
       console.log(error);
       store.dispatch(StoreAccRetrieve.SetPagingBlk({}));
+    });
+  }
+}
+
+export const getAccRetrievePagingTrnList = (queryStr, pageNumber, pageSize, start, end) => {
+  store.dispatch(StoreAccRetrieve.GetPagingTrn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreAccRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.transfer.list[trnListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
+    network.request(ep, params)
+    .then((response) => {
+      
+      let acc = store.getState().accRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreAccRetrieve.SetPagingTrn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreAccRetrieve.SetPagingTrn({}));
     });
   }
 }

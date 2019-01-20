@@ -2,7 +2,7 @@
 import axios from 'axios';
 import SockJS from 'sockjs-client' 
 import Stomp from 'stompjs'
-import { blkListType, tknListType, txnListType, accListType, cntrListType, eventListType } from 'lib/NCEnums';
+import { trnListType, blkListType, tknListType, txnListType, accListType, cntrListType, eventListType } from 'lib/NCEnums';
 import * as mock from 'lib/NCData';
 import ms from 'ms';
 import appConfig from '../../config.json';
@@ -133,7 +133,16 @@ export const endpoint = {
       params: ['searchParam','token']
     }
   },
-  
+  transfer:{
+    list:{
+      [trnListType['BY_ACCOUNT']]: {
+        link: '/aion/dashboard/getInternalTransfersByAddress',
+        //params: ['searchParam', 'transactionPage', 'transactionSize','token'],
+        params:["accountAddress","page","size","timestampStart", "timestampEnd"]
+      }
+    }
+
+  },  
   token: {
     list: {
       [tknListType['ALL']]: {

@@ -10,7 +10,8 @@ export const NCEntity =
   TKN:1,
   SEARCH:5,
   CNTR:6,
-  EVENT:7
+  EVENT:7,
+  TRN:8
 };
 
 
@@ -100,7 +101,10 @@ export const tknListType = {
   ALL: 0,
   BY_ACCOUNT: 1
 }
-
+export const trnListType = {
+  ALL: 0,
+  BY_ACCOUNT: 1
+}
 export const cntrListType = {
   ALL: 0,
   BY_ACCOUNT: 1

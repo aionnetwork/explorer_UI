@@ -67,9 +67,27 @@ export const SetPagingBlk = (data) =>
   }
 }
 
+// Paging Internal transfer
+// ------------
+export const GetPagingTrn = (data) => 
+{
+  return {
+    type: 'ACC_RETRIEVE_GET_PAGING_TRN',
+    data: data,
+  }
+}
+export const SetPagingTrn = (data) => 
+{
+  return {
+    type: 'ACC_RETRIEVE_SET_PAGING_TRN',
+    data: data,
+  }
+}
+
 let initialState_StoreBlkRetrieve = 
 {
   isLoadingPagingBlkList: false,
+  isLoadingPagingTrnList: false,
   isLoadingPagingTxnList: false,
   isLoadingTopLevel: false, 
   
@@ -89,6 +107,10 @@ let initialState_StoreBlkRetrieve =
       momentUpdated: null
     },
     tkn: {
+      data: null,
+      momentUpdated: null
+    },
+    trn: {
       data: null,
       momentUpdated: null
     },
@@ -196,6 +218,28 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       
       _state.response.blk.data = action.data;
       _state.response.blk.momentUpdated = moment();
+      _state.momentUpdated = moment();
+      
+      return _state;
+    }
+    // Paging Internal transfers
+    // ------------
+    case 'ACC_RETRIEVE_GET_PAGING_TRN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTrnList = true;
+      
+      return _state;
+    }
+    case 'ACC_RETRIEVE_SET_PAGING_TRN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTrnList = false;
+      
+      _state.response.trn.data = action.data;
+      _state.response.trn.momentUpdated = moment();
       _state.momentUpdated = moment();
       
       return _state;

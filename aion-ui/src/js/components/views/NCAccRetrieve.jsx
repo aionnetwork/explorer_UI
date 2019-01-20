@@ -177,10 +177,10 @@ class NCAccRetrieve extends Component
     const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
 
     /*This section is for transfers table. This feature was added to accomodate for internal transfers made on tokens.*/
-    const isTrnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
-    const trnList = (store.response && store.response.txn) ? store.response.txn.data : null;
-    const isTrnListValid = nc_isListValid(txnList);
-    const isTrnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
+    const isTrnListFirstLoad = (store.response && store.response.trn) ? store.response.trn.momentUpdated : null;
+    const trnList = (store.response && store.response.trn) ? store.response.trn.data : null;
+    const isTrnListValid = nc_isListValid(trnList);
+    const isTrnListEmpty = nc_isListEmpty(trnList, isTrnListValid);
     /*End*/
 
     const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
@@ -286,26 +286,15 @@ class NCAccRetrieve extends Component
       marginTop={40}
 
       content={
-        !acc.tokenName ?
-        <NCTxnTableOwn 
-          data={trnList}
-          onPageCallback={this.requestPagingTrnList}
-          isLoading={store.isLoadingPagingTrnList}
-          isPaginated={true}
-          ownAddr={acc.address}
-          isLatest={true}/>
-        
-        :
-
-        <NCTxnTableOwnToken 
-          data={trnList}
-          onPageCallback={this.requestPagingTrnList}
-          isLoading={store.isLoadingPagingTrnList}
-          isPaginated={true}
-          ownAddr={desc}
-          isLatest={true}/>
-        }
-    />
+                <NCTxnTableOwnToken 
+                  data={trnList}
+                  onPageCallback={this.requestPagingTrnList}
+                  isLoading={store.isLoadingPagingTrnList}
+                  isPaginated={true}
+                  ownAddr={desc}
+                  isLatest={true}/>
+              }
+    />  
     const txnListSection = <NCExplorerSection 
       className={""}
       subtitle={
@@ -401,7 +390,7 @@ class NCAccRetrieve extends Component
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
               <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
-              {/*<Tab2 id="trn" title="Transfers" panel={transferListSection}/>*/}
+              <Tab2 id="trn" title="Transfers" panel={transferListSection}/>
             </Tabs2>
           </div>
         }
