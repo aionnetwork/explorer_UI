@@ -11,6 +11,7 @@ import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 import NCTxnTableOwnToken from 'components/transactions/NCTxnTableOwnToken';
+import NCTxnTableOwnTransfer from 'components/transactions/NCTxnTableOwnTransfer';
 
 import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
@@ -69,7 +70,11 @@ class NCAccRetrieve extends Component
     network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
   }
 
+  requestPagingTrnList = (pageNumber,pageSize,start,end) => {
+    const queryStr = this.props.accRetrieve.queryStr;
 
+    network.getAccRetrievePagingTrnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
+  }
 
   requestDownload = (type, data) => {
     //const queryStr = this.props.accRetrieve.queryStr;
@@ -286,7 +291,7 @@ class NCAccRetrieve extends Component
       marginTop={40}
 
       content={
-                <NCTxnTableOwnToken 
+                <NCTxnTableOwnTransfer 
                   data={trnList}
                   onPageCallback={this.requestPagingTrnList}
                   isLoading={store.isLoadingPagingTrnList}

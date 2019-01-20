@@ -19,7 +19,7 @@ import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
-export default class NCTxnTableOwn extends Component 
+export default class NCTxnTableOwnToken extends Component 
 {
   constructor(props) {
     super(props);

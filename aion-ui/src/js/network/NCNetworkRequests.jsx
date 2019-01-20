@@ -294,7 +294,10 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
     let params = [request];
     network.request(ep, params)
     .then((response) => {
+      
       store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
+      getTxnRetrievePagingTrnList(request, 0);      
+      
     })
     .catch((error) => {
       console.log(error);
@@ -303,6 +306,32 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
   }
 }
 
+
+export const getTxnRetrievePagingTrnList = (queryStr, pageNumber, pageSize, start, end) => {
+  store.dispatch(StoreTxnRetrieve.GetPagingTrn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreAccRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.transfer.list[trnListType.BY_TXN];
+    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
+    network.request(ep, params)
+    .then((response) => {
+      
+      store.dispatch(StoreTxnRetrieve.SetPagingTrn(response)); 
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTxnRetrieve.SetPagingTrn({}));
+    });
+  }
+}
 // ========================================================
 // Accounts 
 // ========================================================

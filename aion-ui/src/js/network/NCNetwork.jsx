@@ -139,7 +139,13 @@ export const endpoint = {
         link: '/aion/dashboard/getInternalTransfersByAddress',
         //params: ['searchParam', 'transactionPage', 'transactionSize','token'],
         params:["accountAddress","page","size","timestampStart", "timestampEnd"]
-      }
+      },
+      [trnListType['BY_TXN']]: {
+        link: '/aion/dashboard/getInternalTransfersByTransactionHash',
+        //params: ['searchParam', 'transactionPage', 'transactionSize','token'],
+        params:["transactionHash","page","size","timestampStart", "timestampEnd"]
+      },
+
     }
 
   },  

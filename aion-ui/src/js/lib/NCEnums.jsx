@@ -103,7 +103,8 @@ export const tknListType = {
 }
 export const trnListType = {
   ALL: 0,
-  BY_ACCOUNT: 1
+  BY_ACCOUNT: 1,
+  BY_TXN:2
 }
 export const cntrListType = {
   ALL: 0,

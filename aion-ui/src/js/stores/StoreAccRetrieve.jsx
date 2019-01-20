@@ -34,7 +34,7 @@ export const SetPagingTxn = (data) =>
     data: data,
   }
 }
-// Paging Transaction
+// Paging Tokens
 // ------------------
 export const GetTkn = (data) => 
 {
