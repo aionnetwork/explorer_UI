@@ -171,6 +171,10 @@ class NCAccRetrieve extends Component
   }
 
   render() {
+
+    let a = "56325127865487261354678512387645267835846723545672354523764";
+    console.log("Here: "+a.toString());
+
     const store = this.props.accRetrieve;
     
     const tokens = (store.response && store.response.acc.data && store.response.acc.data.content && store.response.acc.data.content[0]) ? store.response.acc.data.content[0].tokens : [];

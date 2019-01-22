@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
+import {BigNumber} from 'bignumber.js';
 import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
 import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
 
@@ -16,8 +17,8 @@ import { NCSortType, NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
-
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { nc_numFormatterAionCoin, nc_decimalPrettify, nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
+//import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
 export default class NCTxnTableOwnTransfer extends Component 
 {
@@ -44,6 +45,14 @@ export default class NCTxnTableOwnTransfer extends Component
       },
       {
         name: "Value",
+        isSortable: false,
+        isFilterable: false,
+        width: 100,
+        flex: false,
+        objPath: null,
+      },
+      {
+        name: "Raw Value",
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -107,9 +116,16 @@ export default class NCTxnTableOwnTransfer extends Component
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
         transferTimestamp = entity.timestamp;
-        value = entity.valueTransferred;
-        rawValue = entity.rawValue;
+        value = entity.valueTransferred;//BigNumber(String(entity.valueTransferred), 16).toString(10);//entity.valueTransferred;
+        //let bal = nc_numFormatterACSensitive(entity.balance);
+        //let balance = nc_decimalPrettify(bal);
+
+        rawValue = nc_decimalPrettify(nc_numFormatterACSensitive(entity.value));
       }
+      console.log(BigNumber(entity.valueTransferred.toString()));
+
+      let a = 56325127865487261354678512387645267835846723545672354523764;
+      console.log(a);//console.log(entity.value.toString());
 
       let isFrom = false;
       if (this.props.ownAddr == fromAddr)
@@ -130,8 +146,9 @@ export default class NCTxnTableOwnTransfer extends Component
       </Cell>;
       tableContent[i][1] = <Cell copy={ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
       tableContent[i][2] = <Cell copy={ value ? value : 0 }>{ value ? value : 0 }</Cell>;
-      //tableContent[i][3] = <Cell copy={ rawValue ? rawValue : 0 }>{ rawValue ? rawValue : 0 }</Cell>;
-      tableContent[i][3] = 
+      tableContent[i][3] = <Cell copy={ rawValue ? rawValue : 0 }>{ rawValue ? rawValue : 0 }</Cell>;
+      
+      tableContent[i][4] = 
       <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.SEARCH].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.SEARCH} 
@@ -139,13 +156,13 @@ export default class NCTxnTableOwnTransfer extends Component
           entityId={fromAddr}
           linkActive={isFrom ? false : true}/>
       </Cell>;
-      tableContent[i][4] = 
+      tableContent[i][5] = 
       <Cell>
         <div className="arrow-cell">
           <span className="pt-icon-standard pt-icon-arrow-right"/>
         </div>
       </Cell>;
-      tableContent[i][5] = 
+      tableContent[i][6] = 
       <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
       {
         toAddr ?

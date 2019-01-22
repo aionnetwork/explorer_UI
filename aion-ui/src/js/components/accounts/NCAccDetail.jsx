@@ -15,8 +15,12 @@ const EMPTY_STR = "Not Available";
 const NOT_CONTRACT = "Not a Contract";
 export default class NCAccDetail extends Component
 {
+
+
   render() {
     let { entity, tokenList } = this.props;
+    let a = 56325127865487261354678512387645267835846723545672354523764;
+      console.log(a);
     
     let bal = nc_numFormatterACSensitive(entity.balance);
     let balance = nc_decimalPrettify(bal);
@@ -49,7 +53,7 @@ export default class NCAccDetail extends Component
                 </span>
                 :
                 entity.balance == null ? "Balance Service Unavailable" :
-                <span className="">{entity.balance + " AION"}
+                <span className="">{balance + " AION"}
                   <span className="subtitle">{"(as of block " + entity.lastBlockNumber + ")"}</span>
                 </span>
 

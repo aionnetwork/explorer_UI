@@ -478,12 +478,13 @@ class NCLayout extends Component {
           {/*permissionsMenu*/}
         </div>
         <div className="NCFooter"> 
-          <div>
+          {(false)&& <div>
             <a className="footer-container" rel="noopener" target="_blank" href="https://aion.network">
               <span className="text">Powered By</span>
               <img className="logo" src="img/logo/aion-icon.svg" alt="logo"/>
             </a>
-          </div>  
+          </div>
+          } 
           {(true)&&
           <div>
             {/*<a className="footer-container" target="_blank" href="/#/terms">
@@ -496,20 +497,25 @@ class NCLayout extends Component {
               <span style={style}  className="text">Feedback</span>          
               
             </a>
-            &nbsp;
+            &nbsp;|&nbsp;
             <a className="footer-container" target="_blank" href="https://aion.network/community/">
               <span style={style}  className="text">Community</span>          
               
             </a>
-            &nbsp;
+            &nbsp;|&nbsp;
             <a className="footer-container" target="_blank" href="https://aion.network/bounty/">
               <span style={style}  className="text">Bounties & Grants</span>          
               
             </a>
-            &nbsp;
+            &nbsp;|&nbsp;
             <a className="footer-container" target="_blank" href="https://aion.network/developers/">
               <span style={style}  className="text">Developers</span>          
               
+            </a>
+               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <a className="footer-container" rel="noopener" target="_blank" href="https://aion.network">
+              <span style={style}>Powered By</span>
+              <img  height="25" src="img/logo/aion-icon.svg" alt="logo"/>
             </a>
            
           </div>

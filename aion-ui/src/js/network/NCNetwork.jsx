@@ -11,6 +11,7 @@ import ENV from '../../env.json';
 import qs from 'qs';
 
 export const NCNETWORK_REQUESTS_ENABLED = true;
+const JSONbig = require('json-bigint');
 //export let NETWORK_LIST = [];
 
 let HTTPS_ENABLED = true;
@@ -276,13 +277,15 @@ export const request = async (endpoint, params,sub_base=false) =>
       //console.log('create endpoint!'+sub_base);
       net = axios.create({
           baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
-          timeout: 120000
+          timeout: 120000,
+          
         });
     }
 
     if (net) {
       net.get(endpoint.link, args)
       .then((response) => {
+        console.log(JSON.stringify(response));
         
         if (response.status == 200 && response.data)
           resolve(response.data);
