@@ -11,7 +11,7 @@ import ENV from '../../env.json';
 import qs from 'qs';
 
 export const NCNETWORK_REQUESTS_ENABLED = true;
-const JSONbig = require('json-bigint');
+const JSONBigInt = require('json-bigint');
 //export let NETWORK_LIST = [];
 
 let HTTPS_ENABLED = true;
@@ -278,8 +278,13 @@ export const request = async (endpoint, params,sub_base=false) =>
       net = axios.create({
           baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
           timeout: 120000,
-          
-        });
+          transformResponse:[function (data) {
+               // Do whatever you want to transform the data
+              return JSONBigInt.parse(data)
+              //return data;
+            }]
+
+          });
     }
 
     if (net) {
@@ -337,7 +342,7 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
       };
 
       
-      console.log('before');
+      
 
       axios(options).then((response) => {
     
@@ -349,7 +354,7 @@ export const postRequest = async (endpoint, params,sub_base=false) =>
           reject("ERR: Bad API get response.");   
        });
       
-      console.log('after');
+      
 
 
   });
