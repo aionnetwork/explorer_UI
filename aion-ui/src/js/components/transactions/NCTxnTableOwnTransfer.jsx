@@ -128,7 +128,7 @@ export default class NCTxnTableOwnTransfer extends Component
         transactionHash = entity.transactionHash//let bal = nc_numFormatterACSensitive(entity.balance);
         //let balance = nc_decimalPrettify(bal);
 
-        rawValue = nc_decimalPrettify(nc_numFormatterACSensitive(entity.value));
+        //rawValue = nc_decimalPrettify(nc_numFormatterACSensitive(entity.value));
       }
       console.log(BigNumber(entity.valueTransferred.toString()));
 
