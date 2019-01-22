@@ -278,7 +278,11 @@ export const request = async (endpoint, params,sub_base=false) =>
       net = axios.create({
           baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
           timeout: 120000,
-          
+          transformResponse:[function (data) {
+              
+              return JSONBigInt.parse(data)
+              
+            }]
 
           });
     }
@@ -286,10 +290,12 @@ export const request = async (endpoint, params,sub_base=false) =>
     if (net) {
       net.get(endpoint.link, args)
       .then((response) => {
-        console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
         
-        if (response.status == 200 && response.data)
+        if (response.status == 200 && response.data){
+          //console.log(JSON.stringify(response));
           resolve(response.data);
+        }
         else {
           reject("ERR: Bad API get response.");
         }
