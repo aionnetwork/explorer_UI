@@ -49,7 +49,7 @@ export default class NCAccDetail extends Component
                 </span>
                 :
                 entity.balance == null ? "Balance Service Unavailable" :
-                <span className="">{balance + " AION"}
+                <span className="">{entity.balance + " AION"}
                   <span className="subtitle">{"(as of block " + entity.lastBlockNumber + ")"}</span>
                 </span>
 
