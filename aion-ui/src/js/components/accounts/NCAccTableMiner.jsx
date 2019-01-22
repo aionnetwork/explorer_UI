@@ -70,7 +70,7 @@ export default class NCAccTableMiner extends Component
             entityId={entity[0]}/> 
         </Cell>;
       tableContent[i][1] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
-      tableContent[i][2] = <Cell copy={ nc_numFormatter(entity[2], 2)+"%" } >{ nc_numFormatter(entity[2], 2)+"%" }</Cell>;        
+      tableContent[i][2] = <Cell copy={ nc_numFormatter(entity[2], 1)+"%" } >{ nc_numFormatter(entity[2], 1)+"%" }</Cell>;        
     });
 
     return tableContent;
