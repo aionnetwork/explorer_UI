@@ -254,7 +254,7 @@ export const endpoint = {
   },
   contact:{
     detail:{
-      link:'/feedback/sendFeedback',
+      link:'/app/sendFeedback',
       params:['topic','message','g-recaptcha-response']
     }
   }
@@ -278,11 +278,7 @@ export const request = async (endpoint, params,sub_base=false) =>
       net = axios.create({
           baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
           timeout: 120000,
-          transformResponse:[function (data) {
-               // Do whatever you want to transform the data
-              return JSONBigInt.parse(data)
-              //return data;
-            }]
+          
 
           });
     }
