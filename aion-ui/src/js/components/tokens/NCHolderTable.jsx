@@ -88,7 +88,7 @@ export default class NCAccTable extends Component
         blockNumber = entity.blockNumber;
         holderAddr = entity.holderAddr;
         contractAddr = entity.contractAddr;
-        balance = entity.tknBalance;
+        balance = entity.rawBalance;
         rawbalance = entity.rawBalance;
       }
 

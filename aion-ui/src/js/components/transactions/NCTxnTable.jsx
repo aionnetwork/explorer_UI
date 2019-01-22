@@ -122,7 +122,7 @@ export default class NCTxnTable extends Component
         
       }
 
-      console.log(status);
+      console.log(toAddr);
 
       // Generate tableContent
       tableContent[i] = [];
