@@ -486,11 +486,13 @@ class NCLayout extends Component {
           </div>
           } 
           {(true)&&
+
           <div>
             {/*<a className="footer-container" target="_blank" href="/#/terms">
               <span style={style}  className="text">Terms of use</span>          
               
             </a>*/} 
+            <br/>
             
           
             <a className="footer-container" target="_blank" href="/#/feedback">
