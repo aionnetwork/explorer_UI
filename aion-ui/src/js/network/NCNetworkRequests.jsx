@@ -883,7 +883,7 @@ export const setDashboardData = (response) => {
   
   if(!isResponseEmpty) {
     let data = response.content[0];
-    console.log(JSON.stringify(data.transactions));
+    //console.log(JSON.stringify(data.transactions));
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
     store.dispatch(StoreTxnRt.SetAll(data.transactions));
     

@@ -98,7 +98,7 @@ export default class NCBlkTable extends Component
         blockNumber = entity.blockNumber;
         nrgConsumed = entity.nrgConsumed;
         difficulty = entity.difficulty;
-        size = entity.blockSize;
+        size = entity.size;
         numTransactions = entity.numTransactions;
         blockTimestamp = entity.blockTimestamp;
       }
