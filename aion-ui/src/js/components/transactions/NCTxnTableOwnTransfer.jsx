@@ -130,7 +130,7 @@ export default class NCTxnTableOwnTransfer extends Component
 
         //rawValue = nc_decimalPrettify(nc_numFormatterACSensitive(entity.value));
       }
-      console.log(BigNumber(entity.valueTransferred.toString()));
+      //console.log(BigNumber(entity.valueTransferred.toString()));
 
       //console.log(entity.value.toString());
 
