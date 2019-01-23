@@ -39,7 +39,7 @@ class NCTxnList extends Component
     let listType = txnListType.ALL;
 
     let query = this.props.location.query; 
-    if (query && query.block) {
+    if (query && query.block){
       listType = txnListType.BY_BLOCK;
       queryStr = query.block;
     }
@@ -47,7 +47,7 @@ class NCTxnList extends Component
     network.getTxnListTopLevel(listType, queryStr);
   }
 
-  requestPaging = (pageNumber, pageSize, start=0, end=0) => {
+  requestPaging = (pageNumber, pageSize, start, end) => {
     const listType = this.props.txnList.listType;
     const queryStr = this.props.txnList.queryStr;
     network.getTxnListPaging(listType, queryStr, pageNumber, pageSize, start, end);

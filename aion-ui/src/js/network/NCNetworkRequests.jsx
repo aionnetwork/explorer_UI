@@ -1,7 +1,7 @@
 /* eslint-disable */
 import * as network from 'network/NCNetwork';
-import { store } from 'stores/NCReduxStore'
-import { Router, Route, IndexRedirect, hashHistory} from 'react-router'
+import { store } from 'stores/NCReduxStore';
+import { Router, Route, IndexRedirect, hashHistory} from 'react-router';
 
 import * as mock from 'lib/NCData';
 
@@ -84,7 +84,7 @@ export const getBlkListTopLevel = (listType, queryStr) => {
   }
 }
 
-export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0, start=0, end=0) => {
+export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0, start=null, end=null) => {
   store.dispatch(StoreBlkList.GetPaging());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -101,7 +101,11 @@ export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0, star
     let params = [];
     switch(listType) {
       case blkListType.ALL: {
-        params = [pageNumber, size, start, end]
+        if(start!==null){
+          params = [pageNumber, size, start, end];
+        }else{
+          params = [pageNumber, size];
+        }
         break; 
       }
     }
@@ -244,16 +248,24 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
 
     let date = new Date();
-    let e = Math.floor((end!==null) ? end : (date.getTime()/1000)-date.getTimezoneOffset()*60);
-    let s = Math.ceil(((start!==null)&&(start>0)) ? start : e-(43800*60) );
 
+    
+      let e = Math.floor((end!==null) ? end : (date.getTime()/1000)-date.getTimezoneOffset()*60);
+      let s = Math.ceil(((start!==null)&&(start>0)) ? start : e-(43800*60) );
+    
     switch(listType) {
       case txnListType.ALL: {
-        params = [pageNumber, size, s, e]
+        if((end!==null)&&(start!==null)){
+          params = [pageNumber, size, s, e];
+        }else if(start!==null){
+          params = [pageNumber, size,s];
+        }else{
+          params = [pageNumber, size];
+        }
         break;
       }
       case txnListType.BY_BLOCK: {
-        params = [nc_trim(queryStr), pageNumber, PAGE_SIZE]
+        params = [nc_trim(queryStr), pageNumber, PAGE_SIZE];
         break;
       }
       
@@ -267,7 +279,7 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start
       store.dispatch(StoreTxnList.SetPaging({}));
     });
   }
-}
+};
 
 export const getTxnRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreTxnRetrieve.GetTopLevel({

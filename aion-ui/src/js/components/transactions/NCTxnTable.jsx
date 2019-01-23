@@ -8,14 +8,14 @@ import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
 import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
+import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table";
 
 import NCTableBase from 'components/common/NCTableBase';
 import { NCSortType, NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
 
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
+import { PAGE_SIZE } from 'network/NCNetworkRequests';
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
@@ -100,7 +100,7 @@ export default class NCTxnTable extends Component
       let blockTimestamp = null;
       let timestamp = null;
       let value = null;
-      let status = null;
+      let status = "";
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
@@ -122,8 +122,8 @@ export default class NCTxnTable extends Component
         
       }
 
-      console.log(toAddr);
-
+      //console.log(status);
+      //console.log(timestamp);
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
@@ -133,7 +133,7 @@ export default class NCTxnTable extends Component
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
-      tableContent[i][1] = <Cell copy={(timestamp!==null) ? timestamp :  moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{(timestamp!==null)? timestamp : moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+      tableContent[i][1] = <Cell copy={(timestamp!==null) ? moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') :  moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{(timestamp!==null)? moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') : moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
       tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }>{ value ? value: 0 }</Cell>;
       tableContent[i][3] = 
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash}>
@@ -146,7 +146,7 @@ export default class NCTxnTable extends Component
       <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+fromAddr}>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
-          entityName={fromAddr}
+          
           entityId={fromAddr}/>
       </Cell>;
       tableContent[i][5] = 

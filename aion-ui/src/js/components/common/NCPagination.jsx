@@ -201,8 +201,8 @@ export default class NCPagination extends Component
               onChange={(e) => {
                 this.serchDirection = SEARCH_DIR.FORWARD;
 
-                console.log(totalElements);
-                console.log(parseInt(e.target.value)-1);
+                //console.log(totalElements);
+                //console.log(parseInt(e.target.value)-1);
 
                 if((parseInt(e.target.value)-1)<totalPages){
 
@@ -213,7 +213,7 @@ export default class NCPagination extends Component
                 
                 }} 
 
-               className="paging-input"
+               className="paging-input wide-input"
               value = {parseInt(pageNumber+1)}
                />
           <span className="pt-text-muted context hide">    
