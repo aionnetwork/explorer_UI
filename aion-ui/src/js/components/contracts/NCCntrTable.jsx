@@ -199,7 +199,7 @@ export default class NCCntrTable extends Component
       <Cell copy={creator} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+creator}>
           <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
-          entityName={creator}
+         
           entityId={creator}/> 
         
       </Cell>;
@@ -207,7 +207,7 @@ export default class NCCntrTable extends Component
       <Cell copy={transaction} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transaction}>
           <NCEntityLabel 
           entityType={NCEntity.TXN} 
-          entityName={transaction}
+          
           entityId={transaction}/> 
         
       </Cell>;

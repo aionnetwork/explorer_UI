@@ -139,7 +139,6 @@ export default class NCTxnTable extends Component
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash}>
         <NCEntityLabel 
           entityType={NCEntity.TXN} 
-          entityName={transactionHash}
           entityId={transactionHash}/> 
       </Cell>;
       tableContent[i][4] = 
