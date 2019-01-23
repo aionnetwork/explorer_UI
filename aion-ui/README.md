@@ -22,7 +22,7 @@ This is a sigle page application that consumes the aion explorer api service; Th
 
 ### Build 
 
-1. Edit the following variables in  `env.json` as needed
+1. Edit the following variables in  `/src/env.json` as needed
       {
          "BASE_URL" : "mainnet-api.aion.network/aion",
          "HOME_URL" : "mainnet-api.aion.network",
