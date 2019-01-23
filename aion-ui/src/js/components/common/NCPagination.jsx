@@ -141,7 +141,7 @@ export default class NCPagination extends Component
             {
               "Showing " + entityName + " " + 
               ((pageNumber * pageSize) + 1) + " - " + ((pageNumber * pageSize) + listSize) + 
-              " of " + totalElements + (isLatest ? ((entityName!=="Contracts")&&(entityName!=="Tokens"))? "  for the last month" : "  for the last year" : " found")
+              " of " + totalElements + (isLatest ? ((entityName!=="Contracts")&&(entityName!=="Tokens"))? "  for 30 days" : "  for 365 days" : " found")
             }
           {/*con*/}
           </span>
@@ -171,7 +171,7 @@ export default class NCPagination extends Component
           <Button 
             
             className="pt-minimal left" 
-            text="First"
+            text="First page"
             
             disabled={isFirstPage || this.loading}
             loading={(this.serchDirection == SEARCH_DIR.BACKWARD && this.loading) ? true : false}
@@ -234,7 +234,7 @@ export default class NCPagination extends Component
             <Button 
             
             className="pt-minimal right" 
-            text="Last"
+            text="Last page"
             
             disabled={isLastPage || this.loading}
             loading={(this.serchDirection == SEARCH_DIR.FORWARD && this.loading) ? true : false}

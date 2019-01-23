@@ -84,6 +84,7 @@ export default class NCActiveAddressChart extends Component
                 type: 'area',
                 name: 'Block Times Chart',
                 data: data,
+                tuboThreshold:15000,
                 
             }]
         }

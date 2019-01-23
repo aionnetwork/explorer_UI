@@ -27,7 +27,7 @@ class NCTxnTableRTRow extends Component
           <div className="column txn-fromEntity growable">
             <NCEntityLabel 
               entityType={NCEntity.ACCOUNT} 
-              entityName={entity.fromAddr}
+              
               entityId={entity.fromAddr}/>
              <span className="pt-icon-large pt-icon-arrow-right arrow-icon"/>
           </div>
@@ -39,7 +39,7 @@ class NCTxnTableRTRow extends Component
               entity.toAddr ?
                 <NCEntityLabel 
                   entityType={NCEntity.ACCOUNT} 
-                  entityName={entity.toAddr}
+                  
                   entityId={entity.toAddr}/>:
                 <strong>Contract Creation</strong>
             }
