@@ -14,7 +14,7 @@ import NCEntityDetail from 'components/common/NCEntityDetail';
 const EMPTY_STR = "Not Available";
 import {BigNumber} from 'bignumber.js';
 
-export default class NCActiveAddressChart extends Component
+export default class NCNetworkDifficultyChart extends Component
 {
   constructor(props) 
   {

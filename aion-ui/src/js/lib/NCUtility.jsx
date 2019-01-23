@@ -528,7 +528,7 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
 
   switch(charttype){
     case 'line':
-        point =[data.timestamp * adjust,data.value];
+        point =[data.timestamp * adjust,parseFloat(data.value)];
         break;  
     case 'pie':        
         
@@ -536,7 +536,7 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
         
         break;  
     case 'bar':        
-        point =[data.timestamp * adjust,data.value];
+        point =[data.timestamp * adjust,parseFloat(data.value)];
         break;                
     default:
         point =[];
@@ -547,7 +547,7 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
 
  }else if(nc_isNumber(data['Other Addresses'])){
 
-  point ={name:'Other addresses', y:45};
+  point ={name:'Other addresses', y:data['Other Addresses']};
 
   return point;
 

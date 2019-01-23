@@ -13,7 +13,7 @@ import NCEntityDetail from 'components/common/NCEntityDetail';
 const EMPTY_STR = "Not Available";
 import {BigNumber} from 'bignumber.js';
 
-export default class NCActiveAddressChart extends Component
+export default class NCHashPowerChart extends Component
 {
   render() {
     let { entity, options, data, mode} = this.props;
