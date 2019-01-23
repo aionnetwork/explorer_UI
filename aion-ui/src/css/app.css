@@ -776,6 +776,9 @@ h1, h2, h3, h4, h5 {
   text-align: center;
   height: 20px;
 }
+.NCPagination .pt-wide-input .pt-input {
+  width: 50px !important;
+}
 .NCPagination .pt-select-input {
   height: 24px !important;
 }

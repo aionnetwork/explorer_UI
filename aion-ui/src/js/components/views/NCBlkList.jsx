@@ -49,7 +49,7 @@ class NCBlkList extends Component
   requestPaging = (pageNumber,pageSize, start, end) => {
     const listType = this.props.blkList.listType;
     const queryStr = this.props.blkList.queryStr;
-    console.log(start+" "+end);
+    //console.log(start+" "+end);
     network.getBlkListPaging(listType, queryStr, pageNumber,pageSize, start, end);
   }
 

@@ -199,21 +199,21 @@ export default class NCPagination extends Component
              <InputGroup 
               type="number" 
               onChange={(e) => {
-                this.serchDirection = SEARCH_DIR.FORWARD;
-
-                //console.log(totalElements);
-                //console.log(parseInt(e.target.value)-1);
-
-                if((parseInt(e.target.value)-1)<totalPages){
-
-                  this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,startDate,endDate);
-
-                }
-
                 
-                }} 
+                    this.serchDirection = SEARCH_DIR.FORWARD;
 
-               className="paging-input wide-input"
+                    if((parseInt(e.target.value)-1)<totalPages){
+                      this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,startDate,endDate);
+                      /*setTimeout( 
+                        this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,startDate,endDate),
+                        500 
+                      );*/
+                    }
+                
+                  }
+              } 
+
+               className="paging-input pt-wide-input"
               value = {parseInt(pageNumber+1)}
                />
           <span className="pt-text-muted context hide">    
