@@ -73,9 +73,16 @@ class NCBlkRetrieve extends Component
 
     let isTxnListValid = nc_isListValid(txnList);
     let isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
+    
+    let prev = null;
+    let next = null;
 
-    let prev = parseInt(this.props.params.blkId)-1;
-    let next = parseInt(this.props.params.blkId)+1;
+    if(blkObj){
+        //console.log(JSON.stringify(blkObj.content[0]['blockNumber'])); 
+        let block = blkObj.content[0]['blockNumber'];
+        prev = parseInt(block)-1;
+        next = parseInt(block)+1;
+    }
 
     const blk = isBlkEmpty ? {} : blkObj.content[0]; 
 
