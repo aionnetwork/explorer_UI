@@ -22,7 +22,15 @@ This is a sigle page application that consumes the aion explorer api service; Th
 
 ### Build 
 
-1. Build application; Build destination is `/build`
+1. Edit the following variables in  `env.json` as needed
+      {
+         "BASE_URL" : "mainnet-api.aion.network/aion",
+         "HOME_URL" : "mainnet-api.aion.network",
+         "NETWORK_LIST" : "mainnet",
+         "GA_KEY" : "UA-000000-10",  
+      }
+
+2. Build application; Build destination is `/build`
 
    ```
    yarn build
