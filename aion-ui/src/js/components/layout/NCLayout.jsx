@@ -59,9 +59,7 @@ class NCLayout extends Component {
 
     if (this.networkList && this.networkList[0].name) {
       this.connectionMenu = 
-        <Button 
-          className="navbar-btn-active pt-button pt-minimal"
-          text={this.networkList[0].name}/>; 
+        <Button className="navbar-btn-active pt-button pt-minimal" text={this.networkList[0].name}/>; 
     }
 
     this.connectionMenuItemList = [];
@@ -400,7 +398,7 @@ class NCLayout extends Component {
     this.renderConnectionMenu(this.networkList,mode);
     //console.log(this.props.darkMode.data + " dark_mode" + mode);
 
-    let style = {fontSize:'9px'}
+    let style = {fontSize:'11px'}
 
     return (
       <div className={mode + " NCPage"}>
