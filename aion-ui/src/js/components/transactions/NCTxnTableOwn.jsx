@@ -141,14 +141,14 @@ export default class NCTxnTableOwn extends Component
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash}>
         <NCEntityLabel 
           entityType={NCEntity.TXN} 
-          entityName={transactionHash}
+          
           entityId={transactionHash}/> 
       </Cell>;
       tableContent[i][4] = 
       <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
-          entityName={fromAddr}
+          
           entityId={fromAddr}
           linkActive={isFrom ? false : true}/>
       </Cell>;

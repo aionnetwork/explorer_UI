@@ -145,7 +145,7 @@ export default class NCTxnTableOwnToken extends Component
       <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.SEARCH].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.SEARCH} 
-          entityName={fromAddr}
+          
           entityId={fromAddr}
           linkActive={isFrom ? false : true}/>
       </Cell>;
@@ -161,7 +161,7 @@ export default class NCTxnTableOwnToken extends Component
         toAddr ?
         <NCEntityLabel 
           entityType={NCEntity.SEARCH} 
-          entityName={toAddr}
+          
           entityId={toAddr}
           linkActive={isTo ? false : true}/>:
         "Contract Creation"

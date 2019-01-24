@@ -158,7 +158,7 @@ export default class NCTxnTableOwnTransfer extends Component
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } >
         <NCEntityLabel 
           entityType={NCEntity.TXN} 
-          entityName={transactionHash}
+          
           entityId={transactionHash}
           linkActive={true}/>
       </Cell>;
@@ -166,7 +166,7 @@ export default class NCTxnTableOwnTransfer extends Component
       <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.SEARCH].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
-          entityName={fromAddr}
+          
           entityId={fromAddr}
           linkActive={isFrom ? false : true}/>
       </Cell>;
@@ -182,7 +182,7 @@ export default class NCTxnTableOwnTransfer extends Component
         toAddr ?
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
-          entityName={toAddr}
+          
           entityId={toAddr}
           linkActive={isTo ? false : true}/>:
         "Contract Creation"
