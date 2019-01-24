@@ -106,7 +106,7 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value == null ? EMPTY_STR : <span className="">{entity.value + " AION"}</span>,
+        value: entity.value == null ? EMPTY_STR : <span className="">{entity.value.toString() + " AION"}</span>,
       },
       {
         field: "Nrg Price",

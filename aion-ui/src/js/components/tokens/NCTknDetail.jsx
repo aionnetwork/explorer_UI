@@ -114,11 +114,11 @@ export default class NCTxnDetail extends Component
       },*/
       {
         field: "TotalSupply",
-        value: entity.totalSupply,
+        value: entity.totalSupply.toString(),
       },
       {
         field: "Liquid Supply",
-        value: entity.liquidSupply,
+        value: entity.liquidSupply.toString(),
       },
      
       
