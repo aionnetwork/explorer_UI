@@ -43,6 +43,11 @@ export default class NCEventTable extends Component
       action: 'Events tab'
     });
 
+    this.state = {
+      isOpen: true,
+      content: ''
+    };
+
     //console.log('events time');
     this.columnDescriptor = 
     [
@@ -83,7 +88,11 @@ export default class NCEventTable extends Component
 
    
    
- 
+ handleOpen = (text) => this.setState({ isOpen: true, content:text});
+
+
+ handleClose = () => this.setState({ isOpen: false });
+
    parseParamData = (txnLog) => {
     let result = "";
 
@@ -100,7 +109,7 @@ export default class NCEventTable extends Component
       return false;
     }
     return result;
-  }
+  };
 
    parseInputData = (txnLog) => {
     let result = "";
@@ -194,15 +203,7 @@ export default class NCEventTable extends Component
 
         id= entity.eventId;
 
-        //console.log(this.parseInputData(entity.inputList));
         
-        //console.log(JSON.parse(this.parseInputData(entity.inputList)));
-        //parsedInputData = this.parseInputData(entity.inputList);//this.parseInputData(entity.inputList);
-        //console.log(JSON.stringify(parsedInputData));
-        //parsedParamData = JSON.parse(this.parseParamData(entity.parameterList));//this.parseParamData(entity.parameterList);
-       
-
-          //console.log(JSON.stringify(entity));
       }
 
       
@@ -211,6 +212,25 @@ export default class NCEventTable extends Component
       const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition"; 
       const classes = classNames(Classes.CARD, Classes.ELEVATION_4, OVERLAY_EXAMPLE_CLASS, this.props.data.themeName);
       
+      const dialog=  
+               <Dialog
+                    
+                    icon="info-sign"
+                    onClose={this.handleClose}
+                    title="Events"
+                    
+                >
+                    <div className={Classes.DIALOG_BODY}>
+                        
+                        {this.state.content}
+
+                    </div>
+                    <div className={Classes.DIALOG_FOOTER}>
+                        <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                                                        
+                        </div>
+                    </div>
+                </Dialog>
 
 
       // Generate tableContent
@@ -228,9 +248,9 @@ export default class NCEventTable extends Component
       
      
       tableContent[i][1] = <Cell copy={inputs.map((a,i)=>{return ({a})})} interactive={true} ><b>{ name + '('+params+')' }<br/>
-      <pre className={'nc-resizable'}>
-             {inputs.map((a,i)=>{return (<span key={i}>{a}<br/></span>)})}
-      </pre></b>
+      </b>
+      
+      
       </Cell>;
     
       tableContent[i][2] = 
@@ -247,8 +267,13 @@ export default class NCEventTable extends Component
   render() {
     const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition";
     const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
+     
+    
+
+                
     
     return (
+     
       <NCTableReactPaginated
         rowHeights = {this.ncRowHeight}
         data={data}
@@ -262,7 +287,10 @@ export default class NCEventTable extends Component
 
           
 
-        />
+        >
+        {this.dialog}
+        </NCTableReactPaginated>
+        
     );
   }
 }
