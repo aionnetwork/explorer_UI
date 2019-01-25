@@ -483,7 +483,7 @@ export const getAccTxnRetrieveCSV = (acc,key,start,end,range) => {
     paramsC = [request,'','Accoun_Mined_Blocks',0,999];
     
     //postRequest/request
-    network.postRequest(ep, params, true)
+    network.request(ep, params, true)
     .then((response) => {
         
         
