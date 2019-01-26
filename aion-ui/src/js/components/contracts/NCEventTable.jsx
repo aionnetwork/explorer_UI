@@ -44,9 +44,12 @@ export default class NCEventTable extends Component
     });
 
     this.state = {
-      isOpen: true,
+      isOpen: false,
       content: ''
     };
+
+    this.isOpen = false;
+    this.content = "";
 
     //console.log('events time');
     this.columnDescriptor = 
@@ -55,7 +58,7 @@ export default class NCEventTable extends Component
         name: "Block #",
         isSortable: false,
         isFilterable: false,
-        width: 200,
+        width: 150,
 
         flex: false,
         
@@ -65,7 +68,7 @@ export default class NCEventTable extends Component
         name: "Event",
         isSortable: false,
         isFilterable: false,
-        width: null,
+        
         flex: true,
         objPath: null,
       },
@@ -74,7 +77,7 @@ export default class NCEventTable extends Component
         name: "Event timestamp", // arrow
         isSortable: false,
         isFilterable: false,
-        width: 250,
+        width: 200,
         flex: false,
       },
       
@@ -86,9 +89,15 @@ export default class NCEventTable extends Component
     this.generateTableContent = this.generateTableContent.bind(this);
   }
 
+
    
    
- handleOpen = (text) => this.setState({ isOpen: true, content:text});
+ handleOpen = (text) => {
+  this.isOpen=true;
+  this.content=text;
+  this.setState({ isOpen: true, content:text});
+  console.log("logs");
+};
 
 
  handleClose = () => this.setState({ isOpen: false });
@@ -218,6 +227,7 @@ export default class NCEventTable extends Component
                     icon="info-sign"
                     onClose={this.handleClose}
                     title="Events"
+                    isOpen={this.state.isOpen}
                     
                 >
                     <div className={Classes.DIALOG_BODY}>
@@ -247,9 +257,19 @@ export default class NCEventTable extends Component
       ;
       
      
-      tableContent[i][1] = <Cell copy={inputs.map((a,i)=>{return ({a})})} interactive={true} ><b>{ name + '('+params+')' }<br/>
+      tableContent[i][1] = <Cell copy={inputs.map((a,i)=>{return ({a})})} interactive={true} ><b>{ name + '('+params+')' }
       </b>
       
+      <Button onClick={
+        (a,i)=>{
+          let _e = inputs.map((a,i)=>{return (<span key={i}>{a}<br/></span>)});
+          console.log(_e);
+          this.handleOpen(_e);
+        }
+      }
+      >
+        View
+      </Button>
       
       </Cell>;
     
@@ -273,9 +293,9 @@ export default class NCEventTable extends Component
                 
     
     return (
-     
+      <div>
       <NCTableReactPaginated
-        rowHeights = {this.ncRowHeight}
+        
         data={data}
         onPageCallback={onPageCallback}
         isLoading={isLoading}
@@ -283,13 +303,29 @@ export default class NCEventTable extends Component
         entityName={"Events"}
         generateTableContent={this.generateTableContent}
         columnDescriptor={this.columnDescriptor}
-        isLatest={isLatest}
+        isLatest={isLatest}         
 
-          
+        />
+          <Dialog
+                    
+                    icon="info-sign"
+                    onClose={this.handleClose}
+                    title="Events"
+                    isOpen={this.state.isOpen}
+                    
+                >
+                    <div className={Classes.DIALOG_BODY}>
+                        
+                        {this.state.content}
 
-        >
-        {this.dialog}
-        </NCTableReactPaginated>
+                    </div>
+                    <div className={Classes.DIALOG_FOOTER}>
+                        <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                                                        
+                        </div>
+                    </div>
+                </Dialog>
+        </div>
         
     );
   }
