@@ -98,7 +98,7 @@ export default class NCAccTable extends Component
       <Cell copy={holderAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+holderAddr}>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
-          entityName={holderAddr}
+          
           entityId={holderAddr}/> 
       </Cell>;
       tableContent[i][1] = 
@@ -112,7 +112,7 @@ export default class NCAccTable extends Component
       <Cell copy={contractAddr} link={'#'+NCEntityInfo[NCEntity.CNTR].absoluteUrl+''+contractAddr}>
         <NCEntityLabel 
           entityType={NCEntity.CNTR} 
-          entityName={contractAddr}
+          
           entityId={contractAddr}/> 
       </Cell>;
 

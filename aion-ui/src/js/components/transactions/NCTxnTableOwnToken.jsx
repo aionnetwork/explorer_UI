@@ -121,7 +121,7 @@ export default class NCTxnTableOwnToken extends Component
         rawValue = entity.rawValue;
       }
 
-      let isFrom = true;
+      let isFrom = false;
       if (this.props.ownAddr == fromAddr)
         isFrom = true;
 
@@ -142,9 +142,9 @@ export default class NCTxnTableOwnToken extends Component
       tableContent[i][2] = <Cell copy={ value ? value : 0 }>{ value ? value : 0 }</Cell>;
       tableContent[i][3] = <Cell copy={ rawValue ? rawValue : 0 }>{ rawValue ? rawValue : 0 }</Cell>;
       tableContent[i][4] = 
-      <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.SEARCH].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
+      <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
         <NCEntityLabel 
-          entityType={NCEntity.SEARCH} 
+          entityType={NCEntity.ACCOUNT} 
           
           entityId={fromAddr}
           linkActive={isFrom ? false : true}/>
@@ -160,7 +160,7 @@ export default class NCTxnTableOwnToken extends Component
       {
         toAddr ?
         <NCEntityLabel 
-          entityType={NCEntity.SEARCH} 
+          entityType={NCEntity.ACCOUNT} 
           
           entityId={toAddr}
           linkActive={isTo ? false : true}/>:
