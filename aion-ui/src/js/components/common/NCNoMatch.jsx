@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import NCNonIdealState from "components/common/NCNonIdealState";
 
 export default class NCNoMatch extends Component {
