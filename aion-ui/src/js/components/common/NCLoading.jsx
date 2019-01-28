@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import { Component } from "react";
 import { Spinner } from "@blueprintjs/core";
 
 export default class NCLoading extends Component
 {
   render() {
     const { title, marginTop="140", marginBottom="0" } = this.props;
-
     return (
       <div
         className="NCLoading"
@@ -19,3 +18,6 @@ export default class NCLoading extends Component
     );
   }
 }
+
+
+

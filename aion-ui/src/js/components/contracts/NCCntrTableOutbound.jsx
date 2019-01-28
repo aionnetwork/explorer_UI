@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Cell } from "@blueprintjs/table"
+import { Cell } from "@blueprintjs/table";
 
 import NCEntityLabel from 'components/common/NCEntityLabel';
 import NCPagination from 'components/common/NCPagination';
@@ -10,7 +10,7 @@ import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 import { NCEntity,NCEntityInfo } from 'lib/NCEnums';
 import { ga_key } from 'lib/NCData';
 import { nc_numFormatter } from 'lib/NCUtility';
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
+import { PAGE_SIZE } from 'network/NCNetworkRequests';
 
 import NCLink from 'components/common/NCLink';
 

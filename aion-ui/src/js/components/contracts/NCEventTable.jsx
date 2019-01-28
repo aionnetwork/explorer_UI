@@ -10,7 +10,7 @@ import NCDialog from 'components/common/NCDialog';
 
 import moment from 'moment';
 import { Tooltip, AnchorButton, Dialog,Button,Overlay, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table"
+import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table";
 
 import NCTableBase from 'components/common/NCTableBase';
 import { NCSortType, NCEntity, nc_LinkToEntity,NCEntityInfo } from 'lib/NCEnums';
@@ -18,7 +18,7 @@ import { NCSortType, NCEntity, nc_LinkToEntity,NCEntityInfo } from 'lib/NCEnums'
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
 import NCTokenLabel from 'components/common/NCTokenLabel';
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
+import { PAGE_SIZE } from 'network/NCNetworkRequests';
 
 import { nc_numFormatterAionCoin, nc_isStrEmpty } from 'lib/NCUtility';
 
@@ -29,7 +29,7 @@ ReactGA.initialize(appConfig.ga_key);
 
  const row = {
     height:"100px",
-  }
+  };
 
   
 
@@ -92,12 +92,11 @@ export default class NCEventTable extends Component
 
    
    
- handleOpen = (text) => {
-  this.isOpen=true;
-  this.content=text;
-  this.setState({ isOpen: true, content:text});
-  console.log("logs");
-};
+ handleOpen = (text,title) => {
+  
+    this.setState({ isOpen: true, eContent:text, eTitle:title});
+    
+  };
 
 
  handleClose = () => this.setState({ isOpen: false });
@@ -132,17 +131,14 @@ export default class NCEventTable extends Component
       input[0]  = input[0].split('[').join('["').split(',').join('","') +'"';
       let input2 =input.join(',"[').split('],').join(']",').split(']]').join(']"]').slice(2,-2).split('","');
 
-      //console.log(JSON.stringify(entity));
-
-      result = input2//inputstr.split(",").join('","').split(',"[').join(',[').split(']"').join(']').split(']"]').join(']]');
+      result = input2;//inputstr.split(",").join('","').split(',"[').join(',[').split(']"').join(']').split(']"]').join(']]');
     
-      //console.log(JSON.stringify(result));
     } catch (e) {
       console.log(e);
       return false;
     }
     return result;
-  }
+  };
 
   parameters = (a) => {
       let list = '';
@@ -154,7 +150,7 @@ export default class NCEventTable extends Component
       }
 
       return list.slice(0,-2); 
-  }
+  };
   inputs = (a,b) =>{
       let list = [];
 
@@ -166,12 +162,13 @@ export default class NCEventTable extends Component
       }
 
       return list;
-  }
+  };
 
   
 
-  generateTableContent(entityList) 
+  generateTableContent(entityList)
   {
+    
     let tableContent = [];
     //console.log('tkn table');
     //console.log(JSON.stringify(entityList));
@@ -187,7 +184,8 @@ export default class NCEventTable extends Component
       let timestamp = null;
       let id = null;
       let params = null;
-      let inputs = null
+      let inputs = null;
+      let eTitle = null;
 
       //console.log(JSON.stringify(entity.inputList));
       //console.log(JSON.stringify(entity.parameterList));
@@ -209,7 +207,7 @@ export default class NCEventTable extends Component
         timestamp = entity.eventTimestamp;
         params = this.parameters(entity.parameterList);
         inputs = this.inputs(entity.inputList, entity.parameterList );
-
+        //eTitle = name + "("+params+")";
         id= entity.eventId;
 
         
@@ -221,27 +219,7 @@ export default class NCEventTable extends Component
       const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition"; 
       const classes = classNames(Classes.CARD, Classes.ELEVATION_4, OVERLAY_EXAMPLE_CLASS, this.props.data.themeName);
       
-      const dialog=  
-               <Dialog
-                    
-                    icon="info-sign"
-                    onClose={this.handleClose}
-                    title="Events"
-                    isOpen={this.state.isOpen}
-                    
-                >
-                    <div className={Classes.DIALOG_BODY}>
-                        
-                        {this.state.content}
-
-                    </div>
-                    <div className={Classes.DIALOG_FOOTER}>
-                        <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                                                        
-                        </div>
-                    </div>
-                </Dialog>
-
+      
 
       // Generate tableContent
       tableContent[i] = [];
@@ -260,11 +238,11 @@ export default class NCEventTable extends Component
       tableContent[i][1] = <Cell copy={inputs.map((a,i)=>{return ({a})})} interactive={true} ><b>{ name + '('+params+')' }
       </b>
       
-      <Button onClick={
-        (a,i)=>{
+      <Button className="pt-button pt-minimal liveness-btn pull-right" onClick={
+        ()=>{
           let _e = inputs.map((a,i)=>{return (<span key={i}>{a}<br/></span>)});
-          console.log(_e);
-          this.handleOpen(_e);
+          
+          this.handleOpen(_e,name);
         }
       }
       >
@@ -310,13 +288,13 @@ export default class NCEventTable extends Component
                     
                     icon="info-sign"
                     onClose={this.handleClose}
-                    title="Events"
+                    title={this.state.eTitle+" event"}
                     isOpen={this.state.isOpen}
                     
                 >
                     <div className={Classes.DIALOG_BODY}>
                         
-                        {this.state.content}
+                        <pre className={"nc-resizable"}>{this.state.eContent}</pre>
 
                     </div>
                     <div className={Classes.DIALOG_FOOTER}>
@@ -324,7 +302,7 @@ export default class NCEventTable extends Component
                                                         
                         </div>
                     </div>
-                </Dialog>
+          </Dialog>
         </div>
         
     );
