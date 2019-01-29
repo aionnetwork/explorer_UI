@@ -65,6 +65,8 @@ export default class NCTxnDetail extends Component
     
     let value = nc_decimalPrettify(entity.value);
 
+    let unit = entity.tokenSymbol == null? "Aion" : entity.tokenSymbol;
+
     let desc = 
     [
       {
@@ -72,9 +74,9 @@ export default class NCTxnDetail extends Component
         value: moment.unix(entity.blockTimestamp).format('LLLL'),
       },
       {
-        field: entity.token == null? "Coin" : "Token",
+        field: entity.tokenSymbol == null? "Coin" : "Token",
         value: 
-                  entity.token == null?
+                  entity.tokenSymbol == null? 
                   <NCEntityLabel
                   entityType={NCEntity.TKN}
                   entityId="AION (native)"
@@ -82,8 +84,8 @@ export default class NCTxnDetail extends Component
                   :
                   <NCEntityLabel
                   entityType={NCEntity.TKN}
-                  entityId={entity.token}
-                  linkActive={true}/>
+                  entityId={entity.tokenName}
+                  linkActive={false}/>
               
       },
       {
@@ -102,7 +104,7 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value == null ? EMPTY_STR : <span className="">{value + " AION"}</span>,
+        value: entity.value == null ? EMPTY_STR : <span className="">{value + " " + unit}</span>,
       },
       {
         field: "Nrg Price",
