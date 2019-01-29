@@ -66,8 +66,8 @@ export default class NCTxnDetail extends Component
     let parsedInputData = this.parseInputData(entity.data);
      //console.log(entity.value);
 
-    let bal = nc_numFormatterACSensitive(entity.value);
-    let value = nc_decimalPrettify(bal);
+    //let bal = nc_numFormatterACSensitive(entity.value);
+    let value = nc_decimalPrettify(entity.value);
 
     let desc = 
     [
@@ -106,7 +106,7 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value == null ? EMPTY_STR : <span className="">{entity.value.toString() + " AION"}</span>,
+        value: entity.value == null ? EMPTY_STR : <span className="">{value + " AION"}</span>,
       },
       {
         field: "Nrg Price",

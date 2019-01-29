@@ -76,6 +76,7 @@ export const Transaction = {
   DATA_POLICY_ACC_IN_EMPTY:"Showing recent accounts which received transactions, over last 10,000 transactions.",
   DATA_POLICY_ACC_OUT_EMPTY:"No outbound account activity in last 24 hours",
   DATA_POLICY:"Showing results from the latest transactions. ",
+  DATA_POLICY_TRN:"Showing results from the latest transactions. ",
   DATA_POLICY:"Showing latest transactions for this contract."
 };
 
