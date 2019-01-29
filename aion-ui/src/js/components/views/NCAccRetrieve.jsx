@@ -59,8 +59,7 @@ class NCAccRetrieve extends Component
   }
 
   requestTopLevel = () => {
-    //console.log('retrieve'+JSON.stringify(this.props.params));
-    //console.log(end);
+    
     network.getAccRetrieveTopLevel(this.props.params.accId,this.props.params.tknId);
   }
 
@@ -77,7 +76,7 @@ class NCAccRetrieve extends Component
   }
 
   requestDownload = (type, data) => {
-    //const queryStr = this.props.accRetrieve.queryStr;
+    
     network.RetrieveDownload(type, data);
   }
 
@@ -100,15 +99,14 @@ class NCAccRetrieve extends Component
       let token = [];
       token.hash = tkn;
       token.value = "token";//tkn;
-      //console.log("changing token");
+      
       this.setState({
         queryStr: '', token: token.hash
       }, () => {
-        console.log("Changing token to: " + token);
-       // nc_LinkToEntityWithParam(entity, queryStr, token);
+       
        hashHistory.push('/account/'+this.props.params.accId+'/'+token.hash);
        network.getAccRetrieveTopLevel(this.props.params.accId,token.hash);
-        //nc_FindEntity(queryStr);
+       
       });
     } else if (!nc_isStrEmpty(queryStr)){
 
@@ -136,7 +134,7 @@ class NCAccRetrieve extends Component
       
       menuItemList.push(
               <MenuItem
-                key = "1"
+                key = {tokenList.length}
                 className = "nav-option"
                 iconName = {NCEntityInfo[NCEntity.TKN].icon}
                 onClick={()=>this.changeToken(this.props.accRetrieve.queryStr)}
@@ -144,9 +142,11 @@ class NCAccRetrieve extends Component
                 value = {this.props.accRetrieve.queryStr}
               />
               );
+      //console.log(tokenList.length+1);
       tokenList.forEach((t, i) => {
         if (i >= 0) {
           if (t.name || t.symbol) {
+            //console.log(i+" "+t.name);
             menuItemList.push(
               <MenuItem
                 key= {i}
@@ -163,7 +163,7 @@ class NCAccRetrieve extends Component
     }else{
       menuItemList.push(
               <MenuItem
-                key = "1"
+                key = "0"
                 className = "nav-option"
                 iconName = {NCEntityInfo[NCEntity.TKN].icon}
                
@@ -233,7 +233,7 @@ class NCAccRetrieve extends Component
 
     const desc = nc_hexPrefix(store.queryStr);
 
-    //console.log('cool:'+isAccValid+' '+isAccEmpty);
+    
     const tokenList =  <div className="token-list hide">
         <span className="title">Token balances:</span><Popover
                 content={this.renderTokenMenu(tokens)}
@@ -247,7 +247,7 @@ class NCAccRetrieve extends Component
 
                 />          
         </Popover>
-      </div>
+      </div>;
 
       const tokenListMobile =  <div className="token-list show">
         <span className="title">Token balances:</span><Popover

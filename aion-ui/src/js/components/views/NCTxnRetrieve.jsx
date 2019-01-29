@@ -77,7 +77,7 @@ class NCTxnRetrieve extends Component
     /*This section is for transfers table. This feature was added to accomodate for internal transfers made on tokens.*/
     const isTrnListFirstLoad = (store.response && store.response.trn) ? store.response.trn.momentUpdated : null;
     const trnList = (store.response && store.response.trn) ? store.response.trn.data : null;
-    console.log(JSON.stringify(store.response.trn));
+    //console.log(JSON.stringify(store.response.trn));
     const isTrnListValid = nc_isListValid(trnList);
     const isTrnListEmpty = nc_isListEmpty(trnList, isTrnListValid);
     /*End*/

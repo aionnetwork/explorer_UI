@@ -61,7 +61,7 @@ export default class NCNonIdealState extends Component
 
   render() {
     const { filter, onCallBack, paddingTop="140", paddingBottom="0", title, description, icon, showHomeLink=false } = this.props;
-    console.log(filter);
+    //console.log(filter);
     return (
       <div 
         className="NCNonIdealState"
