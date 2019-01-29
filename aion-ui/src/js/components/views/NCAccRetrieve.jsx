@@ -160,6 +160,17 @@ class NCAccRetrieve extends Component
           }
         }
       });
+    }else{
+      menuItemList.push(
+              <MenuItem
+                key = "1"
+                className = "nav-option"
+                iconName = {NCEntityInfo[NCEntity.TKN].icon}
+               
+                text = "Aion (Default)"
+                value = {this.props.accRetrieve.queryStr}
+              />
+              );
     }
 
     return (
