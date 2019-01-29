@@ -29,9 +29,7 @@ ReactGA.initialize(appConfig.ga_key);
 
  const row = {
     height:"100px",
-  };
-
-  
+  };  
 
 export default class NCEventTable extends Component
 {
@@ -51,7 +49,6 @@ export default class NCEventTable extends Component
     this.isOpen = false;
     this.content = "";
 
-    //console.log('events time');
     this.columnDescriptor = 
     [
       {
@@ -170,8 +167,7 @@ export default class NCEventTable extends Component
   {
     
     let tableContent = [];
-    //console.log('tkn table');
-    //console.log(JSON.stringify(entityList));
+    
     entityList.forEach((entity, i) => 
     {
       let parsedInputData = null;//this.parseTxnLog(entity.inputList);
@@ -187,10 +183,7 @@ export default class NCEventTable extends Component
       let inputs = null;
       let eTitle = null;
 
-      //console.log(JSON.stringify(entity.inputList));
-      //console.log(JSON.stringify(entity.parameterList));
-
-      // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
+      
       if (Array.isArray(entity)) {
         blockNumber = entity[5];
         token = entity[0];
@@ -207,7 +200,7 @@ export default class NCEventTable extends Component
         timestamp = entity.eventTimestamp;
         params = this.parameters(entity.parameterList);
         inputs = this.inputs(entity.inputList, entity.parameterList );
-        //eTitle = name + "("+params+")";
+        
         id= entity.eventId;
 
         

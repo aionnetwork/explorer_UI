@@ -126,13 +126,9 @@ export default class NCTxnTableOwnTransfer extends Component
         transferTimestamp = entity.timestamp;
         value = entity.valueTransferred;//BigNumber(String(entity.valueTransferred), 16).toString(10);//entity.valueTransferred;
         transactionHash = entity.transactionHash//let bal = nc_numFormatterACSensitive(entity.balance);
-        //let balance = nc_decimalPrettify(bal);
-
-        //rawValue = nc_decimalPrettify(nc_numFormatterACSensitive(entity.value));
+        
       }
-      //console.log(BigNumber(entity.valueTransferred.toString()));
-
-      //console.log(entity.value.toString());
+      
 
       let isFrom = false;
       if (this.props.ownAddr == fromAddr)
@@ -195,7 +191,7 @@ export default class NCTxnTableOwnTransfer extends Component
   
   render() {
     const { ownAddr, data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
-    //console.log("Txn loading state: " + isLoading);
+    
     return (
       <NCTableReactPaginated
         data={data}

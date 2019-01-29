@@ -156,20 +156,15 @@ class NCCntrRetrieve extends Component
     const isAccValid = nc_isObjectValid(accObj);
     const isAccEmpty = nc_isObjectEmpty(accObj, isAccValid);
 
-    //console.log(JSON.stringify(accObj));
-    //console.log(isAccValid);
-
     const isTxnListValid = nc_isListValid(txnList);
     const isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-    //console.log(isTxnListEmpty+"  "+isTxnListFirstLoad+"heeey!"+JSON.stringify(txnList));
     
-
     const isBlkListValid = nc_isListValid(blkList);
     const isBlkListEmpty = nc_isListEmpty(blkList, isBlkListValid);
 
     const isEventListValid = nc_isListValid(eventList);
     const isEventListEmpty = nc_isListEmpty(eventList, isEventListValid);
-    //console.log(isEventListEmpty+""+isEventListValid);
+    
     const acc = isAccEmpty ? {} : accObj.content[0];
     
     const breadcrumbs = [
@@ -204,18 +199,7 @@ class NCCntrRetrieve extends Component
       emptyDataStr={MSG.Contract.EMPTY_DATA +" "+desc}
       marginTop={20}
       marginBottom={30}
-      /*subtitle={<div className="token-list">
-        <span className="title">Token balances:</span><Popover
-                content={this.renderTokenMenu(tokens)}
-                interactionKind={PopoverInteractionKind.CLICK}
-                position={Position.BOTTOM}>
-                <Button 
-                  className="navbar-btn-active pt-button pt-minimal"
-                  iconName="pt-icon-application"
-                  rightIconName="pt-icon-caret-down"
-                  text="Aion (Default)"/>          
-        </Popover>
-      </div>}*/
+      
       content={ <NCCntrDetail entity={acc}/> }
     />
 

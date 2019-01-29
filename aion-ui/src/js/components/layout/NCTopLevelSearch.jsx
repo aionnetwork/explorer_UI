@@ -23,9 +23,7 @@ export default class NCTopLevelSearch extends Component
   submitQuery = () => {
     if (!nc_isStrEmpty(this.state.queryStr))
     {
-      //toDo:before trim identify the required entity from the queryStr
-      //nc_findEntity(this.state.queryStr);
-
+      
       let queryStr = nc_trim(this.state.queryStr);
       let entity = this.state.entity;
 

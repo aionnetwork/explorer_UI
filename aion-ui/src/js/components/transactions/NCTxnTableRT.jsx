@@ -62,8 +62,7 @@ export default class NCTxnTableRT extends Component
     }
   }
   handleVisibilityChange = (visibilityState, documentHidden) => {
-    //console.log('visibilityState: ', visibilityState);
-    //console.log('documentHidden: ', documentHidden);
+    
     this.setState({ documentHidden: documentHidden });
   }
 

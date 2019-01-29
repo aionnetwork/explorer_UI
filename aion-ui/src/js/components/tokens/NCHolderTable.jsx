@@ -52,15 +52,7 @@ export default class NCAccTable extends Component
         width: 110,
         flex: false,
         objPath: 'tknBalance',
-      }/*,
-      {
-        name: "Raw Balance",
-        isSortable: false,
-        isFilterable: false,
-        width: 110,
-        flex: false,
-        objPath: 'rawBalance',
-      },*/
+      }
       
     ];
   }
@@ -78,8 +70,7 @@ export default class NCAccTable extends Component
       let balance = null;
       let rawbalance = null;
 
-      // [blockHash, blockNumber, difficulty, nrgConsumed, nrgLimit, size, blockTimestamp, totalDifficulty, numTransactions]
-      if (Array.isArray(entity)) {
+     if (Array.isArray(entity)) {
         blockNumber = entity[3];
         holderAddr = entity[0];
         contractAddr = entity[1];
@@ -118,7 +109,7 @@ export default class NCAccTable extends Component
 
       
       tableContent[i][3] = <Cell>{ balance }</Cell>;
-      {/*tableContent[i][4] = <Cell>{ rawbalance }</Cell>;*/}
+      
     });
 
     return tableContent;
@@ -127,8 +118,7 @@ export default class NCAccTable extends Component
   render() {
     const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
 
-    //console.log(JSON.stringify(data));
-    
+      
     return (
       <NCTableReactPaginated
         data={data}

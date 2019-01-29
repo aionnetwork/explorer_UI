@@ -81,9 +81,7 @@ class NCRecentBlocks extends Component
 
       if (this.currentBlockNumber != latestBlockNumber)
       {
-        // update the clipped list
-        // update the block number
-        // reset the counter -> cause a render call
+        
         this.clippedList = rtBlockList.slice(0, BLOCK_STREAM_ELEMENT_SIZE);
 
         this.currentBlockNumber = latestBlockNumber;
@@ -102,15 +100,14 @@ class NCRecentBlocks extends Component
   }
 
   handleVisibilityChange = (visibilityState, documentHidden) => {
-    //console.log('visibilityState: ', visibilityState);
-    //console.log('documentHidden: ', documentHidden);
+    
     this.setState({ documentHidden: documentHidden });
   }
 
   render() {
     this.targetBlockTime = this.props.kpi.data.targetBlockTime != null ? this.props.kpi.data.targetBlockTime : DEFAULT_TARGET_BLOCK_TIME;
     const momentUpdated = this.props.blkRt.momentUpdated;
-    //console.log(JSON.stringify(this.props))
+    
     if (momentUpdated == null || this.clippedList == null) {
       return (
         <NCLoading title={"Loading Block Stream"} marginTop={100} marginBottom={0}/>
@@ -136,7 +133,7 @@ class NCRecentBlocks extends Component
     let nextBlockNumber = (this.clippedList[0] != null && this.clippedList[0].blockNumber != null) ?
                           this.clippedList[0].blockNumber + 1 : "Undefined";
 
-    //console.log('blocks mode:'+this.props.darkMode.data);
+   
 
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>

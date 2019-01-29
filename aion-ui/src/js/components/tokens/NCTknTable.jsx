@@ -79,38 +79,7 @@ export default class NCTknTable extends Component
         flex: false,
          objPath: null,
       }
-      /*{
-        name: "Contract",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },
-      {
-        name: "Site",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },
-      {
-        name: "To Address",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },
-      {
-        name: "To Address",
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
-      },*/
+     
     ];
 
     this.generateTableContent = this.generateTableContent.bind(this);
@@ -121,7 +90,7 @@ export default class NCTknTable extends Component
   generateTableContent(entityList) 
   {
     let tableContent = [];
-    //console.log('tkn table');
+    
     entityList.forEach((entity, i) => 
     {
       let blockNumber = null;

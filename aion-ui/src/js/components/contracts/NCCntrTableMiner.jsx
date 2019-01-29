@@ -56,8 +56,7 @@ export default class NCAccTableMiner extends Component
   generateTableContent = (entityList) => 
   {
     let tableContent = [];
-    // [addr, avg_txnPerBlock, percentBlocksMined]
-
+    
     entityList.forEach((entity, i) => 
     {
       tableContent[i] = [];

@@ -133,7 +133,7 @@ class NCAccRetrieve extends Component
   renderTokenMenu = (tokenList) => {
    let menuItemList = [];
    if(Array.isArray(tokenList) && tokenList[0] && tokenList.length > 0) {
-      //console.log('cool'+JSON.stringify(tokenList));
+      
       menuItemList.push(
               <MenuItem
                 key = "1"

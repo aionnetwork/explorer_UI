@@ -62,8 +62,6 @@ class NCTknRetrieve extends Component
 
   render() {
     const store = this.props.tknRetrieve;
-
-    //console.log(JSON.stringify(store));
     
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
@@ -103,8 +101,7 @@ class NCTknRetrieve extends Component
       }
     ];
     
-    //const name = " ";//store.response.tkn.content[0].name;//tkn.content.name;
-    
+        
     const truth = true;
     const desc = nc_hexPrefix(store.queryStr);
     

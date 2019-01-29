@@ -47,7 +47,6 @@ export default class NCCardBlock extends Component
               <span className="proposal-time">{Math.round(blk.blockTime * 100) / 100}s</span>
             }
           </div>
-          {/*<span className="time-elapsed pt-text-muted">{blk.blockTimestamp != null ? moment.unix(blk.blockTimestamp).fromNow() : ""}</span>*/}
           <button
             className="block-link pt-button pt-minimal pt-icon-circle-arrow-right pt-intent-primary"
             onClick={() => nc_LinkToEntity(NCEntity.BLOCK, blk.blockNumber)}

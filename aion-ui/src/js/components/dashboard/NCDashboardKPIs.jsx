@@ -25,47 +25,7 @@ class NCDashboardKPIs extends Component
 
     this.kpiData = 
     [
-      /*{
-        title: <span><strong></strong></span>,
-        kpiList: [/*
-          {
-            value:"$95665.83",
-            units:"",
-            title:["", "USD/AION"],
-            hoverContent: "Mean of inter-block arrival time over last "+KPI_BLK_RANGE+" blocks",
-          },
-          {
-            value:"90083",
-            units:"",
-            title:["Deployed", "Contracts"],
-            hoverContent: "Mean of inter-block arrival time over last "+KPI_BLK_RANGE+" blocks",
-          },
-          {
-            value:"9983",
-            units:"ATS",
-            title:["Token", "Contracts"],
-            hoverContent: "Mean of inter-block arrival time over last "+KPI_BLK_RANGE+" blocks",
-          },
-        ]
-      },
-      {
-        title: <span><strong>Block Time</strong></span>,
-        kpiList: [
-          /*{
-            value:"10",
-            units:"s",
-            title:["Target", "Block Time"],
-            hoverContent: <span>Block time target for the network; <br/>PoW diffulty dynamically adjusted to acheive target</span>,
-            tooltipPosition: Position.BOTTOM_LEFT
-          },
-          {
-            value:"9.83",
-            units:"s",
-            title:["Current", "Block Time"],
-            hoverContent: "Mean of inter-block arrival time over last "+KPI_BLK_RANGE+" blocks",
-          },
-        ]
-      },*/
+      
       {
         title: <span><strong>Network&nbsp;</strong>| &nbsp;EQUI2109</span>,
         kpiList: [
@@ -93,31 +53,10 @@ class NCDashboardKPIs extends Component
             title:["Consumed", "NRG / Block"],
             hoverContent: "Average NRG consumed per block for the last hour.",
           },
-          /*{
-            value:"0.85",
-            units:"",
-            title:["Block", "Reward"],
-            hoverContent: "Current block reward value, denominated in Aion coin (AION)",
-          },*/
+          
         ]
       },
-      /*{
-        title: <span><strong>NRG</strong></span>,
-        kpiList: [
-          {
-            value:"1000",
-            units:"",
-            title:["Consumed", "NRG / Block"],
-            hoverContent: "Average NRG consumed per block for latest "+KPI_BLK_RANGE+" blocks",
-          },
-          {
-            value:"15",
-            units:"",
-            title:["Limit", "NRG / Block"],
-            hoverContent: "Average NRG limit per block for latest "+KPI_BLK_RANGE+" blocks",
-          },
-        ]
-      },*/
+      
       {
         title: <span><strong>Transaction </strong></span>,
         kpiList: [
@@ -159,24 +98,10 @@ class NCDashboardKPIs extends Component
 
     const kpiList = this.props.kpi.data;
 
-    //this.kpiData[0].kpiList[0].value = kpiList.targetBlockTime;
-    //this.kpiData[0].kpiList[1].value = nc_decimalPoint(kpiList.averageBlockTime, 2);
-
     this.kpiData[0].kpiList[0].value = nc_decimalPoint(kpiList.averageBlockTime, 2);
     this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
     this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);
     this.kpiData[0].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
-    //this.kpiData[0].kpiList[4].value = nc_numFormatter(kpiList.averageNrgLimitPerBlock, 2);
-
-    /*this.kpiData[1].kpiList[2].value = kpiList.lastBlockReward == null ? null :  
-                                          (BigNumber(String(kpiList.lastBlockReward)).lt(2) ? 
-                                          nc_decimalPoint(kpiList.lastBlockReward, 2) :
-                                          nc_numFormatterACSensitive(kpiList.lastBlockReward, 2));*/
-
-    //this.kpiData[3].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
-    //this.kpiData[2].kpiList[1].value = nc_numFormatter(kpiList.averageNrgLimitPerBlock, 2);
-
-    //this.kpiData[1].kpiList[0].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
     this.kpiData[1].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
     this.kpiData[1].kpiList[1].value = kpiList.peakTransactionsPerBlockInLast24hours != null ? 
                                           nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 0) : 
@@ -200,9 +125,7 @@ class NCDashboardKPIs extends Component
       ncKPIr.push(<NCKPIResponsive 
                     key={i} 
                     kpiGroup={kpiGroup}/>);
-      //ncKPIr.push(<span key={this.kpiData.length + i} className="NCKPIGroupDivider"></span>);
-      //ncKPIr.push(<p key={i} kpiGroup={kpiGroup}></p>);
-
+      
     });
     
     return (

@@ -78,7 +78,7 @@ class NCBlkRetrieve extends Component
     let next = null;
 
     if(blkObj){
-        //console.log(JSON.stringify(blkObj.content[0]['blockNumber'])); 
+        
         let block = blkObj.content[0]['blockNumber'];
         prev = parseInt(block)-1;
         next = parseInt(block)+1;

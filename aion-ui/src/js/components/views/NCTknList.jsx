@@ -42,16 +42,12 @@ class NCTknList extends Component
     if (query && query.block) {
       listType = tknListType.BY_ACCOUNT;
       queryStr = query.block;
-    }/*
-    else if (query && query.account) {
-      listType = txnListType.BY_ACCOUNT;
-      queryStr = query.account;
-    }*/
+    }
     
     network.getTknListTopLevel(listType, queryStr);
   }
 
-  //requestPaging = (pageNumber, pageSize, start=0, end=0)
+  
   requestPaging = (pageNumber, pageSize, start, end) => {
     const listType = this.props.tknList.listType;
     const queryStr = this.props.tknList.queryStr;
@@ -59,11 +55,9 @@ class NCTknList extends Component
   }
 
   render() {
-    //console.log('tkn list');
-    
+        
     const store = this.props.tknList;
-    //console.log(JSON.stringify(store));
-
+    
     const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
 

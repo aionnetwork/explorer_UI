@@ -39,15 +39,7 @@ export default class NCCntrTable extends Component
         flex: true,
         
       },
-      /*{
-        name: "Name",
-        isSortable: false,
-        isFilterable: false,
-        width: 150,
-        flex: false,
-        
-      },*/
-     
+      
       {
         name: "Block",
         isSortable: false,

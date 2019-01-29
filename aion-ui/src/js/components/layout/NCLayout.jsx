@@ -17,7 +17,7 @@ import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 import { ga_key } from 'lib/NCData';
-//import { disconnectSocket } from 'network/NCNetwork';
+
 import { NC_ENV, disconnectSocket, stopInterval, intervalID } from 'network/NCNetwork';
 import * as network from 'network/NCNetworkRequests';
 
@@ -86,29 +86,7 @@ class NCLayout extends Component {
     stopInterval(intervalID);
   }
 
-/* showContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
-        //console.log('Hey!');// must prevent default to cancel parent's context menu
-        e.preventDefault();
-        // invoke static API, getting coordinates from mouse event
-        ContextMenu.show(
-            <Menu className={this.d_mode_class}>
-                <MenuItem
-          className="nav-option"
-          target="blank"
-          onClick={() => {
-            hashHistory.push('e.link');
-          }}
-          text="Open link in new tab"
-        />
-                
-            </Menu>,
-            { left: e.clientX, top: e.clientY },
-            () => this.setState({ isContextMenuOpen: false }),
-        );
-        // indicate that context menu is open so we can add a CSS class to this element
-        this.setState({ isContextMenuOpen: true });
-    }
-*/
+
   toggleMode = () => {
     
     localStorage.setItem('d_mode', !this.state.darkMode);
@@ -350,12 +328,10 @@ class NCLayout extends Component {
   {
     const pathname = this.props.location.pathname;
 
-    //console.log(this.state.darkMode);
-
-    //ReactGA.pageview(window.location.pathname + window.location.search);
+    
     ReactGA.pageview(pathname);
 
-    //console.log(JSON.stringify(this.state));
+    
 
     let kpi = this.props.kpi;
     {let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
@@ -389,15 +365,11 @@ class NCLayout extends Component {
     let dbLag = (kpi.data.currentBlockchainHead && latestBlockNumber) ? 
                 BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(latestBlockNumber)) : 0;
     let lastUpdated = kpi.momentUpdated;
-
-    
-    //this.props.darkMode
-    
-    //console.log(this.state.darkMode!==false ? "darkMode" : "");
+   
+      
     let mode = (this.props.darkMode.data) ? "darkMode" : ""; 
     this.renderConnectionMenu(this.networkList,mode);
-    //console.log(this.props.darkMode.data + " dark_mode" + mode);
-
+    
     let style = {fontSize:'11px'}
 
     return (
@@ -436,11 +408,7 @@ class NCLayout extends Component {
                   rightIconName="pt-icon-caret-down"
                   text="Analytics"/>          
               </Popover>
-              {/*<Button 
-                  className="navbar-btn-active pt-button pt-minimal"
-                  iconName="timeline-bar-chart"
-                  onClick={() => window.open("https://metrics0.aion.network", "Aion | Metrics")}
-                  text="Metrics"/>*/}   
+              
             </div>
 
             <div className="pt-navbar-group navbar-group-right">

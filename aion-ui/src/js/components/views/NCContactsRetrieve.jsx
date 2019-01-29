@@ -99,7 +99,7 @@ class NCContactsRetrieve extends Component
 
   captcha(key){
       this.setState({recaptcha:response});
-      //console.log(response);
+     
   }
 
   componentWillMount() {

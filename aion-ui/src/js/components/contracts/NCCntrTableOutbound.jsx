@@ -63,8 +63,7 @@ export default class NCAccTableOutbound extends Component
   generateTableContent = (entityList) => 
   {
     let tableContent = [];
-    // [addr, avg_nrgPrice, avg_nrgConsumed, txnCount]
-
+    
     entityList.forEach((entity, i) => 
     {
       tableContent[i] = [];

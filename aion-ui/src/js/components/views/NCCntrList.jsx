@@ -38,20 +38,12 @@ class NCCntrList extends Component
     let queryStr = "";
     let listType = cntrListType.ALL;
 
-    /*let query = this.props.location.query; 
-    if (query && query.block) {
-      listType = tknListType.BY_ACCOUNT;
-      queryStr = query.block;
-    }
-    else if (query && query.account) {
-      listType = txnListType.BY_ACCOUNT;
-      queryStr = query.account;
-    }*/
+   
     
     network.getCntrListTopLevel(listType, queryStr);
   }
 
-  ////requestPaging = (pageNumber, pageSize, start=0, end=0)
+  
   requestPaging = (pageNumber, pageSize, start=0, end=0) => {
     const listType = this.props.cntrList.listType;
     const queryStr = this.props.cntrList.queryStr;

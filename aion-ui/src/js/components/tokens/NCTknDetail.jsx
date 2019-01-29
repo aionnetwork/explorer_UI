@@ -58,7 +58,7 @@ export default class NCTxnDetail extends Component
     let { entity } = this.props;
     let gran = MSG.Token.GRANULARITY;
 
-    //console.log(JSON.stringify(this.props));
+    
     let parsedInputData = this.parseInputData(entity);
     const symbol = " (" + entity.symbol + ")";
     let desc = 
@@ -105,13 +105,7 @@ export default class NCTxnDetail extends Component
                </div>,
         value: entity.granularity,
       },
-      /*{
-        field: "Special Addr",
-        value: <NCEntityLabel
-                  entityType={NCEntity.ACCOUNT}
-                  entityId={entity.specialAddress}
-                  linkActive={true}/>,
-      },*/
+      
       {
         field: "TotalSupply",
         value: entity.totalSupply.toString(),

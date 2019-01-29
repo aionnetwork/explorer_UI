@@ -71,8 +71,7 @@ export default class NCAccTable extends Component
       let numTransactions = null;
       let blockTimestamp = null;
 
-      // [blockHash, blockNumber, difficulty, nrgConsumed, nrgLimit, size, blockTimestamp, totalDifficulty, numTransactions]
-      if (Array.isArray(entity)) {
+       if (Array.isArray(entity)) {
         blockNumber = entity[1];
         nrgConsumed = entity[3];
         difficulty = entity[2];
