@@ -483,10 +483,9 @@ export const getAccTxnRetrieveCSV = (acc,key,start,end,range) => {
     paramsC = [request,'','Accoun_Mined_Blocks',0,999];
     
     //postRequest/request
-    network.request(ep, params, true)
+    network.downloadRequest(ep, params, true)
     .then((response) => {
-        
-        
+          //console.log(JSON.stringify(response));      
         fileDownload(response, 'Account_'+request+'.csv');
          
     })
@@ -1210,7 +1209,7 @@ export const getRetrieveTopLevel = (queryStr) => {
   }
   else {
     // sanitize input string
-    let request = nc_trim(queryStr);
+    let request = nc_trim(queryStr.toLowerCase());
 
     // get block details
     const ep = network.endpoint.search;

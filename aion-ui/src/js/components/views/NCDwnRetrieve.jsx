@@ -85,7 +85,7 @@ class NCDwnRetrieve extends Component
 
   verifyCallback(response) {
        //this.state.recaptcha = response;
-       console.log(response);
+       //console.log(response);
         this.setState({recaptcha:response,button:false});
    };
 

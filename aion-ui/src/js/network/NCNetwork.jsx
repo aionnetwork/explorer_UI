@@ -290,7 +290,7 @@ export const request = async (endpoint, params,sub_base=false) =>
     if (net) {
       net.get(endpoint.link, args)
       .then((response) => {
-        //console.log(JSON.stringify(response));
+        //console.log(response);
         
         if (response.status == 200 && response.data){
           //console.log(JSON.stringify(response));
@@ -310,6 +310,103 @@ export const request = async (endpoint, params,sub_base=false) =>
   });
 }
 
+export const downloadRequest = async (endpoint, params,sub_base=false) => 
+{
+  //console.log('networkrequestTopLevel');
+  
+  return new Promise((resolve, reject) => 
+  {
+    let args = { params: {} };
+    if (Array.isArray(params)) {
+      params.forEach((value, i) => {
+        if(value!==''){args.params[endpoint.params[i]] = value;}
+      });
+    }
+    
+    if ( net == null && BASE_URL) {
+      //console.log('create endpoint!'+sub_base);
+      net = axios.create({
+          baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
+          timeout: 120000,
+          responseType:"text"
+          
+          });
+    }
+
+    if (net) {
+      net.get(endpoint.link, args)
+      .then((response) => {
+        console.log(response);
+        
+        if (response.status == 200 && response.data){
+          //console.log(JSON.stringify(response));
+          resolve(response.data);
+        }
+        else {
+          reject("ERR: Bad API get response.");
+        }
+      })
+      .catch((file) => {
+        
+        resolve(file.text);
+        
+      });
+    } else {
+      reject("ERR: API not initialized");
+    }
+  });
+}
+
+export const Request = async (endpoint, params,sub_base=false) => 
+{
+  //console.log(JSON.stringify(endpoint));
+  return new Promise((resolve, reject) => 
+  {
+    let args = { params: {} };
+    if (Array.isArray(params)) {
+      params.forEach((value, i) => {
+        args.params[endpoint.params[i]] = value;
+      });
+    }
+
+    
+    if (pnet == null && BASE_URL) {
+      //console.log('create post endpoint!'+sub_base);
+      pnet = axios.create({
+          baseURL: generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base),
+          timeout: ms('2min')
+        });
+    }
+
+      //console.log(endpoint.link);
+      //console.log(generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base));
+
+      const url = generateBaseUrl(HTTPS_ENABLED, BASE_URL,sub_base)+endpoint.link;
+      const options = {
+        method: 'POST',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: qs.stringify(args.params),
+        url,
+      };
+
+      
+      
+
+      axios(options).then((response) => {
+    
+        resolve(response.data);
+    
+      })
+      .catch((error) => {
+          //console.log(JSON.stringify(error)); 
+          reject("ERR: Bad API get response.");   
+       });
+      
+      
+
+
+  });
+}
 
 export const postRequest = async (endpoint, params,sub_base=false) => 
 {

@@ -16,7 +16,7 @@ export default class NCPagination extends Component
 {
   constructor(props) {
     super(props);
-    this.state = {start:null, end:null,startDate:null, endDate:null, rangeChange:true
+    this.state = {start:null, end:null,startDate:null, endDate:null,newMaxDate:new Date(), rangeChange:true,minDate:new Date(2018, 3, 22)
     };
     this.loading = false;
     this.serchDirection = SEARCH_DIR.NONE;
@@ -29,16 +29,27 @@ export default class NCPagination extends Component
   }
 
   handleRangeChange = (date) => {
-    //console.log(date[0]);
+    
+    let newDate = new Date(this.state.start);
+    if(date[0]!=null){
+      newDate.setDate(newDate.getDate() + 7);
+    }
+
     this.setState({
-        start: date[0], end: date[1],rangeChange:false
+        start: date[0], end: date[1],rangeChange:false,minDate:date[0],newMaxDate:newDate
       });
   }
   renderCalendarRange = (t) => {
 
-    //let date = new Date();
-    //const today = date; 
-    //const launch = date.setTime(1524455999000); 
+    
+    console.log(this.state.start);
+    if(this.state.start!=null){
+      var newDate = new Date(this.state.start);
+
+      newDate.setDate(newDate.getDate() + 7);
+      console.log(newDate);
+      console.log(this.state.start.getDate());
+    }
 
     return (  
       <div>
@@ -47,8 +58,8 @@ export default class NCPagination extends Component
           onChange={this.handleRangeChange}
           parseDate={str => new Date(str)}
           value={[this.state.start, this.state.end]}
-          minDate={t}
-          maxDate={new Date()}
+          minDate={(this.state.start!=null) ? this.state.minDate : new Date(2018, 3, 22)}
+          maxDate={(this.state.start!=null) ? new Date() : new Date()}
           shortcuts={false}
         />  
         <Button             
@@ -61,11 +72,12 @@ export default class NCPagination extends Component
               });
               let start = Math.round(new Date(this.state.start).getTime()/1000);
               let end = Math.round(new Date(this.state.end).getTime()/1000);
-              console.log(end);
+              //console.log(end);
               this.setState({
                 startDate:start,
                 endDate:end
-              });//this.state.startDate,this.state.endDate
+              });
+              //this.state.startDate,this.state.endDate
               this.serchDirection = SEARCH_DIR.BACKWARD;
               this.props.onPageCallback(0,25, start, end);
             }}/>  
