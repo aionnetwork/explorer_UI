@@ -122,6 +122,7 @@ class NCBlkRetrieve extends Component
         }
       marginTop={40}
     />
+    
 
     const page =
       <div> 

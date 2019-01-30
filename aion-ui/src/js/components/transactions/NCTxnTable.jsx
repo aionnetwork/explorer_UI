@@ -218,6 +218,7 @@ export default class NCTxnTable extends Component
         calFilter={true}
         data={data}
         onPageCallback={onPageCallback}
+        minDate={new Date(Date.now() - 7 * 24 * 3600 * 1000)}
         isLoading={isLoading}
         isPaginated={isPaginated}
         entityName={"transactions"}

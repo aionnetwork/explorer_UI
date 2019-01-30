@@ -34,7 +34,7 @@ export default class NCPagination extends Component
         start: date[0], end: date[1],rangeChange:false
       });
   }
-  renderCalendarRange = () => {
+  renderCalendarRange = (t) => {
 
     //let date = new Date();
     //const today = date; 
@@ -47,8 +47,9 @@ export default class NCPagination extends Component
           onChange={this.handleRangeChange}
           parseDate={str => new Date(str)}
           value={[this.state.start, this.state.end]}
-          minDate={new Date(2018, 3, 22)}
+          minDate={t}
           maxDate={new Date()}
+          shortcuts={false}
         />  
         <Button             
             className="pt-minimal " 
@@ -111,7 +112,7 @@ export default class NCPagination extends Component
   render() {
     
     // pageNumber is zero indexed
-    let { calFilter=false, startDate, endDate, entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
+    let { minDate, calFilter=false, startDate, endDate, entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
     //console.log(startDate+" "+endDate);
     let isFirstPage = (pageNumber + 1 == 1);
     let isLastPage = (pageNumber + 1 == totalPages );
@@ -153,7 +154,7 @@ export default class NCPagination extends Component
             (calFilter!==false) &&
             <Popover
                 
-                content={this.renderCalendarRange()}
+                content={this.renderCalendarRange(minDate)}
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
                 <Button 
@@ -170,7 +171,7 @@ export default class NCPagination extends Component
           }
           <Button 
             
-            className="pt-minimal left" 
+            className="pt-minimal left hide" 
             text="First page"
             
             disabled={isFirstPage || this.loading}
@@ -233,7 +234,7 @@ export default class NCPagination extends Component
             }}/>
             <Button 
             
-            className="pt-minimal right" 
+            className="pt-minimal right hide" 
             text="Last page"
             
             disabled={isLastPage || this.loading}

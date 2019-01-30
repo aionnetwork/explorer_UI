@@ -133,6 +133,7 @@ export default class NCBlkTable extends Component
     return (
       <NCTableReactPaginated
         data={data}
+        minDate={new Date(Date.now() - 7 * 24 * 3600 * 1000)}
         calFilter={true}
         onPageCallback={onPageCallback}
         isLoading={isLoading}

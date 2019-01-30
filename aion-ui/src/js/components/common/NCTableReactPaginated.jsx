@@ -26,7 +26,7 @@ export default class NCTableReactPaginated extends Component
   }
 
   render() {
-    const { calFilter, rowHeight, rowHeights, dialog, data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
+    const { minDate= new Date(2018, 3, 22), calFilter, rowHeight, rowHeights, dialog, data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
     const list = data.content;
     let tableList = list;
     let height = rowHeight;
@@ -55,6 +55,8 @@ export default class NCTableReactPaginated extends Component
             totalPages={numPages}
             pageSize={this.state.pageNumber}
             
+            minDate= {minDate}
+
             onPageCallback={this.selfPageData}
             isLoading={isLoading}
             isLatest={isLatest}/>;
@@ -67,6 +69,8 @@ export default class NCTableReactPaginated extends Component
             listSize={tableList.length}
             totalPages={numPages}
             pageSize={this.state.pageNumber}
+
+            minDate= {minDate}
             
             onPageCallback={this.selfPageData}
             isLoading={isLoading}
@@ -82,6 +86,7 @@ export default class NCTableReactPaginated extends Component
             totalPages={page.totalPages}
             pageSize={page.size}
             
+            minDate= {minDate}
             startDate={page.start}
             endDate={page.end}
 
@@ -99,6 +104,7 @@ export default class NCTableReactPaginated extends Component
             totalPages={page.totalPages}
             pageSize={page.size}
 
+            minDate= {minDate}
             startDate={page.start}
             endDate={page.end}
             
