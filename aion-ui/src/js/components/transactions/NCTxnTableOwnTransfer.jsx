@@ -8,7 +8,7 @@ import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
 //import {BigNumber} from 'bignumber.js';
-import { Position Intent } from "@blueprintjs/core";
+import { Position, Intent } from "@blueprintjs/core";
 import {  Cell } from "@blueprintjs/table"
 
 //import NCTableBase from 'components/common/NCTableBase';
@@ -18,7 +18,7 @@ import {  NCEntityInfo, NCEntity } from 'lib/NCEnums';
 import NCEntityLabel from 'components/common/NCEntityLabel';
 //import { PAGE_SIZE } from 'network/NCNetworkRequests'
 //import { nc_numFormatterAionCoin, nc_decimalPrettify, nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
-//import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { nc_decimalPrettify } from 'lib/NCUtility';
 
 export default class NCTxnTableOwnTransfer extends Component 
 {
@@ -47,7 +47,7 @@ export default class NCTxnTableOwnTransfer extends Component
         name: "Value",
         isSortable: false,
         isFilterable: false,
-        width: 100,
+        width: 180,
         flex: false,
         objPath: null,
       },
@@ -124,7 +124,7 @@ export default class NCTxnTableOwnTransfer extends Component
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
         transferTimestamp = entity.timestamp;
-        value = entity.valueTransferred;//BigNumber(String(entity.valueTransferred), 16).toString(10);//entity.valueTransferred;
+        value = entity.value;//BigNumber(String(entity.valueTransferred), 16).toString(10);//entity.valueTransferred;
         transactionHash = entity.transactionHash//let bal = nc_numFormatterACSensitive(entity.balance);
         
       }
@@ -148,7 +148,7 @@ export default class NCTxnTableOwnTransfer extends Component
           entityId={blockNumber}/> 
       </Cell>;
       tableContent[i][1] = <Cell copy={ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(transferTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell copy={ value ? value : 0 }>{ value ? value : 0 }</Cell>;
+      tableContent[i][2] = <Cell copy={ value ? value : 0 }>{ value ? nc_decimalPrettify(value) : 0 }</Cell>;
       //tableContent[i][3] = <Cell copy={ txn ? txn : 0 }>{ txn ? txn : 0 }</Cell>;
       tableContent[i][3] = 
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } >

@@ -20,6 +20,7 @@ import { nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 class NCAccList extends Component
+{ 
 
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
