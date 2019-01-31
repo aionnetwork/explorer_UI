@@ -16,7 +16,7 @@ import {BigNumber} from 'bignumber.js';
 export default class NCBlockTimesChart extends Component
 {
   render() {
-    let { entity, options, data, mode} = this.props;
+    let { data, mode} = this.props;
 
     const option = {
             exporting: {

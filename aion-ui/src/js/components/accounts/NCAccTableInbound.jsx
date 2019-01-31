@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Cell } from "@blueprintjs/table";
 
 import NCEntityLabel from 'components/common/NCEntityLabel';
-import NCPagination from 'components/common/NCPagination';
+//import NCPagination from 'components/common/NCPagination';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import { NCEntity,NCEntityInfo } from 'lib/NCEnums';

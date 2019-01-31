@@ -6,12 +6,12 @@ import NCEntityLabel from 'components/common/NCEntityLabel';
 import NCLink from 'components/common/NCLink';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_numPrettify, nc_isStrEmpty, nc_numFormatter, nc_numFormatterACSensitive, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_numPrettify, nc_isStrEmpty, nc_numFormatter, nc_numFormatterACSensitive, nc_numFormatterBytes, nc_hexPrefix } from 'lib/NCUtility';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
-import {BigNumber} from 'bignumber.js';
+//import {BigNumber} from 'bignumber.js';
 
 export default class NCBlkDetail extends Component
 {

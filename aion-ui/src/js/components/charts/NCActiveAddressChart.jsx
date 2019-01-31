@@ -8,15 +8,15 @@ import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
 
-import NCEntityDetail from 'components/common/NCEntityDetail';
+//import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
-import {BigNumber} from 'bignumber.js';
+//import {BigNumber} from 'bignumber.js';
 
 export default class NCActiveAddressChart extends Component
 {
   render() {
-    let { entity, options, data, mode} = this.props;
+    let {data, mode} = this.props;
 
 
 

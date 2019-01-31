@@ -2,12 +2,12 @@
 import React, { Component } from 'react'; 
 import moment from 'moment';
 
-import {BigNumber} from 'bignumber.js';
+//import {BigNumber} from 'bignumber.js';
 import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_decimalPrettify, nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
-import NCLink from 'components/common/NCLink';
+import { nc_decimalPrettify } from 'lib/NCUtility';
+//import NCLink from 'components/common/NCLink';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
@@ -23,16 +23,7 @@ export default class NCAccDetail extends Component
     //let bal = nc_numFormatterACSensitive(entity.balance);
     let balance = nc_decimalPrettify(entity.balance);
 
-    let contract = entity.contract ? 
-      {
-        field: "Address",
-        value:  <NCEntityLabel
-                  entityType={ NCEntity.ACCOUNT }
-                  entityId={ entity.address }
-                  linkActive={ false }/>
-      }
-      :
-      " ";
+    
 
     let desc = [
       {
