@@ -3,27 +3,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PageVisibility from 'react-page-visibility';
 
-import { nc_getRandomInt } from 'lib/NCUtility';
+//import { nc_getRandomInt } from 'lib/NCUtility';
 
-import spring, { toString } from 'css-spring';
+import  { toString } from 'css-spring';
 import FlipMove from 'react-flip-move';
 
-import NCPageVisibility from 'components/common/NCPageVisibility';
+//import NCPageVisibility from 'components/common/NCPageVisibility';
 
-import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
+//import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 import NCLoading from 'components/common/NCLoading';
 import NCNonIdealState from 'components/common/NCNonIdealState';
 import NCCardBlock from 'components/dashboard/NCCardBlock';
 
-import { nc_LinkToEntity, NCEntity } from 'lib/NCEnums';
-import NCEntityLabel from 'components/common/NCEntityLabel';
+//import { nc_LinkToEntity, NCEntity } from 'lib/NCEnums';
+//import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import moment from "moment";
 
 const BLOCK_STREAM_ELEMENT_SIZE = 4;
 const DEFAULT_TARGET_BLOCK_TIME = 10;
 
-import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
+//import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 class NCRecentBlocks extends Component
 {

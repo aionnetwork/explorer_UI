@@ -5,15 +5,15 @@ import moment from 'moment';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import NCEntityDetail from 'components/common/NCEntityDetail';
+//import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
-import {BigNumber} from 'bignumber.js';
+//import {BigNumber} from 'bignumber.js';
 
 export default class NCTransactionsChart extends Component
 {
   render() {
-    let { entity, options, data, mode} = this.props;
+    let { data, mode} = this.props;
 
     const option = {
             exporting: {

@@ -1,24 +1,24 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
+import {  Position } from "@blueprintjs/core";
+import { Cell, SelectionModes } from "@blueprintjs/table";
 
-import NCTableBase from 'components/common/NCTableBase';
-import { NCSortType,NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
+//import NCTableBase from 'components/common/NCTableBase';
+import { NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
 
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
 import NCTokenLabel from 'components/common/NCTokenLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+//import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
  const row = {
     height:"100px",
@@ -113,18 +113,18 @@ export default class NCCntrTable extends Component
       let blockNumber = null;
       let creator = null;
 
-      let token = null;
-      let symbol = null;
+      //let token = null;
+      //let symbol = null;
       
-      let totalSupply = null;
-      let liquidSupply= 0;
-      let description = " ";
+      //let totalSupply = null;
+      //let liquidSupply= 0;
+      //let description = " ";
       let decimal = null;
       let transactions = 0;
       let holders = 1;
 
       let transaction = null;
-      let contractHash = null;
+      //let contractHash = null;
       let fromAddr = null;
       let toAddr = null;
       let blockTimestamp = null;
@@ -135,23 +135,23 @@ export default class NCCntrTable extends Component
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
         blockNumber = entity[5];
-        token = entity[0];
+        //token = entity[0];
         symbol = entity[1];
-        fromAddr = entity[1];
-        toAddr = entity[2];
-        blockTimestamp = entity[4];
+        //fromAddr = entity[1];
+        //toAddr = entity[2];
+        //blockTimestamp = entity[4];
         value = entity[3];
       } else {
         Addr = entity.contractAddr;
-        name = entity.contractName;
+        //name = entity.contractName;
         blockNumber = entity.blockNumber;
         creator =  entity.contractCreatorAddr;
 
-        token = entity.name;
-        symbol = entity.symbol;
+        //token = entity.name;
+        //symbol = entity.symbol;
         
-        totalSupply = entity.totalSupply;
-        liquidSupply= entity.liquidSupply;
+        //totalSupply = entity.totalSupply;
+        //liquidSupply= entity.liquidSupply;
         decimal = entity.granularity;
         transaction = entity.contractTxHash;
 

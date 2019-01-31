@@ -8,12 +8,12 @@ import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
 
-import NCEntityDetail from 'components/common/NCEntityDetail';
+//import NCEntityDetail from 'components/common/NCEntityDetail';
 import appConfig from '../../../config.json';
 import { NC_ENV} from 'network/NCNetwork';
 
 const EMPTY_STR = "Not Available";
-import {BigNumber} from 'bignumber.js';
+//import {BigNumber} from 'bignumber.js';
 import { nc_compare } from 'lib/NCUtility';
 
 
@@ -21,7 +21,7 @@ import { nc_compare } from 'lib/NCUtility';
 export default class NCTopMinersChart extends Component
 {
   render() {
-    let { entity, options, data, mode} = this.props;
+    let {data, mode} = this.props;
     //console.log('pie chart');
 
     let points = data.sort(nc_compare);

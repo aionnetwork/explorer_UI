@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import NCTimescale from 'components/common/NCTimescale';
 
-export default class NCExplorerHead extends Component
+export default class NCTKNExplorerHead extends Component
 {
   render() {
     const { breadcrumbs, momentUpdated, title, subtitle } = this.props;

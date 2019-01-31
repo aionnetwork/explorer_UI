@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DateRangePicker, DateRangeInput } from "@blueprintjs/datetime";
+import { DateRangeInput } from "@blueprintjs/datetime";
 
 import moment from 'moment';
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
+import { Button, Position, Popover, Menu, MenuItem, InputGroup, PopoverInteractionKind } from "@blueprintjs/core";
 
 const SEARCH_DIR = {
   NONE: 0,
@@ -128,7 +128,7 @@ export default class NCPagination extends Component
     //console.log(startDate+" "+endDate);
     let isFirstPage = (pageNumber + 1 == 1);
     let isLastPage = (pageNumber + 1 == totalPages );
-    let val = pageNumber + 1;
+    //let val = pageNumber + 1;
 
     
 

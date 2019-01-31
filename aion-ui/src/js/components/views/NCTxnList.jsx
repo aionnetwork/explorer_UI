@@ -7,9 +7,9 @@ import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 
-import * as StoreTxnList from 'stores/StoreTxnList';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
+
+import { nc_isListValid, nc_isListEmpty} from 'lib/NCUtility';
 
 import { txnListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
@@ -58,7 +58,7 @@ class NCTxnList extends Component
     
     const store = this.props.txnList;
 
-    const listType = store.listType;
+
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
 
     const isDataValid = nc_isListValid(store.response);

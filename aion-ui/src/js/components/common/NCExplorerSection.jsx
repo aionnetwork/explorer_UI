@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
+//import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 import NCNonIdealState from 'components/common/NCNonIdealState';
 import NCLoading from 'components/common/NCLoading';
 

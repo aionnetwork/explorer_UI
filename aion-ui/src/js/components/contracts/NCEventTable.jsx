@@ -2,15 +2,15 @@
 
 import classNames from "classnames";
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 import NCDialog from 'components/common/NCDialog';
 
 import moment from 'moment';
-import { Tooltip, AnchorButton, Dialog,Button,Overlay, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table";
+import {Dialog,Button,Position, Classes,Menu, MenuItem} from "@blueprintjs/core";
+import {Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table";
 
 import NCTableBase from 'components/common/NCTableBase';
 import { NCSortType, NCEntity, nc_LinkToEntity,NCEntityInfo } from 'lib/NCEnums';
@@ -182,6 +182,9 @@ export default class NCEventTable extends Component
       let params = null;
       let inputs = null;
       let eTitle = null;
+      let token = null;
+      let symbol=null;
+      let blockTimestamp=null
 
       
       if (Array.isArray(entity)) {
@@ -194,23 +197,23 @@ export default class NCEventTable extends Component
         value = entity[3];
         console.log('Array: '+JSON.stringify(entity));
       } else {
-        Addr = entity.contractAddr;
+        //Addr = entity.contractAddr;
         name = entity.name;
         blockNumber = entity.blockNumber;
         timestamp = entity.eventTimestamp;
         params = this.parameters(entity.parameterList);
         inputs = this.inputs(entity.inputList, entity.parameterList );
         
-        id= entity.eventId;
+        //id= entity.eventId;
 
         
       }
 
       
-      const estyle = {height:'200px',padding:'10px',background:'#f00',border:'#ff0 solid'};
-      const fstyle = {height:'200px',padding:'10px',background:'#00f', top:'50px',};
+      //const estyle = {height:'200px',padding:'10px',background:'#f00',border:'#ff0 solid'};
+      //const fstyle = {height:'200px',padding:'10px',background:'#00f', top:'50px',};
       const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition"; 
-      const classes = classNames(Classes.CARD, Classes.ELEVATION_4, OVERLAY_EXAMPLE_CLASS, this.props.data.themeName);
+      //const classes = classNames(Classes.CARD, Classes.ELEVATION_4, OVERLAY_EXAMPLE_CLASS, this.props.data.themeName);
       
       
 
@@ -248,7 +251,7 @@ export default class NCEventTable extends Component
       
       <Cell copy={ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;     
       
-      this.ncRowHeight.push(60+25*inputs.length);
+      //this.ncRowHeight.push(60+25*inputs.length);
            
     });
 
@@ -256,12 +259,10 @@ export default class NCEventTable extends Component
   }
   
   render() {
-    const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition";
+    //const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition";
     const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
      
-    
-
-                
+                 
     
     return (
       <div>

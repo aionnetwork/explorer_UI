@@ -7,10 +7,10 @@ import NCCntrTable from 'components/contracts/NCCntrTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 
-import * as StoreCntrList from 'stores/StoreCntrList';
+
 import * as MSG from 'lib/NCTerms';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
+import {  nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
 
 import { cntrListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
@@ -72,18 +72,7 @@ class NCCntrList extends Component
       }
     ];
 
-    let subtitle = "(ERC777)"; // txnListType.ALL
-    switch(listType) 
-    {
-      case cntrListType.ALL: {
-        subtitle = "Contracts";// + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
-        break;
-      }
-      case cntrListType.BY_ACCOUNT: {
-        subtitle = "Account: " + nc_hexPrefix(store.queryStr)
-        break;
-      }
-    }
+
 
       
     const page =

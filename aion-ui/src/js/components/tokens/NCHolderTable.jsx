@@ -4,17 +4,17 @@ import moment from 'moment';
 import { Cell } from "@blueprintjs/table"
 
 import NCEntityLabel from 'components/common/NCEntityLabel';
-import NCPagination from 'components/common/NCPagination';
+//import NCPagination from 'components/common/NCPagination';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
-import NCLink from 'components/common/NCLink';
+//import NCLink from 'components/common/NCLink';
 
 import { NCEntityInfo,NCEntity } from 'lib/NCEnums';
-import { nc_numPrettify, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_hexPrefix } from 'lib/NCUtility';
 
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
-import {BigNumber} from 'bignumber.js';
+//import { PAGE_SIZE } from 'network/NCNetworkRequests'
+//import {BigNumber} from 'bignumber.js';
 
-export default class NCAccTable extends Component 
+export default class NCHolderTable extends Component 
 {
   constructor(props) {
     super(props);

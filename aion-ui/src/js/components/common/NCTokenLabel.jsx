@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 
-import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
+import { NCEntity } from 'lib/NCEnums';
 import { nc_trim, nc_GetEntityIcon, nc_LinkToEntity } from 'lib/NCUtility';
 
 

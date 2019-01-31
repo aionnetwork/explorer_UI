@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import moment from 'moment';
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
+import { Button, Position, MenuItem, InputGroup, Intent } from "@blueprintjs/core";
 
 const SEARCH_DIR = {
   NONE: 0,
@@ -23,11 +23,11 @@ export default class NCPaginationFoot extends Component
   render() {
     
     // pageNumber is zero indexed
-    let { entityName, pageNumber, listSize, pageSize, totalPages, totalElements, onPageCallback, isLoading, isLatest=false } = this.props;
+    let {  pageNumber, pageSize, totalPages, totalElements, onPageCallback, isLoading } = this.props;
 
     let isFirstPage = (pageNumber + 1 == 1);
     let isLastPage = (pageNumber + 1 == totalPages );
-    let val = pageNumber + 1;
+    //let val = pageNumber + 1;
 
     if (isLoading != this.loading) 
     {
@@ -60,7 +60,7 @@ export default class NCPaginationFoot extends Component
 
                 
                 }} 
-                     defaultValue="pageSize"   className="pt-input pt-select-input">
+                     defaultValue={pageSize}   className="pt-input pt-select-input">
                 <option value="25">25</option>
                 <option value="50">50</option>
                 <option value="75">75</option>

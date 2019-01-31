@@ -13,15 +13,14 @@ import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 
-import * as StoreAccList from 'stores/StoreAccList';
-import * as MSG from 'lib/NCTerms';
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
 
-import { accListType } from 'lib/NCEnums';
+import * as MSG from 'lib/NCTerms';
+import { nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
+
 import * as network from 'network/NCNetworkRequests';
 
 class NCAccList extends Component
-{
+
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
   }

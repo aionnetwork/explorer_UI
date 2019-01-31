@@ -4,15 +4,15 @@ import moment from 'moment';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
+//import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
 
 import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
 
-import NCEntityDetail from 'components/common/NCEntityDetail';
+//import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
-import {BigNumber} from 'bignumber.js';
+//import {BigNumber} from 'bignumber.js';
 
 export default class NCNetworkDifficultyChart extends Component
 {
@@ -30,7 +30,7 @@ export default class NCNetworkDifficultyChart extends Component
     console.log('toggle!');
   }
   render() {
-    let { type, entity, options, data, mode} = this.props;
+    let { type, data, mode} = this.props;
 
     const option = {
             exporting: {

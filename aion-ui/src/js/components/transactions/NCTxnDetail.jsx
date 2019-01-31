@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import { NCEntity } from 'lib/NCEnums';
-import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntityLabel';
+import NCEntityLabel from 'components/common/NCEntityLabel';
 import NCEntityDetail from 'components/common/NCEntityDetail';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-import { nc_decimalPrettify,nc_isStrEmpty, nc_numFormatter,nc_numPrettify, nc_numFormatterAmp, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_decimalPrettify, nc_numFormatter, nc_numFormatterAmp } from 'lib/NCUtility';
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 

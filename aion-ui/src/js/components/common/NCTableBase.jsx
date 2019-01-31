@@ -1,15 +1,15 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, CopyCellsMenuItem,
+import { Table, Column, ColumnHeaderCell, SelectionModes, CopyCellsMenuItem,
     IMenuContext,  Utils} from "@blueprintjs/table"
-import { Menu, MenuItem, Intent, Popover,ContextMenuTarget, PopoverInteractionKind, Position, Button, InputGroup, Spinner } from "@blueprintjs/core";
+import { Menu, MenuItem, Position } from "@blueprintjs/core";
 
-import { NCSortType, NCEntity } from 'lib/NCEnums';
-import NCEntityLabel from 'components/common/NCEntityLabel';
+import { NCSortType } from 'lib/NCEnums';
+//import NCEntityLabel from 'components/common/NCEntityLabel';
 
 export default class NCTableBase extends Component {
 
@@ -86,7 +86,7 @@ export default class NCTableBase extends Component {
   computeColumnWidths()
   {
     let containerWidth = this.props.width;
-    let containerHeight = this.props.height;
+    //let containerHeight = this.props.height;
 
     let { columnDescriptor, sortColumn } = this.props;
 
@@ -188,7 +188,7 @@ export default class NCTableBase extends Component {
 
   render()
   {
-    let { rowHeights=null, rowHeight = 35, tableContent, sortColumn, sortType, columnDescriptor, isSortAndFilterEnabled } = this.props;
+    let { rowHeights=null, rowHeight = 35, tableContent,columnDescriptor} = this.props;
 
     // generate this array here based on resizing of the parent container
     let columns = [];

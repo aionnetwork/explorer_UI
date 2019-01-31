@@ -1,18 +1,15 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, hashHistory } from 'react-router';
+
 import moment from 'moment';
 
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
 
-import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
+
+import { Button } from "@blueprintjs/core";
 
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
-import NCExplorerSection from 'components/common/NCExplorerSection';
-
 
 //list of charts
 import NCActiveAddressChart from 'components/charts/NCActiveAddressChart';
@@ -21,11 +18,11 @@ import NCNetworkDifficultyChart from 'components/charts/NCNetworkDifficultyChart
 import NCTopMinersChart from 'components/charts/NCTopMinersChart';
 import NCBlockTimesChart from 'components/charts/NCBlockTimesChart';
 import NCHashPowerChart from 'components/charts/NCHashPowerChart';
-import * as StoreChartRetrieve from 'stores/StoreChartRetrieve'; 
+
 import * as MSG from 'lib/NCTerms';
 
 
-import { nc_getChartData, nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
+import { nc_getChartData } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 class NCChartRetrieve extends Component
@@ -150,23 +147,8 @@ class NCChartRetrieve extends Component
 
     
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoading;
-    const queryStr = store.queryStr;
+
     const desc = this.chartData.description;
-    let log = this.type;
-
-    const blkObj = (store.response) ? store.response.blk : null;
-    const txnList = (store.response) ? store.response.txn : null;
-
-    let isBlkValid = nc_isObjectValid(blkObj);
-    let isBlkEmpty = nc_isObjectEmpty(blkObj, isBlkValid);
-
-    let isTxnListValid = nc_isListValid(txnList);
-    let isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-
-    const blk = isBlkEmpty ? {} : blkObj.content[0]; 
-
-    let chart = '';    
-
 
     const breadcrumbs = [
       {

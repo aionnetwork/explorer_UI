@@ -1,14 +1,14 @@
-/* eslint-disable */
+
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+import {, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
-import { Select } from "@blueprintjs/select";
+import { Position, Popover, Tab2, Tabs2, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
+
 
 import NCBlkTable from 'components/blocks/NCBlkTable';
-import NCTxnTable from 'components/transactions/NCTxnTable';
+//import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 import NCTxnTableOwnToken from 'components/transactions/NCTxnTableOwnToken';
 import NCTxnTableOwnTransfer from 'components/transactions/NCTxnTableOwnTransfer';
@@ -22,9 +22,8 @@ import NCNonIdealState from 'components/common/NCNonIdealState';
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 
 import * as MSG from 'lib/NCTerms';
-import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
+import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty, nc_trim } from 'lib/NCUtility';
 
 import * as network from 'network/NCNetworkRequests';
 
@@ -94,8 +93,7 @@ class NCAccRetrieve extends Component
     if (!nc_isStrEmpty(queryStr)&&!nc_isStrEmpty(tkn))
     {
       
-      let str = nc_trim(queryStr);
-      let entity = this.state.entity;
+
       let token = [];
       token.hash = tkn;
       token.value = "token";//tkn;
@@ -110,9 +108,7 @@ class NCAccRetrieve extends Component
       });
     } else if (!nc_isStrEmpty(queryStr)){
 
-      let str = nc_trim(queryStr);
-      let entity = this.state.entity;
-      
+
       this.setState({
         queryStr: ''
       }, () => {

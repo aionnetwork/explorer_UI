@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import PageVisibility from 'react-page-visibility';
 
-import { NCEntityInfo,NCEntity } from 'lib/NCEnums';
-import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { NCEntity } from 'lib/NCEnums';
+import NCEntityLabel from 'components/common/NCEntityLabel';
+//import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
 import FlipMove from 'react-flip-move';
 

@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { hashHistory } from 'react-router';
+//import { hashHistory } from 'react-router';
 
 import { InputGroup, Button, Intent, Popover, Menu, MenuItem, Position } from "@blueprintjs/core";
 
-import { NCEntity, NCEntityServerMapping, NCEntityInfo } from 'lib/NCEnums';
-import { nc_FindEntity, nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
-import * as network from 'network/NCNetworkRequests';
+import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
+import { nc_LinkToEntity, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
+//import * as network from 'network/NCNetworkRequests';
 
 export default class NCTopLevelSearch extends Component
 {

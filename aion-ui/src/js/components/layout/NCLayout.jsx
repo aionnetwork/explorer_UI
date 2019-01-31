@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 
 import {BigNumber} from 'bignumber.js'
 import moment from "moment";
-import {  FormGroup, Switch, Menu, ContextMenu, ContextMenuTarget, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip, MenuDivider } from "@blueprintjs/core";
+import {  FormGroup, Switch, Menu, MenuItem, Position, Popover, Button, PopoverInteractionKind, MenuDivider } from "@blueprintjs/core";
 
-import { ncNetwork_pollForKpiList, ncNetwork_pollForStaticInfo } from 'network/NCNetwork';
+//import { ncNetwork_pollForKpiList, ncNetwork_pollForStaticInfo } from 'network/NCNetwork';
 
 import NCLivenessIndicator from 'components/layout/NCLivenessIndicator';
 import NCTopLevelSearch from 'components/layout/NCTopLevelSearch';
@@ -334,9 +334,8 @@ class NCLayout extends Component {
     
 
     let kpi = this.props.kpi;
-    {let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
-    let feedback ={padding:'10px', margin:'10px'}
-    
+    //{let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
+    //let feedback ={padding:'10px', margin:'10px'}    
     
     }
 

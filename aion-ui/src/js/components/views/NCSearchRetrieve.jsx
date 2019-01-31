@@ -6,14 +6,6 @@ import moment from 'moment';
 
 import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 
-
-//list of sub-displays for details
-//import NCAccDetail from 'components/accounts/NCAccDetail';
-//import NCTknDetail from 'components/tokens/NCTknDetail';
-//import NCBlkDetail from 'components/blocks/NCBlkDetail';
-//import NCTxnDetail from 'components/transactions/NCTxnDetail';
-//import NCCntrDetail from 'components/contracts/NCCntrDetail';
-
 import NCTknTable from 'components/tokens/NCTknTable';
 
 import NCExplorerPage from 'components/common/NCExplorerPage';

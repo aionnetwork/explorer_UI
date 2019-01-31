@@ -1,23 +1,23 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
+import {  Position } from "@blueprintjs/core";
+import {  Cell } from "@blueprintjs/table"
 
-import NCTableBase from 'components/common/NCTableBase';
-import { NCSortType, NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
+//import NCTableBase from 'components/common/NCTableBase';
+//import { NCSortType, NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
 
-import NCPagination from 'components/common/NCPagination';
-import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
+//import NCPagination from 'components/common/NCPagination';
+//import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
+//import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+//import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
 export default class NCTxnEventLogTable extends Component 
 {
@@ -53,16 +53,8 @@ export default class NCTxnEventLogTable extends Component
      
       let transactionHash = null;
      
-     if (Array.isArray(entity)) {
-        
-        transactionHash = entity[0];
-        
-      } else {
-       
-        transactionHash = entity.transactionHash;        
-        
-      }
-      const cell = {'height':'300px'}
+
+      //const cell = {'height':'300px'}
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 

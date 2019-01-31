@@ -1,13 +1,13 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 
 import moment from 'moment';
-import { Tooltip, AnchorButton, Dialog,Button,Overlay, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table"
+import { Dialog,Overlay, Position, Classes} from "@blueprintjs/core";
+//import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table"
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
-import { nc_trim, nc_GetEntityIcon, nc_LinkToEntity } from 'lib/NCUtility';
+//import { nc_trim, nc_GetEntityIcon, nc_LinkToEntity } from 'lib/NCUtility';
 
 import appConfig from '../../../config.json';
 
@@ -36,17 +36,17 @@ export default class NCDialog extends Component
 
    render() {
 
-    let { contract, param=[], input=[],title="View", className="", enabled=true } = this.props;
+    let { param=[], input=[],title="View", className="", enabled=true } = this.props;
 
-    let isOpen = false
+    //let isOpen = false;
 
     const style ={width:'90%', padding:'5px', flex: 1, flexWrap: 'wrap',marginLeft:'15px'}
     const NCdialogcontainer = {width:'100%',padding:'5px', wordWrap: 'break-word'}
     const panel ={background:'#eee',padding:'10px',margin:'15px'}
-    const inputPanel ={background:'#fff',padding:'10px',margin:'15px'}
+    //const inputPanel ={background:'#fff',padding:'10px',margin:'15px'}
 
     const inputList = input;//this.format(input);
-    const paramList = param;//this.format(param);
+    //const paramList = param;//this.format(param);
 
     return( 
         <span 

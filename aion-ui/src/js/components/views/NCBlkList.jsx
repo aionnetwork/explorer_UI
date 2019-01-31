@@ -7,7 +7,6 @@ import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 
-import * as StoreBlkList from 'stores/StoreBlkList';
 import * as MSG from 'lib/NCTerms';
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
 

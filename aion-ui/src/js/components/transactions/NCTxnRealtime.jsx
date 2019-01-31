@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import moment from 'moment';
-import { Spinner } from "@blueprintjs/core";
+//import { Spinner } from "@blueprintjs/core";
 
 import NCTxnTableRT from 'components/transactions/NCTxnTableRT';
 
-import NCNonIdealState from 'components/common/NCNonIdealState';
-import NCLoading from 'components/common/NCLoading';
+//import NCNonIdealState from 'components/common/NCNonIdealState';
+//import NCLoading from 'components/common/NCLoading';
 import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 
 import NCExplorerSection from 'components/common/NCExplorerSection';

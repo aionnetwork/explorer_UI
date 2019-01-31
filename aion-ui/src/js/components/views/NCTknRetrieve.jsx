@@ -5,21 +5,21 @@ import moment from 'moment';
 
 import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
 
-import NCBlkTable from 'components/blocks/NCBlkTable';
+
 import NCHolderTable from 'components/tokens/NCHolderTable';
-import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
+
 import NCTxnTableOwnToken from 'components/transactions/NCTxnTableOwnToken';
 
 import NCTknDetail from 'components/tokens/NCTknDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCTExplorerHead from 'components/common/NCTExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
-import NCNonIdealState from 'components/common/NCNonIdealState';
 
-import * as StoreTknRetrieve from 'stores/StoreTknRetrieve';
+
+
 import * as MSG from 'lib/NCTerms';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
+import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 class NCTknRetrieve extends Component
@@ -63,8 +63,6 @@ class NCTknRetrieve extends Component
   render() {
     const store = this.props.tknRetrieve;
     
-    const isWeb3 = (store.response) ? store.response.web3 : false;
-
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
 
     const isTxnListFirstLoad = (store.response && store.response.transfers) ? store.response.transfers.momentUpdated : null;
@@ -84,7 +82,7 @@ class NCTknRetrieve extends Component
     const isAccListValid = nc_isListValid(accList);
     const isAccListEmpty = nc_isListEmpty(accList, isAccListValid);
 
-    const tkn = isTknEmpty ? {} : tknObj.content[0];
+    const tkn = isTknEmpty ? {} : (tknObj) ? tknObj.content[0] : {};
    
     const breadcrumbs = [
       {

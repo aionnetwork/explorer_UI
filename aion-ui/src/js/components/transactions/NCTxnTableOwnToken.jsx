@@ -1,23 +1,23 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
+import { Position, Intent } from "@blueprintjs/core";
+import { Cell } from "@blueprintjs/table"
 
-import NCTableBase from 'components/common/NCTableBase';
-import { NCSortType, NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
 
-import NCPagination from 'components/common/NCPagination';
-import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
+import {  NCEntityInfo, NCEntity } from 'lib/NCEnums';
 
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+//import NCPagination from 'components/common/NCPagination';
+import NCEntityLabel from 'components/common/NCEntityLabel';
+//import { PAGE_SIZE } from 'network/NCNetworkRequests'
+
+//import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
 export default class NCTxnTableOwnToken extends Component 
 {
@@ -95,10 +95,10 @@ export default class NCTxnTableOwnToken extends Component
     entityList.forEach((entity, i) => 
     {
       let blockNumber = null;
-      let transactionHash = null;
+      //let transactionHash = null;
       let fromAddr = null;
       let toAddr = null;
-      let blockTimestamp = null;
+      //let blockTimestamp = null;
       let value = null;
       let rawValue = null;
       let transferTimestamp =null;
@@ -106,14 +106,14 @@ export default class NCTxnTableOwnToken extends Component
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
         blockNumber = entity[5];
-        transactionHash = entity[0];
+        //transactionHash = entity[0];
         fromAddr = entity[1];
         toAddr = entity[2];
-        blockTimestamp = entity[4];
+        //blockTimestamp = entity[4];
         value = entity[3];
       } else {
         blockNumber = entity.blockNumber;
-        transactionHash = entity.transactionHash;
+        //transactionHash = entity.transactionHash;
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
         transferTimestamp = entity.transferTimestamp;

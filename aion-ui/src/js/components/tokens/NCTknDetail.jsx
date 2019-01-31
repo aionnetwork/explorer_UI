@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import { NCEntity } from 'lib/NCEnums';
-import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntityLabel';
-import { Tooltip, Popover, PopoverInteractionKind, Position, Content, Button } from "@blueprintjs/core";
+import NCEntityLabel from 'components/common/NCEntityLabel';
+import { Tooltip, Position } from "@blueprintjs/core";
 import * as MSG from 'lib/NCTerms';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
@@ -14,7 +14,7 @@ import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterAmp, nc_numFormatterByte
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 
-export default class NCTxnDetail extends Component
+export default class NCTknDetail extends Component
 {
   constructor(props) {
     super(props);
@@ -59,8 +59,8 @@ export default class NCTxnDetail extends Component
     let gran = MSG.Token.GRANULARITY;
 
     
-    let parsedInputData = this.parseInputData(entity);
-    const symbol = " (" + entity.symbol + ")";
+    //let parsedInputData = this.parseInputData(entity);
+    //const symbol = " (" + entity.symbol + ")";
     let desc = 
     [
       {

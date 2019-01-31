@@ -26,7 +26,7 @@ export default class NCTableReactPaginated extends Component
   }
 
   render() {
-    const { minDate= new Date(2018, 3, 22), calFilter, rowHeight, rowHeights, dialog, data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
+    const { minDate= new Date(2018, 3, 22),rowHeight, rowHeights, dialog, data, isPaginated, isLoading, onPageCallback, entityName, columnDescriptor, generateTableContent, isLatest=false } = this.props;
     const list = data.content;
     let tableList = list;
     let height = rowHeight;

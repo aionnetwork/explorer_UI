@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, hashHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 import moment from 'moment';
 
 import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
@@ -12,7 +12,7 @@ import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 
-import * as StoreBlkRetrieve from 'stores/StoreBlkRetrieve';
+//import * as StoreBlkRetrieve from 'stores/StoreBlkRetrieve';
 
 import * as MSG from 'lib/NCTerms';
 import { nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
@@ -25,9 +25,7 @@ class NCBlkRetrieve extends Component
   }
 
   submitQuery(num){
-      let entity = this.props.blkRetrieve.response.blk;
 
-      let str = this.props.params.blkId + num;
       nc_LinkToEntity(this.props.blkRetrieve.response.blk, this.props.params.blkId);
   }
 
@@ -84,7 +82,7 @@ class NCBlkRetrieve extends Component
         next = parseInt(block)+1;
     }
 
-    const blk = isBlkEmpty ? {} : blkObj.content[0]; 
+    const blk = isBlkEmpty ? {} : (blkObj) ? blkObj.content[0]:{};
 
     const breadcrumbs = [
       {

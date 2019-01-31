@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Tooltip, Position } from "@blueprintjs/core";
+import { Position } from "@blueprintjs/core";
 
 import { NCKPIResponsive, NCKPIGroup} from 'components/common/NCKPIGroup';
 import NCLoading from 'components/common/NCLoading';
@@ -10,9 +10,9 @@ import NCLoading from 'components/common/NCLoading';
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 import {BigNumber} from 'bignumber.js'
-import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with1Floor, nc_numFormatterACSensitive, nc_isNumber } from "lib/NCUtility";
+import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with1Floor } from "lib/NCUtility";
 
-import { hashHistory } from 'react-router';
+//import { hashHistory } from 'react-router';
 import moment from 'moment';
 
 const KPI_BLK_RANGE = 128;
@@ -113,7 +113,7 @@ class NCDashboardKPIs extends Component
     let ncKPIs = [];
     let ncKPIr = [];
 
-    let kpi = {}
+    //let kpi = {}
 
     this.kpiData.forEach((kpiGroup, i) => 
     {
