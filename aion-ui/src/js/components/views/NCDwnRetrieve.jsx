@@ -78,8 +78,10 @@ class NCDwnRetrieve extends Component
   download(a){
        //console.log(a);
        this.setState({button:true,display:true});
+       let start = Math.round(new Date(this.state.start).getTime()/1000);
+       let end = Math.round(new Date(this.state.end).getTime()/1000);
        
-       network.getAccTxnRetrieveCSV(this.props.params.accId, a,this.state.start,this.state.end,this.state.range);
+       network.getAccTxnRetrieveCSV(this.props.params.accId, a,start,end,this.state.range);
        //return;
   }
 
