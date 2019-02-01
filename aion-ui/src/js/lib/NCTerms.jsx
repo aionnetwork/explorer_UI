@@ -53,7 +53,7 @@ export const Token = {
   DATA_POLICY:"Showing results from the latest tokens. ",
   INVALID_DATA_TITLE:"No Token",
   INVALID_DATA:"Token Not Available",
-  DATA_POLICY:"Showing results from the latest transactions. ",
+
   INVALID_DATA_LIST:"Invalid Input. Please try again.",
   GRANULARITY:"This is the Granularity"
 };
@@ -77,7 +77,7 @@ export const Transaction = {
   DATA_POLICY_ACC_OUT_EMPTY:"No outbound account activity in last 24 hours",
   DATA_POLICY:"Showing results from the latest transactions. ",
   DATA_POLICY_TRN:"Showing results from the latest transactions. ",
-  DATA_POLICY:"Showing latest transactions for this contract."
+  DATA_POLICY_CNTR:"Showing latest transactions for this contract."
 };
 
 export const Chart = {

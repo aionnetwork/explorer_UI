@@ -1,17 +1,17 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import {AnchorButton, Classes, Intent, Dialog, Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
-import { Select } from "@blueprintjs/select";
+import { Position, Tab2, Tabs2, Tooltip, Menu, MenuItem } from "@blueprintjs/core";
+
 
 import NCEventTable from 'components/contracts/NCEventTable';
 import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTable from 'components/transactions/NCTxnTable';
 
-import NCAccDetail from 'components/accounts/NCAccDetail';
+
 import NCCntrDetail from 'components/contracts/NCCntrDetail';
 
 import NCExplorerPage from 'components/common/NCExplorerPage';
@@ -22,9 +22,9 @@ import NCNonIdealState from 'components/common/NCNonIdealState';
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 
 import * as MSG from 'lib/NCTerms';
-import * as StoreCntrRetrieve from 'stores/StoreCntrRetrieve';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
+
+import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 class NCCntrRetrieve extends Component
@@ -83,7 +83,7 @@ class NCCntrRetrieve extends Component
     if (!nc_isStrEmpty(queryStr)&&!nc_isStrEmpty(tkn))
     {
       
-      let str = nc_trim(queryStr);
+
       let entity = this.state.entity;
       let token = [];
       token.name = "token";
@@ -134,7 +134,7 @@ class NCCntrRetrieve extends Component
 
   render() {
     const store = this.props.cntrRetrieve;
-    const tokens=[{name:'Token',symbol:'test'},{name:'Token1',symbol:'test1'}]
+
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
     //console.log("page Data for retrieve: "+JSON.stringify(store.response));
@@ -165,7 +165,7 @@ class NCCntrRetrieve extends Component
     const isEventListValid = nc_isListValid(eventList);
     const isEventListEmpty = nc_isListEmpty(eventList, isEventListValid);
     
-    const acc = isAccEmpty ? {} : accObj.content[0];
+    const acc = isAccEmpty ? {} : (accObj) ? accObj.content[0]: {};
     
     const breadcrumbs = [
       {
@@ -268,43 +268,7 @@ class NCCntrRetrieve extends Component
           isLatest={true}/>
         }
     />
-    const tknListSection = <NCExplorerSection 
-      className={""}
-      subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </div>
-      }
 
-      isLoading={isBlkListFirstLoad == null}
-      isDataValid={isBlkListValid}
-      isDataEmpty={isBlkListEmpty} 
-      
-      loadingStr={"Loading Blocks"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={
-        <span>No blocks mined by this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </span>}
-      marginTop={40}
-
-      content={
-        <NCBlkTable 
-          data={blkList}
-          onPageCallback={this.requestPagingBlkList}
-          isLoading={store.isLoadingPagingBlkList}
-          isPaginated={true}
-          isLatest={true}/>
-        }
-    />  
     const eventListSection = <NCExplorerSection 
       className={""}
       subtitle={

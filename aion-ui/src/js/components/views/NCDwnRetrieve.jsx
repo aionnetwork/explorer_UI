@@ -1,30 +1,19 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+
 import { connect } from 'react-redux';
 import moment from 'moment';
 
 import Recaptcha from 'react-recaptcha';
 
-import { DateRangePicker, DateRangeInput } from "@blueprintjs/datetime";
+import {  DateRangeInput } from "@blueprintjs/datetime";
 
-import { Position,RangeSlider, Intent, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
-import { Select } from "@blueprintjs/select";
+import { Position,RangeSlider, Button } from "@blueprintjs/core";
 
-import NCBlkTable from 'components/blocks/NCBlkTable';
-import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
 
-import NCAccDetail from 'components/accounts/NCAccDetail';
-import NCExplorerPage from 'components/common/NCExplorerPage';
-import NCExplorerHead from 'components/common/NCExplorerHead';
-import NCExplorerSection from 'components/common/NCExplorerSection';
-import NCNonIdealState from 'components/common/NCNonIdealState';
+import { NCEntity} from 'lib/NCEnums';
 
-import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 
-import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
-
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
 //import { nc_FindEntity, nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
 
 import * as network from 'network/NCNetworkRequests';
@@ -33,7 +22,7 @@ class NCDwnRetrieve extends Component
 {
   constructor(props) {
     super(props);
-    var date = new Date();
+
     this.state = {
       isFetching: false,
       queryStr: '',
@@ -118,7 +107,7 @@ class NCDwnRetrieve extends Component
     let button = this.state.button;
     let recaptcha= this.state.recaptcha;
     let range = this.state.range;
-    let dateRange = this.state.dateRange;
+
     let start = this.state.start;
     let end = this.state.end;
 

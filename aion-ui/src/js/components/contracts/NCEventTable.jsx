@@ -1,26 +1,24 @@
 /* eslint-disable */
 
-import classNames from "classnames";
+
 import React, { Component } from 'react';
 //import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
-import NCDialog from 'components/common/NCDialog';
+
 
 import moment from 'moment';
-import {Dialog,Button,Position, Classes,Menu, MenuItem} from "@blueprintjs/core";
-import {Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table";
+import {Dialog,Button,Position, Classes} from "@blueprintjs/core";
+import {Cell} from "@blueprintjs/table";
 
-import NCTableBase from 'components/common/NCTableBase';
-import { NCSortType, NCEntity, nc_LinkToEntity,NCEntityInfo } from 'lib/NCEnums';
 
-import NCPagination from 'components/common/NCPagination';
-import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
-import NCTokenLabel from 'components/common/NCTokenLabel';
-import { PAGE_SIZE } from 'network/NCNetworkRequests';
+import { NCEntity,NCEntityInfo } from 'lib/NCEnums';
 
-import { nc_numFormatterAionCoin, nc_isStrEmpty } from 'lib/NCUtility';
+import NCEntityLabel from 'components/common/NCEntityLabel';
+
+
+import { nc_isStrEmpty } from 'lib/NCUtility';
 
 import appConfig from '../../../config.json';
 
@@ -101,7 +99,7 @@ export default class NCEventTable extends Component
    parseParamData = (txnLog) => {
     let result = "";
 
-    let arr = [];
+
     try {
       let a = txnLog;//.slice(1,-1);
 
@@ -119,7 +117,7 @@ export default class NCEventTable extends Component
    parseInputData = (txnLog) => {
     let result = "";
 
-    let arr = [];
+
     try {
       let a = txnLog;//.slice(1,-1);
 
@@ -170,31 +168,18 @@ export default class NCEventTable extends Component
     
     entityList.forEach((entity, i) => 
     {
-      let parsedInputData = null;//this.parseTxnLog(entity.inputList);
-      let parsedParamData = null;//this.parseInputData(entity.parameterList);
-      
-      let Addr = null;
+
       let name = null;
       let blockNumber = null;
       
       let timestamp = null;
-      let id = null;
+
       let params = null;
       let inputs = null;
-      let eTitle = null;
-      let token = null;
-      let symbol=null;
-      let blockTimestamp=null
 
-      
       if (Array.isArray(entity)) {
         blockNumber = entity[5];
-        token = entity[0];
-        symbol = entity[1];
-        fromAddr = entity[1];
-        toAddr = entity[2];
-        blockTimestamp = entity[4];
-        value = entity[3];
+
         console.log('Array: '+JSON.stringify(entity));
       } else {
         //Addr = entity.contractAddr;
@@ -209,10 +194,9 @@ export default class NCEventTable extends Component
         
       }
 
-      
       //const estyle = {height:'200px',padding:'10px',background:'#f00',border:'#ff0 solid'};
       //const fstyle = {height:'200px',padding:'10px',background:'#00f', top:'50px',};
-      const OVERLAY_EXAMPLE_CLASS = "docs-overlay-example-transition"; 
+
       //const classes = classNames(Classes.CARD, Classes.ELEVATION_4, OVERLAY_EXAMPLE_CLASS, this.props.data.themeName);
       
       

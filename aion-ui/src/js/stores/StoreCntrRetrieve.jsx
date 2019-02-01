@@ -168,7 +168,7 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       //_state.response.event.data = action.data.content[0].events;
       //console.log('coookfkdflsdlfksdlfklsk'+JSON.stringify(action.data.content[0].events));
       //_state.response.event.momentUpdated = moment();
-      _state.momentUpdated = moment();
+      //_state.momentUpdated = moment();
       
       return _state;
     }

@@ -1,24 +1,20 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+
 import { connect } from 'react-redux';
 
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
+import { Position } from "@blueprintjs/core";
+import { Cell} from "@blueprintjs/table"
 
-import NCTableBase from 'components/common/NCTableBase';
-import { NCSortType, NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
 
-import NCPagination from 'components/common/NCPagination';
-import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
+import { NCEntityInfo, NCEntity} from 'lib/NCEnums';
+
+import NCEntityLabel from 'components/common/NCEntityLabel';
 import NCTokenLabel from 'components/common/NCTokenLabel';
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
-
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
  const row = {
     height:"100px",
@@ -93,7 +89,6 @@ export default class NCTknTable extends Component
     
     entityList.forEach((entity, i) => 
     {
-      let blockNumber = null;
       let token = null;
       let symbol = null;
       let Addr = null;
@@ -104,23 +99,14 @@ export default class NCTknTable extends Component
       let transaction = 0;
       let holder = 1;
 
-      let contractHash = null;
-      let fromAddr = null;
-      let toAddr = null;
-      let blockTimestamp = null;
-      let value = null;
-
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
-        blockNumber = entity[5];
+
         token = entity[0];
         symbol = entity[1];
-        fromAddr = entity[1];
-        toAddr = entity[2];
-        blockTimestamp = entity[4];
-        value = entity[3];
+
       } else {
-        blockNumber = entity.blockNumber;
+
 
         token = entity.name;
         symbol = entity.symbol;
@@ -131,10 +117,6 @@ export default class NCTknTable extends Component
         transaction = entity.transactionHash;
         holder = entity.creatorAddress;
 
-        fromAddr = entity.fromAddr;
-        toAddr = entity.toAddr;
-        blockTimestamp = entity.blockTimestamp;
-        value = entity.value;
       }
 
       // Generate tableContent

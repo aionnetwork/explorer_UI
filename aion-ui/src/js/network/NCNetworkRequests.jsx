@@ -1,7 +1,7 @@
 /* eslint-disable */
 import * as network from 'network/NCNetwork';
 import { store } from 'stores/NCReduxStore';
-import { Router, Route, IndexRedirect, hashHistory} from 'react-router';
+import { Router, hashHistory} from 'react-router';
 
 import * as mock from 'lib/NCData';
 
@@ -33,9 +33,9 @@ import * as StoreRetrieve from 'stores/StoreRetrieve';
 
 import * as StoreContactRetrieve from 'stores/StoreContactRetrieve';
 
-import {BigNumber} from 'bignumber.js';
-import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
-import { cntrListType, tknListType, txnListType, blkListType, accListType, eventListType,trnListType, } from 'lib/NCEnums';
+
+import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
+import {  tknListType, txnListType, blkListType, eventListType,trnListType, } from 'lib/NCEnums';
 
 //console.log('networkRequest'); 
 export const PAGE_SIZE = 25;
@@ -455,7 +455,7 @@ export const getAccTxnRetrieveCSV = (acc,key,start,end,range) => {
   }));
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
-    
+    console.log("NO Network!");
   }
   else {
     // validate the account to make sure it's a valid account string
@@ -473,15 +473,9 @@ export const getAccTxnRetrieveCSV = (acc,key,start,end,range) => {
     const ep = network.endpoint.download.accountTxns;
 
     let params = [];
-    let paramsA = [];
-    let paramsB = [];
-    let paramsC = [];
 
     params = [request,'',start,end,recaptcha];
-    paramsA = [request,'','Account_Tokens'];
-    paramsB = [request,'','Account_Transactions',0,999];
-    paramsC = [request,'','Accoun_Mined_Blocks',0,999];
-    
+
     //postRequest/request
     network.downloadRequest(ep, params, true)
     .then((response) => {
@@ -515,7 +509,7 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
   }
   else {
     
-    const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[txnListType.BY_ACCOUNT] : network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
+    const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];//((start!==null)&&(start>0)) ? network.endpoint.transaction.list[txnListType.BY_ACCOUNT] : network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
     
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     
@@ -743,8 +737,7 @@ export const getCntrRetrieveTopLevel = (queryStr) => {
     
     network.request(ep, params)
     .then((response) => {
-      const isCntrValid = nc_isObjectValid(response);
-      const isCntrEmpty = nc_isObjectEmpty(response, isCntrValid);
+      //const isCntrValid = nc_isObjectValid(response);
 
       store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
       
@@ -1246,7 +1239,7 @@ export const getRetrieveTopLevel = (queryStr) => {
 export const RetrieveDownload =(type, data) => {
 
    if (!network.NCNETWORK_REQUESTS_ENABLED) {
-    
+     console.log("No Network!");
    }
    else {
     // sanitize input string
@@ -1272,7 +1265,7 @@ export const RetrieveDownload =(type, data) => {
 export const submitFeedback =(topic=null,message=null,key=null) => {
 
    if (!network.NCNETWORK_REQUESTS_ENABLED) {
-    
+        console.log("No Network!");
    }
    else {
     // sanitize input string

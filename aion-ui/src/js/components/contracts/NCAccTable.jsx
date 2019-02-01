@@ -4,15 +4,10 @@ import moment from 'moment';
 import { Cell } from "@blueprintjs/table"
 
 import NCEntityLabel from 'components/common/NCEntityLabel';
-import NCPagination from 'components/common/NCPagination';
+
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
-import NCLink from 'components/common/NCLink';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
-import { nc_numPrettify, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_hexPrefix } from 'lib/NCUtility';
-
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
-import {BigNumber} from 'bignumber.js';
 
 export default class NCAccTable extends Component 
 {
@@ -65,26 +60,14 @@ export default class NCAccTable extends Component
     {
       
       let blockNumber = null;
-      let nrgConsumed = null;
-      let difficulty = null;
-      let size = null;
-      let numTransactions = null;
-      let blockTimestamp = null;
 
        if (Array.isArray(entity)) {
         blockNumber = entity[1];
-        nrgConsumed = entity[3];
-        difficulty = entity[2];
-        size = entity[5];
-        numTransactions = entity[8];
-        blockTimestamp = entity[6];
+
+
       } else {
         blockNumber = entity.blockNumber;
-        nrgConsumed = entity.nrgConsumed;
-        difficulty = entity.difficulty;
-        size = entity.size;
-        numTransactions = entity.numTransactions;
-        blockTimestamp = entity.blockTimestamp;
+
       }
 
       tableContent[i] = [];  

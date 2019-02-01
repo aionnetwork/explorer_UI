@@ -23,7 +23,7 @@ import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 
 import * as MSG from 'lib/NCTerms';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty, nc_trim } from 'lib/NCUtility';
+import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty } from 'lib/NCUtility';
 
 import * as network from 'network/NCNetworkRequests';
 
@@ -191,7 +191,6 @@ class NCAccRetrieve extends Component
     const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
 
     /*This section is for transfers table. This feature was added to accomodate for internal transfers made on tokens.*/
-    const isTrnListFirstLoad = (store.response && store.response.trn) ? store.response.trn.momentUpdated : null;
     const trnList = (store.response && store.response.trn) ? store.response.trn.data : null;
     const isTrnListValid = nc_isListValid(trnList);
     const isTrnListEmpty = nc_isListEmpty(trnList, isTrnListValid);
@@ -210,7 +209,7 @@ class NCAccRetrieve extends Component
     const isBlkListValid = nc_isListValid(blkList);
     const isBlkListEmpty = nc_isListEmpty(blkList, isBlkListValid);
 
-    const acc = isAccEmpty ? {} : accObj.content[0];
+    const acc = isAccEmpty ? {} : (accObj) ? accObj.content[0] : {};
     
     const breadcrumbs = [
       {

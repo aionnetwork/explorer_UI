@@ -26,7 +26,7 @@ export function nc_roundNumber(num, scale=2) {
     return null;
 
   if(!("" + num).includes("e")) {
-    return +(Math.round(num + "e+" + scale)  + "e-" + scale);  
+    return +(Math.round(num) + "e+" + scale  + "e-" + scale);
   } else {
     var arr = ("" + num).split("e");
     var sig = ""
@@ -60,7 +60,7 @@ export function nc_objLookupByPath(obj, path) {
   }
 
   return current;
-};
+}
 
 export function nc_defaultSortAsc(a, b) {
   if (a < b) 
@@ -422,7 +422,7 @@ export function nc_RenderLastUpdateTimeTag(moment) {
 }
 
 export function nc_GetEntityIcon(entity) {
-  icon = "pt-icon-help";
+  //let icon = "pt-icon-help";
 
   if (entity == null || NCEntityInfo[entity] == null || NCEntityInfo[entity].icon == null)
     return icon;
@@ -453,15 +453,6 @@ export function nc_findEntity(queryStr){
   }else if(!isNaN(queryStr)){
     //block number
     nc_LinkToEntity(entity, queryStr);
-  }else{
-    
-    //block or transaction
-    
-    //search for block
-    if(true){
-      //search for a transaction
-    }
-    //route
   }
   
 

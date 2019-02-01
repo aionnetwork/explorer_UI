@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 
 import {BigNumber} from 'bignumber.js'
 import moment from "moment";
-import {  FormGroup, Switch, Menu, ContextMenu, ContextMenuTarget, MenuItem, Position, Classes, InputGroup, Popover, Button, PopoverInteractionKind, Spinner, Tooltip, MenuDivider } from "@blueprintjs/core";
+import {  FormGroup, Switch, Menu, MenuItem, Position, Popover, Button, PopoverInteractionKind, MenuDivider } from "@blueprintjs/core";
 
-import { ncNetwork_pollForKpiList, ncNetwork_pollForStaticInfo } from 'network/NCNetwork';
+
 
 import NCLivenessIndicator from 'components/layout/NCLivenessIndicator';
 import NCTopLevelSearch from 'components/layout/NCTopLevelSearch';
@@ -16,12 +16,10 @@ import NCLoading from 'components/common/NCLoading';
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
-import { ga_key } from 'lib/NCData';
+
 
 import { NC_ENV, disconnectSocket, stopInterval, intervalID } from 'network/NCNetwork';
 import * as network from 'network/NCNetworkRequests';
-
-import appConfig from '../../../config.json';
 
 import ReactGA from 'react-ga';
 //ReactGA.initialize(appConfig.ga_key);
@@ -334,13 +332,7 @@ class NCLayout extends Component {
     
 
     let kpi = this.props.kpi;
-    {let css = {zIndex:'999',background:"#4221cc",color:"#fff", position:'fixed',float:'right', bottom:'50px', right:'50px'};
-    let feedback ={padding:'10px', margin:'10px'}
-    
-    
-    }
 
-    
 
     // wait on the response from KPI list to load application
     if (NCNETWORK_REQUESTS_ENABLED && kpi.momentUpdated == null) { 

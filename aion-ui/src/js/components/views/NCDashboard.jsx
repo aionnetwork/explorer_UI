@@ -3,14 +3,12 @@ import React, { Component } from 'react';
 import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
-import {InputGroup, Button, Intent, Tabs2, Tab2 } from "@blueprintjs/core";
+import { Button } from "@blueprintjs/core";
 
 import NCRecentBlocks from 'components/dashboard/NCRecentBlocks';
 import NCDashboardKPIs from 'components/dashboard/NCDashboardKPIs';
 import NCTxnRealtime from 'components/transactions/NCTxnRealtime';
 import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
-
-import * as network from 'network/NCNetworkRequests';
 
 export default class NCDashboard extends Component
 {

@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 //import { Link, hashHistory } from 'react-router';
 
 import moment from 'moment';
-import { Dialog,Overlay, Position, Classes} from "@blueprintjs/core";
+import { Dialog, Position} from "@blueprintjs/core";
 //import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table"
 
-import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
+
 //import { nc_trim, nc_GetEntityIcon, nc_LinkToEntity } from 'lib/NCUtility';
 
 import appConfig from '../../../config.json';

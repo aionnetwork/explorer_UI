@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+
 import { connect } from 'react-redux';
 
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
@@ -105,9 +105,9 @@ export default class NCTxnTableOwnTransfer extends Component
       let transactionHash = null;
       let fromAddr = null;
       let toAddr = null;
-      let blockTimestamp = null;
+      //let blockTimestamp = null;
       let value = null;
-      let rawValue = null;
+      //let rawValue = null;
       let transferTimestamp =null;
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
@@ -116,7 +116,7 @@ export default class NCTxnTableOwnTransfer extends Component
         transactionHash = entity[0];
         fromAddr = entity[1];
         toAddr = entity[2];
-        blockTimestamp = entity[4];
+        //blockTimestamp = entity[4];
         value = entity[3];
       } else {
         blockNumber = entity.blockNumber;
@@ -190,7 +190,7 @@ export default class NCTxnTableOwnTransfer extends Component
   }
   
   render() {
-    const { ownAddr, data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
+    const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
     
     return (
       <NCTableReactPaginated

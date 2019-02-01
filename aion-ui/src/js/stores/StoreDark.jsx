@@ -1,6 +1,6 @@
 /* eslint-disable */
 import moment from 'moment';
-import * as mock from 'lib/NCData';
+
 
 export const SetAll = (isdark) => 
 {

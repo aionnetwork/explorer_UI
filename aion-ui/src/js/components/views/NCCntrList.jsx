@@ -55,7 +55,6 @@ class NCCntrList extends Component
     
     const store = this.props.cntrList;
     
-    const listType = store.listType;
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
 
     const isDataValid = nc_isListValid(store.response);

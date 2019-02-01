@@ -38,7 +38,7 @@ import SearchRetrieve from 'components/views/NCSearchRetrieve';
 import NoResults from 'components/views/NCNoResults';
 
 import { store } from 'stores/NCReduxStore';
-import appConfig from './config.json';
+
 
 //this section is related to Google analytics
 //import ReactGA from 'react-ga';

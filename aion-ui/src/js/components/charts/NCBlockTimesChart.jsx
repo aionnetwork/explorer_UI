@@ -8,10 +8,7 @@ import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
 
-import NCEntityDetail from 'components/common/NCEntityDetail';
-
 const EMPTY_STR = "Not Available";
-import {BigNumber} from 'bignumber.js';
 
 export default class NCBlockTimesChart extends Component
 {

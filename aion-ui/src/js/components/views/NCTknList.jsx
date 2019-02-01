@@ -5,12 +5,11 @@ import moment from 'moment';
 
 import NCTknTable from 'components/tokens/NCTknTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
-import NCExplorerHead from 'components/common/NCExplorerHead';
+
 import NCTKNExplorerHead from 'components/common/NCTKNExplorerHead';
 
-import * as StoreTknList from 'stores/StoreTknList';
 import * as MSG from 'lib/NCTerms';
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
+import { nc_hexPrefix, nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
 
 import { tknListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
@@ -75,18 +74,6 @@ class NCTknList extends Component
       }
     ];
 
-    let subtitle = "(ERC777)"; // txnListType.ALL
-    switch(listType) 
-    {
-      case tknListType.ALL: {
-        subtitle = " Tokens";// + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
-        break;
-      }
-      case tknListType.BY_ACCOUNT: {
-        subtitle = "Account: " + nc_hexPrefix(store.queryStr)
-        break;
-      }
-    }
 
     let emptyDataStr = ""; // txnListType.ALL
     switch(listType) 

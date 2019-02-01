@@ -8,15 +8,14 @@ import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
 import {  Position } from "@blueprintjs/core";
-import { Cell, SelectionModes } from "@blueprintjs/table";
+import { Cell } from "@blueprintjs/table";
 
 //import NCTableBase from 'components/common/NCTableBase';
-import { NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
+import { NCEntityInfo, NCEntity } from 'lib/NCEnums';
 
-import NCPagination from 'components/common/NCPagination';
-import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
-import NCTokenLabel from 'components/common/NCTokenLabel';
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
+
+import NCEntityLabel from 'components/common/NCEntityLabel';
+
 
 //import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
@@ -109,59 +108,24 @@ export default class NCCntrTable extends Component
     entityList.forEach((entity, i) => 
     {
       let Addr = null;
-      let name = null;
+
       let blockNumber = null;
       let creator = null;
 
-      //let token = null;
-      //let symbol = null;
-      
-      //let totalSupply = null;
-      //let liquidSupply= 0;
-      //let description = " ";
-      let decimal = null;
-      let transactions = 0;
-      let holders = 1;
 
       let transaction = null;
-      //let contractHash = null;
-      let fromAddr = null;
-      let toAddr = null;
-      let blockTimestamp = null;
-      let value = null;
 
-      //console.log(JSON.stringify(entity));
-
-      // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
         blockNumber = entity[5];
-        //token = entity[0];
-        symbol = entity[1];
-        //fromAddr = entity[1];
-        //toAddr = entity[2];
-        //blockTimestamp = entity[4];
-        value = entity[3];
+
+
       } else {
         Addr = entity.contractAddr;
-        //name = entity.contractName;
+
         blockNumber = entity.blockNumber;
         creator =  entity.contractCreatorAddr;
 
-        //token = entity.name;
-        //symbol = entity.symbol;
-        
-        //totalSupply = entity.totalSupply;
-        //liquidSupply= entity.liquidSupply;
-        decimal = entity.granularity;
         transaction = entity.contractTxHash;
-
-        transactions = entity.totalTransactions;
-        holders = entity.totalAccounts;
-
-        fromAddr = entity.fromAddr;
-        toAddr = entity.toAddr;
-        blockTimestamp = entity.blockTimestamp;
-        value = entity.value;
       }
 
       // Generate tableContent
