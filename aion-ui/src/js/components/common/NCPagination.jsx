@@ -62,6 +62,13 @@ export default class NCPagination extends Component
           maxDate={(this.state.start!=null) ? new Date() : new Date()}
           shortcuts={false}
         />  
+        <Popover
+        content={"This filter is only available for 7 dyas intervals."}
+        interactionKind={PopoverInteractionKind.HOVER}
+        inline={false}
+        popoverClassName="NCLivenessIndicator-Popover"
+        className="NCLivenessIndicator"
+        position={Position.BOTTOM_RIGHT}>
         <Button             
             className="pt-minimal " 
             text="Filter range"
@@ -80,7 +87,8 @@ export default class NCPagination extends Component
               //this.state.startDate,this.state.endDate
               this.serchDirection = SEARCH_DIR.BACKWARD;
               this.props.onPageCallback(0,25, start, end);
-            }}/>  
+            }}/> 
+        </Popover> 
       </div>
     );
   }

@@ -777,7 +777,7 @@ h1, h2, h3, h4, h5 {
   height: 20px;
 }
 .NCPagination .pt-wide-input .pt-input {
-  width: 50px !important;
+  width: 60px !important;
 }
 .NCPagination .pt-select-input {
   height: 24px !important;
@@ -2348,6 +2348,9 @@ pre {
 .darkMode {
   background-color: #151515 !important;
   color: #d1cfcf;
+}
+.darkMode h2 {
+  color: #ccc;
 }
 .darkMode .NCPage {
   background-color: #000 !important;
