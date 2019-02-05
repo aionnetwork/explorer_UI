@@ -40,6 +40,8 @@ class NCDwnRetrieve extends Component
       entity: NCEntity.ACCOUNT,
       recaptcha:'',
       button: true,
+      captcha_button: true,
+      range_button: true,
       range: [0,1000],
       dateRange: [null,null],
       start:null,
@@ -88,7 +90,7 @@ class NCDwnRetrieve extends Component
   verifyCallback(response) {
        //this.state.recaptcha = response;
        //console.log(response);
-        this.setState({recaptcha:response,button:false});
+        this.setState({recaptcha:response,button:false,captcha_button:false});
    };
 
    handleValueChange = (range: NumberRange) => this.setState({ range });
@@ -97,8 +99,9 @@ class NCDwnRetrieve extends Component
 
    handleRangeChange = (date) => {
     //console.log(date[0]);
+    let button = (date[0] && date[1]) ?  false : true;
     this.setState({
-        start: date[0], end: date[1],rangeChange:false
+        start: date[0], end: date[1],rangeChange:false,range_button:button
       });
   }
 
@@ -117,7 +120,9 @@ class NCDwnRetrieve extends Component
       recaptchaInstance.reset();  
     };
 
-    let button = this.state.button;
+    
+    let button = (this.state.captcha_button || this.state.range_button);
+    
     let recaptcha= this.state.recaptcha;
     let range = this.state.range;
     let dateRange = this.state.dateRange;
