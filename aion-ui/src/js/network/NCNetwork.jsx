@@ -50,6 +50,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 export const NC_ENV={
   "HTTPS_ENABLED":HTTPS_ENABLED,
+  "HOME_URL": HOME_URL,
   "BASE_URL": BASE_URL,
   "NETWORK_LIST": NETWORK_LIST,
   "GA_KEY":GA_KEY,
