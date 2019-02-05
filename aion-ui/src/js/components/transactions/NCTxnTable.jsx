@@ -190,7 +190,7 @@ export default class NCTxnTable extends Component
         }
       </Cell>;
       tableContent[i][6] = 
-      <Cell copy={toAddr ? toAddr : contractAddr ? contractAddr : "Contract Creation"}>
+      <Cell copy={toAddr ? toAddr : contractAddr ? contractAddr : "Contract Creation"}  link={toAddr ? '#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+toAddr :'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+contractAddr}>
       {
             toAddr ? 
                 <NCEntityLabel 

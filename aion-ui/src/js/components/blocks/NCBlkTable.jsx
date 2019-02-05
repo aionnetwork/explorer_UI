@@ -120,7 +120,7 @@ export default class NCBlkTable extends Component
           enabled={ numTransactions > 0 }/>
       </Cell>;
       tableContent[i][3] = <Cell copy={ nc_numFormatter(nrgConsumed, 2) } >{ nc_numFormatter(nrgConsumed, 2) }</Cell>;
-      tableContent[i][4] = <Cell copy={nc_numPrettify(BigNumber(String(difficulty), 16).toString(10))}>{nc_numPrettify(BigNumber(String(difficulty), 16).toString(10))}</Cell>;
+      tableContent[i][4] = <Cell copy={difficulty}>{difficulty}</Cell>;
       tableContent[i][5] = <Cell copy={ nc_numFormatterBytes(size, 2) }>{ nc_numFormatterBytes(size, 2) }</Cell>;
     });
 
