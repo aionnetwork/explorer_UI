@@ -41,7 +41,7 @@ if (process.env.NODE_ENV !== 'production') {
       
 }else{ 
 
-    HTTPS_ENABLED = true;
+    HTTPS_ENABLED = ENV.HTTPS_ENABLED;
     BASE_URL = ENV.BASE_URL;
     HOME_URL = ENV.HOME_URL;
     NETWORK_LIST = appConfig.network_list[ENV.NETWORK_LIST];
@@ -69,9 +69,9 @@ const generateBaseUrl = (https, api, e) => {
   let str = "";
 
   if (https)
-    url+="https://"
+    url+="https://";
   else
-    url+="http://"
+    url+="http://";
 
 
     
