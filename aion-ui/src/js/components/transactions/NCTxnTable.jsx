@@ -210,12 +210,12 @@ export default class NCTxnTable extends Component
   }
   
   render() {
-    const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
+    const { data, isPaginated, isLoading, onPageCallback, isLatest=false,calFilter=true } = this.props;
     //console.log('txn table');
     
     return (
       <NCTableReactPaginated
-        calFilter={true}
+        calFilter={calFilter}
         data={data}
         onPageCallback={onPageCallback}
         minDate={new Date(Date.now() - 7 * 24 * 3600 * 1000)}

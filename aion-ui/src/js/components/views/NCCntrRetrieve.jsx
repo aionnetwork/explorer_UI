@@ -62,7 +62,7 @@ class NCCntrRetrieve extends Component
 
   requestPagingTxnList = (pageNumber,pageSize,start,end) => {
     const queryStr = this.props.cntrRetrieve.queryStr;
-    console.log(pageNumber+"  "+pageSize);
+    //console.log(pageNumber+"  "+pageSize);
     network.getCntrRetrieveTopLevel(queryStr,pageNumber,pageSize);
     //(this.props.params.cntrId);
     //network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
@@ -225,6 +225,7 @@ class NCCntrRetrieve extends Component
 
       content={
         <NCTxnTable 
+          calFilter={false}
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
           isLoading={store.isLoadingPagingTxnList}
