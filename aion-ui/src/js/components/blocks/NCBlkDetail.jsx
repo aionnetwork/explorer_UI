@@ -36,7 +36,7 @@ export default class NCBlkDetail extends Component
         value: <NCLink 
                   link={"/transactions?block=" + entity.blockHash} 
                   title={entity.numTransactions}
-                  enabled={entity.numTransactions && entity.numTransactions > 0} />
+                  enabled={false} />
       },
       // ---------------------------------------------------------------
       {
