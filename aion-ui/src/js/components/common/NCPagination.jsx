@@ -42,13 +42,13 @@ export default class NCPagination extends Component
   renderCalendarRange = (t) => {
 
     
-    console.log(this.state.start);
+    //console.log(this.state.start);
     if(this.state.start!=null){
       var newDate = new Date(this.state.start);
 
       newDate.setDate(newDate.getDate() + 7);
-      console.log(newDate);
-      console.log(this.state.start.getDate());
+      //console.log(newDate);
+      //console.log(this.state.start.getDate());
     }
 
     return (  
@@ -242,6 +242,7 @@ export default class NCPagination extends Component
 
             onClick={() => {
               this.serchDirection = SEARCH_DIR.FORWARD;
+              console.log(pageNumber);
               this.props.onPageCallback(pageNumber + 1,pageSize,startDate,endDate)
             }}/>
             <Button 

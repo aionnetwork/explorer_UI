@@ -706,7 +706,7 @@ export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize, star
   }
 }
 
-export const getCntrRetrieveTopLevel = (queryStr) => {
+export const getCntrRetrieveTopLevel = (queryStr, page, size) => {
   store.dispatch(StoreCntrRetrieve.GetTopLevel({
     queryStr: queryStr
   }));
@@ -739,7 +739,7 @@ export const getCntrRetrieveTopLevel = (queryStr) => {
     
     // get contract details
     const ep = network.endpoint.contract.detail;
-    let params = [request];
+    let params = [request,page,size];
     
     network.request(ep, params)
     .then((response) => {

@@ -206,7 +206,7 @@ export const endpoint = {
     },
     detail: {
       link: '/aion/dashboard/getContractDetailsByContractAddress',//a005fba9e3929857d021a75daf1b343bcd82268cf9b4c7bd393a6a23b36966ab
-      params: ['searchParam','holdersPage','holdersSize','transfersPage','transfersSize']
+      params: ['searchParam','transactionsPage','transactionsSize','contractAddress','eventPage','eventSize','transactionsPage','transactionsSize']
       //params: ["searchParam", "eventsPage","eventsSize","transactionsPage","transactionsSize"]
     }
   },

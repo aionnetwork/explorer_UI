@@ -60,9 +60,12 @@ class NCCntrRetrieve extends Component
     network.getCntrRetrieveTopLevel(this.props.params.cntrId);
   }
 
-  requestPagingTxnList = (pageNumber) => {
+  requestPagingTxnList = (pageNumber,pageSize,start,end) => {
     const queryStr = this.props.cntrRetrieve.queryStr;
-     network.getAccRetrievePagingTxnList(queryStr, pageNumber);
+    console.log(pageNumber+"  "+pageSize);
+    network.getCntrRetrieveTopLevel(queryStr,pageNumber,pageSize);
+    //(this.props.params.cntrId);
+    //network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
   }
 
   requestPagingBlkList = (pageNumber) => {
