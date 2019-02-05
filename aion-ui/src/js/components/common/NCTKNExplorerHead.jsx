@@ -52,7 +52,7 @@ export default class NCExplorerHead extends Component
           <span className="right">
           { 
             (momentUpdated && moment(momentUpdated).isValid()) &&
-            <div className="updated">
+            <div className="updated hide">
               <span className="title">Retrieved:</span> 
               <NCTimescale
                 dateObjArr={[momentUpdated]}

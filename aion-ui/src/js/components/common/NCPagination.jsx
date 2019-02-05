@@ -162,7 +162,7 @@ export default class NCPagination extends Component
             {
               "Showing " + entityName + " " + 
               ((pageNumber * pageSize) + 1) + " - " + ((pageNumber * pageSize) + listSize) + 
-              " of " + totalElements + (isLatest ? ((entityName!=="Contracts")&&(entityName!=="Tokens"))? "  for 30 days" : "  for 365 days" : " found")
+              " of " + totalElements + (isLatest ? ((entityName!=="Contracts")&&(entityName!=="Tokens"))? "  for 30 days or selected range" : "  for 365 days" : " found")
             }
           {/*con*/}
           </span>
