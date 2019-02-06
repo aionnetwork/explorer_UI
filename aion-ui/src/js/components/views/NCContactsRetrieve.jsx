@@ -81,6 +81,8 @@ class NCContactsRetrieve extends Component
       this.setState({notice:'Please ensure that all fields are completed.'});
       this.addToast({ icon: "warning-sign", intent: Intent.DANGER, message: "Please ensure that all fields are completed." })
     }else{
+
+      //this should be improved to use promise (next release)
       this.setState({success:true});
       network.submitFeedback(this.state.topic,this.state.text,this.state.recaptcha);
     }
@@ -160,8 +162,8 @@ class NCContactsRetrieve extends Component
                 className="pt-form-group "
 
             >
-              <select id="topic-input" onChange={this.handleTopicChange} defaultValue="default"  style={contact_input} className="pt-input pt-large">
-                <option value="default">Choose an item</option>
+              <select id="topic-input" onChange={this.handleTopicChange} defaultValue="General"  style={contact_input} className="pt-input pt-large">
+                <option value="General">Choose an item</option>
                 <option value="Analytics">Analytics</option>
                 <option value="Accounts">Accounts</option>
                 <option value="Blocks">Blocks</option>

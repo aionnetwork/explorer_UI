@@ -123,7 +123,7 @@ export default class NCTxnTableOwnTransfer extends Component
         transactionHash = entity.transactionHash;
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
-        transferTimestamp = entity.timestamp;
+        transferTimestamp = entity.blockTimestamp;
         value = entity.valueTransferred;//BigNumber(String(entity.valueTransferred), 16).toString(10);//entity.valueTransferred;
         transactionHash = entity.transactionHash//let bal = nc_numFormatterACSensitive(entity.balance);
         

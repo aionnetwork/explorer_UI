@@ -596,7 +596,7 @@ export const getAccRetrievePagingTrnList = (queryStr, pageNumber, pageSize, star
   }
   else {
     const ep = network.endpoint.transfer.list[trnListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
+    let params = [queryStr, pageNumber, pageSize, start, end];
     network.request(ep, params)
     .then((response) => {
       
