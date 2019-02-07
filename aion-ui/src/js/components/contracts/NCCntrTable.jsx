@@ -167,12 +167,12 @@ export default class NCCntrTable extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell copy={Addr}>
+      <Cell copy={Addr} link={'#'+NCEntityInfo[NCEntity.CNTR].absoluteUrl+''+Addr}>
         
         
         <NCEntityLabel 
             entityType={NCEntity.CNTR} 
-            entityId={Addr}/> 
+            entityId={Addr} /> 
         
         
        </Cell>
