@@ -199,7 +199,7 @@ export default class NCPagination extends Component
             
             onClick={() => {
               this.serchDirection = SEARCH_DIR.BACKWARD;
-              this.props.onPageCallback(0,this.state.page_size,startDate,endDate);
+              this.props.onPageCallback(0,pageSize,startDate,endDate);
             }}/>
             <Button 
             iconName="pt-icon-chevron-left" 
@@ -211,7 +211,7 @@ export default class NCPagination extends Component
             
             onClick={() => {
               this.serchDirection = SEARCH_DIR.BACKWARD;
-              this.props.onPageCallback(pageNumber - 1,this.state.page_size,startDate,endDate);
+              this.props.onPageCallback(pageNumber - 1,pageSize,startDate,endDate);
             }}/>
           
           <span className="pt-text-muted context">
