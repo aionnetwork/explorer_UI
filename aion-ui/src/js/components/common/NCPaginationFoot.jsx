@@ -61,7 +61,8 @@ export default class NCPaginationFoot extends Component
                 
                 }} 
                      defaultValue="pageSize"   className="pt-input pt-select-input">
-                  {(!isLastPage)&&
+                <option value="25">25</option>
+                 {(!isLastPage)&&
                   <option value="50">50</option>
                 }
 
@@ -75,7 +76,7 @@ export default class NCPaginationFoot extends Component
                 
                 {(!isLastPage)&&
                   <option value="250">250</option> 
-                }           
+                }            
                
               </select>
           </span>
