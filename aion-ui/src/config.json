@@ -1,7 +1,7 @@
 {
   "api": {
-    "base_url": "staging-api.aion.network",
-    "https_enabled": false
+    "base_url": "explorer-staging-api.aion.network",
+    "https_enabled": true
   },
   "site": {
     "base_url": "explorer-staging.aion.network",
