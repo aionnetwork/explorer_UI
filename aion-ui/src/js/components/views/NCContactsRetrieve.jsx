@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-//import Recaptcha from 'react-recaptcha';
+//import Recaptcha from 'react-recaptcha';  
 //import ReCAPTCHA from "react-google-recaptcha";
 import Reaptcha from 'reaptcha';
 
@@ -81,10 +81,7 @@ class NCContactsRetrieve extends Component
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state.topic);
-    console.log(this.state.text);
-    console.log(this.state.recaptcha);
-
+    
     if(nc_trim(this.state.topic)==''||nc_trim(this.state.text)==''||nc_trim(this.state.recaptcha)==''){
       this.setState({notice:'Please ensure that all fields are completed.'});
       this.addToast({ icon: "warning-sign", intent: Intent.DANGER, message: "Please ensure that all fields are completed." })
