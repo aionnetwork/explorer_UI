@@ -2,7 +2,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Recaptcha from 'react-recaptcha';
+//import Recaptcha from 'react-recaptcha';
+//import ReCAPTCHA from "react-google-recaptcha";
+import Reaptcha from 'reaptcha';
+
 import NCNonIdealState from 'components/common/NCNonIdealState'
 
 import moment from 'moment';
@@ -43,6 +46,7 @@ class NCContactsRetrieve extends Component
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this)
   }
 
   captcha(key){
@@ -50,6 +54,7 @@ class NCContactsRetrieve extends Component
   }
 
   verifyCallback(response) {
+       //console.log(response);
        this.setState({recaptcha:response});
    };
 
@@ -76,6 +81,9 @@ class NCContactsRetrieve extends Component
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log(this.state.topic);
+    console.log(this.state.text);
+    console.log(this.state.recaptcha);
 
     if(nc_trim(this.state.topic)==''||nc_trim(this.state.text)==''||nc_trim(this.state.recaptcha)==''){
       this.setState({notice:'Please ensure that all fields are completed.'});
@@ -150,6 +158,12 @@ class NCContactsRetrieve extends Component
     const contact_input ={width:"100%"}
     const contact_textArea ={width:"100%",height:"200px"}
     const contact_submit ={right:'10'}
+
+    const recaptchaRef = React.createRef();
+    var verifyCaptcha = function (response) {
+            console.log(response);
+            //this.verifyCallback(response);
+    };
     
    const form =  <div style={contact_container}>
         <form>
@@ -193,17 +207,8 @@ class NCContactsRetrieve extends Component
               />
             </FormGroup>
             
-            
-             {(!this.state.display)&& 
-                <Recaptcha
-                  ref={e => recaptchaInstance = e}
-                 
-                  sitekey="6LfwrXMUAAAAAEpZCdMFD0ba96ryOUDGPMyqHZPA"
-                  verifyCallback={this.verifyCallback.bind(this)}
-            />}
+                <Reaptcha sitekey="6LfwrXMUAAAAAEpZCdMFD0ba96ryOUDGPMyqHZPA" onVerify={this.verifyCallback} />
 
-            
-           
             <Button type="submit" intent="success" onClick={this.handleSubmit} text="Submit" />
         </form>  
         </div>;
