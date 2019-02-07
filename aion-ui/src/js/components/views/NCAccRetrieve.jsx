@@ -300,7 +300,7 @@ class NCAccRetrieve extends Component
       
       loadingStr={MSG.Transaction.LOADING}
       invalidDataStr={MSG.Transaction.INVALID_DATA} 
-      emptyDataStr={MSG.Transaction.EMPTY_DATA_LIST}
+      emptyDataStr={MSG.Transaction.EMPTY_DATA_LIST_TRN}
       marginTop={40}
 
       content={

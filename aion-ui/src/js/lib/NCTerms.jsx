@@ -64,6 +64,7 @@ export const Transaction = {
   EMPTY_DATA:"No Transaction found for descriptor: ",
   EMPTY_DATA_TITLE:"No Transactions",  
   EMPTY_DATA_LIST:"No transactions found for the last 30 days.", 
+  EMPTY_DATA_LIST_TRN:"No internal transfers found.",
   EMPTY_DATA_LIST_ACC:"No Transactions Found Involving Account", 
   EMPTY_DATA_LIST_CNTR:"No Transactions Found Found For This Contract",  
   INVALID_DATA:"Syntax error: Invalid request structure.",
