@@ -525,8 +525,11 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
 
     
     let params = []; 
+    
     if(tkn!==null){
-      params = [queryStr,tkn ,pageNumber, PAGE_SIZE];
+      params = [queryStr,tkn ,pageNumber, size,s];
+    }else if((tkn!==null)&&(end!==null)){
+      params = [queryStr, tkn, pageNumber, size, s, e];
     }else if(end!==null){
       params = [queryStr, null, pageNumber, size, s, e];
     }else{
