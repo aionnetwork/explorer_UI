@@ -140,7 +140,7 @@ export default class NCTknTable extends Component
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
-      <Cell copy={token+" ("+symbol+") "+ Addr+" "+description} truncated={false}
+      <Cell copy={token+" ("+symbol+") "+ Addr+" "+description} link={'#'+NCEntityInfo[NCEntity.TKN].absoluteUrl+''+Addr} truncated={false}
        wrapText={true}>
         
         
