@@ -63,7 +63,7 @@ export default class NCPagination extends Component
           shortcuts={false}
         />  
         <Popover
-        content={"This filter is only available for 7 dyas intervals."}
+        content={"This filter is only available for 7 days intervals."}
         interactionKind={PopoverInteractionKind.HOVER}
         inline={false}
         popoverClassName="NCLivenessIndicator-Popover"
