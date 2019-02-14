@@ -15,6 +15,11 @@ This repository hosts all user interface components for the Aion Blockchain Expl
 
 ### Deployment:
 
-Instructions on deployment can be found [here!](https://github.com/aionnetworkp/Explorer_ui/blob/master/aion-ui/README.md)
+Instructions on deployment can be found [here!](https://github.com/aionnetwork/Explorer_ui/blob/master/aion-ui/README.md)
 
 [Explore the wiki for technical documentation and to start developing!](https://github.com/aionnetwork/aion_explorer/wiki)
+
+### Networks
+
+[Mainnet](https://mainnet.aion.network/#/dashboard) 
+[Mastery Testnet](https://mastery.aion.network/#/dashboard)
