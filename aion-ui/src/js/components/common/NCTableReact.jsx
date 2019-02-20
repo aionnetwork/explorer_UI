@@ -4,17 +4,17 @@ import ContainerDimensions from 'react-container-dimensions'
 
 
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import moment from 'moment';
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
+import {Position,InputGroup } from "@blueprintjs/core";
+//import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
 
 import NCTableBase from 'components/common/NCTableBase';
 
-import { NCSortType, NCEntity, nc_LinkToEntity } from 'lib/NCEnums';
-import NCEntityLabel from 'components/common/NCEntityLabel';
+import { NCSortType, nc_LinkToEntity } from 'lib/NCEnums';
+//import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import { nc_objLookupByPath, nc_defaultSortAsc, nc_defaultSortDesc, nc_defaultFilter } from 'lib/NCUtility';
 
@@ -131,19 +131,21 @@ export default class NCTableReact extends Component
 
   render() {
 
-    let { data, generateTableContent, columnDescriptor } = this.props;
+    let { rowHeight = 35,rowHeights,data, generateTableContent, columnDescriptor } = this.props;
 
     let filteredData = this.runFilter(data);
     let sortedData = this.runSort(filteredData);
     let tableContent = generateTableContent(sortedData);
-
+    let height = rowHeight;
+    //console.log(JSON.stringify(rowHeights));
     return (
       <div className="NCTableEnhanced">
         <ContainerDimensions>
           <NCTableBase 
+            rowHeights={rowHeights}
             tableContent={tableContent}
             columnDescriptor={columnDescriptor}
-
+            rowHeight = {height}
             sortColumn={this.state.sortColumn}
             sortType={this.state.sortType}
             sortCallback={this.sortCallback}

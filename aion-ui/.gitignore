@@ -6,5 +6,9 @@ Thumbs.db
 node_modules/
 .iml
 
+.env
+
+
+
+archive/
 build/
-build_archive/

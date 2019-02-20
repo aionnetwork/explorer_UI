@@ -19,6 +19,24 @@
 .txn-arrow { width: @txn-arrow-width; }
 .txn-toEntity { width: @txn-toEntity-width; }
 
+
+@media all and (max-width: 1030px) 
+{
+  @txn-block-width: 20%;
+  @txn-hash-width: 30%;
+  @txn-fromEntity-width: 30%px;
+  @txn-arrow-width: 10px;
+  @txn-toEntity-width: 30%px;
+
+  .txn-hash { width: @txn-hash-width; }
+  .txn-block { width: @txn-block-width; }
+  .txn-age { width: @txn-age-width; }
+  .txn-fromEntity { width: @txn-fromEntity-width; }
+  .txn-arrow { width: @txn-arrow-width; }
+  .txn-toEntity { width: @txn-toEntity-width; }
+}
+
+
 // table styles -------------------------------------------
 
 .NCTableTransactionsRT 

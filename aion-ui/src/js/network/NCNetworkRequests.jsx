@@ -1,10 +1,14 @@
 /* eslint-disable */
 import * as network from 'network/NCNetwork';
-import { store } from 'stores/NCReduxStore'
+import { store } from 'stores/NCReduxStore';
+import { Router, hashHistory} from 'react-router';
 
 import * as mock from 'lib/NCData';
 
+ import * as fileDownload from 'js-file-download';
+
 import * as StoreKpis from 'stores/StoreKpis';
+import * as StoreDark from 'stores/StoreDark';
 
 import * as StoreBlkRt from 'stores/StoreBlkRt';
 import * as StoreBlkList from 'stores/StoreBlkList';
@@ -14,13 +18,26 @@ import * as StoreTxnRt from 'stores/StoreTxnRt';
 import * as StoreTxnList from 'stores/StoreTxnList';
 import * as StoreTxnRetrieve from 'stores/StoreTxnRetrieve';
 
+import * as StoreTknList from 'stores/StoreTknList';
+import * as StoreTknRetrieve from 'stores/StoreTknRetrieve';
+
 import * as StoreAccList from 'stores/StoreAccList';
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
-import {BigNumber} from 'bignumber.js';
-import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
-import { txnListType, blkListType, accListType } from 'lib/NCEnums';
+import * as StoreCntrList from 'stores/StoreCntrList';
+import * as StoreCntrRetrieve from 'stores/StoreCntrRetrieve';
 
+import * as StoreChartRetrieve from 'stores/StoreChartRetrieve';
+
+import * as StoreRetrieve from 'stores/StoreRetrieve';
+
+import * as StoreContactRetrieve from 'stores/StoreContactRetrieve';
+
+
+import { nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
+import {  tknListType, txnListType, blkListType, eventListType,trnListType, } from 'lib/NCEnums';
+
+//console.log('networkRequest'); 
 export const PAGE_SIZE = 25;
 
 // network.NCNETWORK_REQUESTS_ENABLED
@@ -54,19 +71,7 @@ export const getBlkListTopLevel = (listType, queryStr) => {
       case blkListType.ALL: {
         params = [0, PAGE_SIZE]
         break;
-      }/*
-      case blkListType.BY_ACCOUNT: {
-        let request = nc_sanitizeHex(queryStr);
-        if (request == 0 || request == "0x0") {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        } else if (!nc_isValidEntity(request)) {
-          store.dispatch(StoreBlkList.SetTopLevel({ content:[] }));
-          return;
-        }
-
-        params = [request, 0, PAGE_SIZE]
-        break;
-      }*/
+      }
     }
     network.request(ep, params)
     .then((response) => {
@@ -79,7 +84,7 @@ export const getBlkListTopLevel = (listType, queryStr) => {
   }
 }
 
-export const getBlkListPaging = (listType, queryStr, pageNumber) => {
+export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0, start=null, end=null) => {
   store.dispatch(StoreBlkList.GetPaging());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -91,21 +96,18 @@ export const getBlkListPaging = (listType, queryStr, pageNumber) => {
   }
   else {
     const ep = network.endpoint.block.list[listType];
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+    //console.log(size);
     let params = [];
     switch(listType) {
       case blkListType.ALL: {
-        params = [pageNumber, PAGE_SIZE, 'blockNumber,desc']
-        break; 
-      }/*
-      case blkListType.BY_ACCOUNT: {
-        let request = nc_sanitizeHex(queryStr);
-        if (request == 0) {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
+        if(start!==null){
+          params = [pageNumber, size, start, end];
+        }else{
+          params = [pageNumber, size];
         }
-
-        params = [request, pageNumber, PAGE_SIZE]
-        break;
-      }*/
+        break; 
+      }
     }
     network.request(ep, params)
     .then((response) => {
@@ -138,7 +140,7 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
     if (!nc_isPositiveInteger(request) && !nc_isValidEntity(request)) {
       store.dispatch(StoreBlkRetrieve.SetTopLevel({
         blk: {
-          content: []
+          content: {}
         },
         txn: {}
       }));
@@ -185,6 +187,7 @@ export const getTxnListTopLevel = (listType, queryStr) => {
     listType: listType,
   }));
 
+ 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.txnList;
@@ -199,7 +202,7 @@ export const getTxnListTopLevel = (listType, queryStr) => {
 
     switch(listType) {
       case txnListType.ALL: {
-        params = [0, PAGE_SIZE, 'blockNumber,desc']
+        params = [0, PAGE_SIZE]
         break;
       }
       case txnListType.BY_BLOCK: {
@@ -210,18 +213,7 @@ export const getTxnListTopLevel = (listType, queryStr) => {
 
         params = [request]
         break;
-      }/*
-      case txnListType.BY_ACCOUNT: {
-        if (request == 0 || request == "0x0") {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        } else if (!nc_isValidEntity(request)) {
-          store.dispatch(StoreTxnList.SetTopLevel({}));
-          return;
-        }
-
-        params = [request, 0, PAGE_SIZE]
-        break;
-      }*/
+      }
     }
 
     network.request(ep, params)
@@ -235,8 +227,10 @@ export const getTxnListTopLevel = (listType, queryStr) => {
   }
 }
 
-export const getTxnListPaging = (listType, queryStr, pageNumber) => {
+export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start=null, end=null) => {
   store.dispatch(StoreTxnList.GetPaging());
+
+  //console.log('txn list paging');
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
@@ -247,27 +241,34 @@ export const getTxnListPaging = (listType, queryStr, pageNumber) => {
     }, 500);
   }
   else {
-    const ep = network.endpoint.transaction.list[listType];
+
+    //console.log(listType);
+    const ep = ((start!==null)&&(start>0)) ? network.endpoint.transaction.list[3] : network.endpoint.transaction.list[listType];
     let params = [];
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+
+    let date = new Date();
+
+    
+      let e = Math.floor((end!==null) ? end : (date.getTime()/1000)-date.getTimezoneOffset()*60);
+      let s = Math.ceil(((start!==null)&&(start>0)) ? start : e-(43800*60) );
+    
     switch(listType) {
       case txnListType.ALL: {
-        params = [pageNumber, PAGE_SIZE, 'blockNumber,desc']
+        if((end!==null)&&(start!==null)){
+          params = [pageNumber, size, s, e];
+        }else if(start!==null){
+          params = [pageNumber, size,s];
+        }else{
+          params = [pageNumber, size];
+        }
         break;
       }
       case txnListType.BY_BLOCK: {
-        params = [nc_trim(queryStr), pageNumber, PAGE_SIZE]
+        params = [nc_trim(queryStr), pageNumber, PAGE_SIZE];
         break;
       }
-      /*
-      case txnListType.BY_ACCOUNT: {
-        let request = nc_trim(queryStr);
-        if (request == 0 || request == "0x0") {
-          request = "0000000000000000000000000000000000000000000000000000000000000000"
-        }
-
-        params = [request, pageNumber, PAGE_SIZE]
-        break;
-      }*/
+      
     }
     network.request(ep, params)
     .then((response) => {
@@ -278,13 +279,13 @@ export const getTxnListPaging = (listType, queryStr, pageNumber) => {
       store.dispatch(StoreTxnList.SetPaging({}));
     });
   }
-}
+};
 
 export const getTxnRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreTxnRetrieve.GetTopLevel({
     queryStr: queryStr
   }));
-
+  
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = mock.txn;
@@ -305,7 +306,10 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
     let params = [request];
     network.request(ep, params)
     .then((response) => {
+      
       store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
+      getTxnRetrievePagingTrnList(request, 0);      
+      
     })
     .catch((error) => {
       console.log(error);
@@ -314,6 +318,32 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
   }
 }
 
+
+export const getTxnRetrievePagingTrnList = (queryStr, pageNumber, pageSize, start, end) => {
+  store.dispatch(StoreTxnRetrieve.GetPagingTrn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreAccRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.transfer.list[trnListType.BY_TXN];
+    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
+    network.request(ep, params)
+    .then((response) => {
+      
+      store.dispatch(StoreTxnRetrieve.SetPagingTrn(response)); 
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTxnRetrieve.SetPagingTrn({}));
+    });
+  }
+}
 // ========================================================
 // Accounts 
 // ========================================================
@@ -330,6 +360,7 @@ export const getAccListTopLevel = () => {
   else {
     // get transaction list
     const ep = network.endpoint.account.list;
+    
     let params = [];
     
     network.request(ep, params)
@@ -343,11 +374,12 @@ export const getAccListTopLevel = () => {
   }
 }
 
-export const getAccRetrieveTopLevel = (queryStr) => {
+export const getAccRetrieveTopLevel = (acc,tkn=null) => {
   store.dispatch(StoreAccRetrieve.GetTopLevel({
-    queryStr: queryStr
+    queryStr: acc
   }));
 
+  
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = {
@@ -361,34 +393,52 @@ export const getAccRetrieveTopLevel = (queryStr) => {
   }
   else {
     // validate the account to make sure it's a valid account string
-    let request = nc_trim(queryStr);
+    let request = nc_trim(acc);
+    let requestb = tkn;
 
     if (request == 0) {
       request = "0000000000000000000000000000000000000000000000000000000000000000"
     } else if (!nc_isValidEntity(request)) {
       store.dispatch(StoreAccRetrieve.SetTopLevel({
-        content: []
+        content: null
       }));
       return;
     } else {
-      request = nc_sanitizeHex(queryStr);
+      request = nc_sanitizeHex(acc);
     }
     
     // get account details
     const ep = network.endpoint.account.detail;
-    let params = [request];
+    let params = []; 
+    
+    if(requestb!=null){
+      
+      params = [request,requestb];
+      
+    }else{
+      params = [request];
+    }
+     
     network.request(ep, params)
     .then((response) => {
       const isAccValid = nc_isObjectValid(response);
       const isAccEmpty = nc_isObjectEmpty(response, isAccValid);
 
-      // ok, make requests for blocks and transactions for this account
+      
       store.dispatch(StoreAccRetrieve.SetTopLevel(response));
-
-      // we can save on a network request if the nonce is zero
+      
+            
       if (!isAccEmpty) {
-        getAccRetrievePagingTxnList(request, 0);
+        //console.log('this call!');
+        getAccRetrievePagingTxnList(request, requestb, 0);
         getAccRetrievePagingBlkList(request, 0);
+        if(response.content[0].hasInternalTransfer){ 
+
+            getAccRetrievePagingTrnList(request, 0);
+        }
+        
+        //console.log(JSON.stringify(response));
+        
       }
     })
     .catch((error) => {
@@ -398,7 +448,55 @@ export const getAccRetrieveTopLevel = (queryStr) => {
   }
 }
 
-export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
+
+export const getAccTxnRetrieveCSV = (acc,key,start,end,range) => {
+  store.dispatch(StoreAccRetrieve.GetTopLevel({
+    queryStr: acc
+  }));
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    console.log("NO Network!");
+  }
+  else {
+    // validate the account to make sure it's a valid account string
+    let request = nc_trim(acc);
+
+    let recaptcha = nc_trim(key);
+
+    if(request == 0) {
+      request = "0000000000000000000000000000000000000000000000000000000000000000"
+    }else {
+      request = nc_sanitizeHex(acc);
+    }
+    
+    // get account details
+    const ep = network.endpoint.download.accountTxns;
+
+    let params = [];
+
+    params = [request,'',start,end,recaptcha];
+
+    //postRequest/request
+    network.downloadRequest(ep, params, true)
+    .then((response) => {
+          //console.log(JSON.stringify(response));      
+        fileDownload(response, 'Account_'+request+'.csv');
+         
+    })
+    .catch((error) => {
+      
+      console.log(error);      
+    });
+
+
+   
+
+    return;
+
+  }
+}
+
+export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, pageSize, start=null, end=null) => {
   store.dispatch(StoreAccRetrieve.GetPagingTxn());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -410,18 +508,34 @@ export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
     }, 500);
   }
   else {
-    // get transaction list
-    const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, PAGE_SIZE];
+    
+    const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];//((start!==null)&&(start>0)) ? network.endpoint.transaction.list[txnListType.BY_ACCOUNT] : network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
+    
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+    
+    let date = new Date();
+    let e = Math.floor((end!==null) ? end : (date.getTime()/1000)-date.getTimezoneOffset()*60);
+    let s = Math.ceil(((start!==null)&&(start>0)) ? start : e-(43800*60) );
+
+    
+    let params = []; 
+    if(tkn!==null){
+      params = [queryStr,tkn ,pageNumber, PAGE_SIZE];
+    }else if(end!==null){
+      params = [queryStr, null, pageNumber, size, s, e];
+    }else{
+      params = [queryStr, null, pageNumber, size, s];
+    }
+    
+
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the account loaded on-screen
+      
       let acc = store.getState().accRetrieve.response.acc;
-
+      
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
-            store.dispatch(StoreAccRetrieve.SetPagingTxn(response));  
+           store.dispatch(StoreAccRetrieve.SetPagingTxn(response));  
         }
       }
     })
@@ -432,7 +546,7 @@ export const getAccRetrievePagingTxnList = (queryStr, pageNumber) => {
   }
 }
 
-export const getAccRetrievePagingBlkList = (queryStr, pageNumber) => {
+export const getAccRetrievePagingBlkList = (queryStr, pageNumber, pageSize, start, end) => {
   store.dispatch(StoreAccRetrieve.GetPagingBlk());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -445,11 +559,10 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber) => {
   }
   else {
     const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, PAGE_SIZE];
+    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
     network.request(ep, params)
     .then((response) => {
-      // ok, now make sure that the response you got is still valid
-      // ie. matches up to the account loaded on-screen
+      
       let acc = store.getState().accRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
@@ -464,96 +577,755 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber) => {
   }
 }
 
+export const getAccRetrievePagingTrnList = (queryStr, pageNumber, pageSize, start, end) => {
+  store.dispatch(StoreAccRetrieve.GetPagingTrn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreAccRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.transfer.list[trnListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
+    network.request(ep, params)
+    .then((response) => {
+      
+      let acc = store.getState().accRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            console.log(JSON.stringify(response));
+            store.dispatch(StoreAccRetrieve.SetPagingTrn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreAccRetrieve.SetPagingTrn({}));
+    });
+  }
+}
+
+export const getAccRetrieveTknList = (queryStr, pageNumber) => {
+  store.dispatch(StoreAccRetrieve.GetTkn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreAccRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.token.list[tknListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      
+      let acc = store.getState().accRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreAccRetrieve.SetTkn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreAccRetrieve.SetTkn({}));
+    });
+  }
+}
+// ========================================================
+// Contracts 
+// ========================================================
+
+export const getCntrListTopLevel = () => {
+  store.dispatch(StoreCntrList.GetTopLevel());
+
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = mock.accList;
+      store.dispatch(StoreCntrList.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // get transaction list
+    const ep = network.endpoint.contract.list;
+    
+    let params = [];
+    
+    network.request(ep, params)
+    .then((response) => {
+       
+      store.dispatch(StoreCntrList.SetTopLevel(response));
+
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrList.SetTopLevel({}));
+    });
+  }
+}
+
+export const getCntrListPaging = (listType, queryStr, pageNumber, pageSize, start=0, end=0) => {
+  store.dispatch(StoreCntrList.GetPaging());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().tknList.response);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreCntrList.SetPaging(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.contract.list;
+    
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+    let params = [pageNumber, size, start, end];
+        
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreCntrList.SetPaging(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrList.SetPaging({}));
+    });
+  }
+}
+
+export const getCntrRetrieveTopLevel = (queryStr) => {
+  store.dispatch(StoreCntrRetrieve.GetTopLevel({
+    queryStr: queryStr
+  }));
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = {
+        cntr: mock.cntr,
+        blk: mock.blkListArry,
+        txn: mock.txnListArry,
+        web3: false
+      };
+      store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // validate the contract to make sure it's a valid contract string
+    let request = nc_trim(queryStr);
+
+    if (request == 0) {
+      request = "0000000000000000000000000000000000000000000000000000000000000000"
+    } else if (!nc_isValidEntity(request)) {
+      store.dispatch(StoreCntrRetrieve.SetTopLevel({
+        content: []
+      }));
+      return;
+    } else {
+      request = nc_sanitizeHex(queryStr);
+    }
+    
+    // get contract details
+    const ep = network.endpoint.contract.detail;
+    let params = [request];
+    
+    network.request(ep, params)
+    .then((response) => {
+      //const isCntrValid = nc_isObjectValid(response);
+
+      store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+      
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetTopLevel({}));
+    });
+  }
+}
+
+export const getCntrRetrievePagingTxnList = (queryStr, pageNumber) => {
+  store.dispatch(StoreCntrRetrieve.GetPagingTxn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.txn);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreCntrRetrieve.SetPagingTxn(response));
+    }, 500);
+  }
+  else {
+    // get transaction list
+    const ep = network.endpoint.contract.detail;
+    let params = [queryStr, null, null, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+     
+      let cntr = store.getState().cntrRetrieve.response.acc;
+
+      if (cntr && cntr.data && cntr.data.content && cntr.data.content[0]) {
+        if (nc_sanitizeHex(cntr.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {            
+            store.dispatch(StoreCntrRetrieve.SetPagingTxn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetPagingTxn({}));
+    });
+  }
+}
+
+export const getCntrRetrievePagingBlkList = (queryStr, pageNumber) => {
+  store.dispatch(StoreCntrRetrieve.GetPagingBlk());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreCntrRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    
+    network.request(ep, params)
+    .then((response) => {
+      let acc = store.getState().cntrRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreCntrRetrieve.SetPagingBlk(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetPagingBlk({}));
+    });
+  }
+}
+export const getCntrRetrievePagingEventList = (queryStr, pageNumber) => {
+  store.dispatch(StoreCntrRetrieve.GetPagingEvent());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreCntrRetrieve.SetPagingEvent(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.event.list[eventListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    console.log('I am here!');
+    network.request(ep, params)
+    .then((response) => {
+     let acc = store.getState().cntrRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreCntrRetrieve.SetPagingEvent(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetPagingEvent({}));
+    });
+  }
+}
+
+export const getCntrRetrieveTknList = (queryStr, pageNumber) => {
+  store.dispatch(StoreCntrRetrieve.GetTkn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreCntrRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.token.list[tknListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      let acc = store.getState().accRetrieve.response.acc;
+      if (acc && acc.data && acc.data.content && acc.data.content[0]) {
+        if (nc_sanitizeHex(acc.data.content[0].contractAddr) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreCntrRetrieve.SetTkn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetTkn({}));
+    });
+  }
+}
 // ========================================================
 // Dashboard 
 // ========================================================
 
-// using pub-sub to subscribe to data updates from webserver
-// function to update stores upon receipt of published data
+//activate dark-mode
+export const setDarkMode = (isdark) => {
+  store.dispatch(StoreDark.SetAll(isdark));
+}
+
+
 export const setDashboardData = (response) => {
   const isResponseEmpty = nc_isObjectEmpty(response);
+  
   if(!isResponseEmpty) {
     let data = response.content[0];
+    //console.log(JSON.stringify(data.transactions));
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
     store.dispatch(StoreTxnRt.SetAll(data.transactions));
-    store.dispatch(StoreKpis.SetAll(data.metrics));
+    
   }
 }
+
 
 export const getDashboardData = () => {
   const ep = network.endpoint.dashboard;
   let params = [];
+  
   network.request(ep, params)
   .then((response) => {
+    
     setDashboardData(response);
 
-    // connect to socket after initial data fetch
-    network.connectSocket((response) => {
-      setDashboardData(response);
+    network.startInterval(ep,params,(response) => {
+        setDashboardData(response);
     });
   })
   .catch((error) => {
     console.log(error);
-    /*
-    // debug. give no indication that initial request fails
-    // user will automatically refresh the page if they are stuck at spinny-indicator 
-    setDashboardData({
-      content: [{
-        blocks: {},
-        transactions: {},
-        metrics: {}
-      }]
-    });*/
+    
   });
 }
-
-/*
-export const setup = () => {
-  network.configuration()
-  .then((r) => {
-    store.dispatch(StoreConfig.SetAll(r));
-    getDashboardData();
-  })
-  .catch((e) => {
-    console.log(e);
-  });
-}*/
-
-// ========================================================
-// Top Level Search 
-// ========================================================
-/*
-export const getSearch = (callback, queryStr) => {
-  if (!network.NCNETWORK_REQUESTS_ENABLED) {
-    // query for the new result
-    setTimeout(() => {
-      let block = {
-        entityType: "block",
-        ...mock.blk
-      };
-
-      callback(block);
-    }, 2000);
+export const setKPIData = (response) => {
+  
+  if(response.content.length > 0) {
+    let data = response.content[0];
+    
+    store.dispatch(StoreKpis.SetAll(data.metrics));
   }
-  else {
-    const ep = network.endpoint.search;
-    let params = [nc_trim(queryStr)];
-    network.request(ep, params)
+}
+
+export const getKPIData = () => {
+  
+    
+    const ep = network.endpoint.dashboard;
+    let params = [];
+
+    network.request(ep,params)
     .then((response) => {
-      callback(response);
+      setKPIData(response);
+      network.startInterval(ep,params,(response) => {
+        setKPIData(response);
+      });
     })
     .catch((error) => {
       console.log(error);
-      callback({});
+      setKPIData({content:[]});
+      
+    });
+  
+}
+
+
+// ========================================================
+// Tokens
+// ========================================================
+
+export const getTknListTopLevel = (listType, queryStr) => {
+  store.dispatch(StoreTknList.GetTopLevel({
+    queryStr: queryStr,
+    listType: listType,
+  }));
+
+  
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = mock.tknList;
+
+      store.dispatch(StoreTknList.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // get transaction list
+    const ep = network.endpoint.token.list[listType];
+    let params = [];
+    let request = nc_trim(queryStr);
+
+    switch(listType) {
+      case tknListType.ALL: {
+        params = [0, PAGE_SIZE]
+        break;
+      }
+      case tknListType.BY_ACCOUNT: {
+        if (!nc_isPositiveInteger(request) && !nc_isValidEntity(request)) {
+          store.dispatch(StoreTknList.SetTopLevel({ content:[] }));
+          return;
+        }
+
+        params = [request]
+        break;
+      }
+    }
+
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreTknList.SetTopLevel(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknList.SetTopLevel({}));
     });
   }
 }
-*/
+
+export const getTknListPaging = (listType, queryStr, pageNumber, pageSize,start=0, end=0) => {
+  store.dispatch(StoreTknList.GetPaging());
+
+  if (network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().tknList.response);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreTknList.SetPaging(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.token.list[listType];
+    let params = [];
+    let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
+    switch(listType) {
+      case tknListType.ALL: {
+        params = [pageNumber, size,start, end]
+        break;
+      }
+      case tknListType.BY_BLOCK: {
+        params = [nc_trim(queryStr), pageNumber, size]
+        break;
+      }
+     
+    }
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreTknList.SetPaging(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknList.SetPaging({}));
+    });
+  }
+}
+
+export const getTknRetrieveTopLevel = (queryStr) => {
+  store.dispatch(StoreTknRetrieve.GetTopLevel({
+    queryStr: queryStr
+  }));
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    console.log("getTknRetrieveTopLevel");
+    setTimeout(() => {
+       let response = {
+        tkn: mock.tkn,
+        blk: mock.blkListArry,
+        txn: mock.txnListArry,
+        web3: false
+      };
+      store.dispatch(StoreTknRetrieve.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    
+    let request = nc_trim(queryStr);
+    if (!nc_isValidEntity(request)) {
+      store.dispatch(StoreTknRetrieve.SetTopLevel({
+        content: []
+      }));
+      return;
+    }
+
+    // get transaction details
+    const ep = network.endpoint.token.detail;
+    let params = [request];
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreTknRetrieve.SetTopLevel(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknRetrieve.SetTopLevel({}));
+    });
+  }
+}
+
+export const getTknRetrievePagingTxnList = (queryStr, pageNumber) => {
+  store.dispatch(StoreTknRetrieve.GetPagingTxn());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().tknRetrieve.response.txn);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreTknRetrieve.SetPagingTxn(response));
+    }, 500);
+  }
+  else {
+    // get transaction list
+    const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+      
+      let tkn = store.getState().tknRetrieve.response.tkn;
+
+      if (tkn && tkn.data && tkn.data.content && tkn.data.content[0]) {
+        if (nc_sanitizeHex(tkn.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoreTknRetrieve.SetPagingTxn(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknRetrieve.SetPagingTxn({}));
+    });
+  }
+}
+export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
+  store.dispatch(StoreTknRetrieve.GetPagingBlk());
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = Object.assign({}, store.getState().tknRetrieve.response.blk);
+      response.page.number = pageNumber;
+
+      store.dispatch(StoreTknRetrieve.SetPagingBlk(response));
+    }, 500);
+  }
+  else {
+    const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+     
+      let tkn = store.getState().tknRetrieve.response.tkn;
+      if (tkn && tkn.data && tkn.data.content && tkn.data.content[0]) {
+        if (nc_sanitizeHex(tkn.data.content[0].address) == nc_sanitizeHex(queryStr)) {
+            store.dispatch(StoretknRetrieve.SetPagingBlk(response));  
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTknRetrieve.SetPagingBlk({}));
+    });
+  }
+}
+
+ let showView = (entity,request) => {
+
+    
+    switch(entity.searchType)
+    {
+
+
+    // Top Level 
+    // ---------
+      case 'block':
+      {  
+         hashHistory.push('/block/'+request);
+         break;
+    
+      }
+      case 'transaction':
+      {
+        hashHistory.push('/transaction/'+request);
+        break;
+      }
+      case'token':
+      {
+        hashHistory.push('/token/'+request);
+        break;
+      }
+      case'account':
+      {
+        hashHistory.push('/account/'+request);
+        break;
+      }
+      case'contract':
+      {
+        
+        hashHistory.push('/contract/'+request);
+        break;
+      }
 
 
 
+      default: 
+      {
+        return "";
+      }
+    }
+
+  }
 
 
+export const getRetrieveTopLevel = (queryStr) => {
+  store.dispatch(StoreRetrieve.GetTopLevel({
+    queryStr: queryStr
+  }));
+
+  //console.log('search network call!');
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = {
+        data: mock.data,
+        
+      };
+      store.dispatch(StoreBlkRetrieve.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // sanitize input string
+    let request = nc_trim(queryStr.toLowerCase());
+
+    // get block details
+    const ep = network.endpoint.search;
+    let params = [request,  0, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+     
+
+      if(typeof response.searchType !== "undefined" && response.searchType !== "token"){ 
+
+        showView(response,request);
+       
+      }
+      else if(typeof response.searchType !== "undefined"){ 
+
+        store.dispatch(StoreRetrieve.SetTopLevel(response));
+
+      }
+      else{
+        store.dispatch(StoreRetrieve.SetTopLevel({
+        
+        }));
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreRetrieve.SetTopLevel({
+        
+      }));
+    });
+  }
+}
+
+export const RetrieveDownload =(type, data) => {
+
+   if (!network.NCNETWORK_REQUESTS_ENABLED) {
+     console.log("No Network!");
+   }
+   else {
+    // sanitize input string
+    let request = nc_trim(type);
+
+    // get block details
+    const ep = network.endpoint.download.detail;
+     
+    let params = [request, data];
+    network.postRequest(ep, params)
+    .then((response) => {
+      
+        console.log(JSON.stringify(response)); 
+        
+    })
+    .catch((error) => {
+      console.log(error);
+      
+    });
+  }
+
+}
+export const submitFeedback =(topic=null,message=null,key=null) => {
+
+   if (!network.NCNETWORK_REQUESTS_ENABLED) {
+        console.log("No Network!");
+   }
+   else {
+    // sanitize input string
+    let post_topic = nc_trim(topic);
+    let post_message = nc_trim(message);
+    // get block details
+    const ep = network.endpoint.contact.detail;
+        
+    let params = [post_topic, post_message, key];
+    network.postRequest(ep, params, true)
+    .then((response) => {
+        
+        store.dispatch(StoreContactRetrieve.SetData(response));
+    
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreContactRetrieve.SetData({}));
+      
+    });
+  }
+
+}
+export const getChartRetrieve = (queryStr) => {
+  store.dispatch(StoreChartRetrieve.GetChart({
+    queryStr: queryStr
+  }));
+
+ 
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      let response = {
+        data: mock.data,
+        
+      };
+      store.dispatch(StoreBlkRetrieve.SetTopLevel(response));
+    }, 500);
+  }
+  else {
+    // sanitize input string
+    let request = nc_trim(queryStr);
+
+    // get block details
+    const ep = network.endpoint.chart.detail;
+    let params = [request];
+    network.request(ep, params)
+    .then((response) => {
+      
+       store.dispatch(StoreChartRetrieve.SetChart(response));
+    
+    })
+    .catch((error) => {
+      
+        console.log(error);
+        store.dispatch(StoreChartRetrieve.SetChart({
+        
+      }));
+    });
+  }
+}
 
 
 

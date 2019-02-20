@@ -34,7 +34,22 @@ export const SetPagingTxn = (data) =>
     data: data,
   }
 }
-
+// Paging Tokens
+// ------------------
+export const GetTkn = (data) => 
+{
+  return {
+    type: 'ACC_RETRIEVE_GET_TKN',
+    data: data,
+  }
+}
+export const SetTkn = (data) => 
+{
+  return {
+    type: 'ACC_RETRIEVE_SET_TKN',
+    data: data,
+  }
+}
 // Paging Block
 // ------------
 export const GetPagingBlk = (data) => 
@@ -52,9 +67,27 @@ export const SetPagingBlk = (data) =>
   }
 }
 
+// Paging Internal transfer
+// ------------
+export const GetPagingTrn = (data) => 
+{
+  return {
+    type: 'ACC_RETRIEVE_GET_PAGING_TRN',
+    data: data,
+  }
+}
+export const SetPagingTrn = (data) => 
+{
+  return {
+    type: 'ACC_RETRIEVE_SET_PAGING_TRN',
+    data: data,
+  }
+}
+
 let initialState_StoreBlkRetrieve = 
 {
   isLoadingPagingBlkList: false,
+  isLoadingPagingTrnList: false,
   isLoadingPagingTxnList: false,
   isLoadingTopLevel: false, 
   
@@ -70,6 +103,14 @@ let initialState_StoreBlkRetrieve =
       momentUpdated: null
     },
     txn: {
+      data: null,
+      momentUpdated: null
+    },
+    tkn: {
+      data: null,
+      momentUpdated: null
+    },
+    trn: {
       data: null,
       momentUpdated: null
     },
@@ -91,6 +132,8 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       _state.isLoadingTopLevel = true; 
       _state.queryStr = action.data.queryStr;
       
+      _state.token = [];
+
       _state.response.acc.momentUpdated = null;
       _state.response.blk.momentUpdated = null;
       _state.response.txn.momentUpdated = null;
@@ -103,6 +146,8 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       let _state = Object.assign({}, state);
       
       _state.isLoadingTopLevel = false; 
+
+      _state.token = action.data.token;
       
       _state.response.acc.data = action.data;
       _state.response.acc.momentUpdated = moment();
@@ -133,7 +178,28 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
 
       return _state;
     }
+    // Paging Token
+    // ------------------
+    case 'ACC_RETRIEVE_GET_TKN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTknList = true;
 
+      return _state;
+    }
+    case 'ACC_RETRIEVE_SET_TKN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTknList = false;
+      
+      _state.response.tkn.data = action.data;
+      //_state.response.tkn.momentUpdated = moment();
+      //_state.momentUpdated = moment();
+
+      return _state;
+    }
     // Paging Block
     // ------------
     case 'ACC_RETRIEVE_GET_PAGING_BLK':
@@ -152,6 +218,28 @@ export function reducer_accRetrieve (state = initialState_StoreBlkRetrieve, acti
       
       _state.response.blk.data = action.data;
       _state.response.blk.momentUpdated = moment();
+      _state.momentUpdated = moment();
+      
+      return _state;
+    }
+    // Paging Internal transfers
+    // ------------
+    case 'ACC_RETRIEVE_GET_PAGING_TRN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTrnList = true;
+      
+      return _state;
+    }
+    case 'ACC_RETRIEVE_SET_PAGING_TRN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTrnList = false;
+      
+      _state.response.trn.data = action.data;
+      _state.response.trn.momentUpdated = moment();
       _state.momentUpdated = moment();
       
       return _state;

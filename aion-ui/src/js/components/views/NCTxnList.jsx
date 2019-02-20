@@ -7,12 +7,13 @@ import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 
-import * as StoreTxnList from 'stores/StoreTxnList';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
+
+import { nc_isListValid, nc_isListEmpty} from 'lib/NCUtility';
 
 import { txnListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
+import * as MSG from 'lib/NCTerms';
 
 class NCTxnList extends Component
 {
@@ -38,28 +39,26 @@ class NCTxnList extends Component
     let listType = txnListType.ALL;
 
     let query = this.props.location.query; 
-    if (query && query.block) {
+    if (query && query.block){
       listType = txnListType.BY_BLOCK;
       queryStr = query.block;
-    }/*
-    else if (query && query.account) {
-      listType = txnListType.BY_ACCOUNT;
-      queryStr = query.account;
-    }*/
+    }
     
     network.getTxnListTopLevel(listType, queryStr);
   }
 
-  requestPaging = (pageNumber) => {
+  requestPaging = (pageNumber, pageSize, start, end) => {
     const listType = this.props.txnList.listType;
     const queryStr = this.props.txnList.queryStr;
-    network.getTxnListPaging(listType, queryStr, pageNumber);
+    network.getTxnListPaging(listType, queryStr, pageNumber, pageSize, start, end);
   }
 
   render() {
+    
+    
     const store = this.props.txnList;
 
-    const listType = store.listType;
+
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
 
     const isDataValid = nc_isListValid(store.response);
@@ -77,28 +76,6 @@ class NCTxnList extends Component
     ];
 
     let subtitle = "Recent Transactions"; // txnListType.ALL
-    switch(listType) 
-    {
-      case txnListType.BY_BLOCK: {
-        subtitle = "Block: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : nc_hexPrefix(store.queryStr));
-        break;
-      }
-      case txnListType.BY_ACCOUNT: {
-        subtitle = "Account: " + nc_hexPrefix(store.queryStr)
-        break;
-      }
-    }
-
-    let emptyDataStr = "No transactions found. Dashboard server loading blocks."; // txnListType.ALL
-    switch(listType) 
-    {
-      case txnListType.BY_BLOCK: {
-        emptyDataStr = "No transactions found in block: " + (nc_isPositiveInteger(store.queryStr) ? '#'+store.queryStr : store.queryStr) + "."
-      }
-      case txnListType.BY_ACCOUNT: {
-        emptyDataStr = "No transactions found involving account "+ nc_hexPrefix(store.queryStr) + "."
-      }
-    }
 
     const page =
       <div> 
@@ -122,9 +99,9 @@ class NCTxnList extends Component
         isDataValid={isDataValid} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Transaction Data"}
-        invalidDataStr={"Server provided an invalid response. Please try again."}
-        emptyDataStr={emptyDataStr}
+        loadingStr={MSG.Transaction.LOADING}
+        invalidDataStr={MSG.Transaction.INVALID_DATA}
+        emptyDataStr={MSG.Transaction.EMPTY_DATA}
         
         page={page}
         marginTop={100}/>

@@ -26,7 +26,7 @@ export function nc_roundNumber(num, scale=2) {
     return null;
 
   if(!("" + num).includes("e")) {
-    return +(Math.round(num + "e+" + scale)  + "e-" + scale);  
+    return +(Math.round(num) + "e+" + scale  + "e-" + scale);
   } else {
     var arr = ("" + num).split("e");
     var sig = ""
@@ -60,7 +60,7 @@ export function nc_objLookupByPath(obj, path) {
   }
 
   return current;
-};
+}
 
 export function nc_defaultSortAsc(a, b) {
   if (a < b) 
@@ -182,6 +182,7 @@ export function nc_numFormatterBytes(num, digits) {
 }
 
 export function nc_numFormatterACSensitive(num, dp=null, isHex=false) {
+  
   if (num == null)
     return null;
 
@@ -262,9 +263,9 @@ export function nc_numFormatterAmp(num, fixed=4, isHex=false) {
   let result;
 
   if (fixed == null)
-    result = formatted.value + " " + formatted.prefix + "Amp";
+    result = nc_numPrettify(formatted.value) + " " + formatted.prefix + "Amp";
   else
-    result = formatted.value.toFixed(fixed) + " " + formatted.prefix + "Amp";
+    result = nc_numPrettify(formatted.value.toFixed(fixed)) + " " + formatted.prefix + "Amp";
 
   return result;
 }
@@ -310,7 +311,7 @@ export function nc_isValidEntity(input) {
 }
 
 export function nc_sanitizeHex(input) {
-  let x = nc_trim(input);
+  let x = nc_trim(input.toLowerCase());//add lowercase check in nc_sanitizeHex
 
   if (
     x.indexOf("0x") == 0 || 
@@ -348,6 +349,7 @@ export function nc_hexPrefix(input) {
 */
 
 export function nc_isObjectValid(obj) {
+  //console.log(JSON.stringify(obj));
   const isValid = (
     obj && 
     obj.content != null && 
@@ -355,7 +357,14 @@ export function nc_isObjectValid(obj) {
   );
   return isValid;
 }
-
+export function nc_isObjectValid_v2(obj) {
+  const isValid = (
+    obj && 
+    obj.content != null && 
+    Array.isArray(obj.content)
+  );
+  return isValid;
+}
 export function nc_isObjectEmpty(obj, isValid=null) {
   if (isValid == null) {
     if (!nc_isObjectValid(obj))
@@ -413,7 +422,7 @@ export function nc_RenderLastUpdateTimeTag(moment) {
 }
 
 export function nc_GetEntityIcon(entity) {
-  icon = "pt-icon-help";
+  //let icon = "pt-icon-help";
 
   if (entity == null || NCEntityInfo[entity] == null || NCEntityInfo[entity].icon == null)
     return icon;
@@ -434,21 +443,115 @@ export function nc_CanLinkToEntity(entity, entityId) {
   }
 }
 
+export function nc_findEntity(queryStr){
+  //get 1st 4 char
+  let entity = 0;
+
+  if(str.substr(0, 4).search('a0')==0){
+    entity = 2;//account
+    nc_LinkToEntity(entity, queryStr);
+  }else if(!isNaN(queryStr)){
+    //block number
+    nc_LinkToEntity(entity, queryStr);
+  }
+  
+
+}
+
 export function nc_LinkToEntity(entity, entityId) {
   if (nc_CanLinkToEntity(entity, entityId)) {
+    //console.log('Link to!');
     hashHistory.push(NCEntityInfo[entity].absoluteUrl+entityId);
   }
 }
 
 
+export function nc_LinkToEntityWithParam(entity, entityId, param) {
+  if (nc_CanLinkToEntity(entity, entityId)) {
+    hashHistory.push(NCEntityInfo[entity].absoluteUrl+entityId+"?"+param.name+"="+param.value);
+  }
+}
+
+//formats numbers to be more human readable.
+export function nc_numPrettify(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export function nc_decimalPrettify(num){
+  let a = num.toString().split('.');
+  let b = 0;
+  if(a[1]){
+    b = nc_numPrettify(a[0]);
+  }else{
+    return nc_numPrettify(num);
+  }
+  return b + '.' + a[1];
+}
+export function nc_getChartData(data,charttype=null){
+
+  //get first line
+  if(charttype!==null){
+    let chart =[]
+   
+    if(Array.isArray(data)&&data.length>1){
+      //let chartType = data[0].chartype;
+      data.forEach( (record,i)=>{
+        //let arr =[record.timestamp,record.value]//datapoint
+        chart.push(nc_datapoint(record,charttype,i));//nc_datapoint(record,charttype)
+      })
+   
+    }else{
+      return chart;
+    }
+      //console.log(JSON.stringify(chart));
+    return chart;
+  }
+
+}
+
+export function nc_datapoint(data,charttype=null,i){
+
+let point =[];
+
+if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(data.detail) && nc_isNumber(data.value)) ){
+  
+  let adjust = 1000;//adjust for milliseconds converter
+
+  switch(charttype){
+    case 'line':
+        point =[data.timestamp * adjust,parseFloat(data.value)];
+        break;  
+    case 'pie':        
+        
+        point ={name:data.detail, y:data.value};
+        
+        break;  
+    case 'bar':        
+        point =[data.timestamp * adjust,parseFloat(data.value)];
+        break;                
+    default:
+        point =[];
+        break;    
+  }
+
+  return point;
+
+ }else if(nc_isNumber(data['Other Addresses'])){
+
+  point ={name:'Other addresses', y:data['Other Addresses']};
+
+  return point;
+
+ }else {
+    return [];
+ }
+
+}
 
 
-
-
-
-
-
-
+export function nc_compare(a,b) {
+  return b.y-a.y;
+}
 
 
 

@@ -1,17 +1,17 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import React, { Component } from 'react'; 
 import moment from 'moment';
 import { Cell } from "@blueprintjs/table"
 
 import NCEntityLabel from 'components/common/NCEntityLabel';
-import NCPagination from 'components/common/NCPagination';
+//import NCPagination from 'components/common/NCPagination';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 import NCLink from 'components/common/NCLink';
 
-import { NCEntity } from 'lib/NCEnums';
-import { nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_hexPrefix } from 'lib/NCUtility';
+import { NCEntity, NCEntityInfo  } from 'lib/NCEnums';
+import { nc_numPrettify, nc_numFormatter, nc_numFormatterBytes } from 'lib/NCUtility';
 
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
+//import { PAGE_SIZE } from 'network/NCNetworkRequests'
 import {BigNumber} from 'bignumber.js';
 
 export default class NCBlkTable extends Component 
@@ -105,23 +105,23 @@ export default class NCBlkTable extends Component
 
       tableContent[i] = [];  
       tableContent[i][0] = 
-      <Cell>
+      <Cell copy={blockNumber} link={'#'+NCEntityInfo[NCEntity.BLOCK].absoluteUrl+''+blockNumber} >
         <NCEntityLabel 
           entityType={NCEntity.BLOCK} 
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
-      tableContent[i][1] = <Cell>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+      tableContent[i][1] = <Cell copy={ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') } >{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
       tableContent[i][2] = 
-      <Cell>
+      <Cell copy={numTransactions} link={"/#/transactions?block=" + blockNumber} >
         <NCLink 
           link={"/transactions?block=" + blockNumber} 
           title={numTransactions} 
           enabled={ numTransactions > 0 }/>
       </Cell>;
-      tableContent[i][3] = <Cell>{ nc_numFormatter(nrgConsumed, 2) }</Cell>;
-      tableContent[i][4] = <Cell>{BigNumber(String(difficulty), 16).toString(10)}</Cell>;
-      tableContent[i][5] = <Cell>{ nc_numFormatterBytes(size, 2) }</Cell>;
+      tableContent[i][3] = <Cell copy={ nc_numFormatter(nrgConsumed, 2) } >{ nc_numFormatter(nrgConsumed, 2) }</Cell>;
+      tableContent[i][4] = <Cell copy={nc_numPrettify(BigNumber(String(difficulty), 16).toString(10))}>{nc_numPrettify(BigNumber(String(difficulty), 16).toString(10))}</Cell>;
+      tableContent[i][5] = <Cell copy={ nc_numFormatterBytes(size, 2) }>{ nc_numFormatterBytes(size, 2) }</Cell>;
     });
 
     return tableContent;
@@ -133,6 +133,8 @@ export default class NCBlkTable extends Component
     return (
       <NCTableReactPaginated
         data={data}
+        minDate={new Date(Date.now() - 7 * 24 * 3600 * 1000)}
+        calFilter={true}
         onPageCallback={onPageCallback}
         isLoading={isLoading}
         isPaginated={isPaginated}

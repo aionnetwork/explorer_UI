@@ -1,9 +1,3 @@
-.pt-button.pt-minimal.pt-intent-primary {
-  color: #106ba3 !important;
-}
-.pt-button.pt-minimal.pt-intent-primary:hover {
-  color: #106ba3 !important;
-}
 .roboto {
   font-family: 'Roboto', sans-serif;
 }
@@ -29,6 +23,12 @@ textarea {
 h1, h2, h3, h4, h5 {
   font-family: 'Montserrat', sans-serif;
 }*/
+.pt-dialog {
+  width: 50%;
+}
+.g-recaptcha {
+  margin-left: 45px;
+}
 /*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  */
@@ -771,6 +771,17 @@ h1, h2, h3, h4, h5 {
   font-size: 13px;
   font-weight: 300;
 }
+.NCPagination .pt-input {
+  width: 40px !important;
+  text-align: center;
+  height: 20px;
+}
+.NCPagination .pt-wide-input .pt-input {
+  width: 50px !important;
+}
+.NCPagination .pt-select-input {
+  height: 24px !important;
+}
 .NCPagination .table-paging {
   float: right;
   display: flex;
@@ -803,22 +814,19 @@ h1, h2, h3, h4, h5 {
   color: #5c7080;
   font-weight: 300;
 }
-.NCTableWrapper {
-  padding: 0 10px;
-}
-@media (max-width: 800px) {
+@media (max-width: 100px) {
   .NCTableEnhanced {
-    width: 736px;
+    width: 36px;
   }
 }
-@media (min-width: 800px) and (max-width: 1440px) {
+@media (min-width: 100px) and (max-width: 1440px) {
   .NCTableEnhanced {
-    width: calc(100vw - 64px);
+    width: 100%;
   }
 }
 @media (min-width: 1440px) {
   .NCTableEnhanced {
-    width: 1376px;
+    width: 100%;
   }
 }
 pre {
@@ -1342,8 +1350,8 @@ pre {
 .NCHeader .row {
   margin: 0 auto;
   max-width: 1440px;
-  min-width: 800px;
-  padding: 0 20px;
+  min-width: 100px;
+  padding: 0 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1383,7 +1391,7 @@ pre {
 .NCHeader .row .navbar-btn-active {
   color: #106ba3 !important;
   box-shadow: 0 0 0 1px rgba(19, 124, 189, 0.15);
-  margin-right: 15px;
+  margin-right: 5px;
 }
 .NCHeader .row .navbar-btn-active:before {
   color: #106ba3 !important;
@@ -1415,24 +1423,19 @@ pre {
 .NCHeader .row .navbar-group-right .NCTopLevelSearch > .pt-input:focus {
   box-shadow: 0 0 0 1px #137cbd, 0 0 0 2px rgba(19, 124, 189, 0.3), inset 0 1px 1px rgba(16, 22, 26, 0.2);
 }
-@media (max-width: 1130px) {
-  .NCHeader .row .navbar-group-left .title {
-    display: none;
-  }
-}
 .NCFooter {
   bottom: 0;
   left: 0;
   position: absolute;
   width: 100%;
-  height: 90px;
-  background-color: inherit;
+  height: 70px;
+  background-color: #7dbcff35;
   text-align: center;
 }
 .NCFooter > div {
   margin: 0 auto;
   max-width: 1440px;
-  min-width: 800px;
+  min-width: 100px;
   margin-top: 5px;
   display: block;
 }
@@ -1457,13 +1460,18 @@ pre {
 .NCPageContent > .container {
   margin: 0 auto;
   max-width: 1440px;
-  min-width: 800px;
-  padding: 45px 0px 90px 0px;
+  min-width: 100px;
+  padding: 45px 0px 70px 0px;
   min-height: 100vh;
 }
 @media screen and (max-height: 600px) {
   .NCPageContent > .container {
     min-height: 600px;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .NCPageContent > .container {
+    max-width: 100%;
   }
 }
 .NCLivenessIndicator .liveness-btn {
@@ -1528,11 +1536,10 @@ pre {
   font-size: 13px;
   color: #5C7080;
   font-weight: 400;
-  padding-left: 10px;
   margin-bottom: 20px;
 }
 .NCEntityDetail {
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 0;
   overflow: hidden;
 }
 .NCEntityDetail .subtitle {
@@ -1603,7 +1610,7 @@ pre {
   color: #f55656;
 }
 .NCExplorerPage {
-  padding: 0 22px 200px 22px;
+  padding: 0 22px 50px 22px;
 }
 .NCExplorerPage .NCExplorerHead .nav-row {
   margin-top: 15px;
@@ -1684,9 +1691,6 @@ pre {
 .NCExplorerPage .NCSectionTabbed {
   margin-top: 20px;
 }
-.NCExplorerPage .NCSectionTabbed .pt-tab-list {
-  padding: 0 10px;
-}
 .nc-hr {
   margin: 29px 0 26px 0;
 }
@@ -1727,6 +1731,12 @@ pre {
 }
 .tx-status .status-text {
   display: inline-block;
+}
+.copy {
+  float: right;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
 }
 .NCGraphZoom {
   fill: none;
@@ -1998,7 +2008,7 @@ pre {
   height: 35px;
 }
 .NCExplorer .NCExplorer-Container .NCExplorer-Content {
-  padding: 30px 30px 190px 280px;
+  padding: 30px 30px 170px 280px;
   display: flex;
   flex-grow: 1;
   transition: padding 0.3s ease-out !important;
@@ -2008,7 +2018,7 @@ pre {
 }
 @media all and (max-width: 1130px) {
   .NCExplorer .NCExplorer-Container .NCExplorer-Content {
-    padding: 30px 30px 190px 30px;
+    padding: 30px 30px 170px 30px;
   }
 }
 .NCTableFlex .table-row {
@@ -2068,6 +2078,26 @@ pre {
 }
 .txn-toEntity {
   width: 130px;
+}
+@media all and (max-width: 1030px) {
+  .txn-hash {
+    width: 30%;
+  }
+  .txn-block {
+    width: 20%;
+  }
+  .txn-age {
+    width: 125px;
+  }
+  .txn-fromEntity {
+    width: 30% px;
+  }
+  .txn-arrow {
+    width: 10px;
+  }
+  .txn-toEntity {
+    width: 30% px;
+  }
 }
 .NCTableTransactionsRT .table-row {
   border-bottom: 1px solid rgba(16, 22, 26, 0.15);
@@ -2253,5 +2283,152 @@ pre {
   }
   .NCTableBlocksRT .txn-entityContainer > div {
     width: 100%;
+  }
+}
+#root {
+  max-width: 100%;
+}
+.show {
+  display: none !important;
+}
+@media all and (max-width: 1030px) {
+  .NCHeader .row .navbar-btn-active span {
+    display: none;
+  }
+  .NCTopLevelSearch .search-bar .pt-input-action .pt-popover-target button span {
+    display: none;
+  }
+  .NCTopLevelSearch {
+    margin: auto;
+  }
+  .NCHeader .row .navbar-group-right .NCTopLevelSearch .search-bar {
+    left: -30px;
+  }
+  .NCKPIGroup {
+    width: 100%;
+    Margin-top: 150px;
+    margin-bottom: -70px;
+  }
+  .NCKPIGroup .group-title {
+    margin: -100px 0 15px 0;
+  }
+  .hide {
+    display: none !important;
+  }
+  .show {
+    display: inline-block !important;
+  }
+  .NCDashboard .NCKPIContainer {
+    display: none !important;
+  }
+  .pt-navbar-divider {
+    display: none !important;
+  }
+  .NCHeader .row {
+    min-width: 300px !important;
+    width: 100%;
+    background-color: #fff;
+  }
+  .pt-large > .pt-tab {
+    font-size: 10px;
+  }
+  .NCFooter > div {
+    min-width: 300px !important;
+  }
+  .NCPageContent > .container {
+    min-width: 300px !important;
+  }
+  .txn-arrow {
+    display: none !important;
+  }
+  span.pt-icon-standard.pt-icon-caret-down.pt-align-right {
+    display: inline !important;
+  }
+}
+.darkMode {
+  background-color: #151515 !important;
+  color: #d1cfcf;
+}
+.darkMode .NCPage {
+  background-color: #000 !important;
+  color: #d1cfcf;
+}
+.darkMode .NCPage.dark-mode {
+  background-color: #000;
+}
+.darkMode .NCHeader .row {
+  background-color: #000;
+}
+.darkMode .NCHeader .row.dark-mode {
+  background-color: #000;
+}
+.darkMode .pt-navbar {
+  background-color: #010101 !important;
+}
+.darkMode .NCKPIGroup {
+  background-color: #222;
+}
+.darkMode .pt-card {
+  background-color: #1d1e1f !important;
+  box-shadow: 0 0 0 1px rgba(243, 246, 247, 0.1), 0 0 0 rgba(16, 22, 26, 0), 0 1px 1px rgba(16, 22, 26, 0.2) !important;
+}
+.darkMode .pt-menu {
+  color: #d1cfcf;
+  background: #333 !important;
+}
+.darkMode .pt-popover .pt-popover-arrow-fill {
+  fill: #333;
+}
+.darkMode .block-card {
+  background-color: #111 !important;
+}
+.darkMode input.pt-input {
+  color: #555;
+  background-color: #ccc;
+}
+.darkMode .NCTableTransactionsRT .header {
+  background-color: #333 !important;
+}
+.darkMode .NCDarkInput {
+  background-color: #333;
+}
+.darkMode .bp-table-column-headers {
+  color: #d1cfcf;
+  background-color: #333;
+}
+.darkMode .NCEntityLabel {
+  color: #d1cfcf;
+  background-color: transparent;
+}
+.darkMode .NCEntityLabel .text {
+  color: #d1cfcf;
+  background-color: transparent;
+}
+.darkMode .block-card .NCEntityLabel .text {
+  color: #d1cfcf;
+  background-color: transparent;
+}
+.darkMode .block-card .NCEntityLabel {
+  background-color: transparent;
+}
+.darkMode .NCTable .bp-table-cell {
+  color: #d1cfcf;
+  background-color: #333;
+}
+.darkMode .desc {
+  color: #d1cfcf;
+}
+.darkMode .NCHeader .row .navbar-btn-active {
+  color: #d1cfcf !important;
+}
+.darkMode .NCFooter {
+  background-color: #333 !important;
+}
+.darkMode .pt-elevation-1 {
+  box-shadow: 0 0 0 1px rgba(243, 246, 247, 0.1), 0 0 0 rgba(16, 22, 26, 0), 0 1px 1px rgba(16, 22, 26, 0.2);
+}
+@media all and (max-width: 1030px) {
+  .darkMode .NCKPIGroup {
+    background-color: #2222220;
   }
 }

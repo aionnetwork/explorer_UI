@@ -8,7 +8,7 @@ export default class NCTimescale extends Component
 {
   render() 
   {
-    const { dateObjArr, timestampArr, format = FORMAT, isMedium=false, disabled } = this.props;
+    const { dateObjArr, timestampArr, format = FORMAT, isMedium=false } = this.props;
 
     //console.log(dateObjArr);
 

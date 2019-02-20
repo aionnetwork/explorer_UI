@@ -34,8 +34,8 @@ class NCKPI extends Component
             {
               (value == null) &&
               <div className="error">
-                <span className="pt-icon-large pt-icon-warning-sign icon"></span>
-                <span className="message">Not Available</span>
+                <span className="pt-icon-large pt-icon-time icon"></span>
+                <span className="message">Loading</span>
               </div>
             }
             {
@@ -47,7 +47,7 @@ class NCKPI extends Component
   }
 }
 
-export default class NCKPIGroup extends Component
+export class NCKPIGroup extends Component
 {
   render() {
 
@@ -73,7 +73,29 @@ export default class NCKPIGroup extends Component
   }
 }
 
+export class NCKPIResponsive extends Component
+{
+  render() {
 
+    let { kpiGroup } = this.props;
+
+    return (
+      <div className="NCKPIGroup">
+        <div className="group-title">{ kpiGroup.title }</div>
+        
+        {
+          kpiGroup.kpiList.map((kpi, i) => 
+          <div key={i}>
+            <p>{kpi.title}</p>
+
+            <b>{kpi.value+" "+kpi.units}</b><br/><hr/>
+          </div>
+          )
+        }
+      </div>
+    );
+  }
+}
 
 
 

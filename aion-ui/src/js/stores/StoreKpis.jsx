@@ -1,6 +1,6 @@
 /* eslint-disable */
 import moment from 'moment';
-import * as mock from 'lib/NCData';
+
 
 export const SetAll = (data) => 
 {
@@ -9,10 +9,17 @@ export const SetAll = (data) =>
     data: data,
   }
 }
+export const getAll = (data) => 
+{
+  return {
+    type: 'KPI_GET_ALL',
+    data: data,
+  }
+}
 
 let initialState_StoreKPIs = 
 {
-  momentUpdated: null,
+  momentUpdated: moment(),
   data: {
     transactionPerSecond: null,
     peakTransactionsPerBlockInLast24hours: null,

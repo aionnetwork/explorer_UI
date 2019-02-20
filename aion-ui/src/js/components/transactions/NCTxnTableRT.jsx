@@ -4,8 +4,8 @@ import moment from 'moment';
 import PageVisibility from 'react-page-visibility';
 
 import { NCEntity } from 'lib/NCEnums';
-import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import NCEntityLabel from 'components/common/NCEntityLabel';
+//import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
 import FlipMove from 'react-flip-move';
 
@@ -13,10 +13,11 @@ class NCTxnTableRTRow extends Component
 {
   render() {
     let { entity } = this.props;
+    let val = entity.value.toString()
     return (
       <div className="table-row body">
-        <div className="column txn-age pt-text-muted">{moment.unix(entity.blockTimestamp).fromNow()} </div>
-        <div className="column txn-block">{entity.value ? nc_numFormatterAionCoin(entity.value, 0, true) : 0}</div>
+        <div className="column txn-age pt-text-muted hide">{moment.unix(entity.blockTimestamp).fromNow()} </div>
+        <div className="column txn-block">{entity.value ? val : 0}</div>
         <div className="column txn-hash growable">
           <NCEntityLabel
             entityType={NCEntity.TXN}
@@ -26,7 +27,7 @@ class NCTxnTableRTRow extends Component
           <div className="column txn-fromEntity growable">
             <NCEntityLabel 
               entityType={NCEntity.ACCOUNT} 
-              entityName={entity.fromAddr}
+              
               entityId={entity.fromAddr}/>
              <span className="pt-icon-large pt-icon-arrow-right arrow-icon"/>
           </div>
@@ -38,7 +39,7 @@ class NCTxnTableRTRow extends Component
               entity.toAddr ?
                 <NCEntityLabel 
                   entityType={NCEntity.ACCOUNT} 
-                  entityName={entity.toAddr}
+                  
                   entityId={entity.toAddr}/>:
                 <strong>Contract Creation</strong>
             }
@@ -61,8 +62,7 @@ export default class NCTxnTableRT extends Component
     }
   }
   handleVisibilityChange = (visibilityState, documentHidden) => {
-    //console.log('visibilityState: ', visibilityState);
-    //console.log('documentHidden: ', documentHidden);
+    
     this.setState({ documentHidden: documentHidden });
   }
 
@@ -80,7 +80,7 @@ export default class NCTxnTableRT extends Component
       <PageVisibility onChange={this.handleVisibilityChange}>
         <div className="NCTableFlex NCTableTransactionsRT">
           <div className="table-row header">
-            <div className="column txn-age">Age</div>
+            <div className="column txn-age hide">Age</div>
             <div className="column txn-block">Value</div>
             <div className="column txn-hash growable">Transaction Hash</div>
             <div className="wrapper txn-entityContainer growable">

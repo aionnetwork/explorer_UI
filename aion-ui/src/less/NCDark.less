@@ -1,0 +1,116 @@
+@dm-text: #ccc;
+@dm-input-text: #555;
+@dm-title: #d1cfcf;
+@dm-background-major:#010101;
+@dm-background-main:#151515;
+@dm-background-minor:#333;
+@dm-background-minor-b:#111;
+
+.darkMode{
+
+			background-color:@dm-background-main !important;
+			color:@dm-title;
+			
+		
+		.NCPage{
+			background-color:#000 !important;
+			color:@dm-title;
+			&.dark-mode{
+		    background-color:#000;
+		  }
+		}
+
+		.NCHeader .row{
+			 background-color:#000;
+			 &.dark-mode{
+		    background-color:#000;
+		  }
+		}
+		.pt-navbar{
+			background-color:@dm-background-major !important;
+		}
+		.NCKPIGroup{
+			background-color:#222;
+		}
+		
+		.pt-card{
+			background-color:#1d1e1f !important;
+			box-shadow: 0 0 0 1px rgba(243, 246, 247, 0.1), 0 0 0 rgba(16, 22, 26, 0), 0 1px 1px rgba(16, 22, 26, 0.2) !important;
+		}
+		.pt-menu{
+			color:@dm-title;
+			background:@dm-background-minor !important;
+		}
+		.pt-popover .pt-popover-arrow-fill{
+			fill:@dm-background-minor
+		}
+		.block-card{
+			background-color:@dm-background-minor-b!important;
+		}
+
+		input.pt-input{
+			color:@dm-input-text;
+			background-color:#ccc;
+		}
+
+		.NCTableTransactionsRT .header{
+			background-color:#333 !important;
+		}
+
+		.NCDarkInput{ background-color:#333;}
+
+		.bp-table-column-headers{
+		color:@dm-title;
+		background-color:@dm-background-minor
+		}
+
+		.bp-table-bottom-container{}
+
+		.NCEntityLabel{
+			color:@dm-title;
+			background-color:transparent;
+		}
+		.NCEntityLabel .text{
+			color:@dm-title;
+			background-color:transparent;
+		}
+		.block-card .NCEntityLabel .text{
+			color:@dm-title;
+			background-color:transparent;
+			
+		}
+		.block-card .NCEntityLabel{
+			
+			background-color:transparent;
+		}
+
+		.NCTable .bp-table-cell{
+		color:@dm-title;
+		background-color:@dm-background-minor;
+			
+		}
+		.desc{
+			color:@dm-title;
+		}
+		.NCHeader .row .navbar-btn-active {
+		    color: @dm-title !important;
+		 }
+		 .NCFooter{
+		 background-color: @dm-background-minor !important;
+		 }
+		 .pt-elevation-1{
+		 	box-shadow: 0 0 0 1px rgba(243, 246, 247, 0.1), 0 0 0 rgba(16, 22, 26, 0), 0 1px 1px rgba(16, 22, 26, 0.2);
+		 }
+
+}
+
+@media all and (max-width: 1030px) {
+	.darkMode{
+
+		.NCKPIGroup{
+			background-color:#2222220;
+		}
+
+	}
+
+}
