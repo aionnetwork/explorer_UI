@@ -168,7 +168,7 @@ export default class NCPagination extends Component
           </span>
         </div>
       {
-        (totalPages > 1) &&
+        (totalPages > 0) &&
         <div className="table-paging">
           {
             (calFilter!==false) &&
