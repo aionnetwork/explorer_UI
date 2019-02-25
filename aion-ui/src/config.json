@@ -1,6 +1,6 @@
 {
   "api": {
-    "base_url": "explorer-staging-api.aion.network",
+    "base_url": "mastery-api.aion.network",
     "https_enabled": true
   },
   "site": {

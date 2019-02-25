@@ -1007,30 +1007,22 @@ export const getTknListTopLevel = (listType, queryStr) => {
 
 export const getTknListPaging = (listType, queryStr, pageNumber, pageSize,start=0, end=0) => {
   store.dispatch(StoreTknList.GetPaging());
-
-  if (network.NCNETWORK_REQUESTS_ENABLED) {
+  
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
       let response = Object.assign({}, store.getState().tknList.response);
       response.page.number = pageNumber;
 
       store.dispatch(StoreTknList.SetPaging(response));
     }, 500);
-  }
-  else {
+  }else {
+
+    
     const ep = network.endpoint.token.list[listType];
     let params = [];
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
-    switch(listType) {
-      case tknListType.ALL: {
-        params = [pageNumber, size,start, end]
-        break;
-      }
-      case tknListType.BY_BLOCK: {
-        params = [nc_trim(queryStr), pageNumber, size]
-        break;
-      }
-     
-    }
+    params = [pageNumber, size];
+    
     network.request(ep, params)
     .then((response) => {
       store.dispatch(StoreTknList.SetPaging(response));
