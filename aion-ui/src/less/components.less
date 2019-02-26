@@ -20,6 +20,8 @@
   }
 }
 
+
+
 .NCLoading
 {
   display: block;
@@ -518,6 +520,20 @@
     }
   }
 
+  .pt-input{
+    width: 40px !important;
+    text-align: center;
+    height: 20px;
+  }
+  .pt-wide-input{
+      .pt-input{
+          width:60px !important;
+      }
+   }
+  .pt-select-input{
+    height: 24px !important;  
+  }
+
   .table-paging 
   {
     float: right;
@@ -562,7 +578,7 @@
 
 .NCTableWrapper 
 {
-  padding: 0 10px;
+  
 }
 
 // ASSUMPTION: TableWrapper always takes up full width of an embedded component
@@ -572,10 +588,10 @@
     width: @container-width-min - 64px;
   }
   @media (min-width: @container-width-min) and (max-width: @container-width-max) {
-    width: ~"calc(100vw - 64px)";
+    width: 100%;
   }
   @media (min-width: @container-width-max) {
-    width: @container-width-max - 64px;
+    width: 100%;
   }
 }
 
@@ -1304,7 +1320,7 @@ pre
     margin: 0 auto;
     max-width: @container-width-max;
     min-width: @container-width-min;
-    padding: 0 20px;
+    padding: 0 15px;
 
     display: flex;
     flex-wrap: wrap;
@@ -1362,7 +1378,7 @@ pre
       
       box-shadow: 0 0 0 1px @muted-blue;
 
-      margin-right: 15px;
+      margin-right: 5px;
     }
 
     .navbar-group-right
@@ -1407,7 +1423,7 @@ pre
     .row {
       .navbar-group-left {
         .title {
-          display: none;
+          
         }
       }
     }
@@ -1424,7 +1440,7 @@ pre
   width: 100%;
   height: @footer-height;
 
-  background-color: inherit;
+  background-color: #7dbcff35;
   text-align: center;
 
   &>div
@@ -1480,6 +1496,11 @@ pre
   @media screen and (max-height: @min-page-height) {
     &>.container {
       min-height: @min-page-height;
+    }
+  }
+  @media screen and (max-width: @container-width-max) {
+    &>.container {
+      max-width: 100%;
     }
   }
 }
@@ -1590,14 +1611,14 @@ pre
     font-size: 13px;
     color: #5C7080;
     font-weight: 400;
-    padding-left: 10px;
+    
     margin-bottom: 20px;
   }
 
 // Entity Details Views
 .NCEntityDetail
 {
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 0;
   overflow: hidden;
 
   .subtitle {
@@ -1704,7 +1725,7 @@ pre
 
 
 .NCExplorerPage {
-  padding: 0 22px 200px 22px;
+  padding: 0 22px 50px 22px;
   .nc-tabular {
 
   }
@@ -1807,7 +1828,7 @@ pre
   .NCSectionTabbed {
     margin-top: 20px;
     .pt-tab-list {
-      padding: 0 10px;
+      
     }
   }
 }
@@ -1859,4 +1880,11 @@ pre
   .status-text {
     display: inline-block;
   }
+}
+
+.copy{
+  float:right;
+  border:0;
+  border-radius:2px;
+  cursor:pointer;
 }

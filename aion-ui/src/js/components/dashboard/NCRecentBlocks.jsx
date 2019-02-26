@@ -3,27 +3,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PageVisibility from 'react-page-visibility';
 
-import { nc_getRandomInt } from 'lib/NCUtility';
+//import { nc_getRandomInt } from 'lib/NCUtility';
 
-import spring, { toString } from 'css-spring';
+import  { toString } from 'css-spring';
 import FlipMove from 'react-flip-move';
 
-import NCPageVisibility from 'components/common/NCPageVisibility';
+//import NCPageVisibility from 'components/common/NCPageVisibility';
 
-import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
+//import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 import NCLoading from 'components/common/NCLoading';
 import NCNonIdealState from 'components/common/NCNonIdealState';
 import NCCardBlock from 'components/dashboard/NCCardBlock';
 
-import { nc_LinkToEntity, NCEntity } from 'lib/NCEnums';
-import NCEntityLabel from 'components/common/NCEntityLabel';
+//import { nc_LinkToEntity, NCEntity } from 'lib/NCEnums';
+//import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import moment from "moment";
 
 const BLOCK_STREAM_ELEMENT_SIZE = 4;
 const DEFAULT_TARGET_BLOCK_TIME = 10;
 
-import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
+//import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 
 class NCRecentBlocks extends Component
 {
@@ -43,8 +43,14 @@ class NCRecentBlocks extends Component
       to:   { transform: 'translate3d(0px, 145px, 0px)', opacity: 0 }
     };
 
+
     this.currentBlockNumber = -1;
     this.targetBlockTime = DEFAULT_TARGET_BLOCK_TIME; // in seconds
+
+    this.currentBlockNumber = (this.props.blkRt.data != null &&
+                               Array.isArray(this.props.blkRt.data) &&
+                               this.props.blkRt.data.length > 0)
+                              ? this.props.blkRt.data[0] : -1;
 
     this.state = {
       nextBlockTimeRemaining: DEFAULT_TARGET_BLOCK_TIME, // in seconds
@@ -72,16 +78,14 @@ class NCRecentBlocks extends Component
       let latestBlockNumber = latestBlock.blockNumber;
 
       if (latestBlockNumber == null) return;
-      
-      if (this.currentBlockNumber != latestBlockNumber) 
+
+      if (this.currentBlockNumber != latestBlockNumber)
       {
-        // update the clipped list
-        // update the block number
-        // reset the counter -> cause a render call
+        
         this.clippedList = rtBlockList.slice(0, BLOCK_STREAM_ELEMENT_SIZE);
 
         this.currentBlockNumber = latestBlockNumber;
-        
+
         this.setState((prevState, props) => ({
           nextBlockTimeRemaining: this.targetBlockTime,
         }));
@@ -89,22 +93,21 @@ class NCRecentBlocks extends Component
     }, 250);
   }
 
-  componentWillUnmount() 
+  componentWillUnmount()
   {
     clearInterval(this.t_nextBlockTime);
     clearInterval(this.t_refreshBlockList);
   }
 
   handleVisibilityChange = (visibilityState, documentHidden) => {
-    //console.log('visibilityState: ', visibilityState);
-    //console.log('documentHidden: ', documentHidden);
+    
     this.setState({ documentHidden: documentHidden });
   }
-  
+
   render() {
     this.targetBlockTime = this.props.kpi.data.targetBlockTime != null ? this.props.kpi.data.targetBlockTime : DEFAULT_TARGET_BLOCK_TIME;
     const momentUpdated = this.props.blkRt.momentUpdated;
-
+    
     if (momentUpdated == null || this.clippedList == null) {
       return (
         <NCLoading title={"Loading Block Stream"} marginTop={100} marginBottom={0}/>
@@ -122,13 +125,15 @@ class NCRecentBlocks extends Component
     }
 
     const cards = this.clippedList.map((block, i) => (
-      <NCCardBlock key={block.blockNumber} block={block}/>
+      <NCCardBlock key={block.blockNumber} block={block} darkMode={this.props.darkMode}/>
     ));
 
     const nextTimeRemaining = this.state.nextBlockTimeRemaining;
 
-    let nextBlockNumber = (this.clippedList[0] != null && this.clippedList[0].blockNumber != null) ? 
+    let nextBlockNumber = (this.clippedList[0] != null && this.clippedList[0].blockNumber != null) ?
                           this.clippedList[0].blockNumber + 1 : "Undefined";
+
+   
 
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>
@@ -136,7 +141,7 @@ class NCRecentBlocks extends Component
           <span className="block-bridge"/>
           <span className="block-bridged-dotted"/>
           <div className="NCCardBlock next-block-container">
-            <img  className="block-parent" src="img/block/block-blue.svg"/>
+            <img  className="block-parent" src={(this.props.darkMode.data) ? "img/block/dark-block-indigo.svg" : "img/block/block-indigo.svg"}/>
             <div className="block-card">
               <div className="block-number">
                 <span className="subtitle pt-text-muted">Block #</span>
@@ -175,7 +180,6 @@ export default connect((state) => {
   return ({
     blkRt: state.blkRt,
     kpi: state.kpi,
+    darkMode: state.dark,
   })
 })(NCRecentBlocks);
-
-

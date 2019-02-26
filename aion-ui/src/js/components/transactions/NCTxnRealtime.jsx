@@ -3,15 +3,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import moment from 'moment';
-import { Spinner } from "@blueprintjs/core";
+//import { Spinner } from "@blueprintjs/core";
 
 import NCTxnTableRT from 'components/transactions/NCTxnTableRT';
 
-import NCNonIdealState from 'components/common/NCNonIdealState';
-import NCLoading from 'components/common/NCLoading';
+//import NCNonIdealState from 'components/common/NCNonIdealState';
+//import NCLoading from 'components/common/NCLoading';
 import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 
 import NCExplorerSection from 'components/common/NCExplorerSection';
+import * as MSG from 'lib/NCTerms';
 
 const RT_TRANSACTIONS_LIMIT = 10;
 
@@ -37,14 +38,14 @@ class NCTxnRealtime extends Component
 
           content={<NCTxnTableRT entities={txnList}/>}
 
-          loadingStr="Loading Transaction Stream"
-          invalidDataStr="Server provided invalid response."
-          emptyDataStr="No transactions in the last 32 blocks."
+          loadingStr={MSG.Transaction.LOADING}
+          invalidDataStr={MSG.Transaction.INVALID_DATA}
+          emptyDataStr= {MSG.Transaction.EMPTY_DATA_LIST}
 
           marginTop={100} 
           
-          invalidDataTitle="No Recent Transactions"
-          emptyDataTitle="No Recent Transactions" 
+          invalidDataTitle={MSG.Transaction.INVALID_DATA_LIST}
+          emptyDataTitle={MSG.Transaction.EMPTY_DATA_TITLE} 
         />
       </NCComponentLazyLoad>
     );

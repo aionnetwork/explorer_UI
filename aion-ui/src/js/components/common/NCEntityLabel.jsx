@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+//import { Link, hashHistory } from 'react-router';
 
 import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 import { nc_trim, nc_GetEntityIcon, nc_LinkToEntity } from 'lib/NCUtility';
@@ -52,6 +52,7 @@ export default class NCEntityLabel extends Component
 
     if (!linkActive)
       return;    
+    //console.log(JSON.stringify(this.props));
 
     nc_LinkToEntity(this.props.entityType, this.props.entityId);
   }
@@ -74,6 +75,7 @@ export default class NCEntityLabel extends Component
       if (
         entityType == NCEntity.USER || 
         entityType == NCEntity.SC || 
+        entityType == NCEntity.CNTR ||
         entityType == NCEntity.TXN || 
         entityType == NCEntity.NODE || 
         entityType == NCEntity.ACCOUNT)
@@ -82,10 +84,22 @@ export default class NCEntityLabel extends Component
       }
     }
 
+         
+
     return( 
+     linkActive ?
+        <a 
+          className={"NCEntityLabel " + (className != null ? className : "") + (linkActive ? " active" : "")}
+          href={'#'+NCEntityInfo[this.props.entityType].absoluteUrl+''+this.props.entityId}
+           >
+          <span className={"icon pt-icon-standard " + this.iconName}/>
+          <span className="text pt-text-overflow-ellipsis ">{ displayName }</span>
+        </a>
+        :
         <span 
           className={"NCEntityLabel " + (className != null ? className : "") + (linkActive ? " active" : "")}
-          onClick={ (e) => this.linkToEntity(e, linkActive)}>
+          href={'#'+NCEntityInfo[this.props.entityType].absoluteUrl+''+this.props.entityId}
+           >
           <span className={"icon pt-icon-standard " + this.iconName}/>
           <span className="text pt-text-overflow-ellipsis ">{ displayName }</span>
         </span>

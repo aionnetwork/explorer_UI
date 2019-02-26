@@ -1,6 +1,5 @@
 /* eslint-disable */
 import moment from 'moment';
-import * as mock from 'lib/NCData';
 
 export const SetAll = (transactionList) => 
 {
@@ -13,7 +12,7 @@ export const SetAll = (transactionList) =>
 let initialState_StoreRtTransactions = 
 {
   momentUpdated: null,
-  data: {},
+  data: [],
 }
 
 export function reducer_txnRt (state = initialState_StoreRtTransactions, action) 
@@ -28,10 +27,10 @@ export function reducer_txnRt (state = initialState_StoreRtTransactions, action)
       if (!Array.isArray(data)) return _state;
 
       //sanitize block data coming from different sources
-      for (let i=0; i < data.length; i++) 
+      /*for (let i=0; i < data.length; i++) 
       {
         if (data[i].toAddr == null && data[i].to != null)
-          data[i].toAddr = data[i].to;  
+          data[i].toAddr = data[i].to;   
 
         if (data[i].fromAddr == null && data[i].from != null)
           data[i].fromAddr = data[i].from;
@@ -41,7 +40,7 @@ export function reducer_txnRt (state = initialState_StoreRtTransactions, action)
 
         if (data[i].transactionHash == null && data[i].hash != null)
           data[i].transactionHash = data[i].hash;
-      }
+      }*/
 
 
       _state.data = data;

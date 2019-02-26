@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
+//import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 import NCNonIdealState from 'components/common/NCNonIdealState';
 import NCLoading from 'components/common/NCLoading';
 
@@ -15,7 +15,10 @@ export default class NCExplorerSection extends Component
       isDataEmpty, 
       
       subtitle,
-      content, 
+      content,
+
+      filter=false, 
+      onCallBack,
 
       loadingStr, 
       invalidDataStr, 
@@ -50,6 +53,8 @@ export default class NCExplorerSection extends Component
       {
         (!isLoading && isDataValid && isDataEmpty) &&
         <NCNonIdealState
+          filter={filter}
+          onCallBack={onCallBack}
           paddingTop={marginTop}
           paddingBottom={marginBottom}
           icon={"pt-icon-offline"}

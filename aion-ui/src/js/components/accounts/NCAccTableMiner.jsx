@@ -4,19 +4,30 @@ import moment from 'moment';
 import { Cell } from "@blueprintjs/table"
 
 import NCEntityLabel from 'components/common/NCEntityLabel';
-import NCPagination from 'components/common/NCPagination';
+//import NCPagination from 'components/common/NCPagination';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
-import { NCEntity } from 'lib/NCEnums';
+import { NCEntity,NCEntityInfo } from 'lib/NCEnums';
+//import { ga_key } from 'lib/NCData';
 import { nc_numFormatter } from 'lib/NCUtility';
-import { PAGE_SIZE } from 'network/NCNetworkRequests'
+//import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
-import NCLink from 'components/common/NCLink';
+//import NCLink from 'components/common/NCLink';
+
+import appConfig from '../../../config.json';
+
+import ReactGA from 'react-ga';
+ReactGA.initialize(appConfig.ga_key);
 
 export default class NCAccTableMiner extends Component 
 {
   constructor(props) {
     super(props);
+
+    ReactGA.event({
+      category: 'Accounts',
+      action: 'Viewed Miner'
+    }); 
 
     this.columnDescriptor = 
     [
@@ -53,13 +64,13 @@ export default class NCAccTableMiner extends Component
     {
       tableContent[i] = [];
       tableContent[i][0] = 
-        <Cell>
+        <Cell copy={entity[0]} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+entity[0]} >
           <NCEntityLabel 
             entityType={NCEntity.ACCOUNT} 
             entityId={entity[0]}/> 
         </Cell>;
-      tableContent[i][1] = <Cell>{ nc_numFormatter(entity[1], 2) }</Cell>;
-      tableContent[i][2] = <Cell>{ nc_numFormatter(entity[2], 2)+"%" }</Cell>;        
+      tableContent[i][1] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
+      tableContent[i][2] = <Cell copy={ nc_numFormatter(entity[2], 1)+"%" } >{ nc_numFormatter(entity[2], 1)+"%" }</Cell>;        
     });
 
     return tableContent;

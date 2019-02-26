@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
  "api": {
    "base_url": "mastery-api.aiondev.network/aion",
    "https_enabled": true
@@ -14,4 +15,51 @@
    }
  ],
  "ga_key":"UA-121993888-1"
+=======
+  "api": {
+    "base_url": "explorer-staging-api.aion.network",
+    "https_enabled": true
+  },
+  "site": {
+    "base_url": "explorer-staging.aion.network",
+    "https_enabled": true
+  },
+  "network_list":{ 
+  "staging": [
+    {
+      "name": "Staging",
+      "url": ""
+    },
+    {
+      "name": "Mainnet Kilimanjaro",
+      "url": "https://mainnet.aion.network"
+    },
+    {
+      "name": "Mastery Testnet",
+      "url": "https://mastery.aion.network"
+    }
+  ],
+  "mastery": [
+    {
+      "name": "Mastery",
+      "url": ""
+    },
+    {
+      "name": "Mainnet Kilimanjaro",
+      "url": "https://mainnet.aion.network"
+    }
+  ],
+  "mainnet": [
+    {
+      "name": "Mainnet",
+      "url": ""
+    },
+    {
+      "name": "Mastery Testnet",
+      "url": "https://mastery.aion.network"
+    }
+  ]},
+
+  "ga_key":"UA-127100301-2"
+>>>>>>> 9732bfa7fd3abed240735f3293c7cbf2b18c8af5
 }

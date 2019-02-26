@@ -13,15 +13,15 @@ import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 
-import * as StoreAccList from 'stores/StoreAccList';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
+import * as MSG from 'lib/NCTerms';
+import { nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
 
-import { accListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
 
 class NCAccList extends Component
-{
+{ 
+
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
   }
@@ -98,16 +98,16 @@ class NCAccList extends Component
     const inboundTxListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing recent accounts which received transactions, over last 10,000 transactions.</div>
+        <div className="NCPageBreakerSubtitle">{MSG.Transaction.DATA_POLICY_ACC_IN}</div>
       }
 
       isLoading={false}
       isDataValid={isInboundTxListValid}
       isDataEmpty={isInboundTxListEmpty} 
       
-      loadingStr={"Loading Accounts List"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={"No inbound account activity in last 24 hours"}
+      loadingStr={MSG.Account.LOADING_LIST}
+      invalidDataStr={MSG.Account.INVALID_DATA} 
+      emptyDataStr={MSG.Transaction.DATA_POLICY_ACC_IN_EMPTY}
       isToplevelSection={false}
       
       content={
@@ -123,16 +123,16 @@ class NCAccList extends Component
     const outboundTxListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing recent accounts which sent transactions, over last 10,000 transactions.</div>
+        <div className="NCPageBreakerSubtitle">{MSG.Transaction.DATA_POLICY_ACC_OUT}</div>
       }
 
       isLoading={false}
       isDataValid={isOutboundTxListValid}
       isDataEmpty={isOutboundTxListEmpty} 
       
-      loadingStr={"Loading Accounts List"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={"No outbound account activity in last 24 hours"}
+      loadingStr={MSG.Account.LOADING_LIST}
+      invalidDataStr={MSG.Account.INVALID_DATA}  
+      emptyDataStr={MSG.Transaction.DATA_POLICY_ACC_OUT_EMPTY}
       isToplevelSection={false}
       
       content={

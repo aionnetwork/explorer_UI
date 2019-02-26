@@ -6,12 +6,12 @@ import NCEntityLabel from 'components/common/NCEntityLabel';
 import NCLink from 'components/common/NCLink';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterACSensitive, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_numPrettify, nc_isStrEmpty, nc_numFormatter, nc_numFormatterACSensitive, nc_numFormatterBytes, nc_hexPrefix } from 'lib/NCUtility';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
-import {BigNumber} from 'bignumber.js';
+//import {BigNumber} from 'bignumber.js';
 
 export default class NCBlkDetail extends Component
 {
@@ -22,7 +22,7 @@ export default class NCBlkDetail extends Component
     [
       {
         field: "Time Proposed",
-        value: moment.unix(entity.blockTimestamp).format('LLLL')
+        value: moment.unix(entity.blockTimestamp).format('MMM D YYYY, hh:mm:ss a')
       },
       {
         field: "Block Number",
@@ -77,11 +77,11 @@ export default class NCBlkDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Difficulty",
-        value: entity.difficulty ? BigNumber(String(entity.difficulty), 16).toString(10) : EMPTY_STR,
+        value: entity.difficulty ? nc_numPrettify(entity.difficulty) : EMPTY_STR,
       },
       {
         field: "Total Difficulty",
-        value: entity.totalDifficulty ? BigNumber(String(entity.totalDifficulty), 16).toString(10) : EMPTY_STR,
+        value: entity.totalDifficulty ? nc_numPrettify(entity.totalDifficulty) : EMPTY_STR,
       },
       {
         field: "Nonce",
@@ -89,15 +89,15 @@ export default class NCBlkDetail extends Component
       },
       {
         field: "Block Reward",
-        value: entity.blockReward != null ? <span className="strong">
+        value: entity.blockReward != null ? <span className="">
           {nc_numFormatterACSensitive(entity.blockReward, null) + " AION"}
           <span className="subtitle">{"(does not include transaction-fee payouts)"}</span>
         </span> : EMPTY_STR,
       },
       {
         field: "NRG Reward",
-        value: entity.nrgReward != null ? <span className="strong">
-          {nc_numFormatterACSensitive(entity.nrgReward, null, true) + " AION"}
+        value: entity.nrgReward != null ? <span className="">
+          {nc_numFormatterACSensitive(entity.nrgReward, null, false) + " AION"}
           <span className="subtitle">{"(transaction-fee payout for included transactions, minus own transactions)"}</span>
         </span> : EMPTY_STR,
       },

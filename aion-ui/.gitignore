@@ -6,6 +6,14 @@ Thumbs.db
 node_modules/
 .iml
 
+.env
+
+
+
+archive/
 build/
+<<<<<<< HEAD
 build_archive/
 archive/
+=======
+>>>>>>> 9732bfa7fd3abed240735f3293c7cbf2b18c8af5

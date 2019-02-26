@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import { NCEntity } from 'lib/NCEnums';
-import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntityLabel';
+import NCEntityLabel from 'components/common/NCEntityLabel';
 import NCEntityDetail from 'components/common/NCEntityDetail';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterAmp, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
-
+import { nc_decimalPrettify, nc_numFormatter, nc_numFormatterAmp } from 'lib/NCUtility';
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 
@@ -15,6 +15,7 @@ export default class NCTxnDetail extends Component
 {
   constructor(props) {
     super(props);
+    this.cpmessage = "";
   }
 
   parseTxnLog = (txnLog) => {
@@ -51,17 +52,41 @@ export default class NCTxnDetail extends Component
     return result;
   }
 
+  copyNotice = () => {
+    this.cpmessage = "copied";
+    setTimeout(function(){ this.cpmessage = ""; }, 3000);
+  }
+
   render() {
     let { entity } = this.props;
 
     let parsedTxnLog = this.parseTxnLog(entity.transactionLog);
     let parsedInputData = this.parseInputData(entity.data);
+    
+    let value = nc_decimalPrettify(entity.value);
+
+    let unit = entity.tokenSymbol == null? "Aion" : entity.tokenSymbol;
 
     let desc = 
     [
       {
         field: "Time Sealed",
         value: moment.unix(entity.blockTimestamp).format('LLLL'),
+      },
+      {
+        field: entity.tokenSymbol == null? "Coin" : "Token",
+        value: 
+                  entity.tokenSymbol == null? 
+                  <NCEntityLabel
+                  entityType={NCEntity.TKN}
+                  entityId="AION (native)"
+                  linkActive={false}/>
+                  :
+                  <NCEntityLabel
+                  entityType={NCEntity.TKN}
+                  entityId={entity.tokenName}
+                  linkActive={false}/>
+              
       },
       {
         field: "Transaction Hash",
@@ -79,7 +104,7 @@ export default class NCTxnDetail extends Component
       // ---------------------------------------------------------------
       {
         field: "Value",
-        value: entity.value == null ? EMPTY_STR : <span className="strong">{nc_numFormatterACSensitive(entity.value, null, true) + " AION"}</span>,
+        value: entity.value == null ? EMPTY_STR : <span className="">{value + " " + unit}</span>,
       },
       {
         field: "Nrg Price",
@@ -128,19 +153,47 @@ export default class NCTxnDetail extends Component
                 <NCEntityLabel 
                   entityType={NCEntity.ACCOUNT} 
                   entityId={entity.toAddr}/> :
+                entity.contractAddr ?
+                <NCEntityLabel 
+                  entityType={NCEntity.CNTR} 
+                  entityId={entity.contractAddr}/> :
                 "Contract Creation",
       },
+       
       // ---------------------------------------------------------------
       {
         field: "Txn Logs",
-        value: parsedTxnLog ? <pre className={"nc-resizable"}>{ parsedTxnLog }</pre> : "No Transaction Logs",
+        value: parsedTxnLog ? 
+        <pre className={"nc-resizable"}>
+          {this.cpmessage}
+          <CopyToClipboard text={parsedTxnLog}
+          onCopy={() => this.setState({copied: true})}>
+          <button className="copy">Copy</button>
+          </CopyToClipboard>
+          { parsedTxnLog }
+        </pre> 
+        : 
+        "No Transaction Logs",
       },
       {
         field: "Input Data",
         value: parsedInputData ? 
                 (entity.toAddr ? 
-                  <pre className={"nc-resizable"}>{ parsedInputData }</pre> : 
-                  <pre className={"nc-resizable"}>{ entity.data }</pre>
+                  <pre className={"nc-resizable"}>
+                  <CopyToClipboard text={parsedInputData}
+                    onCopy={() => this.setState({copied: true})}>
+                    <button className="copy">Copy</button>
+                    </CopyToClipboard>
+                  { parsedInputData }
+                  </pre> 
+                  : 
+                  <pre className={"nc-resizable"}>
+                  <CopyToClipboard text={entity.data}
+                   onCopy={() => this.setState({copied: true})}>
+                  <button className="copy">Copy</button>
+                  </CopyToClipboard>
+                  { entity.data }
+                  </pre>
                 ):
                 "No Input Data",
       },

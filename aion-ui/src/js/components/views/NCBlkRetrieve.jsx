@@ -1,9 +1,10 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import moment from 'moment';
 
-import { Tab2, Tabs2 } from "@blueprintjs/core";
+import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
 
 import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCBlkDetail from 'components/blocks/NCBlkDetail';
@@ -11,16 +12,21 @@ import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 
-import * as StoreBlkRetrieve from 'stores/StoreBlkRetrieve';
+//import * as StoreBlkRetrieve from 'stores/StoreBlkRetrieve';
 
-
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
+import * as MSG from 'lib/NCTerms';
+import { nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 class NCBlkRetrieve extends Component
 {
   constructor(props) {
     super(props);
+  }
+
+  submitQuery(num){
+
+      nc_LinkToEntity(this.props.blkRetrieve.response.blk, this.props.params.blkId);
   }
 
   componentWillMount() {
@@ -45,8 +51,7 @@ class NCBlkRetrieve extends Component
   }
 
   requestPagingTxnList = (pageNumber) => {
-    //const queryStr = this.props.blkRetrieve.queryStr;
-    //network.getBlkRetrievePagingTxnList(queryStr, pageNumber);
+     //network.getBlkRetrievePagingTxnList(queryStr, pageNumber);
   }
 
   render() {
@@ -59,15 +64,25 @@ class NCBlkRetrieve extends Component
     const blkObj = (store.response) ? store.response.blk : null;
     const txnList = (store.response) ? store.response.txn : null;
 
-    console.log(blkObj);
+    
 
     let isBlkValid = nc_isObjectValid(blkObj);
     let isBlkEmpty = nc_isObjectEmpty(blkObj, isBlkValid);
 
     let isTxnListValid = nc_isListValid(txnList);
     let isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
+    
+    let prev = null;
+    let next = null;
 
-    const blk = isBlkEmpty ? {} : blkObj.content[0]; 
+    if(blkObj){
+        
+        let block = blkObj.content[0]['blockNumber'];
+        prev = parseInt(block)-1;
+        next = parseInt(block)+1;
+    }
+
+    const blk = isBlkEmpty ? {} : (blkObj) ? blkObj.content[0]:{};
 
     const breadcrumbs = [
       {
@@ -105,6 +120,7 @@ class NCBlkRetrieve extends Component
         }
       marginTop={40}
     />
+    
 
     const page =
       <div> 
@@ -113,7 +129,15 @@ class NCBlkRetrieve extends Component
           breadcrumbs={breadcrumbs}
           title={"Block"}
           subtitle={desc}
+
+
         />  
+
+        <Button onClick={() => {hashHistory.push('/block/' + prev);}} className = "pt-button pt-minimal" iconName="arrow-left" text="Previous block" />
+        <Button onClick={() => {hashHistory.push('/block/' + next);}} className = "pt-button pt-minimal pull-right" rightIconName="arrow-right"  text="Next block" />
+        
+        <br/><br/>
+
         <NCBlkDetail entity={blk}/>
         <hr className="nc-hr"/>
         {
@@ -127,15 +151,17 @@ class NCBlkRetrieve extends Component
         
       </div>;
 
+      
+
     return (
       <NCExplorerPage
         isLoading={isLoadingTopLevel}
         isDataValid={isBlkValid} 
         isDataEmpty={isBlkEmpty}
         
-        loadingStr={"Loading Block Details"}
-        invalidDataStr={"Server error. Block structure invalid."}
-        emptyDataStr={"No block found for descriptor: " + desc + "."}
+        loadingStr={MSG.Block.LOADING}
+        invalidDataStr={MSG.Block.INVALID_DATA}
+        emptyDataStr={MSG.Block.EMPTY_DATA + desc + "."}
         
         page={page}/>
     );

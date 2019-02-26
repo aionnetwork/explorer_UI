@@ -7,8 +7,7 @@ import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 
-import * as StoreBlkList from 'stores/StoreBlkList';
-
+import * as MSG from 'lib/NCTerms';
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty } from 'lib/NCUtility';
 
 import { blkListType } from 'lib/NCEnums';
@@ -36,20 +35,16 @@ class NCBlkList extends Component
   requestTopLevel = () => {
     let listType = blkListType.ALL;
     let queryStr = "";
-    /*
-    let query = this.props.location.query; 
-    if (query && query.account) {
-      listType = blkListType.BY_ACCOUNT;
-      queryStr = query.account;
-    }*/
+   
 
     network.getBlkListTopLevel(listType, queryStr);
   }
-
-  requestPaging = (pageNumber) => {
+  
+  requestPaging = (pageNumber,pageSize, start, end) => {
     const listType = this.props.blkList.listType;
     const queryStr = this.props.blkList.queryStr;
-    network.getBlkListPaging(listType, queryStr, pageNumber);
+    
+    network.getBlkListPaging(listType, queryStr, pageNumber,pageSize, start, end);
   }
 
   render() {
@@ -97,11 +92,9 @@ class NCBlkList extends Component
         isDataValid={isDataValid} 
         isDataEmpty={isDataEmpty}
         
-        loadingStr={"Loading Block Data"}
-        invalidDataStr={"Server provided an invalid response. Please try again."}
-        emptyDataStr={(listType == blkListType.ALL) ? 
-                "No blocks found. Blockchain server loading blocks." : 
-                "0 results found for account " + store.queryStr + "."}
+        loadingStr={MSG.Block.LOADING_LIST}
+        invalidDataStr={MSG.Block.INVALID_DATA_LIST}
+        emptyDataStr={MSG.Block.EMPTY_DATA_LIST}
         
         page={page}
         marginTop={100}/>

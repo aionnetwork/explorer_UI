@@ -1,12 +1,17 @@
-/* eslint-disable */
+
 import React, { Component } from 'react';
+import { hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
+import { Position, Popover, Tab2, Tabs2, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
+
 
 import NCBlkTable from 'components/blocks/NCBlkTable';
+//import NCTxnTable from 'components/transactions/NCTxnTable';
 import NCTxnTableOwn from 'components/transactions/NCTxnTableOwn';
+import NCTxnTableOwnToken from 'components/transactions/NCTxnTableOwnToken';
+import NCTxnTableOwnTransfer from 'components/transactions/NCTxnTableOwnTransfer';
 
 import NCAccDetail from 'components/accounts/NCAccDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
@@ -14,15 +19,25 @@ import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 import NCNonIdealState from 'components/common/NCNonIdealState';
 
-import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
+import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
+import * as MSG from 'lib/NCTerms';
+
+import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty } from 'lib/NCUtility';
+
 import * as network from 'network/NCNetworkRequests';
 
 class NCAccRetrieve extends Component
 {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isFetching: false,
+      queryStr: '',
+      token:null,
+      entity: NCEntity.ACCOUNT
+    } 
   }
 
   componentWillMount() {
@@ -43,21 +58,131 @@ class NCAccRetrieve extends Component
   }
 
   requestTopLevel = () => {
-    network.getAccRetrieveTopLevel(this.props.params.accId);
+    
+    network.getAccRetrieveTopLevel(this.props.params.accId,this.props.params.tknId);
   }
 
-  requestPagingTxnList = (pageNumber) => {
+  requestPagingTxnList = (pageNumber,pageSize,start,end) => {
     const queryStr = this.props.accRetrieve.queryStr;
-    network.getAccRetrievePagingTxnList(queryStr, pageNumber);
+
+    network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
   }
 
-  requestPagingBlkList = (pageNumber) => {
+  requestPagingTrnList = (pageNumber,pageSize,start,end) => {
     const queryStr = this.props.accRetrieve.queryStr;
-    network.getAccRetrievePagingBlkList(queryStr, pageNumber);
+
+    network.getAccRetrievePagingTrnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
+  }
+
+  requestDownload = (type, data) => {
+    
+    network.RetrieveDownload(type, data);
+  }
+
+  requestPagingBlkList = (pageNumber, pageSize, start=0, end=0) => {
+    const queryStr = this.props.accRetrieve.queryStr;
+    network.getAccRetrievePagingBlkList(queryStr, pageNumber, pageSize, start, end);
+  }
+
+  getTokenList = () => {
+    const list = this.props.accRetrieve.tokens;
+    return list;
+  }
+
+  changeToken = (queryStr, tkn) => {
+    if (!nc_isStrEmpty(queryStr)&&!nc_isStrEmpty(tkn))
+    {
+      
+
+      let token = [];
+      token.hash = tkn;
+      token.value = "token";//tkn;
+      
+      this.setState({
+        queryStr: '', token: token.hash
+      }, () => {
+       
+       hashHistory.push('/account/'+this.props.params.accId+'/'+token.hash);
+       network.getAccRetrieveTopLevel(this.props.params.accId,token.hash);
+       
+      });
+    } else if (!nc_isStrEmpty(queryStr)){
+
+
+      this.setState({
+        queryStr: ''
+      }, () => {
+        
+        hashHistory.push('/account/'+this.props.params.accId);
+        network.getAccRetrieveTopLevel(this.props.params.accId);
+       
+      });
+
+    }
+    
+  }
+
+  
+
+  renderTokenMenu = (tokenList) => {
+   let menuItemList = [];
+   if(Array.isArray(tokenList) && tokenList[0] && tokenList.length > 0) {
+      
+      menuItemList.push(
+              <MenuItem
+                key = {tokenList.length}
+                className = "nav-option"
+                iconName = {NCEntityInfo[NCEntity.TKN].icon}
+                onClick={()=>this.changeToken(this.props.accRetrieve.queryStr)}
+                text = "Aion (Default)"
+                value = {this.props.accRetrieve.queryStr}
+              />
+              );
+      //console.log(tokenList.length+1);
+      tokenList.forEach((t, i) => {
+        if (i >= 0) {
+          if (t.name || t.symbol) {
+            //console.log(i+" "+t.name);
+            menuItemList.push(
+              <MenuItem
+                key= {i}
+                className="nav-option"
+                iconName={NCEntityInfo[NCEntity.TKN].icon}
+                onClick={()=>this.changeToken(this.props.accRetrieve.queryStr,t.contractAddr)}
+                text={t.name+"("+t.symbol+")"}
+                value={t.contractAddr}
+              />
+              );
+          }
+        }
+      });
+    }else{
+      menuItemList.push(
+              <MenuItem
+                key = "0"
+                className = "nav-option"
+                iconName = {NCEntityInfo[NCEntity.TKN].icon}
+               
+                text = "Aion (Default)"
+                value = {this.props.accRetrieve.queryStr}
+              />
+              );
+    }
+
+    return (
+      <Menu className="NCNavMenu">         
+        
+        {menuItemList}
+      </Menu>
+    );
   }
 
   render() {
+
+    
     const store = this.props.accRetrieve;
+    
+    const tokens = (store.response && store.response.acc.data && store.response.acc.data.content && store.response.acc.data.content[0]) ? store.response.acc.data.content[0].tokens : [];
     
     const isWeb3 = (store.response) ? store.response.web3 : false;
 
@@ -65,10 +190,16 @@ class NCAccRetrieve extends Component
     const isTxnListFirstLoad = (store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
     const isBlkListFirstLoad = (store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
 
+    /*This section is for transfers table. This feature was added to accomodate for internal transfers made on tokens.*/
+    const trnList = (store.response && store.response.trn) ? store.response.trn.data : null;
+    const isTrnListValid = nc_isListValid(trnList);
+    const isTrnListEmpty = nc_isListEmpty(trnList, isTrnListValid);
+    /*End*/
+
     const accObj = (store.response && store.response.acc) ? store.response.acc.data : null;
     const txnList = (store.response && store.response.txn) ? store.response.txn.data : null;
     const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
-
+    
     const isAccValid = nc_isObjectValid(accObj);
     const isAccEmpty = nc_isObjectEmpty(accObj, isAccValid);
 
@@ -78,7 +209,7 @@ class NCAccRetrieve extends Component
     const isBlkListValid = nc_isListValid(blkList);
     const isBlkListEmpty = nc_isListEmpty(blkList, isBlkListValid);
 
-    const acc = isAccEmpty ? {} : accObj.content[0];
+    const acc = isAccEmpty ? {} : (accObj) ? accObj.content[0] : {};
     
     const breadcrumbs = [
       {
@@ -96,7 +227,38 @@ class NCAccRetrieve extends Component
     ];
 
     const desc = nc_hexPrefix(store.queryStr);
+
     
+    const tokenList =  <div className="token-list hide">
+        <span className="title">Token balances:</span><Popover
+                content={this.renderTokenMenu(tokens)}
+                interactionKind={PopoverInteractionKind.CLICK}
+                position={Position.BOTTOM}>
+                <Button 
+                  className="navbar-btn-active pt-button pt-minimal"
+                  iconName="pt-icon-application"
+                  rightIconName="pt-icon-caret-down"
+                  text= {acc.tokenName  ? acc.tokenName  : "Aion (Default)"}
+
+                />          
+        </Popover>
+      </div>;
+
+      const tokenListMobile =  <div className="token-list show">
+        <span className="title">Token balances:</span><Popover
+                content={this.renderTokenMenu(tokens)}
+                interactionKind={PopoverInteractionKind.CLICK}
+                position={Position.BOTTOM}>
+                <Button 
+                  className="navbar-btn-active pt-button pt-minimal"
+                  iconName="pt-icon-application"
+                  rightIconName="pt-icon-caret-down"
+                  text= {acc.tokenName  ? acc.tokenName  : "Aion (Default)"}
+
+                />          
+        </Popover>
+      </div>
+
     const accBalanceSection = <NCExplorerSection 
       className={""}
 
@@ -104,47 +266,70 @@ class NCAccRetrieve extends Component
       isDataValid={isAccValid}
       isDataEmpty={isAccEmpty} 
 
-      emptyDataTitle={"Account Not Found"}
-      invalidDataTitle={"Account Service Unavailable"}
+
+      emptyDataTitle={MSG.Account.EMPTY_DATA_TITLE}
+      invalidDataTitle={MSG.Account.INVALID_DATA}
       
-      loadingStr={"Loading Account"}
-      invalidDataStr={"Account Service Unavailable. Please try again."} 
-      emptyDataStr={"No Data Available for Account: "+desc}
+      loadingStr={MSG.Account.LOADING}
+      invalidDataStr={MSG.Account.INVALID_DATA} 
+      emptyDataStr={MSG.Account.EMPTY_DATA+desc}
       marginTop={20}
       marginBottom={30}
 
-      content={ <NCAccDetail entity={acc}/> }
-    />
+      subtitle={tokenList}
 
-    const txnListSection = <NCExplorerSection 
+      content={ <NCAccDetail entity={acc} tokenList={tokenListMobile} /> }
+    />
+    
+     const transferListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million transactions. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
+        <div className="NCPageBreakerSubtitle">
+        {MSG.Transaction.DATA_POLICY_TRN}
         </div>
       }
 
       isLoading={isTxnListFirstLoad == null}
-      isDataValid={isTxnListValid}
-      isDataEmpty={isTxnListEmpty} 
+      isDataValid={true}
+      isDataEmpty={isTrnListEmpty} 
       
-      loadingStr={"Loading Transactions"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={
-        <span>No transactions found for this account in latest million transactions. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </span>}
+      loadingStr={MSG.Transaction.LOADING}
+      invalidDataStr={MSG.Transaction.INVALID_DATA} 
+      emptyDataStr={MSG.Transaction.EMPTY_DATA_LIST}
       marginTop={40}
 
       content={
+                <NCTxnTableOwnTransfer 
+                  data={trnList}
+                  onPageCallback={this.requestPagingTrnList}
+                  isLoading={store.isLoadingPagingTrnList}
+                  isPaginated={true}
+                  ownAddr={desc}
+                  isLatest={true}/>
+              }
+    />  
+    const txnListSection = <NCExplorerSection 
+      className={""}
+      subtitle={
+        <div className="NCPageBreakerSubtitle">
+        {MSG.Transaction.DATA_POLICY}
+        </div>
+      }
+
+      filter={true}
+      onCallBack={this.requestPagingTxnList}
+
+      isLoading={isTxnListFirstLoad == null}
+      isDataValid={true}
+      isDataEmpty={isTxnListEmpty} 
+      
+      loadingStr={MSG.Transaction.LOADING}
+      invalidDataStr={MSG.Transaction.INVALID_DATA} 
+      emptyDataStr={MSG.Transaction.EMPTY_DATA_LIST}
+      marginTop={40}
+
+      content={
+        !acc.tokenName ?
         <NCTxnTableOwn 
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
@@ -152,35 +337,33 @@ class NCAccRetrieve extends Component
           isPaginated={true}
           ownAddr={acc.address}
           isLatest={true}/>
+        
+        :
+
+        <NCTxnTableOwnToken 
+          data={txnList}
+          onPageCallback={this.requestPagingTxnList}
+          isLoading={store.isLoadingPagingTxnList}
+          isPaginated={true}
+          ownAddr={desc}
+          isLatest={true}/>
         }
     />
 
     const blkListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
+        <div className="NCPageBreakerSubtitle">{MSG.Block.DATA_POLICY}
         </div>
       }
 
       isLoading={isBlkListFirstLoad == null}
-      isDataValid={isBlkListValid}
+      isDataValid={true}
       isDataEmpty={isBlkListEmpty} 
       
-      loadingStr={"Loading Blocks"}
-      invalidDataStr={"Server provided an invalid response. Please try again."} 
-      emptyDataStr={
-        <span>No blocks mined by this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
-        </span>}
+      loadingStr={MSG.Block.LOADING}
+      invalidDataStr={MSG.Block.INVALID_DATA} 
+      emptyDataStr={MSG.Block.EMPTY_DATA_LIST_MINER}
       marginTop={40}
 
       content={
@@ -199,13 +382,16 @@ class NCAccRetrieve extends Component
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
           title={"Account"}
-          subtitle={desc}/>  
+          subtitle={desc}
+          token={store.momentUpdated}/>  
         { accBalanceSection }
         <hr className="nc-hr"/>
         
         {
           (isWeb3 && !isAccEmpty) &&
           <NCNonIdealState
+            filter={true}
+
             paddingTop={80}
             icon={"pt-icon-offline"}
             title={"Unavailable In Lite-Mode"}
@@ -217,9 +403,13 @@ class NCAccRetrieve extends Component
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
               <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
+              <Tab2 id="trn" title="Transfers" panel={transferListSection}/>
             </Tabs2>
           </div>
         }
+        <hr className="nc-hr"/>
+        <Button onClick={() => {hashHistory.push('/downloads/'+acc.address);}} className = "pt-button pt-minimal pull-right" rightIconName="Download" text="Download this Account" />
+        
       </div>;
 
     return (
@@ -228,11 +418,13 @@ class NCAccRetrieve extends Component
         isDataValid={true} 
         isDataEmpty={false}
         
-        loadingStr={"Loading Account Details"}
-        invalidDataStr={"Account Service Unavailable. Account data invalid."}
-        emptyDataStr={"No account found for descriptor: " + desc + "."}
+        loadingStr={MSG.Page.LOADING}
+        invalidDataStr={MSG.Page.INVALID_DATA}
+        emptyDataStr={MSG.Page.EMPTY_DATA + desc + "."}
         
-        page={page}/>
+        page={page}
+
+        />
     );
   }
 }

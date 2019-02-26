@@ -18,6 +18,23 @@ export const SetTopLevel = (data) =>
   }
 }
 
+// Paging Internal transfer
+// ------------
+export const GetPagingTrn = (data) => 
+{
+  return {
+    type: 'TXN_RETRIEVE_GET_PAGING_TRN',
+    data: data,
+  }
+}
+export const SetPagingTrn = (data) => 
+{
+  return {
+    type: 'TXN_RETRIEVE_SET_PAGING_TRN',
+    data: data,
+  }
+}
+
 let initialState_StoreBlkRetrieve = 
 {
   isLoadingPagingTxnList: false,
@@ -26,8 +43,13 @@ let initialState_StoreBlkRetrieve =
   queryStr: "",
 
   response: {
-    txn: null
+    txn: null,
+    trn: {
+      data: null,
+      momentUpdated: null
+    },
   },
+  
   momentUpdated: null
 };
 
@@ -56,6 +78,28 @@ export function reducer_txnRetrieve (state = initialState_StoreBlkRetrieve, acti
       _state.isLoadingTopLevel = false; 
       
       _state.response.txn = action.data;
+      _state.momentUpdated = moment();
+      
+      return _state;
+    }
+    // Paging Internal transfers
+    // ------------
+    case 'TXN_RETRIEVE_GET_PAGING_TRN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTrnList = true;
+      
+      return _state;
+    }
+    case 'TXN_RETRIEVE_SET_PAGING_TRN':
+    {
+      let _state = Object.assign({}, state);
+      
+      _state.isLoadingPagingTrnList = false;
+      
+      _state.response.trn.data = action.data;
+      _state.response.trn.momentUpdated = moment();
       _state.momentUpdated = moment();
       
       return _state;
