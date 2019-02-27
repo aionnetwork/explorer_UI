@@ -157,7 +157,7 @@ class NCTknRetrieve extends Component
         <NCTxnTableOwnToken 
           data={txnList}
           onPageCallback={this.requestPagingTxnList}
-          isLoading={store.isLoadingPagingTxnList}
+          isLoading={false}
           isPaginated={true}
           ownAddr={desc}
           isLatest={true}/>
@@ -196,7 +196,7 @@ class NCTknRetrieve extends Component
         <NCHolderTable 
           data={accList}
           onPageCallback={this.requestPagingAccList}
-          isLoading={store.isLoadingPagingBlkList}
+          isLoading={false}
           isPaginated={true}
           isLatest={true}/>
         }
