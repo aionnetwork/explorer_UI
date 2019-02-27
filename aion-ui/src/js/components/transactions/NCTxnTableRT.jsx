@@ -40,7 +40,12 @@ class NCTxnTableRTRow extends Component
                 <NCEntityLabel 
                   entityType={NCEntity.ACCOUNT} 
                   
-                  entityId={entity.toAddr}/>:
+                  entityId={entity.toAddr}/> : entity.contractAddr ?
+                <NCEntityLabel 
+                  entityType={NCEntity.ACCOUNT} 
+                  
+                  entityId={entity.contractAddr}/> :
+
                 <strong>Contract Creation</strong>
             }
             <span className="pt-icon-large pt-icon-blank arrow-icon"/>
