@@ -49,14 +49,15 @@ class NCTknRetrieve extends Component
     network.getTknRetrieveTopLevel(this.props.params.tknId);
   }
 
-  requestPagingTxnList = (pageNumber) => {
+  requestPagingTxnList = (pageNumber, pageSize) => {
     const queryStr = this.props.tknRetrieve.queryStr;
-    network.getTknRetrievePagingTxnList(queryStr, pageNumber);
+    network.getTknRetrievePagingTxnList(queryStr, pageNumber, pageSize);
   }
   
-  requestPagingBlkList = (pageNumber) => {
+  //requestPaging = (pageNumber, pageSize, start, end)
+  requestPagingAccList = (pageNumber,pageSize,) => {
     const queryStr = this.props.tknRetrieve.queryStr;
-    network.getTknRetrievePagingBlkList(queryStr, pageNumber);
+    network.getTknRetrievePagingAccList(queryStr, pageNumber, pageSize);
   }
   
 
@@ -194,7 +195,7 @@ class NCTknRetrieve extends Component
       content={
         <NCHolderTable 
           data={accList}
-          onPageCallback={this.requestPagingBlkList}
+          onPageCallback={this.requestPagingAccList}
           isLoading={store.isLoadingPagingBlkList}
           isPaginated={true}
           isLatest={true}/>

@@ -2,24 +2,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-//import Recaptcha from 'react-recaptcha';  
-//import ReCAPTCHA from "react-google-recaptcha";
-import Reaptcha from 'reaptcha';
-
-import NCNonIdealState from 'components/common/NCNonIdealState'
+import Recaptcha from 'react-recaptcha';
 
 import moment from 'moment';
 
-import { TextArea, FormGroup, Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind, Toaster, ToasterPosition} from "@blueprintjs/core";
-import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
+import { TextArea, FormGroup, Button, Position, Intent, Toaster} from "@blueprintjs/core";
+import { nc_trim} from 'lib/NCUtility';
 
-import NCTxnTable from 'components/transactions/NCTxnTable';
-import NCBlkDetail from 'components/blocks/NCBlkDetail';
-import NCExplorerPage from 'components/common/NCExplorerPage';
+
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
-//import NCExplorerContactUs from 'components/common/NCExplorerContactUs';
+
 import * as network from 'network/NCNetworkRequests';
 
 class NCContactsRetrieve extends Component
@@ -46,7 +40,6 @@ class NCContactsRetrieve extends Component
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.verifyCallback = this.verifyCallback.bind(this)
   }
 
   captcha(key){
@@ -54,7 +47,6 @@ class NCContactsRetrieve extends Component
   }
 
   verifyCallback(response) {
-       //console.log(response);
        this.setState({recaptcha:response});
    };
 
@@ -81,13 +73,11 @@ class NCContactsRetrieve extends Component
 
   handleSubmit(event) {
     event.preventDefault();
-    
+
     if(nc_trim(this.state.topic)==''||nc_trim(this.state.text)==''||nc_trim(this.state.recaptcha)==''){
       this.setState({notice:'Please ensure that all fields are completed.'});
       this.addToast({ icon: "warning-sign", intent: Intent.DANGER, message: "Please ensure that all fields are completed." })
     }else{
-
-      //this should be improved to use promise (next release)
       this.setState({success:true});
       network.submitFeedback(this.state.topic,this.state.text,this.state.recaptcha);
     }
@@ -104,10 +94,6 @@ class NCContactsRetrieve extends Component
         toast.show(t);
     }
 
-  captcha(key){
-      this.setState({recaptcha:response});
-     
-  }
 
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
@@ -124,7 +110,7 @@ class NCContactsRetrieve extends Component
   
   render() {  
 
-   const { isLoading, isDataValid, isDataEmpty, loadingStr, invalidDataStr, emptyDataStr } = this.props;
+   const { isLoading, loadingStr, invalidDataStr, emptyDataStr } = this.props;
 
     let recaptchaInstance;
     const contact_success ={margin:'auto', textAlign:'center', border:'#ccc solid 1px',padding:'10px',borderRadius:'5px',maxWidth:'500px'}
@@ -135,9 +121,7 @@ class NCContactsRetrieve extends Component
                     <p className="center">Thank you for your feedback.</p>
                   </div>
     
-    const resetRecaptcha = () => {
-      recaptchaInstance.reset();  
-    };
+
 
     const breadcrumbs = [
       {
@@ -154,13 +138,7 @@ class NCContactsRetrieve extends Component
     const contact_container ={margin:'auto',  border:'#ccc solid 1px',padding:'10px',borderRadius:'5px',maxWidth:'500px'}
     const contact_input ={width:"100%"}
     const contact_textArea ={width:"100%",height:"200px"}
-    const contact_submit ={right:'10'}
 
-    const recaptchaRef = React.createRef();
-    var verifyCaptcha = function (response) {
-            console.log(response);
-            //this.verifyCallback(response);
-    };
     
    const form =  <div style={contact_container}>
         <form>
@@ -173,8 +151,8 @@ class NCContactsRetrieve extends Component
                 className="pt-form-group "
 
             >
-              <select id="topic-input" onChange={this.handleTopicChange} defaultValue="General"  style={contact_input} className="pt-input pt-large">
-                <option value="General">Choose an item</option>
+              <select id="topic-input" onChange={this.handleTopicChange} defaultValue="default"  style={contact_input} className="pt-input pt-large">
+                <option value="default">Choose an item</option>
                 <option value="Analytics">Analytics</option>
                 <option value="Accounts">Accounts</option>
                 <option value="Blocks">Blocks</option>
@@ -204,8 +182,17 @@ class NCContactsRetrieve extends Component
               />
             </FormGroup>
             
-                <Reaptcha sitekey="6LfwrXMUAAAAAEpZCdMFD0ba96ryOUDGPMyqHZPA" onVerify={this.verifyCallback} />
+            
+             {(!this.state.display)&& 
+                <Recaptcha
+                  ref={e => recaptchaInstance = e}
+                 
+                  sitekey="6LfwrXMUAAAAAEpZCdMFD0ba96ryOUDGPMyqHZPA"
+                  verifyCallback={this.verifyCallback.bind(this)}
+            />}
 
+            
+           
             <Button type="submit" intent="success" onClick={this.handleSubmit} text="Submit" />
         </form>  
         </div>;
@@ -249,24 +236,3 @@ export default connect((state) => {
     feedback: state.feedback,
   })
 })(NCContactsRetrieve);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

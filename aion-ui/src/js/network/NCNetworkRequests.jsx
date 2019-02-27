@@ -1075,7 +1075,7 @@ export const getTknRetrieveTopLevel = (queryStr) => {
   }
 }
 
-export const getTknRetrievePagingTxnList = (queryStr, pageNumber) => {
+export const getTknRetrievePagingTxnList = (queryStr, pageNumber, pageSize) => {
   store.dispatch(StoreTknRetrieve.GetPagingTxn());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -1088,26 +1088,19 @@ export const getTknRetrievePagingTxnList = (queryStr, pageNumber) => {
   }
   else {
     // get transaction list
-    const ep = network.endpoint.transaction.list[txnListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, PAGE_SIZE];
+    const ep = network.endpoint.token.detail;
+    let params = [queryStr, pageNumber, pageSize,0,PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
-      
-      let tkn = store.getState().tknRetrieve.response.tkn;
-
-      if (tkn && tkn.data && tkn.data.content && tkn.data.content[0]) {
-        if (nc_sanitizeHex(tkn.data.content[0].address) == nc_sanitizeHex(queryStr)) {
-            store.dispatch(StoreTknRetrieve.SetPagingTxn(response));  
-        }
-      }
+      store.dispatch(StoreTknRetrieve.SetTopLevel(response));
     })
     .catch((error) => {
       console.log(error);
-      store.dispatch(StoreTknRetrieve.SetPagingTxn({}));
+      store.dispatch(StoreTknRetrieve.SetTopLevel({}));
     });
   }
 }
-export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
+export const getTknRetrievePagingAccList = (queryStr, pageNumber, pageSize) => {
   store.dispatch(StoreTknRetrieve.GetPagingBlk());
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
@@ -1119,21 +1112,15 @@ export const getTknRetrievePagingBlkList = (queryStr, pageNumber) => {
     }, 500);
   }
   else {
-    const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, PAGE_SIZE];
+    const ep = network.endpoint.token.detail;
+    let params = [queryStr,0,PAGE_SIZE, pageNumber, pageSize];
     network.request(ep, params)
     .then((response) => {
-     
-      let tkn = store.getState().tknRetrieve.response.tkn;
-      if (tkn && tkn.data && tkn.data.content && tkn.data.content[0]) {
-        if (nc_sanitizeHex(tkn.data.content[0].address) == nc_sanitizeHex(queryStr)) {
-            store.dispatch(StoretknRetrieve.SetPagingBlk(response));  
-        }
-      }
+      store.dispatch(StoreTknRetrieve.SetTopLevel(response));
     })
     .catch((error) => {
       console.log(error);
-      store.dispatch(StoreTknRetrieve.SetPagingBlk({}));
+      store.dispatch(StoreTknRetrieve.SetTopLevel({}));
     });
   }
 }

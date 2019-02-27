@@ -165,7 +165,7 @@ export const endpoint = {
     detail: {
       //link: '/aion/dashboard/getTokenAndTransactionAndAccountDetailsByContractAddress',
       link: '/aion/dashboard/getTokenDetailsTransfersAndHoldersByContractAddress',
-      params: ['searchParam']
+      params: ['searchParam','transfersPage','transfersSize','holdersPage','holdersSize']
     }
   },
   account: {
