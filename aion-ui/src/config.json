@@ -1,21 +1,5 @@
 {
-<<<<<<< HEAD
- "api": {
-   "base_url": "mastery-api.aiondev.network/aion",
-   "https_enabled": true
- },
- "network_list": [
-   {
-     "name": "MasteryDev",
-     "url": ""
-   },
-   {
-     "name": "Mainnet",
-     "url": "https://mainnet.aion.network"
-   }
- ],
- "ga_key":"UA-121993888-1"
-=======
+
   "api": {
     "base_url": "explorer-staging-api.aion.network",
     "https_enabled": true
@@ -61,5 +45,5 @@
   ]},
 
   "ga_key":"UA-127100301-2"
->>>>>>> 9732bfa7fd3abed240735f3293c7cbf2b18c8af5
+
 }

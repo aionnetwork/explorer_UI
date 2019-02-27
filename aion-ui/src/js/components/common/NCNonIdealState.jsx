@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'; 
 import { DateRangeInput } from "@blueprintjs/datetime";
-import { Button,  Classes } from "@blueprintjs/core";
+import { Button } from "@blueprintjs/core";
 
 
 export default class NCNonIdealState extends Component
@@ -60,7 +60,7 @@ export default class NCNonIdealState extends Component
   }
 
   render() {
-    const { filter, onCallBack, paddingTop="140", paddingBottom="0", title, description, icon, showHomeLink=false } = this.props;
+    const { filter, paddingTop="140", paddingBottom="0", title, description, icon, showHomeLink=false } = this.props;
     //console.log(filter);
     return (
       <div 

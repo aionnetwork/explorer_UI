@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 import { connect } from 'react-redux';
-import moment from 'moment';
+
 
 import { Position, Popover, Tab2, Tabs2, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
 
@@ -53,7 +53,7 @@ class NCAccRetrieve extends Component
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.params.accId != this.props.params.accId)
+    if (prevProps.params.accId !== this.props.params.accId)
       this.requestTopLevel();
   }
 
