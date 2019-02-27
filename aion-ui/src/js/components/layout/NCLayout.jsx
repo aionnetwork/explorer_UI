@@ -461,7 +461,7 @@ class NCLayout extends Component {
             <br/>
             
           
-            <a className="footer-container" target="_blank" href="/#/feedback">
+            <a className="footer-container" target="_blank" href="https://aionnetwork.atlassian.net/servicedesk/customer/portal/9">
               <span style={style}  className="text">Feedback</span>          
               
             </a>
