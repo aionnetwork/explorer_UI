@@ -28,6 +28,7 @@ import ReactGA from 'react-ga';
 //ReactGA.pageview(window.location.pathname + window.location.search);
 //console.log('2 index!');
 ReactGA.initialize(NC_ENV.GA_KEY);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 class NCLayout extends Component {
 
