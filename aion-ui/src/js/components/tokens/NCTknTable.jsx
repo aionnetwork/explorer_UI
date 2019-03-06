@@ -144,11 +144,10 @@ export default class NCTknTable extends Component
        wrapText={true}>
         
         
-        <NCTokenLabel 
+        <NCEntityLabel 
           entityType={NCEntity.TKN} 
-          entityName={token}
-          entityDescription={description}
-          entitySymbol={symbol}
+          entityName={token+" ("+symbol+")"}
+          
           entityId={Addr}/>
         
         

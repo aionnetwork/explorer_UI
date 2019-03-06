@@ -127,13 +127,7 @@ class NCTxnRetrieve extends Component
 
     const desc = nc_hexPrefix(store.queryStr);
 
-    const eventLog =  {
-            'content' : [ 
-                  'key1' : 'input1',
-                  'key2' : 'input2'
-                ],
-            
-};
+    const eventLog =  {};
 
     //console.log(eventLog);
 
