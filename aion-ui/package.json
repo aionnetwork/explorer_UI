@@ -11,9 +11,9 @@
     "gulp": "^3.9.1",
     "gulp-less": "^3.3.0",
     "gulp-plumber": "^1.1.0",
-    "gulp-watch": "^4.3.11",
+    "gulp-watch": "^5.0.1",
     "npm-run-all": "^4.0.2",
-    "react-scripts": "1.0.17"
+    "react-scripts": "^2.1.8"
   },
   "dependencies": {
     "@blueprintjs/core": "^1.14.0",
@@ -53,6 +53,7 @@
     "react-ga": "^2.5.3",
     "react-google-maps": "^6.0.1",
     "react-google-recaptcha": "^1.0.5",
+    "react-localization": "^1.0.13",
     "react-page-visibility": "^1.1.0",
     "react-recaptcha": "^2.3.10",
     "react-redux": "^5.0.2",
@@ -70,5 +71,4 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
- 
 }

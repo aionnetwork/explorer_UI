@@ -533,7 +533,7 @@ export const getAccRetrievePagingTxnList = (queryStr, tkn=null, pageNumber, page
     }else if(end!==null){
       params = [queryStr, null, pageNumber, size, s, e];
     }else{
-      params = [queryStr, null, pageNumber, size, s];
+      params = [queryStr, null, pageNumber, size];
     }
     
 
