@@ -8,6 +8,7 @@ import { NCKPIResponsive, NCKPIGroup} from 'components/common/NCKPIGroup';
 import NCLoading from 'components/common/NCLoading';
 
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
+import * as MSG from 'lib/NCTerms';
 
 import {BigNumber} from 'bignumber.js'
 import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with1Floor, nc_numFormatterACSensitive, nc_isNumber } from "lib/NCUtility";
@@ -32,7 +33,7 @@ class NCDashboardKPIs extends Component
           {
             value:"9.83",
             units:"s",
-            title:["Current", "Block Time"],
+            title:[MSG.strings.kpi_block_l1, MSG.strings.kpi_block_l2],
             hoverContent: "Mean of inter-block arrival time over the last hour. The target block time for the network is 10s. PoW difficulty is dynamically adjusted to acheive target. ",
           },
           {
