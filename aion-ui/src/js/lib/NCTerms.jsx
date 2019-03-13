@@ -269,6 +269,13 @@ export const strings = new LocalizedStrings({
     footer_link_3: "Bounties & Grants",
     footer_link_4: "Developers",
 
+    //breadcrumbs
+    bread:"Home",
+    Txn_slice: "",
+    Txn_crumb: "",
+
+    ///messaging
+
     Account: {
       LOADING:"Loading Account Details",
       LOADING_LIST:"Loading Accounts Data",
@@ -390,7 +397,8 @@ export const strings = new LocalizedStrings({
     kpi_block_l2: "Block Time",
   },
 });
-console.log(strings.getInterfaceLanguage());
+
+//_Dep
 //.Account.
 export const Account = {
   LOADING:"Loading Account Details",
