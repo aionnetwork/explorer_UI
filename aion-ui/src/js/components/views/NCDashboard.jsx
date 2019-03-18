@@ -10,6 +10,8 @@ import NCDashboardKPIs from 'components/dashboard/NCDashboardKPIs';
 import NCTxnRealtime from 'components/transactions/NCTxnRealtime';
 import NCComponentLazyLoad from 'components/common/NCComponentLazyLoad';
 
+import * as MSG from 'lib/NCTerms';
+
 import * as network from 'network/NCNetworkRequests';
 
 export default class NCDashboard extends Component
@@ -31,23 +33,23 @@ export default class NCDashboard extends Component
           <div className="NCDashboardPanel">
             <div className="NCRecentBlocksContainer">
               <div className="NCTitle section blue">
-                <span className="title">Recent Blocks</span>
+                <span className="title">{MSG.strings.landing_blocks_title}</span>
                 <Button 
                   className=" pt-button pt-minimal"
                   
                   onClick={() => {hashHistory.push('/blocks');}}
-                  text="View All"/>
+                  text={MSG.strings.landing_view_link}/>
               </div>
               <NCRecentBlocks/>
             </div>
             <div className="NCRecentTransactionsContainer">
               <div className="NCTitle section">
-                <span className="title">Recent Transactions</span>
+                <span className="title">{MSG.strings.landing_transactions_title}</span>
                 <Button 
                   className=" pt-button pt-minimal"
                   
                   onClick={() => {hashHistory.push('/transactions');}}
-                  text="View All"/> 
+                  text={MSG.strings.landing_view_link}/> 
               </div>
               <NCTxnRealtime/>
             </div>

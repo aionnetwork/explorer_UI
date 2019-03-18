@@ -13,6 +13,8 @@ import NCEntityDetail from 'components/common/NCEntityDetail';
 
 const EMPTY_STR = "Not Available";
 const NOT_CONTRACT = "Not a Contract";
+import * as MSG from 'lib/NCTerms';//MSG.strings.Cntr_detail_row1
+
 export default class NCCntrDetail extends Component
 {
   render() {
@@ -23,7 +25,7 @@ export default class NCCntrDetail extends Component
 
     let desc = [
       {
-        field: "Address",
+        field: MSG.strings.Cntr_detail_row1,
         value:  <NCEntityLabel
                   entityType={ NCEntity.ACCOUNT }
                   entityId={ entity.contractAddr}
@@ -31,56 +33,56 @@ export default class NCCntrDetail extends Component
       },
       
       {
-        field: "Block Number",
+        field: MSG.strings.Cntr_detail_row2,
         value:  <NCEntityLabel
                   entityType={ NCEntity.BLOCK }
                   entityId={ entity.blockNumber}
                   linkActive={ true }/>
       },
       {
-        field: "Transaction Hash",
+        field: MSG.strings.Cntr_detail_row3,
         value:  <NCEntityLabel
                   entityType={ NCEntity.TXN }
                   entityId={ entity.contractTxHash}
                   linkActive={ true }/>
       },
       {
-        field: "Creator",
+        field: MSG.strings.Cntr_detail_row4,
         value:  <NCEntityLabel
                   entityType={ NCEntity.ACCOUNT }
                   entityId={ entity.contractCreatorAddr}
                   linkActive={ true }/>
       },
       {
-        field: "Balance",
+        field: MSG.strings.Cntr_detail_row5,
         value:  balance == null ? "Balance Service Unavailable" :
                 <span className="">{balance + " AION"}
                   <span className="subtitle">{"(as of block " + entity.blockNumber + ")"}</span>
                 </span>
       },
       {
-        field: "Nonce",
+        field: MSG.strings.Cntr_detail_row6,
         value:  !entity.nonce ? EMPTY_STR : entity.nonce
       }
     ];
 
     let bridge = [
       {
-        field: "Address",
+        field: MSG.strings.Cntr_detail_row1,
         value:  <NCEntityLabel
                   entityType={ NCEntity.CNTR }
                   entityId={ entity.contractAddr}
                   linkActive={ true }/>
       },
       {
-        field: "Balance",
+        field: MSG.strings.Cntr_detail_row5,
         value:  balance == null ? "Balance Service Unavailable" :
                 <span className="">{balance + " AION"}
                   {entity.isATB == true ? "" : <span className="subtitle">{"(as of block " + entity.blockNumber + ")"}</span>}
                 </span>
       },
       {
-        field: "Nonce",
+        field: MSG.strings.Cntr_detail_row6,
         value:  !entity.nonce ? EMPTY_STR : entity.nonce
       },
       {

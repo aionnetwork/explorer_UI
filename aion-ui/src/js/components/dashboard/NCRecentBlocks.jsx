@@ -49,13 +49,12 @@ class NCRecentBlocks extends Component
 
     this.currentBlockNumber = (this.props.blkRt.data != null &&
                                Array.isArray(this.props.blkRt.data) &&
-                               this.props.blkRt.data.length > 0)
-                              ? this.props.blkRt.data[0] : -1;
+                               this.props.blkRt.data.length > 0)? this.props.blkRt.data[0] : -1;
 
     this.state = {
       nextBlockTimeRemaining: DEFAULT_TARGET_BLOCK_TIME, // in seconds
       documentHidden: false
-    }
+    };
   }
 
   componentDidMount()
@@ -144,7 +143,7 @@ class NCRecentBlocks extends Component
             <img  className="block-parent" src={(this.props.darkMode.data) ? "img/block/dark-block-indigo.svg" : "img/block/block-indigo.svg"}/>
             <div className="block-card">
               <div className="block-number">
-                <span className="subtitle pt-text-muted">Block #</span>
+                <span className="subtitle pt-text-muted">Block # </span>
                 <span className="title pt-text-muted">{ nextBlockNumber }</span>
               </div>
               <div className="block-pending">

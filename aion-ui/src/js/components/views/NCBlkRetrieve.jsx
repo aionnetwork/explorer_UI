@@ -129,7 +129,7 @@ class NCBlkRetrieve extends Component
         <NCExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"Block"}
+          title={MSG.strings.Blk_detail_title}
           subtitle={desc}
 
 

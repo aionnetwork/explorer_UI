@@ -25,6 +25,8 @@ import { nc_numFormatterAionCoin, nc_isStrEmpty } from 'lib/NCUtility';
 import appConfig from '../../../config.json';
 
 import ReactGA from 'react-ga';
+import * as MSG from 'lib/NCTerms';//MSG.strings.Cntr_detail_tab2_col1
+
 ReactGA.initialize(appConfig.ga_key);
 
  const row = {
@@ -52,7 +54,7 @@ export default class NCEventTable extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Block #",
+        name: MSG.strings.Cntr_detail_tab2_col1,
         isSortable: false,
         isFilterable: false,
         width: 150,
@@ -62,7 +64,7 @@ export default class NCEventTable extends Component
       },
           
       {
-        name: "Event",
+        name: MSG.strings.Cntr_detail_tab2_col2,
         isSortable: false,
         isFilterable: false,
         
@@ -71,7 +73,7 @@ export default class NCEventTable extends Component
       },
       
       {
-        name: "Event timestamp", // arrow
+        name: MSG.strings.Cntr_detail_tab2_col3, // arrow
         isSortable: false,
         isFilterable: false,
         width: 200,

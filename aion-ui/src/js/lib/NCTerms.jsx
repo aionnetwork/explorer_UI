@@ -2,6 +2,7 @@
 // entity ------------------------------------------------------------
 import LocalizedStrings from 'react-localization';
 
+
 export const strings = new LocalizedStrings({
   
   en: {
@@ -17,7 +18,7 @@ export const strings = new LocalizedStrings({
     header_search_filter: "",
 
     landing_blocks_title: "RECENT BLOCKS",
-    landing_transaction_title: "RECENT TRANSACTIONS",
+    landing_transactions_title: "RECENT TRANSACTIONS",
     landing_view_link: "View all",
 
     landing_txn_table_col1: "Age",
@@ -32,25 +33,27 @@ export const strings = new LocalizedStrings({
     
     kpi_block_l1: "Current",
     kpi_block_l2: "Block Time",
-    kpi_block_desc: "Block Time",
-    kpi_hash_l1: "Block Time",
-    kpi_hash_l2: "Block Time",
-    kpi_hash_desc: "Block Time",
-    kpi_difficulty_l1: "Block Time",
-    kpi_difficulty_l2: "Block Time",
-    kpi_difficulty_desc: "Block Time",
-    kpi_NRG_l1: "Block Time",
-    kpi_NRG_l2: "Block Time",
-    kpi_NRG_desc: "Block Time",
-    kpi_TXNPEAK_l1: "Block Time",
-    kpi_TXNPEAK_l2: "Block Time",
-    kpi_TXNPEAK_desc: "Block Time",
-    kpi_TXNTIME_l1: "Block Time",
-    kpi_TXNTIME_l2: "Block Time",
-    kpi_TXNTIME_desc: "Block Time",
-    kpi_TXNCOUNT_l1: "Block Time",
-    kpi_TXNCOUNT_l2: "Block Time",
-    kpi_TXNCOUNT_desc: "Block Time",
+    kpi_block_desc: "Mean of inter-block arrival time over the last hour. The target block time for the network is 10s. PoW difficulty is dynamically adjusted to acheive target. ",
+    kpi_hash_l1: "Network",
+    kpi_hash_l2: "Hash Rate",
+    kpi_hash_desc: "Network hash rate = (last block's difficulty) /(average block time over the last hour.)",
+
+    kpi_difficulty_l1: "Average",
+    kpi_difficulty_l2: "Difficulty",
+    kpi_difficulty_desc: "Difficulty, averaged over the last hour.",
+    kpi_NRG_l1: "Consumed",
+    kpi_NRG_l2: "NRG / Block",
+    kpi_NRG_desc: "Average NRG consumed per block for the last hour.",
+
+    kpi_TXNPEAK_l1: "Txn",
+    kpi_TXNPEAK_l2: "/ Second",
+    kpi_TXNPEAK_desc: "Transactions per second, averaged over the last hour",
+    kpi_TXNTIME_l1: "24 Hr Peak",
+    kpi_TXNTIME_l2: "Txn / Block",
+    kpi_TXNTIME_desc: "Peak number of transactions / block observed in last 24 hours",
+    kpi_TXNCOUNT_l1: "24 Hr",
+    kpi_TXNCOUNT_l2: "Txn Count",
+    kpi_TXNCOUNT_desc: "Number of transactions observed in last 24 hours",
 
     //account related strings
     Acc_list_title: "Account Lists",
@@ -169,13 +172,9 @@ export const strings = new LocalizedStrings({
     Cntr_detail_tab1_col7: "To Address",
 
     Cntr_detail_tab2_col1: "Block #",
-    Cntr_detail_tab2_col2: "Timestamp",
-    Cntr_detail_tab2_col3: "Value",
-    Cntr_detail_tab2_col4: "Transaction Hash",
-    Cntr_detail_tab2_col5: "From Address",
-    Cntr_detail_tab2_col6: "Status",
-    Cntr_detail_tab2_col7: "To Address",
-
+    Cntr_detail_tab2_col2: "Event",
+    Cntr_detail_tab2_col3: "Event timestamp",
+   
     //Tokens
     Tkn_list_title: "Tokens",
     Tkn_list_desc: "Total Tokens",
@@ -271,8 +270,20 @@ export const strings = new LocalizedStrings({
 
     //breadcrumbs
     bread:"Home",
-    Txn_slice: "",
-    Txn_crumb: "",
+    bread_slice: { 
+      blk: "Blocks",
+      acc: "Accounts",
+      txn: "Transactions",
+      tkn: "Tokens",
+      cntr: "Contracts",
+    },
+    bread_crumb: {
+      blk: "Block detail",
+      acc: "Account detail",
+      txn: "Transaction detail",
+      tkn: "Token detail",
+      cntr: "Contract detail",
+    },
 
     ///messaging
 
@@ -397,6 +408,8 @@ export const strings = new LocalizedStrings({
     kpi_block_l2: "Block Time",
   },
 });
+
+export const language = strings.getLanguage();
 
 //_Dep
 //.Account.

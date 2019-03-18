@@ -12,6 +12,7 @@ import { NCEntity, NCEntityInfo  } from 'lib/NCEnums';
 import { nc_numPrettify, nc_numFormatter, nc_numFormatterBytes } from 'lib/NCUtility';
 
 //import { PAGE_SIZE } from 'network/NCNetworkRequests'
+import * as MSG from 'lib/NCTerms';
 import {BigNumber} from 'bignumber.js';
 
 export default class NCBlkTable extends Component 
@@ -22,7 +23,7 @@ export default class NCBlkTable extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Block #",
+        name: MSG.strings.Blk_list_col1,
         isSortable: false,
         isFilterable: false,
         width: 120,
@@ -30,7 +31,7 @@ export default class NCBlkTable extends Component
         objPath: 'blockNumber',
       },
       {
-        name: "Timestamp",
+        name: MSG.strings.Blk_list_col2,
         isSortable: false,
         isFilterable: false,
         width: 200,
@@ -38,7 +39,7 @@ export default class NCBlkTable extends Component
         objPath: 'blockTimestamp',
       },
       {
-        name: "Txn Count",
+        name: MSG.strings.Blk_list_col3,
         isSortable: false,
         isFilterable: false,
         width: 90,
@@ -46,7 +47,7 @@ export default class NCBlkTable extends Component
         objPath: 'numTransactions',
       },
       {
-        name: "Nrg Consumed",
+        name: MSG.strings.Blk_list_col4,
         isSortable: false,
         isFilterable: false,
         width: 110,
@@ -54,7 +55,7 @@ export default class NCBlkTable extends Component
         objPath: 'nrgConsumed',
       },
       {
-        name: "Difficulty",
+        name: MSG.strings.Blk_list_col5,
         isSortable: false,
         isFilterable: false,
         width: 110,
@@ -62,7 +63,7 @@ export default class NCBlkTable extends Component
         objPath: 'difficulty',
       },
       {
-        name: "Block Size",
+        name: MSG.strings.Blk_list_col6,
         isSortable: false,
         isFilterable: false,
         width: 110,

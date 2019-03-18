@@ -19,6 +19,7 @@ import NCTokenLabel from 'components/common/NCTokenLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import * as MSG from 'lib/NCTerms';//MSG.strings.Cntr_list_col1
 
  const row = {
     height:"100px",
@@ -32,7 +33,7 @@ export default class NCCntrTable extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Address",
+        name: MSG.strings.Cntr_list_col1,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -41,7 +42,7 @@ export default class NCCntrTable extends Component
       },
       
       {
-        name: "Block",
+        name: MSG.strings.Cntr_list_col2,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -49,7 +50,7 @@ export default class NCCntrTable extends Component
         objPath: null,
       },
       {
-        name: "Creator",
+        name: MSG.strings.Cntr_list_col3,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -57,7 +58,7 @@ export default class NCCntrTable extends Component
         objPath: null,
       },
       {
-        name: "Transaction", // arrow
+        name: MSG.strings.Cntr_list_col4, // arrow
         isSortable: false,
         isFilterable: false,
         width: null,

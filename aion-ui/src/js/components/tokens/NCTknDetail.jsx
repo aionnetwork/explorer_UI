@@ -14,6 +14,7 @@ import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterAmp, nc_numFormatterByte
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 
+
 export default class NCTxnDetail extends Component
 {
   constructor(props) {
@@ -64,38 +65,38 @@ export default class NCTxnDetail extends Component
     let desc = 
     [
       {
-        field: "Created",
+        field: MSG.strings.Tkn_detail_row1,
         value: moment.unix(entity.creationTimestamp).format('LLLL'),
       },
       {
-        field: "Contract",
+        field: MSG.strings.Tkn_detail_row2,
         value: <NCEntityLabel
                   entityType={NCEntity.CNTR}
                   entityId={entity.contractAddr}
                   linkActive={true}/>,
       },
       {
-        field: "Creator Addr",
+        field: MSG.strings.Tkn_detail_row3,
         value: <NCEntityLabel
                   entityType={NCEntity.ACCOUNT}
                   entityId={entity.creatorAddress}
                   linkActive={true}/>,
       },
       {
-        field: "Transaction",
+        field: MSG.strings.Tkn_detail_row4,
         value: <NCEntityLabel
                   entityType={NCEntity.TXN}
                   entityId={entity.transactionHash}
                   linkActive={true}/>,
       },
       {
-        field: "Symbol",
+        field: MSG.strings.Tkn_detail_row5,
         value: entity.symbol,
       },
       // ---------------------------------------------------------------
       {
         field: <div>
-                Granularity {" "}
+                {MSG.strings.Tkn_detail_row6} {" "}
                 <Tooltip
                   
                   content={gran} >
@@ -107,11 +108,11 @@ export default class NCTxnDetail extends Component
       },
       
       {
-        field: "TotalSupply",
+        field: MSG.strings.Tkn_detail_row7,
         value: entity.totalSupply.toString(),
       },
       {
-        field: "Liquid Supply",
+        field: MSG.strings.Tkn_detail_row8,
         value: entity.liquidSupply.toString(),
       },
      

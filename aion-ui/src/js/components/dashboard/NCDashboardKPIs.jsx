@@ -10,7 +10,7 @@ import NCLoading from 'components/common/NCLoading';
 import { NCNETWORK_REQUESTS_ENABLED } from 'network/NCNetwork';
 import * as MSG from 'lib/NCTerms';
 
-import {BigNumber} from 'bignumber.js'
+import {BigNumber} from 'bignumber.js';
 import { nc_decimalPoint, nc_numFormatter, nc_numFormatter_with1Floor, nc_numFormatterACSensitive, nc_isNumber } from "lib/NCUtility";
 
 import { hashHistory } from 'react-router';
@@ -28,57 +28,57 @@ class NCDashboardKPIs extends Component
     [
       
       {
-        title: <span><strong>Network&nbsp;</strong>| &nbsp;EQUI2109</span>,
+        title: <span><strong>{MSG.strings.kpi_tab1_title} &nbsp;</strong>| &nbsp;{MSG.strings.kpi_tab1_subtitle}</span>,
         kpiList: [
           {
             value:"9.83",
             units:"s",
             title:[MSG.strings.kpi_block_l1, MSG.strings.kpi_block_l2],
-            hoverContent: "Mean of inter-block arrival time over the last hour. The target block time for the network is 10s. PoW difficulty is dynamically adjusted to acheive target. ",
+            hoverContent: MSG.strings.kpi_block_desc,
           },
           {
             value:"10",
             units:"Sol/s",
-            title:["Network", "Hash Rate"],
-            hoverContent: <span>{"Network hash rate = (last block's difficulty) /"}<br/>{"(average block time over the last hour.)"}</span>,
+            title:[MSG.strings.kpi_hash_l1, MSG.strings.kpi_hash_l2],
+            hoverContent: <span>{MSG.strings.kpi_hash_desc}</span>,
           },
           {
             value:"15",
             units:"",
-            title:["Average", "Difficulty"],
-            hoverContent: "Difficulty, averaged over the last hour.",
+            title:[MSG.strings.kpi_difficulty_l1, MSG.strings.kpi_difficulty_l2],
+            hoverContent: MSG.strings.kpi_difficulty_desc,
           },
           {
             value:"1000",
             units:"",
-            title:["Consumed", "NRG / Block"],
-            hoverContent: "Average NRG consumed per block for the last hour.",
+            title:[MSG.strings.kpi_NRG_l1, MSG.strings.kpi_NRG_l2],
+            hoverContent: MSG.strings.kpi_NRG_desc,
           },
           
         ]
       },
       
       {
-        title: <span><strong>Transaction </strong></span>,
+        title: <span><strong>{MSG.strings.kpi_tab2_title}</strong></span>,
         kpiList: [
           
           {
             value:"45",
             units:"",
-            title:["Txn", "/ Second"],
-            hoverContent: "Transactions per second, averaged over the last hour",
+            title:[MSG.strings.kpi_TXNPEAK_l1, MSG.strings.kpi_TXNPEAK_l2],
+            hoverContent: MSG.strings.kpi_TXNPEAK_desc,
           },
           {
             value:"85",
             units:"",
-            title:["24 Hr Peak", "Txn / Block"],
-            hoverContent: "Peak number of transactions / block observed in last 24 hours",
+            title:[MSG.strings.kpi_TXNTIME_l1, MSG.strings.kpi_TXNTIME_l2],
+            hoverContent: MSG.strings.kpi_TXNTIME_desc,
           },
           {
             value:"3991",
             units:"",
-            title:["24 Hr", "Txn Count"],
-            hoverContent: "Number of transactions observed in last 24 hours",
+            title:[MSG.strings.kpi_TXNCOUNT_l1, MSG.strings.kpi_TXNCOUNT_l2],
+            hoverContent: MSG.strings.kpi_TXNCOUNT_desc,
             tooltipPosition: Position.BOTTOM_RIGHT,
           },
         ]

@@ -19,6 +19,7 @@ import NCTokenLabel from 'components/common/NCTokenLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import * as MSG from 'lib/NCTerms';
 
  const row = {
     height:"100px",
@@ -32,7 +33,7 @@ export default class NCTknTable extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Token",
+        name: MSG.strings.Tkn_list_col1,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -40,7 +41,7 @@ export default class NCTknTable extends Component
         objPath: null,
       },
       {
-        name: "Decimal",
+        name: MSG.strings.Tkn_list_col2,
         isSortable: false,
         isFilterable: false,
         width: 70,
@@ -48,7 +49,7 @@ export default class NCTknTable extends Component
         objPath: null,
       },
       {
-        name: "Frozen Supply",
+        name: MSG.strings.Tkn_list_col3,
         isSortable: false,
         isFilterable: false,
         width: 150,
@@ -56,7 +57,7 @@ export default class NCTknTable extends Component
         objPath: null,
       },
       {
-        name: "Liquid Supply",
+        name: MSG.strings.Tkn_list_col4,
         isSortable: false,
         isFilterable: false,
         width: 150,
@@ -64,7 +65,7 @@ export default class NCTknTable extends Component
         objPath: null,
       },
       {
-        name: "Creator",
+        name: MSG.strings.Tkn_list_col5,
         isSortable: false,
         isFilterable: false,
         width: 200,
@@ -72,7 +73,7 @@ export default class NCTknTable extends Component
         objPath: null,
       },
       {
-        name: "Transaction", // arrow
+        name: MSG.strings.Tkn_list_col6, // arrow
         isSortable: false,
         isFilterable: false,
         width: 200,

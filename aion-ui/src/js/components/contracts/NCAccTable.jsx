@@ -14,6 +14,8 @@ import { nc_numPrettify, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterA
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 import {BigNumber} from 'bignumber.js';
 
+import * as MSG from 'lib/NCTerms';//MSG.strings.
+
 export default class NCAccTable extends Component 
 {
   constructor(props) {

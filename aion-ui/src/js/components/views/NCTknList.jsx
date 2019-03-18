@@ -15,6 +15,8 @@ import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger } fr
 import { tknListType } from 'lib/NCEnums';
 import * as network from 'network/NCNetworkRequests';
 
+
+
 class NCTknList extends Component
 {
   componentWillMount() {
@@ -101,14 +103,22 @@ class NCTknList extends Component
         break;
       }
     }
+    
+    let total = null;
+    
+    (store.response)?
+       total = store.response.page.totalElements
+    :
+       total = " ";
+
 
     const page =
       <div> 
-        <NCTKNExplorerHead
+        <NCExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"Tokens"}
-          subtitle={store.response}
+          title={MSG.strings.Tkn_list_title}
+          subtitle={total+ " " + MSG.strings.Tkn_list_desc}
         />  
         <NCTknTable 
           data={store.response}

@@ -60,11 +60,11 @@ class NCBlkList extends Component
     const breadcrumbs = [
       {
         link: '/',
-        body: 'Home',
+        body: MSG.strings.bread,
       },
       {
         link: '/blocks',
-        body: 'Blocks',
+        body: MSG.strings.bread_slice.blk,
       }
     ];
 
@@ -73,9 +73,9 @@ class NCBlkList extends Component
         <NCExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"Blocks"}
+          title={MSG.strings.Blk_list_title}
           subtitle={
-            listType == blkListType.ALL ? "Recent Blocks" : 
+            listType == blkListType.ALL ? MSG.strings.Blk_list_desc : 
             ("Sealed by Account: " + nc_hexPrefix(store.queryStr))
           }
         />  
