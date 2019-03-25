@@ -89,15 +89,15 @@ class NCBlkRetrieve extends Component
     const breadcrumbs = [
       {
         link: '/',
-        body: 'Home',
+        body: MSG.strings.bread,
       },
       {
         link: '/blocks',
-        body: 'Blocks',
+        body: MSG.strings.bread_slice.blk,
       },
       {
         link: '#',
-        body: 'Block Details',
+        body: MSG.strings.bread_crumb.blk,
       }
     ];
 

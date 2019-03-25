@@ -55,7 +55,7 @@ class NCTknRetrieve extends Component
   }
   
   //requestPaging = (pageNumber, pageSize, start, end)
-  requestPagingAccList = (pageNumber,pageSize,) => {
+  requestPagingAccList = (pageNumber,pageSize) => {
     const queryStr = this.props.tknRetrieve.queryStr;
     network.getTknRetrievePagingAccList(queryStr, pageNumber, pageSize);
   }
@@ -90,15 +90,15 @@ class NCTknRetrieve extends Component
     const breadcrumbs = [
       {
         link: '/',
-        body: 'Home',
+        body: MSG.strings.bread,
       },
       {
         link: '/tokens',
-        body: 'Tokens',
+        body: MSG.strings.bread_slice.tkn,
       },
       {
         link: '#',
-        body: 'Token Details',
+        body: MSG.strings.bread_crumb.tkn,
       }
     ];
     

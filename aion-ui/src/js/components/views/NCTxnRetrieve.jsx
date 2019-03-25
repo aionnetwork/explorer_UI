@@ -113,15 +113,15 @@ class NCTxnRetrieve extends Component
     const breadcrumbs = [
       {
         link: '/',
-        body: 'Home',
+        body: MSG.strings.bread,
       },
       {
         link: '/transactions',
-        body: 'Transactions',
+        body: MSG.strings.bread_slice.txn,
       },
       {
         link: '#',
-        body: 'Transaction Details',
+        body: MSG.strings.bread_crumb.txn,
       }
     ];
 

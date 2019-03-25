@@ -70,11 +70,11 @@ class NCTknList extends Component
     const breadcrumbs = [
       {
         link: '/',
-        body: 'Home',
+        body: MSG.strings.bread,
       },
       {
         link: '/tokens',
-        body: 'Tokens',
+        body: MSG.strings.bread_slice.tkn,
       }
     ];
 

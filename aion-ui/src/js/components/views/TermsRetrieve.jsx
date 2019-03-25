@@ -13,6 +13,7 @@ import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
 
+import * as MSG from 'lib/NCTerms';
 
 export default class TermsRetrieve extends Component
 { 
@@ -27,7 +28,7 @@ export default class TermsRetrieve extends Component
     const breadcrumbs = [
       {
         link: '/',
-        body: 'Home',
+        body: MSG.strings.bread,
       },
       {
         link: '/Terms',

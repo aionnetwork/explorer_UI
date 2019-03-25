@@ -67,22 +67,22 @@ class NCTxnList extends Component
     const breadcrumbs = [
       {
         link: '/',
-        body: 'Home',
+        body: MSG.strings.bread,
       },
       {
         link: '/transactions',
-        body: 'Transactions',
+        body: MSG.strings.bread,
       }
     ];
 
-    let subtitle = "Recent Transactions"; // txnListType.ALL
+    let subtitle = MSG.strings.bread; // txnListType.ALL
 
     const page =
       <div> 
         <NCExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={"Transactions"}
+          title={MSG.strings.bread}
           subtitle={subtitle}
         />  
         <NCTxnTable 

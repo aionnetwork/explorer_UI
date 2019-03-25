@@ -11,6 +11,8 @@ import { nc_decimalPrettify,nc_isStrEmpty, nc_numFormatter,nc_numPrettify, nc_nu
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 
+import * as MSG from 'lib/NCTerms';
+
 export default class NCTxnDetail extends Component
 {
   constructor(props) {
@@ -70,16 +72,16 @@ export default class NCTxnDetail extends Component
     let desc = 
     [
       {
-        field: "Time Sealed",
+        field: MSG.strings.Txn_detail_row1,
         value: moment.unix(entity.blockTimestamp).format('LLLL'),
       },
       {
-        field: entity.tokenSymbol == null? "Coin" : "Token",
+        field: entity.tokenSymbol == null? MSG.strings.Txn_detail_row2 : MSG.strings.Txn_detail_row2_alt1,
         value: 
                   entity.tokenSymbol == null? 
                   <NCEntityLabel
                   entityType={NCEntity.TKN}
-                  entityId="AION (native)"
+                  entityId={"AION ("+ MSG.strings.Txn_detail_row2_desc +")"}
                   linkActive={false}/>
                   :
                   <NCEntityLabel
@@ -89,25 +91,25 @@ export default class NCTxnDetail extends Component
               
       },
       {
-        field: "Transaction Hash",
+        field: MSG.strings.Txn_detail_row3,
         value: <NCEntityLabel
                   entityType={NCEntity.TXN}
                   entityId={entity.transactionHash}
                   linkActive={false}/>,
       },
       {
-        field: "Block Number",
+        field: MSG.strings.Txn_detail_row4,
         value: <NCEntityLabel
                   entityType={NCEntity.BLOCK}
                   entityId={entity.blockNumber}/>,
       },
       // ---------------------------------------------------------------
       {
-        field: "Value",
+        field: MSG.strings.Txn_detail_row5,
         value: entity.value == null ? EMPTY_STR : <span className="">{value + " " + unit}</span>,
       },
       {
-        field: "Nrg Price",
+        field: MSG.strings.Txn_detail_row6,
         value: entity.nrgPrice == null ? EMPTY_STR : 
             <span>
               { nc_numFormatterAmp(entity.nrgPrice, null) }
@@ -115,11 +117,11 @@ export default class NCTxnDetail extends Component
             </span>
       },
       {
-        field: "Nrg Consumed",
+        field: MSG.strings.Txn_detail_row7,
         value: entity.nrgConsumed != null ? nc_numFormatter(entity.nrgConsumed, 18) + " NRG" : EMPTY_STR,
       },
       {
-        field: "Status",
+        field: MSG.strings.Txn_detail_row8,
         value: entity.txError == null ? EMPTY_STR :
           (entity.txError == "") ?
           <span className="tx-status">
@@ -134,21 +136,21 @@ export default class NCTxnDetail extends Component
       },
       // ---------------------------------------------------------------
       {
-        field: "Index",
+        field: MSG.strings.Txn_detail_row9,
         value: entity.transactionIndex != null ? entity.transactionIndex : EMPTY_STR,
       },
       {
-        field: "Nonce",
+        field: MSG.strings.Txn_detail_row10,
         value: entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
       },
       {
-        field: "From Address",
+        field: MSG.strings.Txn_detail_row11,
         value: <NCEntityLabel 
                   entityType={NCEntity.ACCOUNT} 
                   entityId={entity.fromAddr}/>,
       },
       {
-        field: "To Address",
+        field: MSG.strings.Txn_detail_row12,
         value: entity.toAddr ? 
                 <NCEntityLabel 
                   entityType={NCEntity.ACCOUNT} 
@@ -162,7 +164,7 @@ export default class NCTxnDetail extends Component
        
       // ---------------------------------------------------------------
       {
-        field: "Txn Logs",
+        field: MSG.strings.Txn_detail_row13,
         value: parsedTxnLog ? 
         <pre className={"nc-resizable"}>
           {this.cpmessage}
@@ -176,7 +178,7 @@ export default class NCTxnDetail extends Component
         "No Transaction Logs",
       },
       {
-        field: "Input Data",
+        field: MSG.strings.Txn_detail_row14,
         value: parsedInputData ? 
                 (entity.toAddr ? 
                   <pre className={"nc-resizable"}>

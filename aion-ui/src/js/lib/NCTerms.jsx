@@ -112,6 +112,7 @@ export const strings = new LocalizedStrings({
     Blk_list_title: "Blocks",
     Blk_list_desc: "Recent blocks",
 
+
     Blk_list_col1: "Block #",
     Blk_list_col2: "Timestamp",
     Blk_list_col3: "Txn Count",
@@ -227,6 +228,8 @@ export const strings = new LocalizedStrings({
     Txn_detail_title: "Transaction",
     Txn_detail_row1: "Time Sealed",
     Txn_detail_row2: "Coin",
+    Txn_detail_row2_desc: "native",
+    Txn_detail_row2_alt1: "Token",
     Txn_detail_row3: "Transaction Hash",
     Txn_detail_row4: "Block Number",
     Txn_detail_row5: "value",
