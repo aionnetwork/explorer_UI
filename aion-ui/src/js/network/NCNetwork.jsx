@@ -173,6 +173,10 @@ export const endpoint = {
       link: '/aion/dashboard/getDailyAccountStatistics',
       params: []
     },
+    rich:{
+        link: '/aion/dashboard/getRichList',
+        params: []
+    },
     detail: {
       link: '/aion/dashboard/getAccountDetails',
       params: ['accountAddress','tokenAddress']

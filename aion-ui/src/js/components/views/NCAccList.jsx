@@ -8,6 +8,7 @@ import { Tab2, Tabs2 } from "@blueprintjs/core";
 import NCAccTableMiner from 'components/accounts/NCAccTableMiner';
 import NCAccTableInbound from 'components/accounts/NCAccTableInbound';
 import NCAccTableOutbound from 'components/accounts/NCAccTableOutbound';
+import NCRichList from 'components/accounts/NCRichList';
 
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
@@ -58,6 +59,12 @@ class NCAccList extends Component
     const outboundTxList = (store.response) ? store.response.txnOutbound : null;
     const isOutboundTxListValid = nc_isListValid(outboundTxList);
     const isOutboundTxListEmpty = nc_isListEmpty(outboundTxList, isOutboundTxListValid);
+
+    const richList = (store.response) ? store.response.richList : null;
+    const isRichListValid = nc_isListValid(richList);
+    const isRichListEmpty = nc_isListEmpty(richList, isRichListValid);
+
+    //(store.response.richList) ? console.log(JSON.stringify(store.response.richList)) : console.log(JSON.stringify(store.response));
 
     const breadcrumbs = [
       {
@@ -146,6 +153,32 @@ class NCAccList extends Component
       marginTop={40}
     />
 
+     const richListSection = <NCExplorerSection 
+      className={""}
+      subtitle={
+        <div className="NCPageBreakerSubtitle">{}</div>
+      }
+
+      isLoading={false}
+      isDataValid={isRichListValid}
+      isDataEmpty={isRichListEmpty} 
+      
+      loadingStr={MSG.Account.LOADING_LIST}
+      invalidDataStr={MSG.Account.INVALID_DATA}  
+      emptyDataStr={MSG.Transaction.DATA_POLICY_ACC_OUT_EMPTY}
+      isToplevelSection={false}
+      
+      content={
+        <NCRichList 
+          data={richList}
+          onPageCallback={null}
+          isLoading={false}
+          isPaginated={false}
+          isLatest={true}/>
+        }
+      marginTop={40}
+    />
+
     const page =
       <div> 
         <NCExplorerHead
@@ -154,10 +187,11 @@ class NCAccList extends Component
           title={"Account Lists"}
           subtitle={"Recent Accounts Statistics"}/>    
         <div className="NCSection">
-          <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
+          <Tabs2 id="NCSectionTabbed" default className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
             <Tab2 id="miner-acc" title="Miners" panel={minerListSection}/>
             <Tab2 id="inbound-acc" title="Accounts Inbound" panel={inboundTxListSection}/>
             <Tab2 id="outbound-acc" title="Accounts Outbound" panel={outboundTxListSection}/>
+            <Tab2 id="rich-list" title="Rich List" panel={richListSection}/>
           </Tabs2>
         </div>
       </div>;

@@ -16,19 +16,29 @@ export const SetTopLevel = (data) =>
     data: data,
   }
 }
+export const SetRichList = (data) => 
+{
+  return {
+    type: 'ACC_RICH_LIST',
+    data: data,
+  }
+}
 
-let initialState_StoreBlkList = 
+let initialState_StoreAccList = 
 {
   isLoadingTopLevel: false,
   response: {
     miners: null,
     txnInbound: null,
-    txnOutbound: null
+    txnOutbound: null,
+    richList: {
+      content: null
+    }
   },
   momentUpdated: null
 };
 
-export function reducer_accList (state = initialState_StoreBlkList, action) 
+export function reducer_accList (state = initialState_StoreAccList, action) 
 {
   switch(action.type)
   {
@@ -57,9 +67,20 @@ export function reducer_accList (state = initialState_StoreBlkList, action)
       _state.response.miners = action.data.miners;
       _state.response.txnInbound = action.data.txnInbound;
       _state.response.txnOutbound = action.data.txnOutbound;
+      //console.log(JSON.stringify(action.data.txnOutbound));
       
       _state.momentUpdated = moment();
       
+      return _state;
+    }
+    case 'ACC_RICH_LIST':
+    {
+      let _state = Object.assign({}, state);
+      
+      //console.log(JSON.stringify(action.data));
+                      
+      _state.response.richList.content = action.data.content;
+            
       return _state;
     }
 

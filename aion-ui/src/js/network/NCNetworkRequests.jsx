@@ -22,6 +22,7 @@ import * as StoreTknList from 'stores/StoreTknList';
 import * as StoreTknRetrieve from 'stores/StoreTknRetrieve';
 
 import * as StoreAccList from 'stores/StoreAccList';
+import * as StoreRichList from 'stores/StoreRichList';
 import * as StoreAccRetrieve from 'stores/StoreAccRetrieve';
 
 import * as StoreCntrList from 'stores/StoreCntrList';
@@ -366,10 +367,38 @@ export const getAccListTopLevel = () => {
     network.request(ep, params)
     .then((response) => {
       store.dispatch(StoreAccList.SetTopLevel(response));
+
+        //get the data for the rich list
+        getAccRichList();
+
     })
     .catch((error) => {
       console.log(error);
       store.dispatch(StoreAccList.SetTopLevel({}));
+    });
+  }
+}
+
+export const getAccRichList = () => {
+  
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    store.dispatch(StoreAccList.SetRichList({}));
+  }
+  else {
+    // get transaction list
+    const ep = network.endpoint.account.rich;
+    
+    let params = [];
+    
+    network.request(ep, params)
+    .then((response) => {
+
+      store.dispatch(StoreAccList.SetRichList(response));
+
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreAccList.SetRichList({}));
     });
   }
 }

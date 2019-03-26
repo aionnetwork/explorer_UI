@@ -41,7 +41,8 @@ export const store = createStore(combineReducers(
   txnList: reducer_txnList,
   txnRetrieve: reducer_txnRetrieve,  
 
-  accList: reducer_accList,
+  accList: reducer_accList, 
+  //richList: reducer_richList, 
   accRetrieve: reducer_accRetrieve,
 
   cntrList: reducer_cntrList,
