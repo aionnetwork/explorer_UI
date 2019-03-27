@@ -46,8 +46,6 @@ class NCSearchRetrieve extends Component
 
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
-
-
   }
 
   componentDidMount() {
@@ -55,17 +53,14 @@ class NCSearchRetrieve extends Component
   }
 
   componentWillReceiveProps(nextProps) {
-    this.isFirstRenderAfterMount = false;
-
-    
+    this.isFirstRenderAfterMount = false;    
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.params.term != this.props.params.term){
       this.requestTopLevel();
     }
-
- }
+  }
 
   requestTopLevel = () => {
     network.getRetrieveTopLevel(this.props.params.term);

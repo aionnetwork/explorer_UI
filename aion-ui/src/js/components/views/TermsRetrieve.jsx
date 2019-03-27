@@ -58,9 +58,9 @@ export default class TermsRetrieve extends Component
         isDataValid={true} 
         isDataEmpty={false}
        
-        loadingStr={"Loading terms"}
-        invalidDataStr={"Server error. Block structure invalid."}
-        emptyDataStr={"No block found for descriptor:."}
+        loadingStr={MSG.strings.Page.LOADING}
+        invalidDataStr={MSG.strings.Page.INVALID_}
+        emptyDataStr={MSG.strings.Page.LOADING}
 
         page={page}
 

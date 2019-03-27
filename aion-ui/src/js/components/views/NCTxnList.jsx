@@ -71,7 +71,7 @@ class NCTxnList extends Component
       },
       {
         link: '/transactions',
-        body: MSG.strings.bread,
+        body: MSG.strings.bread_slice.txn,
       }
     ];
 

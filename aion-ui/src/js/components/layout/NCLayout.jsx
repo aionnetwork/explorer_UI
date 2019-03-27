@@ -22,6 +22,7 @@ import { NC_ENV, disconnectSocket, stopInterval, intervalID } from 'network/NCNe
 import * as network from 'network/NCNetworkRequests';
 
 import appConfig from '../../../config.json';
+import * as MSG from 'lib/NCTerms';
 
 import ReactGA from 'react-ga';
 //ReactGA.initialize(appConfig.ga_key);
@@ -294,7 +295,18 @@ class NCLayout extends Component {
                 <MenuItem
                   className="nav-option"
                   
-                  text="Coming soon"
+                  text="English (En)"
+                />
+                <MenuItem
+                  className="nav-option"
+                  
+                  text=""
+                />
+
+                <MenuItem
+                  className="nav-option"
+                  
+                  text=""
                 />
                 
                                              
@@ -383,7 +395,7 @@ class NCLayout extends Component {
             <div className="pt-navbar-group navbar-group-left">
               <Link to={"/dashboard"} className="logo">
                 <img className="logo-img" src="img/logo/aion-icon.svg" alt="logo"/>
-                <span className="title">Dashboard v2.1</span>
+                <span className="title">{MSG.strings.Header_title}</span>
               </Link>
               <span className="pt-navbar-divider"></span>              
               <Popover

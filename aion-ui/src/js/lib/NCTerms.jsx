@@ -6,9 +6,8 @@ import LocalizedStrings from 'react-localization';
 export const strings = new LocalizedStrings({
   
   en: {
-    test:"this is the test string in english",
-
-    Header_title: "Dashboard",
+  
+    Header_title: "Dashboard 2.2",
     header_tab1: "Explorer",
     //views
     header_tab2: "Analytics",
