@@ -13,6 +13,7 @@ import { nc_numFormatter } from 'lib/NCUtility';
 //import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 //import NCLink from 'components/common/NCLink';
+import {strings as MSG} from 'lib/NCTerms'; //MSG.Acc_miners_col1
 
 import appConfig from '../../../config.json';
 
@@ -32,21 +33,21 @@ export default class NCAccTableMiner extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Address",
+        name: MSG.Acc_miners_col1,
         isSortable: false,
         isFilterable: false,
         width: null,
         flex: true,
       },
       {
-        name: "Avg Txn Per Mined Block",
+        name: MSG.Acc_miners_col2,
         isSortable: false,
         isFilterable: false,
         width: 200,
         flex: false,
       },
       {
-        name: "% Blocks Found (Last 24hr)",
+        name: MSG.Acc_miners_col3,
         isSortable: false,
         isFilterable: false,
         width: 200,

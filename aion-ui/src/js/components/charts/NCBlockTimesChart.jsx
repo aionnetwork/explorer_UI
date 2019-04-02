@@ -9,6 +9,7 @@ import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
+import {strings as MSG} from 'lib/NCTerms';//MSG.Chart_2_title
 
 const EMPTY_STR = "Not Available";
 import {BigNumber} from 'bignumber.js';
@@ -31,11 +32,11 @@ export default class NCBlockTimesChart extends Component
                 backgroundColor: mode,
             },
             title: {
-                text: 'Block Times Chart'
+                text: MSG.Chart_2_title
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                        MSG.Chart_2_subtitle_a : MSG.Chart_2_subtitle_b
             },
             xAxis: {
                 type: 'datetime'
@@ -44,7 +45,7 @@ export default class NCBlockTimesChart extends Component
                 //min:0,
                 type: 'logarithmic',
                 title: {
-                    text: 'Block time (seconds) '
+                    text: MSG.Chart_2_y_title
                 }
             },
             legend: {
@@ -82,7 +83,7 @@ export default class NCBlockTimesChart extends Component
 
             series: [{
                 type: 'area',
-                name: 'Block Times Chart',
+                name: MSG.Chart_2_series_title,
                 data: data,
                 tuboThreshold:15000,
                 

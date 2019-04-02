@@ -86,8 +86,8 @@ export default class NCCntrDetail extends Component
         value:  !entity.nonce ? EMPTY_STR : entity.nonce
       },
       {
-        field: "Notice",
-        value: <p>This is a special bridge contract. To learn more about it click <a href="https://docs.aion.network/docs/swap-overview">here</a> </p>
+        field: Cntr_detail_row7,
+        value: <p>{Cntr_detail_row7_sub_a} <a href="https://docs.aion.network/docs/swap-overview">{Cntr_detail_row7_sub_b}</a> </p>
       }
 
     ];

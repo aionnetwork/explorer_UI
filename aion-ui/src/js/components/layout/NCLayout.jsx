@@ -22,7 +22,7 @@ import { NC_ENV, disconnectSocket, stopInterval, intervalID } from 'network/NCNe
 import * as network from 'network/NCNetworkRequests';
 
 import appConfig from '../../../config.json';
-import * as MSG from 'lib/NCTerms';
+import {strings as MSG} from 'lib/NCTerms';
 
 import ReactGA from 'react-ga';
 //ReactGA.initialize(appConfig.ga_key);
@@ -116,7 +116,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/charts/ActiveAddressGrowth');
           }}
-          text="Active Address"
+          text={MSG.Metric_menu_item_1}
         /></div>
         <MenuItem
           className="nav-option"
@@ -124,7 +124,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/charts/BlockTime');
           }}
-          text="Block Times"
+          text={MSG.Metric_menu_item_2}
         />
         <MenuItem
           className="nav-option"
@@ -132,7 +132,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/charts/HashingPower');
           }}
-          text="Hash Power"
+          text={MSG.Metric_menu_item_3}
         />
         <MenuItem
           className="nav-option"
@@ -140,7 +140,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/charts/Difficulty');
           }}
-          text="Network Difficulty"
+          text={MSG.Metric_menu_item_4}
         />
         <MenuItem
           className="nav-option"
@@ -148,7 +148,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/charts/TopMiner');
           }}
-          text="Top Miners"
+          text={MSG.Metric_menu_item_5}
         />
         
          
@@ -158,7 +158,7 @@ class NCLayout extends Component {
             onClick={() => {
               hashHistory.push('/charts/TransactionsoverTime');
             }}
-            text="Transactions per Hour"
+            text={MSG.Metric_menu_item_6}
           />
 
 
@@ -176,21 +176,21 @@ class NCLayout extends Component {
               <MenuItem
                 className="nav-option"
                 iconName={NCEntityInfo[NCEntity.BLOCK].icon}
-                text="Explorer"
+                text={MSG.Mobile_menu_item_1}
               >
               {this.renderExplorerMenu()} 
               </MenuItem>
               <MenuItem
                 className="nav-option"
                 iconName={NCEntityInfo[NCEntity.BLOCK].icon}
-                text="Analytics"
+                text={MSG.Mobile_menu_item_2}
               >
               {this.renderMetricMenu()} 
               </MenuItem>
               <MenuItem
                 className="nav-option"
                 iconName={NCEntityInfo[NCEntity.BLOCK].icon}
-                text="Switch Network"
+                text={MSG.Mobile_menu_item_3}
               >
               {this.connectionMenuItemList} 
               </MenuItem>
@@ -219,7 +219,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/accounts');
           }}
-          text="Accounts"
+          text={MSG.Explorer_menu_item_1}
         /></div>
         <MenuItem
           className="nav-option"
@@ -227,7 +227,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/blocks');
           }}
-          text="Blocks"
+          text={MSG.Explorer_menu_item_2}
         />
         <MenuItem
           className="nav-option"
@@ -235,7 +235,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/contracts');
           }}
-          text="Contracts"
+          text={MSG.Explorer_menu_item_3}
         />
         <MenuItem
           className="nav-option"
@@ -243,7 +243,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/tokens');
           }}
-          text="Tokens"
+          text={MSG.Explorer_menu_item_4}
         />
         <MenuItem
           className="nav-option"
@@ -251,7 +251,7 @@ class NCLayout extends Component {
           onClick={() => {
             hashHistory.push('/transactions');
           }}
-          text="Transactions"
+          text={MSG.Explorer_menu_item_5}
         />
         
           
@@ -282,15 +282,15 @@ class NCLayout extends Component {
         <Popover
           content={
             <Menu className={mode + " NCNavMenu"}>
-              <MenuDivider title="Switch Network" />
+              <MenuDivider title={MSG.Connection_menu_item_1} />
               { menuItemList }
 
-              <MenuDivider title="Explorer Settings" />
+              <MenuDivider title={MSG.Connection_menu_item_2} />
 
         <MenuItem
               className="nav-option"
               iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}              
-              text="Language">
+              text={MSG.Connection_menu_item_4}>
 
                 <MenuItem
                   className="nav-option"
@@ -314,7 +314,7 @@ class NCLayout extends Component {
           </MenuItem>
           
           <FormGroup>
-            <Switch checked={this.state.darkMode} label="Dark Mode" onChange={() => {
+            <Switch checked={this.state.darkMode} label={MSG.Connection_menu_item_3} onChange={() => {
                 this.toggleMode();
             }} />
             
@@ -395,7 +395,7 @@ class NCLayout extends Component {
             <div className="pt-navbar-group navbar-group-left">
               <Link to={"/dashboard"} className="logo">
                 <img className="logo-img" src="img/logo/aion-icon.svg" alt="logo"/>
-                <span className="title">{MSG.strings.Header_title}</span>
+                <span className="title">{MSG.Header_title}</span>
               </Link>
               <span className="pt-navbar-divider"></span>              
               <Popover

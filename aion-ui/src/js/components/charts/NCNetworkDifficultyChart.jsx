@@ -5,6 +5,7 @@ import moment from 'moment';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
+import {strings as MSG} from 'lib/NCTerms';//MSG.Chart_4_title
 
 import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
@@ -44,11 +45,11 @@ export default class NCNetworkDifficultyChart extends Component
                 backgroundColor: mode,
             },
             title: {
-                text: 'Network Difficulty Chart'
+                text: MSG.Chart_4_title
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                        MSG.Chart_4_subtitle_a : MSG.Chart_4_subtitle_b
             },
             xAxis: {
                 type: 'datetime'
@@ -58,7 +59,7 @@ export default class NCNetworkDifficultyChart extends Component
                 type: type,
 
                 title: {
-                    text: 'Difficulty'
+                    text: MSG.Chart_4_y_title
                 }
             },
             legend: {
@@ -95,7 +96,7 @@ export default class NCNetworkDifficultyChart extends Component
 
             series: [{
                 type: 'area',
-                name: 'Network Difficulty',
+                name: MSG.Chart_4_series_title,
                 data: data
             }]
         }

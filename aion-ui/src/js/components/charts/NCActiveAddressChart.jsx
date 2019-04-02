@@ -9,8 +9,10 @@ import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
 
 //import NCEntityDetail from 'components/common/NCEntityDetail';
+import {strings as MSG} from 'lib/NCTerms';//MSG.Chart_1_title
 
 const EMPTY_STR = "Not Available";
+
 //import {BigNumber} from 'bignumber.js';
 
 export default class NCActiveAddressChart extends Component
@@ -32,11 +34,13 @@ export default class NCActiveAddressChart extends Component
                 useUTC: false,
             },
             title: {
-                text: 'Active Address Growth'
+                text: MSG.Chart_1_title
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                        MSG.Chart_1_subtitle_a
+                         :
+                        MSG.Chart_1_subtitle_b
             },
             xAxis: {
                 type: 'datetime'
@@ -81,7 +85,7 @@ export default class NCActiveAddressChart extends Component
 
             series: [{
                 type: 'area',
-                name: 'Total No of Addresses',
+                name: MSG.Chart_1_series_title,
                 data: data,
                 tuboThreshold:15000,
             }]

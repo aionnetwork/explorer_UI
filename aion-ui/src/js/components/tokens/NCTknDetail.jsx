@@ -15,7 +15,7 @@ import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 
 
-export default class NCTxnDetail extends Component
+export default class NCTknDetail extends Component
 {
   constructor(props) {
     super(props);

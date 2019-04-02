@@ -65,7 +65,7 @@ export default class NCCntrTable extends Component
         flex: true,
       }
       /*{
-        name: "Holders",
+        name: MSG.strings.Cntr_list_col5,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -73,7 +73,7 @@ export default class NCCntrTable extends Component
         objPath: null,
       },
       {
-        name: "Transfers",
+        name: MSG.strings.Cntr_list_col6,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -81,7 +81,7 @@ export default class NCCntrTable extends Component
         objPath: null,
       },
       {
-        name: "To Address",
+        name: MSG.strings.Cntr_list_col6,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -89,7 +89,7 @@ export default class NCCntrTable extends Component
         objPath: null,
       },
       {
-        name: "To Address",
+        name: MSG.strings.Cntr_list_col7,
         isSortable: false,
         isFilterable: false,
         width: null,

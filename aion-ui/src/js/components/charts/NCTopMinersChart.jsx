@@ -8,6 +8,8 @@ import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
 
+import {strings as MSG} from 'lib/NCTerms';//MSG.Chart_5_title
+
 import NCEntityDetail from 'components/common/NCEntityDetail';
 import appConfig from '../../../config.json';
 import { NC_ENV} from 'network/NCNetwork';
@@ -56,7 +58,7 @@ export default class NCTopMinersChart extends Component
         backgroundColor: mode, 
     },
     title: {
-        text: 'Top Miners For The Past 7 days'
+        text: MSG.Chart_5_title
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -102,7 +104,7 @@ export default class NCTopMinersChart extends Component
         }
     },
     series: [{
-        name: 'Mined Blocks',
+        name: MSG.Chart_5_title,
         colorByPoint: true,
         data: points
     }]

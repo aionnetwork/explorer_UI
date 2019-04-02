@@ -17,6 +17,7 @@ import NCCardBlock from 'components/dashboard/NCCardBlock';
 
 import { nc_LinkToEntity, NCEntity } from 'lib/NCEnums';
 import NCEntityLabel from 'components/common/NCEntityLabel';
+import {strings as MSG} from 'lib/NCTerms';//MSG.landing_blocks_text_a
 
 import moment from "moment";
 
@@ -143,17 +144,19 @@ class NCRecentBlocks extends Component
             <img  className="block-parent" src={(this.props.darkMode.data) ? "img/block/dark-block-indigo.svg" : "img/block/block-indigo.svg"}/>
             <div className="block-card">
               <div className="block-number">
-                <span className="subtitle pt-text-muted">Block # </span>
+                <span className="subtitle pt-text-muted">{ MSG.landing_blocks_text_a }</span>
                 <span className="title pt-text-muted">{ nextBlockNumber }</span>
               </div>
               <div className="block-pending">
-                <span className="subtitle pt-text-muted">{
-                  "To be proposed "+((nextTimeRemaining > 0) ? "in " : "")
-                }</span>
+                <span className="subtitle pt-text-muted">
+
+                { MSG.landing_blocks_text_e +((nextTimeRemaining > 0) ? MSG.landing_blocks_text_d + " " : "") }
+
+                </span>
                 <span className="remaining">{
                   (nextTimeRemaining > 0) ?
                   (nextTimeRemaining + "s") :
-                  ("momentarily ...")
+                  (MSG.landing_blocks_text_f)
                 }</span>
               </div>
             </div>

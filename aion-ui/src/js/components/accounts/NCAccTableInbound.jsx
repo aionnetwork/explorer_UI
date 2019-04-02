@@ -14,6 +14,8 @@ import { nc_numFormatter } from 'lib/NCUtility';
 import appConfig from '../../../config.json';
 
 import ReactGA from 'react-ga';
+import {strings as MSG} from 'lib/NCTerms'; //MSG.Acc_inbound_col1
+
 ReactGA.initialize(appConfig.ga_key);
 
 
@@ -30,28 +32,28 @@ export default class NCAccTableInbound extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Address",
+        name: MSG.Acc_inbound_col1,
         isSortable: false,
         isFilterable: false,
         width: null,
         flex: true,
       },
       {
-        name: "Txn Count",
+        name: MSG.Acc_inbound_col2,
         isSortable: false,
         isFilterable: false,
         width: 100,
         flex: false,
       },
       {
-        name: "Avg NRG Price / Txn",
+        name: MSG.Acc_inbound_col3,
         isSortable: false,
         isFilterable: false,
         width: 160,
         flex: false,
       },
       {
-        name: "Avg NRG Consumed / Txn",
+        name: MSG.Acc_inbound_col4,
         isSortable: false,
         isFilterable: false,
         width: 200,

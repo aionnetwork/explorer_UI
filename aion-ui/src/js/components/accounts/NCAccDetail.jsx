@@ -10,9 +10,10 @@ import { nc_decimalPrettify } from 'lib/NCUtility';
 //import NCLink from 'components/common/NCLink';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
+import {strings as MSG} from 'lib/NCTerms';//MSG.Acc_detail_row3
 
-const EMPTY_STR = "Not Available";
-const NOT_CONTRACT = "Not a Contract";
+const EMPTY_STR = MSG.empty_string; //"Not Available";
+const NOT_CONTRACT = MSG.not_contract; //"Not a Contract";
 export default class NCAccDetail extends Component
 {
 
@@ -27,33 +28,33 @@ export default class NCAccDetail extends Component
 
     let desc = [
       {
-        field: "Address",
+        field: MSG.Acc_detail_row2,
         value:  <NCEntityLabel
                   entityType={ NCEntity.ACCOUNT }
                   entityId={ entity.address }
                   linkActive={ false }/>
       },
       {
-        field: "Balance",
+        field: MSG.strings.Acc_detail_row2,
         value:  entity.tokenName  ?
-                entity.balance == null ? "Balance Service Unavailable" :
+                entity.balance == null ? MSG.Acc_detail_row2_subtitle_a :
                 <span className="">
                   {balance + " " + entity.tokenName}                
                 </span>
                 :
-                entity.balance == null ? "Balance Service Unavailable" :
+                entity.balance == null ? MSG.Acc_detail_row2_subtitle_a :
                 <span className="">{balance + " AION"}
-                  <span className="subtitle">{"(as of block " + entity.lastBlockNumber + ")"}</span>
+                  <span className="subtitle">{"("+ MSG.Acc_detail_row2_subtitle_a +"  "+ entity.lastBlockNumber + ")"}</span>
                 </span>
 
 
       },
       {
-        field: "Nonce",
+        field: MSG.Acc_detail_row3,
         value: !entity.nonce ? EMPTY_STR : entity.nonce
       },
       {
-        field: entity.contract ?"Contract view" : "",
+        field: entity.contract ? Acc_detail_row4 : "",
         value: entity.contract ? <NCEntityLabel
                   entityType={ NCEntity.CNTR }
                   entityId={ entity.address }
@@ -61,7 +62,7 @@ export default class NCAccDetail extends Component
                   :""
       },
       {
-        field: "",
+        field: MSG.Acc_detail_row5,
         value: tokenList
       },
       

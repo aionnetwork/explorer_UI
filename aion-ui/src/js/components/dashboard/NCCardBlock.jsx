@@ -7,6 +7,7 @@ import { nc_LinkToEntity } from 'lib/NCUtility';
 import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import moment from "moment";
+import {strings as MSG} from 'lib/NCTerms';//MSG.landing_blocks_text_a
 
 export default class NCCardBlock extends Component
 {
@@ -25,11 +26,11 @@ export default class NCCardBlock extends Component
         <img className="block-child" src={ isEmpty ? ((this.props.darkMode.data) ? "img/block/dark-block-grey.svg" : "img/block/block-grey.svg") : ((this.props.darkMode.data) ? "img/block/dark-block-indigo.svg" : "img/block/block-indigo.svg") }/>
         <div className={"block-card card-hover "+(isEmpty ? "" : "non-empty-block") }>
           <div className="block-number">
-            <span className="subtitle pt-text-muted">Block #</span>
+            <span className="subtitle pt-text-muted">{ MSG.landing_blocks_text_a }</span>
             <span className="title">{ blk.blockNumber != null ? blk.blockNumber : "Undefined" }</span>
           </div>
           <div className="proposer">
-            <span className="subtitle pt-text-muted">Proposed by</span>
+            <span className="subtitle pt-text-muted">{ MSG.landing_blocks_text_b }</span>
             <NCEntityLabel
               entityType={NCEntity.ACCOUNT}
               entityId={blk.minerAddress}/>
@@ -37,10 +38,10 @@ export default class NCCardBlock extends Component
           </div>
           <div className="transaction-count">
             <span className="num-txns">{ blk.numTransactions != null ? blk.numTransactions : "0" }</span>
-            <span className="txns-subtitle pt-text-muted">Transactions</span>
+            <span className="txns-subtitle pt-text-muted">{ MSG.landing_blocks_text_c }</span>
             {
               (blk.blockTime != null) &&
-              <span className="txns-subtitle pt-text-muted">in</span>
+              <span className="txns-subtitle pt-text-muted">{ MSG.landing_blocks_text_d }</span>
             }
             {
               (blk.blockTime != null) &&

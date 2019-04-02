@@ -19,6 +19,12 @@ export const strings = new LocalizedStrings({
     landing_blocks_title: "RECENT BLOCKS",
     landing_transactions_title: "RECENT TRANSACTIONS",
     landing_view_link: "View all",
+    landing_blocks_text_a: "Block #",
+    landing_blocks_text_b: "Proposed by ",
+    landing_blocks_text_c: "Transactions",
+    landing_blocks_text_d: "in",
+    landing_blocks_text_e: "To be proposed ",
+    landing_blocks_text_f: "momentarily... ",
 
     landing_txn_table_col1: "Age",
     landing_txn_table_col2: "Value",
@@ -75,12 +81,18 @@ export const strings = new LocalizedStrings({
     Acc_outbound_col3: "Avg NRG Price / Txn",
     Acc_outbound_col4: "Avg NRG Consumed / Txn",
 
+    Acc_rich_col1: "Address",
+    Acc_rich_col2: "Balance",
+    Acc_rich_col3: "Holdings (%)",
+
     Acc_detail_title: "Account",
     Acc_detail_row1: "Address",
     Acc_detail_row2: "Balance",
-    Acc_detail_row2_subtitle: "as of block",
+    Acc_detail_row2_subtitle_a: "Balance Service Unavailable",
+    Acc_detail_row2_subtitle_b: "as of block",
     Acc_detail_row3: "Nonce",
-    Acc_detail_row4: "Token balance",
+    Acc_detail_row4: "Contract view",
+    Acc_detail_row5: "Token balance",
 
     Acc_detail_tab1: "Transactions",
     Acc_detail_tab2: "Mined Blocks",
@@ -159,6 +171,9 @@ export const strings = new LocalizedStrings({
     Cntr_detail_row4: "Creator",
     Cntr_detail_row5: "Balance",
     Cntr_detail_row6: "Nonce",
+    Cntr_detail_row7: "Notice",
+    Cntr_detail_row7_sub_a: "This is a special bridge contract. To learn more about it click",
+    Cntr_detail_row7_sub_b: "here",
 
     Cntr_detail_tab1: "Transactions",
     Cntr_detail_tab2: "Events",
@@ -178,6 +193,7 @@ export const strings = new LocalizedStrings({
     //Tokens
     Tkn_list_title: "Tokens",
     Tkn_list_desc: "Total Tokens",
+    Tkn_head_text_a: " Total Tokens",
 
     Tkn_list_col1: "Token",
     Tkn_list_col2: "Decimal",
@@ -253,10 +269,74 @@ export const strings = new LocalizedStrings({
     Txn_detail_tab1_col7: "",
 
     //graphs
+    Chart_1_title: 'Active Address Growth',
+    Chart_1_subtitle_a: 'Click and drag in the plot area to zoom in',
+    Chart_1_subtitle_b: 'Pinch the chart to zoom in',
+    Chart_1_y_title: 'Address total',
+    Chart_1_series_title: 'Total No of Addresses',
 
-         
+    Chart_2_title: 'Block Times Chart',
+    Chart_2_subtitle_a: 'Click and drag in the plot area to zoom in',
+    Chart_2_subtitle_b: 'Pinch the chart to zoom in',
+    Chart_2_y_title: 'Block time (seconds) ',
+    Chart_2_series_title: 'Block Times Chart',
+
+    Chart_3_title: 'Hash Power Chart',
+    Chart_3_subtitle_a: 'Click and drag in the plot area to zoom in',
+    Chart_3_subtitle_b: 'Pinch the chart to zoom in',
+    Chart_3_y_title: 'Hash Power  (sols/sec)',
+    Chart_3_series_title: 'Hashpower (sols/sec)',
+
+    Chart_4_title: 'Network Difficulty Chart',
+    Chart_4_subtitle_a: 'Click and drag in the plot area to zoom in',
+    Chart_4_subtitle_b: 'Pinch the chart to zoom in',
+    Chart_4_y_title: 'Difficulty',
+    Chart_4_series_title: 'Network Difficulty',
+
+    Chart_5_title: 'Top Miners For The Past 7 days',
+    Chart_5_series_title: 'Mined Blocks',
+
+    Chart_6_title: 'Transaction per Hour',
+    Chart_6_subtitle_a: 'Click and drag in the plot area to zoom in',
+    Chart_6_subtitle_b: 'Pinch the chart to zoom in',
+    Chart_6_y_title: 'Transactions)',
+    Chart_6_series_title: 'Transactions per Hour',
+
+    //metric menu
+    Metric_menu_item_1: "Active Address",
+    Metric_menu_item_2: "Block Times",
+    Metric_menu_item_3: "Hash Power",
+    Metric_menu_item_4: "Network Difficulty",
+    Metric_menu_item_5: "Top Miners",
+    Metric_menu_item_6: "Transactions per Hour",
+
+    //Explorer menu
+    Explorer_menu_item_1: "Accounts",
+    Explorer_menu_item_2: "Blocks",
+    Explorer_menu_item_3: "Contracts",
+    Explorer_menu_item_4: "Tokens",
+    Explorer_menu_item_5: "Transactions",
+    //Connection menu
+    Connection_menu_item_1: "Switch Network",
+    Connection_menu_item_2: "Explorer Settings",
+    Connection_menu_item_3: "Dark Mode",
+    Connection_menu_item_4: "Language",
+    //Mobile menu
+    Mobile_menu_item_1: "Explorer",
+    Mobile_menu_item_2: "Analytics",
+    Mobile_menu_item_3: "Switch Network",
+    //Liveliness display
+    Live_str_1: "Latest block",
+    Live_str_2: "observed at",
+    //search
+    Search_placeholder: 'Search for Account / Block / Contract / Transaction / Token',
+    Search_filter: "Filter By  ",
+
+
     //utils such as paging and misc strings
     time_r: "Retrieved",
+    empty_string: "Not Available",
+    not_contract: "Not a Contract",
 
     paging_str1: "First page",
     paging_str2: "Prev",

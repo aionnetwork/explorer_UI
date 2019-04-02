@@ -14,7 +14,7 @@ import { nc_numPrettify, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterA
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 import {BigNumber} from 'bignumber.js';
 
-import * as MSG from 'lib/NCTerms';//MSG.strings.
+import * as MSG from 'lib/NCTerms';//MSG.Cntr_list_col1
 
 export default class NCAccTable extends Component 
 {
@@ -24,7 +24,7 @@ export default class NCAccTable extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Block #",
+        name: MSG.Cntr_list_col1,
         isSortable: false,
         isFilterable: false,
         width: 120,
@@ -32,15 +32,15 @@ export default class NCAccTable extends Component
         objPath: 'blockNumber',
       },
       {
-        name: "Account",
+        name: MSG.Cntr_list_col2,
         isSortable: false,
         isFilterable: false,
         width: 200,
         flex: false,
-        objPath: 'holderAddr',
+        objPath: MSG.Cntr_list_col3,
       },
       {
-        name: "Contract",
+        name: MSG.Cntr_list_col3,
         isSortable: false,
         isFilterable: false,
         width: 90,
@@ -48,7 +48,7 @@ export default class NCAccTable extends Component
         objPath: 'contractAddr',
       },
       {
-        name: "Balance",
+        name: MSG.Cntr_list_col4,
         isSortable: false,
         isFilterable: false,
         width: 110,

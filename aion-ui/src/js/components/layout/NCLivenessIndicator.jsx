@@ -7,6 +7,7 @@ import { Popover, PopoverInteractionKind, Position, Spinner, Intent } from "@blu
 import NCEntityLabel from 'components/common/NCEntityLabel';
 import { NCEntity } from 'lib/NCEnums';
 import NCTimescale from 'components/common/NCTimescale';
+import {strings as MSG} from 'lib/NCTerms';
 
 const LIVENESS_DELTA_SECONDS = 60 * 5; // 5 min
 const LIVENESS_THRESHOLD_BLOCKS = 10; // ok to be +/- 10 blocks around chain head
@@ -57,12 +58,12 @@ export default class NCLivenessIndicator extends Component
         {
           (isDataAvailable) &&
           <div className="liveness-indicator">
-            <span className="desc">{ dbLagStr + "Latest block" }</span>    
+            <span className="desc">{ dbLagStr + " " + MSG.Live_str_1}</span>
             <NCEntityLabel
               entityType={NCEntity.BLOCK}
               entityName={latestBlockNumber} 
               entityId={latestBlockNumber}/>
-            <span className="desc">observed at</span>     
+            <span className="desc">{MSG.Live_str_2}</span>
             <NCTimescale dateObjArr={[momentEnd]} isMedium={true}/>
           </div>
         }

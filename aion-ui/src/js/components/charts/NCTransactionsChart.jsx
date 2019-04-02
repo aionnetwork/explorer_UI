@@ -6,6 +6,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
+import {strings as MSG} from 'lib/NCTerms';//MSG.Chart_6_title
 
 const EMPTY_STR = "Not Available";
 import {BigNumber} from 'bignumber.js';
@@ -27,11 +28,11 @@ export default class NCTransactionsChart extends Component
                 useUTC: false,
             },
             title: {
-                text: 'Transaction per Hour'
+                text: MSG.Chart_6_title
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                        MSG.Chart_6_subtitle_a : MSG.Chart_6_subtitle_b
             },
             xAxis: {
                 type: 'datetime'
@@ -39,7 +40,7 @@ export default class NCTransactionsChart extends Component
             yAxis: {
                 min:0,
                 title: {
-                    text: 'Transactions'
+                    text: MSG.Chart_6_y_title
                 }
             },
             legend: {
@@ -76,7 +77,7 @@ export default class NCTransactionsChart extends Component
 
             series: [{
                 type: 'area',
-                name: 'Transactions per Hour',
+                name: MSG.Chart_6_series_title,
                 data: data
             }]
         }

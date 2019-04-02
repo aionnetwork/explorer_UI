@@ -5,8 +5,9 @@ import { Link } from 'react-router';
 import moment from 'moment';
 
 import NCTimescale from 'components/common/NCTimescale';
+import * as MSG from 'lib/NCTerms';
 
-export default class NCExplorerHead extends Component
+export default class NCTKNExplorerHead extends Component
 {
   render() {
     const { breadcrumbs, momentUpdated, title, subtitle } = this.props;
@@ -45,7 +46,7 @@ export default class NCExplorerHead extends Component
             }
             {
               subtitle && 
-              <h2 className="desc">{subtitle.totalTokens + " Total Tokens"}</h2>
+              <h2 className="desc">{subtitle.totalTokens + MSG.Tkn_head_text_a}</h2>
             }
             </span>
           </span>

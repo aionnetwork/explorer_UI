@@ -7,6 +7,7 @@ import { InputGroup, Button, Intent, Popover, Menu, MenuItem, Position } from "@
 import { NCEntity, NCEntityServerMapping, NCEntityInfo } from 'lib/NCEnums';
 import { nc_FindEntity, nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, nc_isStrEmpty, nc_trim } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
+import {strings as MSG} from 'lib/NCTerms';
 
 export default class NCTopLevelSearch extends Component
 {
@@ -95,7 +96,7 @@ export default class NCTopLevelSearch extends Component
 
                 position={Position.BOTTOM_RIGHT}>
                 <Button className={"pt-minimal pt-min-toplvl"} rightIconName={"caret-down"}>
-                    Filter By  {NCEntityInfo[this.state.entity].name}
+                    {MSG.Search_filter + " " + NCEntityInfo[this.state.entity].name}
                 </Button>
             </Popover>
         );
@@ -106,7 +107,7 @@ export default class NCTopLevelSearch extends Component
           name="search"
           className="search-bar"
           disabled={this.state.isFetching}
-          placeholder="Search for Account / Block / Contract / Transaction / Token"
+          placeholder={MSG.Search_placeholder}
           value={this.state.queryStr}
           onChange={(e) => this.setQueryStr(e.target.value)}
           onKeyPress={(e) => { if(e.key === 'Enter'){ this.submitQuery() }}}
