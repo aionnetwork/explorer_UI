@@ -35,7 +35,7 @@ export default class NCAccDetail extends Component
                   linkActive={ false }/>
       },
       {
-        field: MSG.strings.Acc_detail_row2,
+        field: MSG.Acc_detail_row2,
         value:  entity.tokenName  ?
                 entity.balance == null ? MSG.Acc_detail_row2_subtitle_a :
                 <span className="">

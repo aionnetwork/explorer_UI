@@ -1,7 +1,9 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import { Link, hashHistory } from 'react-router'
 import { connect } from 'react-redux';
 import moment from 'moment';
+import queryString from 'query-string';
 
 import { Tab2, Tabs2 } from "@blueprintjs/core";
 
@@ -23,12 +25,22 @@ import * as network from 'network/NCNetworkRequests';
 
 class NCAccList extends Component
 {
+  constructor(props) {
+    super(props);
+    console.log(JSON.stringify(props));
+    this.state = {tab : "miner-acc",};
+  }
   componentWillMount() {
     this.isFirstRenderAfterMount = true;
+    const values = queryString.parse(this.props.location.search);
+    this.setState({ tab : values.tab });
+    //console.log(values.tab); // "top"
   }
 
   componentDidMount() {
+
     this.requestTopLevel();
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,7 +50,11 @@ class NCAccList extends Component
   componentDidUpdate(prevProps, prevState) {
     // empty
   }
-
+  handleTabChange = (e) => {
+    //set the prop
+    this.setState({ tab : e });
+    hashHistory.replace('/accounts?tab=' + e);
+  }
   requestTopLevel = () => {
     network.getAccListTopLevel();
   }
@@ -187,7 +203,7 @@ class NCAccList extends Component
           title={"Account Lists"}
           subtitle={"Recent Accounts Statistics"}/>    
         <div className="NCSection">
-          <Tabs2 id="NCSectionTabbed" default className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
+          <Tabs2 id="NCSectionTabbed" selectedTabId={this.state.tab} onChange={this.handleTabChange} default className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
             <Tab2 id="miner-acc" title="Miners" panel={minerListSection}/>
             <Tab2 id="inbound-acc" title="Accounts Inbound" panel={inboundTxListSection}/>
             <Tab2 id="outbound-acc" title="Accounts Outbound" panel={outboundTxListSection}/>
