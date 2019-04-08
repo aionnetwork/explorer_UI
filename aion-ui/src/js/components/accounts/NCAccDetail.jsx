@@ -54,7 +54,7 @@ export default class NCAccDetail extends Component
         value: !entity.nonce ? EMPTY_STR : entity.nonce
       },
       {
-        field: entity.contract ? Acc_detail_row4 : "",
+        field: entity.contract ? MSG.Acc_detail_row4 : "",
         value: entity.contract ? <NCEntityLabel
                   entityType={ NCEntity.CNTR }
                   entityId={ entity.address }
