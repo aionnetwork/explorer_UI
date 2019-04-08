@@ -74,8 +74,8 @@ export default class NCPaginationFoot extends Component
                   <option value="100">100</option>
                 }
                 
-                {(((!isLastPage)&&(pageNumber*250<totalElements))||(pageSize==250))&&
-                  <option value="250">250</option> 
+                {(((!isLastPage)&&(pageNumber*200<totalElements))||(pageSize==200))&&
+                  <option value="200">200</option>
                 }            
                
               </select>
