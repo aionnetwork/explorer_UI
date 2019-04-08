@@ -383,7 +383,7 @@ class NCLayout extends Component {
     let mode = (this.props.darkMode.data) ? "darkMode" : ""; 
     this.renderConnectionMenu(this.networkList,mode);
     
-    let style = {fontSize:'11px'}
+    let style = {fontSize:'11px',marginTop:'-2px'}
 
     return (
       <div className={mode + " NCPage"}>

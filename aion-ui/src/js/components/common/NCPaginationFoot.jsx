@@ -45,7 +45,7 @@ export default class NCPaginationFoot extends Component
         {(totalPages > 1) && (totalElements > 25) &&
           <div className="row-count hide">
           <span className="pt-text-muted">
-            Page size  :
+            Page size  {"  "}
              <select id="topic-input" 
                      onChange= {(e) => {
                         this.serchDirection = SEARCH_DIR.FORWARD;
