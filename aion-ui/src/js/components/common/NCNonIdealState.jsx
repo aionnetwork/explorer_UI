@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'; 
 import { DateRangeInput } from "@blueprintjs/datetime";
 import { Button } from "@blueprintjs/core";
+import {strings as MSG} from 'lib/NCTerms';
 
 
 export default class NCNonIdealState extends Component
@@ -92,7 +93,7 @@ export default class NCNonIdealState extends Component
               <Link to="/">
                 <button type="button" className="pt-button pt-intent-primary pt-minimal nc-minimal-btn-shadow">
                   <span className="pt-icon-standard pt-icon-home"></span>
-                  Navigate Home
+                  {MSG.non_ideal_state_home_link_text}
                 </button>
               </Link>
               

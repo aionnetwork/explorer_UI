@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DateRangePicker, DateRangeInput } from "@blueprintjs/datetime";
+import {strings as MSG} from 'lib/NCTerms';
 
 import moment from 'moment';
 import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";

@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import moment from 'moment';
 
 import NCTimescale from 'components/common/NCTimescale';
+import {strings as MSG} from 'lib/NCTerms';
 
 export default class NCExplorerHead extends Component
 {
@@ -53,7 +54,7 @@ export default class NCExplorerHead extends Component
           { 
             (momentUpdated && moment(momentUpdated).isValid()) &&
             <div className="updated hide">
-              <span className="title">Retrieved:</span> 
+              <span className="title">MSG.time_r</span>
               <NCTimescale
                 dateObjArr={[momentUpdated]}
                 isMedium={true}/>

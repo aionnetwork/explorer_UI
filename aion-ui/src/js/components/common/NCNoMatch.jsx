@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NCNonIdealState from "components/common/NCNonIdealState";
+import {strings as MSG} from 'lib/NCTerms';
 
 export default class NCNoMatch extends Component {
 
@@ -8,8 +9,8 @@ export default class NCNoMatch extends Component {
 			<NCNonIdealState
 				paddingTop={140}
 				icon={"pt-icon-offline"}
-				title={"Oops ... Page Not Found"}
-				description={"You've found a page that doesn't exist."}/>
+				title={MSG.no_match_title}
+				description={MSG.no_match_description}/>
 		);
 	}
 }

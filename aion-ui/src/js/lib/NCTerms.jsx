@@ -338,6 +338,14 @@ export const strings = new LocalizedStrings({
     empty_string: "Not Available",
     not_contract: "Not a Contract",
 
+    dialog_title:"Event logs",
+    dialog_subtitle_1:"Logs",
+    dialog_subtitle_2:"Inputs",
+
+    no_match_title: "Oops ... Page Not Found",
+    no_match_description: "You've found a page that doesn't exist.",
+    non_ideal_state_home_link_text: "Navigate Home",
+
     paging_str1: "First page",
     paging_str2: "Prev",
     paging_str3: "Page",

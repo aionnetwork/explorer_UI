@@ -1,15 +1,14 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
 
 import moment from 'moment';
-import { Tooltip, AnchorButton, Dialog,Button,Overlay, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, TruncatedFormat } from "@blueprintjs/table"
+import {  Dialog, Position } from "@blueprintjs/core";
 
-import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
-import { nc_trim, nc_GetEntityIcon, nc_LinkToEntity } from 'lib/NCUtility';
+
+
 
 import appConfig from '../../../config.json';
+import {strings as MSG} from 'lib/NCTerms';
 
 import ReactGA from 'react-ga';
 ReactGA.initialize(appConfig.ga_key);
@@ -36,17 +35,17 @@ export default class NCDialog extends Component
 
    render() {
 
-    let { contract, param=[], input=[],title="View", className="", enabled=true } = this.props;
+    let {  param=[], input=[],title="View" } = this.props;
 
-    let isOpen = false
+    //let isOpen = false
 
     const style ={width:'90%', padding:'5px', flex: 1, flexWrap: 'wrap',marginLeft:'15px'}
     const NCdialogcontainer = {width:'100%',padding:'5px', wordWrap: 'break-word'}
     const panel ={background:'#eee',padding:'10px',margin:'15px'}
-    const inputPanel ={background:'#fff',padding:'10px',margin:'15px'}
+    //const inputPanel ={background:'#fff',padding:'10px',margin:'15px'}
 
     const inputList = input;//this.format(input);
-    const paramList = param;//this.format(param);
+    //const paramList = param;//this.format(param);
 
     return( 
         <span 
@@ -58,7 +57,7 @@ export default class NCDialog extends Component
                    
                     icon="info-sign"
                     onClose={this.handleClose}
-                    title="Event logs"
+                    title={MSG.dialog.title}
                     autoFocus= {true}
                     canEscapeKeyClose= {true}
                     canOutsideClickClose= {true}
@@ -70,13 +69,13 @@ export default class NCDialog extends Component
                 >
                 <div style={NCdialogcontainer} >
 
-                      <h5>Logs</h5>
+                      <h5>{MSG.dialog.subtitle_1}Logs</h5>
 
                       {param.map(function(name, index){
                           return <div key={ index }><p style={style} ><strong >{name}</strong>: <br/> {input[index]}</p></div>;
                        })}
 
-                      <h5>Inputs</h5>
+                      <h5>{MSG.dialog.subtitle_2}</h5>
                       <div style={panel}>
                       {inputList.map(function(name, index){
                           return <p  key={ index }><span>{name}</span></p>;

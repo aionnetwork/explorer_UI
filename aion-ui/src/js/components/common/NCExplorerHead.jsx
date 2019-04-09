@@ -53,7 +53,7 @@ export default class NCExplorerHead extends Component
           { 
             (momentUpdated && moment(momentUpdated).isValid()) &&
             <div className="updated hide">
-              <span className="title hide">Retrieved:</span> 
+              <span className="title hide">{MSG.response_date}</span>
               <NCTimescale
                 dateObjArr={[momentUpdated]}
                 isMedium={true}/>
