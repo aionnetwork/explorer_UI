@@ -1,0 +1,9 @@
+// Require the module and instantiate instance
+var TJO = require('translate-json-object')();
+
+// Choose the service to use google/yandex,
+// if you provide both yandex will be used as the default
+TJO.init({
+  googleApiKey: 'api_key',
+  yandexApiKey: 'api_key'
+});

@@ -314,18 +314,16 @@ class NCLayout extends Component {
                 <MenuItem
                   className="nav-option"
                   onClick={() => {
-                              console.log('test '+ language);
-                              changeLanguage('es');
-                              console.log('test '+ language);
-                            }}
+                     changeLanguage('zn');
+                  }}
                   text="Chinese (Zn)"
                 />
 
                 <MenuItem
                   className="nav-option"
                   onClick={() => {
-                              //hashHistory.push('/charts/BlockTime');
-                            }}
+                     changeLanguage('es');//.then(function(language){console.log('test '+ language);});
+                   }}
                   text="Spanish (Es)"
                 />
                 
