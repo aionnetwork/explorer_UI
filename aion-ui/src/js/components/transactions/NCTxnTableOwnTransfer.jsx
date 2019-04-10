@@ -19,6 +19,7 @@ import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityL
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 import { nc_numFormatterAionCoin, nc_decimalPrettify, nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
 //import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import {strings as MSG} from 'lib/NCTerms';
 
 export default class NCTxnTableOwnTransfer extends Component 
 {
@@ -28,7 +29,7 @@ export default class NCTxnTableOwnTransfer extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Block #",
+        name: MSG.Txn_list_own_trn_col1,
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -36,7 +37,7 @@ export default class NCTxnTableOwnTransfer extends Component
         objPath: null,
       },
       {
-        name: "Timestamp",
+        name: MSG.Txn_list_own_trn_col2,
         isSortable: false,
         isFilterable: false,
         width: 160,
@@ -44,7 +45,7 @@ export default class NCTxnTableOwnTransfer extends Component
         objPath: null,
       },
       {
-        name: "Value",
+        name: MSG.Txn_list_own_trn_col3,
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -52,7 +53,7 @@ export default class NCTxnTableOwnTransfer extends Component
         objPath: null,
       },
       /*{
-        name: "Raw Value",
+        name: MSG.Txn_list_own_trn_col4,
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -60,7 +61,7 @@ export default class NCTxnTableOwnTransfer extends Component
         objPath: null,
       },*/
       {
-        name: "Transaction Hash",
+        name: MSG.Txn_list_own_trn_col5,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -68,7 +69,7 @@ export default class NCTxnTableOwnTransfer extends Component
         objPath: null,
       },
       {
-        name: "From Address",
+        name: MSG.Txn_list_own_trn_col6,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -83,7 +84,7 @@ export default class NCTxnTableOwnTransfer extends Component
         flex: false,
       },
       {
-        name: "To Address",
+        name: MSG.Txn_list_own_trn_col7,
         isSortable: false,
         isFilterable: false,
         width: null,

@@ -18,6 +18,7 @@ import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityL
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import {strings as MSG} from 'lib/NCTerms';
 
 export default class NCTxnEventLogTable extends Component 
 {
@@ -27,7 +28,7 @@ export default class NCTxnEventLogTable extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Logs",
+        name: MSG.Txn_event_log_col1,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -46,7 +47,7 @@ export default class NCTxnEventLogTable extends Component
   generateTableContent(entityList) 
   {
     let tableContent = [];
-    console.log(JSON.stringify(entityList));
+    //console.log(JSON.stringify(entityList));
 
     entityList.forEach((entity, i) => 
     {

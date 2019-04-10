@@ -18,6 +18,7 @@ import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityL
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import {strings as MSG} from 'lib/NCTerms';
 
 export default class NCTxnTableOwnToken extends Component 
 {
@@ -27,7 +28,7 @@ export default class NCTxnTableOwnToken extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Block #",
+        name: MSG.Txn_list_col1,
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -35,7 +36,7 @@ export default class NCTxnTableOwnToken extends Component
         objPath: null,
       },
       {
-        name: "Timestamp",
+        name: MSG.Txn_list_col2,
         isSortable: false,
         isFilterable: false,
         width: 160,
@@ -43,7 +44,7 @@ export default class NCTxnTableOwnToken extends Component
         objPath: null,
       },
       {
-        name: "Value",
+        name: MSG.Txn_list_col3,
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -52,7 +53,7 @@ export default class NCTxnTableOwnToken extends Component
       }
       ,
       {
-        name: "Raw Value",
+        name: MSG.Txn_list_col4,
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -60,7 +61,7 @@ export default class NCTxnTableOwnToken extends Component
         objPath: null,
       },
       {
-              name: "Transaction Hash",
+              name: MSG.Txn_list_col5,
               isSortable: false,
               isFilterable: false,
               width: null,
@@ -69,7 +70,7 @@ export default class NCTxnTableOwnToken extends Component
       },
       
       {
-        name: "From Address",
+        name: MSG.Txn_list_col6,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -78,7 +79,7 @@ export default class NCTxnTableOwnToken extends Component
       },
 
       {
-        name: "To Address",
+        name: MSG.Txn_list_col7,
         isSortable: false,
         isFilterable: false,
         width: null,

@@ -240,6 +240,46 @@ export const strings = new LocalizedStrings({
     Txn_list_col6: "Status",
     Txn_list_col7: "To Address",
 
+    Txn_rt_list_col1: "Age",
+    Txn_rt_list_col2: "Value",
+    Txn_rt_list_col3: "Transaction Hash",
+    Txn_rt_list_col4: "From Address",
+    Txn_rt_list_col5: "To Address",
+
+    Txn_trn_list_col1: "Block #",
+    Txn_trn_list_col2: "Timestamp",
+    Txn_trn_list_col3: "Value",
+    Txn_trn_list_col4: "Transaction Hash",
+    Txn_trn_list_col5: "From Address",
+    Txn_trn_list_col6: "To Address",
+    Txn_trn_list_own: "own account",
+    Txn_own: "own account",
+
+    Txn_event_log_col1: "Logs",
+
+    Txn_list_own_col1: "Block #",
+    Txn_list_own_col2: "Timestamp",
+    Txn_list_own_col3: "Value",
+    Txn_list_own_col4: "Transaction Hash",
+    Txn_list_own_col5: "From Address",
+    Txn_list_own_col6: "To Address",
+
+    Txn_list_own_token_col1: "Block #",
+    Txn_list_own_token_col3: "Timestamp",
+    Txn_list_own_token_col4: "Value",
+    Txn_list_own_token_col5: "Raw Value",
+    Txn_list_own_token_col6: "Transaction Hash",
+    Txn_list_own_token_col7: "From Address",
+    Txn_list_own_token_col8: "To Address",
+
+    Txn_list_own_trn_col1: "Block #",
+    Txn_list_own_trn_col2: "Timestamp",
+    Txn_list_own_trn_col3: "Value",
+    Txn_list_own_trn_col4: "Raw Value",
+    Txn_list_own_trn_col5: "Transaction Hash",
+    Txn_list_own_trn_col6: "From Address",
+    Txn_list_own_trn_col7: "To Address",
+
     Txn_detail_title: "Transaction",
     Txn_detail_row1: "Time Sealed",
     Txn_detail_row2: "Coin",
@@ -255,9 +295,11 @@ export const strings = new LocalizedStrings({
     Txn_detail_row10: "Nonce",
     Txn_detail_row11: "From Address",
     Txn_detail_row12: "To Address",
+    Txn_detail_row12_sub_a: "Contract Creation",
     Txn_detail_row13: "Txn Logs",
     Txn_detail_row14: "Input Data",
-    
+    Txn_detail_row14_sub_a: "Copy",
+    Txn_detail_row14_sub_b: "No Input Data",
     Txn_detail_tab1: "Transfers",
     
     Txn_detail_tab1_col1: "",
@@ -331,7 +373,20 @@ export const strings = new LocalizedStrings({
     //search
     Search_placeholder: 'Search for Account / Block / Contract / Transaction / Token',
     Search_filter: "Filter By  ",
+    //pagination
+    date_filter_policy: "This filter is only available for 7 days intervals.",
+    pag_str_1: "Showing",
+    pag_str_2: "of",
+    pag_str_3: " for 30 days or selected range",
+    pag_str_4: "  for 365 days",
+    pag_str_5: " found",
 
+    pag_str_6:"First page",
+    pag_str_7: "Prev",
+    pag_str_8: "Page",
+    pag_str_9: "Next",
+    pag_str_10: "Last page",
+    pag_str_11: "Page size",
 
     //utils such as paging and misc strings
     time_r: "Retrieved",

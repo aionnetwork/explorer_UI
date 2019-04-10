@@ -38,14 +38,14 @@ class NCTxnRealtime extends Component
 
           content={<NCTxnTableRT entities={txnList}/>}
 
-          loadingStr={MSG.Transaction.LOADING}
-          invalidDataStr={MSG.Transaction.INVALID_DATA}
-          emptyDataStr= {MSG.Transaction.EMPTY_DATA_LIST}
+          loadingStr={MSG.strings.Transaction.LOADING}
+          invalidDataStr={MSG.strings.Transaction.INVALID_DATA}
+          emptyDataStr= {MSG.strings.Transaction.EMPTY_DATA_LIST}
 
           marginTop={100} 
           
-          invalidDataTitle={MSG.Transaction.INVALID_DATA_LIST}
-          emptyDataTitle={MSG.Transaction.EMPTY_DATA_TITLE} 
+          invalidDataTitle={MSG.strings.Transaction.INVALID_DATA_LIST}
+          emptyDataTitle={MSG.strings.Transaction.EMPTY_DATA_TITLE}
         />
       </NCComponentLazyLoad>
     );

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import moment from 'moment';
 import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
-
+import {strings as MSG} from 'lib/NCTerms';
 const SEARCH_DIR = {
   NONE: 0,
   FORWARD: 1,
@@ -45,7 +45,7 @@ export default class NCPaginationFoot extends Component
         {(totalPages > 1) && (totalElements > 25) &&
           <div className="row-count hide">
           <span className="pt-text-muted">
-            Page size  {"  "}
+            {MSG. pag_str_11 +"  "}
              <select id="topic-input" 
                      onChange= {(e) => {
                         this.serchDirection = SEARCH_DIR.FORWARD;

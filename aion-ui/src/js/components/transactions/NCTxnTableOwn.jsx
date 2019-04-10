@@ -27,7 +27,7 @@ export default class NCTxnTableOwn extends Component
     this.columnDescriptor = 
     [
       {
-        name: "Block #",
+        name: MSG.Txn_list_own_col1,
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -35,7 +35,7 @@ export default class NCTxnTableOwn extends Component
         objPath: null,
       },
       {
-        name: "Timestamp",
+        name: MSG.Txn_list_own_col2,
         isSortable: false,
         isFilterable: false,
         width: 160,
@@ -43,7 +43,7 @@ export default class NCTxnTableOwn extends Component
         objPath: null,
       },
       {
-        name: "Value",
+        name: MSG.Txn_list_own_col3,
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -51,7 +51,7 @@ export default class NCTxnTableOwn extends Component
         objPath: null,
       },
       {
-        name: "Transaction Hash",
+        name: MSG.Txn_list_own_col4,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -59,7 +59,7 @@ export default class NCTxnTableOwn extends Component
         objPath: null,
       },
       {
-        name: "From Address",
+        name: MSG.Txn_list_own_col5,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -74,7 +74,7 @@ export default class NCTxnTableOwn extends Component
         flex: false,
       },
       {
-        name: "To Address",
+        name: MSG.Txn_list_own_col6,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -145,7 +145,7 @@ export default class NCTxnTableOwn extends Component
           entityId={transactionHash}/> 
       </Cell>;
       tableContent[i][4] = 
-      <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? "own account" : undefined }>
+      <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+fromAddr} intent={ isFrom ? Intent.PRIMARY : Intent.NONE } tooltip={ isFrom ? MSG.Txn_own : undefined }>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           
@@ -159,7 +159,7 @@ export default class NCTxnTableOwn extends Component
         </div>
       </Cell>;
       tableContent[i][6] = 
-      <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
+      <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? MSG.Txn_own : undefined }>
        {
             toAddr ? 
                 <NCEntityLabel 

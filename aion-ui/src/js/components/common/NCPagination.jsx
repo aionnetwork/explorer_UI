@@ -64,7 +64,7 @@ export default class NCPagination extends Component
           shortcuts={false}
         />  
         <Popover
-        content={"This filter is only available for 7 days intervals."}
+        content={MSG.date_filter_policy}
         interactionKind={PopoverInteractionKind.HOVER}
         inline={false}
         popoverClassName="NCLivenessIndicator-Popover"
@@ -161,9 +161,9 @@ export default class NCPagination extends Component
         <div className="row-count">
           <span className="pt-text-muted hide">
             {
-              "Showing " + entityName + " " + 
+              MSG.pag_str_1 + " " + entityName + " " +
               ((pageNumber * pageSize) + 1) + " - " + ((pageNumber * pageSize) + listSize) + 
-              " of " + totalElements + (isLatest ? ((entityName!=="Contracts")&&(entityName!=="Tokens"))? "  for 30 days or selected range" : "  for 365 days" : " found")
+              " " + MSG.pag_str_2 + " " + totalElements + (isLatest ? ((entityName!=="Contracts")&&(entityName!=="Tokens"))? " " + MSG.pag_str_3  : " " +  MSG.pag_str_4 :  MSG.pag_str_5)
             }
           {/*con*/}
           </span>
@@ -193,7 +193,7 @@ export default class NCPagination extends Component
           <Button 
             
             className="pt-minimal left hide" 
-            text="First page"
+            text={MSG.pag_str_6}
             
             disabled={isFirstPage || this.loading}
             loading={(this.serchDirection == SEARCH_DIR.BACKWARD && this.loading) ? true : false}
@@ -205,7 +205,7 @@ export default class NCPagination extends Component
             <Button 
             iconName="pt-icon-chevron-left" 
             className="pt-minimal left" 
-            text="Prev"
+            text={MSG.pag_str_7}
             
             disabled={isFirstPage || this.loading}
             loading={(this.serchDirection == SEARCH_DIR.BACKWARD && this.loading) ? true : false}
@@ -216,7 +216,7 @@ export default class NCPagination extends Component
             }}/>
           
           <span className="pt-text-muted context">
-            { "Page " }
+            { MSG.pag_str_8 + " " }
           </span>
              <InputGroup 
               type="number" 
@@ -244,7 +244,7 @@ export default class NCPagination extends Component
           <Button 
             rightIconName="pt-icon-chevron-right" 
             className="pt-minimal right" 
-            text="Next"
+            text={MSG.pag_str_9}
             
             disabled={isLastPage || this.loading}
             loading={(this.serchDirection == SEARCH_DIR.FORWARD && this.loading) ? true : false}
@@ -257,7 +257,7 @@ export default class NCPagination extends Component
             <Button 
             
             className="pt-minimal right hide" 
-            text="Last page"
+            text={MSG.pag_str_10}
             
             disabled={isLastPage || this.loading}
             loading={(this.serchDirection == SEARCH_DIR.FORWARD && this.loading) ? true : false}

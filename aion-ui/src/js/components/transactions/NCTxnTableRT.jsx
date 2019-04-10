@@ -7,6 +7,8 @@ import { NCEntityInfo,NCEntity } from 'lib/NCEnums';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 
+import {strings as MSG} from 'lib/NCTerms';
+
 import FlipMove from 'react-flip-move';
 
 class NCTxnTableRTRow extends Component 
@@ -85,15 +87,15 @@ export default class NCTxnTableRT extends Component
       <PageVisibility onChange={this.handleVisibilityChange}>
         <div className="NCTableFlex NCTableTransactionsRT">
           <div className="table-row header">
-            <div className="column txn-age hide">Age</div>
+            <div className="column txn-age hide">{MSG.Txn_rt_list_col1}</div>
             <div className="column txn-block">Value</div>
-            <div className="column txn-hash growable">Transaction Hash</div>
+            <div className="column txn-hash growable">{MSG.Txn_rt_list_col2}</div>
             <div className="wrapper txn-entityContainer growable">
-              <div className="column txn-fromEntity growable">From Address</div>
+              <div className="column txn-fromEntity growable">{MSG.Txn_rt_list_col3}</div>
               <div className="column txn-arrow">
                 <span className="pt-icon-large pt-icon-arrow-right"></span>
               </div>
-              <div className="column txn-toEntity growable">To Address</div>
+              <div className="column txn-toEntity growable">{MSG.Txn_rt_list_col4}</div>
             </div>
           </div>
           <FlipMove

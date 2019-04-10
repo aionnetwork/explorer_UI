@@ -159,7 +159,7 @@ export default class NCTxnDetail extends Component
                 <NCEntityLabel 
                   entityType={NCEntity.CNTR} 
                   entityId={entity.contractAddr}/> :
-                "Contract Creation",
+                MSG.strings.Txn_detail_row12_sub_a + " ",
       },
        
       // ---------------------------------------------------------------
@@ -170,7 +170,7 @@ export default class NCTxnDetail extends Component
           {this.cpmessage}
           <CopyToClipboard text={parsedTxnLog}
           onCopy={() => this.setState({copied: true})}>
-          <button className="copy">Copy</button>
+          <button className="copy">{MSG.strings.Txn_detail_row14_sub_a}</button>
           </CopyToClipboard>
           { parsedTxnLog }
         </pre> 
@@ -184,7 +184,7 @@ export default class NCTxnDetail extends Component
                   <pre className={"nc-resizable"}>
                   <CopyToClipboard text={parsedInputData}
                     onCopy={() => this.setState({copied: true})}>
-                    <button className="copy">Copy</button>
+                    <button className="copy">{MSG.strings.Txn_detail_row14_sub_a}</button>
                     </CopyToClipboard>
                   { parsedInputData }
                   </pre> 
@@ -192,12 +192,12 @@ export default class NCTxnDetail extends Component
                   <pre className={"nc-resizable"}>
                   <CopyToClipboard text={entity.data}
                    onCopy={() => this.setState({copied: true})}>
-                  <button className="copy">Copy</button>
+                  <button className="copy">{MSG.strings.Txn_detail_row14_sub_a}</button>
                   </CopyToClipboard>
                   { entity.data }
                   </pre>
                 ):
-                "No Input Data",
+                MSG.strings.Txn_detail_row14_sub_b + " ",
       },
     ];
 
