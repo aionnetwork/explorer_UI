@@ -23,6 +23,8 @@ import * as network from 'network/NCNetworkRequests';
 
 import appConfig from '../../../config.json';
 import {strings as MSG} from 'lib/NCTerms';
+import {setLanguage as changeLanguage} from 'lib/NCTerms';
+import {language} from 'lib/NCTerms';
 
 import ReactGA from 'react-ga';
 //ReactGA.initialize(appConfig.ga_key);
@@ -88,6 +90,12 @@ class NCLayout extends Component {
     stopInterval(intervalID);
   }
 
+  //change the language state
+  //accepts language code as a param
+
+  changeLanguage = (language) => {
+        console.log(' language '+ language);
+  };
 
   toggleMode = () => {
     
@@ -294,19 +302,31 @@ class NCLayout extends Component {
 
                 <MenuItem
                   className="nav-option"
-                  
+                  onClick={
+                    () => {
+
+                       changeLanguage('en');
+
+                    }
+                  }
                   text="English (En)"
                 />
                 <MenuItem
                   className="nav-option"
-                  
-                  text=""
+                  onClick={() => {
+                              console.log('test '+ language);
+                              changeLanguage('es');
+                              console.log('test '+ language);
+                            }}
+                  text="Chinese (Zn)"
                 />
 
                 <MenuItem
                   className="nav-option"
-                  
-                  text=""
+                  onClick={() => {
+                              //hashHistory.push('/charts/BlockTime');
+                            }}
+                  text="Spanish (Es)"
                 />
                 
                                              

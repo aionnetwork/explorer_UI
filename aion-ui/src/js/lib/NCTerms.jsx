@@ -2,6 +2,10 @@
 // entity ------------------------------------------------------------
 import LocalizedStrings from 'react-localization';
 
+//change language
+export const setLanguage = (lng) => {
+    strings.setLanguage(lng);
+}
 
 export const strings = new LocalizedStrings({
   
