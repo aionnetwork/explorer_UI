@@ -6,7 +6,6 @@ import LocalizedStrings from 'react-localization';
 export const setLanguage = (lng) => {
     strings.setLanguage(lng);
     localStorage.setItem('lng_mode', lng);
-    //localStorage.getItem('lng_mode', lng);
 }
 
 export const strings = new LocalizedStrings({

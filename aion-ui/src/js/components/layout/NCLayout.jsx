@@ -74,6 +74,9 @@ class NCLayout extends Component {
   componentWillMount() {
     
     localStorage.getItem('d_mode') && this.setState({darkMode:JSON.parse(localStorage.getItem('d_mode'))});
+
+    localStorage.getItem('lng_mode') && changeLanguage(localStorage.getItem('lng_mode'));
+
     network.getDashboardData();
     network.getKPIData(); 
   }
@@ -81,7 +84,9 @@ class NCLayout extends Component {
   componentDidMount() {
     
     //this.mode = (this.state.darkMode!==false) ? "darkMode" : "";
-    //this.mode = (this.props.darkMode.data) ? "darkMode" : "";  
+    //this.mode = (this.props.darkMode.data) ? "darkMode" : "";
+
+
     this.d_mode_class = (this.props.darkMode.data) ? "darkMode" : "";   
   }
 
@@ -304,9 +309,7 @@ class NCLayout extends Component {
                   className="nav-option"
                   onClick={
                     () => {
-
                        changeLanguage('en');
-
                     }
                   }
                   text="English (En)"
