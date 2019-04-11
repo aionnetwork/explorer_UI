@@ -1201,6 +1201,19 @@ export const getTknRetrievePagingAccList = (queryStr, pageNumber, pageSize) => {
 
   }
 
+export const globalSearch = (queryStr) => {
+    network.request().then((response) =>{
+
+        showView(response,request);
+    })
+    .catch((error) => {
+       console.log(error);
+       store.dispatch(StoreRetrieve.SetTopLevel({
+
+       }));
+    });
+}
+
 
 export const getRetrieveTopLevel = (queryStr) => {
   store.dispatch(StoreRetrieve.GetTopLevel({

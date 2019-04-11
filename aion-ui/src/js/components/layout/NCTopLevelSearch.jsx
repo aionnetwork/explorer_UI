@@ -9,6 +9,7 @@ import { nc_FindEntity, nc_CanLinkToEntity, nc_LinkToEntity, nc_isObjectEmpty, n
 import * as network from 'network/NCNetworkRequests';
 import {strings as MSG} from 'lib/NCTerms';
 
+
 export default class NCTopLevelSearch extends Component
 {
   constructor(props) {
@@ -22,18 +23,23 @@ export default class NCTopLevelSearch extends Component
   }
 
   submitQuery = () => {
-    if (!nc_isStrEmpty(this.state.queryStr))
+    let queryStr = nc_trim(this.state.queryStr);
+    let entity = this.state.entity;
+
+    if (!nc_isStrEmpty(this.state.queryStr) && this.state.entity==5)
     {
+      //global search
+      this.search(queryStr);
       
-      let queryStr = nc_trim(this.state.queryStr);
-      let entity = this.state.entity;
+    }else if(!nc_isStrEmpty(this.state.queryStr)){
+
 
       this.setState({
         queryStr: ''
       }, () => {
-        console.log("query for entity: " + NCEntityInfo[entity].name + " for query string: " + queryStr);
+
         nc_LinkToEntity(entity, queryStr);
-        //nc_FindEntity(queryStr);
+
       });
     }
   }
@@ -42,6 +48,9 @@ export default class NCTopLevelSearch extends Component
     this.setState({
       queryStr: str
     });
+  }
+  search = (str) => {
+    network.getRetrieveTopLevel(str);
   }
 
   render() {

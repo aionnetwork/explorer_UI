@@ -469,7 +469,7 @@ export function nc_findEntity(queryStr){
 
 export function nc_LinkToEntity(entity, entityId) {
   if (nc_CanLinkToEntity(entity, entityId)) {
-    //console.log('Link to!');
+    console.log('Link to!'+NCEntityInfo[entity].absoluteUrl+entityId);
     hashHistory.push(NCEntityInfo[entity].absoluteUrl+entityId);
   }
 }
