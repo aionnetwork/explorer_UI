@@ -137,7 +137,7 @@ export default class NCTableReact extends Component
     let sortedData = this.runSort(filteredData);
     let tableContent = generateTableContent(sortedData);
     let height = rowHeight;
-    //console.log(JSON.stringify(rowHeights));
+    //console.log(JSON.stringify("containerWidth: " + this.props.containerWidth));
     return (
       <div className="NCTableEnhanced">
         <ContainerDimensions>

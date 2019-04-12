@@ -1248,14 +1248,14 @@ export const getRetrieveTopLevel = (queryStr) => {
        
       }
       else if(typeof response.searchType !== "undefined"){ 
-
         store.dispatch(StoreRetrieve.SetTopLevel(response));
-
+        hashHistory.push('/search/');
       }
       else{
         store.dispatch(StoreRetrieve.SetTopLevel({
-        
+
         }));
+        hashHistory.push('/search/');
       }
     })
     .catch((error) => {

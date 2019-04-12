@@ -132,8 +132,12 @@ export default class NCTableBase extends Component {
   componentWillReceiveProps(nextProps)
   {
     if (this.props.width !== nextProps.width || this.props.height !== nextProps.height) {
-      //this.columnWidths = this.computeColumnWidths();
+      this.columnWidths = this.computeColumnWidths();
     }
+  }
+
+  componentWillUpdate(){
+      this.columnWidths = this.computeColumnWidths();
   }
 
   componentWillMount()
@@ -205,6 +209,8 @@ export default class NCTableBase extends Component {
     }
 
     //console.log(JSON.stringify(rowHeights));
+    //console.log(JSON.stringify(this.props.width + "Container Width Base: " + this.props.containerWidth));
+
 
     return (
       <div className="NCTable">

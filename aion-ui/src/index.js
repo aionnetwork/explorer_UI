@@ -121,7 +121,7 @@ ReactDOM.render((
 
         <Route path="no-results(/:query)" component={ NoResults }/>
 
-        <Route path="search/:term" component={ SearchRetrieve }/>
+        <Route path="search/" component={ SearchRetrieve }/>
 
         <Route path="*" component={ NoMatch }/>
       </Route>

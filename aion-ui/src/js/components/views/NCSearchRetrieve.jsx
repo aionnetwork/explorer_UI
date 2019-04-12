@@ -49,7 +49,8 @@ class NCSearchRetrieve extends Component
   }
 
   componentDidMount() {
-    this.requestTopLevel();     
+    //this.requestTopLevel();
+    console.log(JSON.stringify(this.props));
   }
 
   componentWillReceiveProps(nextProps) {

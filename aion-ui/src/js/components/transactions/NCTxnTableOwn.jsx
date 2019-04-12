@@ -16,6 +16,7 @@ import { NCSortType, NCEntity,NCEntityInfo, nc_LinkToEntity } from 'lib/NCEnums'
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
+import {strings as MSG} from 'lib/NCTerms';
 
 import { nc_numFormatterAionCoin } from 'lib/NCUtility';
 

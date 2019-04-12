@@ -219,24 +219,26 @@ export default class NCPagination extends Component
             { MSG.pag_str_8 + " " }
           </span>
              <InputGroup 
-              type="number" 
+              type="number"
+              onKeyPress={(e) => { if(e.key === 'Enter'){
+
+                this.serchDirection = SEARCH_DIR.FORWARD;
+
+                                  if((parseInt(e.target.value)-1)<totalPages){
+                                    this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,startDate,endDate);
+
+                                  }
+
+              }}}
               onChange={(e) => {
                 
-                    this.serchDirection = SEARCH_DIR.FORWARD;
 
-                    if((parseInt(e.target.value)-1)<totalPages){
-                      this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,startDate,endDate);
-                      /*setTimeout( 
-                        this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,startDate,endDate),
-                        500 
-                      );*/
-                    }
-                
+
                   }
               } 
 
                className="paging-input pt-wide-input"
-              value = {parseInt(pageNumber+1)}
+               placeholder = {parseInt(pageNumber+1)}
                />
           <span className="pt-text-muted context hide">    
             { " of " + totalPages}

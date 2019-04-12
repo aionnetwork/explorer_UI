@@ -30,7 +30,7 @@ export default class NCTopLevelSearch extends Component
     {
       //global search
       this.search(queryStr);
-      
+
     }else if(!nc_isStrEmpty(this.state.queryStr)){
 
 
@@ -50,6 +50,7 @@ export default class NCTopLevelSearch extends Component
     });
   }
   search = (str) => {
+    console.log('searching...');
     network.getRetrieveTopLevel(str);
   }
 

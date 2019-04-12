@@ -31,8 +31,8 @@ export default class NCTxnTable extends Component
         name: MSG.Txn_list_col1,
         isSortable: false,
         isFilterable: false,
-        width: 100,
-        flex: false,
+
+        flex: true,
         objPath: null,
       },
       {
