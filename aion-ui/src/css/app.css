@@ -772,7 +772,7 @@ h1, h2, h3, h4, h5 {
   font-weight: 300;
 }
 .NCPagination .pt-input {
-  width: 40px !important;
+  width: 50px !important;
   text-align: center;
   height: 20px;
 }
@@ -1738,6 +1738,9 @@ pre {
   border-radius: 2px;
   cursor: pointer;
 }
+.NCDateFilter .pt-popover-target .pt-control-group .pt-input-group .pt-input {
+  box-shadow: none !important;
+}
 .NCGraphZoom {
   fill: none;
 }
@@ -2343,6 +2346,11 @@ pre {
   }
   span.pt-icon-standard.pt-icon-caret-down.pt-align-right {
     display: inline !important;
+  }
+  .NCDateFilter .pt-popover-target .pt-control-group .pt-input-group .pt-input {
+    width: 85px !important;
+    padding-left: 15px;
+    box-shadow: none !important;
   }
 }
 .darkMode {

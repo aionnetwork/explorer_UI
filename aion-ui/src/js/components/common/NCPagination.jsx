@@ -53,7 +53,7 @@ export default class NCPagination extends Component
     }
 
     return (  
-      <div>
+      <div className="NCDateFilter">
         <DateRangeInput
           formatDate={date => date.toLocaleString()}
           onChange={this.handleRangeChange}
@@ -68,11 +68,11 @@ export default class NCPagination extends Component
         interactionKind={PopoverInteractionKind.HOVER}
         inline={false}
         popoverClassName="NCLivenessIndicator-Popover"
-        className="NCLivenessIndicator"
+        className="NCLivenessIndicator dateFilter"
         position={Position.BOTTOM_RIGHT}>
         <Button             
             className="pt-minimal " 
-            text="Filter range"
+            text="Filter"
             disabled={this.state.rangeChange}            
             onClick={() => {
               this.setState({
@@ -177,7 +177,7 @@ export default class NCPagination extends Component
                 
                 content={this.renderCalendarRange(minDate)}
                 interactionKind={PopoverInteractionKind.CLICK}
-                position={Position.BOTTOM}>
+                position={Position.RIGHT}>
                 <Button 
 
                   className="text navbar-btn-active pt-button pt-minimal"
@@ -187,7 +187,7 @@ export default class NCPagination extends Component
             
                   loading={(this.serchDirection == SEARCH_DIR.FORWARD && this.loading) ? true : false}
 
-                  />          
+                 />
             </Popover>
           }
           <Button 

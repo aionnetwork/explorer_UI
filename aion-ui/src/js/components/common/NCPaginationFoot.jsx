@@ -43,7 +43,7 @@ export default class NCPaginationFoot extends Component
     return (
       <div className="NCPagination">
         {(totalPages > 1) && (totalElements > 25) &&
-          <div className="row-count hide">
+          <div className="row-count">
           <span className="pt-text-muted">
             {MSG. pag_str_11 +"  "}
              <select id="topic-input" 
