@@ -68,13 +68,6 @@ export default class NCTxnTableOwn extends Component
         objPath: null,
       },
       {
-        name: "", // arrow
-        isSortable: false,
-        isFilterable: false,
-        width: 40,
-        flex: false,
-      },
-      {
         name: MSG.Txn_list_own_col6,
         isSortable: false,
         isFilterable: false,
@@ -153,13 +146,8 @@ export default class NCTxnTableOwn extends Component
           entityId={fromAddr}
           linkActive={isFrom ? false : true}/>
       </Cell>;
-      tableContent[i][5] = 
-      <Cell >
-        <div className="arrow-cell">
-          <span className="pt-icon-standard pt-icon-arrow-right"/>
-        </div>
-      </Cell>;
-      tableContent[i][6] = 
+
+      tableContent[i][5] =
       <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? MSG.Txn_own : undefined }>
        {
             toAddr ? 

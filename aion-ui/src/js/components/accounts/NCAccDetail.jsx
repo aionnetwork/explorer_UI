@@ -28,7 +28,7 @@ export default class NCAccDetail extends Component
 
     let desc = [
       {
-        field: MSG.Acc_detail_row2,
+        field: MSG.Acc_detail_row1,
         value:  <NCEntityLabel
                   entityType={ NCEntity.ACCOUNT }
                   entityId={ entity.address }
@@ -62,11 +62,11 @@ export default class NCAccDetail extends Component
                   :""
       },
       {
-        field: MSG.Acc_detail_row5,
+        field: "",
         value: tokenList
       },
-      
-      
+
+
     ];
 
     return (
