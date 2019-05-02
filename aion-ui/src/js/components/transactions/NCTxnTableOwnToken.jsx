@@ -50,10 +50,10 @@ export default class NCTxnTableOwnToken extends Component
         width: 100,
         flex: false,
         objPath: null,
-      }
-      ,
+      },
+
       {
-        name: MSG.Txn_list_col4,
+        name: MSG.Txn_list_col8,
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -61,7 +61,7 @@ export default class NCTxnTableOwnToken extends Component
         objPath: null,
       },
       {
-              name: MSG.Txn_list_col5,
+              name: MSG.Txn_list_col4,
               isSortable: false,
               isFilterable: false,
               width: null,
@@ -70,7 +70,7 @@ export default class NCTxnTableOwnToken extends Component
       },
       
       {
-        name: MSG.Txn_list_col6,
+        name: MSG.Txn_list_col5,
         isSortable: false,
         isFilterable: false,
         width: null,
@@ -78,13 +78,20 @@ export default class NCTxnTableOwnToken extends Component
         objPath: null,
       },
 
+     {
+             name: "", // arrow
+             isSortable: false,
+             isFilterable: false,
+             width: 40,
+             flex: false,
+           },
       {
-        name: MSG.Txn_list_col7,
-        isSortable: false,
-        isFilterable: false,
-        width: null,
-        flex: true,
-        objPath: null,
+              name: MSG.Txn_list_col7,
+              isSortable: false,
+              isFilterable: false,
+              width: null,
+              flex: true,
+              objPath: null,
       },
     ];
 
@@ -163,8 +170,14 @@ export default class NCTxnTableOwnToken extends Component
           linkActive={isFrom ? false : true}/>
       </Cell>;
 
+      tableContent[i][6] =
+              <Cell>
+                <div className="arrow-cell">
+                  <span className="pt-icon-standard pt-icon-arrow-right"/>
+                </div>
+              </Cell>;
 
-      tableContent[i][6] = 
+      tableContent[i][7] =
       <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
       {
         toAddr ?

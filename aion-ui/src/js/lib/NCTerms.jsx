@@ -244,6 +244,7 @@ export const strings = new LocalizedStrings({
     Txn_list_col5: "From Address",
     Txn_list_col6: "Status",
     Txn_list_col7: "To Address",
+    Txn_list_col8: "Raw Value",
 
     Txn_rt_list_col1: "Age",
     Txn_rt_list_col2: "Value",

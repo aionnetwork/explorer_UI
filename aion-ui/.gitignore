@@ -8,7 +8,11 @@ node_modules/
 
 .env
 
-
+app_demo/
+mern-starter/
 
 archive/
 build/
+
+package-lock.json
+yarn.lock
