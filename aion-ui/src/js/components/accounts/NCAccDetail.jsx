@@ -35,11 +35,16 @@ export default class NCAccDetail extends Component
                   linkActive={ false }/>
       },
       {
+                    field: "Token",
+                    value: tokenList
+
+      },
+      {
         field: MSG.Acc_detail_row2,
         value:  entity.tokenName  ?
                 entity.balance == null ? MSG.Acc_detail_row2_subtitle_a :
                 <span className="">
-                  {balance + " " + entity.tokenName}                
+                  {balance + " " + entity.tokenName}
                 </span>
                 :
                 entity.balance == null ? MSG.Acc_detail_row2_subtitle_a :
@@ -60,11 +65,7 @@ export default class NCAccDetail extends Component
                   entityId={ entity.address }
                   linkActive={ true }/>
                   :""
-      },
-      {
-        field: "",
-        value: tokenList
-      },
+      }
 
 
     ];

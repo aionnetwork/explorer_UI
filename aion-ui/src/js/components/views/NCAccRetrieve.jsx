@@ -234,8 +234,9 @@ class NCAccRetrieve extends Component
     const desc = nc_hexPrefix(store.queryStr);
 
     
-    const tokenList =  <div className="token-list hide">
-        <span className="title">Token balances:</span><Popover
+    const tokenList =  <div className="">
+
+        <Popover
                 content={this.renderTokenMenu(tokens)}
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
@@ -250,7 +251,7 @@ class NCAccRetrieve extends Component
       </div>;
 
       const tokenListMobile =  <div className="token-list show">
-        <span className="title">Token balances:</span><Popover
+        <span className="title">Token:</span><Popover
                 content={this.renderTokenMenu(tokens)}
                 interactionKind={PopoverInteractionKind.CLICK}
                 position={Position.BOTTOM}>
@@ -281,9 +282,7 @@ class NCAccRetrieve extends Component
       marginTop={20}
       marginBottom={30}
 
-      subtitle={tokenList}
-
-      content={ <NCAccDetail entity={acc} tokenList={tokenListMobile} /> }
+      content={ <NCAccDetail entity={acc} tokenList={tokenList} /> }
     />
     
      const transferListSection = <NCExplorerSection 
