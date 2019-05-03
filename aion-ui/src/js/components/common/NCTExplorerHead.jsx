@@ -54,7 +54,7 @@ export default class NCTExplorerHead extends Component
           { 
             (momentUpdated && moment(momentUpdated).isValid()) &&
             <div className="updated">
-              <span className="title">{MSG.time_r}</span>
+              <span className="title">{MSG.time_r}: </span>
               <NCTimescale
                 dateObjArr={[momentUpdated]}
                 isMedium={true}/>

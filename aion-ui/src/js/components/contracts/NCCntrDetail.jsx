@@ -86,8 +86,8 @@ export default class NCCntrDetail extends Component
         value:  !entity.nonce ? EMPTY_STR : entity.nonce
       },
       {
-        field: Cntr_detail_row7,
-        value: <p>{Cntr_detail_row7_sub_a} <a href="https://docs.aion.network/docs/swap-overview">{Cntr_detail_row7_sub_b}</a> </p>
+        field: MSG.strings.Cntr_detail_row7,
+        value: <p>{MSG.strings.Cntr_detail_row7_sub_a} <a href="https://docs.aion.network/docs/swap-overview">{MSG.strings.Cntr_detail_row7_sub_b}</a> </p>
       }
 
     ];
