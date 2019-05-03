@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { Table, Column, Cell, ColumnHeaderCell, SelectionModes, CopyCellsMenuItem,
     IMenuContext,  Utils} from "@blueprintjs/table"
-import { Menu, MenuItem, Intent, Popover,ContextMenuTarget, PopoverInteractionKind, Position, Button, InputGroup, Spinner } from "@blueprintjs/core";
+import { Tooltip, Menu, MenuItem, Intent, Popover,ContextMenuTarget, PopoverInteractionKind, Position, Button, InputGroup, Spinner } from "@blueprintjs/core";
 
 import { NCSortType, NCEntity } from 'lib/NCEnums';
 import NCEntityLabel from 'components/common/NCEntityLabel';
@@ -36,10 +36,15 @@ export default class NCTableBase extends Component {
   renderColumnHeader(columnIndex)
   {
     let columnHeader = this.props.columnDescriptor[columnIndex];
+    let info = columnHeader.description ?
+                                            <span className="fa fa-info-circle fa-lg icon"></span>
+                                       :
+                                            "";
     return (
       <ColumnHeaderCell
-        name={ columnHeader.name }
+        name={ columnHeader.description ? columnHeader.description : columnHeader.name}
         className={"NCColumnHeader"}
+
         renderName={(name) => {
           return (
             <div className="bp-table-truncated-text NCColumnHeaderCell">
@@ -47,7 +52,9 @@ export default class NCTableBase extends Component {
               (this.props.sortColumn == columnIndex) &&
               <span className={"pt-icon-standard header-icon "+(this.props.sortType == NCSortType.ASC ? "pt-icon-sort-asc" : "pt-icon-sort-desc")}></span>
             }
-              <span className="pt-text-overflow-ellipsis">{ name }</span>
+              <span className="pt-text-overflow-ellipsis">{ columnHeader.name } {" "}
+                        { info}
+              </span>
             </div>);
           }
         }
@@ -77,7 +84,8 @@ export default class NCTableBase extends Component {
         //     onChange={(e) => this.props.filterCallback(columnIndex, e.target.value)}
         //   />
         // }
-        > 
+        >
+
       </ColumnHeaderCell>
 
     );

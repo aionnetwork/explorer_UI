@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import moment from 'moment';
-import { Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
+import { Tooltip, Button, Position, Classes, Popover, Menu, MenuItem, InputGroup, Intent, PopoverInteractionKind } from "@blueprintjs/core";
 import { Table, Column, Cell, ColumnHeaderCell, SelectionModes } from "@blueprintjs/table"
 
 import NCTableBase from 'components/common/NCTableBase';
@@ -54,6 +54,7 @@ export default class NCTxnTableOwnToken extends Component
 
       {
         name: MSG.Txn_list_col8,
+        description:"Raw balance is...",
         isSortable: false,
         isFilterable: false,
         width: 100,
@@ -97,6 +98,8 @@ export default class NCTxnTableOwnToken extends Component
 
     this.generateTableContent = this.generateTableContent.bind(this);
   }
+
+
 
   generateTableContent(entityList) 
   {
