@@ -15,6 +15,14 @@ export function nc_getRandomFloat(min, max) {
 export function nc_getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+/**/
+export function nc_addDecimal(value,decimals,precision=18){
+
+     var num = new BigNumber(value);
+     var digits = new BigNumber(10);
+     return num.div(digits.pow(decimals)).dp(precision).toString();
+ }
+
 
 export function nc_decimalPoint(num, scale=2) {
   if (num == null) return null;

@@ -9,7 +9,7 @@ import * as MSG from 'lib/NCTerms';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
 
-import { nc_isStrEmpty, nc_numFormatter, nc_numFormatterAmp, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_decimalPrettify,nc_addDecimal,nc_isStrEmpty, nc_numFormatter, nc_numFormatterAmp, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
 
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
@@ -98,7 +98,7 @@ export default class NCTknDetail extends Component
         field: <div>
                 {MSG.strings.Tkn_detail_row6} {" "}
                 <Tooltip
-                  
+                  position={Position.RIGHT}
                   content={gran} >
                   <span className="fa fa-info-circle fa-lg icon"></span>
                 </Tooltip>
@@ -109,11 +109,11 @@ export default class NCTknDetail extends Component
       
       {
         field: MSG.strings.Tkn_detail_row7,
-        value: entity.totalSupply.toString(),
+        value: nc_decimalPrettify(nc_addDecimal(entity.totalSupply.toString(),entity.tokenDecimal,8))+ " " + entity.symbol,
       },
       {
         field: MSG.strings.Tkn_detail_row8,
-        value: entity.liquidSupply.toString(),
+        value: nc_decimalPrettify(nc_addDecimal(entity.liquidSupply.toString(),entity.tokenDecimal,8))+ " "+ entity.symbol,
       },
      
       

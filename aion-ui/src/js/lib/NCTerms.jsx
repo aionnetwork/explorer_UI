@@ -201,7 +201,7 @@ export const strings = new LocalizedStrings({
     Tkn_head_text_a: " Total Tokens",
 
     Tkn_list_col1: "Token",
-    Tkn_list_col2: "Decimal",
+    Tkn_list_col2: "Granularity",
     Tkn_list_col3: "Frozen Supply",
     Tkn_list_col4: "Liquid Supply",
     Tkn_list_col5: "Creator",
@@ -488,7 +488,7 @@ export const strings = new LocalizedStrings({
       INVALID_DATA:"Token Not Available",
       DATA_POLICY_TXN:"Showing results from the latest transactions. ",
       INVALID_DATA_LIST:"Invalid Input. Please try again.",
-      GRANULARITY:"This is the Granularity"
+      GRANULARITY:"This is the increments by which a token can be sent. Example: If the granularity is 1 the token can be sent in multiples of 1."
     },
     Transaction: {
       LOADING:"Loading Transaction Details",
@@ -1025,7 +1025,7 @@ export const strings = new LocalizedStrings({
             INVALID_DATA:"Token Not Available",
             DATA_POLICY_TXN:"Showing results from the latest transactions. ",
             INVALID_DATA_LIST:"Invalid Input. Please try again.",
-            GRANULARITY:"This is the Granularity"
+            GRANULARITY:"This is the increments by which a token can be sent. Example: If the granularity is 1 the token can be sent in multiples of 1."
           },
           Transaction: {
             LOADING:"Loading Transaction Details",
@@ -1150,7 +1150,7 @@ export const Token = {
   INVALID_DATA:"Token Not Available",
   DATA_POLICY_TXN:"Showing results from the latest transactions. ",
   INVALID_DATA_LIST:"Invalid Input. Please try again.",
-  GRANULARITY:"This is the Granularity"
+  GRANULARITY:"This is the increments by which a token can be sent. Example: If the granularity is 1 the token can be sent in multiples of 1."
 };
 
 export const Transaction = {

@@ -18,7 +18,7 @@ import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityL
 import NCTokenLabel from 'components/common/NCTokenLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { nc_numFormatterAionCoin, nc_decimalPrettify, nc_addDecimal } from 'lib/NCUtility';
 import * as MSG from 'lib/NCTerms';
 
  const row = {
@@ -44,7 +44,7 @@ export default class NCTknTable extends Component
         name: MSG.strings.Tkn_list_col2,
         isSortable: false,
         isFilterable: false,
-        width: 70,
+        width: 100,
         flex: false,
         objPath: null,
       },
@@ -155,10 +155,14 @@ export default class NCTknTable extends Component
        </Cell>
       ;
       tableContent[i][1] = <Cell copy={ decimal }>{ decimal }</Cell>;
-      tableContent[i][2] = <Cell copy={ totalSupply }>{ totalSupply }</Cell>;
+      tableContent[i][2] = <Cell copy={ totalSupply }>
+
+        {nc_decimalPrettify(nc_addDecimal(totalSupply.toString(),entity.tokenDecimal,8))}
+      </Cell>;
       tableContent[i][3] = 
       <Cell copy={liquidSupply}>
-          {liquidSupply}
+
+          {nc_decimalPrettify(nc_addDecimal(liquidSupply.toString(),entity.tokenDecimal,8))}
          
       </Cell>;
       tableContent[i][4] = 

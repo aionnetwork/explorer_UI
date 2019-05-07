@@ -6,7 +6,7 @@ import moment from 'moment';
 import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_decimalPrettify } from 'lib/NCUtility';
+import { nc_decimalPrettify,nc_addDecimal, nc_decimalPoint } from 'lib/NCUtility';
 //import NCLink from 'components/common/NCLink';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
@@ -22,8 +22,8 @@ export default class NCAccDetail extends Component
     let { entity, tokenList } = this.props;
     
     //let bal = nc_numFormatterACSensitive(entity.balance);
-    let balance = nc_decimalPrettify(entity.balance);
-
+    //console.log(entity.tokenDecimal);
+    let balance = entity.tokenName && entity.tokenDecimal ? nc_decimalPrettify(nc_addDecimal(entity.balance,entity.tokenDecimal,8)) : nc_decimalPrettify(entity.balance);
     
 
     let desc = [
@@ -49,7 +49,7 @@ export default class NCAccDetail extends Component
                 :
                 entity.balance == null ? MSG.Acc_detail_row2_subtitle_a :
                 <span className="">{balance + " AION"}
-                  <span className="subtitle">{"("+ MSG.Acc_detail_row2_subtitle_a +"  "+ entity.lastBlockNumber + ")"}</span>
+                  <span className="subtitle">{"("+ MSG.Acc_detail_row2_subtitle_b +"  "+ entity.lastBlockNumber + ")"}</span>
                 </span>
 
 
