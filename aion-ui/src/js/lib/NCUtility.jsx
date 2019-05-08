@@ -15,12 +15,19 @@ export function nc_getRandomFloat(min, max) {
 export function nc_getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-/**/
+/*
+    This function should take a (value) and shift the point (decimals) places to the left with (precision) dp.
+*/
 export function nc_addDecimal(value,decimals,precision=18){
 
      var num = new BigNumber(value);
      var digits = new BigNumber(10);
-     return num.div(digits.pow(decimals)).dp(precision).toString();
+     var shift = digits.pow(decimals);
+     if(num.isGreaterThan(shift)){
+        return num.div(shift).dp(precision).toFixed();
+     }else{
+        return num.toFixed();
+     }
  }
 
 
