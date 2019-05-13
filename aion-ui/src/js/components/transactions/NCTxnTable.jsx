@@ -52,6 +52,14 @@ export default class NCTxnTable extends Component
         objPath: null,
       },
       {
+         name: "Type",//MSG.Txn_list_col3,
+         isSortable: false,
+         isFilterable: false,
+         width: 75,
+         flex: false,
+         objPath: null,
+      },
+      {
         name: MSG.Txn_list_col4,
         isSortable: false,
         isFilterable: false,
@@ -71,7 +79,7 @@ export default class NCTxnTable extends Component
         name: MSG.Txn_list_col6, // arrow
         isSortable: false,
         isFilterable: false,
-        width: 100,
+        width: 75,
         flex: false,
       },
       {
@@ -102,6 +110,7 @@ export default class NCTxnTable extends Component
       let timestamp = null;
       let value = null;
       let status = "";
+      let type = "";
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
@@ -120,7 +129,7 @@ export default class NCTxnTable extends Component
         blockTimestamp = entity.blockTimestamp;
         value = entity.value;
         status = entity.txError;
-        
+        type = entity.type;
       }
 
       //console.log(status);
@@ -136,20 +145,21 @@ export default class NCTxnTable extends Component
       </Cell>;
       tableContent[i][1] = <Cell copy={(timestamp!==null) ? moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') :  moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{(timestamp!==null)? moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') : moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
       tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }>{ value ? value: 0 }</Cell>;
-      tableContent[i][3] = 
+      tableContent[i][3] = <Cell copy={ type }>{ type }</Cell>;
+      tableContent[i][4] =
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash}>
         <NCEntityLabel 
           entityType={NCEntity.TXN} 
           entityId={transactionHash}/> 
       </Cell>;
-      tableContent[i][4] = 
+      tableContent[i][5] =
       <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+fromAddr}>
         <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
           
           entityId={fromAddr}/>
       </Cell>;
-      tableContent[i][5] = 
+      tableContent[i][6] =
       <Cell>
         
         {
@@ -190,7 +200,7 @@ export default class NCTxnTable extends Component
                   
         }
       </Cell>;
-      tableContent[i][6] = 
+      tableContent[i][7] =
       <Cell copy={toAddr ? toAddr : contractAddr ? contractAddr : "Contract Creation"}  link={toAddr ? '#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+toAddr :'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+contractAddr}>
       {
             toAddr ? 

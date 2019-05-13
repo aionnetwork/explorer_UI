@@ -144,6 +144,11 @@ export default class NCTxnDetail extends Component
         value: entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
       },
       {
+              //Contract type
+              field: "Type",//MSG.strings.Txn_detail_row10,
+              value: entity.type,//entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
+      },
+      {
         field: MSG.strings.Txn_detail_row11,
         value: <NCEntityLabel 
                   entityType={NCEntity.ACCOUNT} 

@@ -63,7 +63,12 @@ export default class NCCntrDetail extends Component
       {
         field: MSG.strings.Cntr_detail_row6,
         value:  !entity.nonce ? EMPTY_STR : entity.nonce
-      }
+      },
+      {
+         //Contract type
+         field: "Type",//MSG.strings.Txn_detail_row10,
+         value: entity.type,//entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
+      },
     ];
 
     let bridge = [
@@ -85,6 +90,7 @@ export default class NCCntrDetail extends Component
         field: MSG.strings.Cntr_detail_row6,
         value:  !entity.nonce ? EMPTY_STR : entity.nonce
       },
+
       {
         field: MSG.strings.Cntr_detail_row7,
         value: <p>{MSG.strings.Cntr_detail_row7_sub_a} <a href="https://docs.aion.network/docs/swap-overview">{MSG.strings.Cntr_detail_row7_sub_b}</a> </p>

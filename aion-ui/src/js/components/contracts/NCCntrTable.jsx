@@ -50,6 +50,12 @@ export default class NCCntrTable extends Component
         objPath: null,
       },
       {
+              name: "Type",//MSG.strings.Cntr_list_col2,
+              isSortable: false,
+              isFilterable: false,
+              width: 100,
+      },
+      {
         name: MSG.strings.Cntr_list_col3,
         isSortable: false,
         isFilterable: false,
@@ -130,7 +136,7 @@ export default class NCCntrTable extends Component
       let toAddr = null;
       let blockTimestamp = null;
       let value = null;
-
+      let type = null;
       //console.log(JSON.stringify(entity));
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
@@ -163,6 +169,7 @@ export default class NCCntrTable extends Component
         toAddr = entity.toAddr;
         blockTimestamp = entity.blockTimestamp;
         value = entity.value;
+        type = entity.type;
       }
 
       // Generate tableContent
@@ -188,7 +195,8 @@ export default class NCCntrTable extends Component
           entityId={blockNumber}/> 
          
       </Cell>;
-      tableContent[i][2] = 
+      tableContent[i][2] = <Cell>{ type }</Cell>;
+      tableContent[i][3] =
       <Cell copy={creator} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+creator}>
           <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
@@ -196,7 +204,7 @@ export default class NCCntrTable extends Component
           entityId={creator}/> 
         
       </Cell>;
-      tableContent[i][3] = 
+      tableContent[i][4] =
       <Cell copy={transaction} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transaction}>
           <NCEntityLabel 
           entityType={NCEntity.TXN} 
