@@ -1157,7 +1157,7 @@ export const getTknRetrievePagingAccList = (queryStr, pageNumber, pageSize) => {
  let showView = (entity,request) => {
 
     
-    switch(entity.searchType)
+    switch(entity)
     {
 
 
@@ -1200,16 +1200,24 @@ export const getTknRetrievePagingAccList = (queryStr, pageNumber, pageSize) => {
     }
 
   }
-
+//This utilizes the functionality of the v2 API
 export const globalSearch = (queryStr) => {
-    network.request().then((response) =>{
 
-        showView(response,request);
+    const ep = network.endpointV2.search;
+    let request = queryStr;
+    let param = [request];
+
+    network.request(ep, param).then((response) =>{
+        //TODO:compensate for tokens
+        if(response.searchResults[0].type=="token"){
+          store.dispatch(StoreRetrieve.SetTopLevel(response));
+        }else{
+           showView(response.searchResults[0].type,response.searchResults[0].key);
+        }
     })
     .catch((error) => {
        console.log(error);
        store.dispatch(StoreRetrieve.SetTopLevel({
-
        }));
     });
 }
@@ -1235,7 +1243,7 @@ export const getRetrieveTopLevel = (queryStr) => {
     // sanitize input string
     let request = nc_trim(queryStr.toLowerCase());
 
-    // get block details
+
     const ep = network.endpoint.search;
     let params = [request,  0, PAGE_SIZE];
     network.request(ep, params)
@@ -1244,7 +1252,7 @@ export const getRetrieveTopLevel = (queryStr) => {
 
       if(typeof response.searchType !== "undefined" && response.searchType !== "token"){ 
 
-        showView(response,request);
+        showView(response.searchType,request);
        
       }
       else if(typeof response.searchType !== "undefined"){ 

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
+import { connect } from 'react-redux';
 
 import { InputGroup, Button, Intent, Popover, Menu, MenuItem, Position } from "@blueprintjs/core";
 
@@ -10,7 +11,7 @@ import * as network from 'network/NCNetworkRequests';
 import {strings as MSG} from 'lib/NCTerms';
 
 
-export default class NCTopLevelSearch extends Component
+export class NCTopLevelSearch extends Component
 {
   constructor(props) {
     super(props);
@@ -50,8 +51,10 @@ export default class NCTopLevelSearch extends Component
     });
   }
   search = (str) => {
-    console.log('searching...');
-    network.getRetrieveTopLevel(str);
+
+    //network.getRetrieveTopLevel(str);
+    network.globalSearch(str);
+    console.log(JSON.stringify(this.props));
   }
 
   render() {
@@ -133,3 +136,8 @@ export default class NCTopLevelSearch extends Component
     );
   }
 }
+export default connect((state) => {
+  return ({
+    searchRetrieve: state.searchRetrieve,
+  })
+})(NCTopLevelSearch);

@@ -87,7 +87,12 @@ const generateBaseUrl = (https, api, e) => {
 let net = null;
 let enet = null;
 let pnet = null;
-
+export const endpointV2 ={
+    search: {
+          link: '/aion/v2/dashboard/search',
+          params: ['searchParam']
+      }
+}
 export const endpoint = {
   block: {
     list: {

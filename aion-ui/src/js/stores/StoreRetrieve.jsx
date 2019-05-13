@@ -61,6 +61,7 @@ export function reducer_Retrieve (state = initialState_StoreRetrieve, action)
       _state.momentUpdated = moment();
       
       _state.response.test = "action.data";
+
       return _state;
     }
     default: 
