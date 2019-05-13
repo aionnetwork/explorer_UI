@@ -18,15 +18,15 @@ export function nc_getRandomInt(min, max) {
 /*
     This function should take a (value) and shift the point (decimals) places to the left with (precision) dp.
 */
-export function nc_addDecimal(value,decimals,precision=18){
+export function nc_addDecimal(value,decimals,precision=1){
 
      var num = new BigNumber(value);
      var digits = new BigNumber(10);
      var shift = digits.pow(decimals);
      if(num.isGreaterThan(shift)){
-        return num.div(shift).dp(precision).toFixed();
+        return nc_numFormatterACSensitive(num.toFixed());
      }else{
-        return num.toFixed();
+        return nc_numFormatterAionCoin(num.toFixed(),8);
      }
  }
 
