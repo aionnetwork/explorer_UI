@@ -300,7 +300,7 @@ class NCLayout extends Component {
 
               <MenuDivider title={MSG.Connection_menu_item_2} />
 
-        <MenuItem
+        {(false)&&<MenuItem
               className="nav-option"
               iconName={NCEntityInfo[NCEntity.ACCOUNT].icon}              
               text={MSG.Connection_menu_item_4}>
@@ -332,7 +332,7 @@ class NCLayout extends Component {
                 
                                              
 
-          </MenuItem>
+          </MenuItem> }
           
           <FormGroup>
             <Switch checked={this.state.darkMode} label={MSG.Connection_menu_item_3} onChange={() => {
