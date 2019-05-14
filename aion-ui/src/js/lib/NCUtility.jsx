@@ -18,7 +18,7 @@ export function nc_getRandomInt(min, max) {
 /*
     This function should take a (value) and shift the point (decimals) places to the left with (precision) dp.
 */
-export function nc_addDecimal(value,decimals,precision=1){
+export function nc_addDecimal(value,decimals=18,precision=1){
 
      var num = new BigNumber(value);
      var digits = new BigNumber(10);

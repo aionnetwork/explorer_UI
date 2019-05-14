@@ -7,7 +7,7 @@ import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntit
 import NCEntityDetail from 'components/common/NCEntityDetail';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-import { nc_decimalPrettify,nc_isStrEmpty, nc_numFormatter,nc_numPrettify, nc_numFormatterAmp, nc_numFormatterBytes, nc_numFormatterACSensitive, nc_isPositiveInteger, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_addDecimal,nc_decimalPrettify, nc_numFormatter, nc_numFormatterAmp } from 'lib/NCUtility';
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 
@@ -65,7 +65,7 @@ export default class NCTxnDetail extends Component
     let parsedTxnLog = this.parseTxnLog(entity.transactionLog);
     let parsedInputData = this.parseInputData(entity.data);
     
-    let value = nc_decimalPrettify(entity.value);
+    let value = entity.tokenSymbol == null ? nc_decimalPrettify(entity.value) : nc_decimalPrettify(nc_addDecimal(entity.value));
 
     let unit = entity.tokenSymbol == null? "Aion" : entity.tokenSymbol;
 
@@ -105,6 +105,7 @@ export default class NCTxnDetail extends Component
       },
       // ---------------------------------------------------------------
       {
+
         field: MSG.strings.Txn_detail_row5,
         value: entity.value == null ? EMPTY_STR : <span className="">{value + " " + unit}</span>,
       },
