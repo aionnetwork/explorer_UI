@@ -1,11 +1,8 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, IndexRedirect, hashHistory} from 'react-router'
+import { Router} from 'react-router'
 import moment from 'moment';
-
-import { Tab2, Tabs2, Tooltip } from "@blueprintjs/core";
-
 
 //list of sub-displays for details
 //import NCAccDetail from 'components/accounts/NCAccDetail';
@@ -19,14 +16,14 @@ import NCTknTable from 'components/tokens/NCTknTable';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
-import NCNonIdealState from 'components/common/NCNonIdealState';
 
-import { NCEntity, NCEntityInfo } from 'lib/NCEnums';
+
+import { NCEntity } from 'lib/NCEnums';
 import * as MSG from 'lib/NCTerms';
 
-import * as StoreRetrieve from 'stores/StoreRetrieve';
+//import * as StoreRetrieve from 'stores/StoreRetrieve';
 
-import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
+import { nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 class NCSearchRetrieve extends Component
@@ -72,17 +69,15 @@ class NCSearchRetrieve extends Component
   render() {
 
     const store = this.props.searchRetrieve;
-    const isWeb3 = (store.response) ? store.response.web3 : false;
+
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
-    const isTxnListFirstLoad = false//(store.response && store.response.txn) ? store.response.txn.momentUpdated : null;
-    const isBlkListFirstLoad = false//(store.response && store.response.blk) ? store.response.blk.momentUpdated : null;
 
      const srObj = (store.response && store.response.data) ? store.response.data : null;
     const isSrValid = nc_isObjectValid(srObj);
     const isSrEmpty = nc_isObjectEmpty(srObj, isSrValid);
 
-    const result = isSrEmpty ? {} : srObj.content[0];
+
     const entity = isSrEmpty ? null : srObj.searchType;
 
     const token = (store.response.data && store.response.data.searchType) ? store.response.data.searchType : false;
@@ -103,7 +98,7 @@ class NCSearchRetrieve extends Component
     ];
 
     const desc = store.queryStr;
-    
+
     const searchResultSection = <NCExplorerSection 
       className={""}
 

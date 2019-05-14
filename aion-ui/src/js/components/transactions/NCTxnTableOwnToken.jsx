@@ -196,7 +196,7 @@ export default class NCTxnTableOwnToken extends Component
         onPageCallback={onPageCallback}
         isLoading={isLoading}
         isPaginated={isPaginated}
-        entityName={"tokens"}
+        entityName={"transfers"}
         generateTableContent={this.generateTableContent}
         columnDescriptor={this.columnDescriptor}
         isLatest={isLatest}/>
