@@ -1209,16 +1209,23 @@ export const globalSearch = (queryStr) => {
 
     network.request(ep, param).then((response) =>{
         //TODO:compensate for tokens
-        if(response.searchResults[0].type=="token"){
-          store.dispatch(StoreRetrieve.SetTopLevel(response));
+
+        response.queryStr = queryStr;
+        if(response.searchResults && response.searchResults.length > 0){
+
+          if(response.searchResults.length > 1){
+
+            store.dispatch(StoreRetrieve.Set(response));
+          }else{
+            showView(response.searchResults[0].type,response.searchResults[0].key);
+          }
         }else{
-           showView(response.searchResults[0].type,response.searchResults[0].key);
+            store.dispatch(StoreRetrieve.Set(response));
         }
     })
     .catch((error) => {
        console.log(error);
-       store.dispatch(StoreRetrieve.SetTopLevel({
-       }));
+       store.dispatch(StoreRetrieve.Set(""));
     });
 }
 

@@ -103,7 +103,7 @@ export default class NCEventTable extends Component
    parseParamData = (txnLog) => {
     let result = "";
 
-    let arr = [];
+
     try {
       let a = txnLog;//.slice(1,-1);
 
@@ -121,7 +121,7 @@ export default class NCEventTable extends Component
    parseInputData = (txnLog) => {
     let result = "";
 
-    let arr = [];
+
     try {
       let a = txnLog;//.slice(1,-1);
 

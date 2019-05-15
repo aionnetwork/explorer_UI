@@ -447,7 +447,7 @@ class NCLayout extends Component {
 
             <div className="pt-navbar-group navbar-group-right">
               
-              <NCTopLevelSearch className="hide"/>
+              <NCTopLevelSearch dialog={false} className="hide"/>
               
               <span className="pt-navbar-divider"></span>
               <NCLivenessIndicator 
@@ -466,7 +466,7 @@ class NCLayout extends Component {
           </div>
           <div className="row show" >
             <div className="pt-navbar-group navbar-group-right">
-              <NCTopLevelSearch/>
+              <NCTopLevelSearch dialog={true} />
             </div>
           </div>
         </div>
