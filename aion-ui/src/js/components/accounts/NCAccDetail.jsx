@@ -6,7 +6,7 @@ import moment from 'moment';
 import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_decimalPrettify,nc_addDecimal, nc_decimalPoint } from 'lib/NCUtility';
+import { nc_decimalPrettify,nc_addDecimal, nc_decimalPoint,nc_numFormatterAionCoin } from 'lib/NCUtility';
 //import NCLink from 'components/common/NCLink';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
@@ -21,10 +21,11 @@ export default class NCAccDetail extends Component
   render() {
     let { entity, tokenList } = this.props;
     
-    //let bal = nc_numFormatterACSensitive(entity.balance);
+    //let bal = nc_numFormatterACSensitive(entity.balance);nc_numFormatterAionCoin(num.toFixed(),8);
     //console.log(entity.tokenDecimal);
-    let balance = entity.tokenName && entity.tokenDecimal ? nc_decimalPrettify(nc_addDecimal(entity.balance,entity.tokenDecimal,8)) : nc_decimalPrettify(entity.balance);
-    
+    let balance = entity.tokenName ? nc_decimalPrettify(nc_addDecimal(entity.balance)) : nc_decimalPrettify(nc_decimalPoint(entity.balance,18));
+    //let balance = entity.tokenName && entity.tokenDecimal ? nc_decimalPrettify(nc_addDecimal(entity.balance,entity.tokenDecimal,8)) : nc_decimalPrettify(entity.balance);
+    //let value = entity.tokenSymbol == null ? nc_decimalPrettify(entity.value) : nc_decimalPrettify(nc_addDecimal(entity.value));
 
     let desc = [
       {

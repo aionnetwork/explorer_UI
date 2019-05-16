@@ -6,7 +6,7 @@ import {BigNumber} from 'bignumber.js';
 import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_decimalPrettify, nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
+import { nc_decimalPrettify, nc_numFormatterACSensitive,nc_numFormatterAionCoin,nc_decimalPoint, nc_numFormatter } from 'lib/NCUtility';
 import NCLink from 'components/common/NCLink';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
@@ -21,7 +21,10 @@ export default class NCCntrDetail extends Component
     let { entity } = this.props;
     
     //let balance = nc_numFormatterACSensitive(entity.balance);
-    let balance = (entity.balance) ? nc_decimalPrettify(entity.balance) : 0;
+    let balance = (entity.balance) ? nc_decimalPrettify(nc_decimalPoint(entity.balance,18)) : 0;
+     //let bal = nc_numFormatterACSensitive(entity.balance);nc_numFormatterAionCoin(num.toFixed(),8);
+        //console.log(entity.tokenDecimal);
+    //let balance = entity.tokenName ? nc_decimalPrettify(nc_addDecimal(entity.balance)) : nc_decimalPrettify(entity.balance);
 
     let desc = [
       {
