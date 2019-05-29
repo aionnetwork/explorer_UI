@@ -18,7 +18,7 @@ import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityL
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 import {strings as MSG} from 'lib/NCTerms';
 
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import {nc_decimalPrettify, nc_rawFormat, nc_numFormatterAionCoin } from 'lib/NCUtility';
 
 export default class NCTxnTableOwn extends Component 
 {
@@ -109,7 +109,7 @@ export default class NCTxnTableOwn extends Component
         toAddr = entity.toAddr;
         contractAddr = entity.contractAddr;
         blockTimestamp = entity.blockTimestamp;
-        value = entity.value;
+        value = nc_decimalPrettify(nc_rawFormat(entity.value));//entity.value;
       }
 
       let isFrom = false;
@@ -130,7 +130,7 @@ export default class NCTxnTableOwn extends Component
           entityId={blockNumber}/> 
       </Cell>;
       tableContent[i][1] = <Cell copy={ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }>{ value ? value : 0 }</Cell>;
+      tableContent[i][2] = <Cell copy={ value ? value : 0 }>{ value ? value : 0 }</Cell>;
       tableContent[i][3] = 
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash}>
         <NCEntityLabel 

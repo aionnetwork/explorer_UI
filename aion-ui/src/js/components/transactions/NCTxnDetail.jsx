@@ -7,7 +7,7 @@ import NCEntityLabel, { parseClientTransaction } from 'components/common/NCEntit
 import NCEntityDetail from 'components/common/NCEntityDetail';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-import { nc_addDecimal,nc_decimalPrettify, nc_numFormatter, nc_numFormatterAmp,nc_decimalPoint } from 'lib/NCUtility';
+import { nc_addDecimal,nc_decimalPrettify, nc_rawFormat, nc_numFormatterAionCoin, nc_numFormatterACSensitive, nc_numFormatter, nc_numFormatterAmp,nc_decimalPoint } from 'lib/NCUtility';
 import {BigNumber} from 'bignumber.js';
 const EMPTY_STR = "Not Available";
 
@@ -65,7 +65,7 @@ export default class NCTxnDetail extends Component
     let parsedTxnLog = this.parseTxnLog(entity.transactionLog);
     let parsedInputData = this.parseInputData(entity.data);
     
-    let value = entity.tokenSymbol == null ? nc_decimalPrettify(nc_decimalPoint(entity.value,18)) : nc_decimalPrettify(nc_addDecimal(entity.value));
+    let value = entity.tokenSymbol == null ? nc_decimalPrettify(nc_rawFormat(entity.value)) : nc_decimalPrettify(nc_addDecimal(entity.value));
 
     let unit = entity.tokenSymbol == null? "Aion" : entity.tokenSymbol;
 
@@ -144,10 +144,11 @@ export default class NCTxnDetail extends Component
         field: MSG.strings.Txn_detail_row10,
         value: entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
       },
+
       {
               //Contract type
-              field: "Type",//MSG.strings.Txn_detail_row10,
-              value: entity.type,//entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
+              field: (entity.contractAddr) ?  "Type" : "",
+              value: entity.contractAddr ? (entity.type=="DEFAULT")? "FVM" : entity.type : "",
       },
       {
         field: MSG.strings.Txn_detail_row11,

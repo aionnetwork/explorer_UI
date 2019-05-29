@@ -17,7 +17,7 @@ import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { nc_decimalPrettify, nc_addDecimal, nc_numFormatterAionCoin } from 'lib/NCUtility';
 import {strings as MSG} from 'lib/NCTerms';
 
 export default class NCTxnTableOwnToken extends Component 
@@ -120,10 +120,10 @@ export default class NCTxnTableOwnToken extends Component
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
         transferTimestamp = entity.transferTimestamp;
-        value = entity.tknValue;
+        value = nc_decimalPrettify(nc_addDecimal(entity.tknValue,entity.tokenDecimal,8));//entity.tknValue;
         rawValue = entity.rawValue;
       }
-
+        //console.log(entity.tokenDecimal);
       let isFrom = false;
       if (this.props.ownAddr == fromAddr)
         isFrom = true;

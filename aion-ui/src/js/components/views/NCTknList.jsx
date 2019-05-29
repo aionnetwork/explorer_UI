@@ -107,7 +107,7 @@ class NCTknList extends Component
     let total = null;
     
     (store.response)?
-       total = store.response.page.totalElements
+       total = (store.response.page) ? store.response.page.totalElements : 0
     :
        total = " ";
 

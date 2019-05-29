@@ -82,8 +82,8 @@ class NCTxnList extends Component
         <NCExplorerHead
           momentUpdated={store.momentUpdated} 
           breadcrumbs={breadcrumbs}
-          title={MSG.strings.bread}
-          subtitle={subtitle}
+          title={MSG.strings.Txn_list_title}
+          subtitle={MSG.strings.Txn_list_desc}
         />  
         <NCTxnTable 
           data={store.response}

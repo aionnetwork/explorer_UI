@@ -252,6 +252,26 @@ export function nc_numFormatterAionCoin(num, fixed=4, isHex=false) {
   return result;
 }
 
+//
+export function nc_rawFormat(num){
+    if (num == null)
+      return null;
+
+    let bn = null;
+    try{
+        bn = (new BigNumber(String(num), 10));
+    }catch(e){
+        console.log(e);
+        return null;
+    }
+
+    if (!bn || !BigNumber.isBigNumber(bn) || !bn.isFinite() || bn.isNegative())
+        return null;
+
+    return bn.toFixed();
+
+}
+
 // format to Amp
 export function nc_numFormatterAmp(num, fixed=4, isHex=false) {
   if (num == null)

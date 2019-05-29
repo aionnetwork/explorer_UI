@@ -68,10 +68,10 @@ export default class NCCntrDetail extends Component
         value:  !entity.nonce ? EMPTY_STR : entity.nonce
       },
       {
-         //Contract type
-         field: "Type",//MSG.strings.Txn_detail_row10,
-         value: entity.type,//entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
-      },
+                    //Contract type
+                    field: (entity.contractAddr) ?  "Type" : "",
+                    value: entity.contractAddr ? (entity.type=="DEFAULT")? "FVM" : entity.type : "",
+            },
     ];
 
     let bridge = [

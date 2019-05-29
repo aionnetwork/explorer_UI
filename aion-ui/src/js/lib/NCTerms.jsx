@@ -235,7 +235,7 @@ export const strings = new LocalizedStrings({
     
     //Transactions
     Txn_list_title: "Transactions",
-    Txn_list_desc: "Recent Transaction",
+    Txn_list_desc: "Recent Transactions",
 
     Txn_list_col1: "Block #",
     Txn_list_col2: "Timestamp",

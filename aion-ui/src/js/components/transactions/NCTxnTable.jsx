@@ -17,7 +17,7 @@ import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests';
 
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { nc_decimalPrettify,nc_rawFormat, nc_numFormatterAionCoin } from 'lib/NCUtility';
 import {strings as MSG} from 'lib/NCTerms';
 
 export default class NCTxnTable extends Component 
@@ -51,14 +51,14 @@ export default class NCTxnTable extends Component
         flex: false,
         objPath: null,
       },
-      {
+      /*{
          name: "Type",//MSG.Txn_list_col3,
          isSortable: false,
          isFilterable: false,
          width: 75,
          flex: false,
          objPath: null,
-      },
+      },*/
       {
         name: MSG.Txn_list_col4,
         isSortable: false,
@@ -95,11 +95,11 @@ export default class NCTxnTable extends Component
     this.generateTableContent = this.generateTableContent.bind(this);
   }
 
-  generateTableContent(entityList) 
+  generateTableContent(entityList)
   {
     let tableContent = [];
 
-    entityList.forEach((entity, i) => 
+    entityList.forEach((entity, i) =>
     {
       let blockNumber = null;
       let transactionHash = null;
@@ -109,7 +109,7 @@ export default class NCTxnTable extends Component
       let blockTimestamp = null;
       let timestamp = null;
       let value = null;
-      let status = "";
+      let status = null;
       let type = "";
 
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
@@ -127,7 +127,7 @@ export default class NCTxnTable extends Component
         toAddr = entity.toAddr;
         contractAddr = entity.contractAddr;
         blockTimestamp = entity.blockTimestamp;
-        value = entity.value;
+        value = nc_decimalPrettify(nc_rawFormat(entity.value)); //let nc_decimalPrettify(nc_rawFormat(entity.value)) : nc_decimalPrettify(nc_addDecimal(entity.value));
         status = entity.txError;
         type = entity.type;
       }
@@ -136,36 +136,36 @@ export default class NCTxnTable extends Component
       //console.log(timestamp);
       // Generate tableContent
       tableContent[i] = [];
-      tableContent[i][0] = 
+      tableContent[i][0] =
       <Cell copy={blockNumber} link={'#'+NCEntityInfo[NCEntity.BLOCK].absoluteUrl+''+blockNumber}>
-        <NCEntityLabel 
-          entityType={NCEntity.BLOCK} 
+        <NCEntityLabel
+          entityType={NCEntity.BLOCK}
           entityName={blockNumber}
-          entityId={blockNumber}/> 
+          entityId={blockNumber}/>
       </Cell>;
       tableContent[i][1] = <Cell copy={(timestamp!==null) ? moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') :  moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }>{(timestamp!==null)? moment.unix(timestamp).format('MMM D YYYY, hh:mm:ss a') : moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = <Cell copy={ value ? nc_numFormatterAionCoin(value, 4, true) : 0 }>{ value ? value: 0 }</Cell>;
-      tableContent[i][3] = <Cell copy={ type }>{ type }</Cell>;
-      tableContent[i][4] =
+      tableContent[i][2] = <Cell copy={ value ? value : 0 }>{ value ? value: 0 }</Cell>;
+      //tableContent[i][3] = <Cell copy={ type }>{ type }</Cell>;
+      tableContent[i][3] =
       <Cell copy={transactionHash} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transactionHash}>
-        <NCEntityLabel 
-          entityType={NCEntity.TXN} 
-          entityId={transactionHash}/> 
+        <NCEntityLabel
+          entityType={NCEntity.TXN}
+          entityId={transactionHash}/>
       </Cell>;
-      tableContent[i][5] =
+      tableContent[i][4] =
       <Cell copy={fromAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+fromAddr}>
-        <NCEntityLabel 
-          entityType={NCEntity.ACCOUNT} 
-          
+        <NCEntityLabel
+          entityType={NCEntity.ACCOUNT}
+
           entityId={fromAddr}/>
       </Cell>;
-      tableContent[i][6] =
+      tableContent[i][5] =
       <Cell>
-        
+
         {
-         
+
           (status == "") ?
-          
+
           <Popover
             content="Transaction was successful"
             interactionKind={PopoverInteractionKind.HOVER}
@@ -182,7 +182,24 @@ export default class NCTxnTable extends Component
           </Popover>
 
           :
-          
+           (status == null) ?
+
+                    <Popover
+                      content="See Transaction Detail page"
+                      interactionKind={PopoverInteractionKind.HOVER}
+                      inline={false}
+                      popoverClassName="NCLivenessIndicator-Popover"
+                      className="NCLivenessIndicator"
+                      position={Position.BOTTOM_RIGHT}>
+                      <button className="pt-button pt-minimal liveness-btn">
+
+                        <div className="arrow-cell tx-status">
+                          <span className="pt-icon-large pt-icon-arrow-right icon "/>
+                        </div>
+                      </button>
+                    </Popover>
+           :
+
           <Popover
             content="Transaction Failed"
             interactionKind={PopoverInteractionKind.HOVER}
@@ -196,11 +213,11 @@ export default class NCTxnTable extends Component
                 <span className="pt-icon-large pt-icon-arrow-right icon fail"/>
               </div>
             </button>
-          </Popover> 
+          </Popover>
                   
         }
       </Cell>;
-      tableContent[i][7] =
+      tableContent[i][6] =
       <Cell copy={toAddr ? toAddr : contractAddr ? contractAddr : "Contract Creation"}  link={toAddr ? '#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+toAddr :'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+contractAddr}>
       {
             toAddr ? 

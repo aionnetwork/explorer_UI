@@ -169,7 +169,7 @@ export default class NCCntrTable extends Component
         toAddr = entity.toAddr;
         blockTimestamp = entity.blockTimestamp;
         value = entity.value;
-        type = entity.type;
+        type = (entity.type=="DEFAULT")? "FVM" : entity.type;  //entity.type==;
       }
 
       // Generate tableContent
@@ -195,7 +195,7 @@ export default class NCCntrTable extends Component
           entityId={blockNumber}/> 
          
       </Cell>;
-      tableContent[i][2] = <Cell>{ type }</Cell>;
+      tableContent[i][2] = <Cell>{ type }</Cell>;//entity.contractAddr ? (type=="DEFAULT")? "FVM" : type : "",
       tableContent[i][3] =
       <Cell copy={creator} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+creator}>
           <NCEntityLabel 

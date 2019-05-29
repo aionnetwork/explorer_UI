@@ -32,6 +32,10 @@ export class NCTopLevelSearch extends Component
     if (!nc_isStrEmpty(this.state.queryStr) && this.state.entity==5)
     {
       //global search
+      this.setState({
+              queryStr: ''
+
+            });
       this.search(queryStr);
 
     }else if(!nc_isStrEmpty(this.state.queryStr)){
@@ -65,7 +69,7 @@ export class NCTopLevelSearch extends Component
   componentWillUpdate(nextProps, nextState){
 
       //check if list is present and display
-      console.log(JSON.stringify(nextProps.result));
+      //console.log(JSON.stringify(nextProps.result));
       if(!this.state.isOpen && nextProps.result.response!=null && nextProps.result.response != this.props.result.response ){
             //console.log(JSON.stringify(nextProps.result.response));
             this.handleOpen();
@@ -81,7 +85,7 @@ export class NCTopLevelSearch extends Component
 
     const searchResult = this.props.result.response;
     const searchResultCount = this.props.result.response != null? this.props.result.response.length : 0;
-    console.log(JSON.stringify(searchResult));
+    //console.log(JSON.stringify(searchResult));
     const searchDisplay = (
         <div className={Classes.DIALOG_BODY}>
               {(searchResult==null)?

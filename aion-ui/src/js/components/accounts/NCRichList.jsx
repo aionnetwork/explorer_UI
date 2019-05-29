@@ -45,14 +45,8 @@ export default class NCRichList extends Component
         isFilterable: false,
         width: 200,
         flex: false,
-      },
-      {
-        name: MSG.Acc_rich_col3,
-        isSortable: false,
-        isFilterable: false,
-        width: 200,
-        flex: false,
       }
+
     ];
   }
 
@@ -63,7 +57,7 @@ export default class NCRichList extends Component
 
     entityList.forEach((entity, i) => 
     {
-      console.log(JSON.stringify(entity));
+      //console.log(JSON.stringify(entity));
       tableContent[i] = [];
       tableContent[i][0] = 
         <Cell copy={entity['address']} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+entity[0]} >
@@ -72,7 +66,7 @@ export default class NCRichList extends Component
             entityId={entity['address']}/> 
         </Cell>;
       tableContent[i][1] = <Cell copy={ nc_numFormatter(entity['balance'], 2) }>{ nc_numFormatter(entity['balance'], 2) }</Cell>;
-      tableContent[i][2] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
+
              
     });
 

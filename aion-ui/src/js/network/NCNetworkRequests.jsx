@@ -772,7 +772,7 @@ export const getCntrRetrieveTopLevel = (queryStr, page, size) => {
     // get contract details
     const ep = network.endpoint.contract.detail;
     let params = [request,page,size];
-    
+    //console.log(ep,params);
     network.request(ep, params)
     .then((response) => {
       const isCntrValid = nc_isObjectValid(response);
