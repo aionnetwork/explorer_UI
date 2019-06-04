@@ -109,11 +109,11 @@ export default class NCTknDetail extends Component
       
       {
         field: MSG.strings.Tkn_detail_row7,
-        value: nc_decimalPrettify(nc_addDecimal(entity.totalSupply.toString(),entity.tokenDecimal,8))+ " " + entity.symbol,
+        value: (entity.totalSupply)? entity.totalSupply : nc_decimalPrettify(nc_addDecimal(entity.totalSupply.toString(),entity.tokenDecimal,8))+ " " + entity.symbol,
       },
       {
         field: MSG.strings.Tkn_detail_row8,
-        value: nc_decimalPrettify(nc_addDecimal(entity.liquidSupply.toString(),entity.tokenDecimal,8))+ " "+ entity.symbol,
+        value: (entity.liquidSupply)? entity.liquidSupply : nc_decimalPrettify(nc_addDecimal(entity.liquidSupply.toString(),entity.tokenDecimal,8))+ " "+ entity.symbol,
       },
      
       
