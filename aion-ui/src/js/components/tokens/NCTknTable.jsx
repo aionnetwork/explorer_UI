@@ -137,7 +137,7 @@ export default class NCTknTable extends Component
         blockTimestamp = entity.blockTimestamp;
         value = entity.value;
       }
-        console.log(entity.totalSupply);
+      //console.log(entity.totalSupply);
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
