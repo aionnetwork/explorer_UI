@@ -112,7 +112,7 @@ export function reducer_tknRetrieve (state = initialState_StoreTknRetrieve, acti
       _state.response.tkn.data = action.data;
       _state.response.tkn.momentUpdated = moment();
 
-    if(typeof action.data.content != 'undefined'){
+    if(typeof action.data.content[0] != 'undefined'){
       _state.response.transfers.data = action.data.content[0].transfers;//{"content":[]};
        _state.response.holders.data = action.data.content[0].holders;//{"content":[]};
 

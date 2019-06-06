@@ -131,7 +131,7 @@ class NCTknList extends Component
     return (
       <NCExplorerPage
         isLoading={isLoadingTopLevel}
-        isDataValid={true} 
+        isDataValid={isDataValid}
         isDataEmpty={isDataEmpty}
         
         loadingStr={MSG.Token.LOADING}
