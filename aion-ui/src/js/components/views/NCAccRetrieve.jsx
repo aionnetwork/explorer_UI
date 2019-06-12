@@ -114,7 +114,8 @@ class NCAccRetrieve extends Component
       let entity = this.state.entity;
       
       this.setState({
-        queryStr: ''
+        queryStr: '',
+        token: null
       }, () => {
         
         hashHistory.push('/account/'+this.props.params.accId);
@@ -137,7 +138,7 @@ class NCAccRetrieve extends Component
                 key = {tokenList.length}
                 className = "nav-option"
                 iconName = {NCEntityInfo[NCEntity.TKN].icon}
-                onClick={()=>this.changeToken(this.props.accRetrieve.queryStr)}
+                onClick={()=>this.changeToken(this.props.accRetrieve.queryStr,null)}
                 text = "Aion (Default)"
                 value = {this.props.accRetrieve.queryStr}
               />
