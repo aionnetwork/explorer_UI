@@ -65,8 +65,8 @@ class NCAccRetrieve extends Component
 
   requestPagingTxnList = (pageNumber,pageSize,start,end) => {
     const queryStr = this.props.accRetrieve.queryStr;
-
-    network.getAccRetrievePagingTxnList(queryStr, this.state.token, pageNumber,pageSize,start,end);
+    let token = (this.props.params.tknId) ? this.props.params.tknId : this.state.token;
+    network.getAccRetrievePagingTxnList(queryStr, token, pageNumber,pageSize,start,end);
   }
 
   requestPagingTrnList = (pageNumber,pageSize,start,end) => {
@@ -89,6 +89,7 @@ class NCAccRetrieve extends Component
     const list = this.props.accRetrieve.tokens;
     return list;
   }
+
 
   changeToken = (queryStr, tkn) => {
     if (!nc_isStrEmpty(queryStr)&&!nc_isStrEmpty(tkn))

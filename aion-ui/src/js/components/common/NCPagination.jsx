@@ -253,7 +253,7 @@ export default class NCPagination extends Component
 
             onClick={() => {
               this.serchDirection = SEARCH_DIR.FORWARD;
-              console.log(pageNumber);
+              //console.log(pageNumber);
               this.props.onPageCallback(pageNumber + 1,pageSize,startDate,endDate)
             }}/>
             <Button 
