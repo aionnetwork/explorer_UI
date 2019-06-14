@@ -109,6 +109,7 @@ export default class NCTxnTableOwn extends Component
         toAddr = entity.toAddr;
         contractAddr = entity.contractAddr;
         blockTimestamp = entity.blockTimestamp;
+        //console.log("transaction : ",entity);
         value = nc_decimalPrettify(nc_rawFormat(entity.value));//entity.value;
       }
 

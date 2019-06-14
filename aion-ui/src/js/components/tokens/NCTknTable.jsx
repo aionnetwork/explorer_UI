@@ -98,7 +98,7 @@ export default class NCTknTable extends Component
       let token = null;
       let symbol = null;
       let Addr = null;
-      let totalSupply = null;
+      let totalSupply = 0;
       let liquidSupply= 0;
       let description = " ";
       let decimal = null;
@@ -137,7 +137,7 @@ export default class NCTknTable extends Component
         blockTimestamp = entity.blockTimestamp;
         value = entity.value;
       }
-
+      //console.log(entity.totalSupply);
       // Generate tableContent
       tableContent[i] = [];
       tableContent[i][0] = 
@@ -157,12 +157,12 @@ export default class NCTknTable extends Component
       tableContent[i][1] = <Cell copy={ decimal }>{ decimal }</Cell>;
       tableContent[i][2] = <Cell copy={ totalSupply }>
 
-        {nc_decimalPrettify(nc_addDecimal(totalSupply.toString(),entity.tokenDecimal,8))}
+        {(totalSupply<0) ? totalSupply : nc_addDecimal(totalSupply.toString(),entity.tokenDecimal,8)}
       </Cell>;
       tableContent[i][3] = 
       <Cell copy={liquidSupply}>
 
-          {nc_decimalPrettify(nc_addDecimal(liquidSupply.toString(),entity.tokenDecimal,8))}
+       {(liquidSupply<0) ? liquidSupply : nc_addDecimal(liquidSupply.toString(),entity.tokenDecimal,8)}
          
       </Cell>;
       tableContent[i][4] = 

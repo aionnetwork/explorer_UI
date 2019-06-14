@@ -635,7 +635,7 @@ export const getAccRetrievePagingTrnList = (queryStr, pageNumber, pageSize, star
       let acc = store.getState().accRetrieve.response.acc;
       if (acc && acc.data && acc.data.content && acc.data.content[0]) {
         if (nc_sanitizeHex(acc.data.content[0].address) == nc_sanitizeHex(queryStr)) {
-            console.log(JSON.stringify(response));
+            //console.log(JSON.stringify(response));
             store.dispatch(StoreAccRetrieve.SetPagingTrn(response));  
         }
       }

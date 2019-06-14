@@ -68,6 +68,26 @@ var PREFIXES = {
 	"-24": "y"
 };
 
+var PREFIXESEXPANDED = {
+	"24": "yotta",
+	"21": "zetta",
+	"18": "exa",
+	"15": "peta",
+	"12": "tera",
+	"9": "giga",
+	"6": "mega",
+	"3": "kilo",
+	"0": "",
+	"-3": "milli",
+	"-6": "micro",
+	"-9": "nano",
+	"-12": "pico",
+	"-15": "femto",
+	"-18": "atto",
+	"-21": "zepto",
+	"-24": "yocto"
+};
+
 // expects a bignumber as input
 export function formatSI(num) {
 	if (num.eq(0)) {

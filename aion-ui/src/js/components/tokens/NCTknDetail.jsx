@@ -108,12 +108,20 @@ export default class NCTknDetail extends Component
       },
       
       {
-        field: MSG.strings.Tkn_detail_row7,
-        value: nc_decimalPrettify(nc_addDecimal(entity.totalSupply.toString(),entity.tokenDecimal,8))+ " " + entity.symbol,
+        field: <div>
+                               {MSG.strings.Tkn_detail_row7} {" "}
+                               <Tooltip
+                                 position={Position.RIGHT}
+                                 content={MSG.strings.si_prefix_msg} >
+                                 <span className="fa fa-info-circle fa-lg icon"></span>
+                               </Tooltip>
+
+                              </div>,
+        value: (entity.totalSupply < 0)? entity.totalSupply : nc_decimalPrettify(nc_addDecimal(entity.totalSupply.toString(),entity.tokenDecimal,8))+ " " + entity.symbol,
       },
       {
         field: MSG.strings.Tkn_detail_row8,
-        value: nc_decimalPrettify(nc_addDecimal(entity.liquidSupply.toString(),entity.tokenDecimal,8))+ " "+ entity.symbol,
+        value: (entity.liquidSupply < 0)? entity.liquidSupply : nc_decimalPrettify(nc_addDecimal(entity.liquidSupply.toString(),entity.tokenDecimal,8))+ " "+ entity.symbol,
       },
      
       

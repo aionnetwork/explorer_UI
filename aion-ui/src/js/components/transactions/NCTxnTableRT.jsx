@@ -88,14 +88,14 @@ export default class NCTxnTableRT extends Component
         <div className="NCTableFlex NCTableTransactionsRT">
           <div className="table-row header">
             <div className="column txn-age hide">{MSG.Txn_rt_list_col1}</div>
-            <div className="column txn-block">Value</div>
-            <div className="column txn-hash growable">{MSG.Txn_rt_list_col2}</div>
+            <div className="column txn-block">{MSG.Txn_rt_list_col2}</div>
+            <div className="column txn-hash growable">{MSG.Txn_rt_list_col3}</div>
             <div className="wrapper txn-entityContainer growable">
-              <div className="column txn-fromEntity growable">{MSG.Txn_rt_list_col3}</div>
+              <div className="column txn-fromEntity growable">{MSG.Txn_rt_list_col4}</div>
               <div className="column txn-arrow">
                 <span className="pt-icon-large pt-icon-arrow-right"></span>
               </div>
-              <div className="column txn-toEntity growable">{MSG.Txn_rt_list_col4}</div>
+              <div className="column txn-toEntity growable">{MSG.Txn_rt_list_col5}</div>
             </div>
           </div>
           <FlipMove

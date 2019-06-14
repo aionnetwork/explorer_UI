@@ -419,6 +419,8 @@ export const strings = new LocalizedStrings({
     footer_link_3: "Bounties & Grants",
     footer_link_4: "Developers",
 
+    si_prefix_msg: "This value may be displayed with SI unit prefix",
+    
     //breadcrumbs
     bread:"Home",
     bread_slice: { 
@@ -955,6 +957,8 @@ export const strings = new LocalizedStrings({
           footer_link_2: "Community",
           footer_link_3: "Bounties & Grants",
           footer_link_4: "Developers",
+
+          si_prefix_msg: "This value may be displayed with SI unit prefix",
 
           //breadcrumbs
           bread:"Home",

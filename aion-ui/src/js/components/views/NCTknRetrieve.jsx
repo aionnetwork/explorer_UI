@@ -226,8 +226,8 @@ class NCTknRetrieve extends Component
     return (
       <NCExplorerPage
         isLoading={isLoadingTopLevel}
-        isDataValid={true} 
-        isDataEmpty={false}
+        isDataValid={isTknValid}
+        isDataEmpty={isTknEmpty}
         
         loadingStr={MSG.Token.LOADING}
         invalidDataStr={MSG.Token.INVALID_DATA}

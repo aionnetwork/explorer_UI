@@ -53,7 +53,17 @@ The parameters entered are incorrect.
 
 # Version
 
-## 2.0.1
+## 2.2
+
+- AVM type support on contract list
+- AVM type support in contract and transaction details
+- SI unit symbols added to token values
+- updated global search
+- minor update on dark mode
+- rich list added to accounts page
+- page size bug fix
+
+## 2.1
 
 - Feedback form added
 - Improvement in mobile responsiveness 

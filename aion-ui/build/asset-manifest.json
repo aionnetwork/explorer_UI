@@ -1,17 +1,19 @@
 {
-  "main.css": "/static/css/main.5498b8d6.chunk.css",
-  "main.js": "/static/js/main.1b5a4be6.chunk.js",
-  "main.js.map": "/static/js/main.1b5a4be6.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-  "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-  "static/css/2.fea10334.chunk.css": "/static/css/2.fea10334.chunk.css",
-  "static/js/2.b84ef3b1.chunk.js": "/static/js/2.b84ef3b1.chunk.js",
-  "static/js/2.b84ef3b1.chunk.js.map": "/static/js/2.b84ef3b1.chunk.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.9261d5dff08856bcb8c967a6d1eefaf3.js": "/precache-manifest.9261d5dff08856bcb8c967a6d1eefaf3.js",
-  "service-worker.js": "/service-worker.js",
-  "static/css/2.fea10334.chunk.css.map": "/static/css/2.fea10334.chunk.css.map",
-  "static/css/main.5498b8d6.chunk.css.map": "/static/css/main.5498b8d6.chunk.css.map",
-  "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.fee66e71.woff",
-  "static/media/blueprint.css": "/static/media/icons-20.c6e7874e.eot"
+  "files": {
+    "main.css": "/static/css/main.886e5aaf.chunk.css",
+    "main.js": "/static/js/main.6c2ec3bc.chunk.js",
+    "main.js.map": "/static/js/main.6c2ec3bc.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/css/2.6577d8b3.chunk.css": "/static/css/2.6577d8b3.chunk.css",
+    "static/js/2.58f9d078.chunk.js": "/static/js/2.58f9d078.chunk.js",
+    "static/js/2.58f9d078.chunk.js.map": "/static/js/2.58f9d078.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.7236090205ce2203b9dbb0f4e714295a.js": "/precache-manifest.7236090205ce2203b9dbb0f4e714295a.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.6577d8b3.chunk.css.map": "/static/css/2.6577d8b3.chunk.css.map",
+    "static/css/main.886e5aaf.chunk.css.map": "/static/css/main.886e5aaf.chunk.css.map",
+    "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.fee66e71.woff",
+    "static/media/blueprint.css": "/static/media/icons-20.c6e7874e.eot"
+  }
 }

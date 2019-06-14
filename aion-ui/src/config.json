@@ -1,6 +1,6 @@
 {
   "api": {
-    "base_url": "staging-api.aiondev.network",
+    "base_url": "mainnet-api.aion.network",
     "https_enabled": true
   },
   "site": {

@@ -295,10 +295,10 @@ class NCLayout extends Component {
         <Popover
           content={
             <Menu className={mode + " NCNavMenu"}>
-              <MenuDivider title={MSG.Connection_menu_item_1} />
+              <MenuDivider className="" title={MSG.Connection_menu_item_1} />
               { menuItemList }
 
-              <MenuDivider title={MSG.Connection_menu_item_2} />
+              <MenuDivider className="" title={MSG.Connection_menu_item_2} />
 
         {(false)&&<MenuItem
               className="nav-option"
