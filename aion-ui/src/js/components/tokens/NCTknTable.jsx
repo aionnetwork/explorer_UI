@@ -40,14 +40,7 @@ export default class NCTknTable extends Component
         flex: true,
         objPath: null,
       },
-      {
-        name: MSG.strings.Tkn_list_col2,
-        isSortable: false,
-        isFilterable: false,
-        width: 100,
-        flex: false,
-        objPath: null,
-      },
+
       {
         name: MSG.strings.Tkn_list_col3,
         isSortable: false,
@@ -154,18 +147,18 @@ export default class NCTknTable extends Component
         
        </Cell>
       ;
-      tableContent[i][1] = <Cell copy={ decimal }>{ decimal }</Cell>;
-      tableContent[i][2] = <Cell copy={ totalSupply }>
+      //tableContent[i][1] = <Cell copy={ decimal }>{ decimal }</Cell>;
+      tableContent[i][1] = <Cell copy={ totalSupply }>
 
         {(totalSupply<0) ? totalSupply : nc_addDecimal(totalSupply.toString(),entity.tokenDecimal,8)}
       </Cell>;
-      tableContent[i][3] = 
+      tableContent[i][2] =
       <Cell copy={liquidSupply}>
 
        {(liquidSupply<0) ? liquidSupply : nc_addDecimal(liquidSupply.toString(),entity.tokenDecimal,8)}
          
       </Cell>;
-      tableContent[i][4] = 
+      tableContent[i][3] =
       <Cell copy={holder} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+holder}>
           <NCEntityLabel 
           entityType={NCEntity.ACCOUNT} 
@@ -173,7 +166,7 @@ export default class NCTknTable extends Component
           entityId={holder}/> 
         
       </Cell>;
-      tableContent[i][5] = 
+      tableContent[i][4] =
       <Cell copy={transaction} link={'#'+NCEntityInfo[NCEntity.TXN].absoluteUrl+''+transaction}>
           <NCEntityLabel 
           entityType={NCEntity.TXN} 

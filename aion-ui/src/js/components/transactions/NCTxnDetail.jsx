@@ -65,14 +65,18 @@ export default class NCTxnDetail extends Component
 
              list.push(
                              <span key = {i}><b> {nc_decimalPrettify(nc_addDecimal(token.value))}</b>{" "+token.tokenSymbol+ " from: "}
-                                 <a src = "#">{token.from}</a>
+                                 <a href = {"#/account/" + token.from}>{token.from}</a>
                                  {" to:  "}
-                                 <a src = "#">{token.to}</a>
+                                 <a src = "#">{token.to}</a><br/>
                              </span>
 
                           );
 
+
              });
+
+
+
 
 
        }else{
@@ -136,7 +140,7 @@ export default class NCTxnDetail extends Component
       },
       {
          field: "",
-         value: <div className="token-box">tokenList</div>,
+         value: <div className="token-box">{tokenList}</div>,
       },
       {
         field: MSG.strings.Txn_detail_row6,

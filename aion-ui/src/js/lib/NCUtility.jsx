@@ -31,7 +31,7 @@ export function nc_addDecimal(value,decimals=18,precision=1){
      if(num.isGreaterThan(shift)){
         return nc_numFormatterACSensitive(num.toFixed());
      }else{
-        return nc_numFormatterAionCoin(num.toFixed(),8);
+        return num.toFixed();//nc_numFormatterAionCoin(num.toFixed(),8);
      }
  }
 
