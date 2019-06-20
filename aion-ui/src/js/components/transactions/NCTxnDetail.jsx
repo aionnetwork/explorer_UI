@@ -95,7 +95,7 @@ export default class NCTxnDetail extends Component
 
     let unit = entity.tokenSymbol == null? "Aion" : entity.tokenSymbol;
 
-    let tokenList = this.tokenTransfers(entity.tokenTransfers);
+    let tokenList = (entity.tokenTransfers) ? this.tokenTransfers(entity.tokenTransfers) : null;
 
 
     let desc = 
@@ -140,7 +140,7 @@ export default class NCTxnDetail extends Component
       },
       {
          field: "",
-         value: <div className="token-box">{tokenList}</div>,
+         value: tokenList ==null ? "" :<div className="token-box">{tokenList}</div>,
       },
       {
         field: MSG.strings.Txn_detail_row6,
