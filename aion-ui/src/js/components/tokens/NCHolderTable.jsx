@@ -9,7 +9,7 @@ import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 import NCLink from 'components/common/NCLink';
 
 import { NCEntityInfo,NCEntity } from 'lib/NCEnums';
-import { nc_numPrettify, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_hexPrefix } from 'lib/NCUtility';
+import { nc_addDecimal, nc_decimalPrettify, nc_numPrettify, nc_numFormatter, nc_numFormatterBytes, nc_numFormatterAionCoin, nc_hexPrefix } from 'lib/NCUtility';
 
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 import {BigNumber} from 'bignumber.js';
@@ -79,7 +79,7 @@ export default class NCAccTable extends Component
         blockNumber = entity.blockNumber;
         holderAddr = entity.holderAddr;
         contractAddr = entity.contractAddr;
-        balance = entity.rawBalance;
+        balance = nc_decimalPrettify(nc_addDecimal(entity.rawBalance,entity.tokenDecimal,8,true));
         rawbalance = entity.rawBalance;
       }
 

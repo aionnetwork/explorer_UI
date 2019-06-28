@@ -121,7 +121,7 @@ export default class NCTxnTableOwnToken extends Component
         toAddr = entity.toAddr;
         transferTimestamp = entity.transferTimestamp;
         //console.log("data: ",entity.rawValue,entity.tokenDecimal);
-        value = nc_decimalPrettify(nc_addDecimal(entity.rawValue,entity.tokenDecimal,8));//entity.tknValue;
+        value = nc_decimalPrettify(nc_addDecimal(entity.rawValue,entity.tokenDecimal,8,true));//entity.tknValue;
         rawValue = entity.rawValue;
       }
         //console.log(entity.tokenDecimal);

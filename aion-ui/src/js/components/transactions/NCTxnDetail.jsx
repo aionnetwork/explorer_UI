@@ -64,7 +64,7 @@ export default class NCTxnDetail extends Component
          tokens.map((token,i) => {
 
              list.push(
-                             <span key = {i}><b> {nc_decimalPrettify(nc_addDecimal(token.value))}</b>{" "+token.tokenSymbol+ " from: "}
+                             <span key = {i}><b> {nc_decimalPrettify(nc_addDecimal(token.value,18,1,true))}</b>{" "+token.tokenSymbol+ " from: "}
                                  <a href = {"#/account/" + token.from}>{token.from}</a>
                                  {" to:  "}
                                  <a src = "#">{token.to}</a><br/>
