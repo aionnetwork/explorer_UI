@@ -597,7 +597,7 @@ export const getAccRetrievePagingBlkList = (queryStr, pageNumber, pageSize, star
   }
   else {
     const ep = network.endpoint.block.list[blkListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
+    let params = [queryStr, pageNumber, pageSize, start, end];
     network.request(ep, params)
     .then((response) => {
       
