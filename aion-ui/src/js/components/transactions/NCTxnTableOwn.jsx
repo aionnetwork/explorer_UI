@@ -149,7 +149,7 @@ export default class NCTxnTableOwn extends Component
       </Cell>;
 
       tableContent[i][5] =
-      <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? MSG.Txn_own : undefined }>
+      <Cell copy={toAddr} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? MSG.Txn_own : undefined }>
        {
             toAddr ? 
                 <NCEntityLabel 
