@@ -95,7 +95,7 @@ export const strings = new LocalizedStrings({
     Acc_detail_row2: "Balance",
     Acc_detail_row2_subtitle_a: "Balance Service Unavailable",
     Acc_detail_row2_subtitle_b: "as of block",
-    Acc_detail_row3: "Nonce",
+    Acc_detail_row3: "Transaction count",
     Acc_detail_row4: "Contract view",
     Acc_detail_row5: "Token balance",
 
