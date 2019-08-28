@@ -927,6 +927,7 @@ export const setDashboardData = (response) => {
   if(!isResponseEmpty) {
     let data = response.content[0];
     //console.log(JSON.stringify(data.transactions));
+    store.dispatch(StoreKpis.SetAll(data.metrics));
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
     store.dispatch(StoreTxnRt.SetAll(data.transactions));
     
@@ -961,27 +962,52 @@ export const setKPIData = (response) => {
   }
 }
 
+export const setHealthData = (response) => {
+
+  if(response.content.length > 0) {
+    let data = response.content[0];
+
+    store.dispatch(StoreKpis.SetHealth(data));
+  }
+}
+
 export const getKPIData = () => {
-  
-    
-    const ep = network.endpoint.dashboard;
+
+
+     const ep = network.endpoint.dashboard;
+     let params = [];
+
+     network.request(ep,params)
+     .then((response) => {
+         setKPIData(response);
+         network.startInterval(ep,params,(response) => {
+         setKPIData(response);
+       });
+     })
+     .catch((error) => {
+       console.log(error);
+       setKPIData({content:[]});
+
+     });
+
+ }
+export const getHealthData = () => {
+
+    const ep = network.endpointV2.health;
     let params = [];
 
     network.request(ep,params)
     .then((response) => {
-      setKPIData(response);
-      network.startInterval(ep,params,(response) => {
-        setKPIData(response);
+        setHealthData(response);
+        network.startInterval(ep,params,(response) => {
+        setHealthData(response);
       });
     })
     .catch((error) => {
       console.log(error);
-      setKPIData({content:[]});
-      
+      //setKPIData({content:[]});
     });
-  
 }
-
 
 // ========================================================
 // Tokens

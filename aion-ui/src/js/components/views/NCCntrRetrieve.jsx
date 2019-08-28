@@ -362,8 +362,10 @@ class NCCntrRetrieve extends Component
                 (isBlkListValid) &&
                 <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
               }
-              
-              <Tab2 id="event" title="Events" panel={eventListSection}/>
+              {
+               (eventListSection.length > 0) &&
+               <Tab2 id="event" title="Events" panel={eventListSection}/>
+              }
             </Tabs2>
           </div>
         }

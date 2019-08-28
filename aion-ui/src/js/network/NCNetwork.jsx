@@ -91,7 +91,13 @@ export const endpointV2 ={
     search: {
           link: '/aion/v2/dashboard/search',
           params: ['searchParam']
-      }
+    },
+    health: {
+          link: '/aion/v2/dashboard/health',
+          params: [],
+          name: "health"
+    }
+
 }
 export const endpoint = {
   block: {
@@ -189,7 +195,8 @@ export const endpoint = {
   },
   dashboard: {
     link: '/aion/dashboard/view',
-    params: []
+    params: [],
+    name: "dashboard"
   },
   detail: {
       link: '/aion/dashboard/search',
@@ -574,11 +581,11 @@ export function disconnectSocket() {
     stompClient.disconnect()
 }
 
-export let intervalID = null;
+export let intervalID = {};
 
 export function startInterval(endpoint, params,func) {
     //console.log(JSON.stringify(endpoint));
-    intervalID = setInterval(
+    intervalID[endpoint.name] = setInterval(
       function(){ 
 
         //console.log('Endpoint in interval: '+JSON.stringify(endpoint));

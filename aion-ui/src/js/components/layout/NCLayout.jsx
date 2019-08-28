@@ -77,22 +77,27 @@ class NCLayout extends Component {
 
     localStorage.getItem('lng_mode') && changeLanguage(localStorage.getItem('lng_mode'));
 
-    network.getDashboardData();
-    network.getKPIData(); 
+    //network.getDashboardData();
+    //network.getKPIData();
+
+  }
+  componentWillUpdate(){
+
   }
 
   componentDidMount() {
-    
-    //this.mode = (this.state.darkMode!==false) ? "darkMode" : "";
-    //this.mode = (this.props.darkMode.data) ? "darkMode" : "";
-
+    if(this.props.location.pathname !== "/dashboard"){
+       network.getHealthData();
+    }else{
+       stopInterval(intervalID.health);
+    }
 
     this.d_mode_class = (this.props.darkMode.data) ? "darkMode" : "";   
   }
 
   componentWillUnmount() {
-    disconnectSocket();
-    stopInterval(intervalID);
+    //disconnectSocket();
+    //stopInterval(intervalID.health);
   }
 
   //change the language state

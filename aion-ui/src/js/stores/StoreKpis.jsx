@@ -2,10 +2,17 @@
 import moment from 'moment';
 import * as mock from 'lib/NCData';
 
-export const SetAll = (data) => 
+export const SetAll = (data) =>
 {
   return {
     type: 'KPI_SET_ALL',
+    data: data,
+  }
+}
+export const SetHealth = (data) =>
+{
+  return {
+    type: 'SET_HEALTH',
     data: data,
   }
 }
@@ -62,20 +69,20 @@ export function reducer_kpis (state = initialState_StoreKPIs, action)
       data.transactionPerSecond = input.transactionPerSecond;
       data.peakTransactionsPerBlockInLast24hours = input.peakTransactionsPerBlockInLast24hours;
       data.totalTransactionsInLast24hours = input.totalTransactionsInLast24hours;
-          
+
       data.hashRate = input.hashRate;
       data.averageDifficulty = input.averageDifficulty;
       data.lastBlockReward = input.lastBlockReward;
-        
+
       data.averageBlockTime = input.averageBlockTime;
       data.targetBlockTime = input.targetBlockTime;
-      
+
       data.averageNrgLimitPerBlock = input.averageNrgLimitPerBlock;
       data.averageNrgConsumedPerBlock = input.averageNrgConsumedPerBlock;
 
       data.startBlock = input.startBlock;
       data.startTimestamp = input.startTimestamp;
-      
+
       data.endBlock = input.endBlock;
       data.endTimestamp = input.endTimestamp;
 
@@ -88,7 +95,27 @@ export function reducer_kpis (state = initialState_StoreKPIs, action)
       
       return _state;
     }
-    default: 
+    case 'SET_HEALTH':
+    {
+          let _state = Object.assign({}, state);
+
+                let input = action.data;
+                let data = _state.data;
+
+                if (input == null) return _state;
+
+                data.endTimestamp = input.timestamp;
+
+                data.currentBlockchainHead = input.blockchainHead;
+                data.dbBlockTableHead = input.dbBlockHead;
+                data.status = input.status;
+
+                _state.data = data;
+                _state.momentUpdated = moment();
+
+                return _state;
+    }
+    default:
     {
       return state;
     }

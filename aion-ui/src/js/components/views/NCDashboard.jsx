@@ -4,6 +4,7 @@ import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import {InputGroup, Button, Intent, Tabs2, Tab2 } from "@blueprintjs/core";
+import { stopInterval, intervalID } from 'network/NCNetwork';
 
 import NCRecentBlocks from 'components/dashboard/NCRecentBlocks';
 import NCDashboardKPIs from 'components/dashboard/NCDashboardKPIs';
@@ -22,7 +23,14 @@ export default class NCDashboard extends Component
   }
 
  componentWillMount() {
-    
+    stopInterval(intervalID.health);
+    network.getDashboardData();
+    //network.getKPIData();
+ }
+
+  componentWillUnmount() {
+    stopInterval(intervalID.dashboard);
+    network.getHealthData();
   }
 
   render() {

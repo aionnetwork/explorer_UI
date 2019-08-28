@@ -38,7 +38,7 @@ export function nc_addDecimal(value,decimals=18,precision=1,base=false){
 
 export function nc_decimalPoint(num, scale=2) {
   if (num == null) return null;
-  return (new BigNumber(String(num))).dp(scale).toString();
+  return (new BigNumber(String(num))).dp(scale).toFixed();
 }
 
 export function nc_roundNumber(num, scale=2) {
