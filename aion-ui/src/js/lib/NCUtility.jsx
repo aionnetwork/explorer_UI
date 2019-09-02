@@ -602,6 +602,21 @@ export function nc_compare(a,b) {
   return b.y-a.y;
 }
 
+export function nc_formatLogs(logs){
+    let json=[];
+    if(logs!==null){
+
+        logs.forEach(function(log, i){
+          let data = {};
+          data.address = log.contractAddr;
+          data.topics = log.topics;
+          data.data = log.data;
+          json.push(data);
+        });
+    }
+    return json;
+}
+
 
 
 

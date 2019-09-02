@@ -2,7 +2,7 @@
 import axios from 'axios';
 import SockJS from 'sockjs-client' 
 import Stomp from 'stompjs'
-import { trnListType, blkListType, tknListType, txnListType, accListType, cntrListType, eventListType } from 'lib/NCEnums';
+import { trnListType, txnLogListType, blkListType, tknListType, txnListType, accListType, cntrListType, eventListType } from 'lib/NCEnums';
 import * as mock from 'lib/NCData';
 import ms from 'ms';
 import appConfig from '../../config.json';
@@ -96,7 +96,19 @@ export const endpointV2 ={
           link: '/aion/v2/dashboard/health',
           params: [],
           name: "health"
-    }
+    },
+    transactionLog:{
+          list:{
+            [txnLogListType['BY_ACCOUNT']]: {
+              link: '/aion/v2/dashboard/txlogs',
+              params:["contractAddress","page","size"]
+            },
+            [txnLogListType['BY_TXN']]: {
+              link: '/aion/v2/dashboard/txlogs',
+              params:["transactionHash","page","size"]
+            }
+          }
+    },
 
 }
 export const endpoint = {
@@ -146,6 +158,7 @@ export const endpoint = {
       params: ['searchParam','token']
     }
   },
+
   transfer:{
     list:{
       [trnListType['BY_ACCOUNT']]: {

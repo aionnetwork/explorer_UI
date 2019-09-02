@@ -35,6 +35,14 @@ export const SetPagingTrn = (data) =>
   }
 }
 
+export const SetTxnLogs = (data) =>
+{
+  return {
+    type: 'TXN_RETRIEVE_SET_TXN_LOGS',
+    data: data,
+  }
+}
+
 let initialState_StoreBlkRetrieve = 
 {
   isLoadingPagingTxnList: false,
@@ -103,6 +111,14 @@ export function reducer_txnRetrieve (state = initialState_StoreBlkRetrieve, acti
       _state.momentUpdated = moment();
       
       return _state;
+    }
+    case 'TXN_RETRIEVE_SET_TXN_LOGS':
+    {
+          let _state = Object.assign({}, state);
+
+          _state.response.txn.content[0].log = action.data.content;
+
+          return _state;
     }
 
     default: 

@@ -36,7 +36,8 @@ import * as StoreContactRetrieve from 'stores/StoreContactRetrieve';
 
 import {BigNumber} from 'bignumber.js';
 import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
-import { cntrListType, tknListType, txnListType, blkListType, accListType, eventListType,trnListType, } from 'lib/NCEnums';
+import { cntrListType, tknListType, txnListType, blkListType, accListType, eventListType,trnListType, txnLogListType} from 'lib/NCEnums';
+
 
 //console.log('networkRequest'); 
 export const PAGE_SIZE = 25;
@@ -309,7 +310,8 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
     .then((response) => {
       
       store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
-      getTxnRetrievePagingTrnList(request, 0);      
+      getTxnRetrieveTxnLogList(request, 0);
+      getTxnRetrievePagingTrnList(request, 0);
       
     })
     .catch((error) => {
@@ -325,10 +327,7 @@ export const getTxnRetrievePagingTrnList = (queryStr, pageNumber, pageSize, star
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
-      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
-      response.page.number = pageNumber;
-
-      store.dispatch(StoreAccRetrieve.SetPagingBlk(response));
+      store.dispatch(StoreTxnRetrieve.SetPagingTrn({}));
     }, 500);
   }
   else {
@@ -342,6 +341,26 @@ export const getTxnRetrievePagingTrnList = (queryStr, pageNumber, pageSize, star
     .catch((error) => {
       console.log(error);
       store.dispatch(StoreTxnRetrieve.SetPagingTrn({}));
+    });
+  }
+}
+export const getTxnRetrieveTxnLogList = (queryStr, pageNumber, pageSize) => {
+  store.dispatch(StoreTxnRetrieve.GetPagingTrn());
+   if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      store.dispatch(StoreTxnRetrieve.SetPagingTrn({}));
+    }, 500);
+  }
+  else {
+    const ep = network.endpointV2.transactionLog.list[txnLogListType.BY_TXN];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+     store.dispatch(StoreTxnRetrieve.SetTxnLogs(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTxnRetrieve.SetTxnLogs({}));
     });
   }
 }

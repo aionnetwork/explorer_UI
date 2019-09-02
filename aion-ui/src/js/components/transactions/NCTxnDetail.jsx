@@ -35,6 +35,21 @@ export default class NCTxnDetail extends Component
     }
   }
 
+  formatTxnLogs = (logs) => {
+      let json=[];
+      if(typeof logs !== 'undefined'){
+
+          logs.forEach(function(log, i){
+            let data = {};
+            data.address = log.contractAddr;
+            data.topics = log.topics;
+            data.data = log.data;
+            json.push(data);
+          });
+      }
+      return json;
+  }
+
   parseInputData = (data) => {
     let result = "";
     try {
@@ -88,9 +103,11 @@ export default class NCTxnDetail extends Component
   render() {
     let { entity } = this.props;
 
-    let parsedTxnLog = this.parseTxnLog(entity.transactionLog);
+    //TODO: Improve to use v2 transaction logs
+
+    let parsedTxnLog = entity.log ? JSON.stringify(this.formatTxnLogs(entity.log), undefined, 2) : this.parseTxnLog(entity.transactionLog);
     let parsedInputData = this.parseInputData(entity.data);
-    
+    console.log(parsedTxnLog);
     let value = entity.tokenSymbol == null ? nc_decimalPrettify(nc_rawFormat(entity.value)) : nc_decimalPrettify(nc_addDecimal(entity.value));
 
     let unit = entity.tokenSymbol == null? "Aion" : entity.tokenSymbol;

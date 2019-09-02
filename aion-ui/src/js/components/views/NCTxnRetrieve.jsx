@@ -16,7 +16,7 @@ import * as StoreTxnRetrieve from 'stores/StoreTxnRetrieve';
 import { Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-//import { nc_hexPrefix, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
+//import { nc_hexPrefix, nc_isObjectValid, nc_isObjectEmpty, nc_formatLogs } from 'lib/NCUtility';
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
 
 import * as network from 'network/NCNetworkRequests';
