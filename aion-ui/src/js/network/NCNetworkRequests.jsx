@@ -283,7 +283,7 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start
   }
 };
 
-export const getTxnRetrieveTopLevel = (queryStr) => {
+export const getTxnRetrieveTopLevel = (queryStr,subStr=null) => {
   store.dispatch(StoreTxnRetrieve.GetTopLevel({
     queryStr: queryStr
   }));
@@ -296,28 +296,44 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
   }
   else {
     let request = nc_trim(queryStr);
+
     if (!nc_isValidEntity(request)) {
       store.dispatch(StoreTxnRetrieve.SetTopLevel({
         content: []
       }));
       return;
     }
+    if(subStr === null){
+        // get transaction details
+        const ep = network.endpoint.transaction.detail;
+        let params = [request];
+        network.request(ep, params)
+        .then((response) => {
 
-    // get transaction details
-    const ep = network.endpoint.transaction.detail;
-    let params = [request];
-    network.request(ep, params)
-    .then((response) => {
-      
-      store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
-      getTxnRetrieveTxnLogList(request, 0);
-      getTxnRetrievePagingTrnList(request, 0);
-      
-    })
-    .catch((error) => {
-      console.log(error);
-      store.dispatch(StoreTxnRetrieve.SetTopLevel({}));
-    });
+          store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
+          getTxnRetrieveTxnLogList(request, 0);
+          getTxnRetrievePagingTrnList(request, 0);
+
+        })
+        .catch((error) => {
+          console.log(error);
+          store.dispatch(StoreTxnRetrieve.SetTopLevel({}));
+        });
+    }else{
+        // get transfer details
+        const ep = network.endpointV2.transfer.detail;
+        let request_b = nc_trim(subStr);
+        let params = [request,request_b];
+        network.request(ep, params)
+        .then((response) => {
+          store.dispatch(StoreTxnRetrieve.SetTransfer(response));
+        })
+        .catch((error) => {
+          console.log(error);
+          store.dispatch(StoreTxnRetrieve.SetTransfer({}));
+        });
+    }
+
   }
 }
 
@@ -480,9 +496,11 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
         //console.log('this call!');
         getAccRetrievePagingTxnList(request, requestb, 0);
         getAccRetrievePagingBlkList(request, 0);
-        if(response.content[0].hasInternalTransfer){ 
+        //TODO:improve
+        getAccRetrievePagingTrnList(request, 0);
+        if(response.content[0].hasInternalTransfer){
 
-            getAccRetrievePagingTrnList(request, 0);
+            //getAccRetrievePagingTrnList(request, 0);
         }
         
         //console.log(JSON.stringify(response));
@@ -646,8 +664,8 @@ export const getAccRetrievePagingTrnList = (queryStr, pageNumber, pageSize, star
     }, 500);
   }
   else {
-    const ep = network.endpoint.transfer.list[trnListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, pageSize, start, end];
+    const ep = network.endpointV2.transfer.list[trnListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, pageSize];
     network.request(ep, params)
     .then((response) => {
       

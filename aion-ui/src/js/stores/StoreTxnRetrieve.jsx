@@ -35,6 +35,14 @@ export const SetPagingTrn = (data) =>
   }
 }
 
+export const SetTransfer = (data) =>
+{
+  return {
+    type: 'TXN_RETRIEVE_SET_TRANSFER',
+    data: data,
+  }
+}
+
 export const SetTxnLogs = (data) =>
 {
   return {
@@ -52,6 +60,7 @@ let initialState_StoreBlkRetrieve =
 
   response: {
     txn: null,
+    itxn: null,
     trn: {
       data: null,
       momentUpdated: null
@@ -86,6 +95,7 @@ export function reducer_txnRetrieve (state = initialState_StoreBlkRetrieve, acti
       _state.isLoadingTopLevel = false; 
       
       _state.response.txn = action.data;
+      _state.response.itxn = null;
       _state.momentUpdated = moment();
       
       return _state;
@@ -119,6 +129,16 @@ export function reducer_txnRetrieve (state = initialState_StoreBlkRetrieve, acti
           _state.response.txn.content[0].log = action.data.content;
 
           return _state;
+    }
+    case 'TXN_RETRIEVE_SET_TRANSFER':
+    {
+      let _state = Object.assign({}, state);
+
+      _state.isLoadingTopLevel = false;
+      _state.response.itxn = action.data;
+      _state.momentUpdated = moment();
+
+      return _state;
     }
 
     default: 

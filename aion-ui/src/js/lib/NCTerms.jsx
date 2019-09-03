@@ -285,6 +285,9 @@ export const strings = new LocalizedStrings({
     Txn_list_own_trn_col5: "Transaction Hash",
     Txn_list_own_trn_col6: "From Address",
     Txn_list_own_trn_col7: "To Address",
+    Txn_list_own_trn_col8: "Status",
+    Txn_list_own_trn_col9: "Type",
+    Txn_list_own_trn_col10: "Nonce",
 
     Txn_detail_title: "Transaction",
     Txn_detail_row1: "Time Sealed",
@@ -306,6 +309,13 @@ export const strings = new LocalizedStrings({
     Txn_detail_row14: "Input Data",
     Txn_detail_row14_sub_a: "Copy",
     Txn_detail_row14_sub_b: "No Input Data",
+
+    Txn_detail_row15: "NRG Limit",
+    Txn_detail_row16: "Type",
+    Txn_detail_row17: "Data",
+    Txn_detail_row17_sub_a: "Copy",
+    Txn_detail_row17_sub_b: "No Data",
+
     Txn_detail_tab1: "Transfers",
     
     Txn_detail_tab1_col1: "",
@@ -797,6 +807,10 @@ export const strings = new LocalizedStrings({
           Txn_trn_list_col4: "Transaction Hash",
           Txn_trn_list_col5: "From Address",
           Txn_trn_list_col6: "To Address",
+          Txn_trn_list_col7: "Status",
+          Txn_trn_list_col8: "Type",
+          Txn_trn_list_col9: "Nonce",
+
           Txn_trn_list_own: "own account",
           Txn_own: "own account",
 
@@ -824,6 +838,9 @@ export const strings = new LocalizedStrings({
           Txn_list_own_trn_col5: "Transaction Hash",
           Txn_list_own_trn_col6: "From Address",
           Txn_list_own_trn_col7: "To Address",
+          Txn_list_own_trn_col8: "Status",
+          Txn_list_own_trn_col9: "Type",
+          Txn_list_own_trn_col10: "Nonce",
 
           Txn_detail_title: "Transaction",
           Txn_detail_row1: "Time Sealed",

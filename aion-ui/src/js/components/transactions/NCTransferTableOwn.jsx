@@ -82,6 +82,31 @@ export default class NCTransferTableOwn extends Component
         flex: true,
         objPath: null,
       },
+      {
+        name: MSG.Txn_trn_list_col7,
+        isSortable: false,
+        isFilterable: false,
+        width: null,
+        flex: true,
+        objPath: null,
+      },
+      {
+        name: MSG.Txn_trn_list_col8,
+        isSortable: false,
+        isFilterable: false,
+        width: null,
+        flex: true,
+        objPath: null,
+      },
+      {
+        name: MSG.Txn_trn_list_col9,
+        isSortable: false,
+        isFilterable: false,
+        width: null,
+        flex: true,
+        objPath: null,
+      }
+
     ];
 
     this.generateTableContent = this.generateTableContent.bind(this);

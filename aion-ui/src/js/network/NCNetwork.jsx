@@ -109,6 +109,27 @@ export const endpointV2 ={
             }
           }
     },
+    transfer:{
+        list:{
+          [trnListType['BY_ACCOUNT']]: {
+            link: '/aion/v2/dashboard/internalTransaction',
+            params:["address","page","size"]
+          },
+          [trnListType['BY_TXN']]: {
+            link: '/aion/v2/dashboard/internalTransaction',
+            params:["transactionHash","page","size"]
+          },
+          [trnListType['BY_BLOCK']]: {
+            link: '/aion/v2/dashboard/internalTransaction',
+            params:["blockNumber","page","size"]
+          }
+        },
+        detail: {
+            link: '/aion/v2/dashboard/internalTransaction',
+            params: ['transactionHash','index']
+        }
+
+      }
 
 }
 export const endpoint = {
