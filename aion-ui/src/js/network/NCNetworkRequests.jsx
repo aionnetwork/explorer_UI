@@ -347,8 +347,8 @@ export const getTxnRetrievePagingTrnList = (queryStr, pageNumber, pageSize, star
     }, 500);
   }
   else {
-    const ep = network.endpoint.transfer.list[trnListType.BY_TXN];
-    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
+    const ep = network.endpointV2.transfer.list[trnListType.BY_TXN];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
       

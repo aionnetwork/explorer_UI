@@ -46,7 +46,10 @@ class NCTxnRetrieve extends Component
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.params.txnId != this.props.params.txnId)
+    console.log(prevState);
+    console.log(prevProps.params.itxnId, this.props.params.itxnId);
+    console.log(prevProps.params.txnId, this.props.params.txnId);
+    if ((prevProps.params.txnId !== this.props.params.txnId)||(prevProps.params.itxnId !==this.props.params.itxnId))
       this.requestTopLevel();
   }
 

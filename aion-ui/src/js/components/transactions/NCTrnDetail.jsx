@@ -105,10 +105,12 @@ export default class NCTxnDetail extends Component
 
     //TODO: Improve to use v2 transaction logs
 
-    let parsedTxnLog = entity.log ? JSON.stringify(this.formatTxnLogs(entity.log), undefined, 2) : this.parseTxnLog(entity.transactionLog);
-    let parsedInputData = this.parseInputData(entity.data);
-    console.log(parsedTxnLog);
-    let value = entity.tokenSymbol == null ? nc_decimalPrettify(nc_rawFormat(entity.value)) : nc_decimalPrettify(nc_addDecimal(entity.value));
+    //let parsedTxnLog = entity.log ? JSON.stringify(this.formatTxnLogs(entity.log), undefined, 2) : this.parseTxnLog(entity.transactionLog);
+    //let parsedInputData = this.parseInputData(entity.data);
+
+     console.log(nc_rawFormat(entity.value),entity.value);
+     let value = nc_decimalPrettify(nc_rawFormat(entity.value));
+     //let value = entity.value; //nc_decimalPrettify(nc_rawFormat(entity.value));
 
     let unit = entity.tokenSymbol == null? "Aion" : entity.tokenSymbol;
 
