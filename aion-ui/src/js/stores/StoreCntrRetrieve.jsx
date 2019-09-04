@@ -153,7 +153,7 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
       _state.response.acc.data = action.data;
       _state.response.acc.momentUpdated = moment();
 
-      if(typeof(action.data.content) !== 'undefined'){
+      if(typeof(action.data.content[0]) !== 'undefined'){
           _state.response.event.data.content = action.data.content[0].events;
           _state.response.txn.data.content = action.data.content[0].transactions;
           _state.response.txn.momentUpdated = moment();

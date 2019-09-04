@@ -69,6 +69,21 @@ h1, h2, h3, h4, h5 {
 .nc-minimal-btn-shadow {
   box-shadow: 0 0 0 1px rgba(19, 124, 189, 0.15) !important;
 }
+.token-box {
+  border: 1px solid;
+  display: block;
+  background-color: #f5f8fa;
+  border-color: #a7b6c2;
+  padding: 13px 15px 15px;
+  min-height: 20px;
+  border-radius: 3px;
+  line-height: 1.3;
+  font-size: 11px;
+  word-break: break-all;
+  word-wrap: break-word;
+  text-transform: none;
+  font-family: monospace;
+}
 .NCNonIdealState .pt-non-ideal-state {
   max-width: none;
 }

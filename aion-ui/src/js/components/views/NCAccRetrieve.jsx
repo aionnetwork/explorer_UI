@@ -80,8 +80,9 @@ class NCAccRetrieve extends Component
     network.RetrieveDownload(type, data);
   }
 
-  requestPagingBlkList = (pageNumber, pageSize, start=0, end=0) => {
+  requestPagingBlkList = (pageNumber, pageSize, start, end) => {
     const queryStr = this.props.accRetrieve.queryStr;
+    //console.log(pageSize);
     network.getAccRetrievePagingBlkList(queryStr, pageNumber, pageSize, start, end);
   }
 

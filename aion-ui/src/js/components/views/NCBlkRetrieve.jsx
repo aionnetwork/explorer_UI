@@ -77,7 +77,7 @@ class NCBlkRetrieve extends Component
     let prev = null;
     let next = null;
 
-    if(blkObj){
+    if(!isBlkEmpty){
         
         let block = blkObj.content[0]['blockNumber'];
         prev = parseInt(block)-1;

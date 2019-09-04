@@ -18,7 +18,7 @@ export function nc_getRandomInt(min, max) {
 /*
     This function should take a (value) and shift the point (decimals) places to the left with (precision) dp.
 */
-export function nc_addDecimal(value,decimals=18,precision=1){
+export function nc_addDecimal(value,decimals=18,precision=1,base=false){
      if (value == null)
          return null;
 
@@ -28,10 +28,10 @@ export function nc_addDecimal(value,decimals=18,precision=1){
      var num = new BigNumber(value);
      var digits = new BigNumber(10);
      var shift = digits.pow(decimals);
-     if(num.isGreaterThan(shift)){
+     if(num.isGreaterThan(shift)|| base){
         return nc_numFormatterACSensitive(num.toFixed());
      }else{
-        return nc_numFormatterAionCoin(num.toFixed(),8);
+        return num.toFixed();//nc_numFormatterAionCoin(num.toFixed(),8);
      }
  }
 

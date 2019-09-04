@@ -12,7 +12,7 @@ export const strings = new LocalizedStrings({
   
   en: {
   
-    Header_title: "Dashboard 2.2",
+    Header_title: "Dashboard 2.3",
     header_tab1: "Explorer",
     //views
     header_tab2: "Analytics",

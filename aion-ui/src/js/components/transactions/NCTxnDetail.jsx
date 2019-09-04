@@ -58,6 +58,32 @@ export default class NCTxnDetail extends Component
     this.cpmessage = "copied";
     setTimeout(function(){ this.cpmessage = ""; }, 3000);
   }
+  tokenTransfers = (tokens) => {
+       let list=[];
+       if(tokens.length > 0){
+         tokens.map((token,i) => {
+
+             list.push(
+                             <span key = {i}><b> {nc_decimalPrettify(nc_addDecimal(token.value,18,1,true))}</b>{" "+token.tokenSymbol+ " from: "}
+                                 <a href = {"#/account/" + token.from}>{token.from}</a>
+                                 {" to:  "}
+                                 <a src = "#">{token.to}</a><br/>
+                             </span>
+
+                          );
+
+
+             });
+
+
+
+
+
+       }else{
+            return;
+       }
+       return list;
+  }
 
   render() {
     let { entity } = this.props;
@@ -68,6 +94,9 @@ export default class NCTxnDetail extends Component
     let value = entity.tokenSymbol == null ? nc_decimalPrettify(nc_rawFormat(entity.value)) : nc_decimalPrettify(nc_addDecimal(entity.value));
 
     let unit = entity.tokenSymbol == null? "Aion" : entity.tokenSymbol;
+
+    let tokenList = (entity.tokenTransfers) ? this.tokenTransfers(entity.tokenTransfers) : null;
+
 
     let desc = 
     [
@@ -108,6 +137,10 @@ export default class NCTxnDetail extends Component
 
         field: MSG.strings.Txn_detail_row5,
         value: entity.value == null ? EMPTY_STR : <span className="">{value + " " + unit}</span>,
+      },
+      {
+         field: "",
+         value: tokenList ==null ? "" :<div className="token-box">{tokenList}</div>,
       },
       {
         field: MSG.strings.Txn_detail_row6,

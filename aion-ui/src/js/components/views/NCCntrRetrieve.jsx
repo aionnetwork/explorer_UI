@@ -238,12 +238,7 @@ class NCCntrRetrieve extends Component
     const blkListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
+        <div className="NCPageBreakerSubtitle">Showing results latest results for events on this contract.
         </div>
       }
 
@@ -254,12 +249,7 @@ class NCCntrRetrieve extends Component
       loadingStr={"Loading Blocks"}
       invalidDataStr={"Server provided an invalid response. Please try again."} 
       emptyDataStr={
-        <span>No blocks mined by this account in latest million blocks. <br/>To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
+        <span>No data found
         </span>}
       marginTop={40}
 
@@ -312,12 +302,8 @@ class NCCntrRetrieve extends Component
     const eventListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing results from the latest million blocks. To retrieve older data, use our&nbsp;
-          <Tooltip
-            className="pt-tooltip-indicator"
-            content={<em>coming soon ...</em>}>
-            historical explorer.
-          </Tooltip>
+        <div className="NCPageBreakerSubtitle">
+            Showing results latest results for events on this contract.
         </div>
       }
 
