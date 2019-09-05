@@ -251,7 +251,7 @@ export default class NCTxnTableOwnTransfer extends Component
         onPageCallback={onPageCallback}
         isLoading={isLoading}
         isPaginated={isPaginated}
-        entityName={"tokens"}
+        entityName={"transactions"}
         generateTableContent={this.generateTableContent}
         columnDescriptor={this.columnDescriptor}
         isLatest={isLatest}/>

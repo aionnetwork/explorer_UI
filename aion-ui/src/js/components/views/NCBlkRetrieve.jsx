@@ -146,7 +146,8 @@ class NCBlkRetrieve extends Component
           (!isBlkEmpty && !isTxnListEmpty) &&
           <div className="NCSection">
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true}>
-              <Tab2 id="blk" title="Included Transactions" panel={txnListSection} />
+              <Tab2 id="txn" title="Included Transactions" panel={txnListSection} />
+              <Tab2 id="itxn" title="Internal Transactions" panel={txnListSection} />
             </Tabs2>
           </div>
         }

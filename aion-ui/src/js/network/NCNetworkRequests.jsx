@@ -284,9 +284,11 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start
 };
 
 export const getTxnRetrieveTopLevel = (queryStr,subStr=null) => {
-  store.dispatch(StoreTxnRetrieve.GetTopLevel({
-    queryStr: queryStr
-  }));
+  if(subStr === null){
+    store.dispatch(StoreTxnRetrieve.GetTopLevel({
+        queryStr: queryStr
+    }));
+  }
   
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
@@ -326,6 +328,7 @@ export const getTxnRetrieveTopLevel = (queryStr,subStr=null) => {
         let params = [request,request_b];
         network.request(ep, params)
         .then((response) => {
+
           store.dispatch(StoreTxnRetrieve.SetTransfer(response));
         })
         .catch((error) => {

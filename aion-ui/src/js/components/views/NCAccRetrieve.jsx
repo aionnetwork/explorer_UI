@@ -410,7 +410,7 @@ class NCAccRetrieve extends Component
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
               <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
-              <Tab2 id="trn" title="Transfers" panel={transferListSection}/>
+              <Tab2 id="trn" title="Internal Transactions" panel={transferListSection}/>
             </Tabs2>
           </div>
         }
