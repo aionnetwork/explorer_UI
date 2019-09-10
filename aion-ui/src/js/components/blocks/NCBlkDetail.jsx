@@ -33,6 +33,10 @@ export default class NCBlkDetail extends Component
                   linkActive={ false }/>
       },
       {
+              field: MSG.strings.Blk_detail_row21,
+              value: entity.blockType ? entity.blockType : "Proof of Work (PoW)"
+      },
+      {
         field: MSG.strings.Blk_detail_row3,
         value: <NCLink 
                   link={"/transactions?block=" + entity.blockHash} 

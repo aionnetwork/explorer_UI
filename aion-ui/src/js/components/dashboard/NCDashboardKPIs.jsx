@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Tooltip, Position } from "@blueprintjs/core";
+import NCLink from 'components/common/NCLink';
 
 import { NCKPIResponsive, NCKPIGroup} from 'components/common/NCKPIGroup';
 import NCLoading from 'components/common/NCLoading';
@@ -28,12 +29,12 @@ class NCDashboardKPIs extends Component
     [
       
       {
-        title: <span><strong>{MSG.strings.kpi_tab1_title} &nbsp;</strong>| &nbsp;{MSG.strings.kpi_tab1_subtitle}</span>,
+        title: <span><strong>PoW &nbsp;</strong>| &nbsp;{MSG.strings.kpi_tab1_subtitle}</span>,
         kpiList: [
           {
             value:"9.83",
             units:"s",
-            title:[MSG.strings.kpi_block_l1, MSG.strings.kpi_block_l2],
+            title:["Average", MSG.strings.kpi_block_l2],
             hoverContent: MSG.strings.kpi_block_desc,
           },
           {
@@ -56,6 +57,37 @@ class NCDashboardKPIs extends Component
           },
           
         ]
+      },
+
+      {
+              title: <span><strong>PoS &nbsp;</strong>| &nbsp; <a className="footer-container" target="_blank" href="https://docs.aion.network/"><span className="text">info</span></a></span>,
+              kpiList: [
+                {
+                  value:"10.01s",
+                  units:"",
+                  title:["Average", "Block Time"],
+                  hoverContent: "block time",
+                },
+                {
+                  value:"50000",
+                  units:"",
+                  title:["Average", "Yield"],
+                  hoverContent: "Sample yield",
+                },
+                {
+                  value:"45%",
+                  units:"",
+                  title:["% of Network", "staked"],
+                  hoverContent: MSG.strings.kpi_TXNTIME_desc,
+                },
+                {
+                  value:"50%",
+                  units:"",
+                  title:["Performance", "-"],
+                  hoverContent: MSG.strings.kpi_TXNCOUNT_desc,
+                  tooltipPosition: Position.BOTTOM_RIGHT,
+                },
+              ]
       },
       
       {
@@ -103,11 +135,12 @@ class NCDashboardKPIs extends Component
     this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
     this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);
     this.kpiData[0].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
-    this.kpiData[1].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
-    this.kpiData[1].kpiList[1].value = kpiList.peakTransactionsPerBlockInLast24hours != null ? 
+    ///add unity stuff here
+    this.kpiData[2].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
+    this.kpiData[2].kpiList[1].value = kpiList.peakTransactionsPerBlockInLast24hours != null ?
                                           nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 0) : 
                                           null;
-    this.kpiData[1].kpiList[2].value = kpiList.totalTransactionsInLast24hours != null ? 
+    this.kpiData[2].kpiList[2].value = kpiList.totalTransactionsInLast24hours != null ?
                                           nc_numFormatter(kpiList.totalTransactionsInLast24hours, 3) : 
                                           null;
 

@@ -159,6 +159,7 @@ export const strings = new LocalizedStrings({
     Blk_detail_row18: "Bloom Filter",
     Blk_detail_row19: "Extra Data",
     Blk_detail_row20: "Equihash Solution",
+     Blk_detail_row21: "Type",
     
     //Contracts
     Cntr_list_title: "Contracts",
@@ -709,6 +710,7 @@ export const strings = new LocalizedStrings({
           Blk_detail_row18: "Bloom Filter",
           Blk_detail_row19: "Extra Data",
           Blk_detail_row20: "Equihash Solution",
+          Blk_detail_row21: "Type",
 
           //Contracts
           Cntr_list_title: "Contracts",
