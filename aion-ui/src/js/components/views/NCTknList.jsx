@@ -53,7 +53,6 @@ class NCTknList extends Component
   requestPaging = (pageNumber, pageSize, start, end) => {
     const listType = this.props.tknList.listType;
     const queryStr = this.props.tknList.queryStr;
-    console.log(listType+"   "+pageNumber+" "+pageSize+" "+start+" "+end);
     network.getTknListPaging(listType, queryStr, pageNumber, pageSize, start, end);
   }
 

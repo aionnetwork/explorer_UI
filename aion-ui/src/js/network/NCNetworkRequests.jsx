@@ -831,8 +831,15 @@ export const getCntrRetrieveTopLevel = (queryStr, page, size) => {
     .then((response) => {
       const isCntrValid = nc_isObjectValid(response);
       const isCntrEmpty = nc_isObjectEmpty(response, isCntrValid);
+        if(!isCntrEmpty){
+            //get logs
+            store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+            getCntrRetrieveTxnLogList(request);
 
-      store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+        }else{
+            store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+        }
+
       
     })
     .catch((error) => {
@@ -840,6 +847,22 @@ export const getCntrRetrieveTopLevel = (queryStr, page, size) => {
       store.dispatch(StoreCntrRetrieve.SetTopLevel({}));
     });
   }
+}
+
+export const getCntrRetrieveTxnLogList = (queryStr, pageNumber=0, pageSize=25) => {
+    store.dispatch(StoreTxnRetrieve.GetPagingTrn());
+
+    const ep = network.endpointV2.transactionLog.list[txnLogListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, pageSize];
+    network.request(ep, params)
+    .then((response) => {
+     store.dispatch(StoreCntrRetrieve.SetTxnLogs(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetTxnLogs({}));
+    });
+
 }
 
 export const getCntrRetrievePagingTxnList = (queryStr, pageNumber) => {

@@ -12,7 +12,7 @@ export const strings = new LocalizedStrings({
   
   en: {
   
-    Header_title: "Dashboard 2.3",
+    Header_title: "Dashboard 2.4",
     header_tab1: "Explorer",
     //views
     header_tab2: "Analytics",
@@ -183,6 +183,7 @@ export const strings = new LocalizedStrings({
 
     Cntr_detail_tab1: "Transactions",
     Cntr_detail_tab2: "Events",
+    Cntr_detail_tab2: "Logs",
     
     Cntr_detail_tab1_col1: "Block #",
     Cntr_detail_tab1_col2: "Timestamp",
@@ -195,7 +196,12 @@ export const strings = new LocalizedStrings({
     Cntr_detail_tab2_col1: "Block #",
     Cntr_detail_tab2_col2: "Event",
     Cntr_detail_tab2_col3: "Event timestamp",
-   
+
+    Cntr_detail_tab3_col1: "Block #",
+    Cntr_detail_tab3_col2: "Transaction Hash",
+    Cntr_detail_tab3_col3: "LogIndex",
+    Cntr_detail_tab3_col4: "Timestamp",
+
     //Tokens
     Tkn_list_title: "Tokens",
     Tkn_list_desc: "Total Tokens",

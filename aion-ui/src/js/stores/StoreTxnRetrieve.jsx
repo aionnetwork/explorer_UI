@@ -125,9 +125,9 @@ export function reducer_txnRetrieve (state = initialState_StoreBlkRetrieve, acti
     case 'TXN_RETRIEVE_SET_TXN_LOGS':
     {
           let _state = Object.assign({}, state);
-
-          _state.response.txn.content[0].log = action.data.content;
-
+          if(typeof _state.response.txn.content !== "undefined"){
+            _state.response.txn.content[0].log = action.data.content;
+          }
           return _state;
     }
     case 'TXN_RETRIEVE_SET_TRANSFER':
