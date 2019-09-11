@@ -18,7 +18,7 @@ export default class NCBlkDetail extends Component
 {
   render() {
     let { entity } = this.props;
-
+    let sealType = "PoW"
     let desc = 
     [
       {
@@ -89,8 +89,8 @@ export default class NCBlkDetail extends Component
         value: entity.totalDifficulty ? nc_numPrettify(entity.totalDifficulty) : EMPTY_STR,
       },
       {
-        field: MSG.strings.Blk_detail_row12,
-        value: nc_isStrEmpty(entity.nonce) ? EMPTY_STR : nc_hexPrefix(entity.nonce),
+        field: (sealType !== 'PoW') ?  "" : MSG.strings.Blk_detail_row12,
+        value: (sealType !== 'PoW') ?  "" : nc_isStrEmpty(entity.nonce) ? EMPTY_STR : nc_hexPrefix(entity.nonce),
       },
       {
         field: MSG.strings.Blk_detail_row13,
@@ -120,6 +120,18 @@ export default class NCBlkDetail extends Component
         value: nc_numFormatterBytes(entity.size, 8),
       },
       {
+         field: (sealType !== 'PoS') ?  "" : "Seed",
+         value: (sealType !== 'PoS') ?  "" : entity.seed ? entity.seed : EMPTY_STR,
+      },
+      {
+         field: (sealType !== 'PoS') ?  "" : "Public key",
+         value: (sealType !== 'PoS') ?  "" : nc_numFormatterBytes(entity.size, 8),
+      },
+      {
+        field: (sealType !== 'PoS') ?  "" : "Signature",
+        value: (sealType !== 'PoS') ?  "" : entity.signature ? <pre className={"nc-resizable enforce-min-height"}>{ entity.signature }</pre> : EMPTY_STR,
+      },
+      {
         field: MSG.strings.Blk_detail_row18,
         value: entity.bloom ? <pre className={"nc-resizable enforce-min-height"}>{ entity.bloom }</pre> : "No Logs (Empty Bloom Filter)",
       },
@@ -128,8 +140,8 @@ export default class NCBlkDetail extends Component
         value: entity.extraData ? <pre className={"nc-resizable enforce-min-height"}>{ entity.extraData }</pre> : "No Extra Data",
       },
       {
-        field: MSG.strings.Blk_detail_row20,
-        value: entity.solution ? <pre className={"nc-resizable enforce-min-height"}>{ entity.solution }</pre> : EMPTY_STR,
+        field: (sealType !== 'PoW') ?  "" : MSG.strings.Blk_detail_row20,
+        value: (sealType !== 'PoW') ?  "" : entity.solution ? <pre className={"nc-resizable enforce-min-height"}>{ entity.solution }</pre> : EMPTY_STR,
       },
     ];
 
