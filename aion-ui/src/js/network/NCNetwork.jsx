@@ -129,7 +129,23 @@ export const endpointV2 ={
             params: ['transactionHash','index']
         }
 
-      }
+    },
+    block: {
+        list: {
+          [blkListType['ALL']]: {
+            link: '/aion/v2/dashboard/blocks',
+            params: ['page', 'size',"startTime", "endTime"]
+          },
+          [blkListType['BY_ACCOUNT']]: {
+            link: '/aion/v2/dashboard/blocks',
+            params: ['minerAddress', 'page', 'size',"startTime", "endTime"]
+          }
+        },
+        detail: {
+          link: '/aion/v2/dashboard/block',
+          params: ['blockNumber']
+        }
+    },
 
 }
 export const endpoint = {

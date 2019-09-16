@@ -67,7 +67,7 @@ export const getBlkListTopLevel = (listType, queryStr) => {
   }
   else {
     // get block list
-    const ep = network.endpoint.block.list[listType];
+    const ep = network.endpointV2.block.list[listType];
     let params = [];
     switch(listType) {
       case blkListType.ALL: {
@@ -97,7 +97,7 @@ export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0, star
     }, 500);
   }
   else {
-    const ep = network.endpoint.block.list[listType];
+    const ep = network.endpointV2.block.list[listType];
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     //console.log(size);
     let params = [];
@@ -150,7 +150,7 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
     }
 
     // get block details
-    const ep = network.endpoint.block.detail;
+    const ep = network.endpointV2.block.detail;
     let params = [request,  0, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {

@@ -60,31 +60,32 @@ class NCDashboardKPIs extends Component
       },
 
       {
-              title: <span><strong>PoS &nbsp;</strong>| &nbsp; <a className="footer-container" target="_blank" href="https://docs.aion.network/"><span className="text">info</span></a></span>,
+              title: <span><strong>PoS &nbsp;</strong> </span>,
               kpiList: [
                 {
                   value:"10.01s",
                   units:"",
                   title:["Average", "Block Time"],
-                  hoverContent: "block time",
+                  onClick: this.link,
+                  hoverContent: "Mean of PoS block arrival time over the last hour. The target block time for PoS blocks is 20 seconds. PoS difficulty is dynamically adjusted to achieve target.",
                 },
                 {
                   value:"50000",
                   units:"",
-                  title:["Average", "Yield"],
-                  hoverContent: "Sample yield",
+                  title:["Average", "Issuance"],
+                  hoverContent: "Mean of block rewards for PoS blocks for the previous 1024 blocks",
                 },
                 {
                   value:"45%",
                   units:"",
                   title:["% of Network", "staked"],
-                  hoverContent: MSG.strings.kpi_TXNTIME_desc,
+                  hoverContent: "[Total Staked Aion/ Circulating Supply]*100",
                 },
                 {
                   value:"50%",
                   units:"",
-                  title:["Performance", "-"],
-                  hoverContent: MSG.strings.kpi_TXNCOUNT_desc,
+                  title:["Average", " Difficulty"],
+                  hoverContent: "Difficulty, averaged over the last hour",
                   tooltipPosition: Position.BOTTOM_RIGHT,
                 },
               ]
@@ -118,6 +119,11 @@ class NCDashboardKPIs extends Component
       
     ];
   }
+
+  link  = () => {
+      location.href="https://docs.aion.network";
+  }
+
 
   render() {
     

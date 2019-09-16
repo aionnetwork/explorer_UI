@@ -32,16 +32,18 @@ export default class NCTableReactPaginated extends Component
     let height = rowHeight;
 
     let pageSize = (this.state.pageSize > PAGE_SIZE) ? this.state.pageSize : PAGE_SIZE;
-    //console.log();
+    //console.log("this.state.pageNumber",this.state.pageNumber,"list.length", list.length,"tableList.length", tableList.length,"numPages", numPages,"this.state.pageNumber", this.state.pageNumber);
 
     let paginationObj = null;
     let paginationFoot = null;
     const page = data.page;
+
     if (isPaginated) {
       if (page == null) {  
         let numPages = Math.ceil(list.length / pageSize);
         let startIdx = this.state.pageNumber * pageSize;
         let endIdx = startIdx + pageSize;
+         console.log("this.state.pageNumber",this.state.pageNumber,"list.length", list.length,"tableList.length", tableList.length,"numPages", numPages,"this.state.pageNumber", this.state.pageNumber);
 
         tableList = list.slice(startIdx, endIdx);
 
@@ -76,11 +78,12 @@ export default class NCTableReactPaginated extends Component
             isLoading={isLoading}
             isLatest={isLatest}/>;
       } else {
-        paginationObj = 
+
+         paginationObj =
         <NCPagination
             entityName={entityName}
             calFilter={this.props.calFilter}
-            pageNumber={page.number}
+            pageNumber={(typeof page.number !== 'undefined')? page.number : page.page}
             totalElements={page.totalElements}
             listSize={list.length}
             totalPages={page.totalPages}
@@ -98,7 +101,7 @@ export default class NCTableReactPaginated extends Component
         <NCPaginationFoot
             entityName={entityName}
 
-            pageNumber={page.number}
+            pageNumber={(typeof page.number !== 'undefined')? page.number : page.page}
             totalElements={page.totalElements}
             listSize={list.length}
             totalPages={page.totalPages}
