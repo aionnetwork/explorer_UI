@@ -1,4 +1,4 @@
-/* eslint-disable */
+///* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, hashHistory } from 'react-router';
@@ -114,7 +114,7 @@ class NCChartRetrieve extends Component
         
         this.chartData.chart = <NCBlockTimesChart  />
         this.chartData.description = "Block Time";
-        this.chartData.type="line";
+        this.chartData.type="bar";
         this.chartData.id = 5;
         break;  
     default:
