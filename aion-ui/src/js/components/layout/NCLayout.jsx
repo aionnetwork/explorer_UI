@@ -138,12 +138,25 @@ class NCLayout extends Component {
         /></div>
         <MenuItem
           className="nav-option"
-          
-          onClick={() => {
-            hashHistory.push('/charts/BlockTime');
-          }}
           text={MSG.Metric_menu_item_2}
-        />
+        >
+                <MenuItem
+                          className="nav-option"
+
+                          onClick={() => {
+                            hashHistory.push('/charts/BlockTime');
+                          }}
+                          text={MSG.Metric_menu_item_2_a}
+                        />
+                <MenuItem
+                                          className="nav-option"
+
+                                          onClick={() => {
+                                            hashHistory.push('/charts/BlockTime');
+                                          }}
+                                          text={MSG.Metric_menu_item_2_b}
+                                        />
+        </MenuItem>
         <MenuItem
           className="nav-option"
           
@@ -153,13 +166,26 @@ class NCLayout extends Component {
           text={MSG.Metric_menu_item_3}
         />
         <MenuItem
-          className="nav-option"
-          
-          onClick={() => {
-            hashHistory.push('/charts/Difficulty');
-          }}
-          text={MSG.Metric_menu_item_4}
-        />
+                  className="nav-option"
+                  text={MSG.Metric_menu_item_4}
+                >
+                        <MenuItem
+                                  className="nav-option"
+
+                                  onClick={() => {
+                                    hashHistory.push('/charts/BlockTime');
+                                  }}
+                                  text={MSG.Metric_menu_item_4_a}
+                                />
+                        <MenuItem
+                                                  className="nav-option"
+
+                                                  onClick={() => {
+                                                    hashHistory.push('/charts/BlockTime');
+                                                  }}
+                                                  text={MSG.Metric_menu_item_4_b}
+                                                />
+                </MenuItem>
         <MenuItem
           className="nav-option"
           

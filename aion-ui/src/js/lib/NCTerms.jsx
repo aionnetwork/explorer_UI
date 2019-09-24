@@ -370,8 +370,12 @@ export const strings = new LocalizedStrings({
     //metric menu
     Metric_menu_item_1: "Active Address",
     Metric_menu_item_2: "Block Times",
+    Metric_menu_item_2_a: "PoS",
+    Metric_menu_item_2_b: "PoW",
     Metric_menu_item_3: "Hash Power",
-    Metric_menu_item_4: "Network Difficulty",
+    Metric_menu_item_4: "Difficulty",
+    Metric_menu_item_4_a: "PoS",
+    Metric_menu_item_4_b: "PoW",
     Metric_menu_item_5: "Top Miners",
     Metric_menu_item_6: "Transactions per Hour",
 
