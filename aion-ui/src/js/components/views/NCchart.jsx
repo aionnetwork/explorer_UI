@@ -80,7 +80,6 @@ class NCChartRetrieve extends Component
 
     switch(str){
     case 'ActiveAddressGrowth':
-
         this.chartData.chart = <NCActiveAddressChart />
         this.chartData.description = "Active Address";
         this.chartData.type="line";
@@ -97,7 +96,19 @@ class NCChartRetrieve extends Component
         this.chartData.description = "Network Difficulty";
         this.chartData.type="line";
         this.chartData.id = 2;
-        break;                
+        break;
+    case 'PoWDifficulty':
+        this.chartData.chart =  <NCNetworkDifficultyChart  />
+        this.chartData.description = "PoW Difficulty";
+        this.chartData.type="line";
+        this.chartData.id = 2;
+        break;
+    case 'PoSDifficulty':
+        this.chartData.chart =  <NCNetworkDifficultyChart  />
+        this.chartData.description = "PoS Difficulty";
+        this.chartData.type="line";
+        this.chartData.id = 2;
+        break;
     case 'HashingPower':
         this.chartData.chart = <NCHashPowerChart  />
         this.chartData.description = "Hashing Power";
@@ -111,12 +122,24 @@ class NCChartRetrieve extends Component
         this.chartData.id = 4;
         break;  
     case 'BlockTime':
-        
         this.chartData.chart = <NCBlockTimesChart  />
         this.chartData.description = "Block Time";
-        this.chartData.type="bar";
+        this.chartData.type="column";
         this.chartData.id = 5;
-        break;  
+        break;
+    case 'PoWBlockTime':
+        this.chartData.chart = <NCBlockTimesChart  />
+        this.chartData.description = "PoW Block Time";
+        this.chartData.type="column";
+        this.chartData.id = 5;
+        break;
+    case 'PoSBlockTime':
+
+        this.chartData.chart = <NCBlockTimesChart  />
+        this.chartData.description = "PoS Block Time";
+        this.chartData.type="column";
+        this.chartData.id = 5;
+        break;
     default:
         this.chartData.chart = 'Invalid data';
         break;
