@@ -322,6 +322,7 @@ export const strings = new LocalizedStrings({
     Txn_detail_row17: "Data",
     Txn_detail_row17_sub_a: "Copy",
     Txn_detail_row17_sub_b: "No Data",
+    Txn_detail_row18: "Transaction Count",
 
     Txn_detail_tab1: "Transfers",
     

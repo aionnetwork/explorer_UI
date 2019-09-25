@@ -194,7 +194,10 @@ export default class NCTxnDetail extends Component
         field: MSG.strings.Txn_detail_row10,
         value: entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
       },
-
+      {
+        field: MSG.strings.Txn_detail_row18,
+        value: entity.nonce != null ? BigNumber(String(entity.nonce), 16).plus(1).toString(10) : EMPTY_STR,
+      },
       {
               //Contract type
               field: (entity.contractAddr) ?  "Type" : "",
@@ -313,6 +316,10 @@ let desc_2 =[     {
       {
         field: MSG.strings.Txn_detail_row10,
         value: entity.nonce != null ? BigNumber(String(entity.nonce), 16).toString(10) : EMPTY_STR,
+      },
+      {
+        field: MSG.strings.Txn_detail_row15,
+        value: entity.nonce != null ? BigNumber(String(entity.nonce), 16).plus(1).toString(10) : EMPTY_STR,
       },
       {
               field: MSG.strings.Txn_detail_row16,
