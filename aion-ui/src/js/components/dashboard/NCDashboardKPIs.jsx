@@ -136,18 +136,23 @@ class NCDashboardKPIs extends Component
     }
 
     const kpiList = this.props.kpi.data;
-
-    this.kpiData[0].kpiList[0].value = nc_decimalPoint(kpiList.averageBlockTime, 2);
-    this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
-    this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);
-    this.kpiData[0].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
+    console.log(JSON.stringify(kpiList));
+    this.kpiData[0].kpiList[0].value = nc_decimalPoint(kpiList.powBlockTime, 2);
+    this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averagedHashPower, 1);
+    this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.powBlockDifficulty, 1);
+    this.kpiData[0].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumed, 2);
     ///add unity stuff here
-    this.kpiData[2].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
-    this.kpiData[2].kpiList[1].value = kpiList.peakTransactionsPerBlockInLast24hours != null ?
-                                          nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 0) : 
+    this.kpiData[1].kpiList[0].value = nc_decimalPoint(kpiList.posBlockTime, 2);
+    this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averagePosIssuance, 1);
+    this.kpiData[1].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.percentageOfNetworkStaking, 1);
+    this.kpiData[1].kpiList[3].value = nc_numFormatter(kpiList.posBlockDifficulty, 2);
+
+    this.kpiData[2].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionsPerSecond, 2);
+    this.kpiData[2].kpiList[1].value = kpiList.peakTransactionsPerBlock != null ?
+                                          nc_numFormatter(kpiList.peakTransactionsPerBlock, 0) :
                                           null;
-    this.kpiData[2].kpiList[2].value = kpiList.totalTransactionsInLast24hours != null ?
-                                          nc_numFormatter(kpiList.totalTransactionsInLast24hours, 3) : 
+    this.kpiData[2].kpiList[2].value = kpiList.totalTransaction != null ?
+                                          nc_numFormatter(kpiList.totalTransaction, 3) :
                                           null;
 
     let ncKPIs = [];

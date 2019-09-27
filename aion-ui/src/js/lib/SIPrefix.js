@@ -68,7 +68,7 @@ var PREFIXES = {
 	"-24": "y"
 };
 
-var PREFIXESEXPANDED = {
+/*var PREFIXESEXPANDED = {
 	"24": "yotta",
 	"21": "zetta",
 	"18": "exa",
@@ -86,7 +86,7 @@ var PREFIXESEXPANDED = {
 	"-18": "atto",
 	"-21": "zepto",
 	"-24": "yocto"
-};
+};*/
 
 // expects a bignumber as input
 export function formatSI(num) {

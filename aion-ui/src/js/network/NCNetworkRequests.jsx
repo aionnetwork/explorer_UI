@@ -1004,16 +1004,30 @@ export const setDashboardData = (response) => {
   if(!isResponseEmpty) {
     let data = response.content[0];
     //console.log(JSON.stringify(data.transactions));
-    store.dispatch(StoreKpis.SetAll(data.metrics));
+    //store.dispatch(StoreKpis.SetAll(data.metrics));
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
     store.dispatch(StoreTxnRt.SetAll(data.transactions));
     
   }
 }
 
+export const setDashboardKPI = (response) => {
+  const isResponseEmpty = nc_isObjectEmpty(response);
+
+  if(!isResponseEmpty) {
+    let data = response.content[0];
+    //console.log(JSON.stringify(data.transactions));
+    store.dispatch(StoreKpis.SetAllV2(data));
+    //store.dispatch(StoreBlkRt.SetAll(data.blocks));
+    //store.dispatch(StoreTxnRt.SetAll(data.transactions));
+
+  }
+}
+
 
 export const getDashboardData = () => {
   const ep = network.endpoint.dashboard;
+  const epV2 = network.endpointV2.dashboard;
   let params = [];
   
   network.request(ep, params)
@@ -1028,6 +1042,19 @@ export const getDashboardData = () => {
   .catch((error) => {
     console.log(error);
     
+  });
+  network.request(epV2, params)
+    .then((response) => {
+
+      setDashboardKPI(response);
+
+      network.startInterval(epV2,params,(response) => {
+         setDashboardKPI(response);
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+
   });
 }
 export const setKPIData = (response) => {
@@ -1067,7 +1094,7 @@ export const getKPIData = () => {
 
      });
 
- }
+}
 export const getHealthData = () => {
 
     const ep = network.endpointV2.health;

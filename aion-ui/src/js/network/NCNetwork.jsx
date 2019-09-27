@@ -92,6 +92,11 @@ export const endpointV2 ={
           link: '/aion/v2/dashboard/search',
           params: ['searchParam']
     },
+    dashboard: {
+        link: '/aion/v2/dashboard/metrics',
+        params: [],
+        name: "metrics"
+    },
     health: {
           link: '/aion/v2/dashboard/health',
           params: [],

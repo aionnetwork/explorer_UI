@@ -31,7 +31,9 @@ export function nc_addDecimal(value,decimals=18,precision=1,base=false){
      if(num.isGreaterThan(shift)|| base){
         return nc_numFormatterACSensitive(num.toFixed());
      }else{
-        return num.toFixed();//nc_numFormatterAionCoin(num.toFixed(),8);
+        //return nc_numFormatterACSensitiveGeneral(num.toString());
+        return nc_numPrettify(num)
+        //return num.toFixed();//nc_numFormatterAionCoin(num.toFixed(),8);
      }
  }
 
@@ -223,6 +225,30 @@ export function nc_numFormatterACSensitive(num, dp=null, isHex=false) {
     return null;
 
   return bn.shiftedBy(-18).toFormat(dp);
+}
+
+export function nc_numFormatterACSensitiveGeneral(num, dp=null,gran=1, isHex=false) {
+
+  if (num == null)
+    return null;
+
+  let bn = null;
+  try {
+    if (isHex) {
+      bn = (new BigNumber(String(num), 16));
+    }
+    else {
+      bn = (new BigNumber(String(num), 10));
+    }
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+
+  if (!bn || !BigNumber.isBigNumber(bn) || !bn.isFinite() || bn.isNegative())
+    return null;
+  let val = 18/gran*-1;
+  return bn.shiftedBy(val).toFormat(dp);
 }
 
 export function nc_numFormatterAionCoin(num, fixed=4, isHex=false) {

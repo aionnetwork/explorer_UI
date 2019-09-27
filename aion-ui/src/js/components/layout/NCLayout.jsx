@@ -144,7 +144,7 @@ class NCLayout extends Component {
                           className="nav-option"
 
                           onClick={() => {
-                            hashHistory.push('/charts/BlockTime');
+                            hashHistory.push('/charts/PoSBlockTime');
                           }}
                           text={MSG.Metric_menu_item_2_a}
                         />
@@ -152,7 +152,7 @@ class NCLayout extends Component {
                                           className="nav-option"
 
                                           onClick={() => {
-                                            hashHistory.push('/charts/BlockTime');
+                                            hashHistory.push('/charts/PoWBlockTime');
                                           }}
                                           text={MSG.Metric_menu_item_2_b}
                                         />
@@ -173,7 +173,7 @@ class NCLayout extends Component {
                                   className="nav-option"
 
                                   onClick={() => {
-                                    hashHistory.push('/charts/BlockTime');
+                                    hashHistory.push('/charts/PoSDifficulty');
                                   }}
                                   text={MSG.Metric_menu_item_4_a}
                                 />
@@ -181,7 +181,7 @@ class NCLayout extends Component {
                                                   className="nav-option"
 
                                                   onClick={() => {
-                                                    hashHistory.push('/charts/BlockTime');
+                                                    hashHistory.push('/charts/PoWDifficulty');
                                                   }}
                                                   text={MSG.Metric_menu_item_4_b}
                                                 />
