@@ -5,7 +5,7 @@ import PageVisibility from 'react-page-visibility';
 
 import { NCEntityInfo,NCEntity } from 'lib/NCEnums';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { nc_decimalPrettify,nc_addDecimal,nc_numFormatterAionCoin } from 'lib/NCUtility';
 
 import {strings as MSG} from 'lib/NCTerms';
 
@@ -15,7 +15,7 @@ class NCTxnTableRTRow extends Component
 {
   render() {
     let { entity } = this.props;
-    let val = entity.value.toString()
+    let val = nc_decimalPrettify(nc_addDecimal(entity.value));
     return (
       <div className="table-row body">
         <div className="column txn-age pt-text-muted hide">{moment.unix(entity.blockTimestamp).fromNow()} </div>

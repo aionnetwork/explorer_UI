@@ -438,7 +438,7 @@ export const getAccRichList = () => {
   }
   else {
     // get transaction list
-    const ep = network.endpoint.account.rich;
+    const ep = network.endpointV2.account.rich;
     
     let params = [];
     
@@ -1004,7 +1004,7 @@ export const setDashboardData = (response) => {
   if(!isResponseEmpty) {
     let data = response.content[0];
     //console.log(JSON.stringify(data.transactions));
-    //store.dispatch(StoreKpis.SetAll(data.metrics));
+    store.dispatch(StoreKpis.SetAllV2(data.metrics));
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
     store.dispatch(StoreTxnRt.SetAll(data.transactions));
     
@@ -1026,9 +1026,8 @@ export const setDashboardKPI = (response) => {
 
 
 export const getDashboardData = () => {
-  const ep = network.endpoint.dashboard;
-  const epV2 = network.endpointV2.dashboard;
-  let params = [];
+  const ep = network.endpointV2.dashboard;
+ let params = [];
   
   network.request(ep, params)
   .then((response) => {
@@ -1042,19 +1041,6 @@ export const getDashboardData = () => {
   .catch((error) => {
     console.log(error);
     
-  });
-  network.request(epV2, params)
-    .then((response) => {
-
-      setDashboardKPI(response);
-
-      network.startInterval(epV2,params,(response) => {
-         setDashboardKPI(response);
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-
   });
 }
 export const setKPIData = (response) => {

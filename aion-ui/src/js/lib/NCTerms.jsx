@@ -68,7 +68,7 @@ export const strings = new LocalizedStrings({
     //account related strings
     Acc_list_title: "Account Lists",
     Acc_list_desc: "Recent Account Statistics",
-    Acc_list_tab1: "Miner",
+    Acc_list_tab1: "Validator",
     Acc_list_tab2: "Account Inbound",
     Acc_list_tab3: "Account Outbound",
 
@@ -89,6 +89,9 @@ export const strings = new LocalizedStrings({
     Acc_rich_col1: "Address",
     Acc_rich_col2: "Liquid balance",
     Acc_rich_col3: "Holdings (%)",
+    Acc_rich_col4: "Nonce",
+    Acc_rich_col5: "Holdings (%)",
+    Acc_rich_col6: "Holdings (%)",
 
     Acc_detail_title: "Account",
     Acc_detail_row1: "Address",

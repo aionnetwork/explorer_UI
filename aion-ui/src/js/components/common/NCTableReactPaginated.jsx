@@ -32,19 +32,16 @@ export default class NCTableReactPaginated extends Component
     let height = rowHeight;
 
     let pageSize = (this.state.pageSize > PAGE_SIZE) ? this.state.pageSize : PAGE_SIZE;
-    //console.log("this.state.pageNumber",this.state.pageNumber,"list.length", list.length,"tableList.length", tableList.length,"numPages", numPages,"this.state.pageNumber", this.state.pageNumber);
 
     let paginationObj = null;
     let paginationFoot = null;
     const page = data.page;
 
     if (isPaginated) {
-      if (page == null) {  
+      if (page === null || typeof page === 'undefined') {
         let numPages = Math.ceil(list.length / pageSize);
         let startIdx = this.state.pageNumber * pageSize;
         let endIdx = startIdx + pageSize;
-         console.log("this.state.pageNumber",this.state.pageNumber,"list.length", list.length,"tableList.length", tableList.length,"numPages", numPages,"this.state.pageNumber", this.state.pageNumber);
-
         tableList = list.slice(startIdx, endIdx);
 
         paginationObj = 

@@ -61,13 +61,10 @@ export function reducer_accList (state = initialState_StoreAccList, action)
     case 'ACC_LIST_SET_TOP_LEVEL':
     {
       let _state = Object.assign({}, state);
-      
-      _state.isLoadingTopLevel = false; 
-      
       _state.response.miners = action.data.miners;
       _state.response.txnInbound = action.data.txnInbound;
       _state.response.txnOutbound = action.data.txnOutbound;
-      //console.log(JSON.stringify(action.data.txnOutbound));
+
       
       _state.momentUpdated = moment();
       
@@ -76,11 +73,8 @@ export function reducer_accList (state = initialState_StoreAccList, action)
     case 'ACC_RICH_LIST':
     {
       let _state = Object.assign({}, state);
-      
-      //console.log(JSON.stringify(action.data));
-                      
-      _state.response.richList.content = action.data.content;
-            
+      _state.isLoadingTopLevel = false;
+      _state.response.richList = action.data;
       return _state;
     }
 

@@ -92,15 +92,34 @@ export const endpointV2 ={
           link: '/aion/v2/dashboard/search',
           params: ['searchParam']
     },
-    dashboard: {
+    metrics: {
         link: '/aion/v2/dashboard/metrics',
         params: [],
         name: "metrics"
+    },
+    dashboard: {
+         link: '/aion/v2/dashboard/view',
+         params: [],
+         name: "dashboard"
     },
     health: {
           link: '/aion/v2/dashboard/health',
           params: [],
           name: "health"
+    },
+    account: {
+        list: {
+          link: '/aion/v2/dashboard/accounts',
+          params: []
+        },
+        rich:{
+            link: '/aion/v2/dashboard/accounts',
+            params: ["page","size","sort"]
+        },
+        detail: {
+          link: '/aion/v2/dashboard/getAccountDetails',
+          params: ['accountAddress','tokenAddress']
+        }
     },
     transactionLog:{
           list:{

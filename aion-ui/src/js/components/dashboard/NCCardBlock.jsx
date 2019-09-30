@@ -28,7 +28,7 @@ export default class NCCardBlock extends Component
           <div className="block-number">
             <span className="subtitle pt-text-muted">{ MSG.landing_blocks_text_a }</span>
             <span className="title">{ blk.blockNumber != null ? blk.blockNumber : "Undefined" }</span>
-            <span className="pull-right subtitle pt-text-muted">PoW</span>
+            <span className="pull-right subtitle pt-text-muted">{blk.sealType}</span>
           </div>
           <div className="proposer">
             <span className="subtitle pt-text-muted">{ MSG.landing_blocks_text_b }</span>

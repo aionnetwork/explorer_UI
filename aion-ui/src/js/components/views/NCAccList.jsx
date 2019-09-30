@@ -189,7 +189,7 @@ class NCAccList extends Component
           data={richList}
           onPageCallback={null}
           isLoading={false}
-          isPaginated={false}
+          isPaginated={true}
           isLatest={true}/>
         }
       marginTop={40}
