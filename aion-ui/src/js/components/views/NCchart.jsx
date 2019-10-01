@@ -93,13 +93,13 @@ class NCChartRetrieve extends Component
         this.chartData.chart =  <NCNetworkDifficultyChart  />
         this.chartData.description = "PoW Difficulty";
         this.chartData.type="line";
-        this.chartData.id = 2;
+        this.chartData.id = 8;
         break;
     case 'PoSDifficulty':
         this.chartData.chart =  <NCNetworkDifficultyChart  />
         this.chartData.description = "PoS Difficulty";
         this.chartData.type="line";
-        this.chartData.id = 2;
+        this.chartData.id = 7;
         break;
     case 'HashingPower':
         this.chartData.chart = <NCHashPowerChart  />
@@ -123,14 +123,14 @@ class NCChartRetrieve extends Component
         this.chartData.chart = <NCBlockTimesChart  />
         this.chartData.description = "PoW Block Time";
         this.chartData.type="line";
-        this.chartData.id = 5;
+        this.chartData.id = 10;
         break;
     case 'PoSBlockTime':
 
         this.chartData.chart = <NCBlockTimesChart  />
         this.chartData.description = "PoS Block Time";
         this.chartData.type="line";
-        this.chartData.id = 5;
+        this.chartData.id = 9;
         break;
     default:
         this.chartData.chart = 'Invalid data';

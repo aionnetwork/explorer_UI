@@ -140,22 +140,22 @@ class NCLayout extends Component {
           className="nav-option"
           text={MSG.Metric_menu_item_2}
         >
-                <MenuItem
-                          className="nav-option"
+        <MenuItem
+           className="nav-option"
 
-                          onClick={() => {
-                            hashHistory.push('/charts/PoSBlockTime');
-                          }}
-                          text={MSG.Metric_menu_item_2_a}
-                        />
-                <MenuItem
-                                          className="nav-option"
+           onClick={() => {
+              hashHistory.push('/charts/PoSBlockTime');
+           }}
+           text={MSG.Metric_menu_item_2_a}
+        />
+        <MenuItem
+           className="nav-option"
 
-                                          onClick={() => {
-                                            hashHistory.push('/charts/PoWBlockTime');
-                                          }}
-                                          text={MSG.Metric_menu_item_2_b}
-                                        />
+           onClick={() => {
+              hashHistory.push('/charts/PoWBlockTime');
+           }}
+           text={MSG.Metric_menu_item_2_b}
+        />
         </MenuItem>
         <MenuItem
           className="nav-option"
