@@ -118,7 +118,7 @@ export const endpointV2 ={
         },
         miner:{
             link: '/aion/v2/dashboard/validatorStatistics',
-            params: ["sealType","blockNumber"]
+            params: ["page","size","sealType","blockNumber"]
         }
     },
     transactionLog:{

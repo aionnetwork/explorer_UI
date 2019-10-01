@@ -432,7 +432,7 @@ export const getAccListTopLevel = () => {
   }
 }
 
-export const getAccRichList = () => {
+export const getAccRichList = (pageNumber=0, pageSize=25) => {
   
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     store.dispatch(StoreAccList.SetRichList({}));
@@ -441,7 +441,7 @@ export const getAccRichList = () => {
     // get transaction list
     const ep = network.endpointV2.account.rich;
     
-    let params = [];
+    let params = [pageNumber, pageSize];
     
     network.request(ep, params)
     .then((response) => {
@@ -456,7 +456,7 @@ export const getAccRichList = () => {
   }
 }
 
-export const getAccMinerList = () => {
+export const getAccMinerList = (pageNumber=0, pageSize=25) => {
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     store.dispatch(StoreAccList.SetMinerList({}));
@@ -465,7 +465,7 @@ export const getAccMinerList = () => {
     // get transaction list
     const ep = network.endpointV2.account.miner;
 
-    let params = [];
+    let params = [pageNumber, pageSize];
 
     network.request(ep, params)
     .then((response) => {

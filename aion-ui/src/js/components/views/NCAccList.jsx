@@ -58,6 +58,13 @@ class NCAccList extends Component
   requestTopLevel = () => {
     network.getAccListTopLevel();
   }
+
+  requestRichListPaging = (pageNumber, pageSize) => {
+      network.getAccRichList(pageNumber, pageSize);
+  }
+  requestValidatorListPaging = (pageNumber, pageSize) => {
+        network.getAccRichList(pageNumber, pageSize);
+  }
   
   render() {
     const store = this.props.accList;
@@ -111,7 +118,7 @@ class NCAccList extends Component
       content={
         <NCAccTableMiner 
           data={minerList}
-          onPageCallback={null}
+          onPageCallback={this.requestValidatorListPaging}
           isLoading={false}
           isPaginated={true}
           isLatest={true}/>
@@ -187,7 +194,7 @@ class NCAccList extends Component
       content={
         <NCRichList 
           data={richList}
-          onPageCallback={null}
+          onPageCallback={this.requestRichListPaging}
           isLoading={false}
           isPaginated={true}
           isLatest={true}/>

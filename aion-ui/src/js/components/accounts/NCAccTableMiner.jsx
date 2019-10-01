@@ -85,7 +85,7 @@ export default class NCAccTableMiner extends Component
             entityId={entity.minerAddress}/>
         </Cell>;
       tableContent[i][1] = <Cell copy={entity.sealType}>{entity.sealType}</Cell>;
-      tableContent[i][2] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
+      tableContent[i][2] = <Cell copy={ (typeof entity.averageTransactionsPerBlock === 'undefined')? 'unavailable': entity.averageTransactionsPerBlock }>{ (typeof entity.averageTransactionsPerBlock === 'undefined')? 'unavailable': entity.averageTransactionsPerBlock }</Cell>;
       tableContent[i][3] = <Cell copy={ entity.blockCount }>{ entity.blockCount }</Cell>;
       tableContent[i][4] = <Cell copy={ entity.percentageOfBlocksValidated } >{ nc_roundNumber(entity.percentageOfBlocksValidated,2) }</Cell>;
     });
