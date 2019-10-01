@@ -31,6 +31,22 @@ export default class NCBlkTable extends Component
         objPath: 'blockNumber',
       },
       {
+        name: 'Type',
+        isSortable: false,
+        isFilterable: false,
+        width: 200,
+        flex: false,
+        objPath: 'blockTimestamp',
+      },
+      {
+        name: 'Validator',
+        isSortable: false,
+        isFilterable: false,
+
+        flex: true,
+        objPath: 'blockTimestamp',
+      },
+      {
         name: MSG.strings.Blk_list_col2,
         isSortable: false,
         isFilterable: false,
@@ -86,6 +102,8 @@ export default class NCBlkTable extends Component
       let size = null;
       let numTransactions = null;
       let blockTimestamp = null;
+      let sealtype= null;
+      let validator= null;
 
       // [blockHash, blockNumber, difficulty, nrgConsumed, nrgLimit, size, blockTimestamp, totalDifficulty, numTransactions]
       if (Array.isArray(entity)) {
@@ -102,6 +120,8 @@ export default class NCBlkTable extends Component
         size = entity.size;
         numTransactions = entity.numTransactions;
         blockTimestamp = entity.blockTimestamp;
+        sealtype= entity.sealType;
+        validator= entity.minerAddress;
       }
 
       tableContent[i] = [];  
@@ -112,17 +132,25 @@ export default class NCBlkTable extends Component
           entityName={blockNumber}
           entityId={blockNumber}/> 
       </Cell>;
-      tableContent[i][1] = <Cell copy={ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') } >{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
-      tableContent[i][2] = 
+      tableContent[i][1] = <Cell copy={ sealtype } >{ sealtype }</Cell>;
+      tableContent[i][2] = <Cell copy={validator } >
+            <NCEntityLabel
+                entityType={NCEntity.ACCOUNT}
+                entityName={validator}
+                entityId={validator}/>
+      </Cell>;
+
+      tableContent[i][3] = <Cell copy={ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') } >{ moment.unix(blockTimestamp).format('MMM D YYYY, hh:mm:ss a') }</Cell>;
+      tableContent[i][4] =
       <Cell copy={numTransactions} link={"/#/transactions?block=" + blockNumber} >
         <NCLink 
           link={"/transactions?block=" + blockNumber} 
           title={numTransactions} 
           enabled={ numTransactions > 0 }/>
       </Cell>;
-      tableContent[i][3] = <Cell copy={ nc_numFormatter(nrgConsumed, 2) } >{ nc_numFormatter(nrgConsumed, 2) }</Cell>;
-      tableContent[i][4] = <Cell copy={difficulty}>{difficulty}</Cell>;
-      tableContent[i][5] = <Cell copy={ nc_numFormatterBytes(size, 2) }>{ nc_numFormatterBytes(size, 2) }</Cell>;
+      tableContent[i][5] = <Cell copy={ nc_numFormatter(nrgConsumed, 2) } >{ nc_numFormatter(nrgConsumed, 2) }</Cell>;
+      tableContent[i][6] = <Cell copy={difficulty}>{difficulty}</Cell>;
+      tableContent[i][7] = <Cell copy={ nc_numFormatterBytes(size, 2) }>{ nc_numFormatterBytes(size, 2) }</Cell>;
     });
 
     return tableContent;
