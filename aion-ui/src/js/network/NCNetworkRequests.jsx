@@ -419,9 +419,10 @@ export const getAccListTopLevel = () => {
     network.request(ep, params)
     .then((response) => {
       store.dispatch(StoreAccList.SetTopLevel(response));
-
         //get the data for the rich list
         getAccRichList();
+        //get the data for the rich list
+        getAccMinerList();
 
     })
     .catch((error) => {
@@ -451,6 +452,28 @@ export const getAccRichList = () => {
     .catch((error) => {
       console.log(error);
       store.dispatch(StoreAccList.SetRichList({}));
+    });
+  }
+}
+
+export const getAccMinerList = () => {
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    store.dispatch(StoreAccList.SetMinerList({}));
+  }
+  else {
+    // get transaction list
+    const ep = network.endpointV2.account.miner;
+
+    let params = [];
+
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreAccList.SetMinerList(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreAccList.SetMinerList({}));
     });
   }
 }

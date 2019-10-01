@@ -9,7 +9,7 @@ import NCTableReactPaginated from 'components/common/NCTableReactPaginated';
 
 import { NCEntity,NCEntityInfo } from 'lib/NCEnums';
 //import { ga_key } from 'lib/NCData';
-import { nc_numFormatter } from 'lib/NCUtility';
+import { nc_numFormatter, nc_roundNumber } from 'lib/NCUtility';
 //import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
 //import NCLink from 'components/common/NCLink';
@@ -40,7 +40,7 @@ export default class NCAccTableMiner extends Component
         flex: true,
       },
       {
-        name: "MSG.Acc_miners_col2",
+        name: MSG.Acc_miners_col4,
         isSortable: false,
         isFilterable: false,
         width: 200,
@@ -54,7 +54,7 @@ export default class NCAccTableMiner extends Component
         flex: false,
       },
       {
-        name: "MSG.Acc_miners_col2",
+        name: MSG.Acc_miners_col5,
         isSortable: false,
         isFilterable: false,
         width: 200,
@@ -79,15 +79,15 @@ export default class NCAccTableMiner extends Component
     {
       tableContent[i] = [];
       tableContent[i][0] = 
-        <Cell copy={entity[0]} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+entity[0]} >
+        <Cell copy={entity.minerAddress} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+entity.minerAddress} >
           <NCEntityLabel 
             entityType={NCEntity.ACCOUNT} 
-            entityId={entity[0]}/> 
+            entityId={entity.minerAddress}/>
         </Cell>;
-      tableContent[i][1] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
+      tableContent[i][1] = <Cell copy={entity.sealType}>{entity.sealType}</Cell>;
       tableContent[i][2] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
-      tableContent[i][3] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
-      tableContent[i][4] = <Cell copy={ nc_numFormatter(entity[2], 1)+"%" } >{ nc_numFormatter(entity[2], 1)+"%" }</Cell>;
+      tableContent[i][3] = <Cell copy={ entity.blockCount }>{ entity.blockCount }</Cell>;
+      tableContent[i][4] = <Cell copy={ entity.percentageOfBlocksValidated } >{ nc_roundNumber(entity.percentageOfBlocksValidated,2) }</Cell>;
     });
 
     return tableContent;

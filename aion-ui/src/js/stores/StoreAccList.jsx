@@ -23,7 +23,13 @@ export const SetRichList = (data) =>
     data: data,
   }
 }
-
+export const SetMinerList = (data) =>
+{
+  return {
+    type: 'ACC_MINER_LIST',
+    data: data,
+  }
+}
 let initialState_StoreAccList = 
 {
   isLoadingTopLevel: false,
@@ -77,7 +83,13 @@ export function reducer_accList (state = initialState_StoreAccList, action)
       _state.response.richList = action.data;
       return _state;
     }
-
+    case 'ACC_MINER_LIST':
+    {
+      let _state = Object.assign({}, state);
+      _state.isLoadingTopLevel = false;
+      _state.response.miners = action.data;
+      return _state;
+    }
     default: 
     {
       return state;

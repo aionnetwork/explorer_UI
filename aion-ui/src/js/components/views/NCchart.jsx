@@ -196,7 +196,7 @@ class NCChartRetrieve extends Component
     ];
 
     let mode = (this.state.darkMode) ? '#000' : '#fff';
-    //console.log(JSON.stringify(data));
+
     const page =
       <div> 
         <NCExplorerHead

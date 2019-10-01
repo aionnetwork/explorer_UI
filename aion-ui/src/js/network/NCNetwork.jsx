@@ -116,9 +116,9 @@ export const endpointV2 ={
             link: '/aion/v2/dashboard/accounts',
             params: ["page","size","sort"]
         },
-        detail: {
-          link: '/aion/v2/dashboard/getAccountDetails',
-          params: ['accountAddress','tokenAddress']
+        miner:{
+            link: '/aion/v2/dashboard/validatorStatistics',
+            params: ["sealType","blockNumber"]
         }
     },
     transactionLog:{

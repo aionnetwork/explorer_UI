@@ -96,7 +96,7 @@ class NCAccList extends Component
     const minerListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing miner accounts over last 10,000 blocks (~last 24 hours).</div>
+        <div className="NCPageBreakerSubtitle">{MSG.strings.Acc_data_policy_validator}</div>
       }
 
       isLoading={false}

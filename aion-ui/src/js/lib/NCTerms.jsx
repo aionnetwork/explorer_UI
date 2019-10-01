@@ -73,10 +73,13 @@ export const strings = new LocalizedStrings({
     Acc_list_tab3: "Account Outbound",
     Acc_list_tab4: "Rich List",
 
+    Acc_data_policy_validator:"Showing validator accounts over the ~last 7 days",//DATA_POLICY_VALIDATOR
     Acc_miners_col1: "Address",
     Acc_miners_col2: "Avg Txn Per Mined Block",
-    Acc_miners_col3: "% Blocks Found (Last 24hr)",
-    
+    Acc_miners_col3: "% Blocks Found (Last 7days)",
+    Acc_miners_col4: "Type",
+    Acc_miners_col5: "Number of Blocks",
+
     Acc_inbound_col1: "Address",
     Acc_inbound_col2: "Txn Count",
     Acc_inbound_col3: "Avg NRG Price / Txn",
