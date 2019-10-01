@@ -136,7 +136,7 @@ class NCDashboardKPIs extends Component
     }
 
     const kpiList = this.props.kpi.data;
-    console.log(JSON.stringify(kpiList));
+
     this.kpiData[0].kpiList[0].value = nc_decimalPoint(kpiList.powBlockTime, 2);
     this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averagedHashPower, 1);
     this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.powBlockDifficulty, 1);

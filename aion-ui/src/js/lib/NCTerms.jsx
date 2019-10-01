@@ -71,6 +71,7 @@ export const strings = new LocalizedStrings({
     Acc_list_tab1: "Validator",
     Acc_list_tab2: "Account Inbound",
     Acc_list_tab3: "Account Outbound",
+    Acc_list_tab4: "Rich List",
 
     Acc_miners_col1: "Address",
     Acc_miners_col2: "Avg Txn Per Mined Block",

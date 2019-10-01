@@ -40,7 +40,21 @@ export default class NCAccTableMiner extends Component
         flex: true,
       },
       {
+        name: "MSG.Acc_miners_col2",
+        isSortable: false,
+        isFilterable: false,
+        width: 200,
+        flex: false,
+      },
+      {
         name: MSG.Acc_miners_col2,
+        isSortable: false,
+        isFilterable: false,
+        width: 200,
+        flex: false,
+      },
+      {
+        name: "MSG.Acc_miners_col2",
         isSortable: false,
         isFilterable: false,
         width: 200,
@@ -71,7 +85,9 @@ export default class NCAccTableMiner extends Component
             entityId={entity[0]}/> 
         </Cell>;
       tableContent[i][1] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
-      tableContent[i][2] = <Cell copy={ nc_numFormatter(entity[2], 1)+"%" } >{ nc_numFormatter(entity[2], 1)+"%" }</Cell>;        
+      tableContent[i][2] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
+      tableContent[i][3] = <Cell copy={ nc_numFormatter(entity[1], 2) }>{ nc_numFormatter(entity[1], 2) }</Cell>;
+      tableContent[i][4] = <Cell copy={ nc_numFormatter(entity[2], 1)+"%" } >{ nc_numFormatter(entity[2], 1)+"%" }</Cell>;
     });
 
     return tableContent;

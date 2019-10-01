@@ -108,7 +108,7 @@ export default class NCTxnDetail extends Component
     let parsedTxnLog = entity.log ? JSON.stringify(this.formatTxnLogs(entity.log), undefined, 2) : this.parseTxnLog(entity.transactionLog);
     let parsedInputData = this.parseInputData(entity.data);
 
-    let value = (typeof entity.tokenSymbol === 'undefined') ?  nc_decimalPrettify(nc_addDecimal(entity.value)) : nc_decimalPrettify(nc_rawFormat(entity.value));
+    let value = nc_decimalPrettify(nc_rawFormat(entity.value)); //(typeof entity.tokenSymbol === 'undefined') ?  nc_addDecimal(entity.value) : nc_decimalPrettify(nc_rawFormat(entity.value));
 
     let unit = (typeof entity.tokenSymbol === 'undefined')? "Aion" : entity.tokenSymbol;
 
@@ -153,11 +153,11 @@ export default class NCTxnDetail extends Component
       {
 
         field: MSG.strings.Txn_detail_row5,
-        value: entity.value == null ? EMPTY_STR : <span className="">{value + " " + unit}</span>,
+        value: entity.value === null ? EMPTY_STR : <span className="">{value + " " + unit}</span>,
       },
       {
          field: "",
-         value: tokenList ==null ? "" :<div className="token-box">{tokenList}</div>,
+         value: tokenList === null ? "" :<div className="token-box">{tokenList}</div>,
       },
       {
         field: MSG.strings.Txn_detail_row6,
@@ -280,7 +280,7 @@ let desc_2 =[     {
       },
       {
         field: MSG.strings.Txn_detail_row5,
-        value: entity.value == null ? EMPTY_STR : <span className="">{value + " " + unit}</span>,
+        value: entity.value === null ? EMPTY_STR : <span className="">{value + " " + unit}</span>,
       },
 
       {

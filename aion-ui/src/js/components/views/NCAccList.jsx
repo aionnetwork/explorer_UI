@@ -204,10 +204,10 @@ class NCAccList extends Component
           subtitle={"Recent Accounts Statistics"}/>    
         <div className="NCSection">
           <Tabs2 id="NCSectionTabbed" selectedTabId={this.state.tab} onChange={this.handleTabChange} default className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-            <Tab2 id="miner-acc" title="Miners" panel={minerListSection}/>
-            <Tab2 id="inbound-acc" title="Accounts Inbound" panel={inboundTxListSection}/>
-            <Tab2 id="outbound-acc" title="Accounts Outbound" panel={outboundTxListSection}/>
-            <Tab2 id="rich-list" title="Rich List" panel={richListSection}/>
+            <Tab2 id="miner-acc" title={MSG.strings.Acc_list_tab1} panel={minerListSection}/>
+            <Tab2 id="inbound-acc" title={MSG.strings.Acc_list_tab2} panel={inboundTxListSection}/>
+            <Tab2 id="outbound-acc" title={MSG.strings.Acc_list_tab3} panel={outboundTxListSection}/>
+            <Tab2 id="rich-list" title={MSG.strings.Acc_list_tab4} panel={richListSection}/>
           </Tabs2>
         </div>
       </div>;
