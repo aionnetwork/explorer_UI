@@ -1495,20 +1495,36 @@ export const getChartRetrieve = (queryStr) => {
 
     // get block details
     const ep = network.endpoint.chart.detail;
+    const ep2 = network.endpointV2.account.miner;
     let params = [request];
-    network.request(ep, params)
-    .then((response) => {
-      
-       store.dispatch(StoreChartRetrieve.SetChart(response));
-    
-    })
-    .catch((error) => {
-      
-        console.log(error);
-        store.dispatch(StoreChartRetrieve.SetChart({
-        
-      }));
-    });
+    if(request===1 || request==='1'){
+        network.request(ep2, [])
+        .then((response) => {
+           store.dispatch(StoreChartRetrieve.SetChart(response));
+
+        })
+        .catch((error) => {
+
+            console.log(error);
+            store.dispatch(StoreChartRetrieve.SetChart({
+
+          }));
+        });
+    }else{
+        network.request(ep, params)
+        .then((response) => {
+
+           store.dispatch(StoreChartRetrieve.SetChart(response));
+
+        })
+        .catch((error) => {
+
+            console.log(error);
+            store.dispatch(StoreChartRetrieve.SetChart({
+
+          }));
+        });
+    }
   }
 }
 

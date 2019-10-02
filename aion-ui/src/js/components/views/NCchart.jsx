@@ -80,7 +80,7 @@ class NCChartRetrieve extends Component
     case 'TopMiner':        
         this.chartData.chart = <NCTopMinersChart   />
         this.chartData.description = "Top Miners";
-        this.chartData.type="pie";
+        this.chartData.type="custom";
         this.chartData.id = 1;
         break;  
     case 'Difficulty':        
@@ -167,21 +167,6 @@ class NCChartRetrieve extends Component
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoading;
     //const queryStr = store.queryStr;
     const desc = this.chartData.description;
-    //let log = this.type;
-
-    //const blkObj = (store.response) ? store.response.blk : null;
-    //const txnList = (store.response) ? store.response.txn : null;
-
-    //let isBlkValid = nc_isObjectValid(blkObj);
-    //let isBlkEmpty = nc_isObjectEmpty(blkObj, isBlkValid);
-
-    //let isTxnListValid = nc_isListValid(txnList);
-    //let isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-
-    //const blk = isBlkEmpty ? {} : blkObj.content[0];
-
-    //let chart = '';
-
 
     const breadcrumbs = [
       {

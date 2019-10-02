@@ -535,7 +535,6 @@ export function nc_findEntity(queryStr){
 
 export function nc_LinkToEntity(entity, entityId) {
   if (nc_CanLinkToEntity(entity, entityId)) {
-    console.log('Link to!'+NCEntityInfo[entity].absoluteUrl+entityId);
     hashHistory.push(NCEntityInfo[entity].absoluteUrl+entityId);
   }
 }
@@ -567,18 +566,28 @@ export function nc_getChartData(data,charttype=null){
   //get first line
   if(charttype!==null){
     let chart =[]
-   
-    if(Array.isArray(data)&&data.length>1){
-      //let chartType = data[0].chartype;
-      data.forEach( (record,i)=>{
-        //let arr =[record.timestamp,record.value]//datapoint
-        chart.push(nc_datapoint(record,charttype,i));//nc_datapoint(record,charttype)
-      })
-   
+
+    if(charttype!=='custom'){
+        if(Array.isArray(data)&&data.length>1){
+          data.forEach( (record,i)=>{
+
+            chart.push(nc_datapoint(record,charttype,i));//nc_datapoint(record,charttype)
+          })
+
+        }else{
+          return chart;
+        }
     }else{
-      return chart;
+
+        if(Array.isArray(data)&&data.length>1){
+          data.forEach( (record,i)=>{
+            chart.push([record.minerAddress,record.blockCount]);
+          })
+
+        }else{
+          return chart;
+        }
     }
-      //console.log(JSON.stringify(chart));
     return chart;
   }
 
@@ -626,6 +635,9 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
 
 export function nc_compare(a,b) {
   return b.y-a.y;
+}
+export function nc_compare2(a,b) {
+  return b[1]-a[1];
 }
 
 export function nc_formatLogs(logs){
