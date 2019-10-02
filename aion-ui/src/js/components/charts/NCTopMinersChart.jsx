@@ -53,7 +53,7 @@ export default class NCTopMinersChart extends Component
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'pie',
+        type: 'area',
         height:'50%',
         backgroundColor: mode, 
     },

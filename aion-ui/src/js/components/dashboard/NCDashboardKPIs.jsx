@@ -145,7 +145,7 @@ class NCDashboardKPIs extends Component
     this.kpiData[1].kpiList[0].value = kpiList.posBlockTime!==-999 ? nc_decimalPoint(kpiList.posBlockTime, 2) : '--';
     this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averagePosIssuance, 1);
     this.kpiData[1].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.percentageOfNetworkStaking, 1);
-    this.kpiData[1].kpiList[3].value = kpiList.posBlockDifficulty!==-999 ? nc_numFormatter(kpiList.posBlockDifficulty, 2) : '--';
+    this.kpiData[1].kpiList[3].value = kpiList.posBlockDifficulty!==-999 ? nc_numFormatter_with1Floor(kpiList.posBlockDifficulty, 1) : '--';
 
     this.kpiData[2].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionsPerSecond, 2);
     this.kpiData[2].kpiList[1].value = kpiList.peakTransactionsPerBlock != null ?
