@@ -86,18 +86,18 @@ class NCLayout extends Component {
   }
 
   componentDidMount() {
-    if(this.props.location.pathname !== "/dashboard"){
+    /*if(this.props.location.pathname !== "/dashboard"){
        network.getHealthData();
     }else{
-       stopInterval(intervalID.health);
-    }
-
+       //stopInterval(intervalID.health);
+    }*/
+    network.getHealthData();
     this.d_mode_class = (this.props.darkMode.data) ? "darkMode" : "";   
   }
 
   componentWillUnmount() {
     //disconnectSocket();
-    //stopInterval(intervalID.health);
+    stopInterval(intervalID.health);
   }
 
   //change the language state

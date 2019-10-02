@@ -23,14 +23,15 @@ export default class NCDashboard extends Component
   }
 
  componentWillMount() {
-    stopInterval(intervalID.health);
+    //stopInterval(intervalID.health);
     network.getDashboardData();
+    //network.getHealthData();
     //network.getKPIData();
  }
 
   componentWillUnmount() {
     stopInterval(intervalID.dashboard);
-    network.getHealthData();
+    //network.getHealthData();
   }
 
   render() {
