@@ -1,6 +1,6 @@
 {
   "api": {
-    "base_url": "staging-amity-api.aiondev.network",
+    "base_url": "amity-api.aion.network",
     "https_enabled": true
   },
   "site": {
@@ -41,7 +41,21 @@
       "name": "Mastery Testnet",
       "url": "https://mastery.aion.network"
     }
-  ]}
+  ],
+    "amity": [
+      {
+        "name": "Amity",
+        "url": ""
+      },
+      {
+        "name": "Mainnet Kilimanjaro",
+        "url": "https://mainnet.aion.network"
+      },
+      {
+        "name": "Mastery Testnet",
+        "url": "https://mastery.aion.network"
+      }
+    ]}
 
 
 }

@@ -66,7 +66,7 @@ class NCDashboardKPIs extends Component
                   value:"--",
                   units:"",
                   title:["Average", "Block Time"],
-                  onClick: this.link,
+
                   hoverContent: "Mean of PoS block arrival time over the last hour. The target block time for PoS blocks is 20 seconds. PoS difficulty is dynamically adjusted to achieve target.",
                 },
                 {
