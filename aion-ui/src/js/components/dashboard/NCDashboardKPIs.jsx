@@ -65,20 +65,20 @@ class NCDashboardKPIs extends Component
                 {
                   value:"--",
                   units:"",
-                  title:["Average", "Block Time"],
+                  title:["Average", " Block Time"],
 
                   hoverContent: "Mean of PoS block arrival time over the last hour. The target block time for PoS blocks is 20 seconds. PoS difficulty is dynamically adjusted to achieve target.",
                 },
                 {
                   value:"--",
                   units:"",
-                  title:["Average", "Issuance"],
+                  title:["Average", " Issuance"],
                   hoverContent: "Mean of block rewards for PoS blocks for the previous 1024 blocks",
                 },
                 {
                   value:"--",
                   units:"",
-                  title:["% of Network", "staked"],
+                  title:["% of Network", " Staked"],
                   hoverContent: "[Total Staked Aion/ Circulating Supply]*100",
                 },
                 {
