@@ -39,7 +39,7 @@ export const strings = new LocalizedStrings({
 
     kpi_tab1_title: "NETWORK",
     kpi_tab1_subtitle: "EQUI2109",
-    kpi_tab2_title: "TRANSACTION",
+    kpi_tab2_title: "NETWORK",
     
     kpi_block_l1: "Current",
     kpi_block_l2: "Block Time",

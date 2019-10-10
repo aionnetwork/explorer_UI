@@ -48,13 +48,7 @@ class NCDashboardKPIs extends Component
             units:"",
             title:[MSG.strings.kpi_difficulty_l1, MSG.strings.kpi_difficulty_l2],
             hoverContent: MSG.strings.kpi_difficulty_desc,
-          },
-          {
-            value:"--",
-            units:"",
-            title:[MSG.strings.kpi_NRG_l1, MSG.strings.kpi_NRG_l2],
-            hoverContent: MSG.strings.kpi_NRG_desc,
-          },
+          }
           
         ]
       },
@@ -114,6 +108,12 @@ class NCDashboardKPIs extends Component
             hoverContent: MSG.strings.kpi_TXNCOUNT_desc,
             tooltipPosition: Position.BOTTOM_RIGHT,
           },
+          {
+            value:"--",
+            units:"",
+            title:[MSG.strings.kpi_NRG_l1, MSG.strings.kpi_NRG_l2],
+            hoverContent: MSG.strings.kpi_NRG_desc,
+          }
         ]
       },
       
@@ -140,7 +140,7 @@ class NCDashboardKPIs extends Component
     this.kpiData[0].kpiList[0].value = nc_decimalPoint(kpiList.powBlockTime, 2);
     this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averagedHashPower, 1);
     this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.powBlockDifficulty, 1);
-    this.kpiData[0].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumed, 2);
+
     ///add unity stuff here
     this.kpiData[1].kpiList[0].value = kpiList.posBlockTime!==-999 ? nc_decimalPoint(kpiList.posBlockTime, 2) : '--';
     this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averagePosIssuance, 1);
@@ -154,6 +154,7 @@ class NCDashboardKPIs extends Component
     this.kpiData[2].kpiList[2].value = kpiList.totalTransaction != null ?
                                           nc_numFormatter(kpiList.totalTransaction, 3) :
                                           null;
+    this.kpiData[2].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumed, 2);
 
     let ncKPIs = [];
     let ncKPIr = [];
