@@ -59,6 +59,7 @@ export default class NCTopMinersChart extends Component
     title: {
         text: MSG.Chart_5_title
     },
+
     tooltip: {
         pointFormat: '{series.name}: <b>{point.y}</b>'
     },
@@ -104,7 +105,6 @@ export default class NCTopMinersChart extends Component
         column: {
              allowPointSelect: true,
              cursor: 'pointer',
-
              dataLabels: {
                  enabled: true,
                  format: '{point.y} ',
@@ -124,6 +124,7 @@ export default class NCTopMinersChart extends Component
         showInLegend: false,
         name: MSG.Chart_5_title,
         colorByPoint: true,
+        pointStart: 1,
         data: points
     }]
 }
