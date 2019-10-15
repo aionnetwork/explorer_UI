@@ -238,7 +238,7 @@ export default class NCPagination extends Component
               } 
 
                className="paging-input pt-wide-input"
-
+               min = {Math.max(1,parseInt(pageNumber+1))}
                placeholder = {parseInt(pageNumber+1)}
                />
           <span className="pt-text-muted context hide">    

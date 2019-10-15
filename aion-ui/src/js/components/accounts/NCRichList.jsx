@@ -64,7 +64,7 @@ export default class NCRichList extends Component
 
     entityList.forEach((entity, i) => 
     {
-      //console.log(JSON.stringify(entity));
+      
       tableContent[i] = [];
       tableContent[i][0] = 
         <Cell copy={entity['address']} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+entity[0]} >
@@ -84,7 +84,7 @@ export default class NCRichList extends Component
 
   render() {
     const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
-    console.log(JSON.stringify(data));
+
     return (
       <NCTableReactPaginated
         data={data}
