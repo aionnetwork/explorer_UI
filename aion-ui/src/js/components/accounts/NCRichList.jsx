@@ -64,7 +64,7 @@ export default class NCRichList extends Component
 
     entityList.forEach((entity, i) => 
     {
-      
+
       tableContent[i] = [];
       tableContent[i][0] = 
         <Cell copy={entity['address']} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+entity[0]} >
