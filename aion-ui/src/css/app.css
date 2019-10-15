@@ -2464,168 +2464,172 @@ pre {
   }
 }
 .NCTableTransactionsRT .header {
-  background-color: #12173A;
-  color: white;
+  background-color: #ff7800;
+  color: #1c1c1c;
   font-weight: 500;
   border-bottom-style: none;
 }
 .NCTableTransactionsRT .body.table-row {
-  background-color: white;
+  background-color: #e1dccd;
 }
 .NCTableTransactionsRT .body.table-row:hover {
   background-color: #e4e9ed;
 }
+.NCTable .NCColumnHeaderCell {
+  background-color: #ff7800;
+}
 .NCTable .NCColumnHeaderCell .header-icon {
-  color: white;
+  color: #1c1c1c;
 }
 .NCComponentLevelSpinner .pt-intent-primary {
-  color: #5af0bd !important;
+  color: #ffb900 !important;
 }
 .NCKPIGroup .group-title {
-  color: #5af0bd;
+  color: #1c1c1c;
 }
 .NCKPIGroup .group-title strong {
-  color: white;
+  color: #1c1c1c;
+}
+.NCKPIGroup .NCKPI .kpi-card {
+  background-color: #e1dccd;
+  border-color: #1c1c1c;
 }
 .NCKPIGroup .NCKPI .kpi-card > .metric .value {
-  color: #4221cc;
+  color: #1c1c1c;
 }
 .NCKPIGroup .NCKPI .kpi-card > .metric .units {
-  color: #4221cc;
+  color: #1c1c1c;
 }
 .NCDashboard .NCKPIContainer .NCKPIGroup {
-  box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.1);
-  background-color: #12173A;
+  box-shadow: 0 0 12px 1px #1c1c1c;
+  background-color: #e1dccd;
+}
+.NCCardBlock .block-card {
+  background-color: #e1dccd;
 }
 .NCCardBlock .block-card.non-empty-block {
-  border-color: #4221cc;
+  border-color: #1c1c1c;
 }
 .NCCardBlock .block-card .proposer .NCEntityLabel {
-  color: #4221cc;
+  color: #1c1c1c;
 }
 .NCCardBlock .block-card .proposer .NCEntityLabel:hover .text {
-  color: #4221cc !important;
+  color: #1c1c1c !important;
+}
+.NCCardBlock .block-card .block-number .subtitle {
+  color: #1c1c1c !important;
 }
 .NCEntityLabel .icon {
-  color: #5c7080;
+  color: #1c1c1c;
 }
 .NCEntityLabel.active:hover .text {
-  color: #4221cc;
+  color: #ff7800;
 }
 .NCEntityDetail .subtitle {
-  color: #4221cc;
+  color: #ff7800;
 }
 .NCExplorerPage .NCExplorerHead .title-row .left .title .join {
-  border-left: 1px solid #5af0bd;
+  border-left: 1px solid #1c1c1c;
 }
 .NCExplorerPage .NCExplorerHead .title-row .left .title .desc {
-  color: #4221cc;
+  color: #1c1c1c;
 }
 .NCTitle.section {
-  border-bottom: 1px solid #5af0bd;
+  border-bottom: 1px solid #1c1c1c;
 }
 .NCTitle.section span {
-  color: #4221cc;
+  color: #1c1c1c;
   font-weight: 400;
 }
 .NCHeader {
-  background-color: #12173A;
+  background-color: #ff7800;
 }
 .NCHeader .row .navbar-group-left .title {
-  color: #5af0bd;
+  color: #1c1c1c;
 }
 .NCHeader .row .navbar-group-left .pt-navbar-divider {
   margin-right: 15px;
   margin-left: 12px;
-  border-left: 1px solid #ffffffad;
+  border-left: 1px solid #ffffff;
 }
 .NCHeader .row .pt-icon-caret-down {
   margin-left: 5px;
   margin-right: -2px;
-  color: #5af0bd;
+  color: #1c1c1c;
 }
 .NCHeader .row .navbar-btn-active {
-  color: #5af0bd !important;
-  box-shadow: 0 0 0 1px rgba(90, 240, 189, 0.28);
+  color: #1c1c1c !important;
+  box-shadow: 0 0 0 1px #1c1c1c;
 }
 .NCHeader .row .navbar-btn-active:before {
-  color: #5af0bd !important;
+  color: #1c1c1c !important;
 }
 .NCHeader .row .navbar-group-right .pt-navbar-divider {
-  border-left: 1px solid #ffffffad;
+  border-left: 1px solid #ffffff;
 }
 .NCLivenessIndicator .liveness-btn .icon.live {
-  color: #5af0bd;
+  color: green;
 }
 .NCNavMenu .pt-menu-header > h6 {
-  color: #4221cc;
+  color: #1c1c1c;
+}
+.NCFooter {
+  background: #ff7800 !important;
 }
 pre {
-  background-color: white;
+  background-color: #e1dccd;
 }
 .pt-button.pt-intent-primary {
-  color: #5af0bd !important;
+  color: #ffb900 !important;
 }
 .pt-tag.pt-intent-primary {
-  color: #4221cc !important;
+  color: #ff7800 !important;
 }
 .pt-icon-arrow-right.main-search-btn {
-  color: #5af0bd !important;
+  color: #ffb900 !important;
 }
 .pt-icon-circle-arrow-right {
-  color: #12173A !important;
+  color: #f54119 !important;
 }
 .pt-tag.pt-minimal.pt-intent-primary {
   background-color: #e5e4e8;
 }
 .nc-minimal-btn-shadow {
-  box-shadow: 0 0 0 1px rgba(90, 240, 189, 0.28) !important;
+  box-shadow: 0 0 0 1px #1c1c1c !important;
 }
 .bp-table-quadrant-main .bp-table-quadrant-scroll-container {
-  background-color: white !important;
+  background-color: #e1dccd !important;
+}
+.NCTable .bp-table-cell {
+  background-color: #e1dccd !important;
 }
 .bp-table-top-container,
 .bp-table-header:before,
 .bp-table-menu {
-  background-color: #12173A !important;
+  background-color: #ff7800 !important;
 }
 .bp-table-row-name,
 .bp-table-column-name-text {
-  color: white !important;
+  color: #1c1c1c !important;
   font-weight: 400 !important;
 }
 .block-link.pt-button {
-  color: #12173A !important;
+  color: #ff7800 !important;
 }
 .pt-tab[aria-selected="true"],
 .pt-tab:not([aria-disabled="true"]):hover {
-  color: #4221cc;
+  color: #ff7800;
 }
 .pt-tab-indicator {
-  background-color: #5af0bd !important;
+  background-color: #e1dccd !important;
 }
 .pt-button.pt-min-toplvl:hover .pt-icon-standard.pt-icon-caret-down.pt-align-right {
-  color: #5c7080;
+  color: #1c1c1c;
 }
 body {
-  background: #f2f3fd;
-}
-body:after {
-  content: "";
-  background-image: url(https://aion.network/material/views/aion/assets/img/circuit_grid.png);
-  background-position: 100% 0;
-  background-repeat: no-repeat;
-  background-size: 60%;
-  opacity: 0.7;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: fixed;
-  z-index: -1;
-  overflow: hidden;
+  background: #e1dccd;
 }
 a,
 a:hover {
-  color: #4221cc;
+  color: #ffb900;
 }

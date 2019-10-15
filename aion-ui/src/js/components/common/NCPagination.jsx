@@ -226,18 +226,19 @@ export default class NCPagination extends Component
 
                                   if((parseInt(e.target.value)-1)<totalPages){
                                     this.props.onPageCallback(parseInt(e.target.value)-1,pageSize,startDate,endDate);
-
+                                    e.target.placeholder = e.target.value;
+                                    e.target.min = e.target.placeholder
+                                    e.target.value = null;
                                   }
 
               }}}
               onChange={(e) => {
-                
-
-
+                    e.target.min = 1;
                   }
               } 
 
                className="paging-input pt-wide-input"
+
                placeholder = {parseInt(pageNumber+1)}
                />
           <span className="pt-text-muted context hide">    

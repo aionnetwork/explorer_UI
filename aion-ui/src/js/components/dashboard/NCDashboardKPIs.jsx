@@ -67,7 +67,7 @@ class NCDashboardKPIs extends Component
                   value:"--",
                   units:"",
                   title:["Average", " Issuance"],
-                  hoverContent: "Mean of block rewards for PoS blocks for the previous 1024 blocks",
+                  hoverContent: "Mean of block rewards in Aions for PoS blocks over the previous 1024 blocks",
                 },
                 {
                   value:"--",
@@ -143,7 +143,7 @@ class NCDashboardKPIs extends Component
 
     ///add unity stuff here
     this.kpiData[1].kpiList[0].value = kpiList.posBlockTime!==-999 ? nc_decimalPoint(kpiList.posBlockTime, 2) : '--';
-    this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averagePosIssuance, 1);
+    this.kpiData[1].kpiList[1].value = nc_numFormatterACSensitive(kpiList.averagePosIssuance, 1);
     this.kpiData[1].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.percentageOfNetworkStaking, 1);
     this.kpiData[1].kpiList[3].value = kpiList.posBlockDifficulty!==-999 ? nc_numFormatter_with1Floor(kpiList.posBlockDifficulty, 1) : '--';
 
