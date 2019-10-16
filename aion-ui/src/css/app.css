@@ -2464,8 +2464,8 @@ pre {
   }
 }
 .NCTableTransactionsRT .header {
-  background-color: #ff7800;
-  color: #1c1c1c;
+  background-color: #1c1c1c;
+  color: #e1dccd;
   font-weight: 500;
   border-bottom-style: none;
 }
@@ -2476,10 +2476,10 @@ pre {
   background-color: #e4e9ed;
 }
 .NCTable .NCColumnHeaderCell {
-  background-color: #ff7800;
+  background-color: #1c1c1c;
 }
 .NCTable .NCColumnHeaderCell .header-icon {
-  color: #1c1c1c;
+  color: #e1dccd;
 }
 .NCComponentLevelSpinner .pt-intent-primary {
   color: #ffb900 !important;
@@ -2542,10 +2542,10 @@ pre {
   font-weight: 400;
 }
 .NCHeader {
-  background-color: #ff7800;
+  background-color: #1c1c1c;
 }
 .NCHeader .row .navbar-group-left .title {
-  color: #1c1c1c;
+  color: #e1dccd;
 }
 .NCHeader .row .navbar-group-left .pt-navbar-divider {
   margin-right: 15px;
@@ -2555,14 +2555,14 @@ pre {
 .NCHeader .row .pt-icon-caret-down {
   margin-left: 5px;
   margin-right: -2px;
-  color: #1c1c1c;
+  color: #e1dccd;
 }
 .NCHeader .row .navbar-btn-active {
-  color: #1c1c1c !important;
+  color: #e1dccd !important;
   box-shadow: 0 0 0 1px #1c1c1c;
 }
 .NCHeader .row .navbar-btn-active:before {
-  color: #1c1c1c !important;
+  color: #e1dccd !important;
 }
 .NCHeader .row .navbar-group-right .pt-navbar-divider {
   border-left: 1px solid #ffffff;
@@ -2574,7 +2574,7 @@ pre {
   color: #1c1c1c;
 }
 .NCFooter {
-  background: #ff7800 !important;
+  background: #1c1c1c !important;
 }
 pre {
   background-color: #e1dccd;
@@ -2606,15 +2606,15 @@ pre {
 .bp-table-top-container,
 .bp-table-header:before,
 .bp-table-menu {
-  background-color: #ff7800 !important;
+  background-color: #1c1c1c !important;
 }
 .bp-table-row-name,
 .bp-table-column-name-text {
-  color: #1c1c1c !important;
+  color: #e1dccd !important;
   font-weight: 400 !important;
 }
 .block-link.pt-button {
-  color: #ff7800 !important;
+  color: #1c1c1c !important;
 }
 .pt-tab[aria-selected="true"],
 .pt-tab:not([aria-disabled="true"]):hover {

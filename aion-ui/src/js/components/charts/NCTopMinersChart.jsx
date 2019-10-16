@@ -11,7 +11,7 @@ Exporting(Highcharts);
 import {strings as MSG} from 'lib/NCTerms';//MSG.Chart_5_title
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
-import appConfig from '../../../config.json';
+import appConfig from '../../../env.json';
 import { NC_ENV} from 'network/NCNetwork';
 
 const EMPTY_STR = "Not Available";
@@ -61,7 +61,7 @@ export default class NCTopMinersChart extends Component
     },
 
     tooltip: {
-        pointFormat: '{series.name}: <b>{point.y}</b>'
+        pointFormat: '{series.name}: <b>{point.y} Blocks</b>'
     },
     credits:{enabled:false},
     plotOptions: {
@@ -98,7 +98,7 @@ export default class NCTopMinersChart extends Component
         
             events: {
                     click: function({point}) {
-                        location.href = 'https://'+appConfig.site.base_url+'/#/account/'+point.name;
+                        location.href = 'https://'+appConfig.HOME_URL+'/#/account/'+point.name;
                     }
                 }
         },
@@ -115,7 +115,7 @@ export default class NCTopMinersChart extends Component
 
              events: {
                      click: function({point}) {
-                         location.href = 'https://'+appConfig.site.base_url+'/#/account/'+point.name;
+                         location.href = 'https://'+appConfig.HOME_URL+'/#/account/'+point.name;
                      }
                  }
          }

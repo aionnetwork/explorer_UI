@@ -3,7 +3,8 @@
 
 @background: #e1dccd;
 @text: #1c1c1c;
-@color1: #ff7800;//#f54119;
+@text_2: #e1dccd;
+@color1: #1c1c1c;//#ff7800;//#f54119;
 @color2: #ffb900;
 @color3: #ff7800;
 
@@ -16,7 +17,7 @@
 .NCTableTransactionsRT {
   .header {
     background-color: @color1;
-    color: @text;
+    color: @text_2;
     font-weight: 500;
     border-bottom-style: none;
   }
@@ -31,7 +32,7 @@
 .NCTable {
   .NCColumnHeaderCell {
     .header-icon {
-      color: @text;
+      color: @text_2;
     }
     background-color: @color1;
   }
@@ -135,11 +136,11 @@
 }
 // RECENT TRANSACTIONS TABLE HEADER ----------------------
 .NCHeader {
-  background-color: @color3;
+  background-color: @color1;
   .row {
     .navbar-group-left {
       .title {
-        color: @text;
+        color: @text_2;
       }
 
       .pt-navbar-divider {
@@ -152,14 +153,14 @@
     .pt-icon-caret-down {
       margin-left: 5px;
       margin-right: -2px;
-      color: @text;
+      color: @text_2;
     }
 
     .navbar-btn-active {
       &:before {
-        color: @text !important;
+        color: @text_2 !important;
       }
-      color: @text !important;
+      color: @text_2 !important;
       box-shadow: 0 0 0 1px @text;
     }
 
@@ -188,7 +189,7 @@
   }
 }
 .NCFooter {
-  background:@color3 !important;
+  background:@color1 !important;
 }
 pre {
   background-color: @background;
@@ -232,7 +233,7 @@ pre {
 }
 .bp-table-row-name,
 .bp-table-column-name-text {
-  color: @text !important;
+  color: @text_2 !important;
   font-weight: 400 !important;
 }
 

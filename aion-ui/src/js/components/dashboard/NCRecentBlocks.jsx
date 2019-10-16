@@ -141,7 +141,7 @@ class NCRecentBlocks extends Component
           <span className="block-bridge"/>
           <span className="block-bridged-dotted"/>
           <div className="NCCardBlock next-block-container">
-            <img  className="block-parent" src={(this.props.darkMode.data) ? "img/block/dark-block-indigo.svg" : "img/block/block-indigo.svg"}/>
+            <img  className="block-parent" src={(this.props.darkMode.data) ? "img/block/dark-block-indigo.svg" : "img/block/unity-block.svg"}/>
             <div className="block-card">
               <div className="block-number">
                 <span className="subtitle pt-text-muted">{ MSG.landing_blocks_text_a }</span>
