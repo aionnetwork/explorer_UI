@@ -149,7 +149,7 @@ export const strings = new LocalizedStrings({
     Blk_detail_row3: "Transaction Count",
     Blk_detail_row4: "Block Hash",
     Blk_detail_row5: "Parent Hash",
-    Blk_detail_row6: "Miner",
+    Blk_detail_row6: "Validator",
     Blk_detail_row7: "Receipt Root",
     Blk_detail_row8: "Transaction Root",
     Blk_detail_row9: "State Root",
@@ -366,8 +366,8 @@ export const strings = new LocalizedStrings({
     Chart_4_y_title: 'Difficulty',
     Chart_4_series_title: 'Network Difficulty',
 
-    Chart_5_title: 'Top Miners For The Past 7 days',
-    Chart_5_series_title: 'Mined Blocks',
+    Chart_5_title: 'Top Validators For The Past 7 days',
+    Chart_5_series_title: 'Validated Blocks',
 
     Chart_6_title: 'Transaction per Hour',
     Chart_6_subtitle_a: 'Click and drag in the plot area to zoom in',
