@@ -79,7 +79,7 @@ class NCChartRetrieve extends Component
         break;  
     case 'TopMiner':        
         this.chartData.chart = <NCTopMinersChart   />
-        this.chartData.description = "Top Miners";
+        this.chartData.description = "Top Validators";
         this.chartData.type="custom";
         this.chartData.id = 1;
         break;  

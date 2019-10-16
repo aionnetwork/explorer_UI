@@ -56,6 +56,9 @@ export default class NCTopMinersChart extends Component
 
         backgroundColor: mode, 
     },
+    yAxis: {
+            title:{ text: "Number of blocks"}
+    },
     title: {
         text: MSG.Chart_5_title
     },
