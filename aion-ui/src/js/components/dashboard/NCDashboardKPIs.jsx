@@ -63,12 +63,12 @@ class NCDashboardKPIs extends Component
 
                   hoverContent: "Mean of PoS block arrival time over the last hour. The target block time for PoS blocks is 20 seconds. PoS difficulty is dynamically adjusted to achieve target.",
                 },
-                {
+                /*{
                   value:"--",
                   units:"",
                   title:["Average", " Issuance"],
                   hoverContent: "Mean of block rewards in Aions for PoS blocks over the previous 1024 blocks",
-                },
+                },*/
                 {
                   value:"--",
                   units:"",
@@ -143,9 +143,9 @@ class NCDashboardKPIs extends Component
 
     ///add unity stuff here
     this.kpiData[1].kpiList[0].value = kpiList.posBlockTime!==-999 ? nc_decimalPoint(kpiList.posBlockTime, 2) : '--';
-    this.kpiData[1].kpiList[1].value = nc_numFormatterACSensitive(kpiList.averagePosIssuance, 1);
-    this.kpiData[1].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.percentageOfNetworkStaking, 1);
-    this.kpiData[1].kpiList[3].value = kpiList.posBlockDifficulty!==-999 ? nc_numFormatter_with1Floor(kpiList.posBlockDifficulty, 1) : '--';
+    //this.kpiData[1].kpiList[1].value = nc_numFormatterACSensitive(kpiList.averagePosIssuance, 1);
+    this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.percentageOfNetworkStaking, 1);
+    this.kpiData[1].kpiList[2].value = kpiList.posBlockDifficulty!==-999 ? nc_numFormatter_with1Floor(kpiList.posBlockDifficulty, 1) : '--';
 
     this.kpiData[2].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionsPerSecond, 2);
     this.kpiData[2].kpiList[1].value = kpiList.peakTransactionsPerBlock != null ?
