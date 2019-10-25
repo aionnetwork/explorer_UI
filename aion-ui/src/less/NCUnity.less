@@ -1,12 +1,12 @@
 // STYLE GUIDE ---------------------------------------
 
 
-@background: #e1dccd;
+@background: #fff;//#e1dccd;
 @text: #1c1c1c;
 @text_2: #e1dccd;
 @color1: #1c1c1c;//#ff7800;//#f54119;
-@color2: #ffb900;
-@color3: #ff7800;
+@color2: #f54119;//#ffb900;
+@color3: #f54119;//#ff7800;
 
 @indigo: #f54119;
 @purple: #ff7800;
@@ -34,13 +34,16 @@
     .header-icon {
       color: @text_2;
     }
+    .header-icon:hover {
+          color: @text;
+    }
     background-color: @color1;
   }
 }
 // SPINNER ----------------------------------------
 .NCComponentLevelSpinner {
   .pt-intent-primary {
-    color: @color2 !important;
+    color: @text !important;
   }
 }
 // INFO CARDS --------------------------------------
@@ -95,7 +98,7 @@
   &.active {
     &:hover {
       .text {
-        color: @purple;
+        color: @color2;
       }
     }
   }
@@ -103,7 +106,7 @@
 // ENTITY DETAILS VIEW ----------------------------------
 .NCEntityDetail {
   .subtitle {
-    color: @purple;
+    color: @text;
   }
 }
 
@@ -111,6 +114,7 @@
 .NCExplorerPage {
   .NCExplorerHead {
     .title-row {
+        border-bottom: 1px solid @text;
       .left {
         .title {
           .join {
@@ -155,10 +159,13 @@
       margin-right: -2px;
       color: @text_2;
     }
+    .pt-icon-caret-down:hover {
+          color: @text;
+        }
 
     .navbar-btn-active {
       &:before {
-        color: @text_2 !important;
+        color: @text !important;
       }
       color: @text_2 !important;
       box-shadow: 0 0 0 1px @text;
@@ -188,6 +195,14 @@
     color: @text;
   }
 }
+.pt-menu{
+	color:@text;
+	background:@background !important;
+}
+.pt-popover .pt-popover-arrow-fill{
+	fill:@background
+}
+
 .NCFooter {
   background:@color1 !important;
 }
@@ -195,17 +210,18 @@ pre {
   background-color: @background;
 }
 // SMALL ICON CHANGES ---------------------------------
-.pt-menu-item::before, .pt-menu-item::after {
-  // color: @purple;
-}
-// .pt-button.pt-minimal.pt-intent-primary {
-  // color: @purple;
-// }
 .pt-button.pt-intent-primary {
-  color: @color2 !important;
+  color: #f0f !important;
+}
+.pt-button.pt-minimal:hover {
+    background: @color2 !important;
+    color: @text !important;
+    .pt-icon-standard.pt-icon-caret-down.pt-align-right {
+        color: @text;
+      }
 }
 .pt-tag.pt-intent-primary {
-  color: @purple !important;
+  color: @text !important;
 }
 .pt-icon-arrow-right.main-search-btn {
   color: @color2 !important;
@@ -214,7 +230,8 @@ pre {
   color: @indigo !important;
 }
 .pt-tag.pt-minimal.pt-intent-primary {
-  background-color: #e5e4e8;
+  background-color: @background;
+  font-weight: bold;
 }
 .nc-minimal-btn-shadow {
   box-shadow: 0 0 0 1px @text !important;
@@ -242,7 +259,7 @@ pre {
 }
 .pt-tab[aria-selected="true"],
 .pt-tab:not([aria-disabled="true"]):hover {
-  color: @purple;
+  color: @color2;
 }
 .pt-tab-indicator {
   background-color: @background !important;
@@ -259,4 +276,25 @@ body {
 }
 a, a:hover {
   color: @color2;
+}
+
+.NCHeader{
+  .row{
+    .navbar-group-left{
+        .logo{
+            .logo-img {
+                height: 35px;
+            }
+        }
+    }
+  }
+}
+
+
+@media all and (max-width: 1030px) {
+	.NCHeader{
+		.row{
+			background-color:@color1;
+		}
+	}
 }

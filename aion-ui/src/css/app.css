@@ -2470,7 +2470,7 @@ pre {
   border-bottom-style: none;
 }
 .NCTableTransactionsRT .body.table-row {
-  background-color: #e1dccd;
+  background-color: #fff;
 }
 .NCTableTransactionsRT .body.table-row:hover {
   background-color: #e4e9ed;
@@ -2481,8 +2481,11 @@ pre {
 .NCTable .NCColumnHeaderCell .header-icon {
   color: #e1dccd;
 }
+.NCTable .NCColumnHeaderCell .header-icon:hover {
+  color: #1c1c1c;
+}
 .NCComponentLevelSpinner .pt-intent-primary {
-  color: #ffb900 !important;
+  color: #1c1c1c !important;
 }
 .NCKPIGroup .group-title {
   color: #1c1c1c;
@@ -2491,7 +2494,7 @@ pre {
   color: #1c1c1c;
 }
 .NCKPIGroup .NCKPI .kpi-card {
-  background-color: #e1dccd;
+  background-color: #fff;
   border-color: #1c1c1c;
 }
 .NCKPIGroup .NCKPI .kpi-card > .metric .value {
@@ -2502,10 +2505,10 @@ pre {
 }
 .NCDashboard .NCKPIContainer .NCKPIGroup {
   box-shadow: 0 0 12px 1px #1c1c1c;
-  background-color: #e1dccd;
+  background-color: #fff;
 }
 .NCCardBlock .block-card {
-  background-color: #e1dccd;
+  background-color: #fff;
 }
 .NCCardBlock .block-card.non-empty-block {
   border-color: #1c1c1c;
@@ -2523,10 +2526,13 @@ pre {
   color: #1c1c1c;
 }
 .NCEntityLabel.active:hover .text {
-  color: #ff7800;
+  color: #f54119;
 }
 .NCEntityDetail .subtitle {
-  color: #ff7800;
+  color: #1c1c1c;
+}
+.NCExplorerPage .NCExplorerHead .title-row {
+  border-bottom: 1px solid #1c1c1c;
 }
 .NCExplorerPage .NCExplorerHead .title-row .left .title .join {
   border-left: 1px solid #1c1c1c;
@@ -2557,12 +2563,15 @@ pre {
   margin-right: -2px;
   color: #e1dccd;
 }
+.NCHeader .row .pt-icon-caret-down:hover {
+  color: #1c1c1c;
+}
 .NCHeader .row .navbar-btn-active {
   color: #e1dccd !important;
   box-shadow: 0 0 0 1px #1c1c1c;
 }
 .NCHeader .row .navbar-btn-active:before {
-  color: #e1dccd !important;
+  color: #1c1c1c !important;
 }
 .NCHeader .row .navbar-group-right .pt-navbar-divider {
   border-left: 1px solid #ffffff;
@@ -2573,35 +2582,50 @@ pre {
 .NCNavMenu .pt-menu-header > h6 {
   color: #1c1c1c;
 }
+.pt-menu {
+  color: #1c1c1c;
+  background: #fff !important;
+}
+.pt-popover .pt-popover-arrow-fill {
+  fill: #fff;
+}
 .NCFooter {
   background: #1c1c1c !important;
 }
 pre {
-  background-color: #e1dccd;
+  background-color: #fff;
 }
 .pt-button.pt-intent-primary {
-  color: #ffb900 !important;
+  color: #f0f !important;
+}
+.pt-button.pt-minimal:hover {
+  background: #f54119 !important;
+  color: #1c1c1c !important;
+}
+.pt-button.pt-minimal:hover .pt-icon-standard.pt-icon-caret-down.pt-align-right {
+  color: #1c1c1c;
 }
 .pt-tag.pt-intent-primary {
-  color: #ff7800 !important;
+  color: #1c1c1c !important;
 }
 .pt-icon-arrow-right.main-search-btn {
-  color: #ffb900 !important;
+  color: #f54119 !important;
 }
 .pt-icon-circle-arrow-right {
   color: #f54119 !important;
 }
 .pt-tag.pt-minimal.pt-intent-primary {
-  background-color: #e5e4e8;
+  background-color: #fff;
+  font-weight: bold;
 }
 .nc-minimal-btn-shadow {
   box-shadow: 0 0 0 1px #1c1c1c !important;
 }
 .bp-table-quadrant-main .bp-table-quadrant-scroll-container {
-  background-color: #e1dccd !important;
+  background-color: #fff !important;
 }
 .NCTable .bp-table-cell {
-  background-color: #e1dccd !important;
+  background-color: #fff !important;
 }
 .bp-table-top-container,
 .bp-table-header:before,
@@ -2618,18 +2642,26 @@ pre {
 }
 .pt-tab[aria-selected="true"],
 .pt-tab:not([aria-disabled="true"]):hover {
-  color: #ff7800;
+  color: #f54119;
 }
 .pt-tab-indicator {
-  background-color: #e1dccd !important;
+  background-color: #fff !important;
 }
 .pt-button.pt-min-toplvl:hover .pt-icon-standard.pt-icon-caret-down.pt-align-right {
   color: #1c1c1c;
 }
 body {
-  background: #e1dccd;
+  background: #fff;
 }
 a,
 a:hover {
-  color: #ffb900;
+  color: #f54119;
+}
+.NCHeader .row .navbar-group-left .logo .logo-img {
+  height: 35px;
+}
+@media all and (max-width: 1030px) {
+  .NCHeader .row {
+    background-color: #1c1c1c;
+  }
 }
