@@ -151,7 +151,13 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
 
     // get block details
     const ep = network.endpointV2.block.detail;
-    let params = [request,  0, PAGE_SIZE];
+    let params = [];
+
+    if(isNaN(request)){
+        params = [null,request];
+    }else{
+        params = [request];
+    }
     network.request(ep, params)
     .then((response) => {
       

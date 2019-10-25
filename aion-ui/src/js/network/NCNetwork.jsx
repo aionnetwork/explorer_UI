@@ -167,7 +167,7 @@ export const endpointV2 ={
         },
         detail: {
           link: '/aion/v2/dashboard/block',
-          params: ['blockNumber']
+          params: ['blockNumber','blockHash']
         }
     },
 
@@ -379,6 +379,7 @@ export const request = async (endpoint, params,sub_base=false) =>
     }
 
     if (net) {
+        
       net.get(endpoint.link, args)
       .then((response) => {
         //console.log(response);
