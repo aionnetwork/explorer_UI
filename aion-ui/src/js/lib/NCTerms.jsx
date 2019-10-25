@@ -91,7 +91,7 @@ export const strings = new LocalizedStrings({
     Acc_outbound_col4: "Avg NRG Consumed / Txn",
 
     Acc_rich_col1: "Address",
-    Acc_rich_col2: "Liquid balance",
+    Acc_rich_col2: "Balance",
     Acc_rich_col3: "Holdings (%)",
     Acc_rich_col4: "Nonce",
     Acc_rich_col5: "Holdings (%)",
@@ -99,7 +99,7 @@ export const strings = new LocalizedStrings({
 
     Acc_detail_title: "Account",
     Acc_detail_row1: "Address",
-    Acc_detail_row2: "Liquid balance",
+    Acc_detail_row2: "Balance",
     Acc_detail_row2_subtitle_a: "Balance Service Unavailable",
     Acc_detail_row2_subtitle_b: "as of block",
     Acc_detail_row3: "Transaction count",
