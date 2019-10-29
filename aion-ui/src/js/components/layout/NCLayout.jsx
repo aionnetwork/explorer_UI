@@ -509,13 +509,7 @@ class NCLayout extends Component {
           {/*permissionsMenu*/}
         </div>
         <div className="NCFooter"> 
-          {(false)&& <div>
-            <a className="footer-container" rel="noopener" target="_blank" href="https://aion.network">
-              <span className="text">Powered By</span>
-              <img className="logo" src="img/logo/aion-icon.svg" alt="logo"/>
-            </a>
-          </div>
-          } 
+
           {(true)&&
 
           <div>
@@ -551,7 +545,7 @@ class NCLayout extends Component {
             </a>
                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <a className="footer-container" rel="noopener" target="_blank" href="https://aion.network">
-              <span style={style}>Powered By</span>
+              <span  className="footer-powered-by" style={style}>Powered By</span>
               <img  height="25" src="img/logo/aion-icon.svg" alt="logo"/>
             </a>
            

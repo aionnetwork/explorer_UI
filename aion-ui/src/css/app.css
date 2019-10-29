@@ -2592,6 +2592,12 @@ pre {
 .NCFooter {
   background: #1c1c1c !important;
 }
+.NCFooter .footer-container .text {
+  color: #fff !important;
+}
+.NCFooter .footer-container .footer-powered-by {
+  margin-right: 15px;
+}
 pre {
   background-color: #fff;
 }
