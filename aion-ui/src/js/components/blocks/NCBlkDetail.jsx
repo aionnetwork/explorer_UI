@@ -66,6 +66,13 @@ export default class NCBlkDetail extends Component
                   entityId={ entity.minerAddress }
                   entityName={ nc_hexPrefix(entity.minerAddress) }/>
       },
+      {
+         field: 'Coinbase Address',
+         value: <NCEntityLabel
+                   entityType={ NCEntity.ACCOUNT }
+                   entityId={ entity.minerAddress }
+                   entityName={ nc_hexPrefix(entity.coinbase) }/>
+      },
       // ---------------------------------------------------------------
       {
         field: MSG.strings.Blk_detail_row7,
@@ -124,7 +131,7 @@ export default class NCBlkDetail extends Component
          value: (entity.sealType !== 'POS') ?  "" : entity.seed ? <pre className={"nc-resizable enforce-min-height"}>{entity.seed}</pre> : EMPTY_STR,
       },
       {
-         field: (entity.sealType !== 'POS') ?  "" : "Public key",
+         field: (entity.sealType !== 'POS') ?  "" : "Aion Address",
          value: (entity.sealType !== 'POS') ?  "" : <NCEntityLabel
                                                                       entityType={ NCEntity.ACCOUNT }
                                                                       entityId={ entity.publicKey }

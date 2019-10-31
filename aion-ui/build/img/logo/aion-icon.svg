@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 23.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+	 viewBox="0 0 226 220" style="enable-background:new 0 0 226 220;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#E0DACD;}
 </style>
-<g>
-	<circle class="st0" cx="500.2" cy="884.46" r="113.4"/>
-	<polygon class="st0" points="625.69,2.14 374.7,2.14 24.57,987.81 236.62,987.81 500.2,245.8 763.78,987.81 975.82,987.81 	"/>
-</g>
+<title>OAN Symbol Vector</title>
+<path class="st0" d="M194.1,39.9C173.3,14.6,142.3,0,109.6,0H0.1v109.5L0,219.1L109.6,80.3l109.5,138.8L219,109.5
+	C219.1,84.1,210.2,59.5,194.1,39.9z"/>
+<ellipse transform="matrix(7.088900e-02 -0.9975 0.9975 7.088900e-02 -89.4343 287.4042)" class="st0" cx="109.6" cy="191.7" rx="28.3" ry="28.3"/>
 </svg>
