@@ -170,7 +170,7 @@ class NCTxnRetrieve extends Component
               breadcrumbs={breadcrumbs}
               title={(!isItxnValid)?"Transaction":"Internal Transaction"}
               subtitle={desc}/>
-            <NCTxnDetail entity={txn}/>
+            <NCTxnDetail i = {isItxnValid} entity={txn}/>
 
             {
               (isTxnEmpty && !isItxnValid) &&

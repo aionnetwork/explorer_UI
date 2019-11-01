@@ -155,7 +155,7 @@ export default class NCTxnTableOwnTransfer extends Component
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
         transferTimestamp = entity.blockTimestamp;
-        value = (entity.value) ? nc_decimalPrettify(entity.value) : nc_decimalPrettify(entity.valueTransferred);//BigNumber(String(entity.valueTransferred), 16).toString(10);//entity.valueTransferred;
+        value = (entity.value) ? nc_decimalPrettify(nc_numFormatterACSensitive(entity.value)) : nc_decimalPrettify(entity.valueTransferred);//BigNumber(String(entity.valueTransferred), 16).toString(10);//entity.valueTransferred;
         transactionHash = entity.transactionHash;//let bal = nc_numFormatterACSensitive(entity.balance);
 
         transferIndex = entity.internalTransactionIndex;

@@ -101,14 +101,14 @@ export default class NCTxnDetail extends Component
   }
 
   render() {
-    let { entity } = this.props;
+    let { i, entity } = this.props;
 
     //TODO: Improve to use v2 transaction logs
 
     let parsedTxnLog = entity.log ? JSON.stringify(this.formatTxnLogs(entity.log), undefined, 2) : this.parseTxnLog(entity.transactionLog);
     let parsedInputData = this.parseInputData(entity.data);
 
-    let value = nc_decimalPrettify(nc_rawFormat(entity.value)); //(typeof entity.tokenSymbol === 'undefined') ?  nc_addDecimal(entity.value) : nc_decimalPrettify(nc_rawFormat(entity.value));
+    let value = (i) ? nc_decimalPrettify(nc_numFormatterACSensitive(entity.value)): nc_decimalPrettify(nc_rawFormat(entity.value)); //(typeof entity.tokenSymbol === 'undefined') ?  nc_addDecimal(entity.value) : nc_decimalPrettify(nc_rawFormat(entity.value));
 
     let unit = (typeof entity.tokenSymbol === 'undefined')? "Aion" : entity.tokenSymbol;
 
