@@ -73,6 +73,9 @@
 			background-color:#333 !important;
 		}
 
+		.NCTableTransactionsRT .table-row{
+        	background-color:@dm-background-minor
+        }
 		.NCDarkInput{ background-color:#333;}
 
 		.bp-table-column-headers{
@@ -102,9 +105,15 @@
 
 		.NCTable .bp-table-cell{
 		color:@dm-title;
-		background-color:@dm-background-minor;
-			
+		background-color:@dm-background-minor !important;
 		}
+		.bp-table-quadrant-main .bp-table-quadrant-scroll-container {
+          background-color: @dm-background-minor !important;
+        }
+        .NCTable .bp-table-cell {
+          background-color: @dm-background-minor !important;
+        }
+
 		.desc{
 			color:@dm-title;
 		}
@@ -120,13 +129,12 @@
 
 }
 
-@media all and (max-width: 1030px) {
-	.darkMode{
-
+@media all and (max-width: 1030px)
+{
+    .darkMode{
 		.NCKPIGroup{
-			background-color:#2222220;
+			background-color:#222222;
 		}
 
 	}
-
 }
