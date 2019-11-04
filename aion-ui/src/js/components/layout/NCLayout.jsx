@@ -524,27 +524,19 @@ class NCLayout extends Component {
               <span style={style}  className="text">Feedback</span>          
               
             </a>
+
+
             &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://aion.network/community/">
-              <span style={style}  className="text">Community</span>          
-              
-            </a>
-            &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://aion.network/bounty/">
-              <span style={style}  className="text">Bounties & Grants</span>          
-              
-            </a>
-            &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://aion.network/developers/">
+            <a className="footer-container" target="_blank" href="https://developers.theoan.com">
               <span style={style}  className="text">Developers</span>          
               
             </a>
             &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://docs.aion.network/">
-                <span style={style}  className="text">Docs</span>
+            <a className="footer-container" target="_blank" href="https://blog.theoan.com/">
+                <span style={style}  className="text">Blog</span>
             </a>
                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <a className="footer-container" rel="noopener" target="_blank" href="https://aion.network">
+            <a className="footer-container" rel="noopener" target="_blank" href="https://theoan.com">
               <span  className="footer-powered-by" style={style}>Powered By</span>
               <img  height="25" src="img/logo/aion-icon.svg" alt="logo"/>
             </a>
