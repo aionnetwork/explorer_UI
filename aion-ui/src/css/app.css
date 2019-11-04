@@ -2506,7 +2506,7 @@ pre {
   background-color: #fff;
 }
 .pt-button.pt-intent-primary {
-  color: #f0f !important;
+  color: #1c1c1c !important;
 }
 .pt-button.pt-minimal:hover {
   background: #f54119 !important;
@@ -2569,6 +2569,10 @@ a:hover {
 }
 .NCHeader .row .navbar-group-left .logo .logo-img {
   height: 35px;
+}
+.pt-spinner.pt-dinner .pt-spinner-head,
+.pt-spinner .pt-spinner-head {
+  stroke: #1c1c1c;
 }
 @media all and (max-width: 1030px) {
   .NCHeader .row {

@@ -525,6 +525,11 @@ class NCLayout extends Component {
               
             </a>
 
+            &nbsp;|&nbsp;
+            <a className="footer-container" target="_blank" href="https://developers.theoan.com/community">
+              <span style={style}  className="text">Community</span>
+
+            </a>
 
             &nbsp;|&nbsp;
             <a className="footer-container" target="_blank" href="https://developers.theoan.com">
@@ -536,9 +541,9 @@ class NCLayout extends Component {
                 <span style={style}  className="text">Blog</span>
             </a>
                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <a className="footer-container" rel="noopener" target="_blank" href="https://theoan.com">
+            <a className="footer-container" rel="noopener" target="_blank" href="https://aion.theoan.com">
               <span  className="footer-powered-by" style={style}>Powered By</span>
-              <img  height="25" src="img/logo/aion-icon.svg" alt="logo"/>
+              <img  height="25" src="img/logo/aion-oan-icon.svg" alt="logo"/>
             </a>
            
           </div>
