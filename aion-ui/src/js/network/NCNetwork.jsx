@@ -162,7 +162,7 @@ export const endpointV2 ={
               },
               [txnListType['BY_BLOCK']]: {
                 link: '/aion/v2/dashboard/transactions',
-                params: ['blockNumber']
+                params: ['blockNumber','size']
               }
             },
             detail: {

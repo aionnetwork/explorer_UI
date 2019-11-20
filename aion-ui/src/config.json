@@ -1,6 +1,6 @@
 {
   "api": {
-    "base_url": "mainnet-api.aiondev.network",
+    "base_url": "mainnet-api.theoan.com",
     "https_enabled": true
   },
   "site": {

@@ -171,7 +171,7 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
             transactionDetails = res;
             //get internal transactions
                     let ep_2 = network.endpointV2.transfer.list[trnListType.BY_BLOCK];
-                    network.request(ep_2,params).then((res)=>{
+                    network.request(ep_2,[request, 100]).then((res)=>{
                         internalTransactions = res;
                           store.dispatch(StoreBlkRetrieve.SetTopLevel({
                             blk: blockDetails,
