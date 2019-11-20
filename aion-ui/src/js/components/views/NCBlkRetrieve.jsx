@@ -6,7 +6,8 @@ import moment from 'moment';
 
 import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
 
-import NCTxnTable from 'components/transactions/NCTxnTable';
+//import NCTxnTable from 'components/transactions/NCTxnTable';
+import NCTxnTable from 'components/transactions/NCV2TxnTable';
 import NCBlkDetail from 'components/blocks/NCBlkDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
@@ -67,6 +68,7 @@ class NCBlkRetrieve extends Component
 
     const blkObj = (store.response) ? store.response.blk : null;
     const txnList = (store.response) ? store.response.txn : null;
+    console.log(JSON.stringify(txnList));
     const trnList = (store.response) ? store.response.itxn : null;
 
     let isBlkValid = nc_isObjectValid(blkObj);

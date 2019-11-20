@@ -164,23 +164,28 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
       let transactionDetails = { content:[] };
       let internalTransactions = { content:[] };
       let blockDetails = response;
-      if (response && response.content && response.content[0] && response.content[0].transactionList) {
+      if (response && response.content && response.content[0]) {
         let txnList = response.content[0].transactionList;
-        transactionDetails = {
-          content: txnList
-        }
-        //get internal transactions
-        let ep_2 = network.endpointV2.transfer.list[trnListType.BY_BLOCK];
-        network.request(ep_2,params).then((res)=>{
-            internalTransactions = res;
-              store.dispatch(StoreBlkRetrieve.SetTopLevel({
-                blk: blockDetails,
-                txn: transactionDetails,
-                itxn: internalTransactions
-              }));
+        let ep_3 = network.endpointV2.transaction.list[txnListType.BY_BLOCK];
+        network.request(ep_3,params).then((res)=>{
+            transactionDetails = res;
+            //get internal transactions
+                    let ep_2 = network.endpointV2.transfer.list[trnListType.BY_BLOCK];
+                    network.request(ep_2,params).then((res)=>{
+                        internalTransactions = res;
+                          store.dispatch(StoreBlkRetrieve.SetTopLevel({
+                            blk: blockDetails,
+                            txn: transactionDetails,
+                            itxn: internalTransactions
+                          }));
+                    }).catch((err)=>{
+                     console.log(err);
+                    });
         }).catch((err)=>{
-         console.log(err);
+            console.log(err);
         });
+
+
       }else{
           store.dispatch(StoreBlkRetrieve.SetTopLevel({
             blk: blockDetails,

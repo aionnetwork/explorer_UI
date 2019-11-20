@@ -154,6 +154,22 @@ export const endpointV2 ={
         }
 
     },
+    transaction: {
+            list: {
+              [txnListType['ALL']]: {
+                link: '/aion/v2/dashboard/blocks',
+                params: ['page', 'size',"startTime", "endTime"]
+              },
+              [txnListType['BY_BLOCK']]: {
+                link: '/aion/v2/dashboard/transactions',
+                params: ['blockNumber']
+              }
+            },
+            detail: {
+              link: '/aion/v2/dashboard/transaction',
+              params: []
+            }
+        },
     block: {
         list: {
           [blkListType['ALL']]: {
