@@ -445,11 +445,16 @@ class NCLayout extends Component {
             
             
             <div className="pt-navbar-group navbar-group-left">
+              <a rel="noopener" target="_blank" href="https://theoan.com" className="logo">
+                               <img className="logo-img" src="img/logo/aion-icon.svg" alt="logo"/>
+
+              </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <Link to={"/dashboard"} className="logo">
-                <img className="logo-img" src="img/logo/aion-icon.svg" alt="logo"/>
-                <span className="title">{MSG.Header_title}</span>
+
+                              <span className="title">{MSG.Header_title}</span>
               </Link>
-              <span className="pt-navbar-divider"></span>              
+              &nbsp;&nbsp;&nbsp;
               <Popover
                 className="hide"
                 content={this.renderExplorerMenu(mode)}
@@ -519,27 +524,23 @@ class NCLayout extends Component {
             </a>*/} 
             <br/>
             
-          
-            <a className="footer-container" target="_blank" href="https://aionnetwork.atlassian.net/servicedesk/customer/portal/9">
-              <span style={style}  className="text">Feedback</span>          
-              
-            </a>
+               <a className="footer-container" target="_blank" href="https://aionnetwork.atlassian.net/servicedesk/customer/portal/9">
+                        <span style={style}  className="text">Feedback</span>
+                </a>
+                      &nbsp;|&nbsp;
 
-            &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://developers.theoan.com/community">
-              <span style={style}  className="text">Community</span>
+                      <a className="footer-container" target="_blank" href="https://developer.theoan.com/">
+                        <span style={style}  className="text">Developers</span>
 
-            </a>
-
-            &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://developers.theoan.com">
-              <span style={style}  className="text">Developers</span>          
-              
-            </a>
-            &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://blog.theoan.com/">
-                <span style={style}  className="text">Blog</span>
-            </a>
+                      </a>
+                      &nbsp;|&nbsp;
+                      <a className="footer-container" target="_blank" href="https://developer.theoan.com/">
+                          <span style={style}  className="text">Validator</span>
+                      </a>
+                      &nbsp;|&nbsp;
+                                  <a className="footer-container" target="_blank" href="https://docs-aion.theoan.com/docs">
+                                      <span style={style}  className="text">Coin-holders</span>
+                                  </a>
                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <a className="footer-container" rel="noopener" target="_blank" href="https://aion.theoan.com">
               <span  className="footer-powered-by" style={style}>Powered By</span>

@@ -2626,7 +2626,7 @@ a:hover {
   fill: #333;
 }
 .darkMode .block-card {
-  background-color: #111 !important;
+  background-color: #444 !important;
 }
 .darkMode input.pt-input {
   color: #555;
@@ -2637,6 +2637,9 @@ a:hover {
 }
 .darkMode .NCTableTransactionsRT .table-row {
   background-color: #333;
+}
+.darkMode .NCTableTransactionsRT .table-row:hover {
+  background-color: #999;
 }
 .darkMode .NCDarkInput {
   background-color: #333;

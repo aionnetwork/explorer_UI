@@ -23,7 +23,9 @@ export default class NCAccDetail extends Component
     
     //let bal = nc_numFormatterACSensitive(entity.balance);nc_numFormatterAionCoin(num.toFixed(),8);
     //console.log(entity.tokenDecimal);
-    let balance = entity.tokenName ? (entity.scaledBalance < 1) ? nc_decimalPrettify(entity.scaledBalance) : nc_decimalPrettify(nc_decimalPoint(entity.scaledBalance)) : nc_decimalPrettify(nc_decimalPoint(entity.balance,18));
+    let balance = entity.tokenName ?  nc_decimalPrettify(nc_numFormatterACSensitive(entity.balance))  : nc_decimalPrettify(nc_decimalPoint(entity.balance,18));
+
+    //let balance = entity.tokenName ? (entity.scaledBalance < 1) ? nc_decimalPrettify(entity.scaledBalance) : nc_decimalPrettify(nc_decimalPoint(entity.scaledBalance)) : nc_decimalPrettify(nc_decimalPoint(entity.balance,18));
     //let balance = entity.tokenName && entity.tokenDecimal ? nc_decimalPrettify(nc_addDecimal(entity.balance,entity.tokenDecimal,8)) : nc_decimalPrettify(entity.balance);
     //let value = entity.tokenSymbol == null ? nc_decimalPrettify(entity.value) : nc_decimalPrettify(nc_addDecimal(entity.value));
 

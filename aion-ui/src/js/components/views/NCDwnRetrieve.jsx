@@ -84,6 +84,7 @@ class NCDwnRetrieve extends Component
        let end = Math.round(new Date(this.state.end).getTime()/1000);
        
        network.getAccTxnRetrieveCSV(this.props.params.accId, a,start,end,this.state.range);
+       //
        //return;
   }
 
