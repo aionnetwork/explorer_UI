@@ -63,6 +63,25 @@
         "name": "Mastery Testnet",
         "url": "https://mastery.theoan.com"
       }
+    ],
+    "tetryon": [
+      {
+        "name": "Tetryon",
+        "url": ""
+      },
+      {
+        "name": "Mainnet ",
+        "url": "https://mainnet.theoan.com"
+      }
+    ,
+      {
+        "name": "Amity Testnet",
+        "url": "https://amity.theoan.com"
+      },
+      {
+        "name": "Mastery Testnet",
+        "url": "https://mastery.theoan.com"
+      }
     ]}
 
 

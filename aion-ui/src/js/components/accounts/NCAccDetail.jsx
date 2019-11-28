@@ -6,7 +6,7 @@ import moment from 'moment';
 import NCEntityLabel from 'components/common/NCEntityLabel';
 
 import { NCEntity } from 'lib/NCEnums';
-import { nc_decimalPrettify,nc_addDecimal, nc_decimalPoint,nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { nc_decimalPrettify,nc_addDecimal, nc_decimalPoint,nc_numFormatterAionCoin, nc_numFormatterACSensitive } from 'lib/NCUtility';
 //import NCLink from 'components/common/NCLink';
 
 import NCEntityDetail from 'components/common/NCEntityDetail';

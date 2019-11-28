@@ -131,7 +131,7 @@ export default class NCBlkDetail extends Component
          value: (entity.sealType !== 'POS') ?  "" : entity.seed ? <pre className={"nc-resizable enforce-min-height"}>{entity.seed}</pre> : EMPTY_STR,
       },
       {
-         field: (entity.sealType !== 'POS') ?  "" : "Aion Address",
+         field: (entity.sealType !== 'POS') ?  "" : "Signing Public Key",
          value: (entity.sealType !== 'POS') ?  "" : entity.publicKey ? <pre className={"nc-resizable enforce-min-height"}>{ entity.publicKey }</pre> : EMPTY_STR,
       },
       {

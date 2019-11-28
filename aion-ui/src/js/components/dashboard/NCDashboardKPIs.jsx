@@ -53,7 +53,7 @@ class NCDashboardKPIs extends Component
         ]
       },
 
-      {
+      /*{
               title: <span><strong>PoS &nbsp;</strong> </span>,
               kpiList: [
                 {
@@ -63,12 +63,12 @@ class NCDashboardKPIs extends Component
 
                   hoverContent: "Mean of PoS block arrival time over the last hour. The target block time for PoS blocks is 20 seconds. PoS difficulty is dynamically adjusted to achieve target.",
                 },
-                /*{
+                {
                   value:"--",
                   units:"",
                   title:["Average", " Issuance"],
                   hoverContent: "Mean of block rewards in Aions for PoS blocks over the previous 1024 blocks",
-                },*/
+                },
                 {
                   value:"--",
                   units:"",
@@ -83,7 +83,7 @@ class NCDashboardKPIs extends Component
                   tooltipPosition: Position.BOTTOM_RIGHT,
                 },
               ]
-      },
+      },*/
       
       {
         title: <span><strong>{MSG.strings.kpi_tab2_title}</strong></span>,
@@ -142,19 +142,18 @@ class NCDashboardKPIs extends Component
     this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.powBlockDifficulty, 1);
 
     ///add unity stuff here
-    this.kpiData[1].kpiList[0].value = kpiList.posBlockTime!==-999 ? nc_decimalPoint(kpiList.posBlockTime, 2) : '--';
-    //this.kpiData[1].kpiList[1].value = nc_numFormatterACSensitive(kpiList.averagePosIssuance, 1);
-    this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.percentageOfNetworkStaking, 1);
-    this.kpiData[1].kpiList[2].value = kpiList.posBlockDifficulty!==-999 ? nc_numFormatter_with1Floor(kpiList.posBlockDifficulty, 1) : '--';
+    //this.kpiData[1].kpiList[0].value = kpiList.posBlockTime!==-999 ? nc_decimalPoint(kpiList.posBlockTime, 2) : '--';
+    //this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.percentageOfNetworkStaking, 1);
+    //this.kpiData[1].kpiList[2].value = kpiList.posBlockDifficulty!==-999 ? nc_numFormatter_with1Floor(kpiList.posBlockDifficulty, 1) : '--';
 
-    this.kpiData[2].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionsPerSecond, 2);
-    this.kpiData[2].kpiList[1].value = kpiList.peakTransactionsPerBlock != null ?
+    this.kpiData[1].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionsPerSecond, 2);
+    this.kpiData[1].kpiList[1].value = kpiList.peakTransactionsPerBlock != null ?
                                           nc_numFormatter(kpiList.peakTransactionsPerBlock, 0) :
                                           null;
-    this.kpiData[2].kpiList[2].value = kpiList.totalTransaction != null ?
+    this.kpiData[1].kpiList[2].value = kpiList.totalTransaction != null ?
                                           nc_numFormatter(kpiList.totalTransaction, 3) :
                                           null;
-    this.kpiData[2].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumed, 2);
+    this.kpiData[1].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumed, 2);
 
     let ncKPIs = [];
     let ncKPIr = [];
