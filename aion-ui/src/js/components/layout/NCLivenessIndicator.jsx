@@ -16,8 +16,7 @@ export default class NCLivenessIndicator extends Component
 {
   render() {
 
-    let { momentEnd, latestBlockNumber, dbLag, lastUpdated } = this.props;
-
+    let { momentEnd,currentBlockchainHead, latestBlockNumber, dbLag, lastUpdated } = this.props;
     let isHostBlockchainDown = false;
     
     let dbLagStr = "";
@@ -44,6 +43,8 @@ export default class NCLivenessIndicator extends Component
       else if (dbLagInt < -1*LIVENESS_THRESHOLD_BLOCKS) {
         dbLagStr = "Dashboard " + Math.abs(dbLagInt) + " blocks ahead of blockchain. "
       } 
+    }else{
+
     }
 
     const popoverContent = (
