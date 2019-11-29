@@ -431,7 +431,7 @@ class NCLayout extends Component {
                 BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(latestBlockNumber)) : 0;
     let lastUpdated = kpi.momentUpdated;
    
-      
+    let status = kpi.data.status;
     let mode = (this.props.darkMode.data) ? "darkMode" : ""; 
     this.renderConnectionMenu(this.networkList,mode);
     
@@ -491,6 +491,7 @@ class NCLayout extends Component {
                 latestBlockNumber={latestBlockNumber}
                 dbLag={dbLag}
                 lastUpdated={lastUpdated}
+                status={status}
               />
               
               {this.connectionMenu}

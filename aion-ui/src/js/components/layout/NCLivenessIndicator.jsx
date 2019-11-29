@@ -16,22 +16,23 @@ export default class NCLivenessIndicator extends Component
 {
   render() {
 
-    let { momentEnd,currentBlockchainHead, latestBlockNumber, dbLag, lastUpdated } = this.props;
+    let { momentEnd,currentBlockchainHead, latestBlockNumber, dbLag, lastUpdated, status } = this.props;
     let isHostBlockchainDown = false;
     
     let dbLagStr = "";
     let dbLagInt = isNaN(dbLag) ? 0 : dbLag;
+    let isDataStatusGood = (status!=="OK")? false : true;
 
     let isDataAvailable = latestBlockNumber != null && dbLag != null && momentEnd != null && moment(momentEnd).isValid();
 
-    if (isDataAvailable)
+    if (isDataAvailable && isDataStatusGood)
     {
       let lastUpdateTemporalDistanceFromNow = moment.duration(moment().diff(lastUpdated));
-      //let lastBlockTemporalDistanceFromNow = moment.duration(moment().diff(momentEnd));
+      let lastBlockTemporalDistanceFromNow = moment.duration(moment().diff(momentEnd));
 
       isHostBlockchainDown = (
         lastUpdateTemporalDistanceFromNow.asSeconds() > LIVENESS_DELTA_SECONDS 
-        //&& lastBlockTemporalDistanceFromNow.asSeconds() > LIVENESS_DELTA_SECONDS
+        && lastBlockTemporalDistanceFromNow.asSeconds() > LIVENESS_DELTA_SECONDS
       );
       
       if (isHostBlockchainDown) {
