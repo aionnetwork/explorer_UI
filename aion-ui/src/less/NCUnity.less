@@ -1,0 +1,311 @@
+// STYLE GUIDE ---------------------------------------
+
+
+@background: #fff;//#e1dccd;
+@text: #1c1c1c;
+@text_2: #e1dccd;
+@color1: #1c1c1c;//#ff7800;//#f54119;
+@color2: #f54119;//#ffb900;
+@color3: #f54119;//#ff7800;
+
+@indigo: #f54119;
+@purple: #ff7800;
+@teal: #000;
+@muted-teal: rgba(90, 240, 189, 0.28);
+
+// TABLE STYLES --------------------------------------
+.NCTableTransactionsRT {
+  .header {
+    background-color: @color1;
+    color: @text_2;
+    font-weight: 500;
+    border-bottom-style: none;
+  }
+  .body.table-row {
+    background-color: @background;
+    &:hover {
+      background-color: #e4e9ed;
+    }
+  }
+}
+
+.NCTable {
+  .NCColumnHeaderCell {
+    .header-icon {
+      color: @text_2;
+    }
+    .header-icon:hover {
+          color: @text;
+    }
+    background-color: @color1;
+  }
+}
+// SPINNER ----------------------------------------
+.NCComponentLevelSpinner {
+  .pt-intent-primary {
+    color: @text !important;
+  }
+}
+// INFO CARDS --------------------------------------
+.NCKPIGroup .group-title {
+  color: @text;
+
+  strong {
+    color: @text;
+  }
+}
+.NCKPIGroup .NCKPI .kpi-card {
+  background-color: @background;
+  border-color: @text;
+  &>.metric {
+    .value {
+      color: @text;
+    }
+    .units {
+      color: @text;
+    }
+  }
+}
+.NCDashboard .NCKPIContainer .NCKPIGroup {
+  box-shadow: 0 0 12px 1px @text;
+  background-color: @background;
+}
+
+.NCCardBlock .block-card {
+  background-color: @background;
+  &.non-empty-block {
+    border-color: @text;
+  }
+  .proposer .NCEntityLabel {
+    color: @text;
+    &:hover {
+      .text {
+        color: @text !important;
+      }
+    }
+  }
+  .block-number{
+   .subtitle{
+    color: @text !important;
+   }
+  }
+}
+
+.NCEntityLabel {
+  .icon {
+    color: @text;
+  }
+  &.active {
+    &:hover {
+      .text {
+        color: @color2;
+      }
+    }
+  }
+}
+// ENTITY DETAILS VIEW ----------------------------------
+.NCEntityDetail {
+  .subtitle {
+    color: @text;
+  }
+}
+
+// EXPLORER PAGE ----------------------------------------
+.NCExplorerPage {
+  .NCExplorerHead {
+    .title-row {
+        border-bottom: 1px solid @text;
+      .left {
+        .title {
+          .join {
+            border-left: 1px solid @text;
+          }
+          .desc {
+            color: @text;
+          }
+        }
+      }
+    }
+  }
+}
+// RECENT BLOCKS / TRANSACTIONS -------------------------
+.NCTitle {
+  &.section{
+    border-bottom: 1px solid @text;
+    span {
+      color: @text;
+      font-weight: 400;
+    }
+  }
+}
+// RECENT TRANSACTIONS TABLE HEADER ----------------------
+.NCHeader {
+  background-color: @color1;
+  .row {
+    .navbar-group-left {
+      .title {
+        color: @text_2;
+      }
+
+      .pt-navbar-divider {
+        margin-right: 15px;
+        margin-left: 12px;
+        border-left: 1px solid #ffffff;
+      }
+    }
+
+    .pt-icon-caret-down {
+      margin-left: 5px;
+      margin-right: -2px;
+      color: @text_2;
+    }
+    .pt-icon-caret-down:hover {
+          color: @text;
+        }
+
+    .navbar-btn-active {
+      &:before {
+        color: @text !important;
+      }
+      color: @text_2 !important;
+      box-shadow: 0 0 0 1px @text;
+    }
+
+    .navbar-group-right {
+      .pt-navbar-divider {
+        border-left: 1px solid #ffffff;
+      }
+    }
+  }
+}
+
+// NETWORK STATUS --------------------------------------
+.NCLivenessIndicator {
+  .liveness-btn {
+    .icon {
+      &.live {
+        color: green;
+      }
+    }
+  }
+}
+
+.NCNavMenu {
+  .pt-menu-header > h6 {
+    color: @text;
+  }
+}
+.pt-menu{
+	color:@text;
+	background:@background !important;
+}
+.pt-popover .pt-popover-arrow-fill{
+	fill:@background
+}
+
+.NCFooter {
+  background:@color1 !important;
+  .footer-container{
+    .text{
+        color: @background !important;
+    }
+    .footer-powered-by{
+        margin-right:15px;
+    }
+  }
+
+}
+pre {
+  background-color: @background;
+}
+// SMALL ICON CHANGES ---------------------------------
+.pt-button.pt-intent-primary {
+  color: @text !important;
+}
+.pt-button.pt-minimal:hover {
+    background: @color2 !important;
+    color: @text !important;
+    .pt-icon-standard.pt-icon-caret-down.pt-align-right {
+        color: @text;
+      }
+}
+.pt-tag.pt-intent-primary {
+  color: @text !important;
+}
+.pt-icon-arrow-right.main-search-btn {
+  color: @color2 !important;
+}
+.pt-icon-circle-arrow-right {
+  color: @indigo !important;
+}
+.pt-tag.pt-minimal.pt-intent-primary {
+  background-color: @background;
+  font-weight: bold;
+}
+.nc-minimal-btn-shadow {
+  box-shadow: 0 0 0 1px @text !important;
+}
+// TABLE RENDERING ---------------------------------------
+.bp-table-quadrant-main .bp-table-quadrant-scroll-container {
+  background-color: @background !important;
+}
+.NCTable .bp-table-cell {
+  background-color: @background !important;
+}
+.bp-table-top-container,
+.bp-table-header:before,
+.bp-table-menu {
+  background-color: @color1 !important;
+}
+.bp-table-row-name,
+.bp-table-column-name-text {
+  color: @text_2 !important;
+  font-weight: 400 !important;
+}
+
+.block-link.pt-button {
+  color: @color1 !important;
+}
+.pt-tab[aria-selected="true"],
+.pt-tab:not([aria-disabled="true"]):hover {
+  color: @color2;
+}
+.pt-tab-indicator {
+  background-color: @background !important;
+}
+.pt-button.pt-min-toplvl:hover {
+  .pt-icon-standard.pt-icon-caret-down.pt-align-right {
+    color: @text;
+  }
+}
+// GENERAL ----------------------------------------------
+body {
+  background: @background;
+
+}
+a, a:hover {
+  color: @color2;
+}
+
+.NCHeader{
+  .row{
+    .navbar-group-left{
+        .logo{
+            .logo-img {
+                height: 35px;
+            }
+        }
+    }
+  }
+}
+.pt-spinner.pt-dinner .pt-spinner-head, .pt-spinner .pt-spinner-head {
+   stroke: #1c1c1c;
+}
+
+@media all and (max-width: 1030px) {
+	.NCHeader{
+		.row{
+			background-color:@color1;
+		}
+	}
+}

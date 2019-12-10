@@ -60,7 +60,7 @@ export default class NCCntrDetail extends Component
         field: MSG.strings.Cntr_detail_row5,
         value:  balance == null ? "Balance Service Unavailable" :
                 <span className="">{balance + " AION"}
-                  <span className="subtitle">{"(as of block " + entity.blockNumber + ")"}</span>
+
                 </span>
       },
       {

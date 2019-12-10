@@ -36,7 +36,8 @@ import * as StoreContactRetrieve from 'stores/StoreContactRetrieve';
 
 import {BigNumber} from 'bignumber.js';
 import {nc_LinkToEntity, nc_getChartData, nc_isObjectEmpty, nc_trim, nc_isValidEntity, nc_isPositiveInteger, nc_sanitizeHex, nc_isObjectValid } from 'lib/NCUtility';
-import { cntrListType, tknListType, txnListType, blkListType, accListType, eventListType,trnListType, } from 'lib/NCEnums';
+import { cntrListType, tknListType, txnListType, blkListType, accListType, eventListType,trnListType, txnLogListType} from 'lib/NCEnums';
+
 
 //console.log('networkRequest'); 
 export const PAGE_SIZE = 25;
@@ -66,7 +67,7 @@ export const getBlkListTopLevel = (listType, queryStr) => {
   }
   else {
     // get block list
-    const ep = network.endpoint.block.list[listType];
+    const ep = network.endpointV2.block.list[listType];
     let params = [];
     switch(listType) {
       case blkListType.ALL: {
@@ -96,7 +97,7 @@ export const getBlkListPaging = (listType, queryStr, pageNumber,pageSize=0, star
     }, 500);
   }
   else {
-    const ep = network.endpoint.block.list[listType];
+    const ep = network.endpointV2.block.list[listType];
     let size = (pageSize > PAGE_SIZE) ? pageSize : PAGE_SIZE;
     //console.log(size);
     let params = [];
@@ -149,24 +150,49 @@ export const getBlkRetrieveTopLevel = (queryStr) => {
     }
 
     // get block details
-    const ep = network.endpoint.block.detail;
-    let params = [request,  0, PAGE_SIZE];
+    const ep = network.endpointV2.block.detail;
+    let params = [];
+
+    if(isNaN(request)){
+        params = [null,request];
+    }else{
+        params = [request];
+    }
     network.request(ep, params)
     .then((response) => {
       
       let transactionDetails = { content:[] };
+      let internalTransactions = { content:[] };
       let blockDetails = response;
-      if (response && response.content && response.content[0] && response.content[0].transactionList) {
+      if (response && response.content && response.content[0]) {
         let txnList = response.content[0].transactionList;
-        transactionDetails = {
-          content: txnList
-        }
-      }
+        let ep_3 = network.endpointV2.transaction.list[txnListType.BY_BLOCK];
+        network.request(ep_3,params).then((res)=>{
+            transactionDetails = res;
+            //get internal transactions
+                    let ep_2 = network.endpointV2.transfer.list[trnListType.BY_BLOCK];
+                    network.request(ep_2,[request, 100]).then((res)=>{
+                        internalTransactions = res;
+                          store.dispatch(StoreBlkRetrieve.SetTopLevel({
+                            blk: blockDetails,
+                            txn: transactionDetails,
+                            itxn: internalTransactions
+                          }));
+                    }).catch((err)=>{
+                     console.log(err);
+                    });
+        }).catch((err)=>{
+            console.log(err);
+        });
 
-      store.dispatch(StoreBlkRetrieve.SetTopLevel({
-        blk: blockDetails,
-        txn: transactionDetails
-      }));
+
+      }else{
+          store.dispatch(StoreBlkRetrieve.SetTopLevel({
+            blk: blockDetails,
+            txn: transactionDetails,
+            itxn: internalTransactions
+          }));
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -282,10 +308,12 @@ export const getTxnListPaging = (listType, queryStr, pageNumber, pageSize, start
   }
 };
 
-export const getTxnRetrieveTopLevel = (queryStr) => {
-  store.dispatch(StoreTxnRetrieve.GetTopLevel({
-    queryStr: queryStr
-  }));
+export const getTxnRetrieveTopLevel = (queryStr,subStr=null) => {
+  if(subStr === null){
+    store.dispatch(StoreTxnRetrieve.GetTopLevel({
+        queryStr: queryStr
+    }));
+  }
   
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
@@ -295,27 +323,45 @@ export const getTxnRetrieveTopLevel = (queryStr) => {
   }
   else {
     let request = nc_trim(queryStr);
+
     if (!nc_isValidEntity(request)) {
       store.dispatch(StoreTxnRetrieve.SetTopLevel({
         content: []
       }));
       return;
     }
+    if(subStr === null){
+        // get transaction details
+        const ep = network.endpoint.transaction.detail;
+        let params = [request];
+        network.request(ep, params)
+        .then((response) => {
 
-    // get transaction details
-    const ep = network.endpoint.transaction.detail;
-    let params = [request];
-    network.request(ep, params)
-    .then((response) => {
-      
-      store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
-      getTxnRetrievePagingTrnList(request, 0);      
-      
-    })
-    .catch((error) => {
-      console.log(error);
-      store.dispatch(StoreTxnRetrieve.SetTopLevel({}));
-    });
+          store.dispatch(StoreTxnRetrieve.SetTopLevel(response));
+          getTxnRetrieveTxnLogList(request, 0);
+          getTxnRetrievePagingTrnList(request, 0);
+
+        })
+        .catch((error) => {
+          console.log(error);
+          store.dispatch(StoreTxnRetrieve.SetTopLevel({}));
+        });
+    }else{
+        // get transfer details
+        const ep = network.endpointV2.transfer.detail;
+        let request_b = nc_trim(subStr);
+        let params = [request,request_b];
+        network.request(ep, params)
+        .then((response) => {
+
+          store.dispatch(StoreTxnRetrieve.SetTransfer(response));
+        })
+        .catch((error) => {
+          console.log(error);
+          store.dispatch(StoreTxnRetrieve.SetTransfer({}));
+        });
+    }
+
   }
 }
 
@@ -325,15 +371,12 @@ export const getTxnRetrievePagingTrnList = (queryStr, pageNumber, pageSize, star
 
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     setTimeout(() => {
-      let response = Object.assign({}, store.getState().accRetrieve.response.blk);
-      response.page.number = pageNumber;
-
-      store.dispatch(StoreAccRetrieve.SetPagingBlk(response));
+      store.dispatch(StoreTxnRetrieve.SetPagingTrn({}));
     }, 500);
   }
   else {
-    const ep = network.endpoint.transfer.list[trnListType.BY_TXN];
-    let params = [queryStr, pageNumber, PAGE_SIZE, start, end];
+    const ep = network.endpointV2.transfer.list[trnListType.BY_TXN];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
     network.request(ep, params)
     .then((response) => {
       
@@ -342,6 +385,26 @@ export const getTxnRetrievePagingTrnList = (queryStr, pageNumber, pageSize, star
     .catch((error) => {
       console.log(error);
       store.dispatch(StoreTxnRetrieve.SetPagingTrn({}));
+    });
+  }
+}
+export const getTxnRetrieveTxnLogList = (queryStr, pageNumber, pageSize) => {
+  store.dispatch(StoreTxnRetrieve.GetPagingTrn());
+   if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    setTimeout(() => {
+      store.dispatch(StoreTxnRetrieve.SetPagingTrn({}));
+    }, 500);
+  }
+  else {
+    const ep = network.endpointV2.transactionLog.list[txnLogListType.BY_TXN];
+    let params = [queryStr, pageNumber, PAGE_SIZE];
+    network.request(ep, params)
+    .then((response) => {
+     store.dispatch(StoreTxnRetrieve.SetTxnLogs(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreTxnRetrieve.SetTxnLogs({}));
     });
   }
 }
@@ -367,9 +430,10 @@ export const getAccListTopLevel = () => {
     network.request(ep, params)
     .then((response) => {
       store.dispatch(StoreAccList.SetTopLevel(response));
-
         //get the data for the rich list
         getAccRichList();
+        //get the data for the rich list
+        getAccMinerList();
 
     })
     .catch((error) => {
@@ -379,16 +443,16 @@ export const getAccListTopLevel = () => {
   }
 }
 
-export const getAccRichList = () => {
+export const getAccRichList = (pageNumber=0, pageSize=25) => {
   
   if (!network.NCNETWORK_REQUESTS_ENABLED) {
     store.dispatch(StoreAccList.SetRichList({}));
   }
   else {
     // get transaction list
-    const ep = network.endpoint.account.rich;
+    const ep = network.endpointV2.account.rich;
     
-    let params = [];
+    let params = [pageNumber, pageSize];
     
     network.request(ep, params)
     .then((response) => {
@@ -399,6 +463,28 @@ export const getAccRichList = () => {
     .catch((error) => {
       console.log(error);
       store.dispatch(StoreAccList.SetRichList({}));
+    });
+  }
+}
+
+export const getAccMinerList = (pageNumber=0, pageSize=25) => {
+
+  if (!network.NCNETWORK_REQUESTS_ENABLED) {
+    store.dispatch(StoreAccList.SetMinerList({}));
+  }
+  else {
+    // get transaction list
+    const ep = network.endpointV2.account.miner;
+
+    let params = [pageNumber, pageSize];
+
+    network.request(ep, params)
+    .then((response) => {
+      store.dispatch(StoreAccList.SetMinerList(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreAccList.SetMinerList({}));
     });
   }
 }
@@ -461,9 +547,11 @@ export const getAccRetrieveTopLevel = (acc,tkn=null) => {
         //console.log('this call!');
         getAccRetrievePagingTxnList(request, requestb, 0);
         getAccRetrievePagingBlkList(request, 0);
-        if(response.content[0].hasInternalTransfer){ 
+        //TODO:improve
+        getAccRetrievePagingTrnList(request, 0);
+        if(response.content[0].hasInternalTransfer){
 
-            getAccRetrievePagingTrnList(request, 0);
+            //getAccRetrievePagingTrnList(request, 0);
         }
         
         //console.log(JSON.stringify(response));
@@ -627,8 +715,8 @@ export const getAccRetrievePagingTrnList = (queryStr, pageNumber, pageSize, star
     }, 500);
   }
   else {
-    const ep = network.endpoint.transfer.list[trnListType.BY_ACCOUNT];
-    let params = [queryStr, pageNumber, pageSize, start, end];
+    const ep = network.endpointV2.transfer.list[trnListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, pageSize];
     network.request(ep, params)
     .then((response) => {
       
@@ -777,8 +865,15 @@ export const getCntrRetrieveTopLevel = (queryStr, page, size) => {
     .then((response) => {
       const isCntrValid = nc_isObjectValid(response);
       const isCntrEmpty = nc_isObjectEmpty(response, isCntrValid);
+        if(!isCntrEmpty){
+            //get logs
+            store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+            getCntrRetrieveTxnLogList(request);
 
-      store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+        }else{
+            store.dispatch(StoreCntrRetrieve.SetTopLevel(response));
+        }
+
       
     })
     .catch((error) => {
@@ -786,6 +881,22 @@ export const getCntrRetrieveTopLevel = (queryStr, page, size) => {
       store.dispatch(StoreCntrRetrieve.SetTopLevel({}));
     });
   }
+}
+
+export const getCntrRetrieveTxnLogList = (queryStr, pageNumber=0, pageSize=25) => {
+    store.dispatch(StoreTxnRetrieve.GetPagingTrn());
+
+    const ep = network.endpointV2.transactionLog.list[txnLogListType.BY_ACCOUNT];
+    let params = [queryStr, pageNumber, pageSize];
+    network.request(ep, params)
+    .then((response) => {
+     store.dispatch(StoreCntrRetrieve.SetTxnLogs(response));
+    })
+    .catch((error) => {
+      console.log(error);
+      store.dispatch(StoreCntrRetrieve.SetTxnLogs({}));
+    });
+
 }
 
 export const getCntrRetrievePagingTxnList = (queryStr, pageNumber) => {
@@ -927,16 +1038,30 @@ export const setDashboardData = (response) => {
   if(!isResponseEmpty) {
     let data = response.content[0];
     //console.log(JSON.stringify(data.transactions));
+    store.dispatch(StoreKpis.SetAllV2(data.metrics));
     store.dispatch(StoreBlkRt.SetAll(data.blocks));
     store.dispatch(StoreTxnRt.SetAll(data.transactions));
     
   }
 }
 
+export const setDashboardKPI = (response) => {
+  const isResponseEmpty = nc_isObjectEmpty(response);
+
+  if(!isResponseEmpty) {
+    let data = response.content[0];
+    //console.log(JSON.stringify(data.transactions));
+    store.dispatch(StoreKpis.SetAllV2(data));
+    //store.dispatch(StoreBlkRt.SetAll(data.blocks));
+    //store.dispatch(StoreTxnRt.SetAll(data.transactions));
+
+  }
+}
+
 
 export const getDashboardData = () => {
-  const ep = network.endpoint.dashboard;
-  let params = [];
+  const ep = network.endpointV2.dashboard;
+ let params = [];
   
   network.request(ep, params)
   .then((response) => {
@@ -961,27 +1086,52 @@ export const setKPIData = (response) => {
   }
 }
 
+export const setHealthData = (response) => {
+
+  if(response.content.length > 0) {
+    let data = response.content[0];
+
+    store.dispatch(StoreKpis.SetHealth(data));
+  }
+}
+
 export const getKPIData = () => {
-  
-    
-    const ep = network.endpoint.dashboard;
+
+
+     const ep = network.endpoint.dashboard;
+     let params = [];
+
+     network.request(ep,params)
+     .then((response) => {
+         setKPIData(response);
+         network.startInterval(ep,params,(response) => {
+         setKPIData(response);
+       });
+     })
+     .catch((error) => {
+       console.log(error);
+       setKPIData({content:[]});
+
+     });
+
+}
+export const getHealthData = () => {
+
+    const ep = network.endpointV2.health;
     let params = [];
 
     network.request(ep,params)
     .then((response) => {
-      setKPIData(response);
-      network.startInterval(ep,params,(response) => {
-        setKPIData(response);
+        setHealthData(response);
+        network.startInterval(ep,params,(response) => {
+        setHealthData(response);
       });
     })
     .catch((error) => {
       console.log(error);
-      setKPIData({content:[]});
-      
+      //setKPIData({content:[]});
     });
-  
 }
-
 
 // ========================================================
 // Tokens
@@ -1356,20 +1506,36 @@ export const getChartRetrieve = (queryStr) => {
 
     // get block details
     const ep = network.endpoint.chart.detail;
+    const ep2 = network.endpointV2.account.miner;
     let params = [request];
-    network.request(ep, params)
-    .then((response) => {
-      
-       store.dispatch(StoreChartRetrieve.SetChart(response));
-    
-    })
-    .catch((error) => {
-      
-        console.log(error);
-        store.dispatch(StoreChartRetrieve.SetChart({
-        
-      }));
-    });
+    if(request===1 || request==='1'){
+        network.request(ep2, [])
+        .then((response) => {
+           store.dispatch(StoreChartRetrieve.SetChart(response));
+
+        })
+        .catch((error) => {
+
+            console.log(error);
+            store.dispatch(StoreChartRetrieve.SetChart({
+
+          }));
+        });
+    }else{
+        network.request(ep, params)
+        .then((response) => {
+
+           store.dispatch(StoreChartRetrieve.SetChart(response));
+
+        })
+        .catch((error) => {
+
+            console.log(error);
+            store.dispatch(StoreChartRetrieve.SetChart({
+
+          }));
+        });
+    }
   }
 }
 

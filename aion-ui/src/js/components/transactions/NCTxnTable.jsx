@@ -89,7 +89,7 @@ export default class NCTxnTable extends Component
         width: null,
         flex: true,
         objPath: null,
-      },
+      }
     ];
 
     this.generateTableContent = this.generateTableContent.bind(this);

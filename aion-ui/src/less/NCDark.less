@@ -2,7 +2,7 @@
 @dm-input-text: #555;
 @dm-title: #d1cfcf;
 @dm-background-major:#010101;
-@dm-background-main:#151515;
+@dm-background-main:#222;
 @dm-background-minor:#333;
 @dm-background-minor-b:#111;
 
@@ -18,6 +18,9 @@
            h6{
               color:#9e9e9e;
            }
+        }
+        .NCTitle.section span{
+           color: #aaa;
         }
 		.NCPage{
 			background-color:#000 !important;
@@ -48,7 +51,7 @@
 		}
 		
 		.pt-card{
-			background-color:#1d1e1f !important;
+			background-color:@dm-background-minor !important;
 			box-shadow: 0 0 0 1px rgba(243, 246, 247, 0.1), 0 0 0 rgba(16, 22, 26, 0), 0 1px 1px rgba(16, 22, 26, 0.2) !important;
 		}
 		.pt-menu{
@@ -61,7 +64,7 @@
 			fill:@dm-background-minor
 		}
 		.block-card{
-			background-color:@dm-background-minor-b!important;
+			background-color:#444 !important;
 		}
 
 		input.pt-input{
@@ -73,6 +76,12 @@
 			background-color:#333 !important;
 		}
 
+		.NCTableTransactionsRT .table-row{
+        	background-color:@dm-background-minor
+        }
+        .NCTableTransactionsRT .table-row:hover{
+           background-color:#999;
+        }
 		.NCDarkInput{ background-color:#333;}
 
 		.bp-table-column-headers{
@@ -101,10 +110,16 @@
 		}
 
 		.NCTable .bp-table-cell{
-		color:@dm-title;
-		background-color:@dm-background-minor;
-			
+		    color:@dm-title;
+		    background-color:@dm-background-minor !important;
 		}
+		.bp-table-quadrant-main .bp-table-quadrant-scroll-container {
+          background-color: @dm-background-minor !important;
+        }
+        .NCTable .bp-table-cell {
+          background-color: @dm-background-minor !important;
+        }
+
 		.desc{
 			color:@dm-title;
 		}
@@ -120,13 +135,12 @@
 
 }
 
-@media all and (max-width: 1030px) {
-	.darkMode{
-
+@media all and (max-width: 1030px)
+{
+    .darkMode{
 		.NCKPIGroup{
-			background-color:#2222220;
+			background-color:#222222;
 		}
 
 	}
-
 }

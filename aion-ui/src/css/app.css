@@ -135,7 +135,6 @@ h1, h2, h3, h4, h5 {
   display: block;
   font-size: 19px;
   margin: 0 0 15px 0;
-  text-transform: uppercase;
   font-weight: 300;
   font-family: 'Titillium Web', sans-serif;
 }
@@ -2368,8 +2367,220 @@ pre {
     box-shadow: none !important;
   }
 }
+.NCTableTransactionsRT .header {
+  background-color: #1c1c1c;
+  color: #e1dccd;
+  font-weight: 500;
+  border-bottom-style: none;
+}
+.NCTableTransactionsRT .body.table-row {
+  background-color: #fff;
+}
+.NCTableTransactionsRT .body.table-row:hover {
+  background-color: #e4e9ed;
+}
+.NCTable .NCColumnHeaderCell {
+  background-color: #1c1c1c;
+}
+.NCTable .NCColumnHeaderCell .header-icon {
+  color: #e1dccd;
+}
+.NCTable .NCColumnHeaderCell .header-icon:hover {
+  color: #1c1c1c;
+}
+.NCComponentLevelSpinner .pt-intent-primary {
+  color: #1c1c1c !important;
+}
+.NCKPIGroup .group-title {
+  color: #1c1c1c;
+}
+.NCKPIGroup .group-title strong {
+  color: #1c1c1c;
+}
+.NCKPIGroup .NCKPI .kpi-card {
+  background-color: #fff;
+  border-color: #1c1c1c;
+}
+.NCKPIGroup .NCKPI .kpi-card > .metric .value {
+  color: #1c1c1c;
+}
+.NCKPIGroup .NCKPI .kpi-card > .metric .units {
+  color: #1c1c1c;
+}
+.NCDashboard .NCKPIContainer .NCKPIGroup {
+  box-shadow: 0 0 12px 1px #1c1c1c;
+  background-color: #fff;
+}
+.NCCardBlock .block-card {
+  background-color: #fff;
+}
+.NCCardBlock .block-card.non-empty-block {
+  border-color: #1c1c1c;
+}
+.NCCardBlock .block-card .proposer .NCEntityLabel {
+  color: #1c1c1c;
+}
+.NCCardBlock .block-card .proposer .NCEntityLabel:hover .text {
+  color: #1c1c1c !important;
+}
+.NCCardBlock .block-card .block-number .subtitle {
+  color: #1c1c1c !important;
+}
+.NCEntityLabel .icon {
+  color: #1c1c1c;
+}
+.NCEntityLabel.active:hover .text {
+  color: #f54119;
+}
+.NCEntityDetail .subtitle {
+  color: #1c1c1c;
+}
+.NCExplorerPage .NCExplorerHead .title-row {
+  border-bottom: 1px solid #1c1c1c;
+}
+.NCExplorerPage .NCExplorerHead .title-row .left .title .join {
+  border-left: 1px solid #1c1c1c;
+}
+.NCExplorerPage .NCExplorerHead .title-row .left .title .desc {
+  color: #1c1c1c;
+}
+.NCTitle.section {
+  border-bottom: 1px solid #1c1c1c;
+}
+.NCTitle.section span {
+  color: #1c1c1c;
+  font-weight: 400;
+}
+.NCHeader {
+  background-color: #1c1c1c;
+}
+.NCHeader .row .navbar-group-left .title {
+  color: #e1dccd;
+}
+.NCHeader .row .navbar-group-left .pt-navbar-divider {
+  margin-right: 15px;
+  margin-left: 12px;
+  border-left: 1px solid #ffffff;
+}
+.NCHeader .row .pt-icon-caret-down {
+  margin-left: 5px;
+  margin-right: -2px;
+  color: #e1dccd;
+}
+.NCHeader .row .pt-icon-caret-down:hover {
+  color: #1c1c1c;
+}
+.NCHeader .row .navbar-btn-active {
+  color: #e1dccd !important;
+  box-shadow: 0 0 0 1px #1c1c1c;
+}
+.NCHeader .row .navbar-btn-active:before {
+  color: #1c1c1c !important;
+}
+.NCHeader .row .navbar-group-right .pt-navbar-divider {
+  border-left: 1px solid #ffffff;
+}
+.NCLivenessIndicator .liveness-btn .icon.live {
+  color: green;
+}
+.NCNavMenu .pt-menu-header > h6 {
+  color: #1c1c1c;
+}
+.pt-menu {
+  color: #1c1c1c;
+  background: #fff !important;
+}
+.pt-popover .pt-popover-arrow-fill {
+  fill: #fff;
+}
+.NCFooter {
+  background: #1c1c1c !important;
+}
+.NCFooter .footer-container .text {
+  color: #fff !important;
+}
+.NCFooter .footer-container .footer-powered-by {
+  margin-right: 15px;
+}
+pre {
+  background-color: #fff;
+}
+.pt-button.pt-intent-primary {
+  color: #1c1c1c !important;
+}
+.pt-button.pt-minimal:hover {
+  background: #f54119 !important;
+  color: #1c1c1c !important;
+}
+.pt-button.pt-minimal:hover .pt-icon-standard.pt-icon-caret-down.pt-align-right {
+  color: #1c1c1c;
+}
+.pt-tag.pt-intent-primary {
+  color: #1c1c1c !important;
+}
+.pt-icon-arrow-right.main-search-btn {
+  color: #f54119 !important;
+}
+.pt-icon-circle-arrow-right {
+  color: #f54119 !important;
+}
+.pt-tag.pt-minimal.pt-intent-primary {
+  background-color: #fff;
+  font-weight: bold;
+}
+.nc-minimal-btn-shadow {
+  box-shadow: 0 0 0 1px #1c1c1c !important;
+}
+.bp-table-quadrant-main .bp-table-quadrant-scroll-container {
+  background-color: #fff !important;
+}
+.NCTable .bp-table-cell {
+  background-color: #fff !important;
+}
+.bp-table-top-container,
+.bp-table-header:before,
+.bp-table-menu {
+  background-color: #1c1c1c !important;
+}
+.bp-table-row-name,
+.bp-table-column-name-text {
+  color: #e1dccd !important;
+  font-weight: 400 !important;
+}
+.block-link.pt-button {
+  color: #1c1c1c !important;
+}
+.pt-tab[aria-selected="true"],
+.pt-tab:not([aria-disabled="true"]):hover {
+  color: #f54119;
+}
+.pt-tab-indicator {
+  background-color: #fff !important;
+}
+.pt-button.pt-min-toplvl:hover .pt-icon-standard.pt-icon-caret-down.pt-align-right {
+  color: #1c1c1c;
+}
+body {
+  background: #fff;
+}
+a,
+a:hover {
+  color: #f54119;
+}
+.NCHeader .row .navbar-group-left .logo .logo-img {
+  height: 35px;
+}
+.pt-spinner.pt-dinner .pt-spinner-head,
+.pt-spinner .pt-spinner-head {
+  stroke: #1c1c1c;
+}
+@media all and (max-width: 1030px) {
+  .NCHeader .row {
+    background-color: #1c1c1c;
+  }
+}
 .darkMode {
-  background-color: #151515 !important;
+  background-color: #222 !important;
   color: #d1cfcf;
 }
 .darkMode h2 {
@@ -2377,6 +2588,9 @@ pre {
 }
 .darkMode .pt-menu-header h6 {
   color: #9e9e9e;
+}
+.darkMode .NCTitle.section span {
+  color: #aaa;
 }
 .darkMode .NCPage {
   background-color: #000 !important;
@@ -2401,7 +2615,7 @@ pre {
   color: #d1cfcf !important;
 }
 .darkMode .pt-card {
-  background-color: #1d1e1f !important;
+  background-color: #333 !important;
   box-shadow: 0 0 0 1px rgba(243, 246, 247, 0.1), 0 0 0 rgba(16, 22, 26, 0), 0 1px 1px rgba(16, 22, 26, 0.2) !important;
 }
 .darkMode .pt-menu {
@@ -2412,7 +2626,7 @@ pre {
   fill: #333;
 }
 .darkMode .block-card {
-  background-color: #111 !important;
+  background-color: #444 !important;
 }
 .darkMode input.pt-input {
   color: #555;
@@ -2420,6 +2634,12 @@ pre {
 }
 .darkMode .NCTableTransactionsRT .header {
   background-color: #333 !important;
+}
+.darkMode .NCTableTransactionsRT .table-row {
+  background-color: #333;
+}
+.darkMode .NCTableTransactionsRT .table-row:hover {
+  background-color: #999;
 }
 .darkMode .NCDarkInput {
   background-color: #333;
@@ -2445,7 +2665,13 @@ pre {
 }
 .darkMode .NCTable .bp-table-cell {
   color: #d1cfcf;
-  background-color: #333;
+  background-color: #333 !important;
+}
+.darkMode .bp-table-quadrant-main .bp-table-quadrant-scroll-container {
+  background-color: #333 !important;
+}
+.darkMode .NCTable .bp-table-cell {
+  background-color: #333 !important;
 }
 .darkMode .desc {
   color: #d1cfcf;
@@ -2461,6 +2687,6 @@ pre {
 }
 @media all and (max-width: 1030px) {
   .darkMode .NCKPIGroup {
-    background-color: #222222 0;
+    background-color: #222222;
   }
 }

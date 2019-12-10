@@ -23,11 +23,12 @@ export default class NCCardBlock extends Component
     return (
       <div className="NCCardBlock">
 
-        <img className="block-child" src={ isEmpty ? ((this.props.darkMode.data) ? "img/block/dark-block-grey.svg" : "img/block/block-grey.svg") : ((this.props.darkMode.data) ? "img/block/dark-block-indigo.svg" : "img/block/block-indigo.svg") }/>
+        <img className="block-child" src={ isEmpty ? ((this.props.darkMode.data) ? "img/block/dark-block-grey.svg" : "img/block/unity-empty-block.svg") : ((this.props.darkMode.data) ? "img/block/dark-block-indigo.svg" : "img/block/unity-block.svg") }/>
         <div className={"block-card card-hover "+(isEmpty ? "" : "non-empty-block") }>
           <div className="block-number">
             <span className="subtitle pt-text-muted">{ MSG.landing_blocks_text_a }</span>
             <span className="title">{ blk.blockNumber != null ? blk.blockNumber : "Undefined" }</span>
+            <span className="pull-right subtitle pt-text-muted">{blk.sealType}</span>
           </div>
           <div className="proposer">
             <span className="subtitle pt-text-muted">{ MSG.landing_blocks_text_b }</span>

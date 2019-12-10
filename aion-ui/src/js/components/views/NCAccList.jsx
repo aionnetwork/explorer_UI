@@ -58,6 +58,13 @@ class NCAccList extends Component
   requestTopLevel = () => {
     network.getAccListTopLevel();
   }
+
+  requestRichListPaging = (pageNumber, pageSize) => {
+      network.getAccRichList(pageNumber, pageSize);
+  }
+  requestValidatorListPaging = (pageNumber, pageSize) => {
+        network.getAccRichList(pageNumber, pageSize);
+  }
   
   render() {
     const store = this.props.accList;
@@ -96,7 +103,7 @@ class NCAccList extends Component
     const minerListSection = <NCExplorerSection 
       className={""}
       subtitle={
-        <div className="NCPageBreakerSubtitle">Showing miner accounts over last 10,000 blocks (~last 24 hours).</div>
+        <div className="NCPageBreakerSubtitle">{MSG.strings.Acc_data_policy_validator}</div>
       }
 
       isLoading={false}
@@ -111,7 +118,7 @@ class NCAccList extends Component
       content={
         <NCAccTableMiner 
           data={minerList}
-          onPageCallback={null}
+          onPageCallback={this.requestValidatorListPaging}
           isLoading={false}
           isPaginated={true}
           isLatest={true}/>
@@ -187,9 +194,9 @@ class NCAccList extends Component
       content={
         <NCRichList 
           data={richList}
-          onPageCallback={null}
+          onPageCallback={this.requestRichListPaging}
           isLoading={false}
-          isPaginated={false}
+          isPaginated={true}
           isLatest={true}/>
         }
       marginTop={40}
@@ -204,10 +211,10 @@ class NCAccList extends Component
           subtitle={"Recent Accounts Statistics"}/>    
         <div className="NCSection">
           <Tabs2 id="NCSectionTabbed" selectedTabId={this.state.tab} onChange={this.handleTabChange} default className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-            <Tab2 id="miner-acc" title="Miners" panel={minerListSection}/>
-            <Tab2 id="inbound-acc" title="Accounts Inbound" panel={inboundTxListSection}/>
-            <Tab2 id="outbound-acc" title="Accounts Outbound" panel={outboundTxListSection}/>
-            <Tab2 id="rich-list" title="Rich List" panel={richListSection}/>
+            <Tab2 id="miner-acc" title={MSG.strings.Acc_list_tab1} panel={minerListSection}/>
+            <Tab2 id="inbound-acc" title={MSG.strings.Acc_list_tab2} panel={inboundTxListSection}/>
+            <Tab2 id="outbound-acc" title={MSG.strings.Acc_list_tab3} panel={outboundTxListSection}/>
+            <Tab2 id="rich-list" title={MSG.strings.Acc_list_tab4} panel={richListSection}/>
           </Tabs2>
         </div>
       </div>;

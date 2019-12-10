@@ -44,7 +44,8 @@ let initialState_StoreBlkRetrieve =
 
   response: {
     blk: null,
-    txn: null
+    txn: null,
+    itxn: null,
   },
   momentUpdated: null
 };

@@ -104,7 +104,13 @@ export const tknListType = {
 export const trnListType = {
   ALL: 0,
   BY_ACCOUNT: 1,
-  BY_TXN:2
+  BY_TXN:2,
+  BY_BLOCK:3
+}
+export const txnLogListType = {
+  ALL: 2,
+  BY_TXN: 0,
+  BY_ACCOUNT:1
 }
 export const cntrListType = {
   ALL: 0,

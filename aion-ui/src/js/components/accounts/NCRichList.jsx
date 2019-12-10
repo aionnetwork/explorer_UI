@@ -27,7 +27,7 @@ export default class NCRichList extends Component
 
     ReactGA.event({
       category: 'Accounts',
-      action: 'Viewed Outbound'
+      action: 'Rich List'
     });
 
     this.columnDescriptor = 
@@ -38,6 +38,13 @@ export default class NCRichList extends Component
         isFilterable: false,
         width: null,
         flex: true,
+      },
+      {
+        name: MSG.Acc_rich_col4,
+        isSortable: false,
+        isFilterable: false,
+        width: 200,
+        flex: false,
       },
       {
         name: MSG.Acc_rich_col2,
@@ -57,7 +64,7 @@ export default class NCRichList extends Component
 
     entityList.forEach((entity, i) => 
     {
-      //console.log(JSON.stringify(entity));
+
       tableContent[i] = [];
       tableContent[i][0] = 
         <Cell copy={entity['address']} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+entity[0]} >
@@ -65,7 +72,9 @@ export default class NCRichList extends Component
             entityType={NCEntity.ACCOUNT} 
             entityId={entity['address']}/> 
         </Cell>;
-      tableContent[i][1] = <Cell copy={ nc_numFormatter(entity['balance'], 2) }>{ nc_numFormatter(entity['balance'], 2) }</Cell>;
+      tableContent[i][1] = <Cell copy={entity.nonce}>{entity.nonce}</Cell>;
+
+      tableContent[i][2] = <Cell copy={ nc_numFormatter(entity.balance, 2) }>{ nc_numFormatter(entity.balance, 2) }</Cell>;
 
              
     });
@@ -75,7 +84,7 @@ export default class NCRichList extends Component
 
   render() {
     const { data, isPaginated, isLoading, onPageCallback, isLatest=false } = this.props;
-    
+
     return (
       <NCTableReactPaginated
         data={data}

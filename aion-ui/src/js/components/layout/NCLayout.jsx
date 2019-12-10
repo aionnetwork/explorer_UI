@@ -77,22 +77,27 @@ class NCLayout extends Component {
 
     localStorage.getItem('lng_mode') && changeLanguage(localStorage.getItem('lng_mode'));
 
-    network.getDashboardData();
-    network.getKPIData(); 
+    //network.getDashboardData();
+    //network.getKPIData();
+
+  }
+  componentWillUpdate(){
+
   }
 
   componentDidMount() {
-    
-    //this.mode = (this.state.darkMode!==false) ? "darkMode" : "";
-    //this.mode = (this.props.darkMode.data) ? "darkMode" : "";
-
-
+    /*if(this.props.location.pathname !== "/dashboard"){
+       network.getHealthData();
+    }else{
+       //stopInterval(intervalID.health);
+    }*/
+    network.getHealthData();
     this.d_mode_class = (this.props.darkMode.data) ? "darkMode" : "";   
   }
 
   componentWillUnmount() {
-    disconnectSocket();
-    stopInterval(intervalID);
+    //disconnectSocket();
+    stopInterval(intervalID.health);
   }
 
   //change the language state
@@ -133,12 +138,25 @@ class NCLayout extends Component {
         /></div>
         <MenuItem
           className="nav-option"
-          
-          onClick={() => {
-            hashHistory.push('/charts/BlockTime');
-          }}
           text={MSG.Metric_menu_item_2}
+        >
+        <MenuItem
+           className="nav-option"
+
+           onClick={() => {
+              hashHistory.push('/charts/PoSBlockTime');
+           }}
+           text={MSG.Metric_menu_item_2_a}
         />
+        <MenuItem
+           className="nav-option"
+
+           onClick={() => {
+              hashHistory.push('/charts/PoWBlockTime');
+           }}
+           text={MSG.Metric_menu_item_2_b}
+        />
+        </MenuItem>
         <MenuItem
           className="nav-option"
           
@@ -148,13 +166,26 @@ class NCLayout extends Component {
           text={MSG.Metric_menu_item_3}
         />
         <MenuItem
-          className="nav-option"
-          
-          onClick={() => {
-            hashHistory.push('/charts/Difficulty');
-          }}
-          text={MSG.Metric_menu_item_4}
-        />
+                  className="nav-option"
+                  text={MSG.Metric_menu_item_4}
+                >
+                        <MenuItem
+                                  className="nav-option"
+
+                                  onClick={() => {
+                                    hashHistory.push('/charts/PoSDifficulty');
+                                  }}
+                                  text={MSG.Metric_menu_item_4_a}
+                                />
+                        <MenuItem
+                                                  className="nav-option"
+
+                                                  onClick={() => {
+                                                    hashHistory.push('/charts/PoWDifficulty');
+                                                  }}
+                                                  text={MSG.Metric_menu_item_4_b}
+                                                />
+                </MenuItem>
         <MenuItem
           className="nav-option"
           
@@ -400,7 +431,7 @@ class NCLayout extends Component {
                 BigNumber(kpi.data.currentBlockchainHead).minus(BigNumber(latestBlockNumber)) : 0;
     let lastUpdated = kpi.momentUpdated;
    
-      
+    let status = kpi.data.status;
     let mode = (this.props.darkMode.data) ? "darkMode" : ""; 
     this.renderConnectionMenu(this.networkList,mode);
     
@@ -414,11 +445,16 @@ class NCLayout extends Component {
             
             
             <div className="pt-navbar-group navbar-group-left">
+              <a rel="noopener" target="_blank" href="https://theoan.com" className="logo">
+                               <img className="logo-img" src="img/logo/aion-icon.svg" alt="logo"/>
+
+              </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <Link to={"/dashboard"} className="logo">
-                <img className="logo-img" src="img/logo/aion-icon.svg" alt="logo"/>
-                <span className="title">{MSG.Header_title}</span>
+
+                              <span className="title">{MSG.Header_title}</span>
               </Link>
-              <span className="pt-navbar-divider"></span>              
+              &nbsp;&nbsp;&nbsp;
               <Popover
                 className="hide"
                 content={this.renderExplorerMenu(mode)}
@@ -455,6 +491,7 @@ class NCLayout extends Component {
                 latestBlockNumber={latestBlockNumber}
                 dbLag={dbLag}
                 lastUpdated={lastUpdated}
+                status={status}
               />
               
               {this.connectionMenu}
@@ -478,13 +515,7 @@ class NCLayout extends Component {
           {/*permissionsMenu*/}
         </div>
         <div className="NCFooter"> 
-          {(false)&& <div>
-            <a className="footer-container" rel="noopener" target="_blank" href="https://aion.network">
-              <span className="text">Powered By</span>
-              <img className="logo" src="img/logo/aion-icon.svg" alt="logo"/>
-            </a>
-          </div>
-          } 
+
           {(true)&&
 
           <div>
@@ -494,34 +525,27 @@ class NCLayout extends Component {
             </a>*/} 
             <br/>
             
-          
-            <a className="footer-container" target="_blank" href="https://aionnetwork.atlassian.net/servicedesk/customer/portal/9">
-              <span style={style}  className="text">Feedback</span>          
-              
-            </a>
-            &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://aion.network/community/">
-              <span style={style}  className="text">Community</span>          
-              
-            </a>
-            &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://aion.network/bounty/">
-              <span style={style}  className="text">Bounties & Grants</span>          
-              
-            </a>
-            &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://aion.network/developers/">
-              <span style={style}  className="text">Developers</span>          
-              
-            </a>
-            &nbsp;|&nbsp;
-            <a className="footer-container" target="_blank" href="https://docs.aion.network/">
-                <span style={style}  className="text">Docs</span>
-            </a>
+               <a className="footer-container" target="_blank" href="https://aionnetwork.atlassian.net/servicedesk/customer/portal/9">
+                        <span style={style}  className="text">Feedback</span>
+                </a>
+                      &nbsp;|&nbsp;
+
+                      <a className="footer-container" target="_blank" href="https://developer.theoan.com/">
+                        <span style={style}  className="text">Developers</span>
+
+                      </a>
+                      &nbsp;|&nbsp;
+                      <a className="footer-container" target="_blank" href="https://developer.theoan.com/">
+                          <span style={style}  className="text">Validator</span>
+                      </a>
+                      &nbsp;|&nbsp;
+                                  <a className="footer-container" target="_blank" href="https://docs-aion.theoan.com/docs">
+                                      <span style={style}  className="text">Coin-holders</span>
+                                  </a>
                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <a className="footer-container" rel="noopener" target="_blank" href="https://aion.network">
-              <span style={style}>Powered By</span>
-              <img  height="25" src="img/logo/aion-icon.svg" alt="logo"/>
+            <a className="footer-container" rel="noopener" target="_blank" href="https://aion.theoan.com">
+              <span  className="footer-powered-by" style={style}>Powered By</span>
+              <img  height="25" src="img/logo/aion-oan-icon.svg" alt="logo"/>
             </a>
            
           </div>

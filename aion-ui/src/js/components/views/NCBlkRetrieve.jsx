@@ -6,11 +6,14 @@ import moment from 'moment';
 
 import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
 
-import NCTxnTable from 'components/transactions/NCTxnTable';
+//import NCTxnTable from 'components/transactions/NCTxnTable';
+import NCTxnTable from 'components/transactions/NCV2TxnTable';
 import NCBlkDetail from 'components/blocks/NCBlkDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
+
+import NCTxnTableOwnTransfer from 'components/transactions/NCTxnTableOwnTransfer';
 
 import * as StoreBlkRetrieve from 'stores/StoreBlkRetrieve';
 
@@ -65,15 +68,18 @@ class NCBlkRetrieve extends Component
 
     const blkObj = (store.response) ? store.response.blk : null;
     const txnList = (store.response) ? store.response.txn : null;
-
-    
+    console.log(JSON.stringify(txnList));
+    const trnList = (store.response) ? store.response.itxn : null;
 
     let isBlkValid = nc_isObjectValid(blkObj);
     let isBlkEmpty = nc_isObjectEmpty(blkObj, isBlkValid);
 
     let isTxnListValid = nc_isListValid(txnList);
     let isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-    
+
+    let isTrnListValid = nc_isListValid(trnList);
+    let isTrnListEmpty = nc_isListEmpty(trnList, isTrnListValid);
+
     let prev = null;
     let next = null;
 
@@ -122,6 +128,34 @@ class NCBlkRetrieve extends Component
         }
       marginTop={40}
     />
+
+    const transferListSection = <NCExplorerSection
+          className={""}
+          subtitle={
+            <div className="NCPageBreakerSubtitle">
+            {MSG.Transaction.DATA_POLICY}
+            </div>
+          }
+
+          isLoading={isLoadingTopLevel}
+          isDataValid={isTxnListValid}
+          isDataEmpty={isTxnListEmpty}
+
+          loadingStr={MSG.Transaction.LOADING}
+          invalidDataStr={MSG.Transaction.INVALID_DATA}
+          emptyDataStr={MSG.Transaction.EMPTY_DATA_LIST}
+          marginTop={40}
+
+          content={
+                    <NCTxnTableOwnTransfer
+                      data={trnList}
+                      onPageCallback={this.requestPagingTrnList}
+                      isLoading={false}
+                      isPaginated={true}
+                      ownAddr={desc}
+                      isLatest={true}/>
+                  }
+        />
     
 
     const page =
@@ -145,8 +179,11 @@ class NCBlkRetrieve extends Component
         {
           (!isBlkEmpty && !isTxnListEmpty) &&
           <div className="NCSection">
-            <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true}>
-              <Tab2 id="blk" title="Included Transactions" panel={txnListSection} />
+            <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
+              <Tab2 id="txn" title="Included Transactions" panel={txnListSection} />
+              {(!isTrnListEmpty) &&
+                <Tab2 id="itxn" title="Internal Transactions" panel={transferListSection} />
+              }
             </Tabs2>
           </div>
         }

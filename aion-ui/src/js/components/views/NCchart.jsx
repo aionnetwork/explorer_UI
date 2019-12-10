@@ -1,18 +1,11 @@
-/* eslint-disable */
+///* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, hashHistory } from 'react-router';
-import moment from 'moment';
 
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-
-import { Button, Tab2, Tabs2 } from "@blueprintjs/core";
+import { Button} from "@blueprintjs/core";
 
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
-import NCExplorerSection from 'components/common/NCExplorerSection';
-
 
 //list of charts
 import NCActiveAddressChart from 'components/charts/NCActiveAddressChart';
@@ -21,11 +14,10 @@ import NCNetworkDifficultyChart from 'components/charts/NCNetworkDifficultyChart
 import NCTopMinersChart from 'components/charts/NCTopMinersChart';
 import NCBlockTimesChart from 'components/charts/NCBlockTimesChart';
 import NCHashPowerChart from 'components/charts/NCHashPowerChart';
-import * as StoreChartRetrieve from 'stores/StoreChartRetrieve'; 
 import * as MSG from 'lib/NCTerms';
 
 
-import { nc_getChartData, nc_LinkToEntity, nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isObjectValid, nc_isObjectEmpty, nc_isPositiveInteger } from 'lib/NCUtility';
+import { nc_getChartData} from 'lib/NCUtility';
 import * as network from 'network/NCNetworkRequests';
 
 class NCChartRetrieve extends Component
@@ -67,7 +59,7 @@ class NCChartRetrieve extends Component
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.params.chartId != this.props.params.chartId){
+    if (prevProps.params.chartId !== this.props.params.chartId){
       this.cLoad=false;
       this.parseChart(this.props.params.chartId);
       this.request();
@@ -80,7 +72,6 @@ class NCChartRetrieve extends Component
 
     switch(str){
     case 'ActiveAddressGrowth':
-
         this.chartData.chart = <NCActiveAddressChart />
         this.chartData.description = "Active Address";
         this.chartData.type="line";
@@ -88,8 +79,8 @@ class NCChartRetrieve extends Component
         break;  
     case 'TopMiner':        
         this.chartData.chart = <NCTopMinersChart   />
-        this.chartData.description = "Top Miners";
-        this.chartData.type="pie";
+        this.chartData.description = "Top Validators";
+        this.chartData.type="custom";
         this.chartData.id = 1;
         break;  
     case 'Difficulty':        
@@ -97,7 +88,19 @@ class NCChartRetrieve extends Component
         this.chartData.description = "Network Difficulty";
         this.chartData.type="line";
         this.chartData.id = 2;
-        break;                
+        break;
+    case 'PoWDifficulty':
+        this.chartData.chart =  <NCNetworkDifficultyChart  />
+        this.chartData.description = "PoW Difficulty";
+        this.chartData.type="line";
+        this.chartData.id = 8;
+        break;
+    case 'PoSDifficulty':
+        this.chartData.chart =  <NCNetworkDifficultyChart  />
+        this.chartData.description = "PoS Difficulty";
+        this.chartData.type="line";
+        this.chartData.id = 7;
+        break;
     case 'HashingPower':
         this.chartData.chart = <NCHashPowerChart  />
         this.chartData.description = "Hashing Power";
@@ -111,12 +114,24 @@ class NCChartRetrieve extends Component
         this.chartData.id = 4;
         break;  
     case 'BlockTime':
-        
         this.chartData.chart = <NCBlockTimesChart  />
         this.chartData.description = "Block Time";
         this.chartData.type="line";
         this.chartData.id = 5;
-        break;  
+        break;
+    case 'PoWBlockTime':
+        this.chartData.chart = <NCBlockTimesChart  />
+        this.chartData.description = "PoW Block Time";
+        this.chartData.type="line";
+        this.chartData.id = 10;
+        break;
+    case 'PoSBlockTime':
+
+        this.chartData.chart = <NCBlockTimesChart  />
+        this.chartData.description = "PoS Block Time";
+        this.chartData.type="line";
+        this.chartData.id = 9;
+        break;
     default:
         this.chartData.chart = 'Invalid data';
         break;
@@ -150,23 +165,8 @@ class NCChartRetrieve extends Component
 
     
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoading;
-    const queryStr = store.queryStr;
+    //const queryStr = store.queryStr;
     const desc = this.chartData.description;
-    let log = this.type;
-
-    const blkObj = (store.response) ? store.response.blk : null;
-    const txnList = (store.response) ? store.response.txn : null;
-
-    let isBlkValid = nc_isObjectValid(blkObj);
-    let isBlkEmpty = nc_isObjectEmpty(blkObj, isBlkValid);
-
-    let isTxnListValid = nc_isListValid(txnList);
-    let isTxnListEmpty = nc_isListEmpty(txnList, isTxnListValid);
-
-    const blk = isBlkEmpty ? {} : blkObj.content[0]; 
-
-    let chart = '';    
-
 
     const breadcrumbs = [
       {
@@ -181,7 +181,7 @@ class NCChartRetrieve extends Component
     ];
 
     let mode = (this.state.darkMode) ? '#000' : '#fff';
-    //console.log(JSON.stringify(data));
+
     const page =
       <div> 
         <NCExplorerHead
@@ -192,7 +192,7 @@ class NCChartRetrieve extends Component
         />  
 
         
-        {(this.chartData.description==="Network Difficulty")&&
+        {(this.chartData.description==="Network Difficulty"||this.chartData.description==="PoW Difficulty"||this.chartData.description==="PoS Difficulty")&&
           <Button onClick={() => {this.toggle()}} className = "pt-button pt-minimal pull-right" text="Toggle Log" />
         }
 

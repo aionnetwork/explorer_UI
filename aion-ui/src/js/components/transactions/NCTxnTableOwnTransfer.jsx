@@ -16,6 +16,7 @@ import { NCSortType, NCEntityInfo, NCEntity, nc_LinkToEntity } from 'lib/NCEnums
 
 import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
+import NCLink from 'components/common/NCLink';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 import { nc_numFormatterAionCoin, nc_decimalPrettify, nc_numFormatterACSensitive, nc_numFormatter } from 'lib/NCUtility';
 //import { nc_numFormatterAionCoin } from 'lib/NCUtility';
@@ -91,6 +92,31 @@ export default class NCTxnTableOwnTransfer extends Component
         flex: true,
         objPath: null,
       },
+      {
+        name: MSG.Txn_list_own_trn_col8,
+        isSortable: false,
+        isFilterable: false,
+        width: 100,
+        flex: true,
+        objPath: null,
+      },
+      {
+        name: MSG.Txn_list_own_trn_col9,
+        isSortable: false,
+        isFilterable: false,
+        width: 60,
+
+        objPath: null,
+      },
+      {
+        name: MSG.Txn_list_own_trn_col10,
+        isSortable: false,
+        isFilterable: false,
+        width: 60,
+
+        objPath: null,
+      },
+
     ];
 
     this.generateTableContent = this.generateTableContent.bind(this);
@@ -110,7 +136,11 @@ export default class NCTxnTableOwnTransfer extends Component
       let value = null;
       let rawValue = null;
       let transferTimestamp =null;
+      let transferIndex =null;
 
+      let status =null;
+      let type =null;
+      let nonce =null;
       // [transactionHash, fromAddr, toAddr, value, blockTimestamp, blockNumber]
       if (Array.isArray(entity)) {
         blockNumber = entity[5];
@@ -125,8 +155,13 @@ export default class NCTxnTableOwnTransfer extends Component
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
         transferTimestamp = entity.blockTimestamp;
-        value = (entity.value) ? nc_decimalPrettify(entity.value) : nc_decimalPrettify(entity.valueTransferred);//BigNumber(String(entity.valueTransferred), 16).toString(10);//entity.valueTransferred;
+        value = (entity.value) ? nc_decimalPrettify(nc_numFormatterACSensitive(entity.value)) : nc_decimalPrettify(entity.valueTransferred);//BigNumber(String(entity.valueTransferred), 16).toString(10);//entity.valueTransferred;
         transactionHash = entity.transactionHash;//let bal = nc_numFormatterACSensitive(entity.balance);
+
+        transferIndex = entity.internalTransactionIndex;
+        status = entity.rejected? "Rejected" : "Successful";
+        type = entity.type;
+        nonce = entity.nonce;
         
       }
       
@@ -185,6 +220,23 @@ export default class NCTxnTableOwnTransfer extends Component
         "Contract Creation"
       }
       </Cell>;
+
+      tableContent[i][7] =
+      <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
+      <NCLink link={"/transaction/"+transactionHash+"/"+transferIndex} title= {"("+ status +") View details"}/>
+      </Cell>;
+      tableContent[i][8] =
+      <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
+      {
+        type
+      }
+      </Cell>;
+      tableContent[i][9] =
+      <Cell copy={toAddr} intent={ isTo ? Intent.PRIMARY : Intent.NONE } tooltip={ isTo ? "own account" : undefined }>
+      {
+        nonce
+      }
+      </Cell>;
     });
 
     return tableContent;
@@ -199,7 +251,7 @@ export default class NCTxnTableOwnTransfer extends Component
         onPageCallback={onPageCallback}
         isLoading={isLoading}
         isPaginated={isPaginated}
-        entityName={"tokens"}
+        entityName={"transactions"}
         generateTableContent={this.generateTableContent}
         columnDescriptor={this.columnDescriptor}
         isLatest={isLatest}/>

@@ -18,7 +18,17 @@ gulp.task('css', function() {
 });
 
 gulp.task('watch', function() {
-  watch(['./src/less/**/*.less'], function() {
-    gulp.start('css');
+  watch(['./src/less/*.less'], function() {
+    return gulp.src('./src/less/app.less')
+        .pipe(plumber({
+        	// end the process on error
+        	// need it to re-start gulp-watch
+          handleError: function (err) {
+            console.log(err);
+            this.emit('end');
+          }
+      }))
+      .pipe(less())
+      .pipe(gulp.dest('./src/css'))
   });
 });

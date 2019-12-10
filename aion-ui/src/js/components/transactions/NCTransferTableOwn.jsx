@@ -17,7 +17,7 @@ import NCPagination from 'components/common/NCPagination';
 import NCEntityLabel, {parseClientTransaction} from 'components/common/NCEntityLabel';
 import { PAGE_SIZE } from 'network/NCNetworkRequests'
 
-import { nc_numFormatterAionCoin } from 'lib/NCUtility';
+import { nc_numFormatterAionCoin, nc_decimalPrettify, nc_rawFormat } from 'lib/NCUtility';
 import {strings as MSG} from 'lib/NCTerms';
 
 export default class NCTransferTableOwn extends Component 
@@ -82,6 +82,31 @@ export default class NCTransferTableOwn extends Component
         flex: true,
         objPath: null,
       },
+      {
+        name: MSG.Txn_trn_list_col7,
+        isSortable: false,
+        isFilterable: false,
+        width: null,
+        flex: true,
+        objPath: null,
+      },
+      {
+        name: MSG.Txn_trn_list_col8,
+        isSortable: false,
+        isFilterable: false,
+        width: null,
+        flex: true,
+        objPath: null,
+      },
+      {
+        name: MSG.Txn_trn_list_col9,
+        isSortable: false,
+        isFilterable: false,
+        width: null,
+        flex: true,
+        objPath: null,
+      }
+
     ];
 
     this.generateTableContent = this.generateTableContent.bind(this);
@@ -114,7 +139,7 @@ export default class NCTransferTableOwn extends Component
         fromAddr = entity.fromAddr;
         toAddr = entity.toAddr;
         blockTimestamp = entity.blockTimestamp;
-        value = entity.value;
+        value = entity.value;//nc_decimalPrettify(nc_rawFormat(entity.value));//entity.value;
       }
 
       let isFrom = false;

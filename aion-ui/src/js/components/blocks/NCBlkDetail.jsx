@@ -18,7 +18,7 @@ export default class NCBlkDetail extends Component
 {
   render() {
     let { entity } = this.props;
-
+    let sealType = "PoW"
     let desc = 
     [
       {
@@ -31,6 +31,10 @@ export default class NCBlkDetail extends Component
                   entityType={ NCEntity.BLOCK }
                   entityId={ entity.blockNumber }
                   linkActive={ false }/>
+      },
+      {
+              field: MSG.strings.Blk_detail_row21,
+              value: entity.sealType === "POS" ? "Proof of Stake (PoS)" : "Proof of Work (PoW)"
       },
       {
         field: MSG.strings.Blk_detail_row3,
@@ -62,6 +66,13 @@ export default class NCBlkDetail extends Component
                   entityId={ entity.minerAddress }
                   entityName={ nc_hexPrefix(entity.minerAddress) }/>
       },
+      {
+         field: (entity.sealType !== 'POS') ?  "" : 'Coinbase Address',
+         value: (entity.sealType !== 'POS') ?  "" : <NCEntityLabel
+                   entityType={ NCEntity.ACCOUNT }
+                   entityId={ entity.minerAddress }
+                   entityName={ nc_hexPrefix(entity.coinbase) }/>
+      },
       // ---------------------------------------------------------------
       {
         field: MSG.strings.Blk_detail_row7,
@@ -85,8 +96,8 @@ export default class NCBlkDetail extends Component
         value: entity.totalDifficulty ? nc_numPrettify(entity.totalDifficulty) : EMPTY_STR,
       },
       {
-        field: MSG.strings.Blk_detail_row12,
-        value: nc_isStrEmpty(entity.nonce) ? EMPTY_STR : nc_hexPrefix(entity.nonce),
+        field: (entity.sealType !== 'POW') ?  "" : MSG.strings.Blk_detail_row12,
+        value: (entity.sealType !== 'POW') ?  "" : nc_isStrEmpty(entity.nonce) ? EMPTY_STR : nc_hexPrefix(entity.nonce),
       },
       {
         field: MSG.strings.Blk_detail_row13,
@@ -116,6 +127,18 @@ export default class NCBlkDetail extends Component
         value: nc_numFormatterBytes(entity.size, 8),
       },
       {
+         field: (entity.sealType !== 'POS') ?  "" : "Seed",
+         value: (entity.sealType !== 'POS') ?  "" : entity.seed ? <pre className={"nc-resizable enforce-min-height"}>{entity.seed}</pre> : EMPTY_STR,
+      },
+      {
+         field: (entity.sealType !== 'POS') ?  "" : "Signing Public Key",
+         value: (entity.sealType !== 'POS') ?  "" : entity.publicKey ? <pre className={"nc-resizable enforce-min-height"}>{ entity.publicKey }</pre> : EMPTY_STR,
+      },
+      {
+        field: (entity.sealType !== 'POS') ?  "" : "Signature",
+        value: (entity.sealType !== 'POS') ?  "" : entity.signature ? <pre className={"nc-resizable enforce-min-height"}>{ entity.signature }</pre> : EMPTY_STR,
+      },
+      {
         field: MSG.strings.Blk_detail_row18,
         value: entity.bloom ? <pre className={"nc-resizable enforce-min-height"}>{ entity.bloom }</pre> : "No Logs (Empty Bloom Filter)",
       },
@@ -124,8 +147,8 @@ export default class NCBlkDetail extends Component
         value: entity.extraData ? <pre className={"nc-resizable enforce-min-height"}>{ entity.extraData }</pre> : "No Extra Data",
       },
       {
-        field: MSG.strings.Blk_detail_row20,
-        value: entity.solution ? <pre className={"nc-resizable enforce-min-height"}>{ entity.solution }</pre> : EMPTY_STR,
+        field: (entity.sealType !== 'POW') ?  "" : MSG.strings.Blk_detail_row20,
+        value: (entity.sealType !== 'POW') ?  "" : entity.solution ? <pre className={"nc-resizable enforce-min-height"}>{ entity.solution }</pre> : EMPTY_STR,
       },
     ];
 

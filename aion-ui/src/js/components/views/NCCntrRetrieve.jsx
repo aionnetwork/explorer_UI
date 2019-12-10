@@ -8,6 +8,7 @@ import {AnchorButton, Classes, Intent, Dialog, Position, Popover, Tab2, Tabs2, T
 import { Select } from "@blueprintjs/select";
 
 import NCEventTable from 'components/contracts/NCEventTable';
+import NCLogTable from 'components/contracts/NCLogTable';
 import NCBlkTable from 'components/blocks/NCBlkTable';
 import NCTxnTable from 'components/transactions/NCTxnTable';
 
@@ -155,7 +156,8 @@ class NCCntrRetrieve extends Component
 
     const blkList = (store.response && store.response.blk) ? store.response.blk.data : null;
     const eventList = (store.response && store.response.event && store.response.event.data.content) ? store.response.event.data.content : null;
-
+    const logList = (typeof store.response.log.data.content !== "undefined") ? store.response.log.data : null;
+    console.log(JSON.stringify(logList));
     const isAccValid = nc_isObjectValid(accObj);
     const isAccEmpty = nc_isObjectEmpty(accObj, isAccValid);
 
@@ -167,7 +169,10 @@ class NCCntrRetrieve extends Component
 
     const isEventListValid = nc_isListValid(eventList);
     const isEventListEmpty = nc_isListEmpty(eventList, isEventListValid);
-    
+
+    const isLogListValid = nc_isListValid(logList);
+    const isLogListEmpty = nc_isListEmpty(logList, isLogListValid);
+    console.log(isLogListValid, isLogListEmpty);
     const acc = isAccEmpty ? {} : accObj.content[0];
     
     const breadcrumbs = [
@@ -329,6 +334,36 @@ class NCCntrRetrieve extends Component
         }
     />
 
+     const logListSection = <NCExplorerSection
+          className={""}
+          subtitle={
+            <div className="NCPageBreakerSubtitle">
+                Showing results latest results for logs on this contract.
+            </div>
+          }
+
+          isLoading={isEventListFirstLoad == null}
+          isDataValid={true}
+          isDataEmpty={isLogListEmpty}
+
+          loadingStr={"Loading Blocks"}
+          invalidDataStr={"Server provided an invalid response. Please try again."}
+          emptyDataStr={
+            <span>No events found in this contract.
+
+            </span>}
+          marginTop={40}
+
+          content={
+            <NCLogTable
+              data={logList}
+              onPageCallback={this.requestLogList}
+              isLoading={store.isLoadingLogList}
+              isPaginated={false}
+              isLatest={true}/>
+            }
+        />
+
     const page =
       <div> 
         <NCExplorerHead
@@ -354,7 +389,7 @@ class NCCntrRetrieve extends Component
              
             <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
               {
-                (isTxnListValid) &&
+                (!isTxnListEmpty) &&
                 <Tab2 id="txn" title="Transactions" panel={txnListSection}/>
               }
               
@@ -362,8 +397,14 @@ class NCCntrRetrieve extends Component
                 (isBlkListValid) &&
                 <Tab2 id="blk" title="Mined Blocks" panel={blkListSection}/>
               }
-              
-              <Tab2 id="event" title="Events" panel={eventListSection}/>
+              {
+               (!isEventListEmpty) &&
+               <Tab2 id="event" title="Events" panel={eventListSection}/>
+              }
+              {
+                 (!isEventListEmpty) &&
+                 <Tab2 id="logs" title="Logs" panel={logListSection}/>
+              }
             </Tabs2>
           </div>
         }

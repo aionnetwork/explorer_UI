@@ -82,6 +82,22 @@ export const SetPagingEvent = (data) =>
     data: data,
   }
 }
+// Logs
+// ------------
+export const GetPagingLogs = (data) =>
+{
+  return {
+    type: 'CNTR_RETRIEVE_GET_PAGING_EVENT',
+    data: data,
+  }
+}
+export const SetTxnLogs = (data) =>
+{
+  return {
+    type: 'CNTR_RETRIEVE_SET_LOG',
+    data: data,
+  }
+}
 let initialState_StoreCntrRetrieve = 
 {
   isLoadingPagingBlkList: false,
@@ -110,6 +126,10 @@ let initialState_StoreCntrRetrieve =
     event: {
       data: {content:null},
       momentUpdated: null
+    },
+    log: {
+          data: {content:null},
+          momentUpdated: null
     },
     momentUpdated: null,
     web3: false
@@ -261,6 +281,18 @@ export function reducer_cntrRetrieve (state = initialState_StoreCntrRetrieve, ac
 
       //console.log('event moment');
       
+      return _state;
+    }
+    case 'CNTR_RETRIEVE_SET_LOG':
+    {
+      let _state = Object.assign({}, state);
+
+      _state.isLoadingLogList = false;
+
+      _state.response.log.data = action.data;
+      _state.response.log.momentUpdated = moment();
+      _state.momentUpdated = moment();
+
       return _state;
     }
 

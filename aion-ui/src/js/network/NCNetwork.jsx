@@ -2,7 +2,7 @@
 import axios from 'axios';
 import SockJS from 'sockjs-client' 
 import Stomp from 'stompjs'
-import { trnListType, blkListType, tknListType, txnListType, accListType, cntrListType, eventListType } from 'lib/NCEnums';
+import { trnListType, txnLogListType, blkListType, tknListType, txnListType, accListType, cntrListType, eventListType } from 'lib/NCEnums';
 import * as mock from 'lib/NCData';
 import ms from 'ms';
 import appConfig from '../../config.json';
@@ -91,7 +91,102 @@ export const endpointV2 ={
     search: {
           link: '/aion/v2/dashboard/search',
           params: ['searchParam']
-      }
+    },
+    metrics: {
+        link: '/aion/v2/dashboard/metrics',
+        params: [],
+        name: "metrics"
+    },
+    dashboard: {
+         link: '/aion/v2/dashboard/view',
+         params: [],
+         name: "dashboard"
+    },
+    health: {
+          link: '/aion/v2/dashboard/health',
+          params: [],
+          name: "health"
+    },
+    account: {
+        list: {
+          link: '/aion/v2/dashboard/accounts',
+          params: []
+        },
+        rich:{
+            link: '/aion/v2/dashboard/accounts',
+            params: ["page","size","sort"]
+        },
+        miner:{
+            link: '/aion/v2/dashboard/validatorStatistics',
+            params: ["page","size","sealType","blockNumber"]
+        }
+    },
+    transactionLog:{
+          list:{
+            [txnLogListType['BY_ACCOUNT']]: {
+              link: '/aion/v2/dashboard/txlogs',
+              params:["contractAddress","page","size"]
+            },
+            [txnLogListType['BY_TXN']]: {
+              link: '/aion/v2/dashboard/txlogs',
+              params:["transactionHash","page","size"]
+            }
+          }
+    },
+    transfer:{
+        list:{
+          [trnListType['BY_ACCOUNT']]: {
+            link: '/aion/v2/dashboard/internalTransaction',
+            params:["address","page","size"]
+          },
+          [trnListType['BY_TXN']]: {
+            link: '/aion/v2/dashboard/internalTransaction',
+            params:["transactionHash","page","size"]
+          },
+          [trnListType['BY_BLOCK']]: {
+            link: '/aion/v2/dashboard/internalTransaction',
+            params:["blockNumber","page","size"]
+          }
+        },
+        detail: {
+            link: '/aion/v2/dashboard/internalTransaction',
+            params: ['transactionHash','index']
+        }
+
+    },
+    transaction: {
+            list: {
+              [txnListType['ALL']]: {
+                link: '/aion/v2/dashboard/blocks',
+                params: ['page', 'size',"startTime", "endTime"]
+              },
+              [txnListType['BY_BLOCK']]: {
+                link: '/aion/v2/dashboard/transactions',
+                params: ['blockNumber','size']
+              }
+            },
+            detail: {
+              link: '/aion/v2/dashboard/transaction',
+              params: []
+            }
+        },
+    block: {
+        list: {
+          [blkListType['ALL']]: {
+            link: '/aion/v2/dashboard/blocks',
+            params: ['page', 'size',"startTime", "endTime"]
+          },
+          [blkListType['BY_ACCOUNT']]: {
+            link: '/aion/v2/dashboard/blocks',
+            params: ['minerAddress', 'page', 'size',"startTime", "endTime"]
+          }
+        },
+        detail: {
+          link: '/aion/v2/dashboard/block',
+          params: ['blockNumber','blockHash']
+        }
+    },
+
 }
 export const endpoint = {
   block: {
@@ -140,6 +235,7 @@ export const endpoint = {
       params: ['searchParam','token']
     }
   },
+
   transfer:{
     list:{
       [trnListType['BY_ACCOUNT']]: {
@@ -189,7 +285,8 @@ export const endpoint = {
   },
   dashboard: {
     link: '/aion/dashboard/view',
-    params: []
+    params: [],
+    name: "dashboard"
   },
   detail: {
       link: '/aion/dashboard/search',
@@ -298,6 +395,7 @@ export const request = async (endpoint, params,sub_base=false) =>
     }
 
     if (net) {
+
       net.get(endpoint.link, args)
       .then((response) => {
         //console.log(response);
@@ -574,11 +672,11 @@ export function disconnectSocket() {
     stompClient.disconnect()
 }
 
-export let intervalID = null;
+export let intervalID = {};
 
 export function startInterval(endpoint, params,func) {
     //console.log(JSON.stringify(endpoint));
-    intervalID = setInterval(
+    intervalID[endpoint.name] = setInterval(
       function(){ 
 
         //console.log('Endpoint in interval: '+JSON.stringify(endpoint));

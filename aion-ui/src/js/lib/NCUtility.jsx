@@ -31,14 +31,16 @@ export function nc_addDecimal(value,decimals=18,precision=1,base=false){
      if(num.isGreaterThan(shift)|| base){
         return nc_numFormatterACSensitive(num.toFixed());
      }else{
-        return num.toFixed();//nc_numFormatterAionCoin(num.toFixed(),8);
+        //return nc_numFormatterACSensitiveGeneral(num.toString());
+        return nc_numPrettify(num)
+        //return num.toFixed();//nc_numFormatterAionCoin(num.toFixed(),8);
      }
  }
 
 
 export function nc_decimalPoint(num, scale=2) {
   if (num == null) return null;
-  return (new BigNumber(String(num))).dp(scale).toString();
+  return (new BigNumber(String(num))).dp(scale).toFixed();
 }
 
 export function nc_roundNumber(num, scale=2) {
@@ -223,6 +225,30 @@ export function nc_numFormatterACSensitive(num, dp=null, isHex=false) {
     return null;
 
   return bn.shiftedBy(-18).toFormat(dp);
+}
+
+export function nc_numFormatterACSensitiveGeneral(num, dp=null,gran=1, isHex=false) {
+
+  if (num == null)
+    return null;
+
+  let bn = null;
+  try {
+    if (isHex) {
+      bn = (new BigNumber(String(num), 16));
+    }
+    else {
+      bn = (new BigNumber(String(num), 10));
+    }
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+
+  if (!bn || !BigNumber.isBigNumber(bn) || !bn.isFinite() || bn.isNegative())
+    return null;
+  let val = 18/gran*-1;
+  return bn.shiftedBy(val).toFormat(dp);
 }
 
 export function nc_numFormatterAionCoin(num, fixed=4, isHex=false) {
@@ -509,7 +535,6 @@ export function nc_findEntity(queryStr){
 
 export function nc_LinkToEntity(entity, entityId) {
   if (nc_CanLinkToEntity(entity, entityId)) {
-    console.log('Link to!'+NCEntityInfo[entity].absoluteUrl+entityId);
     hashHistory.push(NCEntityInfo[entity].absoluteUrl+entityId);
   }
 }
@@ -541,18 +566,28 @@ export function nc_getChartData(data,charttype=null){
   //get first line
   if(charttype!==null){
     let chart =[]
-   
-    if(Array.isArray(data)&&data.length>1){
-      //let chartType = data[0].chartype;
-      data.forEach( (record,i)=>{
-        //let arr =[record.timestamp,record.value]//datapoint
-        chart.push(nc_datapoint(record,charttype,i));//nc_datapoint(record,charttype)
-      })
-   
+
+    if(charttype!=='custom'){
+        if(Array.isArray(data)&&data.length>1){
+          data.forEach( (record,i)=>{
+
+            chart.push(nc_datapoint(record,charttype,i));//nc_datapoint(record,charttype)
+          })
+
+        }else{
+          return chart;
+        }
     }else{
-      return chart;
+
+        if(Array.isArray(data)&&data.length>1){
+          data.forEach( (record,i)=>{
+            chart.push([record.minerAddress,record.blockCount]);
+          })
+
+        }else{
+          return chart;
+        }
     }
-      //console.log(JSON.stringify(chart));
     return chart;
   }
 
@@ -600,6 +635,24 @@ if((nc_isNumber(data.timestamp) && nc_isNumber(data.value)) || (!nc_isStrEmpty(d
 
 export function nc_compare(a,b) {
   return b.y-a.y;
+}
+export function nc_compare2(a,b) {
+  return b[1]-a[1];
+}
+
+export function nc_formatLogs(logs){
+    let json=[];
+    if(logs!==null){
+
+        logs.forEach(function(log, i){
+          let data = {};
+          data.address = log.contractAddr;
+          data.topics = log.topics;
+          data.data = log.data;
+          json.push(data);
+        });
+    }
+    return json;
 }
 
 

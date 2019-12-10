@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import NCTxnDetail from 'components/transactions/NCTxnDetail';
+import NCTrnDetail from 'components/transactions/NCTrnDetail';
 import NCExplorerPage from 'components/common/NCExplorerPage';
 import NCExplorerHead from 'components/common/NCExplorerHead';
 import NCExplorerSection from 'components/common/NCExplorerSection';
@@ -16,7 +17,7 @@ import * as StoreTxnRetrieve from 'stores/StoreTxnRetrieve';
 import { Position, Popover, Tab2, Tabs2, Tooltip, Button, Menu, MenuItem, PopoverInteractionKind } from "@blueprintjs/core";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-//import { nc_hexPrefix, nc_isObjectValid, nc_isObjectEmpty } from 'lib/NCUtility';
+//import { nc_hexPrefix, nc_isObjectValid, nc_isObjectEmpty, nc_formatLogs } from 'lib/NCUtility';
 import { nc_hexPrefix, nc_isListValid, nc_isListEmpty, nc_isPositiveInteger, nc_isObjectValid, nc_isStrEmpty, nc_isObjectEmpty,nc_LinkToEntityWithParam, nc_trim } from 'lib/NCUtility';
 
 import * as network from 'network/NCNetworkRequests';
@@ -36,7 +37,6 @@ class NCTxnRetrieve extends Component
   }
 
   componentDidMount() {
-    
     this.requestTopLevel();
   }
 
@@ -45,8 +45,9 @@ class NCTxnRetrieve extends Component
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.params.txnId != this.props.params.txnId)
+    if ((prevProps.params.txnId !== this.props.params.txnId) || (prevProps.params.itxnId !== this.props.params.itxnId)){
       this.requestTopLevel();
+    }
   }
 
   requestPagingTrnList = (pageNumber,pageSize,start,end) => {
@@ -56,8 +57,7 @@ class NCTxnRetrieve extends Component
   }
 
   requestTopLevel = () => {
-    //console.log('requestTopLevel');
-    network.getTxnRetrieveTopLevel(this.props.params.txnId);
+    network.getTxnRetrieveTopLevel(this.props.params.txnId,this.props.params.itxnId);
   }
 
 
@@ -68,13 +68,22 @@ class NCTxnRetrieve extends Component
 
     const isLoadingTopLevel = this.isFirstRenderAfterMount || store.isLoadingTopLevel;
     const txnObj = (store.response) ? store.response.txn : null;
-    
+    const itxnObj = (store.response) ? store.response.itxn : null;
+
     const isTxnValid = nc_isObjectValid(txnObj);
     const isTxnEmpty = nc_isObjectEmpty(txnObj, isTxnValid);
+    const isItxnValid = nc_isObjectValid(itxnObj);
+    const isItxnEmpty = nc_isObjectEmpty(itxnObj, isItxnValid);
 
-    const txn = isTxnEmpty ? {} : txnObj.content[0];
+    const isValid = isItxnValid ? true : isTxnValid;
+    const isEmpty = isItxnValid ? isItxnEmpty : isTxnEmpty;
+
+    //const txn = isTxnEmpty ? {} : txnObj.content[0];
+    const txn = isItxnEmpty ? isTxnEmpty ? {} : txnObj.content[0] : itxnObj.content[0];
+
 
     /*This section is for transfers table. This feature was added to accomodate for internal transfers made on tokens.*/
+
     const isTrnListFirstLoad = (store.response && store.response.trn) ? store.response.trn.momentUpdated : null;
     const trnList = (store.response && store.response.trn) ? store.response.trn.data : null;
     //console.log(JSON.stringify(store.response.trn));
@@ -128,10 +137,7 @@ class NCTxnRetrieve extends Component
     const desc = nc_hexPrefix(store.queryStr);
 
     const eventLog =  {};
-
-    //console.log(eventLog);
-
-    const eventListSection = <NCExplorerSection 
+    const eventListSection = <NCExplorerSection
       className={""}
       subtitle={
         <div className="NCPageBreakerSubtitle">Showing events for this transaction.</div>
@@ -158,42 +164,41 @@ class NCTxnRetrieve extends Component
     />
 
     const page =
-      <div> 
-        <NCExplorerHead
-          momentUpdated={store.momentUpdated} 
-          breadcrumbs={breadcrumbs}
-          title={"Transaction"}
-          subtitle={desc}/>  
-        <NCTxnDetail entity={txn}/>
-        <hr className="nc-hr"/>
+            <div>
+            <NCExplorerHead
+              momentUpdated={store.momentUpdated}
+              breadcrumbs={breadcrumbs}
+              title={(!isItxnValid)?"Transaction":"Internal Transaction"}
+              subtitle={desc}/>
+            <NCTxnDetail i = {isItxnValid} entity={txn}/>
 
-        {
-          (isTxnEmpty) &&
-          <NCNonIdealState
-            paddingTop={80}
-            icon={"pt-icon-offline"}
-            title={"Event logs are unavailable"}
-            description={"Please try again later."}/>
-        }
-        {
-          (!isWeb3 && !isTxnEmpty) &&  
-          <div className="NCSection">
-            <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
-              <Tab2 id="trn" title="Transfers" panel={transferListSection}/>
-            </Tabs2>
-          </div>
-        }
-        <hr className="nc-hr"/>
-        
+            {
+              (isTxnEmpty && !isItxnValid) &&
+              <NCNonIdealState
+                paddingTop={80}
+                icon={"pt-icon-offline"}
+                title={"Event meta are unavailable"}
+                description={"Please try again later."}/>
+            }
+            {
+              (!isTxnEmpty && !isItxnValid) &&
+              <div className="NCSection">
+                <hr className="nc-hr"/>
+                <Tabs2 id="NCSectionTabbed" className="NCSectionTabbed" large={true} renderActiveTabPanelOnly={true}>
+                  <Tab2 id="trn" title="Internal Transactions" panel={transferListSection}/>
+                </Tabs2>
+                <hr className="nc-hr"/>
+              </div>
+            }
 
+            </div>
 
-      </div>;
 
     return (
       <NCExplorerPage
         isLoading={isLoadingTopLevel}
-        isDataValid={isTxnValid} 
-        isDataEmpty={isTxnEmpty}
+        isDataValid={isValid}
+        isDataEmpty={isEmpty}
         
         loadingStr={MSG.Transaction.LOADING}
         invalidDataStr={MSG.Transaction.INVALID_DATA}

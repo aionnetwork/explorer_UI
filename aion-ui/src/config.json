@@ -1,6 +1,6 @@
 {
   "api": {
-    "base_url": "staging-api.aiondev.network",
+    "base_url": "mainnet-api.theoan.com",
     "https_enabled": true
   },
   "site": {
@@ -28,8 +28,12 @@
       "url": ""
     },
     {
+      "name": "Amity",
+      "url": "https://amity.theoan.com"
+    },
+    {
       "name": "Mainnet Kilimanjaro",
-      "url": "https://mainnet.aion.network"
+      "url": "https://mainnet.theoan.com"
     }
   ],
   "mainnet": [
@@ -38,10 +42,47 @@
       "url": ""
     },
     {
+      "name": "Amity Testnet",
+      "url": "https://amity.theoan.com"
+    },
+    {
       "name": "Mastery Testnet",
-      "url": "https://mastery.aion.network"
+      "url": "https://mastery.theoan.com"
     }
-  ]}
+  ],
+    "amity": [
+      {
+        "name": "Amity",
+        "url": ""
+      },
+      {
+        "name": "Mainnet",
+        "url": "https://mainnet.theoan.com"
+      },
+      {
+        "name": "Mastery Testnet",
+        "url": "https://mastery.theoan.com"
+      }
+    ],
+    "tetryon": [
+      {
+        "name": "Tetryon",
+        "url": ""
+      },
+      {
+        "name": "Mainnet ",
+        "url": "https://mainnet.theoan.com"
+      }
+    ,
+      {
+        "name": "Amity Testnet",
+        "url": "https://amity.theoan.com"
+      },
+      {
+        "name": "Mastery Testnet",
+        "url": "https://mastery.theoan.com"
+      }
+    ]}
 
 
 }

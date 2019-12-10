@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Tooltip, Position } from "@blueprintjs/core";
+import NCLink from 'components/common/NCLink';
 
 import { NCKPIResponsive, NCKPIGroup} from 'components/common/NCKPIGroup';
 import NCLoading from 'components/common/NCLoading';
@@ -28,34 +29,60 @@ class NCDashboardKPIs extends Component
     [
       
       {
-        title: <span><strong>{MSG.strings.kpi_tab1_title} &nbsp;</strong>| &nbsp;{MSG.strings.kpi_tab1_subtitle}</span>,
+        title: <span><strong>PoW &nbsp;</strong>| &nbsp;{MSG.strings.kpi_tab1_subtitle}</span>,
         kpiList: [
           {
-            value:"9.83",
+            value:"--",
             units:"s",
-            title:[MSG.strings.kpi_block_l1, MSG.strings.kpi_block_l2],
+            title:["Average", MSG.strings.kpi_block_l2],
             hoverContent: MSG.strings.kpi_block_desc,
           },
           {
-            value:"10",
+            value:"--",
             units:"Sol/s",
             title:[MSG.strings.kpi_hash_l1, MSG.strings.kpi_hash_l2],
             hoverContent: <span>{MSG.strings.kpi_hash_desc}</span>,
           },
           {
-            value:"15",
+            value:"--",
             units:"",
             title:[MSG.strings.kpi_difficulty_l1, MSG.strings.kpi_difficulty_l2],
             hoverContent: MSG.strings.kpi_difficulty_desc,
-          },
-          {
-            value:"1000",
-            units:"",
-            title:[MSG.strings.kpi_NRG_l1, MSG.strings.kpi_NRG_l2],
-            hoverContent: MSG.strings.kpi_NRG_desc,
-          },
+          }
           
         ]
+      },
+
+      {
+              title: <span><strong>PoS &nbsp;</strong> </span>,
+              kpiList: [
+                {
+                  value:"--",
+                  units:"",
+                  title:["Average", " Block Time"],
+
+                  hoverContent: "Mean of PoS block arrival time over the last hour. The target block time for PoS blocks is 20 seconds. PoS difficulty is dynamically adjusted to achieve target.",
+                }/*,
+                {
+                  value:"--",
+                  units:"",
+                  title:["Average", " Issuance"],
+                  hoverContent: "Mean of block rewards in Aions for PoS blocks over the previous 1024 blocks",
+                }*/,
+                {
+                  value:"--",
+                  units:"",
+                  title:["% of Network", " Staked"],
+                  hoverContent: "[Total Staked Aion/ Circulating Supply]*100",
+                },
+                {
+                  value:"--",
+                  units:"",
+                  title:["Average", " Difficulty"],
+                  hoverContent: "Difficulty, averaged over the last hour",
+                  tooltipPosition: Position.BOTTOM_RIGHT,
+                },
+              ]
       },
       
       {
@@ -63,29 +90,40 @@ class NCDashboardKPIs extends Component
         kpiList: [
           
           {
-            value:"45",
+            value:"--",
             units:"",
             title:[MSG.strings.kpi_TXNPEAK_l1, MSG.strings.kpi_TXNPEAK_l2],
             hoverContent: MSG.strings.kpi_TXNPEAK_desc,
           },
           {
-            value:"85",
+            value:"--",
             units:"",
             title:[MSG.strings.kpi_TXNTIME_l1, MSG.strings.kpi_TXNTIME_l2],
             hoverContent: MSG.strings.kpi_TXNTIME_desc,
           },
           {
-            value:"3991",
+            value:"--",
             units:"",
             title:[MSG.strings.kpi_TXNCOUNT_l1, MSG.strings.kpi_TXNCOUNT_l2],
             hoverContent: MSG.strings.kpi_TXNCOUNT_desc,
             tooltipPosition: Position.BOTTOM_RIGHT,
           },
+          {
+            value:"--",
+            units:"",
+            title:[MSG.strings.kpi_NRG_l1, MSG.strings.kpi_NRG_l2],
+            hoverContent: MSG.strings.kpi_NRG_desc,
+          }
         ]
       },
       
     ];
   }
+
+  link  = () => {
+      location.href="https://docs.aion.network";
+  }
+
 
   render() {
     
@@ -99,17 +137,23 @@ class NCDashboardKPIs extends Component
 
     const kpiList = this.props.kpi.data;
 
-    this.kpiData[0].kpiList[0].value = nc_decimalPoint(kpiList.averageBlockTime, 2);
-    this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.hashRate, 1);
-    this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.averageDifficulty, 1);
-    this.kpiData[0].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumedPerBlock, 2);
-    this.kpiData[1].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionPerSecond, 2);
-    this.kpiData[1].kpiList[1].value = kpiList.peakTransactionsPerBlockInLast24hours != null ? 
-                                          nc_numFormatter(kpiList.peakTransactionsPerBlockInLast24hours, 0) : 
+    this.kpiData[0].kpiList[0].value = nc_decimalPoint(kpiList.powBlockTime, 2);
+    this.kpiData[0].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.averagedHashPower, 1);
+    this.kpiData[0].kpiList[2].value = nc_numFormatter_with1Floor(kpiList.powBlockDifficulty, 1);
+
+    ///add unity stuff here
+    this.kpiData[1].kpiList[0].value = kpiList.posBlockTime!==-999 ? nc_decimalPoint(kpiList.posBlockTime, 2) : '--';
+    this.kpiData[1].kpiList[1].value = nc_numFormatter_with1Floor(kpiList.percentageOfNetworkStaking, 1);
+    this.kpiData[1].kpiList[2].value = kpiList.posBlockDifficulty!==-999 ? nc_numFormatter_with1Floor(kpiList.posBlockDifficulty, 1) : '--';
+
+    this.kpiData[2].kpiList[0].value = nc_numFormatter_with1Floor(kpiList.transactionsPerSecond, 2);
+    this.kpiData[2].kpiList[1].value = kpiList.peakTransactionsPerBlock != null ?
+                                          nc_numFormatter(kpiList.peakTransactionsPerBlock, 0) :
                                           null;
-    this.kpiData[1].kpiList[2].value = kpiList.totalTransactionsInLast24hours != null ? 
-                                          nc_numFormatter(kpiList.totalTransactionsInLast24hours, 3) : 
+    this.kpiData[2].kpiList[2].value = kpiList.totalTransaction != null ?
+                                          nc_numFormatter(kpiList.totalTransaction, 3) :
                                           null;
+    this.kpiData[2].kpiList[3].value = nc_numFormatter(kpiList.averageNrgConsumed, 2);
 
     let ncKPIs = [];
     let ncKPIr = [];

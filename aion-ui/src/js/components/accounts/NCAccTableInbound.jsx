@@ -70,12 +70,12 @@ export default class NCAccTableInbound extends Component
     entityList.forEach((entity, i) => 
     {
       tableContent[i] = [];
-      tableContent[i][0] = 
+      tableContent[i][0] = (entity[0]!=='')?
         <Cell copy={entity[0]} link={'#'+NCEntityInfo[NCEntity.ACCOUNT].absoluteUrl+''+entity[0]} >
           <NCEntityLabel 
             entityType={NCEntity.ACCOUNT} 
             entityId={entity[0]}/> 
-        </Cell>;
+        </Cell> : <Cell>Contract creation</Cell>;
       tableContent[i][1] = <Cell copy={ nc_numFormatter(entity[3], 2) } >{ nc_numFormatter(entity[3], 2) }</Cell>;
       tableContent[i][2] = <Cell copy={ nc_numFormatter(entity[1], 2) } >{ nc_numFormatter(entity[1], 2) }</Cell>;
       tableContent[i][3] = <Cell copy={ nc_numFormatter(entity[2], 2) }>{ nc_numFormatter(entity[2], 2) }</Cell>;        

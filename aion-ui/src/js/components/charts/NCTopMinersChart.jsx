@@ -11,12 +11,12 @@ Exporting(Highcharts);
 import {strings as MSG} from 'lib/NCTerms';//MSG.Chart_5_title
 
 import NCEntityDetail from 'components/common/NCEntityDetail';
-import appConfig from '../../../config.json';
+import appConfig from '../../../env.json';
 import { NC_ENV} from 'network/NCNetwork';
 
 const EMPTY_STR = "Not Available";
 import {BigNumber} from 'bignumber.js';
-import { nc_compare } from 'lib/NCUtility';
+import { nc_compare2,nc_compare } from 'lib/NCUtility';
 
 
 
@@ -26,8 +26,7 @@ export default class NCTopMinersChart extends Component
     let { entity, options, data, mode} = this.props;
     //console.log('pie chart');
 
-    let points = data.sort(nc_compare);
-    //console.log(JSON.stringify(points));
+    let points = data.sort(nc_compare2);
 
     const option = {
 
@@ -37,7 +36,7 @@ export default class NCTopMinersChart extends Component
                 series: {
 
                     dataLabels: {
-                        enabled: true,                        
+                        enabled: false,
                     }
                 }
             }
@@ -53,15 +52,19 @@ export default class NCTopMinersChart extends Component
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'pie',
-        height:'50%',
+        type: 'column',
+
         backgroundColor: mode, 
+    },
+    yAxis: {
+            title:{ text: "Number of blocks"}
     },
     title: {
         text: MSG.Chart_5_title
     },
+
     tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: '{series.name}: <b>{point.y} Blocks</b>'
     },
     credits:{enabled:false},
     plotOptions: {
@@ -98,14 +101,33 @@ export default class NCTopMinersChart extends Component
         
             events: {
                     click: function({point}) {
-                        location.href = 'https://'+appConfig.site.base_url+'/#/account/'+point.name;
+                        location.href = 'https://'+appConfig.HOME_URL+'/#/account/'+point.name;
                     }
                 }
-        }
+        },
+        column: {
+             allowPointSelect: true,
+             cursor: 'pointer',
+             dataLabels: {
+                 enabled: true,
+                 format: '{point.y} ',
+                 style: {
+                     color:  'black'
+                 }
+             },
+
+             events: {
+                     click: function({point}) {
+                         location.href = 'https://'+appConfig.HOME_URL+'/#/account/'+point.name;
+                     }
+                 }
+         }
     },
     series: [{
+        showInLegend: false,
         name: MSG.Chart_5_title,
         colorByPoint: true,
+        pointStart: 1,
         data: points
     }]
 }

@@ -64,6 +64,7 @@
   },
   "scripts": {
     "build-css": "gulp css",
+    "watch-css": "gulp watch",
     "build": "npm run build-css && cross-env NODE_PATH=src/js react-scripts build",
     "start": "cross-env NODE_PATH=src/js react-scripts start",
     "test": "react-scripts test --env=jsdom",
