@@ -61,7 +61,7 @@ class NCDashboardKPIs extends Component
                   units:"",
                   title:["Average", " Block Time"],
 
-                  hoverContent: "Mean of PoS block arrival time over the last hour. The target block time for PoS blocks is 20 seconds. PoS difficulty is dynamically adjusted to achieve target.",
+                  hoverContent: "Mean of PoS block arrival time over the last 1024 blocks. The target block time for PoS blocks is 10 seconds. PoS difficulty is dynamically adjusted to achieve target.",
                 }/*,
                 {
                   value:"--",
@@ -79,7 +79,7 @@ class NCDashboardKPIs extends Component
                   value:"--",
                   units:"",
                   title:["Average", " Difficulty"],
-                  hoverContent: "Difficulty, averaged over the last hour",
+                  hoverContent: "Difficulty, averaged over the last 1024 blocks",
                   tooltipPosition: Position.BOTTOM_RIGHT,
                 },
               ]
