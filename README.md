@@ -2,7 +2,7 @@
 
 ### What's Here?
 
-This repository hosts all user interface components for the Aion Blockchain Explorer service, hosted by the Aion Foundation.
+This repository hosts all user interface components for the Aion Blockchain Explorer service, hosted by the OAN.
 
 ### Features:
 
@@ -21,5 +21,7 @@ Instructions on deployment can be found [here!](https://github.com/aionnetwork/E
 
 ### Networks
 
-[Mainnet](https://mainnet.aion.network/#/dashboard) 
+[Mainnet](https://mainnet.theoan.com/#/dashboard) 
+[Amity Testnet](https://amity.theoan.com/#/dashboard)
+[Tetryon Testnet](https://tetryon.theoan.com/#/dashboard)
 [Mastery Testnet](https://mastery.aion.network/#/dashboard)
