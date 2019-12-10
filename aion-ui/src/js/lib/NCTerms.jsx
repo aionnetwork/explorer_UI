@@ -43,17 +43,17 @@ export const strings = new LocalizedStrings({
     
     kpi_block_l1: "Current",
     kpi_block_l2: "Block Time",
-    kpi_block_desc: "Mean of inter-block arrival time over the 1024 blocks. The target block time for the network is 10s. PoW difficulty is dynamically adjusted to achieve target. ",
+    kpi_block_desc: "Mean of PoW block arrival time over the last 1024 blocks. The target block time for the POW is 10s. PoW difficulty is dynamically adjusted to achieve target.",
     kpi_hash_l1: "Network",
     kpi_hash_l2: "Hash Rate",
-    kpi_hash_desc: "Network hash rate = (last block's difficulty) /(average block time over the last 1024 blocks.)",
+    kpi_hash_desc: "Hashrate = difficulty of last mined POW block/ average POW block time",
 
     kpi_difficulty_l1: "Average",
     kpi_difficulty_l2: "Difficulty",
     kpi_difficulty_desc: "Difficulty, averaged over the last 1024 blocks.",
     kpi_NRG_l1: "Consumed",
     kpi_NRG_l2: "NRG / Block",
-    kpi_NRG_desc: "Average NRG consumed per block for the last hour.",
+    kpi_NRG_desc: "Average NRG consumed per block for the last 1024 blocks.",
 
     kpi_TXNPEAK_l1: "Txn",
     kpi_TXNPEAK_l2: "/ Second",
