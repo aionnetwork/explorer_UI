@@ -70,7 +70,7 @@ export default class NCBlkDetail extends Component
          field: (entity.sealType !== 'POS') ?  "" : 'Coinbase Address',
          value: (entity.sealType !== 'POS') ?  "" : <NCEntityLabel
                    entityType={ NCEntity.ACCOUNT }
-                   entityId={ entity.minerAddress }
+                   entityId={ nc_hexPrefix(entity.coinbase) }
                    entityName={ nc_hexPrefix(entity.coinbase) }/>
       },
       // ---------------------------------------------------------------
