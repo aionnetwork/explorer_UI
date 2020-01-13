@@ -25,7 +25,7 @@ export default class NCLivenessIndicator extends Component
 
     let isDataAvailable = latestBlockNumber != null && dbLag != null && momentEnd != null && moment(momentEnd).isValid();
 
-    if (isDataAvailable && isDataStatusGood)
+    if (isDataAvailable)
     {
       let lastUpdateTemporalDistanceFromNow = moment.duration(moment().diff(lastUpdated));
       let lastBlockTemporalDistanceFromNow = moment.duration(moment().diff(momentEnd));
@@ -49,14 +49,14 @@ export default class NCLivenessIndicator extends Component
     const popoverContent = (
       <div className="content-container">
         {
-          (!isDataAvailable && !isDataStatusGood) &&
+          (!isDataStatusGood) &&
           <div className="no-data">
             <span className="pt-icon-standard pt-icon-warning-sign"></span>
-            <span className="text">Latest Database Update Time Unknown</span> 
+        <span className="text">Error: Network {status}</span> 
           </div>
         }
         {
-          (isDataAvailable && isDataStatusGood) &&
+          (isDataStatusGood) &&
           <div className="liveness-indicator">
             <span className="desc">{ dbLagStr + " " + MSG.Live_str_1}</span>
             <NCEntityLabel
@@ -82,28 +82,28 @@ export default class NCLivenessIndicator extends Component
         <button className="pt-button pt-minimal liveness-btn">
 
         {
-          (!isDataAvailable && isDataStatusGood) && 
+          (!isDataStatusGood) && 
           <span>
             <span className="pt-icon-standard pt-icon-warning-sign icon"></span>
             <span className="text"></span>
           </span>
         }
         {
-          (isDataStatusGood &&  isDataAvailable && isHostBlockchainDown) && 
+          (isDataStatusGood  && isHostBlockchainDown) && 
           <span>
             <span className="fa fa-exclamation-circle icon warning"></span>
             <span className="text"></span> 
           </span>
         }
         {
-          (isDataStatusGood && isDataAvailable && !isHostBlockchainDown && dbLagInt >= LIVENESS_THRESHOLD_BLOCKS) && 
+          (isDataStatusGood && !isHostBlockchainDown && dbLagInt >= LIVENESS_THRESHOLD_BLOCKS) && 
           <span>
             <Spinner className="pt-small icon" intent={Intent.PRIMARY}/>
             <span className="text"></span>
           </span>
         }
         {
-          (isDataStatusGood && isDataAvailable && !isHostBlockchainDown && dbLagInt < LIVENESS_THRESHOLD_BLOCKS) && 
+          (isDataStatusGood && !isHostBlockchainDown && dbLagInt < LIVENESS_THRESHOLD_BLOCKS) && 
           <span>
             <span className="fa fa-check-circle icon live"></span>
             <span className="text"></span>

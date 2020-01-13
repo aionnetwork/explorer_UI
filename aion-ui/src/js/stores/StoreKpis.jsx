@@ -70,6 +70,7 @@ let initialState_StoreKPIs =
 
     currentBlockchainHead: null,
     blockWindow: null,
+    status: "STALLED"
 
 
   },

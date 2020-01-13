@@ -1092,6 +1092,8 @@ export const setHealthData = (response) => {
     let data = response.content[0];
 
     store.dispatch(StoreKpis.SetHealth(data));
+  }else{
+    store.dispatch(StoreKpis.SetHealth([]));
   }
 }
 
@@ -1129,7 +1131,7 @@ export const getHealthData = () => {
     })
     .catch((error) => {
       console.log(error);
-      //setKPIData({content:[]});
+      setHealthData({content:[]});
     });
 }
 
