@@ -18,7 +18,7 @@ const EMPTY_STR = "Not Available";
 export default class NCActiveAddressChart extends Component
 {
   render() {
-    let {data, mode} = this.props;
+    let {type, data, mode} = this.props;
 
 
 
@@ -46,7 +46,8 @@ export default class NCActiveAddressChart extends Component
                 type: 'datetime'
             },
             yAxis: { 
-                min:0,
+                //min:0,
+                type: type,
                 title: {
                     text: 'Address total'
                 }

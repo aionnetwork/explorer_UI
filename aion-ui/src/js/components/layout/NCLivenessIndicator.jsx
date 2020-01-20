@@ -52,7 +52,7 @@ export default class NCLivenessIndicator extends Component
           (!isDataStatusGood) &&
           <div className="no-data">
             <span className="pt-icon-standard pt-icon-warning-sign"></span>
-        <span className="text">Error: Network {status}</span> 
+            <span className="text">Status: Network {status}</span> 
           </div>
         }
         {

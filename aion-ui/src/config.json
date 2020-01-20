@@ -1,6 +1,6 @@
 {
   "api": {
-    "base_url": "mainnet-api.theoan.com",
+    "base_url": "amity-api.theoan.com",
     "https_enabled": true
   },
   "site": {

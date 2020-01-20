@@ -192,8 +192,8 @@ class NCChartRetrieve extends Component
         />  
 
         
-        {(this.chartData.description==="Network Difficulty"||this.chartData.description==="PoW Difficulty"||this.chartData.description==="PoS Difficulty")&&
-          <Button onClick={() => {this.toggle()}} className = "pt-button pt-minimal pull-right" text="Toggle Log" />
+        {(this.chartData.description==="Active Address"||this.chartData.description==="Network Difficulty"||this.chartData.description==="PoW Difficulty"||this.chartData.description==="PoS Difficulty")&&
+          <Button onClick={() => {this.toggle()}} className = "pt-button pt-minimal pull-right" text={"Toggle Log ("+this.state.type+")"} />
         }
 
 
