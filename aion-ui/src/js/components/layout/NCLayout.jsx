@@ -535,8 +535,12 @@ class NCLayout extends Component {
 
                       </a>
                       &nbsp;|&nbsp;
-                      <a className="footer-container" target="_blank" href="https://developer.theoan.com/">
-                          <span style={style}  className="text">Validator</span>
+                      <a className="footer-container" target="_blank" href="https://staking.theoan.com/dashboard">
+                          <span style={style}  className="text">Staking</span>
+                      </a>
+                      &nbsp;|&nbsp;
+                      <a className="footer-container" target="_blank" href="https://validators.theoan.com/docs">
+                          <span style={style}  className="text">Validators</span>
                       </a>
                       &nbsp;|&nbsp;
                                   <a className="footer-container" target="_blank" href="https://docs-aion.theoan.com/docs">
