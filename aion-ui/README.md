@@ -24,8 +24,9 @@ This is a sigle page application that consumes the aion explorer api service; Th
 
 1. Edit the following variables in  `/src/env.json` as needed
       {
-         "BASE_URL" : "mainnet-api.aion.network/aion",
-         "HOME_URL" : "mainnet-api.aion.network",
+         "HTTPS_ENABLED": true,
+         "BASE_URL" : "mainnet-api.theoan.com",
+         "HOME_URL" : "mainnet-api.theoan.com",
          "NETWORK_LIST" : "mainnet",
          "GA_KEY" : "UA-000000-10",  
       }

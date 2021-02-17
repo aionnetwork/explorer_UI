@@ -4,7 +4,7 @@
     "https_enabled": true
   },
   "site": {
-    "base_url": "staging.aiondev.network",
+    "base_url": "mainnet.theoan.com",
     "https_enabled": true
   },
   "network_list":{ 
@@ -44,10 +44,6 @@
     {
       "name": "Amity Testnet",
       "url": "https://amity.theoan.com"
-    },
-    {
-      "name": "Mastery Testnet",
-      "url": "https://mastery.theoan.com"
     }
   ],
     "amity": [
@@ -58,10 +54,6 @@
       {
         "name": "Mainnet",
         "url": "https://mainnet.theoan.com"
-      },
-      {
-        "name": "Mastery Testnet",
-        "url": "https://mastery.theoan.com"
       }
     ],
     "tetryon": [
